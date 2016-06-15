@@ -1,0 +1,14 @@
+﻿Add connect to send first command
+1 sec timer then check for data.  Reset timer
+Read first byte to determine total number of bytes 
+Read total bytes
+Parse data
+Print to Rich text box
+
+BYTE COUNT DOES NOT  INCLUDE CHECKSUM
+SO LENGTH = BYTE COUNT + 1
+
+** FOR WRITE COMMANDS
+	EACH COMAND NEEDS A BOOL FOR EXPECTED READ AND INT FOR LENGTH IF REQUIRED
+
+	SET DATE TIME RETURNS 2 BYTES + CHECKSUM
