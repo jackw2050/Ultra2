@@ -80,6 +80,10 @@
             this.gearSelectorTextBox = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.inhibitFlagTextBox = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.byte76TextBox = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.byte77TextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label13
@@ -498,11 +502,47 @@
             this.inhibitFlagTextBox.Size = new System.Drawing.Size(100, 20);
             this.inhibitFlagTextBox.TabIndex = 92;
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(162, 197);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(43, 13);
+            this.label27.TabIndex = 99;
+            this.label27.Text = "Byte 76";
+            // 
+            // byte76TextBox
+            // 
+            this.byte76TextBox.Location = new System.Drawing.Point(165, 213);
+            this.byte76TextBox.Name = "byte76TextBox";
+            this.byte76TextBox.Size = new System.Drawing.Size(118, 20);
+            this.byte76TextBox.TabIndex = 98;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(162, 236);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(43, 13);
+            this.label28.TabIndex = 97;
+            this.label28.Text = "Byte 77";
+            // 
+            // byte77TextBox
+            // 
+            this.byte77TextBox.Location = new System.Drawing.Point(165, 252);
+            this.byte77TextBox.Name = "byte77TextBox";
+            this.byte77TextBox.Size = new System.Drawing.Size(118, 20);
+            this.byte77TextBox.TabIndex = 96;
+            // 
             // DataStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 472);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.byte76TextBox);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.byte77TextBox);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.gearSelectorTextBox);
             this.Controls.Add(this.label26);
@@ -617,5 +657,9 @@
         public System.Windows.Forms.TextBox gearSelectorTextBox;
         public System.Windows.Forms.Label label26;
         public System.Windows.Forms.TextBox inhibitFlagTextBox;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox byte76TextBox;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox byte77TextBox;
     }
 }

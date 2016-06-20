@@ -583,43 +583,43 @@ namespace SerialPortTerminal
 
                 if (MeterStatus.lGyro_Fog == 0)
                 {
-                    textBox19.Text = "OK";
+                    DataStatusForm.textBox19.Text = "OK";
                 }
                 else
                 {
-                    textBox19.Text = "Bad";
+                    DataStatusForm.textBox19.Text = "Bad";
                 }
                 if (MeterStatus.xGyro_Fog == 0)
                 {
-                    textBox20.Text = "OK";
+                    DataStatusForm.textBox20.Text = "OK";
                 }
                 else
                 {
-                    textBox20.Text = "Bad";
+                    DataStatusForm.textBox20.Text = "Bad";
                 }
                 if (MeterStatus.meterHeater == 0)
                 {
-                    textBox21.Text = "OK";
+                    DataStatusForm.textBox21.Text = "OK";
                 }
                 else
                 {
-                    textBox21.Text = "Bad";
+                    DataStatusForm.textBox21.Text = "Bad";
                 }
                 if (MeterStatus.incorrectCommandReceived == 0)
                 {
-                    textBox23.Text = "OK";
+                    DataStatusForm.textBox23.Text = "OK";
                 }
                 else
                 {
-                    textBox23.Text = "Incorrect Command";
+                    DataStatusForm.textBox23.Text = "Incorrect Command";
                 }
                 if (MeterStatus.receiveDataCheckSumError == 0)
                 {
-                    textBox22.Text = "OK";
+                    DataStatusForm.textBox22.Text = "OK";
                 }
                 else
                 {
-                    textBox22.Text = "Checksum error";
+                    DataStatusForm.textBox22.Text = "Checksum error";
                 }
 
                 //   textBox19.Text = (MeterStatus.lGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// long

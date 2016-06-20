@@ -49,12 +49,6 @@ namespace SerialPortTerminal
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBox21 = new System.Windows.Forms.TextBox();
             this.TorqueMotorButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -67,16 +61,9 @@ namespace SerialPortTerminal
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.label23 = new System.Windows.Forms.Label();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.byte77TextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.byte76TextBox = new System.Windows.Forms.TextBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
+            this.button14 = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.springTensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,7 +93,6 @@ namespace SerialPortTerminal
             this.dynamicDataDataSet = new SerialPortTerminal.DynamicDataDataSet();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.data_Table_SimulatedTableAdapter = new SerialPortTerminal.DynamicDataDataSetTableAdapters.Data_Table_SimulatedTableAdapter();
-            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
@@ -117,7 +103,7 @@ namespace SerialPortTerminal
             // btnOpenPort
             // 
             this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(860, 373);
+            this.btnOpenPort.Location = new System.Drawing.Point(590, 77);
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPort.TabIndex = 6;
@@ -145,7 +131,7 @@ namespace SerialPortTerminal
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(27, 175);
+            this.button2.Location = new System.Drawing.Point(419, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 25);
             this.button2.TabIndex = 11;
@@ -197,7 +183,7 @@ namespace SerialPortTerminal
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(631, 208);
+            this.textBox5.Location = new System.Drawing.Point(760, 3);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(118, 20);
             this.textBox5.TabIndex = 22;
@@ -205,7 +191,7 @@ namespace SerialPortTerminal
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(587, 208);
+            this.label5.Location = new System.Drawing.Point(716, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 23;
@@ -269,54 +255,6 @@ namespace SerialPortTerminal
             this.textBox18.Size = new System.Drawing.Size(100, 20);
             this.textBox18.TabIndex = 45;
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(866, 280);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(56, 13);
-            this.label19.TabIndex = 56;
-            this.label19.Text = "Long FOG";
-            // 
-            // textBox19
-            // 
-            this.textBox19.Location = new System.Drawing.Point(869, 298);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(100, 20);
-            this.textBox19.TabIndex = 55;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(866, 231);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(58, 13);
-            this.label20.TabIndex = 54;
-            this.label20.Text = "Cross FOG";
-            // 
-            // textBox20
-            // 
-            this.textBox20.Location = new System.Drawing.Point(869, 250);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(100, 20);
-            this.textBox20.TabIndex = 53;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(866, 192);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(69, 13);
-            this.label21.TabIndex = 52;
-            this.label21.Text = "Meter Heater";
-            // 
-            // textBox21
-            // 
-            this.textBox21.Location = new System.Drawing.Point(869, 211);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(100, 20);
-            this.textBox21.TabIndex = 51;
-            // 
             // TorqueMotorButton
             // 
             this.TorqueMotorButton.Location = new System.Drawing.Point(997, 402);
@@ -329,7 +267,7 @@ namespace SerialPortTerminal
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(27, 208);
+            this.button3.Location = new System.Drawing.Point(419, 40);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(144, 23);
             this.button3.TabIndex = 58;
@@ -339,7 +277,7 @@ namespace SerialPortTerminal
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(27, 237);
+            this.button4.Location = new System.Drawing.Point(419, 69);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(144, 23);
             this.button4.TabIndex = 59;
@@ -349,7 +287,7 @@ namespace SerialPortTerminal
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(27, 266);
+            this.button5.Location = new System.Drawing.Point(419, 98);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(144, 23);
             this.button5.TabIndex = 60;
@@ -359,7 +297,7 @@ namespace SerialPortTerminal
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(27, 295);
+            this.button6.Location = new System.Drawing.Point(419, 127);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 23);
             this.button6.TabIndex = 61;
@@ -369,7 +307,7 @@ namespace SerialPortTerminal
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(27, 324);
+            this.button7.Location = new System.Drawing.Point(419, 156);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(144, 23);
             this.button7.TabIndex = 62;
@@ -379,7 +317,7 @@ namespace SerialPortTerminal
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(27, 353);
+            this.button8.Location = new System.Drawing.Point(419, 182);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(144, 23);
             this.button8.TabIndex = 63;
@@ -389,7 +327,7 @@ namespace SerialPortTerminal
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(204, 344);
+            this.button9.Location = new System.Drawing.Point(590, 43);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(127, 23);
             this.button9.TabIndex = 64;
@@ -399,7 +337,7 @@ namespace SerialPortTerminal
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(204, 373);
+            this.button10.Location = new System.Drawing.Point(723, 43);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(127, 23);
             this.button10.TabIndex = 65;
@@ -409,7 +347,7 @@ namespace SerialPortTerminal
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(204, 179);
+            this.button11.Location = new System.Drawing.Point(590, 14);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(105, 23);
             this.button11.TabIndex = 66;
@@ -436,70 +374,6 @@ namespace SerialPortTerminal
             this.button13.Text = "Enable Torque Motor";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(985, 231);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(57, 13);
-            this.label23.TabIndex = 72;
-            this.label23.Text = "Checksum";
-            // 
-            // textBox22
-            // 
-            this.textBox22.Location = new System.Drawing.Point(988, 250);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(100, 20);
-            this.textBox22.TabIndex = 71;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(985, 192);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(87, 13);
-            this.label24.TabIndex = 70;
-            this.label24.Text = "Command Status";
-            // 
-            // textBox23
-            // 
-            this.textBox23.Location = new System.Drawing.Point(988, 211);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(100, 20);
-            this.textBox23.TabIndex = 69;
-            // 
-            // byte77TextBox
-            // 
-            this.byte77TextBox.Location = new System.Drawing.Point(493, 327);
-            this.byte77TextBox.Name = "byte77TextBox";
-            this.byte77TextBox.Size = new System.Drawing.Size(118, 20);
-            this.byte77TextBox.TabIndex = 74;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(490, 311);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 75;
-            this.label1.Text = "Byte 77";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(490, 272);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 77;
-            this.label2.Text = "Byte 76";
-            // 
-            // byte76TextBox
-            // 
-            this.byte76TextBox.Location = new System.Drawing.Point(493, 288);
-            this.byte76TextBox.Name = "byte76TextBox";
-            this.byte76TextBox.Size = new System.Drawing.Size(118, 20);
-            this.byte76TextBox.TabIndex = 76;
             // 
             // chart1
             // 
@@ -529,6 +403,15 @@ namespace SerialPortTerminal
             this.rtfTerminal.Size = new System.Drawing.Size(387, 58);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(1, 3);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(104, 23);
+            this.button14.TabIndex = 85;
+            this.button14.Text = "Serial Port Form";
+            this.button14.UseVisualStyleBackColor = true;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -701,15 +584,6 @@ namespace SerialPortTerminal
             // 
             this.data_Table_SimulatedTableAdapter.ClearBeforeFill = true;
             // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(1, 3);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(104, 23);
-            this.button14.TabIndex = 85;
-            this.button14.Text = "Serial Port Form";
-            this.button14.UseVisualStyleBackColor = true;
-            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -718,14 +592,6 @@ namespace SerialPortTerminal
             this.Controls.Add(this.button14);
             this.Controls.Add(this.rtfTerminal);
             this.Controls.Add(this.chart1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.byte76TextBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.byte77TextBox);
-            this.Controls.Add(this.label23);
-            this.Controls.Add(this.textBox22);
-            this.Controls.Add(this.label24);
-            this.Controls.Add(this.textBox23);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
@@ -738,12 +604,6 @@ namespace SerialPortTerminal
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.TorqueMotorButton);
-            this.Controls.Add(this.label19);
-            this.Controls.Add(this.textBox19);
-            this.Controls.Add(this.label20);
-            this.Controls.Add(this.textBox20);
-            this.Controls.Add(this.label21);
-            this.Controls.Add(this.textBox21);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.label17);
@@ -820,12 +680,6 @@ namespace SerialPortTerminal
         public System.Windows.Forms.TextBox textBox16;
         public System.Windows.Forms.TextBox textBox17;
         public System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.Label label19;
-        public System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.Button TorqueMotorButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
@@ -838,14 +692,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.TextBox byte77TextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox byte76TextBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         public System.Windows.Forms.RichTextBox rtfTerminal;
         private System.Windows.Forms.Button button14;
