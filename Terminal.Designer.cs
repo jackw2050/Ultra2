@@ -29,53 +29,17 @@ namespace SerialPortTerminal
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTerminal));
-            this.rtfTerminal = new System.Windows.Forms.RichTextBox();
-            this.txtSendData = new System.Windows.Forms.TextBox();
-            this.lblSend = new System.Windows.Forms.Label();
-            this.btnSend = new System.Windows.Forms.Button();
-            this.cmbPortName = new System.Windows.Forms.ComboBox();
-            this.rbHex = new System.Windows.Forms.RadioButton();
-            this.rbText = new System.Windows.Forms.RadioButton();
-            this.gbMode = new System.Windows.Forms.GroupBox();
-            this.lblComPort = new System.Windows.Forms.Label();
             this.btnOpenPort = new System.Windows.Forms.Button();
-            this.gbPortSettings = new System.Windows.Forms.GroupBox();
-            this.chkClearOnOpen = new System.Windows.Forms.CheckBox();
             this.lnkAbout = new System.Windows.Forms.LinkLabel();
-            this.btnClear = new System.Windows.Forms.Button();
             this.tmrCheckComPorts = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this._timer1 = new System.Windows.Forms.Timer(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.springTensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rawBeamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.digitalGravityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.crossCouplingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.yEARDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dAYSDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hOURDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mINDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sECDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vCCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aXDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aX2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.xACC2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lACC2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.xACCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lACCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.altitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gPSStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.periodDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dynamicDataDataSet = new SerialPortTerminal.DynamicDataDataSet();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -107,175 +71,70 @@ namespace SerialPortTerminal
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.data_Table_SimulatedTableAdapter = new SerialPortTerminal.DynamicDataDataSetTableAdapters.Data_Table_SimulatedTableAdapter();
             this.byte77TextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.byte76TextBox = new System.Windows.Forms.TextBox();
-            this.gbMode.SuspendLayout();
-            this.gbPortSettings.SuspendLayout();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.rtfTerminal = new System.Windows.Forms.RichTextBox();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.springTensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rawBeamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.digitalGravityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.crossCouplingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yEARDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dAYSDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hOURDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mINDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sECDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vCCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aXDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aX2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.xACC2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lACC2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.xACCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lACCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.altitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gPSStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.periodDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dynamicDataDataSet = new SerialPortTerminal.DynamicDataDataSet();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.data_Table_SimulatedTableAdapter = new SerialPortTerminal.DynamicDataDataSetTableAdapters.Data_Table_SimulatedTableAdapter();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
-            // rtfTerminal
-            // 
-            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtfTerminal.Location = new System.Drawing.Point(12, 12);
-            this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(1090, 87);
-            this.rtfTerminal.TabIndex = 0;
-            this.rtfTerminal.Text = "";
-            this.rtfTerminal.TextChanged += new System.EventHandler(this.rtfTerminal_TextChanged);
-            // 
-            // txtSendData
-            // 
-            this.txtSendData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtSendData.Location = new System.Drawing.Point(76, 514);
-            this.txtSendData.Name = "txtSendData";
-            this.txtSendData.Size = new System.Drawing.Size(110, 20);
-            this.txtSendData.TabIndex = 2;
-            this.txtSendData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSendData_KeyDown);
-            this.txtSendData.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSendData_KeyPress);
-            // 
-            // lblSend
-            // 
-            this.lblSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSend.AutoSize = true;
-            this.lblSend.Location = new System.Drawing.Point(12, 517);
-            this.lblSend.Name = "lblSend";
-            this.lblSend.Size = new System.Drawing.Size(61, 13);
-            this.lblSend.TabIndex = 1;
-            this.lblSend.Text = "Send &Data:";
-            // 
-            // btnSend
-            // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(1027, 491);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
-            this.btnSend.TabIndex = 3;
-            this.btnSend.Text = "Send";
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // cmbPortName
-            // 
-            this.cmbPortName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPortName.FormattingEnabled = true;
-            this.cmbPortName.Items.AddRange(new object[] {
-            "COM1",
-            "COM2",
-            "COM3",
-            "COM4",
-            "COM5",
-            "COM6"});
-            this.cmbPortName.Location = new System.Drawing.Point(84, 15);
-            this.cmbPortName.Name = "cmbPortName";
-            this.cmbPortName.Size = new System.Drawing.Size(67, 21);
-            this.cmbPortName.TabIndex = 1;
-            // 
-            // rbHex
-            // 
-            this.rbHex.AutoSize = true;
-            this.rbHex.Location = new System.Drawing.Point(12, 39);
-            this.rbHex.Name = "rbHex";
-            this.rbHex.Size = new System.Drawing.Size(44, 17);
-            this.rbHex.TabIndex = 1;
-            this.rbHex.Text = "Hex";
-            this.rbHex.CheckedChanged += new System.EventHandler(this.rbHex_CheckedChanged);
-            // 
-            // rbText
-            // 
-            this.rbText.AutoSize = true;
-            this.rbText.Location = new System.Drawing.Point(12, 19);
-            this.rbText.Name = "rbText";
-            this.rbText.Size = new System.Drawing.Size(46, 17);
-            this.rbText.TabIndex = 0;
-            this.rbText.Text = "Text";
-            this.rbText.CheckedChanged += new System.EventHandler(this.rbText_CheckedChanged);
-            // 
-            // gbMode
-            // 
-            this.gbMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbMode.Controls.Add(this.rbText);
-            this.gbMode.Controls.Add(this.rbHex);
-            this.gbMode.Location = new System.Drawing.Point(300, 540);
-            this.gbMode.Name = "gbMode";
-            this.gbMode.Size = new System.Drawing.Size(89, 64);
-            this.gbMode.TabIndex = 5;
-            this.gbMode.TabStop = false;
-            this.gbMode.Text = "Data &Mode";
-            // 
-            // lblComPort
-            // 
-            this.lblComPort.AutoSize = true;
-            this.lblComPort.Location = new System.Drawing.Point(12, 19);
-            this.lblComPort.Name = "lblComPort";
-            this.lblComPort.Size = new System.Drawing.Size(56, 13);
-            this.lblComPort.TabIndex = 0;
-            this.lblComPort.Text = "COM Port:";
-            // 
             // btnOpenPort
             // 
             this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(1027, 564);
+            this.btnOpenPort.Location = new System.Drawing.Point(860, 373);
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPort.TabIndex = 6;
             this.btnOpenPort.Text = "&Open Port";
             this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
             // 
-            // gbPortSettings
-            // 
-            this.gbPortSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbPortSettings.Controls.Add(this.chkClearOnOpen);
-            this.gbPortSettings.Controls.Add(this.cmbPortName);
-            this.gbPortSettings.Controls.Add(this.lblComPort);
-            this.gbPortSettings.Location = new System.Drawing.Point(12, 540);
-            this.gbPortSettings.Name = "gbPortSettings";
-            this.gbPortSettings.Size = new System.Drawing.Size(282, 64);
-            this.gbPortSettings.TabIndex = 4;
-            this.gbPortSettings.TabStop = false;
-            this.gbPortSettings.Text = "COM Serial Port Settings";
-            // 
-            // chkClearOnOpen
-            // 
-            this.chkClearOnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkClearOnOpen.AutoSize = true;
-            this.chkClearOnOpen.Location = new System.Drawing.Point(174, 15);
-            this.chkClearOnOpen.Name = "chkClearOnOpen";
-            this.chkClearOnOpen.Size = new System.Drawing.Size(94, 17);
-            this.chkClearOnOpen.TabIndex = 10;
-            this.chkClearOnOpen.Text = "Clear on Open";
-            this.chkClearOnOpen.UseVisualStyleBackColor = true;
-            // 
             // lnkAbout
             // 
             this.lnkAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkAbout.AutoSize = true;
-            this.lnkAbout.Location = new System.Drawing.Point(1067, 590);
+            this.lnkAbout.Location = new System.Drawing.Point(1053, 309);
             this.lnkAbout.Name = "lnkAbout";
             this.lnkAbout.Size = new System.Drawing.Size(35, 13);
             this.lnkAbout.TabIndex = 8;
             this.lnkAbout.TabStop = true;
             this.lnkAbout.Text = "&About";
             this.lnkAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAbout_LinkClicked);
-            // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(1027, 520);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 9;
-            this.btnClear.Text = "&Clear";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // tmrCheckComPorts
             // 
@@ -286,7 +145,7 @@ namespace SerialPortTerminal
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(27, 177);
+            this.button2.Location = new System.Drawing.Point(27, 175);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 25);
             this.button2.TabIndex = 11;
@@ -300,6 +159,8 @@ namespace SerialPortTerminal
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -329,172 +190,10 @@ namespace SerialPortTerminal
             this.gPSStatusDataGridViewTextBoxColumn,
             this.periodDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.dataTableSimulatedBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 105);
+            this.dataGridView1.Location = new System.Drawing.Point(1, 534);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1087, 66);
             this.dataGridView1.TabIndex = 13;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "date";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // springTensionDataGridViewTextBoxColumn
-            // 
-            this.springTensionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.springTensionDataGridViewTextBoxColumn.DataPropertyName = "SpringTension";
-            this.springTensionDataGridViewTextBoxColumn.HeaderText = "SpringTension";
-            this.springTensionDataGridViewTextBoxColumn.Name = "springTensionDataGridViewTextBoxColumn";
-            // 
-            // rawBeamDataGridViewTextBoxColumn
-            // 
-            this.rawBeamDataGridViewTextBoxColumn.DataPropertyName = "RawBeam";
-            this.rawBeamDataGridViewTextBoxColumn.HeaderText = "RawBeam";
-            this.rawBeamDataGridViewTextBoxColumn.Name = "rawBeamDataGridViewTextBoxColumn";
-            // 
-            // digitalGravityDataGridViewTextBoxColumn
-            // 
-            this.digitalGravityDataGridViewTextBoxColumn.DataPropertyName = "DigitalGravity";
-            this.digitalGravityDataGridViewTextBoxColumn.HeaderText = "DigitalGravity";
-            this.digitalGravityDataGridViewTextBoxColumn.Name = "digitalGravityDataGridViewTextBoxColumn";
-            // 
-            // crossCouplingDataGridViewTextBoxColumn
-            // 
-            this.crossCouplingDataGridViewTextBoxColumn.DataPropertyName = "CrossCoupling";
-            this.crossCouplingDataGridViewTextBoxColumn.HeaderText = "CrossCoupling";
-            this.crossCouplingDataGridViewTextBoxColumn.Name = "crossCouplingDataGridViewTextBoxColumn";
-            // 
-            // yEARDataGridViewTextBoxColumn
-            // 
-            this.yEARDataGridViewTextBoxColumn.DataPropertyName = "YEAR";
-            this.yEARDataGridViewTextBoxColumn.HeaderText = "YEAR";
-            this.yEARDataGridViewTextBoxColumn.Name = "yEARDataGridViewTextBoxColumn";
-            // 
-            // dAYSDataGridViewTextBoxColumn
-            // 
-            this.dAYSDataGridViewTextBoxColumn.DataPropertyName = "DAYS";
-            this.dAYSDataGridViewTextBoxColumn.HeaderText = "DAYS";
-            this.dAYSDataGridViewTextBoxColumn.Name = "dAYSDataGridViewTextBoxColumn";
-            // 
-            // hOURDataGridViewTextBoxColumn
-            // 
-            this.hOURDataGridViewTextBoxColumn.DataPropertyName = "HOUR";
-            this.hOURDataGridViewTextBoxColumn.HeaderText = "HOUR";
-            this.hOURDataGridViewTextBoxColumn.Name = "hOURDataGridViewTextBoxColumn";
-            // 
-            // mINDataGridViewTextBoxColumn
-            // 
-            this.mINDataGridViewTextBoxColumn.DataPropertyName = "MIN";
-            this.mINDataGridViewTextBoxColumn.HeaderText = "MIN";
-            this.mINDataGridViewTextBoxColumn.Name = "mINDataGridViewTextBoxColumn";
-            // 
-            // sECDataGridViewTextBoxColumn
-            // 
-            this.sECDataGridViewTextBoxColumn.DataPropertyName = "SEC";
-            this.sECDataGridViewTextBoxColumn.HeaderText = "SEC";
-            this.sECDataGridViewTextBoxColumn.Name = "sECDataGridViewTextBoxColumn";
-            // 
-            // vCCDataGridViewTextBoxColumn
-            // 
-            this.vCCDataGridViewTextBoxColumn.DataPropertyName = "VCC";
-            this.vCCDataGridViewTextBoxColumn.HeaderText = "VCC";
-            this.vCCDataGridViewTextBoxColumn.Name = "vCCDataGridViewTextBoxColumn";
-            // 
-            // aLDataGridViewTextBoxColumn
-            // 
-            this.aLDataGridViewTextBoxColumn.DataPropertyName = "AL";
-            this.aLDataGridViewTextBoxColumn.HeaderText = "AL";
-            this.aLDataGridViewTextBoxColumn.Name = "aLDataGridViewTextBoxColumn";
-            // 
-            // aXDataGridViewTextBoxColumn
-            // 
-            this.aXDataGridViewTextBoxColumn.DataPropertyName = "AX";
-            this.aXDataGridViewTextBoxColumn.HeaderText = "AX";
-            this.aXDataGridViewTextBoxColumn.Name = "aXDataGridViewTextBoxColumn";
-            // 
-            // vEDataGridViewTextBoxColumn
-            // 
-            this.vEDataGridViewTextBoxColumn.DataPropertyName = "VE";
-            this.vEDataGridViewTextBoxColumn.HeaderText = "VE";
-            this.vEDataGridViewTextBoxColumn.Name = "vEDataGridViewTextBoxColumn";
-            // 
-            // aX2DataGridViewTextBoxColumn
-            // 
-            this.aX2DataGridViewTextBoxColumn.DataPropertyName = "AX2";
-            this.aX2DataGridViewTextBoxColumn.HeaderText = "AX2";
-            this.aX2DataGridViewTextBoxColumn.Name = "aX2DataGridViewTextBoxColumn";
-            // 
-            // xACC2DataGridViewTextBoxColumn
-            // 
-            this.xACC2DataGridViewTextBoxColumn.DataPropertyName = "XACC2";
-            this.xACC2DataGridViewTextBoxColumn.HeaderText = "XACC2";
-            this.xACC2DataGridViewTextBoxColumn.Name = "xACC2DataGridViewTextBoxColumn";
-            // 
-            // lACC2DataGridViewTextBoxColumn
-            // 
-            this.lACC2DataGridViewTextBoxColumn.DataPropertyName = "LACC2";
-            this.lACC2DataGridViewTextBoxColumn.HeaderText = "LACC2";
-            this.lACC2DataGridViewTextBoxColumn.Name = "lACC2DataGridViewTextBoxColumn";
-            // 
-            // xACCDataGridViewTextBoxColumn
-            // 
-            this.xACCDataGridViewTextBoxColumn.DataPropertyName = "XACC";
-            this.xACCDataGridViewTextBoxColumn.HeaderText = "XACC";
-            this.xACCDataGridViewTextBoxColumn.Name = "xACCDataGridViewTextBoxColumn";
-            // 
-            // lACCDataGridViewTextBoxColumn
-            // 
-            this.lACCDataGridViewTextBoxColumn.DataPropertyName = "LACC";
-            this.lACCDataGridViewTextBoxColumn.HeaderText = "LACC";
-            this.lACCDataGridViewTextBoxColumn.Name = "lACCDataGridViewTextBoxColumn";
-            // 
-            // altitudeDataGridViewTextBoxColumn
-            // 
-            this.altitudeDataGridViewTextBoxColumn.DataPropertyName = "Altitude";
-            this.altitudeDataGridViewTextBoxColumn.HeaderText = "Altitude";
-            this.altitudeDataGridViewTextBoxColumn.Name = "altitudeDataGridViewTextBoxColumn";
-            // 
-            // longitudeDataGridViewTextBoxColumn
-            // 
-            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn.HeaderText = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
-            // 
-            // latitudeDataGridViewTextBoxColumn
-            // 
-            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn.HeaderText = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
-            // 
-            // gPSStatusDataGridViewTextBoxColumn
-            // 
-            this.gPSStatusDataGridViewTextBoxColumn.DataPropertyName = "GPS_Status";
-            this.gPSStatusDataGridViewTextBoxColumn.HeaderText = "GPS_Status";
-            this.gPSStatusDataGridViewTextBoxColumn.Name = "gPSStatusDataGridViewTextBoxColumn";
-            // 
-            // periodDataGridViewTextBoxColumn
-            // 
-            this.periodDataGridViewTextBoxColumn.DataPropertyName = "Period";
-            this.periodDataGridViewTextBoxColumn.HeaderText = "Period";
-            this.periodDataGridViewTextBoxColumn.Name = "periodDataGridViewTextBoxColumn";
-            // 
-            // dataTableSimulatedBindingSource
-            // 
-            this.dataTableSimulatedBindingSource.DataMember = "Data_Table_Simulated";
-            this.dataTableSimulatedBindingSource.DataSource = this.dynamicDataDataSet;
-            // 
-            // dynamicDataDataSet
-            // 
-            this.dynamicDataDataSet.DataSetName = "DynamicDataDataSet";
-            this.dynamicDataDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // textBox5
             // 
@@ -514,9 +213,9 @@ namespace SerialPortTerminal
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(631, 439);
+            this.button1.Location = new System.Drawing.Point(218, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 27);
+            this.button1.Size = new System.Drawing.Size(99, 23);
             this.button1.TabIndex = 44;
             this.button1.Text = "Data Status Form";
             this.button1.UseVisualStyleBackColor = true;
@@ -720,7 +419,7 @@ namespace SerialPortTerminal
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(504, 443);
+            this.button12.Location = new System.Drawing.Point(108, 3);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(107, 23);
             this.button12.TabIndex = 67;
@@ -770,22 +469,6 @@ namespace SerialPortTerminal
             this.textBox23.Size = new System.Drawing.Size(100, 20);
             this.textBox23.TabIndex = 69;
             // 
-            // textBox24
-            // 
-            this.textBox24.Location = new System.Drawing.Point(27, 488);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(724, 20);
-            this.textBox24.TabIndex = 73;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.dynamicDataDataSet;
-            this.bindingSource1.Position = 0;
-            // 
-            // data_Table_SimulatedTableAdapter
-            // 
-            this.data_Table_SimulatedTableAdapter.ClearBeforeFill = true;
-            // 
             // byte77TextBox
             // 
             this.byte77TextBox.Location = new System.Drawing.Point(493, 327);
@@ -818,16 +501,227 @@ namespace SerialPortTerminal
             this.byte76TextBox.Size = new System.Drawing.Size(118, 20);
             this.byte76TextBox.TabIndex = 76;
             // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(1, 447);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(1087, 81);
+            this.chart1.TabIndex = 78;
+            this.chart1.Text = "chart1";
+            // 
+            // rtfTerminal
+            // 
+            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtfTerminal.Location = new System.Drawing.Point(1, 42);
+            this.rtfTerminal.Name = "rtfTerminal";
+            this.rtfTerminal.Size = new System.Drawing.Size(387, 58);
+            this.rtfTerminal.TabIndex = 84;
+            this.rtfTerminal.Text = "";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "date";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // springTensionDataGridViewTextBoxColumn
+            // 
+            this.springTensionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.springTensionDataGridViewTextBoxColumn.DataPropertyName = "SpringTension";
+            this.springTensionDataGridViewTextBoxColumn.HeaderText = "SpringTension";
+            this.springTensionDataGridViewTextBoxColumn.Name = "springTensionDataGridViewTextBoxColumn";
+            // 
+            // rawBeamDataGridViewTextBoxColumn
+            // 
+            this.rawBeamDataGridViewTextBoxColumn.DataPropertyName = "RawBeam";
+            this.rawBeamDataGridViewTextBoxColumn.HeaderText = "RawBeam";
+            this.rawBeamDataGridViewTextBoxColumn.Name = "rawBeamDataGridViewTextBoxColumn";
+            // 
+            // digitalGravityDataGridViewTextBoxColumn
+            // 
+            this.digitalGravityDataGridViewTextBoxColumn.DataPropertyName = "DigitalGravity";
+            this.digitalGravityDataGridViewTextBoxColumn.HeaderText = "DigitalGravity";
+            this.digitalGravityDataGridViewTextBoxColumn.Name = "digitalGravityDataGridViewTextBoxColumn";
+            // 
+            // crossCouplingDataGridViewTextBoxColumn
+            // 
+            this.crossCouplingDataGridViewTextBoxColumn.DataPropertyName = "CrossCoupling";
+            this.crossCouplingDataGridViewTextBoxColumn.HeaderText = "CrossCoupling";
+            this.crossCouplingDataGridViewTextBoxColumn.Name = "crossCouplingDataGridViewTextBoxColumn";
+            // 
+            // yEARDataGridViewTextBoxColumn
+            // 
+            this.yEARDataGridViewTextBoxColumn.DataPropertyName = "YEAR";
+            this.yEARDataGridViewTextBoxColumn.HeaderText = "YEAR";
+            this.yEARDataGridViewTextBoxColumn.Name = "yEARDataGridViewTextBoxColumn";
+            // 
+            // dAYSDataGridViewTextBoxColumn
+            // 
+            this.dAYSDataGridViewTextBoxColumn.DataPropertyName = "DAYS";
+            this.dAYSDataGridViewTextBoxColumn.HeaderText = "DAYS";
+            this.dAYSDataGridViewTextBoxColumn.Name = "dAYSDataGridViewTextBoxColumn";
+            // 
+            // hOURDataGridViewTextBoxColumn
+            // 
+            this.hOURDataGridViewTextBoxColumn.DataPropertyName = "HOUR";
+            this.hOURDataGridViewTextBoxColumn.HeaderText = "HOUR";
+            this.hOURDataGridViewTextBoxColumn.Name = "hOURDataGridViewTextBoxColumn";
+            // 
+            // mINDataGridViewTextBoxColumn
+            // 
+            this.mINDataGridViewTextBoxColumn.DataPropertyName = "MIN";
+            this.mINDataGridViewTextBoxColumn.HeaderText = "MIN";
+            this.mINDataGridViewTextBoxColumn.Name = "mINDataGridViewTextBoxColumn";
+            // 
+            // sECDataGridViewTextBoxColumn
+            // 
+            this.sECDataGridViewTextBoxColumn.DataPropertyName = "SEC";
+            this.sECDataGridViewTextBoxColumn.HeaderText = "SEC";
+            this.sECDataGridViewTextBoxColumn.Name = "sECDataGridViewTextBoxColumn";
+            // 
+            // vCCDataGridViewTextBoxColumn
+            // 
+            this.vCCDataGridViewTextBoxColumn.DataPropertyName = "VCC";
+            this.vCCDataGridViewTextBoxColumn.HeaderText = "VCC";
+            this.vCCDataGridViewTextBoxColumn.Name = "vCCDataGridViewTextBoxColumn";
+            // 
+            // aLDataGridViewTextBoxColumn
+            // 
+            this.aLDataGridViewTextBoxColumn.DataPropertyName = "AL";
+            this.aLDataGridViewTextBoxColumn.HeaderText = "AL";
+            this.aLDataGridViewTextBoxColumn.Name = "aLDataGridViewTextBoxColumn";
+            // 
+            // aXDataGridViewTextBoxColumn
+            // 
+            this.aXDataGridViewTextBoxColumn.DataPropertyName = "AX";
+            this.aXDataGridViewTextBoxColumn.HeaderText = "AX";
+            this.aXDataGridViewTextBoxColumn.Name = "aXDataGridViewTextBoxColumn";
+            // 
+            // vEDataGridViewTextBoxColumn
+            // 
+            this.vEDataGridViewTextBoxColumn.DataPropertyName = "VE";
+            this.vEDataGridViewTextBoxColumn.HeaderText = "VE";
+            this.vEDataGridViewTextBoxColumn.Name = "vEDataGridViewTextBoxColumn";
+            // 
+            // aX2DataGridViewTextBoxColumn
+            // 
+            this.aX2DataGridViewTextBoxColumn.DataPropertyName = "AX2";
+            this.aX2DataGridViewTextBoxColumn.HeaderText = "AX2";
+            this.aX2DataGridViewTextBoxColumn.Name = "aX2DataGridViewTextBoxColumn";
+            // 
+            // xACC2DataGridViewTextBoxColumn
+            // 
+            this.xACC2DataGridViewTextBoxColumn.DataPropertyName = "XACC2";
+            this.xACC2DataGridViewTextBoxColumn.HeaderText = "XACC2";
+            this.xACC2DataGridViewTextBoxColumn.Name = "xACC2DataGridViewTextBoxColumn";
+            // 
+            // lACC2DataGridViewTextBoxColumn
+            // 
+            this.lACC2DataGridViewTextBoxColumn.DataPropertyName = "LACC2";
+            this.lACC2DataGridViewTextBoxColumn.HeaderText = "LACC2";
+            this.lACC2DataGridViewTextBoxColumn.Name = "lACC2DataGridViewTextBoxColumn";
+            // 
+            // xACCDataGridViewTextBoxColumn
+            // 
+            this.xACCDataGridViewTextBoxColumn.DataPropertyName = "XACC";
+            this.xACCDataGridViewTextBoxColumn.HeaderText = "XACC";
+            this.xACCDataGridViewTextBoxColumn.Name = "xACCDataGridViewTextBoxColumn";
+            // 
+            // lACCDataGridViewTextBoxColumn
+            // 
+            this.lACCDataGridViewTextBoxColumn.DataPropertyName = "LACC";
+            this.lACCDataGridViewTextBoxColumn.HeaderText = "LACC";
+            this.lACCDataGridViewTextBoxColumn.Name = "lACCDataGridViewTextBoxColumn";
+            // 
+            // altitudeDataGridViewTextBoxColumn
+            // 
+            this.altitudeDataGridViewTextBoxColumn.DataPropertyName = "Altitude";
+            this.altitudeDataGridViewTextBoxColumn.HeaderText = "Altitude";
+            this.altitudeDataGridViewTextBoxColumn.Name = "altitudeDataGridViewTextBoxColumn";
+            // 
+            // longitudeDataGridViewTextBoxColumn
+            // 
+            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn.HeaderText = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
+            // 
+            // latitudeDataGridViewTextBoxColumn
+            // 
+            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn.HeaderText = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
+            // 
+            // gPSStatusDataGridViewTextBoxColumn
+            // 
+            this.gPSStatusDataGridViewTextBoxColumn.DataPropertyName = "GPS_Status";
+            this.gPSStatusDataGridViewTextBoxColumn.HeaderText = "GPS_Status";
+            this.gPSStatusDataGridViewTextBoxColumn.Name = "gPSStatusDataGridViewTextBoxColumn";
+            // 
+            // periodDataGridViewTextBoxColumn
+            // 
+            this.periodDataGridViewTextBoxColumn.DataPropertyName = "Period";
+            this.periodDataGridViewTextBoxColumn.HeaderText = "Period";
+            this.periodDataGridViewTextBoxColumn.Name = "periodDataGridViewTextBoxColumn";
+            // 
+            // dataTableSimulatedBindingSource
+            // 
+            this.dataTableSimulatedBindingSource.DataMember = "Data_Table_Simulated";
+            this.dataTableSimulatedBindingSource.DataSource = this.dynamicDataDataSet;
+            // 
+            // dynamicDataDataSet
+            // 
+            this.dynamicDataDataSet.DataSetName = "DynamicDataDataSet";
+            this.dynamicDataDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.dynamicDataDataSet;
+            this.bindingSource1.Position = 0;
+            // 
+            // data_Table_SimulatedTableAdapter
+            // 
+            this.data_Table_SimulatedTableAdapter.ClearBeforeFill = true;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(1, 3);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(104, 23);
+            this.button14.TabIndex = 85;
+            this.button14.Text = "Serial Port Form";
+            this.button14.UseVisualStyleBackColor = true;
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 614);
+            this.ClientSize = new System.Drawing.Size(1113, 612);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.rtfTerminal);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.byte76TextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.byte77TextBox);
-            this.Controls.Add(this.textBox24);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.textBox22);
             this.Controls.Add(this.label24);
@@ -861,15 +755,8 @@ namespace SerialPortTerminal
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lnkAbout);
-            this.Controls.Add(this.gbPortSettings);
             this.Controls.Add(this.btnOpenPort);
-            this.Controls.Add(this.gbMode);
-            this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.lblSend);
-            this.Controls.Add(this.txtSendData);
-            this.Controls.Add(this.rtfTerminal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(505, 250);
             this.Name = "frmTerminal";
@@ -877,11 +764,8 @@ namespace SerialPortTerminal
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTerminal_FormClosing);
             this.Load += new System.EventHandler(this.frmTerminal_Load);
             this.Shown += new System.EventHandler(this.frmTerminal_Shown);
-            this.gbMode.ResumeLayout(false);
-            this.gbMode.PerformLayout();
-            this.gbPortSettings.ResumeLayout(false);
-            this.gbPortSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -891,21 +775,8 @@ namespace SerialPortTerminal
     }
 
     #endregion
-
-    private System.Windows.Forms.RichTextBox rtfTerminal;
-    private System.Windows.Forms.TextBox txtSendData;
-    private System.Windows.Forms.Label lblSend;
-    private System.Windows.Forms.Button btnSend;
-    private System.Windows.Forms.ComboBox cmbPortName;
-    private System.Windows.Forms.RadioButton rbHex;
-    private System.Windows.Forms.RadioButton rbText;
-    private System.Windows.Forms.GroupBox gbMode;
-    private System.Windows.Forms.Label lblComPort;
     private System.Windows.Forms.Button btnOpenPort;
-    private System.Windows.Forms.GroupBox gbPortSettings;
     private System.Windows.Forms.LinkLabel lnkAbout;
-		private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.CheckBox chkClearOnOpen;
 		private System.Windows.Forms.Timer tmrCheckComPorts;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button button2;
@@ -971,11 +842,13 @@ namespace SerialPortTerminal
         private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.TextBox textBox24;
         private System.Windows.Forms.TextBox byte77TextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox byte76TextBox;
-  }
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        public System.Windows.Forms.RichTextBox rtfTerminal;
+        private System.Windows.Forms.Button button14;
+    }
 }
 

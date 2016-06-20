@@ -16,7 +16,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ManifestCertificateThumbprint>B10B521D1ED7BF02CFF1AB16278794F204013821</ManifestCertificateThumbprint>
     <ManifestKeyFile>NoahCoad.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
@@ -46,6 +46,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +57,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -65,6 +67,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -76,6 +79,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +106,12 @@
     </Compile>
     <Compile Include="Parameters.Designer.cs">
       <DependentUpon>Parameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SerialPortForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SerialPortForm.Designer.cs">
+      <DependentUpon>SerialPortForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StatusForm1.cs">
       <SubType>Form</SubType>
@@ -137,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Parameters.resx">
       <DependentUpon>Parameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SerialPortForm.resx">
+      <DependentUpon>SerialPortForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatusForm1.resx">
       <DependentUpon>StatusForm1.cs</DependentUpon>
