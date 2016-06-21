@@ -1006,6 +1006,8 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dynamicDataDataSet5.Data_Table_Simulated' table. You can move, or remove it, as needed.
+            this.data_Table_SimulatedTableAdapter2.Fill(this.dynamicDataDataSet5.Data_Table_Simulated);
 
 
             // Connect to database and leave connection open.
@@ -1606,6 +1608,19 @@ namespace SerialPortTerminal
                 RelaySwitches.RelaySwitchCalculate();
                 RelaySwitches.RelaySW = 0x09;
                 sendCmd("Send Relay Switches");           // 0 ----*/
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.data_Table_SimulatedTableAdapter1.FillBy(this.dynamicDataDataSet6.Data_Table_Simulated);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

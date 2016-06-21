@@ -30,8 +30,13 @@ namespace SerialPortTerminal
     {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTerminal));
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.lnkAbout = new System.Windows.Forms.LinkLabel();
@@ -39,7 +44,6 @@ namespace SerialPortTerminal
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this._timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -61,21 +65,56 @@ namespace SerialPortTerminal
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
             this.button14 = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dynamicDataDataSet2 = new SerialPortTerminal.DynamicDataDataSet2();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surveyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
+            this.dynamicDataDataSet4 = new SerialPortTerminal.DynamicDataDataSet4();
+            this.data_Table_SimulatedTableAdapter1 = new SerialPortTerminal.DynamicDataDataSet6TableAdapters.Data_Table_SimulatedTableAdapter();
+            this.dynamicDataDataSet6 = new SerialPortTerminal.DynamicDataDataSet6();
+            this.data_Table_SimulatedTableAdapter2 = new SerialPortTerminal.DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet6)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOpenPort
             // 
             this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(590, 77);
+            this.btnOpenPort.Location = new System.Drawing.Point(607, 98);
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPort.TabIndex = 6;
@@ -86,7 +125,7 @@ namespace SerialPortTerminal
             // 
             this.lnkAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkAbout.AutoSize = true;
-            this.lnkAbout.Location = new System.Drawing.Point(914, 18);
+            this.lnkAbout.Location = new System.Drawing.Point(931, 39);
             this.lnkAbout.Name = "lnkAbout";
             this.lnkAbout.Size = new System.Drawing.Size(35, 13);
             this.lnkAbout.TabIndex = 8;
@@ -103,7 +142,7 @@ namespace SerialPortTerminal
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(419, 12);
+            this.button2.Location = new System.Drawing.Point(419, 33);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 25);
             this.button2.TabIndex = 11;
@@ -114,11 +153,6 @@ namespace SerialPortTerminal
             // _timer1
             // 
             this._timer1.Interval = 1000;
-            // 
-            // dataTableSimulatedBindingSource
-            // 
-            this.dataTableSimulatedBindingSource.DataSource = this.dynamicDataDataSet2;
-            this.dataTableSimulatedBindingSource.Position = 0;
             // 
             // textBox5
             // 
@@ -314,33 +348,13 @@ namespace SerialPortTerminal
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
-            // chart1
-            // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.DataSource = this.dataTableSimulatedBindingSource;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(1, 237);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1087, 291);
-            this.chart1.TabIndex = 78;
-            this.chart1.Text = "chart1";
-            // 
             // rtfTerminal
             // 
-            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtfTerminal.Location = new System.Drawing.Point(1, 42);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(387, 58);
+            this.rtfTerminal.Size = new System.Drawing.Size(404, 79);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
@@ -353,27 +367,304 @@ namespace SerialPortTerminal
             this.button14.Text = "Serial Port Form";
             this.button14.UseVisualStyleBackColor = true;
             // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "Gravity Stuff";
+            chartArea2.Name = "Cross Coupling Stuff";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.ChartAreas.Add(chartArea2);
+            this.chart1.DataSource = this.dataTableSimulatedBindingSource;
+            legend1.Alignment = System.Drawing.StringAlignment.Far;
+            legend1.DockedToChartArea = "Gravity Stuff";
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend1.IsDockedInsideChartArea = false;
+            legend1.Name = "Gravity Legend";
+            legend2.Alignment = System.Drawing.StringAlignment.Far;
+            legend2.DockedToChartArea = "Cross Coupling Stuff";
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend2.IsDockedInsideChartArea = false;
+            legend2.Name = "Cross Coupling Legend";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(1, 211);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
+            series1.ChartArea = "Gravity Stuff";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Legend = "Gravity Legend";
+            series1.Name = "Raw Beam";
+            series1.XValueMember = "date";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series1.YValueMembers = "RawBeam";
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.ChartArea = "Gravity Stuff";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Gravity Legend";
+            series2.Name = "Digital Gravity";
+            series2.XValueMember = "date";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series2.YValueMembers = "DigitalGravity";
+            series3.ChartArea = "Cross Coupling Stuff";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Cross Coupling Legend";
+            series3.Name = "XACC2";
+            series3.XValueMember = "date";
+            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series3.YValueMembers = "XACC2";
+            series4.ChartArea = "Cross Coupling Stuff";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.Legend = "Cross Coupling Legend";
+            series4.Name = "LACC2";
+            series4.XValueMember = "date";
+            series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series4.YValueMembers = "LACC2";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
+            this.chart1.Series.Add(series4);
+            this.chart1.Size = new System.Drawing.Size(1129, 338);
+            this.chart1.TabIndex = 78;
+            this.chart1.Text = "chart1";
+            // 
+            // dataTableSimulatedBindingSource
+            // 
+            this.dataTableSimulatedBindingSource.DataMember = "Data_Table_Simulated";
+            this.dataTableSimulatedBindingSource.DataSource = this.dynamicDataDataSet5BindingSource;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22,
+            this.dataGridViewTextBoxColumn23,
+            this.dataGridViewTextBoxColumn24,
+            this.dataGridViewTextBoxColumn25,
+            this.surveyNameDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.dataTableSimulatedBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 534);
+            this.dataGridView1.Location = new System.Drawing.Point(1, 555);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(898, 79);
+            this.dataGridView1.RowTemplate.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(1129, 79);
             this.dataGridView1.TabIndex = 86;
             // 
-            // dynamicDataDataSet2
+            // dataGridViewTextBoxColumn1
             // 
-            this.dynamicDataDataSet2.DataSetName = "DynamicDataDataSet2";
-            this.dynamicDataDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "date";
+            this.dataGridViewTextBoxColumn2.HeaderText = "date";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "YEAR";
+            this.dataGridViewTextBoxColumn3.HeaderText = "YEAR";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "DAYS";
+            this.dataGridViewTextBoxColumn4.HeaderText = "DAYS";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "HOUR";
+            this.dataGridViewTextBoxColumn5.HeaderText = "HOUR";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "MIN";
+            this.dataGridViewTextBoxColumn6.HeaderText = "MIN";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "SEC";
+            this.dataGridViewTextBoxColumn7.HeaderText = "SEC";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "DigitalGravity";
+            this.dataGridViewTextBoxColumn8.HeaderText = "DigitalGravity";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "SpringTension";
+            this.dataGridViewTextBoxColumn9.HeaderText = "SpringTension";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "CrossCoupling";
+            this.dataGridViewTextBoxColumn10.HeaderText = "CrossCoupling";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "RawBeam";
+            this.dataGridViewTextBoxColumn11.HeaderText = "RawBeam";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "VCC";
+            this.dataGridViewTextBoxColumn12.HeaderText = "VCC";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "AL";
+            this.dataGridViewTextBoxColumn13.HeaderText = "AL";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "AX";
+            this.dataGridViewTextBoxColumn14.HeaderText = "AX";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "VE";
+            this.dataGridViewTextBoxColumn15.HeaderText = "VE";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "AX2";
+            this.dataGridViewTextBoxColumn16.HeaderText = "AX2";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "XACC2";
+            this.dataGridViewTextBoxColumn17.HeaderText = "XACC2";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "LACC2";
+            this.dataGridViewTextBoxColumn18.HeaderText = "LACC2";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "XACC";
+            this.dataGridViewTextBoxColumn19.HeaderText = "XACC";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "LACC";
+            this.dataGridViewTextBoxColumn20.HeaderText = "LACC";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "Altitude";
+            this.dataGridViewTextBoxColumn21.HeaderText = "Altitude";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "Longitude";
+            this.dataGridViewTextBoxColumn22.HeaderText = "Longitude";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "Latitude";
+            this.dataGridViewTextBoxColumn23.HeaderText = "Latitude";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "GPS_Status";
+            this.dataGridViewTextBoxColumn24.HeaderText = "GPS_Status";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.DataPropertyName = "Period";
+            this.dataGridViewTextBoxColumn25.HeaderText = "Period";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            // 
+            // surveyNameDataGridViewTextBoxColumn
+            // 
+            this.surveyNameDataGridViewTextBoxColumn.DataPropertyName = "Survey_Name";
+            this.surveyNameDataGridViewTextBoxColumn.HeaderText = "Survey_Name";
+            this.surveyNameDataGridViewTextBoxColumn.Name = "surveyNameDataGridViewTextBoxColumn";
+            // 
+            // dynamicDataDataSet5BindingSource
+            // 
+            this.dynamicDataDataSet5BindingSource.DataSource = this.dynamicDataDataSet5;
+            this.dynamicDataDataSet5BindingSource.Position = 0;
+            // 
+            // dynamicDataDataSet5
+            // 
+            this.dynamicDataDataSet5.DataSetName = "DynamicDataDataSet5";
+            this.dynamicDataDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dynamicDataDataSet4
+            // 
+            this.dynamicDataDataSet4.DataSetName = "DynamicDataDataSet4";
+            this.dynamicDataDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // data_Table_SimulatedTableAdapter1
+            // 
+            this.data_Table_SimulatedTableAdapter1.ClearBeforeFill = true;
+            // 
+            // dynamicDataDataSet6
+            // 
+            this.dynamicDataDataSet6.DataSetName = "DynamicDataDataSet6";
+            this.dynamicDataDataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // data_Table_SimulatedTableAdapter2
+            // 
+            this.data_Table_SimulatedTableAdapter2.ClearBeforeFill = true;
             // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1113, 612);
+            this.ClientSize = new System.Drawing.Size(1130, 633);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.rtfTerminal);
@@ -409,10 +700,13 @@ namespace SerialPortTerminal
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTerminal_FormClosing);
             this.Load += new System.EventHandler(this.frmTerminal_Load);
             this.Shown += new System.EventHandler(this.frmTerminal_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -426,7 +720,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer _timer1;
         private DynamicDataDataSet dynamicDataDataSet;
-        private System.Windows.Forms.BindingSource dataTableSimulatedBindingSource;
         private DynamicDataDataSetTableAdapters.Data_Table_SimulatedTableAdapter data_Table_SimulatedTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
@@ -477,8 +770,40 @@ namespace SerialPortTerminal
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         public System.Windows.Forms.RichTextBox rtfTerminal;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private DynamicDataDataSet2 dynamicDataDataSet2;
+        private DynamicDataDataSet6TableAdapters.Data_Table_SimulatedTableAdapter data_Table_SimulatedTableAdapter1;
+        private DynamicDataDataSet4 dynamicDataDataSet4;
+        private System.Windows.Forms.BindingSource dynamicDataDataSet5BindingSource;
+        private DynamicDataDataSet5 dynamicDataDataSet5;
+        private DynamicDataDataSet6 dynamicDataDataSet6;
+        private System.Windows.Forms.BindingSource dataTableSimulatedBindingSource;
+        private DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter data_Table_SimulatedTableAdapter2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surveyNameDataGridViewTextBoxColumn;
+        protected System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
