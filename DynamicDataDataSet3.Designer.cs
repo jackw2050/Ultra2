@@ -20,17 +20,17 @@ namespace SerialPortTerminal {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DynamicDataDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("DynamicDataDataSet3")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DynamicDataDataSet : global::System.Data.DataSet {
+    public partial class DynamicDataDataSet3 : global::System.Data.DataSet {
         
-        private Data_Table_SimulatedDataTable tableData_Table_Simulated;
+        private CalibrationDataTable tableCalibration;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DynamicDataDataSet() {
+        public DynamicDataDataSet3() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SerialPortTerminal {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DynamicDataDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected DynamicDataDataSet3(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SerialPortTerminal {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Data_Table_Simulated"] != null)) {
-                    base.Tables.Add(new Data_Table_SimulatedDataTable(ds.Tables["Data_Table_Simulated"]));
+                if ((ds.Tables["Calibration"] != null)) {
+                    base.Tables.Add(new CalibrationDataTable(ds.Tables["Calibration"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SerialPortTerminal {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Data_Table_SimulatedDataTable Data_Table_Simulated {
+        public CalibrationDataTable Calibration {
             get {
-                return this.tableData_Table_Simulated;
+                return this.tableCalibration;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SerialPortTerminal {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DynamicDataDataSet cln = ((DynamicDataDataSet)(base.Clone()));
+            DynamicDataDataSet3 cln = ((DynamicDataDataSet3)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SerialPortTerminal {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Data_Table_Simulated"] != null)) {
-                    base.Tables.Add(new Data_Table_SimulatedDataTable(ds.Tables["Data_Table_Simulated"]));
+                if ((ds.Tables["Calibration"] != null)) {
+                    base.Tables.Add(new CalibrationDataTable(ds.Tables["Calibration"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SerialPortTerminal {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableData_Table_Simulated = ((Data_Table_SimulatedDataTable)(base.Tables["Data_Table_Simulated"]));
+            this.tableCalibration = ((CalibrationDataTable)(base.Tables["Calibration"]));
             if ((initTable == true)) {
-                if ((this.tableData_Table_Simulated != null)) {
-                    this.tableData_Table_Simulated.InitVars();
+                if ((this.tableCalibration != null)) {
+                    this.tableCalibration.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SerialPortTerminal {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DynamicDataDataSet";
+            this.DataSetName = "DynamicDataDataSet3";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/DynamicDataDataSet3.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableData_Table_Simulated = new Data_Table_SimulatedDataTable();
-            base.Tables.Add(this.tableData_Table_Simulated);
+            this.tableCalibration = new CalibrationDataTable();
+            base.Tables.Add(this.tableCalibration);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeData_Table_Simulated() {
+        private bool ShouldSerializeCalibration() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SerialPortTerminal {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DynamicDataDataSet ds = new DynamicDataDataSet();
+            DynamicDataDataSet3 ds = new DynamicDataDataSet3();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,38 +270,62 @@ namespace SerialPortTerminal {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void Data_Table_SimulatedRowChangeEventHandler(object sender, Data_Table_SimulatedRowChangeEvent e);
+        public delegate void CalibrationRowChangeEventHandler(object sender, CalibrationRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Data_Table_SimulatedDataTable : global::System.Data.TypedTableBase<Data_Table_SimulatedRow> {
+        public partial class CalibrationDataTable : global::System.Data.TypedTableBase<CalibrationRow> {
             
             private global::System.Data.DataColumn columnid;
             
-            private global::System.Data.DataColumn columndate;
+            private global::System.Data.DataColumn columnCalibrationDate;
             
-            private global::System.Data.DataColumn columnYEAR;
+            private global::System.Data.DataColumn columnMeterNumber;
             
-            private global::System.Data.DataColumn columnDAYS;
+            private global::System.Data.DataColumn columnBeamScaleFactor;
             
-            private global::System.Data.DataColumn columnHOUR;
+            private global::System.Data.DataColumn _columnCross_Axis_Period;
             
-            private global::System.Data.DataColumn columnMIN;
+            private global::System.Data.DataColumn _columnCross_Axis_Damping;
             
-            private global::System.Data.DataColumn columnSEC;
+            private global::System.Data.DataColumn _columnCross_Axis_Gain;
             
-            private global::System.Data.DataColumn columnDigitalGravity;
+            private global::System.Data.DataColumn _columnCross_Axis_Lead;
             
-            private global::System.Data.DataColumn columnSpringTension;
+            private global::System.Data.DataColumn _columnCross_Axis_Compensation_4_;
             
-            private global::System.Data.DataColumn columnCrossCoupling;
+            private global::System.Data.DataColumn _columnCross_Axis_Compensation_16_;
             
-            private global::System.Data.DataColumn columnRawBeam;
+            private global::System.Data.DataColumn _columnCross_Axis_Compensation_Phase_4_;
+            
+            private global::System.Data.DataColumn _columnCross_Axis_Compensation_Phase_16_;
+            
+            private global::System.Data.DataColumn _columnCross_Axis_Bias;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Bias;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Period;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Damping;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Gain;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Lead;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Compensation_4_;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Compensation_16_;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Compensation_Phase_4_;
+            
+            private global::System.Data.DataColumn _columnLong_Axis_Compensation_Phase_16_;
             
             private global::System.Data.DataColumn columnVCC;
+            
+            private global::System.Data.DataColumn columnMode;
             
             private global::System.Data.DataColumn columnAL;
             
@@ -315,24 +339,22 @@ namespace SerialPortTerminal {
             
             private global::System.Data.DataColumn columnLACC2;
             
-            private global::System.Data.DataColumn columnXACC;
+            private global::System.Data.DataColumn _columnAX_Phase;
             
-            private global::System.Data.DataColumn columnLACC;
+            private global::System.Data.DataColumn _columnAL_Phase;
             
-            private global::System.Data.DataColumn columnAltitude;
+            private global::System.Data.DataColumn columnVCC_Phase;
             
-            private global::System.Data.DataColumn columnLongitude;
+            private global::System.Data.DataColumn _columnMax_Spring_Tension;
             
-            private global::System.Data.DataColumn columnLatitude;
+            private global::System.Data.DataColumn _columnSerial_Port_Format;
             
-            private global::System.Data.DataColumn columnGPS_Status;
-            
-            private global::System.Data.DataColumn columnPeriod;
+            private global::System.Data.DataColumn _columnSerial_Port_Output;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedDataTable() {
-                this.TableName = "Data_Table_Simulated";
+            public CalibrationDataTable() {
+                this.TableName = "Calibration";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -340,7 +362,7 @@ namespace SerialPortTerminal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Data_Table_SimulatedDataTable(global::System.Data.DataTable table) {
+            internal CalibrationDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -357,7 +379,7 @@ namespace SerialPortTerminal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected Data_Table_SimulatedDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected CalibrationDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -372,81 +394,169 @@ namespace SerialPortTerminal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
+            public global::System.Data.DataColumn CalibrationDateColumn {
                 get {
-                    return this.columndate;
+                    return this.columnCalibrationDate;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn YEARColumn {
+            public global::System.Data.DataColumn MeterNumberColumn {
                 get {
-                    return this.columnYEAR;
+                    return this.columnMeterNumber;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DAYSColumn {
+            public global::System.Data.DataColumn BeamScaleFactorColumn {
                 get {
-                    return this.columnDAYS;
+                    return this.columnBeamScaleFactor;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn HOURColumn {
+            public global::System.Data.DataColumn _Cross_Axis_PeriodColumn {
                 get {
-                    return this.columnHOUR;
+                    return this._columnCross_Axis_Period;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn MINColumn {
+            public global::System.Data.DataColumn _Cross_Axis_DampingColumn {
                 get {
-                    return this.columnMIN;
+                    return this._columnCross_Axis_Damping;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SECColumn {
+            public global::System.Data.DataColumn _Cross_Axis_GainColumn {
                 get {
-                    return this.columnSEC;
+                    return this._columnCross_Axis_Gain;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DigitalGravityColumn {
+            public global::System.Data.DataColumn _Cross_Axis_LeadColumn {
                 get {
-                    return this.columnDigitalGravity;
+                    return this._columnCross_Axis_Lead;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SpringTensionColumn {
+            public global::System.Data.DataColumn _Cross_Axis_Compensation_4_Column {
                 get {
-                    return this.columnSpringTension;
+                    return this._columnCross_Axis_Compensation_4_;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CrossCouplingColumn {
+            public global::System.Data.DataColumn _Cross_Axis_Compensation_16_Column {
                 get {
-                    return this.columnCrossCoupling;
+                    return this._columnCross_Axis_Compensation_16_;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn RawBeamColumn {
+            public global::System.Data.DataColumn _Cross_Axis_Compensation_Phase_4_Column {
                 get {
-                    return this.columnRawBeam;
+                    return this._columnCross_Axis_Compensation_Phase_4_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Cross_Axis_Compensation_Phase_16_Column {
+                get {
+                    return this._columnCross_Axis_Compensation_Phase_16_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Cross_Axis_BiasColumn {
+                get {
+                    return this._columnCross_Axis_Bias;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_BiasColumn {
+                get {
+                    return this._columnLong_Axis_Bias;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_PeriodColumn {
+                get {
+                    return this._columnLong_Axis_Period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_DampingColumn {
+                get {
+                    return this._columnLong_Axis_Damping;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_GainColumn {
+                get {
+                    return this._columnLong_Axis_Gain;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_LeadColumn {
+                get {
+                    return this._columnLong_Axis_Lead;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_Compensation_4_Column {
+                get {
+                    return this._columnLong_Axis_Compensation_4_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_Compensation_16_Column {
+                get {
+                    return this._columnLong_Axis_Compensation_16_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_Compensation_Phase_4_Column {
+                get {
+                    return this._columnLong_Axis_Compensation_Phase_4_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn _Long_Axis_Compensation_Phase_16_Column {
+                get {
+                    return this._columnLong_Axis_Compensation_Phase_16_;
                 }
             }
             
@@ -455,6 +565,14 @@ namespace SerialPortTerminal {
             public global::System.Data.DataColumn VCCColumn {
                 get {
                     return this.columnVCC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ModeColumn {
+                get {
+                    return this.columnMode;
                 }
             }
             
@@ -508,57 +626,49 @@ namespace SerialPortTerminal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn XACCColumn {
+            public global::System.Data.DataColumn _AX_PhaseColumn {
                 get {
-                    return this.columnXACC;
+                    return this._columnAX_Phase;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn LACCColumn {
+            public global::System.Data.DataColumn _AL_PhaseColumn {
                 get {
-                    return this.columnLACC;
+                    return this._columnAL_Phase;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn AltitudeColumn {
+            public global::System.Data.DataColumn VCC_PhaseColumn {
                 get {
-                    return this.columnAltitude;
+                    return this.columnVCC_Phase;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn LongitudeColumn {
+            public global::System.Data.DataColumn _Max_Spring_TensionColumn {
                 get {
-                    return this.columnLongitude;
+                    return this._columnMax_Spring_Tension;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn LatitudeColumn {
+            public global::System.Data.DataColumn _Serial_Port_FormatColumn {
                 get {
-                    return this.columnLatitude;
+                    return this._columnSerial_Port_Format;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn GPS_StatusColumn {
+            public global::System.Data.DataColumn _Serial_Port_OutputColumn {
                 get {
-                    return this.columnGPS_Status;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PeriodColumn {
-                get {
-                    return this.columnPeriod;
+                    return this._columnSerial_Port_Output;
                 }
             }
             
@@ -573,100 +683,123 @@ namespace SerialPortTerminal {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedRow this[int index] {
+            public CalibrationRow this[int index] {
                 get {
-                    return ((Data_Table_SimulatedRow)(this.Rows[index]));
+                    return ((CalibrationRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Data_Table_SimulatedRowChangeEventHandler Data_Table_SimulatedRowChanging;
+            public event CalibrationRowChangeEventHandler CalibrationRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Data_Table_SimulatedRowChangeEventHandler Data_Table_SimulatedRowChanged;
+            public event CalibrationRowChangeEventHandler CalibrationRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Data_Table_SimulatedRowChangeEventHandler Data_Table_SimulatedRowDeleting;
+            public event CalibrationRowChangeEventHandler CalibrationRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Data_Table_SimulatedRowChangeEventHandler Data_Table_SimulatedRowDeleted;
+            public event CalibrationRowChangeEventHandler CalibrationRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddData_Table_SimulatedRow(Data_Table_SimulatedRow row) {
+            public void AddCalibrationRow(CalibrationRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedRow AddData_Table_SimulatedRow(
-                        System.DateTime date, 
-                        int YEAR, 
-                        int DAYS, 
-                        int HOUR, 
-                        int MIN, 
-                        int SEC, 
-                        double DigitalGravity, 
-                        double SpringTension, 
-                        double CrossCoupling, 
-                        double RawBeam, 
+            public CalibrationRow AddCalibrationRow(
+                        int id, 
+                        System.DateTime CalibrationDate, 
+                        string MeterNumber, 
+                        double BeamScaleFactor, 
+                        double _Cross_Axis_Period, 
+                        double _Cross_Axis_Damping, 
+                        double _Cross_Axis_Gain, 
+                        double _Cross_Axis_Lead, 
+                        double _Cross_Axis_Compensation_4_, 
+                        double _Cross_Axis_Compensation_16_, 
+                        double _Cross_Axis_Compensation_Phase_4_, 
+                        double _Cross_Axis_Compensation_Phase_16_, 
+                        double _Cross_Axis_Bias, 
+                        double _Long_Axis_Bias, 
+                        double _Long_Axis_Period, 
+                        double _Long_Axis_Damping, 
+                        double _Long_Axis_Gain, 
+                        double _Long_Axis_Lead, 
+                        double _Long_Axis_Compensation_4_, 
+                        double _Long_Axis_Compensation_16_, 
+                        double _Long_Axis_Compensation_Phase_4_, 
+                        double _Long_Axis_Compensation_Phase_16_, 
                         double VCC, 
+                        string Mode, 
                         double AL, 
                         double AX, 
                         double VE, 
                         double AX2, 
                         double XACC2, 
                         double LACC2, 
-                        double XACC, 
-                        double LACC, 
-                        double Altitude, 
-                        double Longitude, 
-                        double Latitude, 
-                        double GPS_Status, 
-                        double Period) {
-                Data_Table_SimulatedRow rowData_Table_SimulatedRow = ((Data_Table_SimulatedRow)(this.NewRow()));
+                        double _AX_Phase, 
+                        double _AL_Phase, 
+                        double VCC_Phase, 
+                        double _Max_Spring_Tension, 
+                        double _Serial_Port_Format, 
+                        double _Serial_Port_Output) {
+                CalibrationRow rowCalibrationRow = ((CalibrationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
-                        date,
-                        YEAR,
-                        DAYS,
-                        HOUR,
-                        MIN,
-                        SEC,
-                        DigitalGravity,
-                        SpringTension,
-                        CrossCoupling,
-                        RawBeam,
+                        id,
+                        CalibrationDate,
+                        MeterNumber,
+                        BeamScaleFactor,
+                        _Cross_Axis_Period,
+                        _Cross_Axis_Damping,
+                        _Cross_Axis_Gain,
+                        _Cross_Axis_Lead,
+                        _Cross_Axis_Compensation_4_,
+                        _Cross_Axis_Compensation_16_,
+                        _Cross_Axis_Compensation_Phase_4_,
+                        _Cross_Axis_Compensation_Phase_16_,
+                        _Cross_Axis_Bias,
+                        _Long_Axis_Bias,
+                        _Long_Axis_Period,
+                        _Long_Axis_Damping,
+                        _Long_Axis_Gain,
+                        _Long_Axis_Lead,
+                        _Long_Axis_Compensation_4_,
+                        _Long_Axis_Compensation_16_,
+                        _Long_Axis_Compensation_Phase_4_,
+                        _Long_Axis_Compensation_Phase_16_,
                         VCC,
+                        Mode,
                         AL,
                         AX,
                         VE,
                         AX2,
                         XACC2,
                         LACC2,
-                        XACC,
-                        LACC,
-                        Altitude,
-                        Longitude,
-                        Latitude,
-                        GPS_Status,
-                        Period};
-                rowData_Table_SimulatedRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowData_Table_SimulatedRow);
-                return rowData_Table_SimulatedRow;
+                        _AX_Phase,
+                        _AL_Phase,
+                        VCC_Phase,
+                        _Max_Spring_Tension,
+                        _Serial_Port_Format,
+                        _Serial_Port_Output};
+                rowCalibrationRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCalibrationRow);
+                return rowCalibrationRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedRow FindByid(int id) {
-                return ((Data_Table_SimulatedRow)(this.Rows.Find(new object[] {
+            public CalibrationRow FindByid(int id) {
+                return ((CalibrationRow)(this.Rows.Find(new object[] {
                             id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                Data_Table_SimulatedDataTable cln = ((Data_Table_SimulatedDataTable)(base.Clone()));
+                CalibrationDataTable cln = ((CalibrationDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -674,37 +807,48 @@ namespace SerialPortTerminal {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new Data_Table_SimulatedDataTable();
+                return new CalibrationDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
-                this.columndate = base.Columns["date"];
-                this.columnYEAR = base.Columns["YEAR"];
-                this.columnDAYS = base.Columns["DAYS"];
-                this.columnHOUR = base.Columns["HOUR"];
-                this.columnMIN = base.Columns["MIN"];
-                this.columnSEC = base.Columns["SEC"];
-                this.columnDigitalGravity = base.Columns["DigitalGravity"];
-                this.columnSpringTension = base.Columns["SpringTension"];
-                this.columnCrossCoupling = base.Columns["CrossCoupling"];
-                this.columnRawBeam = base.Columns["RawBeam"];
+                this.columnCalibrationDate = base.Columns["CalibrationDate"];
+                this.columnMeterNumber = base.Columns["MeterNumber"];
+                this.columnBeamScaleFactor = base.Columns["BeamScaleFactor"];
+                this._columnCross_Axis_Period = base.Columns["Cross-Axis-Period"];
+                this._columnCross_Axis_Damping = base.Columns["Cross-Axis-Damping"];
+                this._columnCross_Axis_Gain = base.Columns["Cross-Axis-Gain"];
+                this._columnCross_Axis_Lead = base.Columns["Cross-Axis-Lead"];
+                this._columnCross_Axis_Compensation_4_ = base.Columns["Cross-Axis-Compensation(4)"];
+                this._columnCross_Axis_Compensation_16_ = base.Columns["Cross-Axis-Compensation(16)"];
+                this._columnCross_Axis_Compensation_Phase_4_ = base.Columns["Cross-Axis-Compensation_Phase(4)"];
+                this._columnCross_Axis_Compensation_Phase_16_ = base.Columns["Cross-Axis-Compensation_Phase(16)"];
+                this._columnCross_Axis_Bias = base.Columns["Cross-Axis_Bias"];
+                this._columnLong_Axis_Bias = base.Columns["Long-Axis-Bias"];
+                this._columnLong_Axis_Period = base.Columns["Long-Axis-Period"];
+                this._columnLong_Axis_Damping = base.Columns["Long-Axis-Damping"];
+                this._columnLong_Axis_Gain = base.Columns["Long-Axis-Gain"];
+                this._columnLong_Axis_Lead = base.Columns["Long-Axis-Lead"];
+                this._columnLong_Axis_Compensation_4_ = base.Columns["Long-Axis-Compensation(4)"];
+                this._columnLong_Axis_Compensation_16_ = base.Columns["Long-Axis-Compensation(16)"];
+                this._columnLong_Axis_Compensation_Phase_4_ = base.Columns["Long-Axis-Compensation-Phase(4)"];
+                this._columnLong_Axis_Compensation_Phase_16_ = base.Columns["Long-Axis-Compensation-Phase(16)"];
                 this.columnVCC = base.Columns["VCC"];
+                this.columnMode = base.Columns["Mode"];
                 this.columnAL = base.Columns["AL"];
                 this.columnAX = base.Columns["AX"];
                 this.columnVE = base.Columns["VE"];
                 this.columnAX2 = base.Columns["AX2"];
                 this.columnXACC2 = base.Columns["XACC2"];
                 this.columnLACC2 = base.Columns["LACC2"];
-                this.columnXACC = base.Columns["XACC"];
-                this.columnLACC = base.Columns["LACC"];
-                this.columnAltitude = base.Columns["Altitude"];
-                this.columnLongitude = base.Columns["Longitude"];
-                this.columnLatitude = base.Columns["Latitude"];
-                this.columnGPS_Status = base.Columns["GPS_Status"];
-                this.columnPeriod = base.Columns["Period"];
+                this._columnAX_Phase = base.Columns["AX-Phase"];
+                this._columnAL_Phase = base.Columns["AL-Phase"];
+                this.columnVCC_Phase = base.Columns["VCC_Phase"];
+                this._columnMax_Spring_Tension = base.Columns["Max-Spring-Tension"];
+                this._columnSerial_Port_Format = base.Columns["Serial-Port-Format"];
+                this._columnSerial_Port_Output = base.Columns["Serial-Port-Output"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -712,28 +856,88 @@ namespace SerialPortTerminal {
             private void InitClass() {
                 this.columnid = new global::System.Data.DataColumn("id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
-                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate);
-                this.columnYEAR = new global::System.Data.DataColumn("YEAR", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnYEAR);
-                this.columnDAYS = new global::System.Data.DataColumn("DAYS", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDAYS);
-                this.columnHOUR = new global::System.Data.DataColumn("HOUR", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnHOUR);
-                this.columnMIN = new global::System.Data.DataColumn("MIN", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMIN);
-                this.columnSEC = new global::System.Data.DataColumn("SEC", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC);
-                this.columnDigitalGravity = new global::System.Data.DataColumn("DigitalGravity", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDigitalGravity);
-                this.columnSpringTension = new global::System.Data.DataColumn("SpringTension", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSpringTension);
-                this.columnCrossCoupling = new global::System.Data.DataColumn("CrossCoupling", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCrossCoupling);
-                this.columnRawBeam = new global::System.Data.DataColumn("RawBeam", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRawBeam);
+                this.columnCalibrationDate = new global::System.Data.DataColumn("CalibrationDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCalibrationDate);
+                this.columnMeterNumber = new global::System.Data.DataColumn("MeterNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMeterNumber);
+                this.columnBeamScaleFactor = new global::System.Data.DataColumn("BeamScaleFactor", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBeamScaleFactor);
+                this._columnCross_Axis_Period = new global::System.Data.DataColumn("Cross-Axis-Period", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Period.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Period");
+                this._columnCross_Axis_Period.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Period");
+                base.Columns.Add(this._columnCross_Axis_Period);
+                this._columnCross_Axis_Damping = new global::System.Data.DataColumn("Cross-Axis-Damping", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Damping.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Damping");
+                this._columnCross_Axis_Damping.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Damping");
+                base.Columns.Add(this._columnCross_Axis_Damping);
+                this._columnCross_Axis_Gain = new global::System.Data.DataColumn("Cross-Axis-Gain", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Gain.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Gain");
+                this._columnCross_Axis_Gain.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Gain");
+                base.Columns.Add(this._columnCross_Axis_Gain);
+                this._columnCross_Axis_Lead = new global::System.Data.DataColumn("Cross-Axis-Lead", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Lead.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Lead");
+                this._columnCross_Axis_Lead.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Lead");
+                base.Columns.Add(this._columnCross_Axis_Lead);
+                this._columnCross_Axis_Compensation_4_ = new global::System.Data.DataColumn("Cross-Axis-Compensation(4)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Compensation_4_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Compensation_4_");
+                this._columnCross_Axis_Compensation_4_.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Compensation(4)");
+                base.Columns.Add(this._columnCross_Axis_Compensation_4_);
+                this._columnCross_Axis_Compensation_16_ = new global::System.Data.DataColumn("Cross-Axis-Compensation(16)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Compensation_16_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Compensation_16_");
+                this._columnCross_Axis_Compensation_16_.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Compensation(16)");
+                base.Columns.Add(this._columnCross_Axis_Compensation_16_);
+                this._columnCross_Axis_Compensation_Phase_4_ = new global::System.Data.DataColumn("Cross-Axis-Compensation_Phase(4)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Compensation_Phase_4_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Compensation_Phase_4_");
+                this._columnCross_Axis_Compensation_Phase_4_.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Compensation_Phase(4)");
+                base.Columns.Add(this._columnCross_Axis_Compensation_Phase_4_);
+                this._columnCross_Axis_Compensation_Phase_16_ = new global::System.Data.DataColumn("Cross-Axis-Compensation_Phase(16)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Compensation_Phase_16_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Compensation_Phase_16_");
+                this._columnCross_Axis_Compensation_Phase_16_.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis-Compensation_Phase(16)");
+                base.Columns.Add(this._columnCross_Axis_Compensation_Phase_16_);
+                this._columnCross_Axis_Bias = new global::System.Data.DataColumn("Cross-Axis_Bias", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnCross_Axis_Bias.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCross_Axis_Bias");
+                this._columnCross_Axis_Bias.ExtendedProperties.Add("Generator_UserColumnName", "Cross-Axis_Bias");
+                base.Columns.Add(this._columnCross_Axis_Bias);
+                this._columnLong_Axis_Bias = new global::System.Data.DataColumn("Long-Axis-Bias", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Bias.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Bias");
+                this._columnLong_Axis_Bias.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Bias");
+                base.Columns.Add(this._columnLong_Axis_Bias);
+                this._columnLong_Axis_Period = new global::System.Data.DataColumn("Long-Axis-Period", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Period.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Period");
+                this._columnLong_Axis_Period.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Period");
+                base.Columns.Add(this._columnLong_Axis_Period);
+                this._columnLong_Axis_Damping = new global::System.Data.DataColumn("Long-Axis-Damping", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Damping.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Damping");
+                this._columnLong_Axis_Damping.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Damping");
+                base.Columns.Add(this._columnLong_Axis_Damping);
+                this._columnLong_Axis_Gain = new global::System.Data.DataColumn("Long-Axis-Gain", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Gain.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Gain");
+                this._columnLong_Axis_Gain.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Gain");
+                base.Columns.Add(this._columnLong_Axis_Gain);
+                this._columnLong_Axis_Lead = new global::System.Data.DataColumn("Long-Axis-Lead", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Lead.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Lead");
+                this._columnLong_Axis_Lead.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Lead");
+                base.Columns.Add(this._columnLong_Axis_Lead);
+                this._columnLong_Axis_Compensation_4_ = new global::System.Data.DataColumn("Long-Axis-Compensation(4)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Compensation_4_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Compensation_4_");
+                this._columnLong_Axis_Compensation_4_.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Compensation(4)");
+                base.Columns.Add(this._columnLong_Axis_Compensation_4_);
+                this._columnLong_Axis_Compensation_16_ = new global::System.Data.DataColumn("Long-Axis-Compensation(16)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Compensation_16_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Compensation_16_");
+                this._columnLong_Axis_Compensation_16_.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Compensation(16)");
+                base.Columns.Add(this._columnLong_Axis_Compensation_16_);
+                this._columnLong_Axis_Compensation_Phase_4_ = new global::System.Data.DataColumn("Long-Axis-Compensation-Phase(4)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Compensation_Phase_4_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Compensation_Phase_4_");
+                this._columnLong_Axis_Compensation_Phase_4_.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Compensation-Phase(4)");
+                base.Columns.Add(this._columnLong_Axis_Compensation_Phase_4_);
+                this._columnLong_Axis_Compensation_Phase_16_ = new global::System.Data.DataColumn("Long-Axis-Compensation-Phase(16)", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnLong_Axis_Compensation_Phase_16_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLong_Axis_Compensation_Phase_16_");
+                this._columnLong_Axis_Compensation_Phase_16_.ExtendedProperties.Add("Generator_UserColumnName", "Long-Axis-Compensation-Phase(16)");
+                base.Columns.Add(this._columnLong_Axis_Compensation_Phase_16_);
                 this.columnVCC = new global::System.Data.DataColumn("VCC", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVCC);
+                this.columnMode = new global::System.Data.DataColumn("Mode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMode);
                 this.columnAL = new global::System.Data.DataColumn("AL", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAL);
                 this.columnAX = new global::System.Data.DataColumn("AX", typeof(double), null, global::System.Data.MappingType.Element);
@@ -746,55 +950,61 @@ namespace SerialPortTerminal {
                 base.Columns.Add(this.columnXACC2);
                 this.columnLACC2 = new global::System.Data.DataColumn("LACC2", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLACC2);
-                this.columnXACC = new global::System.Data.DataColumn("XACC", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnXACC);
-                this.columnLACC = new global::System.Data.DataColumn("LACC", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLACC);
-                this.columnAltitude = new global::System.Data.DataColumn("Altitude", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAltitude);
-                this.columnLongitude = new global::System.Data.DataColumn("Longitude", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLongitude);
-                this.columnLatitude = new global::System.Data.DataColumn("Latitude", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLatitude);
-                this.columnGPS_Status = new global::System.Data.DataColumn("GPS_Status", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnGPS_Status);
-                this.columnPeriod = new global::System.Data.DataColumn("Period", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPeriod);
+                this._columnAX_Phase = new global::System.Data.DataColumn("AX-Phase", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnAX_Phase.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnAX_Phase");
+                this._columnAX_Phase.ExtendedProperties.Add("Generator_UserColumnName", "AX-Phase");
+                base.Columns.Add(this._columnAX_Phase);
+                this._columnAL_Phase = new global::System.Data.DataColumn("AL-Phase", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnAL_Phase.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnAL_Phase");
+                this._columnAL_Phase.ExtendedProperties.Add("Generator_UserColumnName", "AL-Phase");
+                base.Columns.Add(this._columnAL_Phase);
+                this.columnVCC_Phase = new global::System.Data.DataColumn("VCC_Phase", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVCC_Phase);
+                this._columnMax_Spring_Tension = new global::System.Data.DataColumn("Max-Spring-Tension", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnMax_Spring_Tension.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnMax_Spring_Tension");
+                this._columnMax_Spring_Tension.ExtendedProperties.Add("Generator_UserColumnName", "Max-Spring-Tension");
+                base.Columns.Add(this._columnMax_Spring_Tension);
+                this._columnSerial_Port_Format = new global::System.Data.DataColumn("Serial-Port-Format", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnSerial_Port_Format.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSerial_Port_Format");
+                this._columnSerial_Port_Format.ExtendedProperties.Add("Generator_UserColumnName", "Serial-Port-Format");
+                base.Columns.Add(this._columnSerial_Port_Format);
+                this._columnSerial_Port_Output = new global::System.Data.DataColumn("Serial-Port-Output", typeof(double), null, global::System.Data.MappingType.Element);
+                this._columnSerial_Port_Output.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSerial_Port_Output");
+                this._columnSerial_Port_Output.ExtendedProperties.Add("Generator_UserColumnName", "Serial-Port-Output");
+                base.Columns.Add(this._columnSerial_Port_Output);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
-                this.columnid.AutoIncrement = true;
-                this.columnid.AutoIncrementSeed = -1;
-                this.columnid.AutoIncrementStep = -1;
                 this.columnid.AllowDBNull = false;
-                this.columnid.ReadOnly = true;
                 this.columnid.Unique = true;
-                this.columnSpringTension.AllowDBNull = false;
+                this.columnCalibrationDate.AllowDBNull = false;
+                this.columnMeterNumber.MaxLength = 10;
+                this.columnMode.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedRow NewData_Table_SimulatedRow() {
-                return ((Data_Table_SimulatedRow)(this.NewRow()));
+            public CalibrationRow NewCalibrationRow() {
+                return ((CalibrationRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Data_Table_SimulatedRow(builder);
+                return new CalibrationRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(Data_Table_SimulatedRow);
+                return typeof(CalibrationRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.Data_Table_SimulatedRowChanged != null)) {
-                    this.Data_Table_SimulatedRowChanged(this, new Data_Table_SimulatedRowChangeEvent(((Data_Table_SimulatedRow)(e.Row)), e.Action));
+                if ((this.CalibrationRowChanged != null)) {
+                    this.CalibrationRowChanged(this, new CalibrationRowChangeEvent(((CalibrationRow)(e.Row)), e.Action));
                 }
             }
             
@@ -802,8 +1012,8 @@ namespace SerialPortTerminal {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.Data_Table_SimulatedRowChanging != null)) {
-                    this.Data_Table_SimulatedRowChanging(this, new Data_Table_SimulatedRowChangeEvent(((Data_Table_SimulatedRow)(e.Row)), e.Action));
+                if ((this.CalibrationRowChanging != null)) {
+                    this.CalibrationRowChanging(this, new CalibrationRowChangeEvent(((CalibrationRow)(e.Row)), e.Action));
                 }
             }
             
@@ -811,8 +1021,8 @@ namespace SerialPortTerminal {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.Data_Table_SimulatedRowDeleted != null)) {
-                    this.Data_Table_SimulatedRowDeleted(this, new Data_Table_SimulatedRowChangeEvent(((Data_Table_SimulatedRow)(e.Row)), e.Action));
+                if ((this.CalibrationRowDeleted != null)) {
+                    this.CalibrationRowDeleted(this, new CalibrationRowChangeEvent(((CalibrationRow)(e.Row)), e.Action));
                 }
             }
             
@@ -820,14 +1030,14 @@ namespace SerialPortTerminal {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.Data_Table_SimulatedRowDeleting != null)) {
-                    this.Data_Table_SimulatedRowDeleting(this, new Data_Table_SimulatedRowChangeEvent(((Data_Table_SimulatedRow)(e.Row)), e.Action));
+                if ((this.CalibrationRowDeleting != null)) {
+                    this.CalibrationRowDeleting(this, new CalibrationRowChangeEvent(((CalibrationRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveData_Table_SimulatedRow(Data_Table_SimulatedRow row) {
+            public void RemoveCalibrationRow(CalibrationRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -836,7 +1046,7 @@ namespace SerialPortTerminal {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DynamicDataDataSet ds = new DynamicDataDataSet();
+                DynamicDataDataSet3 ds = new DynamicDataDataSet3();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -854,7 +1064,7 @@ namespace SerialPortTerminal {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Data_Table_SimulatedDataTable";
+                attribute2.FixedValue = "CalibrationDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -898,180 +1108,364 @@ namespace SerialPortTerminal {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class Data_Table_SimulatedRow : global::System.Data.DataRow {
+        public partial class CalibrationRow : global::System.Data.DataRow {
             
-            private Data_Table_SimulatedDataTable tableData_Table_Simulated;
+            private CalibrationDataTable tableCalibration;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Data_Table_SimulatedRow(global::System.Data.DataRowBuilder rb) : 
+            internal CalibrationRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableData_Table_Simulated = ((Data_Table_SimulatedDataTable)(this.Table));
+                this.tableCalibration = ((CalibrationDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int id {
                 get {
-                    return ((int)(this[this.tableData_Table_Simulated.idColumn]));
+                    return ((int)(this[this.tableCalibration.idColumn]));
                 }
                 set {
-                    this[this.tableData_Table_Simulated.idColumn] = value;
+                    this[this.tableCalibration.idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime date {
+            public System.DateTime CalibrationDate {
+                get {
+                    return ((global::System.DateTime)(this[this.tableCalibration.CalibrationDateColumn]));
+                }
+                set {
+                    this[this.tableCalibration.CalibrationDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MeterNumber {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableData_Table_Simulated.dateColumn]));
+                        return ((string)(this[this.tableCalibration.MeterNumberColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'MeterNumber\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.dateColumn] = value;
+                    this[this.tableCalibration.MeterNumberColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int YEAR {
+            public double BeamScaleFactor {
                 get {
                     try {
-                        return ((int)(this[this.tableData_Table_Simulated.YEARColumn]));
+                        return ((double)(this[this.tableCalibration.BeamScaleFactorColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'YEAR\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'BeamScaleFactor\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.YEARColumn] = value;
+                    this[this.tableCalibration.BeamScaleFactorColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int DAYS {
+            public double _Cross_Axis_Period {
                 get {
                     try {
-                        return ((int)(this[this.tableData_Table_Simulated.DAYSColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_PeriodColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DAYS\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Period\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.DAYSColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_PeriodColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int HOUR {
+            public double _Cross_Axis_Damping {
                 get {
                     try {
-                        return ((int)(this[this.tableData_Table_Simulated.HOURColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_DampingColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'HOUR\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Damping\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.HOURColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_DampingColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int MIN {
+            public double _Cross_Axis_Gain {
                 get {
                     try {
-                        return ((int)(this[this.tableData_Table_Simulated.MINColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_GainColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MIN\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Gain\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.MINColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_GainColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int SEC {
+            public double _Cross_Axis_Lead {
                 get {
                     try {
-                        return ((int)(this[this.tableData_Table_Simulated.SECColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_LeadColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SEC\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Lead\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.SECColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_LeadColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double DigitalGravity {
+            public double _Cross_Axis_Compensation_4_ {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.DigitalGravityColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_Compensation_4_Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DigitalGravity\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Compensation(4)\' in table \'Calibration\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.DigitalGravityColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_Compensation_4_Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double SpringTension {
-                get {
-                    return ((double)(this[this.tableData_Table_Simulated.SpringTensionColumn]));
-                }
-                set {
-                    this[this.tableData_Table_Simulated.SpringTensionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double CrossCoupling {
+            public double _Cross_Axis_Compensation_16_ {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.CrossCouplingColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_Compensation_16_Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CrossCoupling\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Compensation(16)\' in table \'Calibration\' is DBNu" +
+                                "ll.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.CrossCouplingColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_Compensation_16_Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double RawBeam {
+            public double _Cross_Axis_Compensation_Phase_4_ {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.RawBeamColumn]));
+                        return ((double)(this[this.tableCalibration._Cross_Axis_Compensation_Phase_4_Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RawBeam\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Compensation_Phase(4)\' in table \'Calibration\' is" +
+                                " DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.RawBeamColumn] = value;
+                    this[this.tableCalibration._Cross_Axis_Compensation_Phase_4_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Cross_Axis_Compensation_Phase_16_ {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Cross_Axis_Compensation_Phase_16_Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis-Compensation_Phase(16)\' in table \'Calibration\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Cross_Axis_Compensation_Phase_16_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Cross_Axis_Bias {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Cross_Axis_BiasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Cross-Axis_Bias\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Cross_Axis_BiasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Bias {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_BiasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Bias\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_BiasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Period {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_PeriodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Period\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_PeriodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Damping {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_DampingColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Damping\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_DampingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Gain {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_GainColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Gain\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_GainColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Lead {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_LeadColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Lead\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_LeadColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Compensation_4_ {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_Compensation_4_Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Compensation(4)\' in table \'Calibration\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_Compensation_4_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Compensation_16_ {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_Compensation_16_Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Compensation(16)\' in table \'Calibration\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_Compensation_16_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Compensation_Phase_4_ {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_Compensation_Phase_4_Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Compensation-Phase(4)\' in table \'Calibration\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_Compensation_Phase_4_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double _Long_Axis_Compensation_Phase_16_ {
+                get {
+                    try {
+                        return ((double)(this[this.tableCalibration._Long_Axis_Compensation_Phase_16_Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Long-Axis-Compensation-Phase(16)\' in table \'Calibration\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration._Long_Axis_Compensation_Phase_16_Column] = value;
                 }
             }
             
@@ -1080,14 +1474,30 @@ namespace SerialPortTerminal {
             public double VCC {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.VCCColumn]));
+                        return ((double)(this[this.tableCalibration.VCCColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VCC\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'VCC\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.VCCColumn] = value;
+                    this[this.tableCalibration.VCCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Mode {
+                get {
+                    try {
+                        return ((string)(this[this.tableCalibration.ModeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Mode\' in table \'Calibration\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCalibration.ModeColumn] = value;
                 }
             }
             
@@ -1096,14 +1506,14 @@ namespace SerialPortTerminal {
             public double AL {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.ALColumn]));
+                        return ((double)(this[this.tableCalibration.ALColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AL\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'AL\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.ALColumn] = value;
+                    this[this.tableCalibration.ALColumn] = value;
                 }
             }
             
@@ -1112,14 +1522,14 @@ namespace SerialPortTerminal {
             public double AX {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.AXColumn]));
+                        return ((double)(this[this.tableCalibration.AXColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AX\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'AX\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.AXColumn] = value;
+                    this[this.tableCalibration.AXColumn] = value;
                 }
             }
             
@@ -1128,14 +1538,14 @@ namespace SerialPortTerminal {
             public double VE {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.VEColumn]));
+                        return ((double)(this[this.tableCalibration.VEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VE\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'VE\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.VEColumn] = value;
+                    this[this.tableCalibration.VEColumn] = value;
                 }
             }
             
@@ -1144,14 +1554,14 @@ namespace SerialPortTerminal {
             public double AX2 {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.AX2Column]));
+                        return ((double)(this[this.tableCalibration.AX2Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AX2\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'AX2\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.AX2Column] = value;
+                    this[this.tableCalibration.AX2Column] = value;
                 }
             }
             
@@ -1160,14 +1570,14 @@ namespace SerialPortTerminal {
             public double XACC2 {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.XACC2Column]));
+                        return ((double)(this[this.tableCalibration.XACC2Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'XACC2\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'XACC2\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.XACC2Column] = value;
+                    this[this.tableCalibration.XACC2Column] = value;
                 }
             }
             
@@ -1176,403 +1586,519 @@ namespace SerialPortTerminal {
             public double LACC2 {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.LACC2Column]));
+                        return ((double)(this[this.tableCalibration.LACC2Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LACC2\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'LACC2\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.LACC2Column] = value;
+                    this[this.tableCalibration.LACC2Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double XACC {
+            public double _AX_Phase {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.XACCColumn]));
+                        return ((double)(this[this.tableCalibration._AX_PhaseColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'XACC\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'AX-Phase\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.XACCColumn] = value;
+                    this[this.tableCalibration._AX_PhaseColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double LACC {
+            public double _AL_Phase {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.LACCColumn]));
+                        return ((double)(this[this.tableCalibration._AL_PhaseColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LACC\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'AL-Phase\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.LACCColumn] = value;
+                    this[this.tableCalibration._AL_PhaseColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Altitude {
+            public double VCC_Phase {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.AltitudeColumn]));
+                        return ((double)(this[this.tableCalibration.VCC_PhaseColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Altitude\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'VCC_Phase\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.AltitudeColumn] = value;
+                    this[this.tableCalibration.VCC_PhaseColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Longitude {
+            public double _Max_Spring_Tension {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.LongitudeColumn]));
+                        return ((double)(this[this.tableCalibration._Max_Spring_TensionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Longitude\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Max-Spring-Tension\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.LongitudeColumn] = value;
+                    this[this.tableCalibration._Max_Spring_TensionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Latitude {
+            public double _Serial_Port_Format {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.LatitudeColumn]));
+                        return ((double)(this[this.tableCalibration._Serial_Port_FormatColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Latitude\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Serial-Port-Format\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.LatitudeColumn] = value;
+                    this[this.tableCalibration._Serial_Port_FormatColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double GPS_Status {
+            public double _Serial_Port_Output {
                 get {
                     try {
-                        return ((double)(this[this.tableData_Table_Simulated.GPS_StatusColumn]));
+                        return ((double)(this[this.tableCalibration._Serial_Port_OutputColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GPS_Status\' in table \'Data_Table_Simulated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Serial-Port-Output\' in table \'Calibration\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableData_Table_Simulated.GPS_StatusColumn] = value;
+                    this[this.tableCalibration._Serial_Port_OutputColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Period {
-                get {
-                    try {
-                        return ((double)(this[this.tableData_Table_Simulated.PeriodColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Period\' in table \'Data_Table_Simulated\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableData_Table_Simulated.PeriodColumn] = value;
-                }
+            public bool IsMeterNumberNull() {
+                return this.IsNull(this.tableCalibration.MeterNumberColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsdateNull() {
-                return this.IsNull(this.tableData_Table_Simulated.dateColumn);
+            public void SetMeterNumberNull() {
+                this[this.tableCalibration.MeterNumberColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetdateNull() {
-                this[this.tableData_Table_Simulated.dateColumn] = global::System.Convert.DBNull;
+            public bool IsBeamScaleFactorNull() {
+                return this.IsNull(this.tableCalibration.BeamScaleFactorColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsYEARNull() {
-                return this.IsNull(this.tableData_Table_Simulated.YEARColumn);
+            public void SetBeamScaleFactorNull() {
+                this[this.tableCalibration.BeamScaleFactorColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetYEARNull() {
-                this[this.tableData_Table_Simulated.YEARColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_PeriodNull() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_PeriodColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDAYSNull() {
-                return this.IsNull(this.tableData_Table_Simulated.DAYSColumn);
+            public void Set_Cross_Axis_PeriodNull() {
+                this[this.tableCalibration._Cross_Axis_PeriodColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDAYSNull() {
-                this[this.tableData_Table_Simulated.DAYSColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_DampingNull() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_DampingColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsHOURNull() {
-                return this.IsNull(this.tableData_Table_Simulated.HOURColumn);
+            public void Set_Cross_Axis_DampingNull() {
+                this[this.tableCalibration._Cross_Axis_DampingColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetHOURNull() {
-                this[this.tableData_Table_Simulated.HOURColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_GainNull() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_GainColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsMINNull() {
-                return this.IsNull(this.tableData_Table_Simulated.MINColumn);
+            public void Set_Cross_Axis_GainNull() {
+                this[this.tableCalibration._Cross_Axis_GainColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetMINNull() {
-                this[this.tableData_Table_Simulated.MINColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_LeadNull() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_LeadColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSECNull() {
-                return this.IsNull(this.tableData_Table_Simulated.SECColumn);
+            public void Set_Cross_Axis_LeadNull() {
+                this[this.tableCalibration._Cross_Axis_LeadColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSECNull() {
-                this[this.tableData_Table_Simulated.SECColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_Compensation_4_Null() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_Compensation_4_Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDigitalGravityNull() {
-                return this.IsNull(this.tableData_Table_Simulated.DigitalGravityColumn);
+            public void Set_Cross_Axis_Compensation_4_Null() {
+                this[this.tableCalibration._Cross_Axis_Compensation_4_Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDigitalGravityNull() {
-                this[this.tableData_Table_Simulated.DigitalGravityColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_Compensation_16_Null() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_Compensation_16_Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCrossCouplingNull() {
-                return this.IsNull(this.tableData_Table_Simulated.CrossCouplingColumn);
+            public void Set_Cross_Axis_Compensation_16_Null() {
+                this[this.tableCalibration._Cross_Axis_Compensation_16_Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCrossCouplingNull() {
-                this[this.tableData_Table_Simulated.CrossCouplingColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_Compensation_Phase_4_Null() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_Compensation_Phase_4_Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsRawBeamNull() {
-                return this.IsNull(this.tableData_Table_Simulated.RawBeamColumn);
+            public void Set_Cross_Axis_Compensation_Phase_4_Null() {
+                this[this.tableCalibration._Cross_Axis_Compensation_Phase_4_Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetRawBeamNull() {
-                this[this.tableData_Table_Simulated.RawBeamColumn] = global::System.Convert.DBNull;
+            public bool Is_Cross_Axis_Compensation_Phase_16_Null() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_Compensation_Phase_16_Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Cross_Axis_Compensation_Phase_16_Null() {
+                this[this.tableCalibration._Cross_Axis_Compensation_Phase_16_Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Cross_Axis_BiasNull() {
+                return this.IsNull(this.tableCalibration._Cross_Axis_BiasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Cross_Axis_BiasNull() {
+                this[this.tableCalibration._Cross_Axis_BiasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_BiasNull() {
+                return this.IsNull(this.tableCalibration._Long_Axis_BiasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_BiasNull() {
+                this[this.tableCalibration._Long_Axis_BiasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_PeriodNull() {
+                return this.IsNull(this.tableCalibration._Long_Axis_PeriodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_PeriodNull() {
+                this[this.tableCalibration._Long_Axis_PeriodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_DampingNull() {
+                return this.IsNull(this.tableCalibration._Long_Axis_DampingColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_DampingNull() {
+                this[this.tableCalibration._Long_Axis_DampingColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_GainNull() {
+                return this.IsNull(this.tableCalibration._Long_Axis_GainColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_GainNull() {
+                this[this.tableCalibration._Long_Axis_GainColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_LeadNull() {
+                return this.IsNull(this.tableCalibration._Long_Axis_LeadColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_LeadNull() {
+                this[this.tableCalibration._Long_Axis_LeadColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_Compensation_4_Null() {
+                return this.IsNull(this.tableCalibration._Long_Axis_Compensation_4_Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_Compensation_4_Null() {
+                this[this.tableCalibration._Long_Axis_Compensation_4_Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_Compensation_16_Null() {
+                return this.IsNull(this.tableCalibration._Long_Axis_Compensation_16_Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_Compensation_16_Null() {
+                this[this.tableCalibration._Long_Axis_Compensation_16_Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_Compensation_Phase_4_Null() {
+                return this.IsNull(this.tableCalibration._Long_Axis_Compensation_Phase_4_Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_Compensation_Phase_4_Null() {
+                this[this.tableCalibration._Long_Axis_Compensation_Phase_4_Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Is_Long_Axis_Compensation_Phase_16_Null() {
+                return this.IsNull(this.tableCalibration._Long_Axis_Compensation_Phase_16_Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Set_Long_Axis_Compensation_Phase_16_Null() {
+                this[this.tableCalibration._Long_Axis_Compensation_Phase_16_Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVCCNull() {
-                return this.IsNull(this.tableData_Table_Simulated.VCCColumn);
+                return this.IsNull(this.tableCalibration.VCCColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVCCNull() {
-                this[this.tableData_Table_Simulated.VCCColumn] = global::System.Convert.DBNull;
+                this[this.tableCalibration.VCCColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsModeNull() {
+                return this.IsNull(this.tableCalibration.ModeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetModeNull() {
+                this[this.tableCalibration.ModeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsALNull() {
-                return this.IsNull(this.tableData_Table_Simulated.ALColumn);
+                return this.IsNull(this.tableCalibration.ALColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetALNull() {
-                this[this.tableData_Table_Simulated.ALColumn] = global::System.Convert.DBNull;
+                this[this.tableCalibration.ALColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAXNull() {
-                return this.IsNull(this.tableData_Table_Simulated.AXColumn);
+                return this.IsNull(this.tableCalibration.AXColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAXNull() {
-                this[this.tableData_Table_Simulated.AXColumn] = global::System.Convert.DBNull;
+                this[this.tableCalibration.AXColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVENull() {
-                return this.IsNull(this.tableData_Table_Simulated.VEColumn);
+                return this.IsNull(this.tableCalibration.VEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVENull() {
-                this[this.tableData_Table_Simulated.VEColumn] = global::System.Convert.DBNull;
+                this[this.tableCalibration.VEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAX2Null() {
-                return this.IsNull(this.tableData_Table_Simulated.AX2Column);
+                return this.IsNull(this.tableCalibration.AX2Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAX2Null() {
-                this[this.tableData_Table_Simulated.AX2Column] = global::System.Convert.DBNull;
+                this[this.tableCalibration.AX2Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsXACC2Null() {
-                return this.IsNull(this.tableData_Table_Simulated.XACC2Column);
+                return this.IsNull(this.tableCalibration.XACC2Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetXACC2Null() {
-                this[this.tableData_Table_Simulated.XACC2Column] = global::System.Convert.DBNull;
+                this[this.tableCalibration.XACC2Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLACC2Null() {
-                return this.IsNull(this.tableData_Table_Simulated.LACC2Column);
+                return this.IsNull(this.tableCalibration.LACC2Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLACC2Null() {
-                this[this.tableData_Table_Simulated.LACC2Column] = global::System.Convert.DBNull;
+                this[this.tableCalibration.LACC2Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsXACCNull() {
-                return this.IsNull(this.tableData_Table_Simulated.XACCColumn);
+            public bool Is_AX_PhaseNull() {
+                return this.IsNull(this.tableCalibration._AX_PhaseColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetXACCNull() {
-                this[this.tableData_Table_Simulated.XACCColumn] = global::System.Convert.DBNull;
+            public void Set_AX_PhaseNull() {
+                this[this.tableCalibration._AX_PhaseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLACCNull() {
-                return this.IsNull(this.tableData_Table_Simulated.LACCColumn);
+            public bool Is_AL_PhaseNull() {
+                return this.IsNull(this.tableCalibration._AL_PhaseColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLACCNull() {
-                this[this.tableData_Table_Simulated.LACCColumn] = global::System.Convert.DBNull;
+            public void Set_AL_PhaseNull() {
+                this[this.tableCalibration._AL_PhaseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsAltitudeNull() {
-                return this.IsNull(this.tableData_Table_Simulated.AltitudeColumn);
+            public bool IsVCC_PhaseNull() {
+                return this.IsNull(this.tableCalibration.VCC_PhaseColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetAltitudeNull() {
-                this[this.tableData_Table_Simulated.AltitudeColumn] = global::System.Convert.DBNull;
+            public void SetVCC_PhaseNull() {
+                this[this.tableCalibration.VCC_PhaseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLongitudeNull() {
-                return this.IsNull(this.tableData_Table_Simulated.LongitudeColumn);
+            public bool Is_Max_Spring_TensionNull() {
+                return this.IsNull(this.tableCalibration._Max_Spring_TensionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLongitudeNull() {
-                this[this.tableData_Table_Simulated.LongitudeColumn] = global::System.Convert.DBNull;
+            public void Set_Max_Spring_TensionNull() {
+                this[this.tableCalibration._Max_Spring_TensionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLatitudeNull() {
-                return this.IsNull(this.tableData_Table_Simulated.LatitudeColumn);
+            public bool Is_Serial_Port_FormatNull() {
+                return this.IsNull(this.tableCalibration._Serial_Port_FormatColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLatitudeNull() {
-                this[this.tableData_Table_Simulated.LatitudeColumn] = global::System.Convert.DBNull;
+            public void Set_Serial_Port_FormatNull() {
+                this[this.tableCalibration._Serial_Port_FormatColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsGPS_StatusNull() {
-                return this.IsNull(this.tableData_Table_Simulated.GPS_StatusColumn);
+            public bool Is_Serial_Port_OutputNull() {
+                return this.IsNull(this.tableCalibration._Serial_Port_OutputColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetGPS_StatusNull() {
-                this[this.tableData_Table_Simulated.GPS_StatusColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPeriodNull() {
-                return this.IsNull(this.tableData_Table_Simulated.PeriodColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPeriodNull() {
-                this[this.tableData_Table_Simulated.PeriodColumn] = global::System.Convert.DBNull;
+            public void Set_Serial_Port_OutputNull() {
+                this[this.tableCalibration._Serial_Port_OutputColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1580,22 +2106,22 @@ namespace SerialPortTerminal {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class Data_Table_SimulatedRowChangeEvent : global::System.EventArgs {
+        public class CalibrationRowChangeEvent : global::System.EventArgs {
             
-            private Data_Table_SimulatedRow eventRow;
+            private CalibrationRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedRowChangeEvent(Data_Table_SimulatedRow row, global::System.Data.DataRowAction action) {
+            public CalibrationRowChangeEvent(CalibrationRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Data_Table_SimulatedRow Row {
+            public CalibrationRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -1611,7 +2137,7 @@ namespace SerialPortTerminal {
         }
     }
 }
-namespace SerialPortTerminal.DynamicDataDataSetTableAdapters {
+namespace SerialPortTerminal.DynamicDataDataSet3TableAdapters {
     
     
     /// <summary>
@@ -1623,7 +2149,7 @@ namespace SerialPortTerminal.DynamicDataDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class Data_Table_SimulatedTableAdapter : global::System.ComponentModel.Component {
+    public partial class CalibrationTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1637,7 +2163,7 @@ namespace SerialPortTerminal.DynamicDataDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public Data_Table_SimulatedTableAdapter() {
+        public CalibrationTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1734,83 +2260,131 @@ namespace SerialPortTerminal.DynamicDataDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Data_Table_Simulated";
+            tableMapping.DataSetTable = "Calibration";
             tableMapping.ColumnMappings.Add("id", "id");
-            tableMapping.ColumnMappings.Add("date", "date");
-            tableMapping.ColumnMappings.Add("YEAR", "YEAR");
-            tableMapping.ColumnMappings.Add("DAYS", "DAYS");
-            tableMapping.ColumnMappings.Add("HOUR", "HOUR");
-            tableMapping.ColumnMappings.Add("MIN", "MIN");
-            tableMapping.ColumnMappings.Add("SEC", "SEC");
-            tableMapping.ColumnMappings.Add("DigitalGravity", "DigitalGravity");
-            tableMapping.ColumnMappings.Add("SpringTension", "SpringTension");
-            tableMapping.ColumnMappings.Add("CrossCoupling", "CrossCoupling");
-            tableMapping.ColumnMappings.Add("RawBeam", "RawBeam");
+            tableMapping.ColumnMappings.Add("CalibrationDate", "CalibrationDate");
+            tableMapping.ColumnMappings.Add("MeterNumber", "MeterNumber");
+            tableMapping.ColumnMappings.Add("BeamScaleFactor", "BeamScaleFactor");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Period", "Cross-Axis-Period");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Damping", "Cross-Axis-Damping");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Gain", "Cross-Axis-Gain");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Lead", "Cross-Axis-Lead");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Compensation(4)", "Cross-Axis-Compensation(4)");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Compensation(16)", "Cross-Axis-Compensation(16)");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Compensation_Phase(4)", "Cross-Axis-Compensation_Phase(4)");
+            tableMapping.ColumnMappings.Add("Cross-Axis-Compensation_Phase(16)", "Cross-Axis-Compensation_Phase(16)");
+            tableMapping.ColumnMappings.Add("Cross-Axis_Bias", "Cross-Axis_Bias");
+            tableMapping.ColumnMappings.Add("Long-Axis-Bias", "Long-Axis-Bias");
+            tableMapping.ColumnMappings.Add("Long-Axis-Period", "Long-Axis-Period");
+            tableMapping.ColumnMappings.Add("Long-Axis-Damping", "Long-Axis-Damping");
+            tableMapping.ColumnMappings.Add("Long-Axis-Gain", "Long-Axis-Gain");
+            tableMapping.ColumnMappings.Add("Long-Axis-Lead", "Long-Axis-Lead");
+            tableMapping.ColumnMappings.Add("Long-Axis-Compensation(4)", "Long-Axis-Compensation(4)");
+            tableMapping.ColumnMappings.Add("Long-Axis-Compensation(16)", "Long-Axis-Compensation(16)");
+            tableMapping.ColumnMappings.Add("Long-Axis-Compensation-Phase(4)", "Long-Axis-Compensation-Phase(4)");
+            tableMapping.ColumnMappings.Add("Long-Axis-Compensation-Phase(16)", "Long-Axis-Compensation-Phase(16)");
             tableMapping.ColumnMappings.Add("VCC", "VCC");
+            tableMapping.ColumnMappings.Add("Mode", "Mode");
             tableMapping.ColumnMappings.Add("AL", "AL");
             tableMapping.ColumnMappings.Add("AX", "AX");
             tableMapping.ColumnMappings.Add("VE", "VE");
             tableMapping.ColumnMappings.Add("AX2", "AX2");
             tableMapping.ColumnMappings.Add("XACC2", "XACC2");
             tableMapping.ColumnMappings.Add("LACC2", "LACC2");
-            tableMapping.ColumnMappings.Add("XACC", "XACC");
-            tableMapping.ColumnMappings.Add("LACC", "LACC");
-            tableMapping.ColumnMappings.Add("Altitude", "Altitude");
-            tableMapping.ColumnMappings.Add("Longitude", "Longitude");
-            tableMapping.ColumnMappings.Add("Latitude", "Latitude");
-            tableMapping.ColumnMappings.Add("GPS_Status", "GPS_Status");
-            tableMapping.ColumnMappings.Add("Period", "Period");
+            tableMapping.ColumnMappings.Add("AX-Phase", "AX-Phase");
+            tableMapping.ColumnMappings.Add("AL-Phase", "AL-Phase");
+            tableMapping.ColumnMappings.Add("VCC_Phase", "VCC_Phase");
+            tableMapping.ColumnMappings.Add("Max-Spring-Tension", "Max-Spring-Tension");
+            tableMapping.ColumnMappings.Add("Serial-Port-Format", "Serial-Port-Format");
+            tableMapping.ColumnMappings.Add("Serial-Port-Output", "Serial-Port-Output");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Data_Table_Simulated] WHERE (([id] = @Original_id) AND ((@IsNu" +
-                "ll_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ((@IsNull_YEAR" +
-                " = 1 AND [YEAR] IS NULL) OR ([YEAR] = @Original_YEAR)) AND ((@IsNull_DAYS = 1 AN" +
-                "D [DAYS] IS NULL) OR ([DAYS] = @Original_DAYS)) AND ((@IsNull_HOUR = 1 AND [HOUR" +
-                "] IS NULL) OR ([HOUR] = @Original_HOUR)) AND ((@IsNull_MIN = 1 AND [MIN] IS NULL" +
-                ") OR ([MIN] = @Original_MIN)) AND ((@IsNull_SEC = 1 AND [SEC] IS NULL) OR ([SEC]" +
-                " = @Original_SEC)) AND ((@IsNull_DigitalGravity = 1 AND [DigitalGravity] IS NULL" +
-                ") OR ([DigitalGravity] = @Original_DigitalGravity)) AND ([SpringTension] = @Orig" +
-                "inal_SpringTension) AND ((@IsNull_CrossCoupling = 1 AND [CrossCoupling] IS NULL)" +
-                " OR ([CrossCoupling] = @Original_CrossCoupling)) AND ((@IsNull_RawBeam = 1 AND [" +
-                "RawBeam] IS NULL) OR ([RawBeam] = @Original_RawBeam)) AND ((@IsNull_VCC = 1 AND " +
-                "[VCC] IS NULL) OR ([VCC] = @Original_VCC)) AND ((@IsNull_AL = 1 AND [AL] IS NULL" +
-                ") OR ([AL] = @Original_AL)) AND ((@IsNull_AX = 1 AND [AX] IS NULL) OR ([AX] = @O" +
-                "riginal_AX)) AND ((@IsNull_VE = 1 AND [VE] IS NULL) OR ([VE] = @Original_VE)) AN" +
-                "D ((@IsNull_AX2 = 1 AND [AX2] IS NULL) OR ([AX2] = @Original_AX2)) AND ((@IsNull" +
-                "_XACC2 = 1 AND [XACC2] IS NULL) OR ([XACC2] = @Original_XACC2)) AND ((@IsNull_LA" +
-                "CC2 = 1 AND [LACC2] IS NULL) OR ([LACC2] = @Original_LACC2)) AND ((@IsNull_XACC " +
-                "= 1 AND [XACC] IS NULL) OR ([XACC] = @Original_XACC)) AND ((@IsNull_LACC = 1 AND" +
-                " [LACC] IS NULL) OR ([LACC] = @Original_LACC)) AND ((@IsNull_Altitude = 1 AND [A" +
-                "ltitude] IS NULL) OR ([Altitude] = @Original_Altitude)) AND ((@IsNull_Longitude " +
-                "= 1 AND [Longitude] IS NULL) OR ([Longitude] = @Original_Longitude)) AND ((@IsNu" +
-                "ll_Latitude = 1 AND [Latitude] IS NULL) OR ([Latitude] = @Original_Latitude)) AN" +
-                "D ((@IsNull_GPS_Status = 1 AND [GPS_Status] IS NULL) OR ([GPS_Status] = @Origina" +
-                "l_GPS_Status)) AND ((@IsNull_Period = 1 AND [Period] IS NULL) OR ([Period] = @Or" +
-                "iginal_Period)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Calibration] WHERE (([id] = @Original_id) AND ([CalibrationDat" +
+                "e] = @Original_CalibrationDate) AND ((@IsNull_MeterNumber = 1 AND [MeterNumber] " +
+                "IS NULL) OR ([MeterNumber] = @Original_MeterNumber)) AND ((@IsNull_BeamScaleFact" +
+                "or = 1 AND [BeamScaleFactor] IS NULL) OR ([BeamScaleFactor] = @Original_BeamScal" +
+                "eFactor)) AND ((@p3 = 1 AND [Cross-Axis-Period] IS NULL) OR ([Cross-Axis-Period]" +
+                " = @p2)) AND ((@p6 = 1 AND [Cross-Axis-Damping] IS NULL) OR ([Cross-Axis-Damping" +
+                "] = @p5)) AND ((@p9 = 1 AND [Cross-Axis-Gain] IS NULL) OR ([Cross-Axis-Gain] = @" +
+                "p8)) AND ((@p12 = 1 AND [Cross-Axis-Lead] IS NULL) OR ([Cross-Axis-Lead] = @p11)" +
+                ") AND ((@p15 = 1 AND [Cross-Axis-Compensation(4)] IS NULL) OR ([Cross-Axis-Compe" +
+                "nsation(4)] = @p14)) AND ((@p18 = 1 AND [Cross-Axis-Compensation(16)] IS NULL) O" +
+                "R ([Cross-Axis-Compensation(16)] = @p17)) AND ((@p21 = 1 AND [Cross-Axis-Compens" +
+                "ation_Phase(4)] IS NULL) OR ([Cross-Axis-Compensation_Phase(4)] = @p20)) AND ((@" +
+                "p24 = 1 AND [Cross-Axis-Compensation_Phase(16)] IS NULL) OR ([Cross-Axis-Compens" +
+                "ation_Phase(16)] = @p23)) AND ((@p27 = 1 AND [Cross-Axis_Bias] IS NULL) OR ([Cro" +
+                "ss-Axis_Bias] = @p26)) AND ((@p30 = 1 AND [Long-Axis-Bias] IS NULL) OR ([Long-Ax" +
+                "is-Bias] = @p29)) AND ((@p33 = 1 AND [Long-Axis-Period] IS NULL) OR ([Long-Axis-" +
+                "Period] = @p32)) AND ((@p36 = 1 AND [Long-Axis-Damping] IS NULL) OR ([Long-Axis-" +
+                "Damping] = @p35)) AND ((@p39 = 1 AND [Long-Axis-Gain] IS NULL) OR ([Long-Axis-Ga" +
+                "in] = @p38)) AND ((@p42 = 1 AND [Long-Axis-Lead] IS NULL) OR ([Long-Axis-Lead] =" +
+                " @p41)) AND ((@p45 = 1 AND [Long-Axis-Compensation(4)] IS NULL) OR ([Long-Axis-C" +
+                "ompensation(4)] = @p44)) AND ((@p48 = 1 AND [Long-Axis-Compensation(16)] IS NULL" +
+                ") OR ([Long-Axis-Compensation(16)] = @p47)) AND ((@p51 = 1 AND [Long-Axis-Compen" +
+                "sation-Phase(4)] IS NULL) OR ([Long-Axis-Compensation-Phase(4)] = @p50)) AND ((@" +
+                "p54 = 1 AND [Long-Axis-Compensation-Phase(16)] IS NULL) OR ([Long-Axis-Compensat" +
+                "ion-Phase(16)] = @p53)) AND ((@IsNull_VCC = 1 AND [VCC] IS NULL) OR ([VCC] = @Or" +
+                "iginal_VCC)) AND ((@IsNull_Mode = 1 AND [Mode] IS NULL) OR ([Mode] = @Original_M" +
+                "ode)) AND ((@IsNull_AL = 1 AND [AL] IS NULL) OR ([AL] = @Original_AL)) AND ((@Is" +
+                "Null_AX = 1 AND [AX] IS NULL) OR ([AX] = @Original_AX)) AND ((@IsNull_VE = 1 AND" +
+                " [VE] IS NULL) OR ([VE] = @Original_VE)) AND ((@IsNull_AX2 = 1 AND [AX2] IS NULL" +
+                ") OR ([AX2] = @Original_AX2)) AND ((@IsNull_XACC2 = 1 AND [XACC2] IS NULL) OR ([" +
+                "XACC2] = @Original_XACC2)) AND ((@IsNull_LACC2 = 1 AND [LACC2] IS NULL) OR ([LAC" +
+                "C2] = @Original_LACC2)) AND ((@p57 = 1 AND [AX-Phase] IS NULL) OR ([AX-Phase] = " +
+                "@p56)) AND ((@p60 = 1 AND [AL-Phase] IS NULL) OR ([AL-Phase] = @p59)) AND ((@IsN" +
+                "ull_VCC_Phase = 1 AND [VCC_Phase] IS NULL) OR ([VCC_Phase] = @Original_VCC_Phase" +
+                ")) AND ((@p63 = 1 AND [Max-Spring-Tension] IS NULL) OR ([Max-Spring-Tension] = @" +
+                "p62)) AND ((@p66 = 1 AND [Serial-Port-Format] IS NULL) OR ([Serial-Port-Format] " +
+                "= @p65)) AND ((@p69 = 1 AND [Serial-Port-Output] IS NULL) OR ([Serial-Port-Outpu" +
+                "t] = @p68)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DAYS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DAYS", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DAYS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DAYS", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_HOUR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HOUR", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HOUR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HOUR", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MIN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MIN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MIN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MIN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DigitalGravity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DigitalGravity", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DigitalGravity", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DigitalGravity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SpringTension", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpringTension", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CrossCoupling", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CrossCoupling", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CrossCoupling", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CrossCoupling", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RawBeam", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RawBeam", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RawBeam", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RawBeam", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CalibrationDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CalibrationDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MeterNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeterNumber", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MeterNumber", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeterNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BeamScaleFactor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BeamScaleFactor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BeamScaleFactor", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BeamScaleFactor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p3", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Period", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Period", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p6", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Damping", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p5", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Damping", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p9", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Gain", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p8", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Gain", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p12", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Lead", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p11", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Lead", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p15", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p14", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p18", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p17", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p21", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p20", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p24", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p23", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p27", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis_Bias", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p26", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis_Bias", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p30", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Bias", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p29", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Bias", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p33", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Period", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p32", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Period", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p36", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Damping", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p35", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Damping", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p39", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Gain", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p38", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Gain", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p42", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Lead", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p41", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Lead", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p45", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p44", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p48", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p47", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p51", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p50", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p54", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p53", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_VCC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VCC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Mode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Mode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_AL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AL", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_AX", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -1823,132 +2397,221 @@ namespace SerialPortTerminal.DynamicDataDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_XACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LACC2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC2", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_XACC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_XACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LACC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Altitude", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Altitude", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Altitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Altitude", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Longitude", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Longitude", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Longitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Longitude", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Latitude", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Latitude", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Latitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Latitude", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GPS_Status", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS_Status", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GPS_Status", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS_Status", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Period", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Period", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Period", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Period", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p57", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX-Phase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p56", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX-Phase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p60", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL-Phase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p59", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL-Phase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_VCC_Phase", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC_Phase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VCC_Phase", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC_Phase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p63", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Max-Spring-Tension", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p62", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Max-Spring-Tension", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p66", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Format", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p65", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Format", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p69", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Output", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p68", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Output", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Data_Table_Simulated] ([date], [YEAR], [DAYS], [HOUR], [MIN], [SEC], [DigitalGravity], [SpringTension], [CrossCoupling], [RawBeam], [VCC], [AL], [AX], [VE], [AX2], [XACC2], [LACC2], [XACC], [LACC], [Altitude], [Longitude], [Latitude], [GPS_Status], [Period]) VALUES (@date, @YEAR, @DAYS, @HOUR, @MIN, @SEC, @DigitalGravity, @SpringTension, @CrossCoupling, @RawBeam, @VCC, @AL, @AX, @VE, @AX2, @XACC2, @LACC2, @XACC, @LACC, @Altitude, @Longitude, @Latitude, @GPS_Status, @Period);
-SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, CrossCoupling, RawBeam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, Altitude, Longitude, Latitude, GPS_Status, Period FROM Data_Table_Simulated WHERE (id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Calibration] ([id], [CalibrationDate], [MeterNumber], [BeamSca" +
+                "leFactor], [Cross-Axis-Period], [Cross-Axis-Damping], [Cross-Axis-Gain], [Cross-" +
+                "Axis-Lead], [Cross-Axis-Compensation(4)], [Cross-Axis-Compensation(16)], [Cross-" +
+                "Axis-Compensation_Phase(4)], [Cross-Axis-Compensation_Phase(16)], [Cross-Axis_Bi" +
+                "as], [Long-Axis-Bias], [Long-Axis-Period], [Long-Axis-Damping], [Long-Axis-Gain]" +
+                ", [Long-Axis-Lead], [Long-Axis-Compensation(4)], [Long-Axis-Compensation(16)], [" +
+                "Long-Axis-Compensation-Phase(4)], [Long-Axis-Compensation-Phase(16)], [VCC], [Mo" +
+                "de], [AL], [AX], [VE], [AX2], [XACC2], [LACC2], [AX-Phase], [AL-Phase], [VCC_Pha" +
+                "se], [Max-Spring-Tension], [Serial-Port-Format], [Serial-Port-Output]) VALUES (@" +
+                "id, @CalibrationDate, @MeterNumber, @BeamScaleFactor, @p1, @p4, @p7, @p10, @p13," +
+                " @p16, @p19, @p22, @p25, @p28, @p31, @p34, @p37, @p40, @p43, @p46, @p49, @p52, @" +
+                "VCC, @Mode, @AL, @AX, @VE, @AX2, @XACC2, @LACC2, @p55, @p58, @VCC_Phase, @p61, @" +
+                "p64, @p67);\r\nSELECT id, CalibrationDate, MeterNumber, BeamScaleFactor, [Cross-Ax" +
+                "is-Period], [Cross-Axis-Damping], [Cross-Axis-Gain], [Cross-Axis-Lead], [Cross-A" +
+                "xis-Compensation(4)], [Cross-Axis-Compensation(16)], [Cross-Axis-Compensation_Ph" +
+                "ase(4)], [Cross-Axis-Compensation_Phase(16)], [Cross-Axis_Bias], [Long-Axis-Bias" +
+                "], [Long-Axis-Period], [Long-Axis-Damping], [Long-Axis-Gain], [Long-Axis-Lead], " +
+                "[Long-Axis-Compensation(4)], [Long-Axis-Compensation(16)], [Long-Axis-Compensati" +
+                "on-Phase(4)], [Long-Axis-Compensation-Phase(16)], VCC, Mode, AL, AX, VE, AX2, XA" +
+                "CC2, LACC2, [AX-Phase], [AL-Phase], VCC_Phase, [Max-Spring-Tension], [Serial-Por" +
+                "t-Format], [Serial-Port-Output] FROM Calibration WHERE (id = @id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DAYS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DAYS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HOUR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HOUR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MIN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DigitalGravity", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DigitalGravity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SpringTension", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpringTension", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CrossCoupling", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CrossCoupling", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RawBeam", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RawBeam", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CalibrationDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CalibrationDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MeterNumber", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeterNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BeamScaleFactor", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BeamScaleFactor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p4", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Damping", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p7", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Gain", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p10", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Lead", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p13", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p16", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p19", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p22", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p25", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis_Bias", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p28", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Bias", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p31", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p34", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Damping", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p37", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Gain", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p40", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Lead", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p43", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p46", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p49", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p52", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VCC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Mode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AL", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VE", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AX2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@XACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@XACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Altitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Altitude", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Longitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Longitude", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Latitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Latitude", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GPS_Status", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS_Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Period", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p55", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX-Phase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p58", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL-Phase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VCC_Phase", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC_Phase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p61", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Max-Spring-Tension", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p64", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Format", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p67", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Output", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Data_Table_Simulated] SET [date] = @date, [YEAR] = @YEAR, [DAYS] = " +
-                "@DAYS, [HOUR] = @HOUR, [MIN] = @MIN, [SEC] = @SEC, [DigitalGravity] = @DigitalGr" +
-                "avity, [SpringTension] = @SpringTension, [CrossCoupling] = @CrossCoupling, [RawB" +
-                "eam] = @RawBeam, [VCC] = @VCC, [AL] = @AL, [AX] = @AX, [VE] = @VE, [AX2] = @AX2," +
-                " [XACC2] = @XACC2, [LACC2] = @LACC2, [XACC] = @XACC, [LACC] = @LACC, [Altitude] " +
-                "= @Altitude, [Longitude] = @Longitude, [Latitude] = @Latitude, [GPS_Status] = @G" +
-                "PS_Status, [Period] = @Period WHERE (([id] = @Original_id) AND ((@IsNull_date = " +
-                "1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ((@IsNull_YEAR = 1 AND [" +
-                "YEAR] IS NULL) OR ([YEAR] = @Original_YEAR)) AND ((@IsNull_DAYS = 1 AND [DAYS] I" +
-                "S NULL) OR ([DAYS] = @Original_DAYS)) AND ((@IsNull_HOUR = 1 AND [HOUR] IS NULL)" +
-                " OR ([HOUR] = @Original_HOUR)) AND ((@IsNull_MIN = 1 AND [MIN] IS NULL) OR ([MIN" +
-                "] = @Original_MIN)) AND ((@IsNull_SEC = 1 AND [SEC] IS NULL) OR ([SEC] = @Origin" +
-                "al_SEC)) AND ((@IsNull_DigitalGravity = 1 AND [DigitalGravity] IS NULL) OR ([Dig" +
-                "italGravity] = @Original_DigitalGravity)) AND ([SpringTension] = @Original_Sprin" +
-                "gTension) AND ((@IsNull_CrossCoupling = 1 AND [CrossCoupling] IS NULL) OR ([Cros" +
-                "sCoupling] = @Original_CrossCoupling)) AND ((@IsNull_RawBeam = 1 AND [RawBeam] I" +
-                "S NULL) OR ([RawBeam] = @Original_RawBeam)) AND ((@IsNull_VCC = 1 AND [VCC] IS N" +
-                "ULL) OR ([VCC] = @Original_VCC)) AND ((@IsNull_AL = 1 AND [AL] IS NULL) OR ([AL]" +
-                " = @Original_AL)) AND ((@IsNull_AX = 1 AND [AX] IS NULL) OR ([AX] = @Original_AX" +
-                ")) AND ((@IsNull_VE = 1 AND [VE] IS NULL) OR ([VE] = @Original_VE)) AND ((@IsNul" +
-                "l_AX2 = 1 AND [AX2] IS NULL) OR ([AX2] = @Original_AX2)) AND ((@IsNull_XACC2 = 1" +
-                " AND [XACC2] IS NULL) OR ([XACC2] = @Original_XACC2)) AND ((@IsNull_LACC2 = 1 AN" +
-                "D [LACC2] IS NULL) OR ([LACC2] = @Original_LACC2)) AND ((@IsNull_XACC = 1 AND [X" +
-                "ACC] IS NULL) OR ([XACC] = @Original_XACC)) AND ((@IsNull_LACC = 1 AND [LACC] IS" +
-                " NULL) OR ([LACC] = @Original_LACC)) AND ((@IsNull_Altitude = 1 AND [Altitude] I" +
-                "S NULL) OR ([Altitude] = @Original_Altitude)) AND ((@IsNull_Longitude = 1 AND [L" +
-                "ongitude] IS NULL) OR ([Longitude] = @Original_Longitude)) AND ((@IsNull_Latitud" +
-                "e = 1 AND [Latitude] IS NULL) OR ([Latitude] = @Original_Latitude)) AND ((@IsNul" +
-                "l_GPS_Status = 1 AND [GPS_Status] IS NULL) OR ([GPS_Status] = @Original_GPS_Stat" +
-                "us)) AND ((@IsNull_Period = 1 AND [Period] IS NULL) OR ([Period] = @Original_Per" +
-                "iod)));\r\nSELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTens" +
-                "ion, CrossCoupling, RawBeam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, Alt" +
-                "itude, Longitude, Latitude, GPS_Status, Period FROM Data_Table_Simulated WHERE (" +
-                "id = @id)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Calibration] SET [id] = @id, [CalibrationDate] = @CalibrationDate, " +
+                "[MeterNumber] = @MeterNumber, [BeamScaleFactor] = @BeamScaleFactor, [Cross-Axis-" +
+                "Period] = @p1, [Cross-Axis-Damping] = @p4, [Cross-Axis-Gain] = @p7, [Cross-Axis-" +
+                "Lead] = @p10, [Cross-Axis-Compensation(4)] = @p13, [Cross-Axis-Compensation(16)]" +
+                " = @p16, [Cross-Axis-Compensation_Phase(4)] = @p19, [Cross-Axis-Compensation_Pha" +
+                "se(16)] = @p22, [Cross-Axis_Bias] = @p25, [Long-Axis-Bias] = @p28, [Long-Axis-Pe" +
+                "riod] = @p31, [Long-Axis-Damping] = @p34, [Long-Axis-Gain] = @p37, [Long-Axis-Le" +
+                "ad] = @p40, [Long-Axis-Compensation(4)] = @p43, [Long-Axis-Compensation(16)] = @" +
+                "p46, [Long-Axis-Compensation-Phase(4)] = @p49, [Long-Axis-Compensation-Phase(16)" +
+                "] = @p52, [VCC] = @VCC, [Mode] = @Mode, [AL] = @AL, [AX] = @AX, [VE] = @VE, [AX2" +
+                "] = @AX2, [XACC2] = @XACC2, [LACC2] = @LACC2, [AX-Phase] = @p55, [AL-Phase] = @p" +
+                "58, [VCC_Phase] = @VCC_Phase, [Max-Spring-Tension] = @p61, [Serial-Port-Format] " +
+                "= @p64, [Serial-Port-Output] = @p67 WHERE (([id] = @Original_id) AND ([Calibrati" +
+                "onDate] = @Original_CalibrationDate) AND ((@IsNull_MeterNumber = 1 AND [MeterNum" +
+                "ber] IS NULL) OR ([MeterNumber] = @Original_MeterNumber)) AND ((@IsNull_BeamScal" +
+                "eFactor = 1 AND [BeamScaleFactor] IS NULL) OR ([BeamScaleFactor] = @Original_Bea" +
+                "mScaleFactor)) AND ((@p3 = 1 AND [Cross-Axis-Period] IS NULL) OR ([Cross-Axis-Pe" +
+                "riod] = @p2)) AND ((@p6 = 1 AND [Cross-Axis-Damping] IS NULL) OR ([Cross-Axis-Da" +
+                "mping] = @p5)) AND ((@p9 = 1 AND [Cross-Axis-Gain] IS NULL) OR ([Cross-Axis-Gain" +
+                "] = @p8)) AND ((@p12 = 1 AND [Cross-Axis-Lead] IS NULL) OR ([Cross-Axis-Lead] = " +
+                "@p11)) AND ((@p15 = 1 AND [Cross-Axis-Compensation(4)] IS NULL) OR ([Cross-Axis-" +
+                "Compensation(4)] = @p14)) AND ((@p18 = 1 AND [Cross-Axis-Compensation(16)] IS NU" +
+                "LL) OR ([Cross-Axis-Compensation(16)] = @p17)) AND ((@p21 = 1 AND [Cross-Axis-Co" +
+                "mpensation_Phase(4)] IS NULL) OR ([Cross-Axis-Compensation_Phase(4)] = @p20)) AN" +
+                "D ((@p24 = 1 AND [Cross-Axis-Compensation_Phase(16)] IS NULL) OR ([Cross-Axis-Co" +
+                "mpensation_Phase(16)] = @p23)) AND ((@p27 = 1 AND [Cross-Axis_Bias] IS NULL) OR " +
+                "([Cross-Axis_Bias] = @p26)) AND ((@p30 = 1 AND [Long-Axis-Bias] IS NULL) OR ([Lo" +
+                "ng-Axis-Bias] = @p29)) AND ((@p33 = 1 AND [Long-Axis-Period] IS NULL) OR ([Long-" +
+                "Axis-Period] = @p32)) AND ((@p36 = 1 AND [Long-Axis-Damping] IS NULL) OR ([Long-" +
+                "Axis-Damping] = @p35)) AND ((@p39 = 1 AND [Long-Axis-Gain] IS NULL) OR ([Long-Ax" +
+                "is-Gain] = @p38)) AND ((@p42 = 1 AND [Long-Axis-Lead] IS NULL) OR ([Long-Axis-Le" +
+                "ad] = @p41)) AND ((@p45 = 1 AND [Long-Axis-Compensation(4)] IS NULL) OR ([Long-A" +
+                "xis-Compensation(4)] = @p44)) AND ((@p48 = 1 AND [Long-Axis-Compensation(16)] IS" +
+                " NULL) OR ([Long-Axis-Compensation(16)] = @p47)) AND ((@p51 = 1 AND [Long-Axis-C" +
+                "ompensation-Phase(4)] IS NULL) OR ([Long-Axis-Compensation-Phase(4)] = @p50)) AN" +
+                "D ((@p54 = 1 AND [Long-Axis-Compensation-Phase(16)] IS NULL) OR ([Long-Axis-Comp" +
+                "ensation-Phase(16)] = @p53)) AND ((@IsNull_VCC = 1 AND [VCC] IS NULL) OR ([VCC] " +
+                "= @Original_VCC)) AND ((@IsNull_Mode = 1 AND [Mode] IS NULL) OR ([Mode] = @Origi" +
+                "nal_Mode)) AND ((@IsNull_AL = 1 AND [AL] IS NULL) OR ([AL] = @Original_AL)) AND " +
+                "((@IsNull_AX = 1 AND [AX] IS NULL) OR ([AX] = @Original_AX)) AND ((@IsNull_VE = " +
+                "1 AND [VE] IS NULL) OR ([VE] = @Original_VE)) AND ((@IsNull_AX2 = 1 AND [AX2] IS" +
+                " NULL) OR ([AX2] = @Original_AX2)) AND ((@IsNull_XACC2 = 1 AND [XACC2] IS NULL) " +
+                "OR ([XACC2] = @Original_XACC2)) AND ((@IsNull_LACC2 = 1 AND [LACC2] IS NULL) OR " +
+                "([LACC2] = @Original_LACC2)) AND ((@p57 = 1 AND [AX-Phase] IS NULL) OR ([AX-Phas" +
+                "e] = @p56)) AND ((@p60 = 1 AND [AL-Phase] IS NULL) OR ([AL-Phase] = @p59)) AND (" +
+                "(@IsNull_VCC_Phase = 1 AND [VCC_Phase] IS NULL) OR ([VCC_Phase] = @Original_VCC_" +
+                "Phase)) AND ((@p63 = 1 AND [Max-Spring-Tension] IS NULL) OR ([Max-Spring-Tension" +
+                "] = @p62)) AND ((@p66 = 1 AND [Serial-Port-Format] IS NULL) OR ([Serial-Port-For" +
+                "mat] = @p65)) AND ((@p69 = 1 AND [Serial-Port-Output] IS NULL) OR ([Serial-Port-" +
+                "Output] = @p68)));\r\nSELECT id, CalibrationDate, MeterNumber, BeamScaleFactor, [C" +
+                "ross-Axis-Period], [Cross-Axis-Damping], [Cross-Axis-Gain], [Cross-Axis-Lead], [" +
+                "Cross-Axis-Compensation(4)], [Cross-Axis-Compensation(16)], [Cross-Axis-Compensa" +
+                "tion_Phase(4)], [Cross-Axis-Compensation_Phase(16)], [Cross-Axis_Bias], [Long-Ax" +
+                "is-Bias], [Long-Axis-Period], [Long-Axis-Damping], [Long-Axis-Gain], [Long-Axis-" +
+                "Lead], [Long-Axis-Compensation(4)], [Long-Axis-Compensation(16)], [Long-Axis-Com" +
+                "pensation-Phase(4)], [Long-Axis-Compensation-Phase(16)], VCC, Mode, AL, AX, VE, " +
+                "AX2, XACC2, LACC2, [AX-Phase], [AL-Phase], VCC_Phase, [Max-Spring-Tension], [Ser" +
+                "ial-Port-Format], [Serial-Port-Output] FROM Calibration WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DAYS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DAYS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HOUR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HOUR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MIN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DigitalGravity", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DigitalGravity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SpringTension", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpringTension", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CrossCoupling", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CrossCoupling", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RawBeam", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RawBeam", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CalibrationDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CalibrationDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MeterNumber", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeterNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BeamScaleFactor", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BeamScaleFactor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p1", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p4", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Damping", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p7", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Gain", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p10", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Lead", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p13", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p16", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p19", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p22", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p25", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis_Bias", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p28", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Bias", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p31", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p34", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Damping", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p37", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Gain", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p40", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Lead", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p43", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p46", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p49", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(4)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p52", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(16)", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VCC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Mode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AL", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AX", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VE", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AX2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@XACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@XACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Altitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Altitude", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Longitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Longitude", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Latitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Latitude", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GPS_Status", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS_Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Period", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p55", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX-Phase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p58", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL-Phase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VCC_Phase", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC_Phase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p61", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Max-Spring-Tension", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p64", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Format", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p67", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Output", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DAYS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DAYS", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DAYS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DAYS", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_HOUR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HOUR", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HOUR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HOUR", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MIN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MIN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MIN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MIN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DigitalGravity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DigitalGravity", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DigitalGravity", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DigitalGravity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SpringTension", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SpringTension", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CrossCoupling", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CrossCoupling", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CrossCoupling", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CrossCoupling", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_RawBeam", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RawBeam", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_RawBeam", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "RawBeam", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CalibrationDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CalibrationDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MeterNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeterNumber", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MeterNumber", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MeterNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BeamScaleFactor", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BeamScaleFactor", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BeamScaleFactor", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BeamScaleFactor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p3", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Period", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Period", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p6", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Damping", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p5", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Damping", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p9", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Gain", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p8", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Gain", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p12", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Lead", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p11", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Lead", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p15", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p14", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p18", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p17", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p21", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p20", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p24", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p23", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis-Compensation_Phase(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p27", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis_Bias", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p26", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Cross-Axis_Bias", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p30", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Bias", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p29", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Bias", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p33", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Period", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p32", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Period", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p36", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Damping", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p35", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Damping", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p39", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Gain", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p38", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Gain", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p42", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Lead", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p41", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Lead", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p45", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p44", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p48", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p47", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p51", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(4)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p50", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(4)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p54", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(16)", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p53", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Long-Axis-Compensation-Phase(16)", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_VCC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VCC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Mode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Mode", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Mode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_AL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AL", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_AX", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -1961,28 +2624,25 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_XACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LACC2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC2", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LACC2", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_XACC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_XACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "XACC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LACC", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LACC", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LACC", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Altitude", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Altitude", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Altitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Altitude", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Longitude", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Longitude", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Longitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Longitude", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Latitude", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Latitude", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Latitude", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Latitude", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GPS_Status", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS_Status", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GPS_Status", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS_Status", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Period", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Period", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Period", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Period", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p57", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX-Phase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p56", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AX-Phase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p60", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL-Phase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p59", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AL-Phase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_VCC_Phase", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC_Phase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VCC_Phase", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VCC_Phase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p63", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Max-Spring-Tension", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p62", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Max-Spring-Tension", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p66", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Format", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p65", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Format", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p69", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Output", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p68", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Serial-Port-Output", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SerialPortTerminal.Properties.Settings.Default.DynamicDataConnectionString;
+            this._connection.ConnectionString = global::SerialPortTerminal.Properties.Settings.Default.DynamicDataConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1991,9 +2651,7 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cross" +
-                "Coupling, RawBeam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, Altitude, Lon" +
-                "gitude, Latitude, GPS_Status, Period FROM dbo.Data_Table_Simulated";
+            this._commandCollection[0].CommandText = @"SELECT id, CalibrationDate, MeterNumber, BeamScaleFactor, [Cross-Axis-Period], [Cross-Axis-Damping], [Cross-Axis-Gain], [Cross-Axis-Lead], [Cross-Axis-Compensation(4)], [Cross-Axis-Compensation(16)], [Cross-Axis-Compensation_Phase(4)], [Cross-Axis-Compensation_Phase(16)], [Cross-Axis_Bias], [Long-Axis-Bias], [Long-Axis-Period], [Long-Axis-Damping], [Long-Axis-Gain], [Long-Axis-Lead], [Long-Axis-Compensation(4)], [Long-Axis-Compensation(16)], [Long-Axis-Compensation-Phase(4)], [Long-Axis-Compensation-Phase(16)], VCC, Mode, AL, AX, VE, AX2, XACC2, LACC2, [AX-Phase], [AL-Phase], VCC_Phase, [Max-Spring-Tension], [Serial-Port-Format], [Serial-Port-Output] FROM dbo.Calibration";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2001,7 +2659,7 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DynamicDataDataSet.Data_Table_SimulatedDataTable dataTable) {
+        public virtual int Fill(DynamicDataDataSet3.CalibrationDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -2014,9 +2672,9 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DynamicDataDataSet.Data_Table_SimulatedDataTable GetData() {
+        public virtual DynamicDataDataSet3.CalibrationDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DynamicDataDataSet.Data_Table_SimulatedDataTable dataTable = new DynamicDataDataSet.Data_Table_SimulatedDataTable();
+            DynamicDataDataSet3.CalibrationDataTable dataTable = new DynamicDataDataSet3.CalibrationDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -2024,15 +2682,15 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DynamicDataDataSet.Data_Table_SimulatedDataTable dataTable) {
+        public virtual int Update(DynamicDataDataSet3.CalibrationDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DynamicDataDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Data_Table_Simulated");
+        public virtual int Update(DynamicDataDataSet3 dataSet) {
+            return this.Adapter.Update(dataSet, "Calibration");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2056,215 +2714,314 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
         public virtual int Delete(
                     int Original_id, 
-                    global::System.Nullable<global::System.DateTime> Original_date, 
-                    global::System.Nullable<int> Original_YEAR, 
-                    global::System.Nullable<int> Original_DAYS, 
-                    global::System.Nullable<int> Original_HOUR, 
-                    global::System.Nullable<int> Original_MIN, 
-                    global::System.Nullable<int> Original_SEC, 
-                    global::System.Nullable<double> Original_DigitalGravity, 
-                    double Original_SpringTension, 
-                    global::System.Nullable<double> Original_CrossCoupling, 
-                    global::System.Nullable<double> Original_RawBeam, 
+                    System.DateTime Original_CalibrationDate, 
+                    string Original_MeterNumber, 
+                    global::System.Nullable<double> Original_BeamScaleFactor, 
+                    global::System.Nullable<double> p2, 
+                    global::System.Nullable<double> p5, 
+                    global::System.Nullable<double> p8, 
+                    global::System.Nullable<double> p11, 
+                    global::System.Nullable<double> p14, 
+                    global::System.Nullable<double> p17, 
+                    global::System.Nullable<double> p20, 
+                    global::System.Nullable<double> p23, 
+                    global::System.Nullable<double> p26, 
+                    global::System.Nullable<double> p29, 
+                    global::System.Nullable<double> p32, 
+                    global::System.Nullable<double> p35, 
+                    global::System.Nullable<double> p38, 
+                    global::System.Nullable<double> p41, 
+                    global::System.Nullable<double> p44, 
+                    global::System.Nullable<double> p47, 
+                    global::System.Nullable<double> p50, 
+                    global::System.Nullable<double> p53, 
                     global::System.Nullable<double> Original_VCC, 
+                    string Original_Mode, 
                     global::System.Nullable<double> Original_AL, 
                     global::System.Nullable<double> Original_AX, 
                     global::System.Nullable<double> Original_VE, 
                     global::System.Nullable<double> Original_AX2, 
                     global::System.Nullable<double> Original_XACC2, 
                     global::System.Nullable<double> Original_LACC2, 
-                    global::System.Nullable<double> Original_XACC, 
-                    global::System.Nullable<double> Original_LACC, 
-                    global::System.Nullable<double> Original_Altitude, 
-                    global::System.Nullable<double> Original_Longitude, 
-                    global::System.Nullable<double> Original_Latitude, 
-                    global::System.Nullable<double> Original_GPS_Status, 
-                    global::System.Nullable<double> Original_Period) {
+                    global::System.Nullable<double> p56, 
+                    global::System.Nullable<double> p59, 
+                    global::System.Nullable<double> Original_VCC_Phase, 
+                    global::System.Nullable<double> p62, 
+                    global::System.Nullable<double> p65, 
+                    global::System.Nullable<double> p68) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
-            if ((Original_date.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_date.Value));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_CalibrationDate));
+            if ((Original_MeterNumber == null)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_MeterNumber));
             }
-            if ((Original_YEAR.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_YEAR.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DAYS.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_DAYS.Value));
+            if ((Original_BeamScaleFactor.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((double)(Original_BeamScaleFactor.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((Original_HOUR.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_HOUR.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MIN.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_MIN.Value));
+            if ((p2.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((double)(p2.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((Original_SEC.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_SEC.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DigitalGravity.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((double)(Original_DigitalGravity.Value));
+            if ((p5.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((double)(p5.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            this.Adapter.DeleteCommand.Parameters[15].Value = ((double)(Original_SpringTension));
-            if ((Original_CrossCoupling.HasValue == true)) {
+            if ((p8.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((double)(p8.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((p11.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((double)(p11.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((p14.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((double)(p14.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((p17.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((double)(Original_CrossCoupling.Value));
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((double)(p17.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((Original_RawBeam.HasValue == true)) {
+            if ((p20.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((double)(Original_RawBeam.Value));
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((double)(p20.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            if ((Original_VCC.HasValue == true)) {
+            if ((p23.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((double)(Original_VCC.Value));
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((double)(p23.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            if ((Original_AL.HasValue == true)) {
+            if ((p26.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((double)(Original_AL.Value));
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((double)(p26.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
-            if ((Original_AX.HasValue == true)) {
+            if ((p29.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((double)(Original_AX.Value));
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((double)(p29.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[24].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
-            if ((Original_VE.HasValue == true)) {
+            if ((p32.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((double)(Original_VE.Value));
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((double)(p32.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[26].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
-            if ((Original_AX2.HasValue == true)) {
+            if ((p35.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((double)(Original_AX2.Value));
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((double)(p35.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[28].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
-            if ((Original_XACC2.HasValue == true)) {
+            if ((p38.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[31].Value = ((double)(Original_XACC2.Value));
+                this.Adapter.DeleteCommand.Parameters[31].Value = ((double)(p38.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[30].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[31].Value = global::System.DBNull.Value;
             }
-            if ((Original_LACC2.HasValue == true)) {
+            if ((p41.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[33].Value = ((double)(Original_LACC2.Value));
+                this.Adapter.DeleteCommand.Parameters[33].Value = ((double)(p41.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[33].Value = global::System.DBNull.Value;
             }
-            if ((Original_XACC.HasValue == true)) {
+            if ((p44.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[35].Value = ((double)(Original_XACC.Value));
+                this.Adapter.DeleteCommand.Parameters[35].Value = ((double)(p44.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[34].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
-            if ((Original_LACC.HasValue == true)) {
+            if ((p47.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[37].Value = ((double)(Original_LACC.Value));
+                this.Adapter.DeleteCommand.Parameters[37].Value = ((double)(p47.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[36].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[37].Value = global::System.DBNull.Value;
             }
-            if ((Original_Altitude.HasValue == true)) {
+            if ((p50.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[38].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[39].Value = ((double)(Original_Altitude.Value));
+                this.Adapter.DeleteCommand.Parameters[39].Value = ((double)(p50.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[38].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[39].Value = global::System.DBNull.Value;
             }
-            if ((Original_Longitude.HasValue == true)) {
+            if ((p53.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[40].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[41].Value = ((double)(Original_Longitude.Value));
+                this.Adapter.DeleteCommand.Parameters[41].Value = ((double)(p53.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[40].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[41].Value = global::System.DBNull.Value;
             }
-            if ((Original_Latitude.HasValue == true)) {
+            if ((Original_VCC.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[42].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[43].Value = ((double)(Original_Latitude.Value));
+                this.Adapter.DeleteCommand.Parameters[43].Value = ((double)(Original_VCC.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[42].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[43].Value = global::System.DBNull.Value;
             }
-            if ((Original_GPS_Status.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[45].Value = ((double)(Original_GPS_Status.Value));
-            }
-            else {
+            if ((Original_Mode == null)) {
                 this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[45].Value = global::System.DBNull.Value;
             }
-            if ((Original_Period.HasValue == true)) {
+            else {
+                this.Adapter.DeleteCommand.Parameters[44].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[45].Value = ((string)(Original_Mode));
+            }
+            if ((Original_AL.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[46].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[47].Value = ((double)(Original_Period.Value));
+                this.Adapter.DeleteCommand.Parameters[47].Value = ((double)(Original_AL.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[46].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[47].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AX.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[48].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[49].Value = ((double)(Original_AX.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[48].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[49].Value = global::System.DBNull.Value;
+            }
+            if ((Original_VE.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[50].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[51].Value = ((double)(Original_VE.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[50].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[51].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AX2.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[52].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[53].Value = ((double)(Original_AX2.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[52].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[53].Value = global::System.DBNull.Value;
+            }
+            if ((Original_XACC2.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[54].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[55].Value = ((double)(Original_XACC2.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[54].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[55].Value = global::System.DBNull.Value;
+            }
+            if ((Original_LACC2.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[56].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[57].Value = ((double)(Original_LACC2.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[56].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[57].Value = global::System.DBNull.Value;
+            }
+            if ((p56.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[58].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[59].Value = ((double)(p56.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[58].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[59].Value = global::System.DBNull.Value;
+            }
+            if ((p59.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[60].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[61].Value = ((double)(p59.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[60].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[61].Value = global::System.DBNull.Value;
+            }
+            if ((Original_VCC_Phase.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[62].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[63].Value = ((double)(Original_VCC_Phase.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[62].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[63].Value = global::System.DBNull.Value;
+            }
+            if ((p62.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[64].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[65].Value = ((double)(p62.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[64].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[65].Value = global::System.DBNull.Value;
+            }
+            if ((p65.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[66].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[67].Value = ((double)(p65.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[66].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[67].Value = global::System.DBNull.Value;
+            }
+            if ((p68.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[68].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[69].Value = ((double)(p68.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[68].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[69].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -2287,168 +3044,247 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
         public virtual int Insert(
-                    global::System.Nullable<global::System.DateTime> date, 
-                    global::System.Nullable<int> YEAR, 
-                    global::System.Nullable<int> DAYS, 
-                    global::System.Nullable<int> HOUR, 
-                    global::System.Nullable<int> MIN, 
-                    global::System.Nullable<int> SEC, 
-                    global::System.Nullable<double> DigitalGravity, 
-                    double SpringTension, 
-                    global::System.Nullable<double> CrossCoupling, 
-                    global::System.Nullable<double> RawBeam, 
+                    int id, 
+                    System.DateTime CalibrationDate, 
+                    string MeterNumber, 
+                    global::System.Nullable<double> BeamScaleFactor, 
+                    global::System.Nullable<double> p1, 
+                    global::System.Nullable<double> p4, 
+                    global::System.Nullable<double> p7, 
+                    global::System.Nullable<double> p10, 
+                    global::System.Nullable<double> p13, 
+                    global::System.Nullable<double> p16, 
+                    global::System.Nullable<double> p19, 
+                    global::System.Nullable<double> p22, 
+                    global::System.Nullable<double> p25, 
+                    global::System.Nullable<double> p28, 
+                    global::System.Nullable<double> p31, 
+                    global::System.Nullable<double> p34, 
+                    global::System.Nullable<double> p37, 
+                    global::System.Nullable<double> p40, 
+                    global::System.Nullable<double> p43, 
+                    global::System.Nullable<double> p46, 
+                    global::System.Nullable<double> p49, 
+                    global::System.Nullable<double> p52, 
                     global::System.Nullable<double> VCC, 
+                    string Mode, 
                     global::System.Nullable<double> AL, 
                     global::System.Nullable<double> AX, 
                     global::System.Nullable<double> VE, 
                     global::System.Nullable<double> AX2, 
                     global::System.Nullable<double> XACC2, 
                     global::System.Nullable<double> LACC2, 
-                    global::System.Nullable<double> XACC, 
-                    global::System.Nullable<double> LACC, 
-                    global::System.Nullable<double> Altitude, 
-                    global::System.Nullable<double> Longitude, 
-                    global::System.Nullable<double> Latitude, 
-                    global::System.Nullable<double> GPS_Status, 
-                    global::System.Nullable<double> Period) {
-            if ((date.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(date.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((YEAR.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(YEAR.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((DAYS.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(DAYS.Value));
-            }
-            else {
+                    global::System.Nullable<double> p55, 
+                    global::System.Nullable<double> p58, 
+                    global::System.Nullable<double> VCC_Phase, 
+                    global::System.Nullable<double> p61, 
+                    global::System.Nullable<double> p64, 
+                    global::System.Nullable<double> p67) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(id));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(CalibrationDate));
+            if ((MeterNumber == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((HOUR.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(HOUR.Value));
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(MeterNumber));
+            }
+            if ((BeamScaleFactor.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(BeamScaleFactor.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((MIN.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(MIN.Value));
+            if ((p1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(p1.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((SEC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(SEC.Value));
+            if ((p4.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(p4.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((DigitalGravity.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(DigitalGravity.Value));
+            if ((p7.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(p7.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.InsertCommand.Parameters[7].Value = ((double)(SpringTension));
-            if ((CrossCoupling.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((double)(CrossCoupling.Value));
+            if ((p10.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(p10.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((p13.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((double)(p13.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((RawBeam.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((double)(RawBeam.Value));
+            if ((p16.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((double)(p16.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((VCC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(VCC.Value));
+            if ((p19.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(p19.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            if ((AL.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((double)(AL.Value));
+            if ((p22.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((double)(p22.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((AX.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((double)(AX.Value));
+            if ((p25.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((double)(p25.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((VE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(VE.Value));
+            if ((p28.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(p28.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            if ((AX2.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((double)(AX2.Value));
+            if ((p31.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((double)(p31.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((XACC2.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((double)(XACC2.Value));
+            if ((p34.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((double)(p34.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            if ((LACC2.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[16].Value = ((double)(LACC2.Value));
+            if ((p37.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((double)(p37.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((XACC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((double)(XACC.Value));
+            if ((p40.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[17].Value = ((double)(p40.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((LACC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[18].Value = ((double)(LACC.Value));
+            if ((p43.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[18].Value = ((double)(p43.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((Altitude.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[19].Value = ((double)(Altitude.Value));
+            if ((p46.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[19].Value = ((double)(p46.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            if ((Longitude.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[20].Value = ((double)(Longitude.Value));
+            if ((p49.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[20].Value = ((double)(p49.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((Latitude.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[21].Value = ((double)(Latitude.Value));
+            if ((p52.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[21].Value = ((double)(p52.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            if ((GPS_Status.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[22].Value = ((double)(GPS_Status.Value));
+            if ((VCC.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[22].Value = ((double)(VCC.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((Period.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[23].Value = ((double)(Period.Value));
+            if ((Mode == null)) {
+                this.Adapter.InsertCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[23].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[23].Value = ((string)(Mode));
+            }
+            if ((AL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[24].Value = ((double)(AL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((AX.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[25].Value = ((double)(AX.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((VE.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[26].Value = ((double)(VE.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((AX2.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[27].Value = ((double)(AX2.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            if ((XACC2.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[28].Value = ((double)(XACC2.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((LACC2.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[29].Value = ((double)(LACC2.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            if ((p55.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[30].Value = ((double)(p55.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            if ((p58.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[31].Value = ((double)(p58.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            if ((VCC_Phase.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[32].Value = ((double)(VCC_Phase.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[32].Value = global::System.DBNull.Value;
+            }
+            if ((p61.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[33].Value = ((double)(p61.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            if ((p64.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[34].Value = ((double)(p64.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            if ((p67.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[35].Value = ((double)(p67.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -2471,382 +3307,558 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<global::System.DateTime> date, 
-                    global::System.Nullable<int> YEAR, 
-                    global::System.Nullable<int> DAYS, 
-                    global::System.Nullable<int> HOUR, 
-                    global::System.Nullable<int> MIN, 
-                    global::System.Nullable<int> SEC, 
-                    global::System.Nullable<double> DigitalGravity, 
-                    double SpringTension, 
-                    global::System.Nullable<double> CrossCoupling, 
-                    global::System.Nullable<double> RawBeam, 
+                    int id, 
+                    System.DateTime CalibrationDate, 
+                    string MeterNumber, 
+                    global::System.Nullable<double> BeamScaleFactor, 
+                    global::System.Nullable<double> p1, 
+                    global::System.Nullable<double> p4, 
+                    global::System.Nullable<double> p7, 
+                    global::System.Nullable<double> p10, 
+                    global::System.Nullable<double> p13, 
+                    global::System.Nullable<double> p16, 
+                    global::System.Nullable<double> p19, 
+                    global::System.Nullable<double> p22, 
+                    global::System.Nullable<double> p25, 
+                    global::System.Nullable<double> p28, 
+                    global::System.Nullable<double> p31, 
+                    global::System.Nullable<double> p34, 
+                    global::System.Nullable<double> p37, 
+                    global::System.Nullable<double> p40, 
+                    global::System.Nullable<double> p43, 
+                    global::System.Nullable<double> p46, 
+                    global::System.Nullable<double> p49, 
+                    global::System.Nullable<double> p52, 
                     global::System.Nullable<double> VCC, 
+                    string Mode, 
                     global::System.Nullable<double> AL, 
                     global::System.Nullable<double> AX, 
                     global::System.Nullable<double> VE, 
                     global::System.Nullable<double> AX2, 
                     global::System.Nullable<double> XACC2, 
                     global::System.Nullable<double> LACC2, 
-                    global::System.Nullable<double> XACC, 
-                    global::System.Nullable<double> LACC, 
-                    global::System.Nullable<double> Altitude, 
-                    global::System.Nullable<double> Longitude, 
-                    global::System.Nullable<double> Latitude, 
-                    global::System.Nullable<double> GPS_Status, 
-                    global::System.Nullable<double> Period, 
+                    global::System.Nullable<double> p55, 
+                    global::System.Nullable<double> p58, 
+                    global::System.Nullable<double> VCC_Phase, 
+                    global::System.Nullable<double> p61, 
+                    global::System.Nullable<double> p64, 
+                    global::System.Nullable<double> p67, 
                     int Original_id, 
-                    global::System.Nullable<global::System.DateTime> Original_date, 
-                    global::System.Nullable<int> Original_YEAR, 
-                    global::System.Nullable<int> Original_DAYS, 
-                    global::System.Nullable<int> Original_HOUR, 
-                    global::System.Nullable<int> Original_MIN, 
-                    global::System.Nullable<int> Original_SEC, 
-                    global::System.Nullable<double> Original_DigitalGravity, 
-                    double Original_SpringTension, 
-                    global::System.Nullable<double> Original_CrossCoupling, 
-                    global::System.Nullable<double> Original_RawBeam, 
+                    System.DateTime Original_CalibrationDate, 
+                    string Original_MeterNumber, 
+                    global::System.Nullable<double> Original_BeamScaleFactor, 
+                    global::System.Nullable<double> p2, 
+                    global::System.Nullable<double> p5, 
+                    global::System.Nullable<double> p8, 
+                    global::System.Nullable<double> p11, 
+                    global::System.Nullable<double> p14, 
+                    global::System.Nullable<double> p17, 
+                    global::System.Nullable<double> p20, 
+                    global::System.Nullable<double> p23, 
+                    global::System.Nullable<double> p26, 
+                    global::System.Nullable<double> p29, 
+                    global::System.Nullable<double> p32, 
+                    global::System.Nullable<double> p35, 
+                    global::System.Nullable<double> p38, 
+                    global::System.Nullable<double> p41, 
+                    global::System.Nullable<double> p44, 
+                    global::System.Nullable<double> p47, 
+                    global::System.Nullable<double> p50, 
+                    global::System.Nullable<double> p53, 
                     global::System.Nullable<double> Original_VCC, 
+                    string Original_Mode, 
                     global::System.Nullable<double> Original_AL, 
                     global::System.Nullable<double> Original_AX, 
                     global::System.Nullable<double> Original_VE, 
                     global::System.Nullable<double> Original_AX2, 
                     global::System.Nullable<double> Original_XACC2, 
                     global::System.Nullable<double> Original_LACC2, 
-                    global::System.Nullable<double> Original_XACC, 
-                    global::System.Nullable<double> Original_LACC, 
-                    global::System.Nullable<double> Original_Altitude, 
-                    global::System.Nullable<double> Original_Longitude, 
-                    global::System.Nullable<double> Original_Latitude, 
-                    global::System.Nullable<double> Original_GPS_Status, 
-                    global::System.Nullable<double> Original_Period, 
-                    int id) {
-            if ((date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(date.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((YEAR.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(YEAR.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((DAYS.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(DAYS.Value));
-            }
-            else {
+                    global::System.Nullable<double> p56, 
+                    global::System.Nullable<double> p59, 
+                    global::System.Nullable<double> Original_VCC_Phase, 
+                    global::System.Nullable<double> p62, 
+                    global::System.Nullable<double> p65, 
+                    global::System.Nullable<double> p68) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(CalibrationDate));
+            if ((MeterNumber == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((HOUR.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(HOUR.Value));
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(MeterNumber));
+            }
+            if ((BeamScaleFactor.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((double)(BeamScaleFactor.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((MIN.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(MIN.Value));
+            if ((p1.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(p1.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((SEC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(SEC.Value));
+            if ((p4.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(p4.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((DigitalGravity.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((double)(DigitalGravity.Value));
+            if ((p7.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((double)(p7.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(SpringTension));
-            if ((CrossCoupling.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(CrossCoupling.Value));
+            if ((p10.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(p10.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((p13.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(p13.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((RawBeam.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(RawBeam.Value));
+            if ((p16.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(p16.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((VCC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(VCC.Value));
+            if ((p19.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(p19.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            if ((AL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(AL.Value));
+            if ((p22.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(p22.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((AX.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(AX.Value));
+            if ((p25.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((double)(p25.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((VE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(VE.Value));
+            if ((p28.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(p28.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            if ((AX2.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(AX2.Value));
+            if ((p31.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((double)(p31.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((XACC2.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(XACC2.Value));
+            if ((p34.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(p34.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            if ((LACC2.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(LACC2.Value));
+            if ((p37.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(p37.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            if ((XACC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(XACC.Value));
+            if ((p40.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(p40.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((LACC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(LACC.Value));
+            if ((p43.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(p43.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((Altitude.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(Altitude.Value));
+            if ((p46.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(p46.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            if ((Longitude.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(Longitude.Value));
+            if ((p49.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(p49.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((Latitude.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(Latitude.Value));
+            if ((p52.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(p52.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
-            if ((GPS_Status.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(GPS_Status.Value));
+            if ((VCC.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(VCC.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((Period.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((double)(Period.Value));
-            }
-            else {
+            if ((Mode == null)) {
                 this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_id));
-            if ((Original_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((System.DateTime)(Original_date.Value));
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((string)(Mode));
+            }
+            if ((AL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(AL.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((AX.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((double)(AX.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((VE.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((double)(VE.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            if ((Original_YEAR.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_YEAR.Value));
+            if ((AX2.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((double)(AX2.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            if ((XACC2.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((double)(XACC2.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
             }
-            if ((Original_DAYS.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_DAYS.Value));
+            if ((LACC2.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((double)(LACC2.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            if ((p55.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((double)(p55.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
-            if ((Original_HOUR.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_HOUR.Value));
+            if ((p58.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((double)(p58.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            if ((VCC_Phase.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((double)(VCC_Phase.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
-            if ((Original_MIN.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_MIN.Value));
+            if ((p61.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((double)(p61.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            if ((p64.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((double)(p64.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
             }
-            if ((Original_SEC.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_SEC.Value));
+            if ((p67.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((double)(p67.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
             }
-            if ((Original_DigitalGravity.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((double)(Original_DigitalGravity.Value));
+            this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_id));
+            this.Adapter.UpdateCommand.Parameters[37].Value = ((System.DateTime)(Original_CalibrationDate));
+            if ((Original_MeterNumber == null)) {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((string)(Original_MeterNumber));
             }
-            this.Adapter.UpdateCommand.Parameters[39].Value = ((double)(Original_SpringTension));
-            if ((Original_CrossCoupling.HasValue == true)) {
+            if ((Original_BeamScaleFactor.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((double)(Original_CrossCoupling.Value));
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((double)(Original_BeamScaleFactor.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[41].Value = global::System.DBNull.Value;
             }
-            if ((Original_RawBeam.HasValue == true)) {
+            if ((p2.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((double)(Original_RawBeam.Value));
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((double)(p2.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[43].Value = global::System.DBNull.Value;
             }
-            if ((Original_VCC.HasValue == true)) {
+            if ((p5.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[45].Value = ((double)(Original_VCC.Value));
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((double)(p5.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[45].Value = global::System.DBNull.Value;
             }
-            if ((Original_AL.HasValue == true)) {
+            if ((p8.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[46].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[47].Value = ((double)(Original_AL.Value));
+                this.Adapter.UpdateCommand.Parameters[47].Value = ((double)(p8.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[46].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[47].Value = global::System.DBNull.Value;
             }
-            if ((Original_AX.HasValue == true)) {
+            if ((p11.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[48].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[49].Value = ((double)(Original_AX.Value));
+                this.Adapter.UpdateCommand.Parameters[49].Value = ((double)(p11.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[48].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[49].Value = global::System.DBNull.Value;
             }
-            if ((Original_VE.HasValue == true)) {
+            if ((p14.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[50].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[51].Value = ((double)(Original_VE.Value));
+                this.Adapter.UpdateCommand.Parameters[51].Value = ((double)(p14.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[50].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[51].Value = global::System.DBNull.Value;
             }
-            if ((Original_AX2.HasValue == true)) {
+            if ((p17.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[52].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[53].Value = ((double)(Original_AX2.Value));
+                this.Adapter.UpdateCommand.Parameters[53].Value = ((double)(p17.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[52].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[53].Value = global::System.DBNull.Value;
             }
-            if ((Original_XACC2.HasValue == true)) {
+            if ((p20.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[54].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[55].Value = ((double)(Original_XACC2.Value));
+                this.Adapter.UpdateCommand.Parameters[55].Value = ((double)(p20.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[54].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[55].Value = global::System.DBNull.Value;
             }
-            if ((Original_LACC2.HasValue == true)) {
+            if ((p23.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[56].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[57].Value = ((double)(Original_LACC2.Value));
+                this.Adapter.UpdateCommand.Parameters[57].Value = ((double)(p23.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[56].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[57].Value = global::System.DBNull.Value;
             }
-            if ((Original_XACC.HasValue == true)) {
+            if ((p26.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[58].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[59].Value = ((double)(Original_XACC.Value));
+                this.Adapter.UpdateCommand.Parameters[59].Value = ((double)(p26.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[58].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[59].Value = global::System.DBNull.Value;
             }
-            if ((Original_LACC.HasValue == true)) {
+            if ((p29.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[60].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[61].Value = ((double)(Original_LACC.Value));
+                this.Adapter.UpdateCommand.Parameters[61].Value = ((double)(p29.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[60].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[61].Value = global::System.DBNull.Value;
             }
-            if ((Original_Altitude.HasValue == true)) {
+            if ((p32.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[62].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[63].Value = ((double)(Original_Altitude.Value));
+                this.Adapter.UpdateCommand.Parameters[63].Value = ((double)(p32.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[62].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[63].Value = global::System.DBNull.Value;
             }
-            if ((Original_Longitude.HasValue == true)) {
+            if ((p35.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[64].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[65].Value = ((double)(Original_Longitude.Value));
+                this.Adapter.UpdateCommand.Parameters[65].Value = ((double)(p35.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[64].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[65].Value = global::System.DBNull.Value;
             }
-            if ((Original_Latitude.HasValue == true)) {
+            if ((p38.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[66].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[67].Value = ((double)(Original_Latitude.Value));
+                this.Adapter.UpdateCommand.Parameters[67].Value = ((double)(p38.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[66].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[67].Value = global::System.DBNull.Value;
             }
-            if ((Original_GPS_Status.HasValue == true)) {
+            if ((p41.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[68].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[69].Value = ((double)(Original_GPS_Status.Value));
+                this.Adapter.UpdateCommand.Parameters[69].Value = ((double)(p41.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[68].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[69].Value = global::System.DBNull.Value;
             }
-            if ((Original_Period.HasValue == true)) {
+            if ((p44.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[70].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[71].Value = ((double)(Original_Period.Value));
+                this.Adapter.UpdateCommand.Parameters[71].Value = ((double)(p44.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[70].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[71].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[72].Value = ((int)(id));
+            if ((p47.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[72].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[73].Value = ((double)(p47.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[72].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[73].Value = global::System.DBNull.Value;
+            }
+            if ((p50.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[74].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[75].Value = ((double)(p50.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[74].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[75].Value = global::System.DBNull.Value;
+            }
+            if ((p53.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[76].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[77].Value = ((double)(p53.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[76].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[77].Value = global::System.DBNull.Value;
+            }
+            if ((Original_VCC.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[78].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[79].Value = ((double)(Original_VCC.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[78].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[79].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Mode == null)) {
+                this.Adapter.UpdateCommand.Parameters[80].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[81].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[80].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[81].Value = ((string)(Original_Mode));
+            }
+            if ((Original_AL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[82].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[83].Value = ((double)(Original_AL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[82].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[83].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AX.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[84].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[85].Value = ((double)(Original_AX.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[84].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[85].Value = global::System.DBNull.Value;
+            }
+            if ((Original_VE.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[86].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[87].Value = ((double)(Original_VE.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[86].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[87].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AX2.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[88].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[89].Value = ((double)(Original_AX2.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[88].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[89].Value = global::System.DBNull.Value;
+            }
+            if ((Original_XACC2.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[90].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[91].Value = ((double)(Original_XACC2.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[90].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[91].Value = global::System.DBNull.Value;
+            }
+            if ((Original_LACC2.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[92].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[93].Value = ((double)(Original_LACC2.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[92].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[93].Value = global::System.DBNull.Value;
+            }
+            if ((p56.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[94].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[95].Value = ((double)(p56.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[94].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[95].Value = global::System.DBNull.Value;
+            }
+            if ((p59.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[96].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[97].Value = ((double)(p59.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[96].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[97].Value = global::System.DBNull.Value;
+            }
+            if ((Original_VCC_Phase.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[98].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[99].Value = ((double)(Original_VCC_Phase.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[98].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[99].Value = global::System.DBNull.Value;
+            }
+            if ((p62.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[100].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[101].Value = ((double)(p62.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[100].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[101].Value = global::System.DBNull.Value;
+            }
+            if ((p65.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[102].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[103].Value = ((double)(p65.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[102].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[103].Value = global::System.DBNull.Value;
+            }
+            if ((p68.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[104].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[105].Value = ((double)(p68.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[104].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[105].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2868,56 +3880,78 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<global::System.DateTime> date, 
-                    global::System.Nullable<int> YEAR, 
-                    global::System.Nullable<int> DAYS, 
-                    global::System.Nullable<int> HOUR, 
-                    global::System.Nullable<int> MIN, 
-                    global::System.Nullable<int> SEC, 
-                    global::System.Nullable<double> DigitalGravity, 
-                    double SpringTension, 
-                    global::System.Nullable<double> CrossCoupling, 
-                    global::System.Nullable<double> RawBeam, 
+                    System.DateTime CalibrationDate, 
+                    string MeterNumber, 
+                    global::System.Nullable<double> BeamScaleFactor, 
+                    global::System.Nullable<double> p1, 
+                    global::System.Nullable<double> p4, 
+                    global::System.Nullable<double> p7, 
+                    global::System.Nullable<double> p10, 
+                    global::System.Nullable<double> p13, 
+                    global::System.Nullable<double> p16, 
+                    global::System.Nullable<double> p19, 
+                    global::System.Nullable<double> p22, 
+                    global::System.Nullable<double> p25, 
+                    global::System.Nullable<double> p28, 
+                    global::System.Nullable<double> p31, 
+                    global::System.Nullable<double> p34, 
+                    global::System.Nullable<double> p37, 
+                    global::System.Nullable<double> p40, 
+                    global::System.Nullable<double> p43, 
+                    global::System.Nullable<double> p46, 
+                    global::System.Nullable<double> p49, 
+                    global::System.Nullable<double> p52, 
                     global::System.Nullable<double> VCC, 
+                    string Mode, 
                     global::System.Nullable<double> AL, 
                     global::System.Nullable<double> AX, 
                     global::System.Nullable<double> VE, 
                     global::System.Nullable<double> AX2, 
                     global::System.Nullable<double> XACC2, 
                     global::System.Nullable<double> LACC2, 
-                    global::System.Nullable<double> XACC, 
-                    global::System.Nullable<double> LACC, 
-                    global::System.Nullable<double> Altitude, 
-                    global::System.Nullable<double> Longitude, 
-                    global::System.Nullable<double> Latitude, 
-                    global::System.Nullable<double> GPS_Status, 
-                    global::System.Nullable<double> Period, 
+                    global::System.Nullable<double> p55, 
+                    global::System.Nullable<double> p58, 
+                    global::System.Nullable<double> VCC_Phase, 
+                    global::System.Nullable<double> p61, 
+                    global::System.Nullable<double> p64, 
+                    global::System.Nullable<double> p67, 
                     int Original_id, 
-                    global::System.Nullable<global::System.DateTime> Original_date, 
-                    global::System.Nullable<int> Original_YEAR, 
-                    global::System.Nullable<int> Original_DAYS, 
-                    global::System.Nullable<int> Original_HOUR, 
-                    global::System.Nullable<int> Original_MIN, 
-                    global::System.Nullable<int> Original_SEC, 
-                    global::System.Nullable<double> Original_DigitalGravity, 
-                    double Original_SpringTension, 
-                    global::System.Nullable<double> Original_CrossCoupling, 
-                    global::System.Nullable<double> Original_RawBeam, 
+                    System.DateTime Original_CalibrationDate, 
+                    string Original_MeterNumber, 
+                    global::System.Nullable<double> Original_BeamScaleFactor, 
+                    global::System.Nullable<double> p2, 
+                    global::System.Nullable<double> p5, 
+                    global::System.Nullable<double> p8, 
+                    global::System.Nullable<double> p11, 
+                    global::System.Nullable<double> p14, 
+                    global::System.Nullable<double> p17, 
+                    global::System.Nullable<double> p20, 
+                    global::System.Nullable<double> p23, 
+                    global::System.Nullable<double> p26, 
+                    global::System.Nullable<double> p29, 
+                    global::System.Nullable<double> p32, 
+                    global::System.Nullable<double> p35, 
+                    global::System.Nullable<double> p38, 
+                    global::System.Nullable<double> p41, 
+                    global::System.Nullable<double> p44, 
+                    global::System.Nullable<double> p47, 
+                    global::System.Nullable<double> p50, 
+                    global::System.Nullable<double> p53, 
                     global::System.Nullable<double> Original_VCC, 
+                    string Original_Mode, 
                     global::System.Nullable<double> Original_AL, 
                     global::System.Nullable<double> Original_AX, 
                     global::System.Nullable<double> Original_VE, 
                     global::System.Nullable<double> Original_AX2, 
                     global::System.Nullable<double> Original_XACC2, 
                     global::System.Nullable<double> Original_LACC2, 
-                    global::System.Nullable<double> Original_XACC, 
-                    global::System.Nullable<double> Original_LACC, 
-                    global::System.Nullable<double> Original_Altitude, 
-                    global::System.Nullable<double> Original_Longitude, 
-                    global::System.Nullable<double> Original_Latitude, 
-                    global::System.Nullable<double> Original_GPS_Status, 
-                    global::System.Nullable<double> Original_Period) {
-            return this.Update(date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, CrossCoupling, RawBeam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, Altitude, Longitude, Latitude, GPS_Status, Period, Original_id, Original_date, Original_YEAR, Original_DAYS, Original_HOUR, Original_MIN, Original_SEC, Original_DigitalGravity, Original_SpringTension, Original_CrossCoupling, Original_RawBeam, Original_VCC, Original_AL, Original_AX, Original_VE, Original_AX2, Original_XACC2, Original_LACC2, Original_XACC, Original_LACC, Original_Altitude, Original_Longitude, Original_Latitude, Original_GPS_Status, Original_Period, Original_id);
+                    global::System.Nullable<double> p56, 
+                    global::System.Nullable<double> p59, 
+                    global::System.Nullable<double> Original_VCC_Phase, 
+                    global::System.Nullable<double> p62, 
+                    global::System.Nullable<double> p65, 
+                    global::System.Nullable<double> p68) {
+            return this.Update(Original_id, CalibrationDate, MeterNumber, BeamScaleFactor, p1, p4, p7, p10, p13, p16, p19, p22, p25, p28, p31, p34, p37, p40, p43, p46, p49, p52, VCC, Mode, AL, AX, VE, AX2, XACC2, LACC2, p55, p58, VCC_Phase, p61, p64, p67, Original_id, Original_CalibrationDate, Original_MeterNumber, Original_BeamScaleFactor, p2, p5, p8, p11, p14, p17, p20, p23, p26, p29, p32, p35, p38, p41, p44, p47, p50, p53, Original_VCC, Original_Mode, Original_AL, Original_AX, Original_VE, Original_AX2, Original_XACC2, Original_LACC2, p56, p59, Original_VCC_Phase, p62, p65, p68);
         }
     }
     
@@ -2933,7 +3967,7 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         
         private UpdateOrderOption _updateOrder;
         
-        private Data_Table_SimulatedTableAdapter _data_Table_SimulatedTableAdapter;
+        private CalibrationTableAdapter _calibrationTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -2955,12 +3989,12 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public Data_Table_SimulatedTableAdapter Data_Table_SimulatedTableAdapter {
+        public CalibrationTableAdapter CalibrationTableAdapter {
             get {
-                return this._data_Table_SimulatedTableAdapter;
+                return this._calibrationTableAdapter;
             }
             set {
-                this._data_Table_SimulatedTableAdapter = value;
+                this._calibrationTableAdapter = value;
             }
         }
         
@@ -2983,9 +4017,9 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._data_Table_SimulatedTableAdapter != null) 
-                            && (this._data_Table_SimulatedTableAdapter.Connection != null))) {
-                    return this._data_Table_SimulatedTableAdapter.Connection;
+                if (((this._calibrationTableAdapter != null) 
+                            && (this._calibrationTableAdapter.Connection != null))) {
+                    return this._calibrationTableAdapter.Connection;
                 }
                 return null;
             }
@@ -3000,7 +4034,7 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._data_Table_SimulatedTableAdapter != null)) {
+                if ((this._calibrationTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -3012,14 +4046,14 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(DynamicDataDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(DynamicDataDataSet3 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._data_Table_SimulatedTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Data_Table_Simulated.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._calibrationTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Calibration.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._data_Table_SimulatedTableAdapter.Update(updatedRows));
+                    result = (result + this._calibrationTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -3031,13 +4065,13 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(DynamicDataDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(DynamicDataDataSet3 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._data_Table_SimulatedTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Data_Table_Simulated.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._calibrationTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Calibration.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._data_Table_SimulatedTableAdapter.Update(addedRows));
+                    result = (result + this._calibrationTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -3049,13 +4083,13 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(DynamicDataDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(DynamicDataDataSet3 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._data_Table_SimulatedTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Data_Table_Simulated.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._calibrationTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Calibration.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._data_Table_SimulatedTableAdapter.Update(deletedRows));
+                    result = (result + this._calibrationTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -3091,15 +4125,15 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(DynamicDataDataSet dataSet) {
+        public virtual int UpdateAll(DynamicDataDataSet3 dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._data_Table_SimulatedTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._data_Table_SimulatedTableAdapter.Connection) == false))) {
+            if (((this._calibrationTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._calibrationTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -3135,13 +4169,13 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._data_Table_SimulatedTableAdapter != null)) {
-                    revertConnections.Add(this._data_Table_SimulatedTableAdapter, this._data_Table_SimulatedTableAdapter.Connection);
-                    this._data_Table_SimulatedTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._data_Table_SimulatedTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._data_Table_SimulatedTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._data_Table_SimulatedTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._data_Table_SimulatedTableAdapter.Adapter);
+                if ((this._calibrationTableAdapter != null)) {
+                    revertConnections.Add(this._calibrationTableAdapter, this._calibrationTableAdapter.Connection);
+                    this._calibrationTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._calibrationTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._calibrationTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._calibrationTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._calibrationTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -3202,9 +4236,9 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._data_Table_SimulatedTableAdapter != null)) {
-                    this._data_Table_SimulatedTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._data_Table_SimulatedTableAdapter]));
-                    this._data_Table_SimulatedTableAdapter.Transaction = null;
+                if ((this._calibrationTableAdapter != null)) {
+                    this._calibrationTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._calibrationTableAdapter]));
+                    this._calibrationTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

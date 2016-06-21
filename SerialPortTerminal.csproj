@@ -101,6 +101,26 @@
     <Compile Include="DataStatusForm.Designer.cs">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DynamicDataDataSet12.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DynamicDataDataSet12.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicDataDataSet21.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DynamicDataDataSet21.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicDataDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DynamicDataDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicDataDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DynamicDataDataSet4.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Parameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,10 +145,10 @@
     <Compile Include="Switches.Designer.cs">
       <DependentUpon>Switches.cs</DependentUpon>
     </Compile>
-    <Compile Include="DynamicDataDataSet3.Designer.cs">
+    <Compile Include="DynamicDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DynamicDataDataSet3.xsd</DependentUpon>
+      <DependentUpon>DynamicDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Terminal.cs">
       <SubType>Form</SubType>
@@ -171,6 +191,28 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="App.config" />
+    <None Include="DynamicDataDataSet12.xsc">
+      <DependentUpon>DynamicDataDataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataDataSet12.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DynamicDataDataSet12.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DynamicDataDataSet12.xss">
+      <DependentUpon>DynamicDataDataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataDataSet21.xsc">
+      <DependentUpon>DynamicDataDataSet21.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataDataSet21.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DynamicDataDataSet21.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DynamicDataDataSet21.xss">
+      <DependentUpon>DynamicDataDataSet21.xsd</DependentUpon>
+    </None>
     <None Include="DynamicDataDataSet3.xsc">
       <DependentUpon>DynamicDataDataSet3.xsd</DependentUpon>
     </None>
@@ -181,6 +223,28 @@
     </None>
     <None Include="DynamicDataDataSet3.xss">
       <DependentUpon>DynamicDataDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataDataSet4.xsc">
+      <DependentUpon>DynamicDataDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DynamicDataDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DynamicDataDataSet4.xss">
+      <DependentUpon>DynamicDataDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataSet.xsc">
+      <DependentUpon>DynamicDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DynamicDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DynamicDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DynamicDataSet.xss">
+      <DependentUpon>DynamicDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

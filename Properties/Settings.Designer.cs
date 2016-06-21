@@ -129,5 +129,15 @@ namespace SerialPortTerminal.Properties {
                 return ((string)(this["DynamicDataConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOPSERVER;Initial Catalog=DynamicData;Integrated Security=True")]
+        public string DynamicDataConnectionString1 {
+            get {
+                return ((string)(this["DynamicDataConnectionString1"]));
+            }
+        }
     }
 }

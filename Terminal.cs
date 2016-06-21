@@ -1006,9 +1006,7 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dynamicDataDataSet.Data_Table_Simulated' table. You can move, or remove it, as needed.
-            //     this.data_Table_SimulatedTableAdapter.Fill(this.dynamicDataDataSet.Data_Table_Simulated);
-            bindingSource1.ResetBindings(false);
+
 
             // Connect to database and leave connection open.
             //  Need to add desconnect on exit or error.
