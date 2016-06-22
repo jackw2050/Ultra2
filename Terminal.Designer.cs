@@ -37,6 +37,8 @@ namespace SerialPortTerminal
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTerminal));
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.lnkAbout = new System.Windows.Forms.LinkLabel();
@@ -67,10 +69,10 @@ namespace SerialPortTerminal
             this.button13 = new System.Windows.Forms.Button();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
             this.button14 = new System.Windows.Forms.Button();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.GravityChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,18 +100,24 @@ namespace SerialPortTerminal
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.surveyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
             this.data_Table_SimulatedTableAdapter2 = new SerialPortTerminal.DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStripForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPort
             // 
             this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(607, 98);
+            this.btnOpenPort.Location = new System.Drawing.Point(590, 72);
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPort.TabIndex = 6;
@@ -137,7 +145,7 @@ namespace SerialPortTerminal
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(419, 33);
+            this.button2.Location = new System.Drawing.Point(419, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 25);
             this.button2.TabIndex = 11;
@@ -235,7 +243,7 @@ namespace SerialPortTerminal
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(419, 40);
+            this.button3.Location = new System.Drawing.Point(419, 42);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(144, 23);
             this.button3.TabIndex = 58;
@@ -245,7 +253,7 @@ namespace SerialPortTerminal
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(419, 69);
+            this.button4.Location = new System.Drawing.Point(419, 70);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(144, 23);
             this.button4.TabIndex = 59;
@@ -265,7 +273,7 @@ namespace SerialPortTerminal
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(419, 127);
+            this.button6.Location = new System.Drawing.Point(419, 126);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 23);
             this.button6.TabIndex = 61;
@@ -275,7 +283,7 @@ namespace SerialPortTerminal
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(419, 156);
+            this.button7.Location = new System.Drawing.Point(419, 154);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(144, 23);
             this.button7.TabIndex = 62;
@@ -362,32 +370,43 @@ namespace SerialPortTerminal
             this.button14.Text = "Serial Port Form";
             this.button14.UseVisualStyleBackColor = true;
             // 
-            // chart1
+            // GravityChart
             // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.GravityChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "Gravity Stuff";
-            chartArea2.Name = "Cross Coupling Stuff";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.ChartAreas.Add(chartArea2);
-            this.chart1.DataSource = this.dataTableSimulatedBindingSource;
+            this.GravityChart.BackColor = System.Drawing.Color.Gray;
+            this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            this.GravityChart.BackSecondaryColor = System.Drawing.Color.White;
+            this.GravityChart.BorderlineColor = System.Drawing.Color.MidnightBlue;
+            this.GravityChart.BorderlineWidth = 5;
+            chartArea1.BackColor = System.Drawing.Color.DimGray;
+            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            chartArea1.Name = "Gravity";
+            chartArea2.BackColor = System.Drawing.Color.DimGray;
+            chartArea2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            chartArea2.Name = "Cross Coupling";
+            this.GravityChart.ChartAreas.Add(chartArea1);
+            this.GravityChart.ChartAreas.Add(chartArea2);
+            this.GravityChart.ContextMenuStrip = this.contextMenuStrip1;
+            this.GravityChart.DataSource = this.dataTableSimulatedBindingSource;
             legend1.Alignment = System.Drawing.StringAlignment.Far;
-            legend1.DockedToChartArea = "Gravity Stuff";
+            legend1.BackColor = System.Drawing.Color.White;
+            legend1.DockedToChartArea = "Gravity";
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
             legend1.IsDockedInsideChartArea = false;
             legend1.Name = "Gravity Legend";
             legend2.Alignment = System.Drawing.StringAlignment.Far;
-            legend2.DockedToChartArea = "Cross Coupling Stuff";
+            legend2.DockedToChartArea = "Cross Coupling";
             legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
             legend2.IsDockedInsideChartArea = false;
             legend2.Name = "Cross Coupling Legend";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(1, 211);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series1.ChartArea = "Gravity Stuff";
+            this.GravityChart.Legends.Add(legend1);
+            this.GravityChart.Legends.Add(legend2);
+            this.GravityChart.Location = new System.Drawing.Point(1, 211);
+            this.GravityChart.Name = "GravityChart";
+            this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+            series1.ChartArea = "Gravity";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Gravity Legend";
             series1.Name = "Raw Beam";
@@ -395,49 +414,71 @@ namespace SerialPortTerminal
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             series1.YValueMembers = "RawBeam";
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series2.ChartArea = "Gravity Stuff";
+            series2.ChartArea = "Gravity";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Legend = "Gravity Legend";
             series2.Name = "Digital Gravity";
             series2.XValueMember = "date";
             series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             series2.YValueMembers = "DigitalGravity";
-            series3.ChartArea = "Cross Coupling Stuff";
+            series3.ChartArea = "Cross Coupling";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series3.Legend = "Cross Coupling Legend";
             series3.Name = "XACC2";
             series3.XValueMember = "date";
             series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             series3.YValueMembers = "XACC2";
-            series4.ChartArea = "Cross Coupling Stuff";
+            series4.ChartArea = "Cross Coupling";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series4.Legend = "Cross Coupling Legend";
             series4.Name = "LACC2";
             series4.XValueMember = "date";
             series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             series4.YValueMembers = "LACC2";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-            this.chart1.Series.Add(series3);
-            this.chart1.Series.Add(series4);
-            this.chart1.Size = new System.Drawing.Size(1129, 338);
-            this.chart1.TabIndex = 78;
-            this.chart1.Text = "chart1";
+            series5.ChartArea = "Cross Coupling";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series5.Legend = "Cross Coupling Legend";
+            series5.Name = "XACC";
+            series5.XValueMember = "date";
+            series5.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series5.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            series5.YValueMembers = "XACC";
+            series6.ChartArea = "Cross Coupling";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Legend = "Cross Coupling Legend";
+            series6.Name = "LACC";
+            series6.XValueMember = "date";
+            series6.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series6.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            series6.YValueMembers = "LACC";
+            this.GravityChart.Series.Add(series1);
+            this.GravityChart.Series.Add(series2);
+            this.GravityChart.Series.Add(series3);
+            this.GravityChart.Series.Add(series4);
+            this.GravityChart.Series.Add(series5);
+            this.GravityChart.Series.Add(series6);
+            this.GravityChart.Size = new System.Drawing.Size(1129, 338);
+            this.GravityChart.TabIndex = 78;
+            this.GravityChart.Text = "chart1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripMenuItem1.Text = "Background Color";
             // 
             // dataTableSimulatedBindingSource
             // 
             this.dataTableSimulatedBindingSource.DataMember = "Data_Table_Simulated";
             this.dataTableSimulatedBindingSource.DataSource = this.dynamicDataDataSet5BindingSource;
-            // 
-            // dynamicDataDataSet5BindingSource
-            // 
-            this.dynamicDataDataSet5BindingSource.DataSource = this.dynamicDataDataSet5;
-            this.dynamicDataDataSet5BindingSource.Position = 0;
-            // 
-            // dynamicDataDataSet5
-            // 
-            this.dynamicDataDataSet5.DataSetName = "DynamicDataDataSet5";
-            this.dynamicDataDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dataGridView1
             // 
@@ -637,19 +678,44 @@ namespace SerialPortTerminal
             this.surveyNameDataGridViewTextBoxColumn.HeaderText = "Survey_Name";
             this.surveyNameDataGridViewTextBoxColumn.Name = "surveyNameDataGridViewTextBoxColumn";
             // 
+            // dynamicDataDataSet5BindingSource
+            // 
+            this.dynamicDataDataSet5BindingSource.DataSource = this.dynamicDataDataSet5;
+            this.dynamicDataDataSet5BindingSource.Position = 0;
+            // 
+            // dynamicDataDataSet5
+            // 
+            this.dynamicDataDataSet5.DataSetName = "DynamicDataDataSet5";
+            this.dynamicDataDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // data_Table_SimulatedTableAdapter2
             // 
             this.data_Table_SimulatedTableAdapter2.ClearBeforeFill = true;
+            // 
+            // contextMenuStripForm
+            // 
+            this.contextMenuStripForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Exit});
+            this.contextMenuStripForm.Name = "contextMenuStripForm";
+            this.contextMenuStripForm.Size = new System.Drawing.Size(153, 48);
+            // 
+            // Exit
+            // 
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(152, 22);
+            this.Exit.Text = "Exit";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 633);
+            this.ContextMenuStrip = this.contextMenuStripForm;
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.rtfTerminal);
-            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.GravityChart);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
@@ -681,11 +747,13 @@ namespace SerialPortTerminal
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTerminal_FormClosing);
             this.Load += new System.EventHandler(this.frmTerminal_Load);
             this.Shown += new System.EventHandler(this.frmTerminal_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStripForm.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -698,31 +766,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer _timer1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn springTensionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rawBeamDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn digitalGravityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn crossCouplingDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn yEARDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dAYSDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hOURDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mINDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sECDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vCCDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aLDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aXDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aX2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn xACC2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lACC2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn xACCDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lACCDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn altitudeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn longitudeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latitudeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gPSStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn periodDataGridViewTextBoxColumn;
+
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
@@ -744,7 +788,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
         public System.Windows.Forms.RichTextBox rtfTerminal;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.BindingSource dynamicDataDataSet5BindingSource;
@@ -778,6 +822,10 @@ namespace SerialPortTerminal
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
         private System.Windows.Forms.DataGridViewTextBoxColumn surveyNameDataGridViewTextBoxColumn;
         protected System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripForm;
+        private System.Windows.Forms.ToolStripMenuItem Exit;
     }
 }
 

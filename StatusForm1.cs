@@ -23,7 +23,7 @@ namespace SerialPortTerminal
         {
 
 
-            while ((crossFogReady == false) & (longFogReady = false) & (heaterReady = false))
+            while ((crossFogReady == false) & (longFogReady == false) & (heaterReady == false))
             {
 
                
