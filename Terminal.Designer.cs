@@ -69,6 +69,7 @@ namespace SerialPortTerminal
             this.button14 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,25 +97,16 @@ namespace SerialPortTerminal
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.surveyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
-            this.dynamicDataDataSet4 = new SerialPortTerminal.DynamicDataDataSet4();
-            this.data_Table_SimulatedTableAdapter1 = new SerialPortTerminal.DynamicDataDataSet6TableAdapters.Data_Table_SimulatedTableAdapter();
-            this.dynamicDataDataSet6 = new SerialPortTerminal.DynamicDataDataSet6();
-            this.data_Table_SimulatedTableAdapter2 = new SerialPortTerminal.DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOpenPort
             // 
             this.btnOpenPort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenPort.Location = new System.Drawing.Point(607, 98);
+            this.btnOpenPort.Location = new System.Drawing.Point(590, 98);
             this.btnOpenPort.Name = "btnOpenPort";
             this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
             this.btnOpenPort.TabIndex = 6;
@@ -142,7 +134,7 @@ namespace SerialPortTerminal
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(419, 33);
+            this.button2.Location = new System.Drawing.Point(419, 15);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 25);
             this.button2.TabIndex = 11;
@@ -240,7 +232,7 @@ namespace SerialPortTerminal
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(419, 40);
+            this.button3.Location = new System.Drawing.Point(419, 44);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(144, 23);
             this.button3.TabIndex = 58;
@@ -250,7 +242,7 @@ namespace SerialPortTerminal
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(419, 69);
+            this.button4.Location = new System.Drawing.Point(419, 71);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(144, 23);
             this.button4.TabIndex = 59;
@@ -270,7 +262,7 @@ namespace SerialPortTerminal
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(419, 127);
+            this.button6.Location = new System.Drawing.Point(419, 125);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 23);
             this.button6.TabIndex = 61;
@@ -280,7 +272,7 @@ namespace SerialPortTerminal
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(419, 156);
+            this.button7.Location = new System.Drawing.Point(419, 152);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(144, 23);
             this.button7.TabIndex = 62;
@@ -290,7 +282,7 @@ namespace SerialPortTerminal
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(419, 182);
+            this.button8.Location = new System.Drawing.Point(419, 179);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(144, 23);
             this.button8.TabIndex = 63;
@@ -372,6 +364,10 @@ namespace SerialPortTerminal
             this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.chart1.BackColor = System.Drawing.Color.Gray;
+            this.chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            this.chart1.BorderlineColor = System.Drawing.Color.Silver;
+            this.chart1.BorderlineWidth = 5;
             chartArea1.Name = "Gravity Stuff";
             chartArea2.Name = "Cross Coupling Stuff";
             this.chart1.ChartAreas.Add(chartArea1);
@@ -632,34 +628,6 @@ namespace SerialPortTerminal
             this.surveyNameDataGridViewTextBoxColumn.HeaderText = "Survey_Name";
             this.surveyNameDataGridViewTextBoxColumn.Name = "surveyNameDataGridViewTextBoxColumn";
             // 
-            // dynamicDataDataSet5BindingSource
-            // 
-            this.dynamicDataDataSet5BindingSource.DataSource = this.dynamicDataDataSet5;
-            this.dynamicDataDataSet5BindingSource.Position = 0;
-            // 
-            // dynamicDataDataSet5
-            // 
-            this.dynamicDataDataSet5.DataSetName = "DynamicDataDataSet5";
-            this.dynamicDataDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dynamicDataDataSet4
-            // 
-            this.dynamicDataDataSet4.DataSetName = "DynamicDataDataSet4";
-            this.dynamicDataDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // data_Table_SimulatedTableAdapter1
-            // 
-            this.data_Table_SimulatedTableAdapter1.ClearBeforeFill = true;
-            // 
-            // dynamicDataDataSet6
-            // 
-            this.dynamicDataDataSet6.DataSetName = "DynamicDataDataSet6";
-            this.dynamicDataDataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // data_Table_SimulatedTableAdapter2
-            // 
-            this.data_Table_SimulatedTableAdapter2.ClearBeforeFill = true;
-            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -702,11 +670,8 @@ namespace SerialPortTerminal
             this.Shown += new System.EventHandler(this.frmTerminal_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

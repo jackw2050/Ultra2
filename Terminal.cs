@@ -32,17 +32,17 @@ namespace SerialPortTerminal
 
     public partial class frmTerminal : Form
     {
-        public CalculateMarineData mdt = new CalculateMarineData();
-        public DataForm f2 = new DataForm();
-        private RelaySwitches RelaySwitches = new RelaySwitches();
-        private ConfigData ConfigData = new ConfigData();
-        private ControlSwitches ControlSwitches = new ControlSwitches();
-        private MeterStatus MeterStatus = new MeterStatus();
-        private DataStatusForm DataStatusForm = new DataStatusForm();
-        private SerialPortForm SerialPortForm = new SerialPortForm();
 
+        #region Callbacks
 
         private delegate void SetTextCallback(string text);
+        public delegate void SetSerialPortCallback(string text);// Callback for writing to the serial port
+             
+
+        #endregion Callbacks
+
+
+        #region Global Variables
 
         public int set = 1;
         public int enable = 1;
@@ -74,7 +74,20 @@ namespace SerialPortTerminal
 
         public Boolean filterData = false;
 
+        #endregion Global Variables
+
+
+
         #region Local Variables
+
+        private CalculateMarineData mdt = new CalculateMarineData();
+        private DataForm f2 = new DataForm();
+        private RelaySwitches RelaySwitches = new RelaySwitches();
+        private ConfigData ConfigData = new ConfigData();
+        private ControlSwitches ControlSwitches = new ControlSwitches();
+        private MeterStatus MeterStatus = new MeterStatus();
+        private DataStatusForm DataStatusForm = new DataStatusForm();
+        private SerialPortForm SerialPortForm = new SerialPortForm();
 
         // The main control for communicating through the RS-232 port
         private SerialPort comport = new SerialPort();
@@ -531,6 +544,43 @@ namespace SerialPortTerminal
                 //           f2.GravityRichTextBox1.Text = Convert.ToString(mdt.myDT ) +  "         " + Convert.ToString(mdt.SpringTension) + "             " + Convert.ToString(mdt.Beam) + "/n/n";
             }
         }
+
+
+
+
+        private void ThreadSerialWriteSafe(string command)
+        {
+
+            string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
+
+            // Check if this method is running on a different thread
+            // than the thread that created the control.
+            if (this.f2.InvokeRequired)
+            {
+                // It's on a different thread, so use Invoke.
+             
+                SetSerialPortCallback SerialCallBack = new SetSerialPortCallback(SetText);
+                this.Invoke(SerialCallBack, new object[] { text });
+                Thread.Sleep(2000);// do I need this?
+
+            }
+            else
+            {
+                // It's on the same thread, no need for Invoke
+
+
+                // write to serial port
+                 sendCmd(command);
+
+            }
+
+        }
+
+
+
+
+
+
 
         private void ThreadProcSafe()
         {
@@ -1533,6 +1583,15 @@ namespace SerialPortTerminal
             sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
             sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
             sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
+
+
+          // Thread safe version
+            ThreadSerialWriteSafe("Send Relay Switches");           // 0 ----
+            ThreadSerialWriteSafe("Set Cross Axis Parameters");      // download platform parameters 4 -----
+            ThreadSerialWriteSafe("Set Long Axis Parameters");       // download platform parametersv 5 -----
+            ThreadSerialWriteSafe("Update Cross Coupling Values");   // download CC parameters 8     -----
+
+
 
             ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
 
