@@ -12,8 +12,59 @@ namespace SerialPortTerminal
 
     public class Errors
     {
+
+        // IERR -7  Timed out waiting for data
+        // - 4 remote rebooted
+        // 200 Hz not present
+
+/*
+ * -1 Printer error
+ * -2 com2 error
+ * -3 disk open error
+ * -4 remote rebooted
+ * -5 hard disk read / write error
+ * -6 com1 intermittant error
+ * -7 com1 persistant error
+ * -8 remote communication error
+ * -9 alarm shutdown
+ * -10 time set successful
+ * -11 time set failed
+ * 
+ * */
+
         public Boolean remoteRebooted = false;
         public Boolean timeSetSuccessful = false;
+        public int tooLgCounter = 0;
+        private int tooSmCounter = 0;
+        private int checksumCounter = 0;
+
+        public class DataLength
+        {
+            private Errors Errors = new Errors();
+            private frmTerminal Form = new frmTerminal();
+            private DateTime currentTime = DateTime.Now;
+            private int currentMin = DateTime.Now.Minute;
+
+            private void TooLarge()
+            {
+                Errors.tooLgCounter++;
+                if (Errors.tooLgCounter > 3)
+                {
+                    Errors.tooLgCounter = 0;
+                    Form.StartTimer("subtract");
+                }
+            }
+
+            private void TooSmall()
+            {
+                Errors.tooSmCounter++;
+                if (Errors.tooSmCounter > 3)
+                {
+                    Errors.tooSmCounter = 0;
+                    Form.StartTimer("add");
+                }
+            }
+        }
     }
 
     public class PortC //  Byte 77
@@ -140,8 +191,6 @@ namespace SerialPortTerminal
         }
     }
 
-
-
     public class RelaySwitches
     {
         public int relaySW = 0;
@@ -157,6 +206,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xFE;// Clear bit 1
             }
         }
+
         public void relayTorqueMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -168,6 +218,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xFD;// Clear bit 1
             }
         }
+
         public void alarm(int state)
         {
             if (state == 1)// Enable alarm
@@ -179,6 +230,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xFB;// Clear bit 1
             }
         }
+
         public void steppingMotorDirection(int state)
         {
             if (state == 1)
@@ -190,6 +242,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xF7;// Clear bit 1
             }
         }
+
         public void slew4(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -201,6 +254,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xEF;// Clear bit 1
             }
         }
+
         public void slew5(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -212,6 +266,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xDF;// Clear bit 1
             }
         }
+
         public void triggerStepperMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -223,6 +278,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xBF;// Clear bit 1
             }
         }
+
         public void stepperMotorEnable(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -235,9 +291,6 @@ namespace SerialPortTerminal
             }
         }
     }
-
-
-
 
     public class ControlSwitches
     {
@@ -254,6 +307,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xFE;// Clear bit 1
             }
         }
+
         public void SpringTension(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -265,6 +319,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xFD;// Clear bit 1
             }
         }
+
         public void Alarm(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -276,6 +331,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xF7;// Clear bit 1
             }
         }
+
         public void DataCollection(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -287,6 +343,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xFB;// Clear bit 1
             }
         }
+
         public void AlarmFlag(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -299,10 +356,6 @@ namespace SerialPortTerminal
             }
         }
     }
-
-
-
-
 
     public class ControlSwitchesOld
     {
@@ -321,15 +374,8 @@ namespace SerialPortTerminal
                 alarmSwitch * 0x04 +
                 dataSwitch * 0x08 +
                 alarmFlag * 0x10;
-
         }
     }
-
-
-
-
-
-
 
     public class ConfigData
     {
@@ -405,7 +451,7 @@ namespace SerialPortTerminal
         public double altitude = 0;
 
         public static double[] table1 = {
-    	0.0, 100.0, 200.0, 300.0 ,400.0, 500.0, 600.0,700.0, 800.0, 900.0, 1000.0, 1100.0 ,1200.0,
+        0.0, 100.0, 200.0, 300.0 ,400.0, 500.0, 600.0,700.0, 800.0, 900.0, 1000.0, 1100.0 ,1200.0,
         1300.0, 1400.0, 1500.0, 1600.0, 1700.0, 1800.0, 1900.0, 2000.0, 2100.0, 2200.0, 2300.0 ,2400.0,
         2500.0, 2600.0, 2700.0, 2800.0, 2900.0, 3000.0, 3100.0, 3200.0, 3300.0, 3400.0, 3500.0, 3600.0,
         3700.0, 3800.0, 3900.0, 4000.0, 4100.0, 4200.0, 4300.0, 4400.0, 4500.0, 4600.0, 4700.0, 4800.0,
@@ -468,11 +514,8 @@ namespace SerialPortTerminal
 
         //     MeterData[] LiveMeterData;
 
-
-
         private Byte[] SetTempByte(Byte[] meterData, int numBytes, int startByte)
         {
-
             Byte[] tempB = new Byte[numBytes];
 
             for (int i = 0; i < numBytes; i++)
@@ -481,20 +524,17 @@ namespace SerialPortTerminal
             }
 
             return tempB;
-
         }
-
-
-
-
-
-
-
-
 
         public void initializeDataCounter(int newval)
         {
             dataCounter = newval;
+        }
+
+        public int Checksum(byte[] data)
+        {
+            int checksum = 0;
+            return checksum;
         }
 
         public void GetMeterData(byte[] meterBytes)
@@ -508,21 +548,28 @@ namespace SerialPortTerminal
 
             // CHECK METERBYTES LENGTH AND SEND TO SWITCH CASE - ONLY PARSE FOR FILLED DATA
 
+            // set error counter
+            // length too low count
+            // length to long count
+            // call error class for eval.  It must return a value (stop or go)
+
             if (meterBytes.Length > 77)// remove this
             {
-                tempByte[0] = meterBytes[0];
-                tempByte[1] = 0;
-
-                dataLength = BitConverter.ToInt16(tempByte, 0);
+                // call error.dataLength.ToLarge
             }
-
-            // best way to zero an array?  Array.Clear(tempByte, 0, tempByte.Length);
 
             //          Add checksum verification.  Only record valid data
 
             if (meterBytes.Length < 10)
             {
+                // call error.dataLength.ToSmall
             }
+            else if (Checksum(meterBytes) == (meterBytes[meterBytes.Length - 1]))
+            {
+                // call error.BadCheckSum;
+            }
+
+            // continue only if meterBytes[0] == meterBytes.Length - 1
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {
                 dataValid = true;
@@ -762,14 +809,9 @@ namespace SerialPortTerminal
                 }
                 else
                 {
-
-
                     altitude = 0;
                     latitude = 0;
                     longitude = 0;
-
-
-
 
                     // Altitude
                     Int32 gTemp = 0;
@@ -864,7 +906,6 @@ namespace SerialPortTerminal
                     {
                         latitude *= -1;
                     }
-
                 }
 
                 //GET PRINTER STATUS  -- No longer used
@@ -875,7 +916,6 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[76];
                 Int16 meterStatus = BitConverter.ToInt16(tempByte, 0);
                 MeterStatus.GetMeterStatus(meterStatus);
-
 
                 //GET PORT C INPUT
                 Array.Clear(tempByte, 0, tempByte.Length);
@@ -940,13 +980,6 @@ namespace SerialPortTerminal
         }
 
         // add routine for error accumulation
-
-
-
-
-
-
-
 
         // I don't remember where I use this
         private string ByteArrayToHexString(byte[] data)

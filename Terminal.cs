@@ -32,15 +32,13 @@ namespace SerialPortTerminal
 
     public partial class frmTerminal : Form
     {
-
         #region Callbacks
 
         private delegate void SetTextCallback(string text);
+
         public delegate void SetSerialPortCallback(string text);// Callback for writing to the serial port
-             
 
         #endregion Callbacks
-
 
         #region Global Variables
 
@@ -75,8 +73,6 @@ namespace SerialPortTerminal
         public Boolean filterData = false;
 
         #endregion Global Variables
-
-
 
         #region Local Variables
 
@@ -249,7 +245,7 @@ namespace SerialPortTerminal
             Invoke(new EventHandler(delegate
             {
                 rtfTerminal.SelectedText = string.Empty;
-               //tfTerminal.SelectionFont = new Font(SelectionFont, FontStyle.Bold);
+                //tfTerminal.SelectionFont = new Font(SelectionFont, FontStyle.Bold);
                 rtfTerminal.SelectionColor = LogMsgTypeColor[(int)msgtype];
                 rtfTerminal.AppendText(msg);
                 rtfTerminal.ScrollToCaret();
@@ -351,7 +347,7 @@ namespace SerialPortTerminal
                     UpdatePinState();
                 }
 
-                f2.Show();
+              //  f2.Show();
                 // START 1 SEC TIMER
                 //       timer1.Enabled = true;
                 //       timer1.Start();
@@ -545,46 +541,31 @@ namespace SerialPortTerminal
             }
         }
 
-
-
-
         private void ThreadSerialWriteSafe(string command)
         {
-
             string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
 
             // Check if this method is running on a different thread
             // than the thread that created the control.
-            if (this.f2.InvokeRequired)
+            if (true)//this.f2.InvokeRequired
             {
                 // It's on a different thread, so use Invoke.
-             
+
                 SetSerialPortCallback SerialCallBack = new SetSerialPortCallback(SetText);
                 this.Invoke(SerialCallBack, new object[] { text });
                 Thread.Sleep(2000);// do I need this?
-
             }
             else
             {
                 // It's on the same thread, no need for Invoke
 
-
                 // write to serial port
-                 sendCmd(command);
-
+                sendCmd(command);
             }
-
         }
-
-
-
-
-
-
 
         private void ThreadProcSafe()
         {
-
             string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
 
             // Check if this method is running on a different thread
@@ -596,17 +577,17 @@ namespace SerialPortTerminal
                 this.Invoke(d, new object[] { text });
                 Thread.Sleep(2000);
                 DataBaseWrite(mdt);
-             /*   textBox1.Text = (mdt.gravity.ToString());
-                textBox16.Text = mdt.altitude.ToString();
-                textBox17.Text = mdt.latitude.ToString();
-                textBox18.Text = mdt.longitude.ToString();*/
+                /*   textBox1.Text = (mdt.gravity.ToString());
+                   textBox16.Text = mdt.altitude.ToString();
+                   textBox17.Text = mdt.latitude.ToString();
+                   textBox18.Text = mdt.longitude.ToString();*/
             }
             else
             {
                 // It's on the same thread, no need for Invoke
                 //   this.f2.GravityRichTextBox1.Text = text;
                 //   DataBaseWrite();
-                
+
                 DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
@@ -624,7 +605,7 @@ namespace SerialPortTerminal
                 DataStatusForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
-                
+
                 string specifier;
                 specifier = "000.000000";
                 textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
@@ -796,29 +777,29 @@ namespace SerialPortTerminal
                         // DataBaseDisconnect();
                         DataBaseConnect();
                     }
-/*
-                    // Add your parameters
-                    command.Parameters.AddWithValue("@Date", CalculateMarineData.myDT);
-                    command.Parameters.AddWithValue("@Year", CalculateMarineData.year);
-                    command.Parameters.AddWithValue("@Days", CalculateMarineData.day);
-                    command.Parameters.AddWithValue("@Hour", CalculateMarineData.Hour);
-                    command.Parameters.AddWithValue("@Min", CalculateMarineData.Min);
-                    command.Parameters.AddWithValue("@Sec", CalculateMarineData.Sec);
+                    /*
+                                        // Add your parameters
+                                        command.Parameters.AddWithValue("@Date", CalculateMarineData.myDT);
+                                        command.Parameters.AddWithValue("@Year", CalculateMarineData.year);
+                                        command.Parameters.AddWithValue("@Days", CalculateMarineData.day);
+                                        command.Parameters.AddWithValue("@Hour", CalculateMarineData.Hour);
+                                        command.Parameters.AddWithValue("@Min", CalculateMarineData.Min);
+                                        command.Parameters.AddWithValue("@Sec", CalculateMarineData.Sec);
 
-                    command.Parameters.AddWithValue("@DigitalGravity", CalculateMarineData.gravity);// this is calculated for now set  eq spring tenstion
-                    command.Parameters.AddWithValue("@SpringTension", CalculateMarineData.SpringTension);
-                    command.Parameters.AddWithValue("@CrossCoupling", 0);// CalculateMarineData.c);// calculated
-                    command.Parameters.AddWithValue("@RawBeam", CalculateMarineData.Beam);
-                    command.Parameters.AddWithValue("@VCC", CalculateMarineData.VCC);
-                    command.Parameters.AddWithValue("@AL", CalculateMarineData.AL);
-                    command.Parameters.AddWithValue("@AX", CalculateMarineData.AX);
-                    command.Parameters.AddWithValue("@VE", CalculateMarineData.VE);
-                    command.Parameters.AddWithValue("@AX2", CalculateMarineData.AX2);
-                    command.Parameters.AddWithValue("@XACC2", CalculateMarineData.XACC2);
-                    command.Parameters.AddWithValue("@LACC2", CalculateMarineData.LACC2);
-                    command.Parameters.AddWithValue("@XACC", CalculateMarineData.XACC);
-                    command.Parameters.AddWithValue("@LACC", CalculateMarineData.LACC);
-                    */
+                                        command.Parameters.AddWithValue("@DigitalGravity", CalculateMarineData.gravity);// this is calculated for now set  eq spring tenstion
+                                        command.Parameters.AddWithValue("@SpringTension", CalculateMarineData.SpringTension);
+                                        command.Parameters.AddWithValue("@CrossCoupling", 0);// CalculateMarineData.c);// calculated
+                                        command.Parameters.AddWithValue("@RawBeam", CalculateMarineData.Beam);
+                                        command.Parameters.AddWithValue("@VCC", CalculateMarineData.VCC);
+                                        command.Parameters.AddWithValue("@AL", CalculateMarineData.AL);
+                                        command.Parameters.AddWithValue("@AX", CalculateMarineData.AX);
+                                        command.Parameters.AddWithValue("@VE", CalculateMarineData.VE);
+                                        command.Parameters.AddWithValue("@AX2", CalculateMarineData.AX2);
+                                        command.Parameters.AddWithValue("@XACC2", CalculateMarineData.XACC2);
+                                        command.Parameters.AddWithValue("@LACC2", CalculateMarineData.LACC2);
+                                        command.Parameters.AddWithValue("@XACC", CalculateMarineData.XACC);
+                                        command.Parameters.AddWithValue("@LACC", CalculateMarineData.LACC);
+                                        */
                     // Execute your query
                     command.ExecuteNonQuery();
                 }
@@ -846,8 +827,7 @@ namespace SerialPortTerminal
                             }
 
                             */
-
-                this.data_Table_SimulatedTableAdapter.Fill(this.dynamicDataDataSet.Data_Table_Simulated);
+                            // re bind table
             }
         }
 
@@ -970,7 +950,6 @@ namespace SerialPortTerminal
         {
         }
 
-
         public byte[] CalculateCheckSum(byte[] intBytes, int numBytes)
         {
             var checkSum = 0;
@@ -995,7 +974,6 @@ namespace SerialPortTerminal
 
             //  comport.Write(txCmd, 0, txCmd.Length);
         }
-
 
         #endregion Serial Port
 
@@ -1025,12 +1003,42 @@ namespace SerialPortTerminal
 
             _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
             _timer1.Enabled = true;
+
+            StartTimer("set");
+
             // Show the hex digits on in the terminal window
             Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
 
         //  This will be sendData later will full command byte array and checksum.
         //  Not needed until I implement sending commands, settings etc.
+
+        public void StartTimer(string mode)
+        {
+            if (mode == "set")
+            {
+                _timer1.Interval = 1000;
+            }
+            else if (mode == "add")
+            {
+                _timer1.Interval = 1200;
+            }
+            else if (mode == "subtract")
+            {
+                _timer1.Interval = 800;
+            }
+            else if (mode == "sync")
+            {
+                _timer1.Interval = (1000 - DateTime.Now.Millisecond);
+            }
+            else
+            {
+                _timer1.Interval = 1000;
+            }
+
+            _timer1.Enabled = true;
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             byte checkSum = 0;
@@ -1052,12 +1060,8 @@ namespace SerialPortTerminal
             Log(LogMsgType.Incoming, Convert.ToString(StringOutput) + "\n");
         }
 
-     
-
         private void frmTerminal_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dynamicDataDataSet5.Data_Table_Simulated' table. You can move, or remove it, as needed.
-            this.data_Table_SimulatedTableAdapter2.Fill(this.dynamicDataDataSet5.Data_Table_Simulated);
 
 
             // Connect to database and leave connection open.
@@ -1115,6 +1119,7 @@ namespace SerialPortTerminal
 
             return outputBytes;
         }
+
         public byte[] CreateTxArray(byte command, Single data1, Single data2, Single data3, Single data4, double data5)
         {
             byte[] cmdByte = { command };
@@ -1145,6 +1150,7 @@ namespace SerialPortTerminal
 
             return outputBytes;
         }
+
         public byte[] CreateTxArray(byte command, Single data1, Single data2)
         {
             byte[] cmdByte = { command };
@@ -1165,6 +1171,7 @@ namespace SerialPortTerminal
 
             return outputBytes;
         }
+
         public byte[] CreateTxArray(byte command, int data1)
         {
             byte[] cmdByte = { command };
@@ -1185,6 +1192,7 @@ namespace SerialPortTerminal
 
             return outputBytes;
         }
+
         public void sendCmd(string cmd)
         {
             byte[] data;
@@ -1569,6 +1577,7 @@ namespace SerialPortTerminal
         {
             AutoStart();
         }
+
         private void button3_Click_1(object sender, EventArgs e)
         {
             // turn on 200 Hz
@@ -1584,20 +1593,18 @@ namespace SerialPortTerminal
             sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
             sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
 
-
-          // Thread safe version
+            // Thread safe version
             ThreadSerialWriteSafe("Send Relay Switches");           // 0 ----
             ThreadSerialWriteSafe("Set Cross Axis Parameters");      // download platform parameters 4 -----
             ThreadSerialWriteSafe("Set Long Axis Parameters");       // download platform parametersv 5 -----
             ThreadSerialWriteSafe("Update Cross Coupling Values");   // download CC parameters 8     -----
-
-
 
             ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
 
             sendCmd("Send Control Switches");           // 1 ----
             sendCmd("Send Control Switches");           // 1 ----
         }
+
         private void button4_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0xB1;// cmd 0
@@ -1605,29 +1612,33 @@ namespace SerialPortTerminal
             ControlSwitches.controlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");           // 1 ----
         }
+
         private void button5_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
         }
+
         private void button6_Click(object sender, EventArgs e)
         {
             ControlSwitches.controlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");           // 1 ----
         }
+
         private void button7_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x80;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
         }
+
         private void button8_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
         }
+
         private void button9_Click(object sender, EventArgs e)
         {
-
             RelaySwitches.relaySW = 0x83;// cmd 0
             sendCmd("Send Relay Switches");
             // 0 ----
@@ -1636,6 +1647,7 @@ namespace SerialPortTerminal
             // ControlSwitches.controlSw = 0x09; // ControlSwitches.RelayControlSW = 0x09;
             sendCmd("Send Control Switches");           // 1 ----
         }
+
         private void button10_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x81;// cmd 0
@@ -1643,20 +1655,23 @@ namespace SerialPortTerminal
             ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");           // 1 ----
         }
+
         private void button11_Click(object sender, EventArgs e)
         {
             RelaySwitches.alarm(enable);
-        //    RelaySwitches.RelaySwitchCalculate();
- 
+            //    RelaySwitches.RelaySwitchCalculate();
+
             RelaySwitches.relaySW = 0x83;
             sendCmd("Send Relay Switches");           // 0 ----
         }
+
         private void button12_Click(object sender, EventArgs e)
         {
             ControlSwitches.DataCollection(enable); //ControlSwitches.dataSwitch = enable;// icntlsw = set bit 3  turn on data transmission
             // ControlSwitches.ControlSwitchCalculate();
             sendCmd("Send Control Switches");          // 1   -------
         }
+
         private void button13_Click(object sender, EventArgs e)
         {
             ControlSwitches.TorqueMotor(enable);// ControlSwitches.torquMotorSwitch = enable;
@@ -1669,17 +1684,6 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");           // 0 ----*/
         }
 
-        private void fillByToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.data_Table_SimulatedTableAdapter1.FillBy(this.dynamicDataDataSet6.Data_Table_Simulated);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
-        }
+      
     }
 }
