@@ -91,15 +91,17 @@
     </Compile>
     <Compile Include="CalculateMarineData.cs" />
     <Compile Include="Comms.cs" />
-    <Compile Include="DataForm.Designer.cs" />
+    <Compile Include="DataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataForm.Designer.cs">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataStatusForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DataStatusForm.Designer.cs">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicDataDataSet5.cs">
-      <DependentUpon>DynamicDataDataSet5.xsd</DependentUpon>
     </Compile>
     <Compile Include="DynamicDataDataSet5.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -141,7 +143,9 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataForm.resx" />
+    <EmbeddedResource Include="DataForm.resx">
+      <DependentUpon>DataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataStatusForm.resx">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
     </EmbeddedResource>
