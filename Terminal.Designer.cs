@@ -74,8 +74,6 @@ namespace SerialPortTerminal
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,13 +103,15 @@ namespace SerialPortTerminal
             this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
             this.data_Table_SimulatedTableAdapter2 = new SerialPortTerminal.DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter();
+            this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.contextMenuStripForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).BeginInit();
+            this.contextMenuStripForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPort
@@ -357,7 +357,7 @@ namespace SerialPortTerminal
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtfTerminal.Location = new System.Drawing.Point(1, 42);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(404, 43);
+            this.rtfTerminal.Size = new System.Drawing.Size(404, 79);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
@@ -520,20 +520,6 @@ namespace SerialPortTerminal
             this.dataGridView1.RowTemplate.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(1129, 79);
             this.dataGridView1.TabIndex = 86;
-            // 
-            // contextMenuStripForm
-            // 
-            this.contextMenuStripForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Exit});
-            this.contextMenuStripForm.Name = "contextMenuStripForm";
-            this.contextMenuStripForm.Size = new System.Drawing.Size(93, 26);
-            // 
-            // Exit
-            // 
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(92, 22);
-            this.Exit.Text = "Exit";
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -706,6 +692,20 @@ namespace SerialPortTerminal
             // 
             this.data_Table_SimulatedTableAdapter2.ClearBeforeFill = true;
             // 
+            // contextMenuStripForm
+            // 
+            this.contextMenuStripForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Exit});
+            this.contextMenuStripForm.Name = "contextMenuStripForm";
+            this.contextMenuStripForm.Size = new System.Drawing.Size(153, 48);
+            // 
+            // Exit
+            // 
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(152, 22);
+            this.Exit.Text = "Exit";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -751,9 +751,9 @@ namespace SerialPortTerminal
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.contextMenuStripForm.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).EndInit();
+            this.contextMenuStripForm.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
