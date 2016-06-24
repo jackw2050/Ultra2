@@ -104,7 +104,7 @@ namespace SerialPortTerminal
 
             // Enable/disable controls based on the current state
             EnableControls();
-
+            CurrentDataMode = DataMode.Hex;
             // When data is recieved through the port, call this method
 
             // THESE EVENT HANDLERS WILL NEED TO  BE REMOVED AND REPLACED WITH THE 1 SEC TIMER EVENT HANDLER
@@ -202,8 +202,8 @@ namespace SerialPortTerminal
                 // Send the user's text straight out the port
                 comport.Write(SerialPortForm.txtSendData.Text);
 
-                // Show in the terminal window the user's text
-                Log(LogMsgType.Outgoing, SerialPortForm.txtSendData.Text + "\n");
+                // Show in the terminal window the user's texttext
+                Log(LogMsgType.Outgoing, SerialPortForm.txtSendData.Text + "Data mode \n");
             }
             else
             {
@@ -216,7 +216,7 @@ namespace SerialPortTerminal
                     comport.Write(data, 0, data.Length);
 
                     // Show the hex digits on in the terminal window
-                    Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+                    Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "Data mode hex\n");
                 }
                 catch (FormatException)
                 {
@@ -949,19 +949,7 @@ namespace SerialPortTerminal
 
         #endregion Serial Port
 
-        private void button1_Click(object sender, EventArgs e)// Send data button.  For debug only.  Remove in final app.
-        {
-            // create hex data stream.  Convert to string and place in text box for sending.
-            // Command 1 - send relay switches
 
-            byte[] data = { 0x00, 0x80, 0x80, 0x04, 0x07, 0x45, 0xf3, 0x37, 0x9a, 0x99, 0x99, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x33, 0x33, 0xb3, 0x3e, 0x2e, 0x90, 0x20, 0xbb, 0x66, 0x66, 0x66, 0x3f, 0xa4, 0x05, 0x93, 0x1a, 0xda, 0x37, 0x85, 0xeb, 0x91, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x33, 0x33, 0xb3, 0x3e, 0x89, 0xd2, 0x5e, 0xbb, 0x00, 0x00, 0x80, 0x3f, 0x5f, 0x08, 0x3f, 0x35, 0x5e, 0x3e, 0x68, 0x91, 0x2d, 0x3e, 0x14, 0xae, 0x47, 0x3e, 0xa4, 0x70, 0x3d, 0x3e, 0x5c, 0x21, 0x88, 0xbf, 0x00, 0xc0, 0xda, 0x45, 0x89, 0x01, 0x08, 0x09, 0x0a, 0x88, 0x45, 0xb3, 0xc3, 0xa3, 0x8e, 0xf3, 0xc2, 0xab };
-
-            // Send the binary data out the port
-            comport.Write(data, 0, data.Length);
-
-            // Show the hex digits on in the terminal window
-            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-        }
 
         // Start data collection.  Send command 1 for meter to start data stream
         private void button2_Click(object sender, EventArgs e)
@@ -971,7 +959,7 @@ namespace SerialPortTerminal
             byte[] data = { 0x01, 0x08, 0x09 };                                        //HexStringToByteArray(txtSendData.Text);
 
             // Send the binary data out the port
-            //    comport.Write(data, 0, data.Length);
+                comport.Write(data, 0, data.Length);
 
             _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
             _timer1.Enabled = true;
@@ -1030,8 +1018,8 @@ namespace SerialPortTerminal
             // IPORT(1) = 0x80 0b1000 0000
             // IPORT(2) = 0x00
             // IPORT(2) = 0xFF
-
-            Console.WriteLine();
+            DataStatusForm.Show();
+           
         }
 
         public byte[] CreateTxArray(byte command, Single data1, Single data2, Single data3, Single data4, double data5, double data6)
