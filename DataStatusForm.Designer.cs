@@ -84,6 +84,10 @@
             this.byte76TextBox = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.byte77TextBox = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.relaySwitchesTextBox = new System.Windows.Forms.TextBox();
+            this.controlSwitchesTextBox = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label13
@@ -534,11 +538,47 @@
             this.byte77TextBox.Size = new System.Drawing.Size(118, 20);
             this.byte77TextBox.TabIndex = 96;
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(406, 276);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(80, 13);
+            this.label29.TabIndex = 100;
+            this.label29.Text = "Relay Switches";
+            // 
+            // relaySwitchesTextBox
+            // 
+            this.relaySwitchesTextBox.Location = new System.Drawing.Point(409, 294);
+            this.relaySwitchesTextBox.Name = "relaySwitchesTextBox";
+            this.relaySwitchesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.relaySwitchesTextBox.TabIndex = 101;
+            // 
+            // controlSwitchesTextBox
+            // 
+            this.controlSwitchesTextBox.Location = new System.Drawing.Point(583, 295);
+            this.controlSwitchesTextBox.Name = "controlSwitchesTextBox";
+            this.controlSwitchesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.controlSwitchesTextBox.TabIndex = 103;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(580, 277);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(86, 13);
+            this.label30.TabIndex = 102;
+            this.label30.Text = "Control Switches";
+            // 
             // DataStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 472);
+            this.Controls.Add(this.controlSwitchesTextBox);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.relaySwitchesTextBox);
+            this.Controls.Add(this.label29);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.byte76TextBox);
             this.Controls.Add(this.label28);
@@ -658,8 +698,12 @@
         public System.Windows.Forms.Label label26;
         public System.Windows.Forms.TextBox inhibitFlagTextBox;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox byte76TextBox;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox byte77TextBox;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        public System.Windows.Forms.TextBox relaySwitchesTextBox;
+        public System.Windows.Forms.TextBox controlSwitchesTextBox;
+        public System.Windows.Forms.TextBox byte76TextBox;
+        public System.Windows.Forms.TextBox byte77TextBox;
     }
 }

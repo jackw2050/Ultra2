@@ -120,11 +120,11 @@
     <Compile Include="SerialPortForm.Designer.cs">
       <DependentUpon>SerialPortForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatusForm1.cs">
+    <Compile Include="AutoStartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StatusForm1.Designer.cs">
-      <DependentUpon>StatusForm1.cs</DependentUpon>
+    <Compile Include="AutoStartForm.Designer.cs">
+      <DependentUpon>AutoStartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Switches.cs">
       <SubType>Form</SubType>
@@ -155,8 +155,8 @@
     <EmbeddedResource Include="SerialPortForm.resx">
       <DependentUpon>SerialPortForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatusForm1.resx">
-      <DependentUpon>StatusForm1.cs</DependentUpon>
+    <EmbeddedResource Include="AutoStartForm.resx">
+      <DependentUpon>AutoStartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Switches.resx">
       <DependentUpon>Switches.cs</DependentUpon>

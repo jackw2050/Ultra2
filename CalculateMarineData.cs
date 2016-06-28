@@ -393,7 +393,7 @@ namespace SerialPortTerminal
         public int REMOTEREBOOTED;
         public int TimeSetSuccess;
         public int G2000Bias;
-        private Int16 portCStatus;
+        public Int16 portCStatus;
         public int year;
         public int day;
         public double Hour, Min, Sec;
@@ -875,6 +875,7 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[76];
                 Int16 meterStatus = BitConverter.ToInt16(tempByte, 0);
                 MeterStatus.GetMeterStatus(meterStatus);
+                Console.WriteLine("Meter status " + meterStatus);
 
 
                 //GET PORT C INPUT
@@ -882,7 +883,7 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[77];
                 portCStatus = BitConverter.ToInt16(tempByte, 0);//  make global later
                 Port_C.Port_C_MeterStatus(portCStatus);
-
+                Console.WriteLine("PortC status " + portCStatus);
                 // CHECK FOR REMOTE EMBEDDED COMPUTER REBOOT
                 tempByte[0] = meterBytes[1];
                 if (tempByte[0] == 1)//remote rebooted

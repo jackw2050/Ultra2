@@ -40,7 +40,8 @@ namespace SerialPortTerminal
         private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
-        private StatusForm1 AutoStartForm = new StatusForm1();
+        public AutoStartForm AutoStartForm = new AutoStartForm();
+        
 
         private delegate void SetTextCallback(string text);
 
@@ -574,6 +575,11 @@ namespace SerialPortTerminal
                 DataStatusForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.byte76TextBox.Text = Convert.ToString(mdt.MeterSTATUS,2); 
+                DataStatusForm.byte77TextBox.Text = Convert.ToString(mdt.portCStatus,2); 
+                DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.relaySW,2);
+                DataStatusForm.controlSwitchesTextBox .Text = Convert.ToString(ControlSwitches.controlSw,2);
+
 
                 string specifier;
                 specifier = "000.000000";
@@ -583,27 +589,51 @@ namespace SerialPortTerminal
 
                 if (MeterStatus.lGyro_Fog == 0)
                 {
+                    if (AutoStartForm.Visible)
+                    {
+                        AutoStartForm.crossGyroStatusLabel.Text = "Ready";
+                    }
                     DataStatusForm.textBox19.Text = "OK";
                 }
                 else
                 {
+                    if (AutoStartForm.Visible)
+                    {
+                        AutoStartForm.crossGyroStatusLabel.Text = "Not Ready";
+                    }
+                    { }
                     DataStatusForm.textBox19.Text = "Bad";
                 }
                 if (MeterStatus.xGyro_Fog == 0)
                 {
+                    if (AutoStartForm.Visible)
+                    {
+                        AutoStartForm.longGyroStatusLabel.Text = "Ready";
+                    }
                     DataStatusForm.textBox20.Text = "OK";
                 }
                 else
                 {
+                    if (AutoStartForm.Visible)
+                    {
+                        AutoStartForm.longGyroStatusLabel.Text = "Not Ready";
+                    }
+                    
                     DataStatusForm.textBox20.Text = "Bad";
                 }
                 if (MeterStatus.meterHeater == 0)
                 {
-                    DataStatusForm.textBox21.Text = "OK";
+                    if (AutoStartForm.Visible)
+                    {
+                        DataStatusForm.textBox21.Text = "OK";
+                    }
                 }
                 else
                 {
-                    DataStatusForm.textBox21.Text = "Bad";
+                    if (AutoStartForm.Visible)
+                    {
+                        DataStatusForm.textBox21.Text = "Bad";
+                    }
                 }
                 if (MeterStatus.incorrectCommandReceived == 0)
                 {
@@ -615,6 +645,7 @@ namespace SerialPortTerminal
                 }
                 if (MeterStatus.receiveDataCheckSumError == 0)
                 {
+
                     DataStatusForm.textBox22.Text = "OK";
                 }
                 else
@@ -1497,18 +1528,7 @@ namespace SerialPortTerminal
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            /*DateTime myDatetime = DateTime.Now;
-            int year = myDatetime.Year;
-            int day = myDatetime.DayOfYear;
-            int hour = myDatetime.Hour;
-            int min = myDatetime.Minute;
-            int sec = myDatetime.Second;*/
-
-            // IPORT(1) = 0x80 0b1000 0000
-            // IPORT(2) = 0x00
-            // IPORT(2) = 0xFF
-
-            Console.WriteLine();
+            DataStatusForm.Show();
         }
 
         public byte[] CreateTxArray(byte command, Single data1, Single data2, Single data3, Single data4, double data5, double data6)
@@ -1867,65 +1887,42 @@ namespace SerialPortTerminal
             analogFilter5 = System.Convert.ToSingle(ConfigData.analogFilter[5]);
             analogFilter6 = System.Convert.ToSingle(ConfigData.analogFilter[6]);
 
-            // CLEAR CONTROL SW 6 AND 7  not sure what this is
-
-            // START HERE
-
-            // while( notReady){   see if PLINQ will work here
-            //  need to loop until meter and fog come up.  need seperate thread for this
-            // check for timeout.  On timeout alert and stop auto start
-            //    }
 
             // turn on 200 Hz
-            /*    RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
-                RelaySwitches.slew4 = enable;
-                RelaySwitches.slew5 = enable;
-                RelaySwitches.RelaySwitchCalculate();// 0x80
-                sendCmd("Send Relay Switches");           // 0 ----
+            // RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
 
-               sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
-               sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
-               sendCmd("Update Cross Coupling Values");   // CC parameters 8     -----
+            RelaySwitches.slew4(disable);
+            RelaySwitches.slew5(disable);
+            RelaySwitches.stepperMotorEnable(enable);
 
-               ControlSwitches.dataSwitch = enable;// icntlsw = set bit 3  turn on data transmission
-               ControlSwitches.ControlSwitchCalculate();
-               sendCmd("Send Control Switches");// start data collection
-               sendCmd("Send Control Switches");// start data collection
+            RelaySwitches.relaySW = 0x80;            // cmd 0
+            sendCmd("Send Relay Switches");          // 0 ----
+            sendCmd("Set Cross Axis Parameters");    // download platform parameters 4 -----
+            sendCmd("Set Long Axis Parameters");     // download platform parametersv 5 -----
+            sendCmd("Update Cross Coupling Values"); // download CC parameters 8     -----
 
-            RelaySwitches.relay200Hz = enable;
-            RelaySwitches.slew4 = enable;// probably  don't need this.  for GG49?
-            RelaySwitches.slew5 = enable;// probably  don't need this.  for GG49?
-            RelaySwitches.stepperMotorEnable = enable;
-            RelaySwitches.RelaySwitchCalculate();// 0x
-            sendCmd("Send Relay Switches");           // 0 ----
+            ControlSwitches.controlSw = 0x08;       // ControlSwitches.RelayControlSW = 0x08;
 
-            ControlSwitches.dataSwitch = enable;// icntlsw = set bit 3  turn on data transmission
-            ControlSwitches.ControlSwitchCalculate();
-            sendCmd("Send Control Switches");          // 1   -------
+            sendCmd("Send Control Switches");       // 1 ----
+            sendCmd("Send Control Switches");       // 1 ----
 
-            RelaySwitches.relay200Hz = enable;
-            RelaySwitches.slew4 = disable;
-            RelaySwitches.slew5 = disable;
-            RelaySwitches.stepperMotorEnable = enable;
-            RelaySwitches.RelaySwitchCalculate();
-            sendCmd("Send Relay Switches");           // 0 ----
+            RelaySwitches.relaySW = 0xB1;           // cmd 0
+            sendCmd("Send Relay Switches");         // 0 ----
+            ControlSwitches.controlSw = 0x08;       //ControlSwitches.RelayControlSW = 0x08;
+            sendCmd("Send Control Switches");       // 1 ----
 
-            RelaySwitches.alarm = enable;
-            RelaySwitches.RelaySwitchCalculate();
-            sendCmd("Send Relay Switches");           // 0 ----
+            RelaySwitches.relaySW = 0x81;           // cmd 0
+            sendCmd("Send Relay Switches");         // 0 ----
 
-            ControlSwitches.dataSwitch = enable;// icntlsw = set bit 3  turn on data transmission
-            ControlSwitches.ControlSwitchCalculate();
-            sendCmd("Send Control Switches");          // 1   -------
+            ControlSwitches.DataCollection(enable);
+            sendCmd("Send Control Switches");       // 1 ----
+            RelaySwitches.relaySW = 0x80;           // cmd 0
+            sendCmd("Send Relay Switches");         // 0 ----
 
-            RelaySwitches.relayTorqueMotor = enable;  // turn on torque motor.
-            RelaySwitches.RelaySwitchCalculate();
-            sendCmd("Send Relay Switches");           // 0 ----
 
-            ControlSwitches.springTensionSwitch = enable;
-            ControlSwitches.ControlSwitchCalculate();
-            sendCmd("Send Control Switches");          // 1   -------
-              */
+
+
+
 
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
@@ -2075,6 +2072,9 @@ namespace SerialPortTerminal
 
         private void button11_Click(object sender, EventArgs e)// Autostart
         {
+            AutoStart();
+
+
             AutoStartForm.Show();
         }
 
