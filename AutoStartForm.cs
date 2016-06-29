@@ -6,20 +6,18 @@ namespace SerialPortTerminal
 {
     public partial class AutoStartForm : Form
     {
-        public string status = "Not Ready";
+        
         public Boolean completed = false;
         private MeterStatus MeterStatus = new MeterStatus();
-        Boolean crossFogReady = false;
-        Boolean longFogReady = false;
-        Boolean heaterReady = false;
+        private Boolean crossFogNotReady = true;
+        private Boolean longFogNotReady = true;
+        private Boolean heaterNotReady = true;
         public int heaterWaitOptions = 0;// 0 - wait for heater, 1 - continue with startup without heater, 2 - Cancel startup
 
         public AutoStartForm()
         {
             InitializeComponent();
         }
-
-
 
         private void radioButtonWait_CheckedChanged(object sender, EventArgs e)
         {
@@ -33,7 +31,7 @@ namespace SerialPortTerminal
         {
             if (radioButtonContinue.Checked == true)
             {
-                heaterWaitOptions = 1;
+                heaterWaitOptions = 2;
             }
         }
 
@@ -41,87 +39,72 @@ namespace SerialPortTerminal
         {
             if (radioButtonCancel.Checked == true)
             {
-                heaterWaitOptions = 2;
+                heaterWaitOptions = 3;
             }
         }
 
-
-        private void FogCheck()
+        public void FogCheck()
         {
-            Thread.Sleep(3000);
-
-
-            while ((crossFogReady == false) & (longFogReady == false) & (heaterReady == false))
+            Thread.Sleep(3000);// wait 1 sec
+            while ((crossFogNotReady) & (longFogNotReady) & (heaterNotReady))
             {
-
-
-
+                crossGyroStatusLabel.Text = "Not Ready...";
                 // Check Cross FOG status
                 if (MeterStatus.xGyro_Fog == 0)
                 {
-                    crossFogReady = true;
-                    crossGyroStatusLabel.Text = "Ready";
-                    crossGyroStatusLabel.ForeColor = System.Drawing.Color.Green;
+                    crossFogNotReady = false;
                 }
                 else
                 {
-                    crossFogReady = false;
-                    crossGyroStatusLabel.Text = "Not Ready";
-                    crossGyroStatusLabel.ForeColor = System.Drawing.Color.Red;
+                    crossFogNotReady = true;
                 }
 
                 // Check Long FOG status
                 if (MeterStatus.xGyro_Fog == 0)
                 {
-                    longFogReady = true;
-                    longGyroStatusLabel.Text = "Ready";
-                    longGyroStatusLabel.ForeColor = System.Drawing.Color.Green;
+                    longFogNotReady = false;
                 }
                 else
                 {
-                    longFogReady = false;
-                    longGyroStatusLabel.Text = "Not Ready";
-                    longGyroStatusLabel.ForeColor = System.Drawing.Color.Red;
+                    longFogNotReady = true;
                 }
 
                 // Check Heater status
-                if (MeterStatus.xGyro_Fog == 0)
+                if (MeterStatus.meterHeater == 0)
                 {
-                    heaterReady = true;
-                    heaterStatusLabel.Text = "Ready";
-                    heaterStatusLabel.ForeColor = System.Drawing.Color.Green;
+                    heaterNotReady = false;
                 }
                 else
                 {
-                    heaterReady = false;
-                    heaterStatusLabel.Text = "Not Ready";
-                    heaterStatusLabel.ForeColor = System.Drawing.Color.Red;
+                    heaterNotReady = true;
                 }
 
-
-                if (heaterWaitOptions == 2)
+                if (heaterWaitOptions == 2 | heaterWaitOptions == 3)
                 {
                     break;
                 }
 
-                Thread.Sleep(1000);// wait 1 sec
+               // Thread.Sleep(3000);// wait 1 sec
             }// while
+           // Thread.Sleep(3000);// wait 1 sec
             completed = true;
             Console.WriteLine("autostart loaded");
+           // this.Hide();
         }
-
-
 
         private void AutoStartForm_Load(object sender, EventArgs e)
         {
-
-            crossGyroStatusLabel.Text = "Not Ready";
-            longGyroStatusLabel.Text = "Not Ready";
-            heaterStatusLabel.Text = "Not Ready";
-
             FogCheck();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //FogCheck();
         }
     }
 }

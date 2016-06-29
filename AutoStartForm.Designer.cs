@@ -102,7 +102,7 @@
             this.gyroStatusGroupBox.Controls.Add(this.crossGyroStatusLabel);
             this.gyroStatusGroupBox.Controls.Add(this.label6);
             this.gyroStatusGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gyroStatusGroupBox.Location = new System.Drawing.Point(12, 28);
+            this.gyroStatusGroupBox.Location = new System.Drawing.Point(12, 13);
             this.gyroStatusGroupBox.Name = "gyroStatusGroupBox";
             this.gyroStatusGroupBox.Size = new System.Drawing.Size(240, 184);
             this.gyroStatusGroupBox.TabIndex = 8;
@@ -116,7 +116,7 @@
             this.groupBox2.Controls.Add(this.radioButtonWait);
             this.groupBox2.Controls.Add(this.heaterStatusLabel);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(296, 28);
+            this.groupBox2.Location = new System.Drawing.Point(296, 13);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 184);
             this.groupBox2.TabIndex = 9;

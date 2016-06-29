@@ -41,7 +41,6 @@ namespace SerialPortTerminal
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
         public AutoStartForm AutoStartForm = new AutoStartForm();
-        
 
         private delegate void SetTextCallback(string text);
 
@@ -68,7 +67,8 @@ namespace SerialPortTerminal
         public Single aLongGain = 0;
         public Single aCrossLead = 0;
         public Single aLongLead = 0;
-
+        public static Int16 meter_status = 0;
+        private Boolean autostart = false;
         public string connectionString = "Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True";
 
         // Database connection strings etc.
@@ -575,11 +575,11 @@ namespace SerialPortTerminal
                 DataStatusForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
-                DataStatusForm.byte76TextBox.Text = Convert.ToString(mdt.MeterSTATUS,2); 
-                DataStatusForm.byte77TextBox.Text = Convert.ToString(mdt.portCStatus,2); 
-                DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.relaySW,2);
-                DataStatusForm.controlSwitchesTextBox .Text = Convert.ToString(ControlSwitches.controlSw,2);
-
+                DataStatusForm.textBox21.Text = Convert.ToString(meter_status, 2);
+                DataStatusForm.byte76TextBox.Text = Convert.ToString(meter_status, 2);
+                DataStatusForm.byte77TextBox.Text = Convert.ToString(mdt.portCStatus, 2);
+                DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.relaySW, 2);
+                DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.controlSw, 2);
 
                 string specifier;
                 specifier = "000.000000";
@@ -587,10 +587,19 @@ namespace SerialPortTerminal
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
 
+                
+
+
+
+
+
+
+
                 if (MeterStatus.lGyro_Fog == 0)
                 {
                     if (AutoStartForm.Visible)
                     {
+                        AutoStartForm.crossGyroStatusLabel.ForeColor = Color.Green;
                         AutoStartForm.crossGyroStatusLabel.Text = "Ready";
                     }
                     DataStatusForm.textBox19.Text = "OK";
@@ -599,6 +608,7 @@ namespace SerialPortTerminal
                 {
                     if (AutoStartForm.Visible)
                     {
+                        AutoStartForm.crossGyroStatusLabel.ForeColor = Color.Red;
                         AutoStartForm.crossGyroStatusLabel.Text = "Not Ready";
                     }
                     { }
@@ -608,6 +618,7 @@ namespace SerialPortTerminal
                 {
                     if (AutoStartForm.Visible)
                     {
+                        AutoStartForm.longGyroStatusLabel.ForeColor = Color.Green;
                         AutoStartForm.longGyroStatusLabel.Text = "Ready";
                     }
                     DataStatusForm.textBox20.Text = "OK";
@@ -616,14 +627,20 @@ namespace SerialPortTerminal
                 {
                     if (AutoStartForm.Visible)
                     {
+                        AutoStartForm.longGyroStatusLabel.ForeColor = Color.Red;
                         AutoStartForm.longGyroStatusLabel.Text = "Not Ready";
                     }
-                    
+
                     DataStatusForm.textBox20.Text = "Bad";
                 }
-                if (MeterStatus.meterHeater == 0)
+                if (meter_status == 0)
                 {
                     if (AutoStartForm.Visible)
+                    {
+                        AutoStartForm.heaterStatusLabel.ForeColor = Color.Green;
+                        AutoStartForm.heaterStatusLabel.Text = "Ready";
+                    }
+                    if (DataStatusForm.Visible)
                     {
                         DataStatusForm.textBox21.Text = "OK";
                     }
@@ -632,7 +649,12 @@ namespace SerialPortTerminal
                 {
                     if (AutoStartForm.Visible)
                     {
-                        DataStatusForm.textBox21.Text = "Bad";
+                        AutoStartForm.heaterStatusLabel.ForeColor = Color.Red;
+                        AutoStartForm.heaterStatusLabel.Text = "Not ready";
+                    }
+                    if (DataStatusForm.Visible)
+                    {
+                        DataStatusForm.textBox21.Text = "Not ready";
                     }
                 }
                 if (MeterStatus.incorrectCommandReceived == 0)
@@ -645,13 +667,25 @@ namespace SerialPortTerminal
                 }
                 if (MeterStatus.receiveDataCheckSumError == 0)
                 {
-
                     DataStatusForm.textBox22.Text = "OK";
                 }
                 else
                 {
                     DataStatusForm.textBox22.Text = "Checksum error";
                 }
+
+
+
+                if (autostart)
+                {
+                    if (AutoStartForm.completed)
+                    {
+                       
+                       // AutoStartForm.Hide();
+                    }
+                }
+
+
 
                 //   textBox19.Text = (MeterStatus.lGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// long
                 //   textBox20.Text = (MeterStatus.xGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// cross
@@ -1887,7 +1921,6 @@ namespace SerialPortTerminal
             analogFilter5 = System.Convert.ToSingle(ConfigData.analogFilter[5]);
             analogFilter6 = System.Convert.ToSingle(ConfigData.analogFilter[6]);
 
-
             // turn on 200 Hz
             // RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
 
@@ -1918,11 +1951,6 @@ namespace SerialPortTerminal
             sendCmd("Send Control Switches");       // 1 ----
             RelaySwitches.relaySW = 0x80;           // cmd 0
             sendCmd("Send Relay Switches");         // 0 ----
-
-
-
-
-
 
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
@@ -2072,10 +2100,12 @@ namespace SerialPortTerminal
 
         private void button11_Click(object sender, EventArgs e)// Autostart
         {
+            autostart = true;
             AutoStart();
 
-
             AutoStartForm.Show();
+            
+           // AutoStartForm.FogCheck();
         }
 
         private void button12_Click(object sender, EventArgs e)
