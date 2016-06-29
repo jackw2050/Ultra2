@@ -45,51 +45,36 @@ namespace SerialPortTerminal
 
         public void FogCheck()
         {
-            Thread.Sleep(3000);// wait 1 sec
-            while ((crossFogNotReady) & (longFogNotReady) & (heaterNotReady))
-            {
+
                 crossGyroStatusLabel.Text = "Not Ready...";
                 // Check Cross FOG status
                 if (MeterStatus.xGyro_Fog == 0)
-                {
-                    crossFogNotReady = false;
-                }
+                {crossFogNotReady = false;}
                 else
-                {
-                    crossFogNotReady = true;
-                }
+                {crossFogNotReady = true;}
 
                 // Check Long FOG status
                 if (MeterStatus.xGyro_Fog == 0)
-                {
-                    longFogNotReady = false;
-                }
+                {longFogNotReady = false;}
                 else
-                {
-                    longFogNotReady = true;
-                }
+                {longFogNotReady = true;}
 
                 // Check Heater status
                 if (MeterStatus.meterHeater == 0)
-                {
-                    heaterNotReady = false;
-                }
+                {heaterNotReady = false;}
                 else
-                {
-                    heaterNotReady = true;
-                }
+                { heaterNotReady = true; }
 
-                if (heaterWaitOptions == 2 | heaterWaitOptions == 3)
-                {
-                    break;
-                }
+            if ((crossFogNotReady) & (longFogNotReady) & (heaterNotReady)){
+                completed = true;
+            }
+            else if ((heaterWaitOptions == 2) | (heaterWaitOptions == 3))
+            {
+                completed = true;
+            }
 
-               // Thread.Sleep(3000);// wait 1 sec
-            }// while
-           // Thread.Sleep(3000);// wait 1 sec
-            completed = true;
-            Console.WriteLine("autostart loaded");
-           // this.Hide();
+
+
         }
 
         private void AutoStartForm_Load(object sender, EventArgs e)

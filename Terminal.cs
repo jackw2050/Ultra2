@@ -678,9 +678,10 @@ namespace SerialPortTerminal
 
                 if (autostart)
                 {
+                    AutoStartForm.FogCheck();
                     if (AutoStartForm.completed)
                     {
-                       
+                        Console.WriteLine("ready for gyros");
                        // AutoStartForm.Hide();
                     }
                 }
