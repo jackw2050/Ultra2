@@ -72,46 +72,20 @@ namespace SerialPortTerminal
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataTableSimulatedBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox17 = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surveyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dynamicDataDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dynamicDataDataSet5 = new SerialPortTerminal.DynamicDataDataSet5();
             this.data_Table_SimulatedTableAdapter2 = new SerialPortTerminal.DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.contextMenuStripForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStripForm.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPort
@@ -238,9 +212,9 @@ namespace SerialPortTerminal
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(419, 42);
+            this.button3.Location = new System.Drawing.Point(419, 46);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 23);
+            this.button3.Size = new System.Drawing.Size(16, 23);
             this.button3.TabIndex = 58;
             this.button3.Text = "200Hz + parameters";
             this.button3.UseVisualStyleBackColor = true;
@@ -248,9 +222,9 @@ namespace SerialPortTerminal
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(419, 70);
+            this.button4.Location = new System.Drawing.Point(441, 46);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 23);
+            this.button4.Size = new System.Drawing.Size(16, 23);
             this.button4.TabIndex = 59;
             this.button4.Text = "relays, control sw";
             this.button4.UseVisualStyleBackColor = true;
@@ -258,9 +232,9 @@ namespace SerialPortTerminal
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(419, 98);
+            this.button5.Location = new System.Drawing.Point(463, 46);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 23);
+            this.button5.Size = new System.Drawing.Size(16, 23);
             this.button5.TabIndex = 60;
             this.button5.Text = "Wait 20 sec";
             this.button5.UseVisualStyleBackColor = true;
@@ -268,9 +242,9 @@ namespace SerialPortTerminal
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(419, 126);
+            this.button6.Location = new System.Drawing.Point(485, 46);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(144, 23);
+            this.button6.Size = new System.Drawing.Size(16, 23);
             this.button6.TabIndex = 61;
             this.button6.Text = "Next - 5 sec";
             this.button6.UseVisualStyleBackColor = true;
@@ -278,9 +252,9 @@ namespace SerialPortTerminal
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(419, 154);
+            this.button7.Location = new System.Drawing.Point(507, 46);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(144, 23);
+            this.button7.Size = new System.Drawing.Size(16, 23);
             this.button7.TabIndex = 62;
             this.button7.Text = "20 sec";
             this.button7.UseVisualStyleBackColor = true;
@@ -288,9 +262,9 @@ namespace SerialPortTerminal
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(419, 182);
+            this.button8.Location = new System.Drawing.Point(529, 46);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(144, 23);
+            this.button8.Size = new System.Drawing.Size(14, 23);
             this.button8.TabIndex = 63;
             this.button8.Text = "RelaySW = 0x81";
             this.button8.UseVisualStyleBackColor = true;
@@ -481,41 +455,17 @@ namespace SerialPortTerminal
             this.dataTableSimulatedBindingSource.DataMember = "Data_Table_Simulated";
             this.dataTableSimulatedBindingSource.DataSource = this.dynamicDataDataSet5BindingSource;
             // 
+            // dynamicDataDataSet5
+            // 
+            this.dynamicDataDataSet5.DataSetName = "DynamicDataDataSet5";
+            this.dynamicDataDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24,
-            this.dataGridViewTextBoxColumn25,
-            this.surveyNameDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.dataTableSimulatedBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(1, 555);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.ReadOnly = true;
@@ -545,173 +495,6 @@ namespace SerialPortTerminal
             this.textBox17.Size = new System.Drawing.Size(31, 20);
             this.textBox17.TabIndex = 87;
             this.textBox17.Text = "0.0";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "date";
-            this.dataGridViewTextBoxColumn2.HeaderText = "date";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "YEAR";
-            this.dataGridViewTextBoxColumn3.HeaderText = "YEAR";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "DAYS";
-            this.dataGridViewTextBoxColumn4.HeaderText = "DAYS";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "HOUR";
-            this.dataGridViewTextBoxColumn5.HeaderText = "HOUR";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "MIN";
-            this.dataGridViewTextBoxColumn6.HeaderText = "MIN";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "SEC";
-            this.dataGridViewTextBoxColumn7.HeaderText = "SEC";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "DigitalGravity";
-            this.dataGridViewTextBoxColumn8.HeaderText = "DigitalGravity";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "SpringTension";
-            this.dataGridViewTextBoxColumn9.HeaderText = "SpringTension";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "CrossCoupling";
-            this.dataGridViewTextBoxColumn10.HeaderText = "CrossCoupling";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "RawBeam";
-            this.dataGridViewTextBoxColumn11.HeaderText = "RawBeam";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "VCC";
-            this.dataGridViewTextBoxColumn12.HeaderText = "VCC";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "AL";
-            this.dataGridViewTextBoxColumn13.HeaderText = "AL";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "AX";
-            this.dataGridViewTextBoxColumn14.HeaderText = "AX";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "VE";
-            this.dataGridViewTextBoxColumn15.HeaderText = "VE";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "AX2";
-            this.dataGridViewTextBoxColumn16.HeaderText = "AX2";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "XACC2";
-            this.dataGridViewTextBoxColumn17.HeaderText = "XACC2";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "LACC2";
-            this.dataGridViewTextBoxColumn18.HeaderText = "LACC2";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "XACC";
-            this.dataGridViewTextBoxColumn19.HeaderText = "XACC";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "LACC";
-            this.dataGridViewTextBoxColumn20.HeaderText = "LACC";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "Altitude";
-            this.dataGridViewTextBoxColumn21.HeaderText = "Altitude";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "Longitude";
-            this.dataGridViewTextBoxColumn22.HeaderText = "Longitude";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.DataPropertyName = "Latitude";
-            this.dataGridViewTextBoxColumn23.HeaderText = "Latitude";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.DataPropertyName = "GPS_Status";
-            this.dataGridViewTextBoxColumn24.HeaderText = "GPS_Status";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            this.dataGridViewTextBoxColumn25.DataPropertyName = "Period";
-            this.dataGridViewTextBoxColumn25.HeaderText = "Period";
-            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            // 
-            // surveyNameDataGridViewTextBoxColumn
-            // 
-            this.surveyNameDataGridViewTextBoxColumn.DataPropertyName = "Survey_Name";
-            this.surveyNameDataGridViewTextBoxColumn.HeaderText = "Survey_Name";
-            this.surveyNameDataGridViewTextBoxColumn.Name = "surveyNameDataGridViewTextBoxColumn";
-            // 
-            // dynamicDataDataSet5BindingSource
-            // 
-            this.dynamicDataDataSet5BindingSource.DataSource = this.dynamicDataDataSet5;
-            this.dynamicDataDataSet5BindingSource.Position = 0;
-            // 
-            // dynamicDataDataSet5
-            // 
-            this.dynamicDataDataSet5.DataSetName = "DynamicDataDataSet5";
-            this.dynamicDataDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // data_Table_SimulatedTableAdapter2
             // 
@@ -763,8 +546,6 @@ namespace SerialPortTerminal
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStripForm.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -805,32 +586,6 @@ namespace SerialPortTerminal
         private DynamicDataDataSet5 dynamicDataDataSet5;
         private System.Windows.Forms.BindingSource dataTableSimulatedBindingSource;
         private DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter data_Table_SimulatedTableAdapter2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surveyNameDataGridViewTextBoxColumn;
         protected System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;

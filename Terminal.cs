@@ -8,6 +8,7 @@
 using SerialPortTerminal.Properties;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
@@ -70,7 +71,7 @@ namespace SerialPortTerminal
         public static Int16 meter_status = 0;
         private Boolean autostart = false;
         public string connectionString = "Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True";
-
+        BindingSource bindingSource1 = new BindingSource();
         // Database connection strings etc.
         private SqlConnection myConnection = new SqlConnection("Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True");
 
@@ -483,6 +484,8 @@ namespace SerialPortTerminal
                     // Need to check how to sync threads or have all threads access same data source
                     ThreadProcSafe();//  Initially write data1 -data4 in text boxes
                     DataBaseWrite(mdt);
+                    GravityChart.DataBind();
+                    dataGridView1.Refresh() ;
                 }
             }
         }
@@ -715,6 +718,42 @@ namespace SerialPortTerminal
         #endregion Event Handlers
 
         #region Database stuff
+        private void GetData(string selectCommand)
+        {
+            try
+            {
+
+                // Create a new data adapter based on the specified query.
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+
+                // Populate a new data table and bind it to the BindingSource.
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                
+                dataAdapter.Fill(table);
+                bindingSource1.DataSource = table;
+                GravityChart.DataSource = table;
+
+                // Resize the DataGridView columns to fit the newly loaded content.
+                dataGridView1.AutoResizeColumns(
+                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("To run this example, replace the value of the " +
+                    "connectionString variable with a connection string that is " +
+                    "valid for your system.");
+            }
+        }
+
+
+
+
+
+
+
 
         private void DataBaseConnect()
         {
@@ -790,7 +829,7 @@ namespace SerialPortTerminal
 
         private void DataBaseWrite(CalculateMarineData CalculateMarineData)
         {
-            if (false)
+            if (true)
             {
                 // CalculateMarineData CalculateMarineData = new CalculateMarineData();
 
@@ -812,7 +851,7 @@ namespace SerialPortTerminal
                         // DataBaseDisconnect();
                         DataBaseConnect();
                     }
-                    /*
+                    
                                         // Add your parameters
                                         command.Parameters.AddWithValue("@Date", CalculateMarineData.myDT);
                                         command.Parameters.AddWithValue("@Year", CalculateMarineData.year);
@@ -834,7 +873,7 @@ namespace SerialPortTerminal
                                         command.Parameters.AddWithValue("@LACC2", CalculateMarineData.LACC2);
                                         command.Parameters.AddWithValue("@XACC", CalculateMarineData.XACC);
                                         command.Parameters.AddWithValue("@LACC", CalculateMarineData.LACC);
-                                        */
+                                        
                     // Execute your query
                     command.ExecuteNonQuery();
                 }
@@ -862,8 +901,9 @@ namespace SerialPortTerminal
                             }
 
                             */
+               // GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated]");
+                GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
 
-                // this.data_Table_SimulatedTableAdapter.Fill(this.dynamicDataDataSet.Data_Table_Simulated);
             }
         }
 
@@ -1508,6 +1548,20 @@ namespace SerialPortTerminal
             Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
 
+
+
+        private void StartDataCollection()
+        {
+            OpenPort();
+            byte[] data = { 0x01, 0x08, 0x09 };                                      
+
+            _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+            _timer1.Enabled = true;
+            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+        }
+
+
+
         // Start data collection.  Send command 1 for meter to start data stream
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1552,6 +1606,13 @@ namespace SerialPortTerminal
             // TODO: This line of code loads data into the 'dynamicDataDataSet5.Data_Table_Simulated' table. You can move, or remove it, as needed.
             this.data_Table_SimulatedTableAdapter2.Fill(this.dynamicDataDataSet5.Data_Table_Simulated);
 
+            dataGridView1.DataSource = bindingSource1;
+            GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
+         //   GetData("SELECT top 1  FROM [DynamicData].[dbo].[Data_Table_Simulated] ");// ORDER BY id desc
+
+            dataGridView1.AutoResizeColumns(
+          DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+
             //SetupChart();
             // Connect to database and leave connection open.
             //  Need to add desconnect on exit or error.
@@ -1565,6 +1626,7 @@ namespace SerialPortTerminal
         {
             DataStatusForm.Show();
         }
+
 
         public byte[] CreateTxArray(byte command, Single data1, Single data2, Single data3, Single data4, double data5, double data6)
         {
@@ -1956,18 +2018,18 @@ namespace SerialPortTerminal
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
 
-            /*
-             *
-             * RelaySwitches.relay200Hz = 1;// set bit 0  high to turn on 200 Hz
-             * sendCmd("Send Relay Switches") ;           // 0
-             * Display status window 200Hz,  Cross FOG, Long FOG, Heaters, Torque Motors, Spring Tension
-             * read meter status for 30 sec before timeout check for 200Hs
-             * if (PortC.irqPresent == 1) then check for gyro
-             * if((MeterStatus.xGyro_Fog == 1) && (MeterStatus.lGyro_Fog == 1)){
-             * RelaySwitches.relayTorqueMotor = 1;//enable torque motor
-             * }
-             *
-             * */
+
+
+
+
+
+
+
+
+
+
+
+       
         }
 
         public void InitStuff()
@@ -2102,6 +2164,7 @@ namespace SerialPortTerminal
         private void button11_Click(object sender, EventArgs e)// Autostart
         {
             autostart = true;
+            StartDataCollection();
             AutoStart();
 
             AutoStartForm.Show();
@@ -2139,4 +2202,16 @@ namespace SerialPortTerminal
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }
