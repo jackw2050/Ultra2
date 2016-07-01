@@ -722,9 +722,26 @@ namespace SerialPortTerminal
         {
             try
             {
+                DateTime cutoffTime = DateTime.Now;
+                cutoffTime.AddDays(-1);
+                string cTimeString = cutoffTime.ToString("yyyy-MM-dd hh:mm:ss");
+
+
+
+                
+
+
+                selectCommand = "SELECT * FROM Data_Table_Simulated WHERE DAYS = @startDate";
+                SqlCommand cmd = new SqlCommand(selectCommand, myConnection);
+                cmd.Parameters.AddWithValue("@startDate",180);// DateTime.Now.AddDays(-1)
+                cmd.Parameters.AddWithValue("@endDate", DateTime.Now);
+
 
                 // Create a new data adapter based on the specified query.
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+                //  SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                 
 
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
 
@@ -732,9 +749,11 @@ namespace SerialPortTerminal
                 DataTable table = new DataTable();
                 table.Locale = System.Globalization.CultureInfo.InvariantCulture;
                 
+
+
                 dataAdapter.Fill(table);
                 bindingSource1.DataSource = table;
-                GravityChart.DataSource = table;
+           //     GravityChart.DataSource = table;
 
                 // Resize the DataGridView columns to fit the newly loaded content.
                 dataGridView1.AutoResizeColumns(
@@ -903,6 +922,7 @@ namespace SerialPortTerminal
                             */
                // GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated]");
                 GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
+                GravityChart.DataBind();
 
             }
         }
@@ -937,40 +957,35 @@ namespace SerialPortTerminal
             //   SBind.DataSource = dataTable;
 
             //   string chartAreaType = "Single chart area";
-
+            this.GravityChart.Series.Add("Digital Gravity");
+            this.GravityChart.Series.Add("Spring Tension");
+            this.GravityChart.Series.Add("Cross Coupling");
+            this.GravityChart.Series.Add("Raw Beam");
+            this.GravityChart.Series.Add("Total Correction");
             //      SETUP MAIN PAIGE GRAVITY CHART
-            this.GravityChart.Series["Digital Gravity"].XValueMember = "dateTime";
+            this.GravityChart.Series["Digital Gravity"].XValueMember = "date";
             this.GravityChart.Series["Digital Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            this.GravityChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
-            this.GravityChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-            this.GravityChart.Series["Digital Gravity"].YValueMembers = "gravity";
+            this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
+            this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;
+            this.GravityChart.Series["Digital Gravity"].YValueMembers = "DigitalGravity";
             this.GravityChart.Series["Digital Gravity"].BorderWidth = 4;
-            //     this.GravityChart.DataSource = dataTable;
-            //     this.GravityChart.DataBind();
-            this.GravityChart.Series["Spring Tension"].XValueMember = "dateTime";
+
+            this.GravityChart.Series["Spring Tension"].XValueMember = "date";
             this.GravityChart.Series["Spring Tension"].YValueMembers = "springTension";
             this.GravityChart.Series["Spring Tension"].BorderWidth = 4;
 
-            //     this.GravityChart.DataSource = dataTable;
-            //    this.GravityChart.DataBind();
-            this.GravityChart.Series["Cross Coupling"].XValueMember = "dateTime";
+            this.GravityChart.Series["Cross Coupling"].XValueMember = "date";
             this.GravityChart.Series["Cross Coupling"].YValueMembers = "crossCoupling";
             this.GravityChart.Series["Cross Coupling"].BorderWidth = 4;
-            //      this.GravityChart.DataSource = dataTable;
-            //     this.GravityChart.DataBind();
 
-            this.GravityChart.Series["Raw Beam"].XValueMember = "dateTime";
+            this.GravityChart.Series["Raw Beam"].XValueMember = "date";
             this.GravityChart.Series["Raw Beam"].YValueMembers = "RawBeam";
             this.GravityChart.Series["Raw Beam"].BorderWidth = 4;
-            //      this.GravityChart.DataSource = dataTable;
-            //      this.GravityChart.DataBind();
-
-            this.GravityChart.Series["Total Correction"].XValueMember = "dateTime";
+/*
+            this.GravityChart.Series["Total Correction"].XValueMember = "date";
             this.GravityChart.Series["Total Correction"].YValueMembers = "TotalCorrection";
             this.GravityChart.Series["Total Correction"].BorderWidth = 4;
-            //     this.GravityChart.DataSource = dataTable;
-            //    this.GravityChart.DataBind();
-
+            */
             this.GravityChart.Titles.Add("Gravity");
 
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
@@ -989,51 +1004,63 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             this.GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
 
-            //      SETUP FLOATING CROSS COUPLING CHART
-            this.GravityChart.Series["Raw Gravity"].XValueMember = "dateTime";
-            this.GravityChart.Series["Raw Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            this.GravityChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
-            this.GravityChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-            this.GravityChart.Series["Raw Gravity"].YValueMembers = "gravity";
-            this.GravityChart.Series["Raw Gravity"].BorderWidth = 4;
-            //     this.GravityChart.DataSource = dataTable;
-            //       this.GravityChart.DataBind();
 
-            this.GravityChart.Series["AL"].XValueMember = "dateTime";
+
+
+
+            //      SETUP FLOATING CROSS COUPLING CHART
+   //         this.GravityChart.Series.Add("Raw Gravity");
+            this.GravityChart.Series.Add("AL");
+            this.GravityChart.Series.Add("AX");
+            this.GravityChart.Series.Add("VE");
+            this.GravityChart.Series.Add("AX2");
+            this.GravityChart.Series.Add("XACC");
+            this.GravityChart.Series.Add("LACC");
+            //       this.GravityChart.Series["CrossCoupling"].ChartArea = "Raw Gravity";
+            this.GravityChart.Series["AL"].ChartArea = "CrossCoupling";
+            this.GravityChart.Series["AX"].ChartArea = "CrossCoupling";
+            this.GravityChart.Series["VE"].ChartArea = "CrossCoupling";
+            this.GravityChart.Series["AX2"].ChartArea = "CrossCoupling";
+            this.GravityChart.Series["XACC"].ChartArea = "CrossCoupling";
+            this.GravityChart.Series["LACC"].ChartArea = "CrossCoupling";
+
+
+
+
+
+            /*
+                        this.GravityChart.Series["Raw Gravity"].XValueMember = "dateTime";
+                        this.GravityChart.Series["Raw Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+                        this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
+                        this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Angle = 0;
+                        this.GravityChart.Series["Raw Gravity"].YValueMembers = "gravity";
+                        this.GravityChart.Series["Raw Gravity"].BorderWidth = 4;
+                        //     this.GravityChart.DataSource = dataTable;
+                        //       this.GravityChart.DataBind();
+            */
+            this.GravityChart.Series["AL"].XValueMember = "date";
             this.GravityChart.Series["AL"].YValueMembers = "springTension";
             this.GravityChart.Series["AL"].BorderWidth = 4;
-            //     this.GravityChart.DataSource = dataTable;
-            //    this.GravityChart.DataBind();
 
-            this.GravityChart.Series["AX"].XValueMember = "dateTime";
+            this.GravityChart.Series["AX"].XValueMember = "date";
             this.GravityChart.Series["AX"].YValueMembers = "crossCoupling";
             this.GravityChart.Series["AX"].BorderWidth = 4;
-            //     this.GravityChart.DataSource = dataTable;
-            //     this.GravityChart.DataBind();
 
-            this.GravityChart.Series["VE"].XValueMember = "dateTime";
+            this.GravityChart.Series["VE"].XValueMember = "date";
             this.GravityChart.Series["VE"].YValueMembers = "RawBeam";
             this.GravityChart.Series["VE"].BorderWidth = 4;
-            //   this.GravityChart.DataSource = dataTable;
-            //   this.GravityChart.DataBind();
 
-            this.GravityChart.Series["AX2"].XValueMember = "dateTime";
-            this.GravityChart.Series["AX2"].YValueMembers = "TotalCorrection";
+            this.GravityChart.Series["AX2"].XValueMember = "date";
+            this.GravityChart.Series["AX2"].YValueMembers = "AX2";
             this.GravityChart.Series["AX2"].BorderWidth = 4;
-            //  this.GravityChart.DataSource = dataTable;
-            //  this.GravityChart.DataBind();
 
-            this.GravityChart.Series["XACC"].XValueMember = "dateTime";
-            this.GravityChart.Series["XACC"].YValueMembers = "TotalCorrection";
+            this.GravityChart.Series["XACC"].XValueMember = "date";
+            this.GravityChart.Series["XACC"].YValueMembers = "XACC";
             this.GravityChart.Series["XACC"].BorderWidth = 4;
-            //   this.GravityChart.DataSource = dataTable;
-            //   this.GravityChart.DataBind();
 
-            this.GravityChart.Series["LACC"].XValueMember = "dateTime";
-            this.GravityChart.Series["LACC"].YValueMembers = "TotalCorrection";
+            this.GravityChart.Series["LACC"].XValueMember = "date";
+            this.GravityChart.Series["LACC"].YValueMembers = "LACC";
             this.GravityChart.Series["LACC"].BorderWidth = 4;
-            //   this.GravityChart.DataSource = dataTable;
-            //   this.GravityChart.DataBind();
 
             this.GravityChart.Titles.Add("Cross Coupling");
 
@@ -1051,16 +1078,585 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.Zoomable = true;
             this.GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             this.GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
+
+
+
+        //    SetTraceColor(Properties.Settings.Default
+
+
+
+            SetChartType();
+            SetTraceColor();// Properties.Settings.Default.tracePalette);//              Set trace color palette
+            SetChartAreaColors(2);// Properties.Settings.Default.chartColor);//           Set chart background color
+            SetChartBorderWidth(2); // Properties.Settings.Default.traceWidth);//          Set trace width
+            ChartMarkers(false);// Properties.Settings.Default.traceMarkers);//               Enable/ disable trace markers
+            SetLegendLocation();// Properties.Settings.Default.chartLegendLocation);//   Set legend location
+            ExtraChartStuff();
+            SetChartToolTips();
+            SetChartCursors();
+            SetChartZoom();
+            SetChartScroll();
+  //          SetLegend();
+
+
+
+
+
+
+
+        }
+        private void SetChartCursors()
+        {
+            // Set cursor interval properties
+            GravityChart.ChartAreas["Gravity"].CursorX.Interval = .001D;
+            GravityChart.ChartAreas["Gravity"].CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Seconds;
+            GravityChart.ChartAreas["Gravity"].CursorY.Interval = 1;
+
+            GravityChart.ChartAreas["Gravity"].CursorX.IsUserEnabled = true;
+            GravityChart.ChartAreas["Gravity"].CursorX.IsUserSelectionEnabled = true;
+            GravityChart.ChartAreas["Gravity"].CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+            GravityChart.ChartAreas["Gravity"].CursorX.Interval = .01;// .1D;
+
+            //  Y AXIS
+            //  this.GravityChart.ChartAreas["ChartArea1"].AxisY.ScaleView.ZoomReset(1);
+            GravityChart.ChartAreas["Gravity"].CursorY.IsUserEnabled = true;
+            GravityChart.ChartAreas["Gravity"].CursorY.IsUserSelectionEnabled = true;
+
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.IsUserEnabled = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorY.IsUserEnabled = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.IsUserSelectionEnabled = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorY.IsUserSelectionEnabled = true;
         }
 
-        private void ChartSeries()
+        private void SetChartZoom()
         {
+            // Set automatic zooming
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.Zoomable = true;
+
+            //            GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Zoom(2, 3);
+            //            GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.ZoomReset(1);
+        }
+
+        private void SetChartScaleView()
+        {
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSize = .1D;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoomable = true;
+
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.MinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.MinSize = .1D;
+
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollMinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollMinSize = .1D;
+
+            GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.Zoomable = true;
+
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoom(2, 3);
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.ZoomReset(1);
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.ZoomReset(1);
+
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.Zoomable = true;
+        }
+
+        private void SetChartScroll()
+        {
+            // Set automatic scrolling
+            GravityChart.ChartAreas["Gravity"].CursorX.AutoScroll = true;
+            GravityChart.ChartAreas["Gravity"].CursorY.AutoScroll = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.AutoScroll = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorY.AutoScroll = true;
+        }
+
+        private void SetChartScrollBars()
+        {
+            // Change scrollbar colors
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.BackColor = System.Drawing.Color.LightGray;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = false;
+
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.Size = 12;
+            // show either just the center scroll button..
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
+            // .. or include the left and right buttons:
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.ButtonStyle =
+                 System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All ^ System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.ResetZoom;
+
+            // Scrollbars position
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.Enabled = true;
+            // this.GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 100;  // number (!) of data points visible
+
+            GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
+            GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
+
+
+            // Cross Coupling
+            // Change scrollbar colors
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.BackColor = System.Drawing.Color.LightGray;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = false;
+
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.Size = 12;
+            // show either just the center scroll button..
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
+            // .. or include the left and right buttons:
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.ButtonStyle =
+                 System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All ^ System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.ResetZoom;
+
+            // Scrollbars position
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.Enabled = true;
+            // this.GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 100;  // number (!) of data points visible
+
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
+
+        }
+
+
+        private void SetChartToolTips()
+        {
+            string mode = "Value";
+
+            if (mode == "Time/Value")
+            {
+                GravityChart.Series["Digital Gravity"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["Spring Tension"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["Cross Coupling"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["Raw Beam"].ToolTip = "Time = #VALX\n#VALY";
+        //        GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["AL"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["AX"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["VE"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["AX2"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["XACC"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["LACC"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["LACC"].ToolTip = "Time = #VALX\n#VALY";
+            }
+            else if (mode == "Value")
+            {
+           //     myData d = new myData();
+                GravityChart.Series["Digital Gravity"].ToolTip = "Gravity =  " + "#VALY";
+                //  GravityChart.Series["Digital Gravity"].ToolTip = "#VALY";
+                GravityChart.Series["Spring Tension"].ToolTip = "#VALY";
+                GravityChart.Series["Cross Coupling"].ToolTip = "#VALY";
+                GravityChart.Series["Raw Beam"].ToolTip = "#VALY";
+                //        GravityChart.Series["Total Correction"].ToolTip = "#VALY";
+                GravityChart.Series["AL"].ToolTip = "#VALY";
+                GravityChart.Series["AX"].ToolTip = "#VALY";
+                GravityChart.Series["VE"].ToolTip = "#VALY";
+                GravityChart.Series["AX2"].ToolTip = "#VALY";
+                GravityChart.Series["XACC"].ToolTip = "#VALY";
+                GravityChart.Series["LACC"].ToolTip = "#VALY";
+            }
+        }
+
+        public void SetChartAreaColors(int scheme)
+        {
+            if (scheme == 0)// Light background
+            {
+                //  GRAVITY
+                GravityChart.ChartAreas["Gravity"].BackColor = System.Drawing.Color.White;
+                GravityChart.ChartAreas["Gravity"].AxisX.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Black;
+
+                // CROSS COUPLING
+                GravityChart.ChartAreas["CrossCoupling"].BackColor = System.Drawing.Color.White;
+                GravityChart.ChartAreas["CrossCoupling"].AxisX.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Black;
+           //     Properties.Settings.Default.chartColor = 0;
+            }
+            if (scheme == 1)// gray background
+            {
+                //  GRAVITY
+                GravityChart.ChartAreas["Gravity"].BackColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["Gravity"].AxisX.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Black;
+
+                // CROSS COUPLING
+                GravityChart.ChartAreas["CrossCoupling"].BackColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["CrossCoupling"].AxisX.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Black;
+              //  Properties.Settings.Default.chartColor = 1;
+            }
+            if (scheme == 2)// black background
+            {
+                //  GRAVITY
+                GravityChart.ChartAreas["Gravity"].BackColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["Gravity"].AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["Gravity"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["Gravity"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["Gravity"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Gray;
+
+                // CROSS COUPLING
+                GravityChart.ChartAreas["CrossCoupling"].BackColor = System.Drawing.Color.Black;
+                GravityChart.ChartAreas["CrossCoupling"].AxisX.MajorGrid.LineColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["CrossCoupling"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Gray;
+                GravityChart.ChartAreas["CrossCoupling"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Gray;
+               // Properties.Settings.Default.chartColor = 2;
+            }
+        }
+        private void SetTraceColor()
+        {
+            string colorPalette = "Bright";
+            switch (colorPalette)
+            {
+                case "None":
+                    this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;   
+                 //   Properties.Settings.Default.tracePalette = "None";
+                    break;
+
+                case "Bright":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+             //       Properties.Settings.Default.GravityChart = "Bright";
+                    break;
+
+                case "Grayscale":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Grayscale;
+              //      Properties.Settings.Default.tracePalette = "Grayscale";
+                    break;
+
+                case "Excel":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+                //    Properties.Settings.Default.tracePalette = "Excel";
+                    break;
+
+                case "Light":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Light;
+                    break;
+
+                case "Pastel":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
+                //    Properties.Settings.Default.tracePalette = "Pastel";
+                    break;
+
+                case "EarthTones":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
+                //    Properties.Settings.Default.tracePalette = "EarthTones";
+                    break;
+
+                case "SemiTransparant":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+               //     Properties.Settings.Default.tracePalette = "SemiTransparant";
+                    break;
+
+                case "Berry":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
+               //     Properties.Settings.Default.tracePalette = "Berry";
+                    break;
+
+                case "Chocolate":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
+                //    Properties.Settings.Default.tracePalette = "Chocolate";
+                    break;
+
+                case "Fire":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
+                 //   Properties.Settings.Default.tracePalette = "Fire";
+                    break;
+
+                case "SeaGreen":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+              //      Properties.Settings.Default.tracePalette = "SeaGreen";
+                    break;
+
+                case "BrightPastel":
+                    this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.BrightPastel;
+               //     Properties.Settings.Default.tracePalette = "BrightPastel";
+                    break;
+
+                default:
+                    break;
+            }
+            this.GravityChart.ApplyPaletteColors();
+        }
+        private void SetLegendLocation()
+        {
+            /*
+            string location = "top";
+            switch (location)
+            {
+                case "Bottom":
+                    GravityChart.Legends["Legend1"].Docking = Docking.Bottom;
+                    GravityChart.Legends["Legend2"].Docking =     Docking.Bottom;
+                    break;
+
+                case "Top":
+                    GravityChart.Legends["Legend1"].Docking = Docking.Top;
+                    GravityChart.Legends["Legend2"].Docking = Docking.Top;
+
+                    break;
+
+                case "Right":
+                    GravityChart.Legends["Legend1"].Docking = Docking.Right;
+                    GravityChart.Legends["Legend2"].Docking = Docking.Right;
+                    break;
+
+                case "Left":
+                    GravityChart.Legends["Legend1"].Docking = Docking.Left;
+                    GravityChart.Legends["Legend2"].Docking = Docking.Left;
+                    break;
+
+                default:
+                    break;
+            }
+            Properties.Settings.Default.chartLegendLocation = location;
+            */
+        }
+
+        private void SetLegend()
+        {
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+
+            //  GravityChart.Legends.Add(new Legend("legend1"));
+            legend1.BackColor = System.Drawing.Color.Transparent;
+            legend1.Enabled = false;
+            legend1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            legend1.IsTextAutoFit = false;
+            legend1.Name = "Default";
+            this.GravityChart.Legends.Add(legend1);
+  //          GravityChart.Legends["Legend1"].Docking = Docking.Bottom;
+
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+
+            legend2.BackColor = System.Drawing.Color.Transparent;
+            legend2.Enabled = false;
+            legend2.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            legend2.IsTextAutoFit = false;
+            legend2.Name = "Default";
+            this.GravityChart.Legends.Add(legend2);
+  //          GravityChart.Legends["Legend2"].Docking = Docking.Bottom;
+        }
+        //*****************************************************************************
+        //                       Chart Methods
+        //*****************************************************************************
+        public static class ChartColors
+        {
+            public static System.Drawing.Color digitalGravity = System.Drawing.Color.SteelBlue;
+            public static System.Drawing.Color springTension = System.Drawing.Color.BlueViolet;
+            public static System.Drawing.Color crossCoupling = System.Drawing.Color.DarkOrange;
+            public static System.Drawing.Color rawBeam = System.Drawing.Color.DeepSkyBlue;
+            public static System.Drawing.Color totalCorrection = System.Drawing.Color.ForestGreen;
+
+            //   public static System.Drawing.Color rawGravity = System.Drawing.Color.RoyalBlue;
+            public static System.Drawing.Color AL = System.Drawing.Color.LightSeaGreen;
+
+            public static System.Drawing.Color AX = System.Drawing.Color.OrangeRed;
+            public static System.Drawing.Color VE = System.Drawing.Color.PaleVioletRed;
+            public static System.Drawing.Color AX2 = System.Drawing.Color.Red;
+            public static System.Drawing.Color LACC = System.Drawing.Color.Wheat;
+            public static System.Drawing.Color XACC = System.Drawing.Color.SteelBlue;
+        }
+
+        public static class ChartVisibility
+        {
+            public static Boolean digitalGravity = true;
+            public static Boolean springTension = true;
+            public static Boolean crossCoupling = true;
+            public static Boolean rawBeam = true;
+            public static Boolean totalCorrection = true;
+
+            //   public static Boolean rawGravity = true;
+            public static Boolean AL = true;
+
+            public static Boolean AX = true;
+            public static Boolean VE = true;
+            public static Boolean AX2 = true;
+            public static Boolean LACC = true;
+            public static Boolean XACC = true;
+        }
+
+        public void SetChartBorderWidth(int width)
+        {
+            GravityChart.Series["Digital Gravity"].BorderWidth = width;
+            GravityChart.Series["Spring Tension"].BorderWidth = width;
+            GravityChart.Series["Raw Beam"].BorderWidth = width;
+            GravityChart.Series["Cross Coupling"].BorderWidth = width;
+            GravityChart.Series["Total Correction"].BorderWidth = width;
+            //  crossCouplingChart.Series["Raw Gravity"].BorderWidth = width;
+            GravityChart.Series["LACC"].BorderWidth = width;
+            GravityChart.Series["XACC"].BorderWidth = width;
+            GravityChart.Series["AX2"].BorderWidth = width;
+            GravityChart.Series["VE"].BorderWidth = width;
+            GravityChart.Series["AX"].BorderWidth = width;
+            GravityChart.Series["AL"].BorderWidth = width;
+        }
+        public void SetChartColors()
+        {
+            GravityChart.Series["Digital Gravity"].Color = ChartColors.digitalGravity;
+            GravityChart.Series["Spring Tension"].Color = ChartColors.springTension;
+            GravityChart.Series["Cross Coupling"].Color = ChartColors.crossCoupling;
+            GravityChart.Series["Raw Beam"].Color = ChartColors.rawBeam;
+            GravityChart.Series["Total Correction"].Color = ChartColors.totalCorrection;
+            //  crossCouplingChart.Series["Raw Gravity"].Color = ChartColors.rawGravity;
+            GravityChart.Series["AL"].Color = ChartColors.AL;
+            GravityChart.Series["AX"].Color = ChartColors.AX;
+            GravityChart.Series["VE"].Color = ChartColors.VE;
+            GravityChart.Series["AX2"].Color = ChartColors.AX2;
+            GravityChart.Series["XACC"].Color = ChartColors.XACC;
+            GravityChart.Series["LACC"].Color = ChartColors.LACC;
+            GravityChart.Update();
+  
+        }
+
+        private void SetChartMarkerSize(int size)
+        {
+            GravityChart.Series["Digital Gravity"].MarkerSize = size;
+            GravityChart.Series["Spring Tension"].MarkerSize = size;
+            GravityChart.Series["Cross Coupling"].MarkerSize = size;
+            GravityChart.Series["Raw Beam"].MarkerSize = size;
+            GravityChart.Series["Total Correction"].MarkerSize = size;
+
+            //  crossCouplingChart.Series["Raw Gravity"].MarkerStyle = MarkerStyle.Circle;
+            GravityChart.Series["AL"].MarkerSize = size;
+            GravityChart.Series["AX"].MarkerSize = size;
+            GravityChart.Series["VE"].MarkerSize = size;
+            GravityChart.Series["AX2"].MarkerSize = size;
+            GravityChart.Series["LACC"].MarkerSize = size;
+            GravityChart.Series["XACC"].MarkerSize = size;
+        }
+
+        public void ChartMarkers(bool enable)
+        {
+            /*
+
+
+            if (enable == true)
+            {
+                GravityChart.Series["Digital Gravity"].MarkerStyle = MarkerStyle.Circle;
+                GravityChart.Series["Spring Tension"].MarkerStyle = MarkerStyle.Cross;
+                GravityChart.Series["Cross Coupling"].MarkerStyle = MarkerStyle.Diamond;
+                GravityChart.Series["Raw Beam"].MarkerStyle = MarkerStyle.Square;
+                GravityChart.Series["Total Correction"].MarkerStyle = MarkerStyle.Triangle;
+
+                //  crossCouplingChart.Series["Raw Gravity"].MarkerStyle = MarkerStyle.Circle;
+                GravityChart.Series["AL"].MarkerStyle = MarkerStyle.Triangle;
+                GravityChart.Series["AX"].MarkerStyle = MarkerStyle.Star5;
+                GravityChart.Series["VE"].MarkerStyle = MarkerStyle.Square;
+                GravityChart.Series["AX2"].MarkerStyle = MarkerStyle.Diamond;
+                GravityChart.Series["LACC"].MarkerStyle = MarkerStyle.Cross;
+                GravityChart.Series["XACC"].MarkerStyle = MarkerStyle.Star10;
+            }
+            else
+            {
+                GravityChart.Series["Digital Gravity"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["Spring Tension"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["Cross Coupling"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["Raw Beam"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["Total Correction"].MarkerStyle = MarkerStyle.None;
+
+                // crossCouplingChart.Series["Raw Gravity"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["AL"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["AX"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["VE"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["AX2"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["LACC"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Series["XACC"].MarkerStyle = MarkerStyle.None;
+                GravityChart.Update();
+                */
         }
 
         private void ChartCallback()
         {
         }
+        private void SetChartType()
+        {
+            System.Windows.Forms.DataVisualization.Charting.SeriesChartType   myChartType = new System.Windows.Forms.DataVisualization.Charting.SeriesChartType();
+            myChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            GravityChart.Series["Digital Gravity"].ChartType = myChartType;
+            GravityChart.Series["Spring Tension"].ChartType = myChartType;
+            GravityChart.Series["Cross Coupling"].ChartType = myChartType;
+            GravityChart.Series["Raw Beam"].ChartType = myChartType;
+            GravityChart.Series["Total Correction"].ChartType = myChartType;
+            GravityChart.Series["AL"].ChartType = myChartType;
+            GravityChart.Series["AX"].ChartType = myChartType;
+            GravityChart.Series["VE"].ChartType = myChartType;
+            GravityChart.Series["AX2"].ChartType = myChartType;
+            GravityChart.Series["XACC"].ChartType = myChartType;
+            GravityChart.Series["LACC"].ChartType = myChartType;
+        }
+        private void ExtraChartStuff()
+        {
+            this.GravityChart.BackColor = System.Drawing.Color.WhiteSmoke;   //.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
+            this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            this.GravityChart.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
+            this.GravityChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.GravityChart.BorderlineWidth = 2;
+            this.GravityChart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
+            GravityChart.ChartAreas["Gravity"].Area3DStyle.Inclination = 15;
+            GravityChart.ChartAreas["Gravity"].Area3DStyle.IsClustered = true;
+            GravityChart.ChartAreas["Gravity"].Area3DStyle.IsRightAngleAxes = false;
+            GravityChart.ChartAreas["Gravity"].Area3DStyle.Perspective = 10;
+            GravityChart.ChartAreas["Gravity"].Area3DStyle.Rotation = 10;
+            GravityChart.ChartAreas["Gravity"].Area3DStyle.WallWidth = 0;
+            GravityChart.ChartAreas["Gravity"].AxisX.IsLabelAutoFit = false;
+            GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            GravityChart.ChartAreas["Gravity"].AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["Gravity"].AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["Gravity"].AxisY.IsLabelAutoFit = false;
+            GravityChart.ChartAreas["Gravity"].AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            GravityChart.ChartAreas["Gravity"].AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["Gravity"].AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            // GravityChart.ChartAreas["ChartArea1"].AxisY.Maximum = 5000D;
+            // GravityChart.ChartAreas["ChartArea1"].AxisY.Minimum = 1000D;
+            GravityChart.ChartAreas["Gravity"].BackColor = System.Drawing.Color.LightSlateGray;
+            GravityChart.ChartAreas["Gravity"].BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            GravityChart.ChartAreas["Gravity"].BackSecondaryColor = System.Drawing.Color.White;
+            GravityChart.ChartAreas["Gravity"].BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["Gravity"].BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            //  GravityChart.ChartAreas["ChartArea1"].Name = "Default";
+            GravityChart.ChartAreas["Gravity"].ShadowColor = System.Drawing.Color.Transparent;
+            //   this.GravityChart.ChartAreas.Add(chartArea1);
 
+
+            // Cross Coupling
+
+            this.GravityChart.BackColor = System.Drawing.Color.WhiteSmoke;   //.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
+            //this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            this.GravityChart.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
+            this.GravityChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.GravityChart.BorderlineWidth = 2;
+            this.GravityChart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
+            GravityChart.ChartAreas["CrossCoupling"].Area3DStyle.Inclination = 15;
+            GravityChart.ChartAreas["CrossCoupling"].Area3DStyle.IsClustered = true;
+            GravityChart.ChartAreas["CrossCoupling"].Area3DStyle.IsRightAngleAxes = false;
+            GravityChart.ChartAreas["CrossCoupling"].Area3DStyle.Perspective = 10;
+            GravityChart.ChartAreas["CrossCoupling"].Area3DStyle.Rotation = 10;
+            GravityChart.ChartAreas["CrossCoupling"].Area3DStyle.WallWidth = 0;
+            GravityChart.ChartAreas["Gravity"].AxisX.IsLabelAutoFit = false;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.IsLabelAutoFit = false;
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //  crossCouplingChart.ChartAreas["ChartArea1"].AxisY.Maximum = 5000D;
+            //  crossCouplingChart.ChartAreas["ChartArea1"].AxisY.Minimum = 1000D;
+            GravityChart.ChartAreas["CrossCoupling"].BackColor = System.Drawing.Color.LightSlateGray;
+            GravityChart.ChartAreas["CrossCoupling"].BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            GravityChart.ChartAreas["CrossCoupling"].BackSecondaryColor = System.Drawing.Color.White;
+            GravityChart.ChartAreas["CrossCoupling"].BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            GravityChart.ChartAreas["CrossCoupling"].BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            //  GravityChart.ChartAreas["ChartArea1"].Name = "Default";
+            GravityChart.ChartAreas["CrossCoupling"].ShadowColor = System.Drawing.Color.Transparent;
+            //   this.GravityChart.ChartAreas.Add(chartArea1);
+        }
         #endregion Chart
 
         #region Serial Port
@@ -1603,16 +2199,22 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dynamicDataDataSet5.Data_Table_Simulated' table. You can move, or remove it, as needed.
-            this.data_Table_SimulatedTableAdapter2.Fill(this.dynamicDataDataSet5.Data_Table_Simulated);
+           
+
+
+
+
+
+
+
 
             dataGridView1.DataSource = bindingSource1;
             GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
-         //   GetData("SELECT top 1  FROM [DynamicData].[dbo].[Data_Table_Simulated] ");// ORDER BY id desc
+            //   GetData("SELECT top 1  FROM [DynamicData].[dbo].[Data_Table_Simulated] ");// ORDER BY id desc
+            //     GetData("SELECT * FROM [DynamicData].[dbo].[Data_Table_Simulated] WHERE [date] >= (date >= DATEADD(M, -10, DateTime.Parse('2016-06-29 15:13:51')))  ");
 
-            dataGridView1.AutoResizeColumns(
-          DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-
+            GravityChart.DataSource = bindingSource1;
+            SetupChart();
             //SetupChart();
             // Connect to database and leave connection open.
             //  Need to add desconnect on exit or error.

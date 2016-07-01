@@ -2819,9 +2819,9 @@ SELECT meterNumber, beamScale, engPassword, crossPeriod, longPeriod, crossDampFa
                 "ringTensionMax] = @Original_springTensionMax)) AND ((@IsNull_crossBias = 1 AND [" +
                 "crossBias] IS NULL) OR ([crossBias] = @Original_crossBias)) AND ((@IsNull_longBi" +
                 "as = 1 AND [longBias] IS NULL) OR ([longBias] = @Original_longBias)) AND ([id] =" +
-                " @Original_id));\r\nSELECT meterNumber, beamScale, engPassword, crossPeriod, longP" +
-                "eriod, crossDampFactor, longDampFactor, crossGain, longGain, crossLead, longLead" +
-                ", springTensionMax, crossBias, longBias, id FROM ConfigData WHERE (id = @id)";
+                " @Original_id));\nSELECT meterNumber, beamScale, engPassword, crossPeriod, longPe" +
+                "riod, crossDampFactor, longDampFactor, crossGain, longGain, crossLead, longLead," +
+                " springTensionMax, crossBias, longBias, id FROM ConfigData WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@meterNumber", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "meterNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beamScale", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "beamScale", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3757,10 +3757,10 @@ SELECT id, date, YEAR, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, Cros
                 "iginal_Latitude)) AND ((@IsNull_GPS_Status = 1 AND [GPS_Status] IS NULL) OR ([GP" +
                 "S_Status] = @Original_GPS_Status)) AND ((@IsNull_Period = 1 AND [Period] IS NULL" +
                 ") OR ([Period] = @Original_Period)) AND ((@IsNull_Survey_Name = 1 AND [Survey_Na" +
-                "me] IS NULL) OR ([Survey_Name] = @Original_Survey_Name)));\r\nSELECT id, date, YEA" +
-                "R, DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, CrossCoupling, RawBeam, " +
-                "VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, Altitude, Longitude, Latitude, G" +
-                "PS_Status, Period, Survey_Name FROM Data_Table_Simulated WHERE (id = @id)";
+                "me] IS NULL) OR ([Survey_Name] = @Original_Survey_Name)));\nSELECT id, date, YEAR" +
+                ", DAYS, HOUR, MIN, SEC, DigitalGravity, SpringTension, CrossCoupling, RawBeam, V" +
+                "CC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, Altitude, Longitude, Latitude, GP" +
+                "S_Status, Period, Survey_Name FROM Data_Table_Simulated WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@YEAR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "YEAR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

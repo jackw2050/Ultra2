@@ -103,6 +103,9 @@
     <Compile Include="DataStatusForm.Designer.cs">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DynamicDataDataSet5.cs">
+      <DependentUpon>DynamicDataDataSet5.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DynamicDataDataSet5.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
