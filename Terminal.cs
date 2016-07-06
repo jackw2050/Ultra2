@@ -78,23 +78,140 @@ namespace SerialPortTerminal
 
         public Boolean filterData = false;
 
-        private class MeterData
+        private class MeterDataForDisplay
         {
-            private DateTime dateTime;
-            private double DigitalGravity;
-            private double SpringTension;
-            private double CrossCoupling;
-            private double RawBeam;
-            private double VCC;
-            private double AL;
-            private double AX;
-            private double VE;
-            private double AX2;
-            private double XACC2;
-            private double LACC2;
-            private double XACC;
-            private double LACC;
-            private double totalCorrection;
+             DateTime _dateTime;
+             double _digitalGravity, _springTension, _crossCoupling, _rawBeam, _vcc, _al, _ax, _ve, _ax2;
+             double _xacc2, _lacc2, _xacc, _lacc, _totalCorrection;
+
+            public MeterDataForDisplay(DateTime _dateTime,  double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
+            {
+                this._dateTime = _dateTime;
+                this.digitalGravity
+            }
+            public DateTime meterDate
+            {
+                get { return _dateTime; }
+                set { _dateTime = value; }
+            }
+
+            public double digitalGravity
+            {
+                get { return _digitalGravity; }
+                set { _digitalGravity = value; }
+            }
+
+            public double springTension
+            {
+                get { return _springTension; }
+                set { _springTension = value; }
+            }
+            public double crossCoupling
+            {
+                get { return _crossCoupling; }
+                set { _crossCoupling = value; }
+            }
+            public double rawBeam
+            {
+                get { return _rawBeam; }
+                set { _rawBeam = value; }
+            }
+            public double vcc
+            {
+                get { return _vcc; }
+                set { _vcc = value; }
+            }
+            public double al
+            {
+                get { return _al; }
+                set { _al = value; }
+            }
+            public double ax
+            {
+                get { return _ax; }
+                set { _ax = value; }
+            }
+            public double ve
+            {
+                get { return _ve; }
+                set { _ve = value; }
+            }
+            public double ax2
+            {
+                get { return _ax2; }
+                set { _ax2 = value; }
+            }
+            public double xacc2
+            {
+                get { return _xacc2; }
+                set { _xacc2 = value; }
+            }
+            public double lacc2
+            {
+                get { return _lacc2; }
+                set { _lacc2 = value; }
+            }
+            public double xacc
+            {
+                get { return _xacc; }
+                set { _xacc = value; }
+            }
+            public double lacc
+            {
+                get { return _lacc; }
+                set { _lacc = value; }
+            }
+            public double totalCorrection
+            {
+                get { return _totalCorrection; }
+                set { _totalCorrection = value; }
+            }
+
+
+
+
+
+
+
+
+
+
+            public void PushDate(DateTime newDate)
+            {
+                _dateTime.Add(newDate);
+            }
+
+            public void PushDigitalGravity(double digitalGravity)
+            {
+                _digitalGravity.Add(digitalGravity);
+            }
+
+            public void PushSpringTension(double springTension)
+            {
+                _springTension.Add(springTension);
+            }
+
+            public void CleanUp(string timePeriod, int timeValue)
+            {
+                int maxArraySize = 60;// initialize for 60 seconds
+                if (timePeriod == "seconds")
+                {
+                    maxArraySize = timeValue;
+                }
+                else if (timePeriod == "minutes")
+                {
+                    maxArraySize = 60 * timeValue;
+                }
+                else if (timePeriod == "hours")
+                {
+                    maxArraySize = 3600 * timeValue;
+                }
+
+                if (_dateTime.Count > maxArraySize)
+                {
+                    _dateTime.RemoveAt(maxArraySize);
+                }
+            }
         }
 
         #region Local Variables
