@@ -73,6 +73,12 @@ namespace SerialPortTerminal
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.data_Table_SimulatedTableAdapter1 = new SerialPortTerminal.DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter();
             this.textBox17 = new System.Windows.Forms.TextBox();
+            this.textBoxDay = new System.Windows.Forms.TextBox();
+            this.textBoxHour = new System.Windows.Forms.TextBox();
+            this.textBoxMin = new System.Windows.Forms.TextBox();
+            this.textBoxSec = new System.Windows.Forms.TextBox();
+            this.textBoxNow = new System.Windows.Forms.TextBox();
+            this.button15 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).BeginInit();
@@ -323,7 +329,7 @@ namespace SerialPortTerminal
             this.rtfTerminal.BackColor = System.Drawing.SystemColors.Control;
             this.rtfTerminal.Location = new System.Drawing.Point(1, 42);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(404, 27);
+            this.rtfTerminal.Size = new System.Drawing.Size(404, 69);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
@@ -420,10 +426,10 @@ namespace SerialPortTerminal
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 555);
+            this.dataGridView1.Location = new System.Drawing.Point(1, 419);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1129, 79);
+            this.dataGridView1.Size = new System.Drawing.Size(1129, 215);
             this.dataGridView1.TabIndex = 86;
             // 
             // contextMenuStripForm
@@ -454,12 +460,73 @@ namespace SerialPortTerminal
             this.textBox17.TabIndex = 88;
             this.textBox17.Text = "135.376";
             // 
+            // textBoxDay
+            // 
+            this.textBoxDay.CausesValidation = false;
+            this.textBoxDay.Location = new System.Drawing.Point(856, 104);
+            this.textBoxDay.Name = "textBoxDay";
+            this.textBoxDay.Size = new System.Drawing.Size(100, 20);
+            this.textBoxDay.TabIndex = 89;
+            this.textBoxDay.Text = "-1";
+            // 
+            // textBoxHour
+            // 
+            this.textBoxHour.CausesValidation = false;
+            this.textBoxHour.Location = new System.Drawing.Point(750, 104);
+            this.textBoxHour.Name = "textBoxHour";
+            this.textBoxHour.Size = new System.Drawing.Size(100, 20);
+            this.textBoxHour.TabIndex = 90;
+            this.textBoxHour.Text = "7";
+            // 
+            // textBoxMin
+            // 
+            this.textBoxMin.CausesValidation = false;
+            this.textBoxMin.Location = new System.Drawing.Point(644, 104);
+            this.textBoxMin.Name = "textBoxMin";
+            this.textBoxMin.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMin.TabIndex = 91;
+            this.textBoxMin.Text = "0";
+            // 
+            // textBoxSec
+            // 
+            this.textBoxSec.CausesValidation = false;
+            this.textBoxSec.Location = new System.Drawing.Point(538, 104);
+            this.textBoxSec.Name = "textBoxSec";
+            this.textBoxSec.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSec.TabIndex = 92;
+            this.textBoxSec.Text = "0";
+            // 
+            // textBoxNow
+            // 
+            this.textBoxNow.CausesValidation = false;
+            this.textBoxNow.Location = new System.Drawing.Point(856, 81);
+            this.textBoxNow.Name = "textBoxNow";
+            this.textBoxNow.Size = new System.Drawing.Size(100, 20);
+            this.textBoxNow.TabIndex = 93;
+            this.textBoxNow.Text = "0";
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(441, 101);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(75, 23);
+            this.button15.TabIndex = 94;
+            this.button15.Text = "update";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 633);
             this.ContextMenuStrip = this.contextMenuStripForm;
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.textBoxNow);
+            this.Controls.Add(this.textBoxSec);
+            this.Controls.Add(this.textBoxMin);
+            this.Controls.Add(this.textBoxHour);
+            this.Controls.Add(this.textBoxDay);
             this.Controls.Add(this.textBox17);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button14);
@@ -498,7 +565,6 @@ namespace SerialPortTerminal
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTableSimulatedBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dynamicDataDataSet5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStripForm.ResumeLayout(false);
@@ -547,6 +613,12 @@ namespace SerialPortTerminal
         private DynamicDataDataSet5TableAdapters.Data_Table_SimulatedTableAdapter data_Table_SimulatedTableAdapter1;
         public System.Windows.Forms.TextBox textBox17;
         public System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBoxDay;
+        private System.Windows.Forms.TextBox textBoxHour;
+        private System.Windows.Forms.TextBox textBoxMin;
+        private System.Windows.Forms.TextBox textBoxSec;
+        private System.Windows.Forms.TextBox textBoxNow;
+        private System.Windows.Forms.Button button15;
     }
 }
 

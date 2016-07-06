@@ -71,11 +71,31 @@ namespace SerialPortTerminal
         public static Int16 meter_status = 0;
         private Boolean autostart = false;
         public string connectionString = "Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True";
-        BindingSource bindingSource1 = new BindingSource();
+        private BindingSource bindingSource1 = new BindingSource();
+
         // Database connection strings etc.
         private SqlConnection myConnection = new SqlConnection("Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True");
 
         public Boolean filterData = false;
+
+        private class MeterData
+        {
+            private DateTime dateTime;
+            private double DigitalGravity;
+            private double SpringTension;
+            private double CrossCoupling;
+            private double RawBeam;
+            private double VCC;
+            private double AL;
+            private double AX;
+            private double VE;
+            private double AX2;
+            private double XACC2;
+            private double LACC2;
+            private double XACC;
+            private double LACC;
+            private double totalCorrection;
+        }
 
         #region Local Variables
 
@@ -485,7 +505,7 @@ namespace SerialPortTerminal
                     ThreadProcSafe();//  Initially write data1 -data4 in text boxes
                     DataBaseWrite(mdt);
                     GravityChart.DataBind();
-                    dataGridView1.Refresh() ;
+                    dataGridView1.Refresh();
                 }
             }
         }
@@ -590,14 +610,6 @@ namespace SerialPortTerminal
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
 
-                
-
-
-
-
-
-
-
                 if (MeterStatus.lGyro_Fog == 0)
                 {
                     if (AutoStartForm.Visible)
@@ -677,19 +689,15 @@ namespace SerialPortTerminal
                     DataStatusForm.textBox22.Text = "Checksum error";
                 }
 
-
-
                 if (autostart)
                 {
                     AutoStartForm.FogCheck();
                     if (AutoStartForm.completed)
                     {
                         Console.WriteLine("ready for gyros");
-                       // AutoStartForm.Hide();
+                        // AutoStartForm.Hide();
                     }
                 }
-
-
 
                 //   textBox19.Text = (MeterStatus.lGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// long
                 //   textBox20.Text = (MeterStatus.xGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// cross
@@ -718,6 +726,7 @@ namespace SerialPortTerminal
         #endregion Event Handlers
 
         #region Database stuff
+
         private void GetData(string selectCommand)
         {
             try
@@ -726,34 +735,37 @@ namespace SerialPortTerminal
                 cutoffTime.AddDays(-1);
                 string cTimeString = cutoffTime.ToString("yyyy-MM-dd hh:mm:ss");
 
+                Int32 days = Int32.Parse(textBoxDay.Text);
+                Int32 hour = Int32.Parse(textBoxHour.Text);
+                Int32 min = Int32.Parse(textBoxMin.Text);
+                Int32 sec = Int32.Parse(textBoxSec.Text);
+                Int32 initDays = Int32.Parse(textBoxNow.Text);
+                var startDate = DateTime.Now.AddDays(initDays);
+                var endDate = startDate.AddDays(days).AddHours(hour).AddMinutes(min).AddSeconds(sec);
 
-
-                
-
-
-                selectCommand = "SELECT * FROM Data_Table_Simulated WHERE DAYS = @startDate";
+                //          endDate.AddHours(8);
+                selectCommand = "SELECT * FROM Data_Table_Simulated WHERE date BETWEEN @endDate AND @startDate";
                 SqlCommand cmd = new SqlCommand(selectCommand, myConnection);
-                cmd.Parameters.AddWithValue("@startDate",180);// DateTime.Now.AddDays(-1)
-                cmd.Parameters.AddWithValue("@endDate", DateTime.Now);
 
+                cmd.Parameters.AddWithValue("@startDate", SqlDbType.DateTime).Value = startDate;
+                cmd.Parameters.AddWithValue("@endDate", SqlDbType.DateTime).Value = endDate;
 
                 // Create a new data adapter based on the specified query.
                 //  SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
 
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                 
 
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
 
                 // Populate a new data table and bind it to the BindingSource.
                 DataTable table = new DataTable();
                 table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                
 
+                GravityChart.DataBind();
 
                 dataAdapter.Fill(table);
                 bindingSource1.DataSource = table;
-           //     GravityChart.DataSource = table;
+                //     GravityChart.DataSource = table;
 
                 // Resize the DataGridView columns to fit the newly loaded content.
                 dataGridView1.AutoResizeColumns(
@@ -766,13 +778,6 @@ namespace SerialPortTerminal
                     "valid for your system.");
             }
         }
-
-
-
-
-
-
-
 
         private void DataBaseConnect()
         {
@@ -870,29 +875,29 @@ namespace SerialPortTerminal
                         // DataBaseDisconnect();
                         DataBaseConnect();
                     }
-                    
-                                        // Add your parameters
-                                        command.Parameters.AddWithValue("@Date", CalculateMarineData.myDT);
-                                        command.Parameters.AddWithValue("@Year", CalculateMarineData.year);
-                                        command.Parameters.AddWithValue("@Days", CalculateMarineData.day);
-                                        command.Parameters.AddWithValue("@Hour", CalculateMarineData.Hour);
-                                        command.Parameters.AddWithValue("@Min", CalculateMarineData.Min);
-                                        command.Parameters.AddWithValue("@Sec", CalculateMarineData.Sec);
 
-                                        command.Parameters.AddWithValue("@DigitalGravity", CalculateMarineData.gravity);// this is calculated for now set  eq spring tenstion
-                                        command.Parameters.AddWithValue("@SpringTension", CalculateMarineData.SpringTension);
-                                        command.Parameters.AddWithValue("@CrossCoupling", 0);// CalculateMarineData.c);// calculated
-                                        command.Parameters.AddWithValue("@RawBeam", CalculateMarineData.Beam);
-                                        command.Parameters.AddWithValue("@VCC", CalculateMarineData.VCC);
-                                        command.Parameters.AddWithValue("@AL", CalculateMarineData.AL);
-                                        command.Parameters.AddWithValue("@AX", CalculateMarineData.AX);
-                                        command.Parameters.AddWithValue("@VE", CalculateMarineData.VE);
-                                        command.Parameters.AddWithValue("@AX2", CalculateMarineData.AX2);
-                                        command.Parameters.AddWithValue("@XACC2", CalculateMarineData.XACC2);
-                                        command.Parameters.AddWithValue("@LACC2", CalculateMarineData.LACC2);
-                                        command.Parameters.AddWithValue("@XACC", CalculateMarineData.XACC);
-                                        command.Parameters.AddWithValue("@LACC", CalculateMarineData.LACC);
-                                        
+                    // Add your parameters
+                    command.Parameters.AddWithValue("@Date", CalculateMarineData.myDT);
+                    command.Parameters.AddWithValue("@Year", CalculateMarineData.year);
+                    command.Parameters.AddWithValue("@Days", CalculateMarineData.day);
+                    command.Parameters.AddWithValue("@Hour", CalculateMarineData.Hour);
+                    command.Parameters.AddWithValue("@Min", CalculateMarineData.Min);
+                    command.Parameters.AddWithValue("@Sec", CalculateMarineData.Sec);
+
+                    command.Parameters.AddWithValue("@DigitalGravity", CalculateMarineData.gravity);// this is calculated for now set  eq spring tenstion
+                    command.Parameters.AddWithValue("@SpringTension", CalculateMarineData.SpringTension);
+                    command.Parameters.AddWithValue("@CrossCoupling", 0);// CalculateMarineData.c);// calculated
+                    command.Parameters.AddWithValue("@RawBeam", CalculateMarineData.Beam);
+                    command.Parameters.AddWithValue("@VCC", CalculateMarineData.VCC);
+                    command.Parameters.AddWithValue("@AL", CalculateMarineData.AL);
+                    command.Parameters.AddWithValue("@AX", CalculateMarineData.AX);
+                    command.Parameters.AddWithValue("@VE", CalculateMarineData.VE);
+                    command.Parameters.AddWithValue("@AX2", CalculateMarineData.AX2);
+                    command.Parameters.AddWithValue("@XACC2", CalculateMarineData.XACC2);
+                    command.Parameters.AddWithValue("@LACC2", CalculateMarineData.LACC2);
+                    command.Parameters.AddWithValue("@XACC", CalculateMarineData.XACC);
+                    command.Parameters.AddWithValue("@LACC", CalculateMarineData.LACC);
+
                     // Execute your query
                     command.ExecuteNonQuery();
                 }
@@ -920,10 +925,9 @@ namespace SerialPortTerminal
                             }
 
                             */
-               // GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated]");
-                GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
-                GravityChart.DataBind();
-
+                // GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated]");
+                //      GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
+                //      GravityChart.DataBind();
             }
         }
 
@@ -981,11 +985,11 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Raw Beam"].XValueMember = "date";
             this.GravityChart.Series["Raw Beam"].YValueMembers = "RawBeam";
             this.GravityChart.Series["Raw Beam"].BorderWidth = 4;
-/*
-            this.GravityChart.Series["Total Correction"].XValueMember = "date";
-            this.GravityChart.Series["Total Correction"].YValueMembers = "TotalCorrection";
-            this.GravityChart.Series["Total Correction"].BorderWidth = 4;
-            */
+            /*
+                        this.GravityChart.Series["Total Correction"].XValueMember = "date";
+                        this.GravityChart.Series["Total Correction"].YValueMembers = "TotalCorrection";
+                        this.GravityChart.Series["Total Correction"].BorderWidth = 4;
+                        */
             this.GravityChart.Titles.Add("Gravity");
 
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
@@ -1004,12 +1008,8 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             this.GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
 
-
-
-
-
             //      SETUP FLOATING CROSS COUPLING CHART
-   //         this.GravityChart.Series.Add("Raw Gravity");
+            //         this.GravityChart.Series.Add("Raw Gravity");
             this.GravityChart.Series.Add("AL");
             this.GravityChart.Series.Add("AX");
             this.GravityChart.Series.Add("VE");
@@ -1023,10 +1023,6 @@ namespace SerialPortTerminal
             this.GravityChart.Series["AX2"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["XACC"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["LACC"].ChartArea = "CrossCoupling";
-
-
-
-
 
             /*
                         this.GravityChart.Series["Raw Gravity"].XValueMember = "dateTime";
@@ -1079,11 +1075,7 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             this.GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
 
-
-
-        //    SetTraceColor(Properties.Settings.Default
-
-
+            //    SetTraceColor(Properties.Settings.Default
 
             SetChartType();
             SetTraceColor();// Properties.Settings.Default.tracePalette);//              Set trace color palette
@@ -1096,15 +1088,9 @@ namespace SerialPortTerminal
             SetChartCursors();
             SetChartZoom();
             SetChartScroll();
-  //          SetLegend();
-
-
-
-
-
-
-
+            //          SetLegend();
         }
+
         private void SetChartCursors()
         {
             // Set cursor interval properties
@@ -1194,7 +1180,6 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
 
-
             // Cross Coupling
             // Change scrollbar colors
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.BackColor = System.Drawing.Color.LightGray;
@@ -1216,9 +1201,7 @@ namespace SerialPortTerminal
 
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
-
         }
-
 
         private void SetChartToolTips()
         {
@@ -1230,7 +1213,7 @@ namespace SerialPortTerminal
                 GravityChart.Series["Spring Tension"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Cross Coupling"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Raw Beam"].ToolTip = "Time = #VALX\n#VALY";
-        //        GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
+                //        GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["AL"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["AX"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["VE"].ToolTip = "Time = #VALX\n#VALY";
@@ -1241,7 +1224,7 @@ namespace SerialPortTerminal
             }
             else if (mode == "Value")
             {
-           //     myData d = new myData();
+                //     myData d = new myData();
                 GravityChart.Series["Digital Gravity"].ToolTip = "Gravity =  " + "#VALY";
                 //  GravityChart.Series["Digital Gravity"].ToolTip = "#VALY";
                 GravityChart.Series["Spring Tension"].ToolTip = "#VALY";
@@ -1274,7 +1257,7 @@ namespace SerialPortTerminal
                 GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Black;
                 GravityChart.ChartAreas["CrossCoupling"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Black;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Black;
-           //     Properties.Settings.Default.chartColor = 0;
+                //     Properties.Settings.Default.chartColor = 0;
             }
             if (scheme == 1)// gray background
             {
@@ -1291,7 +1274,7 @@ namespace SerialPortTerminal
                 GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Black;
                 GravityChart.ChartAreas["CrossCoupling"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Black;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Black;
-              //  Properties.Settings.Default.chartColor = 1;
+                //  Properties.Settings.Default.chartColor = 1;
             }
             if (scheme == 2)// black background
             {
@@ -1308,32 +1291,33 @@ namespace SerialPortTerminal
                 GravityChart.ChartAreas["CrossCoupling"].AxisY.MajorGrid.LineColor = System.Drawing.Color.Gray;
                 GravityChart.ChartAreas["CrossCoupling"].AxisX2.MajorGrid.LineColor = System.Drawing.Color.Gray;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.MajorGrid.LineColor = System.Drawing.Color.Gray;
-               // Properties.Settings.Default.chartColor = 2;
+                // Properties.Settings.Default.chartColor = 2;
             }
         }
+
         private void SetTraceColor()
         {
             string colorPalette = "Bright";
             switch (colorPalette)
             {
                 case "None":
-                    this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;   
-                 //   Properties.Settings.Default.tracePalette = "None";
+                    this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+                    //   Properties.Settings.Default.tracePalette = "None";
                     break;
 
                 case "Bright":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-             //       Properties.Settings.Default.GravityChart = "Bright";
+                    //       Properties.Settings.Default.GravityChart = "Bright";
                     break;
 
                 case "Grayscale":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Grayscale;
-              //      Properties.Settings.Default.tracePalette = "Grayscale";
+                    //      Properties.Settings.Default.tracePalette = "Grayscale";
                     break;
 
                 case "Excel":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
-                //    Properties.Settings.Default.tracePalette = "Excel";
+                    //    Properties.Settings.Default.tracePalette = "Excel";
                     break;
 
                 case "Light":
@@ -1342,42 +1326,42 @@ namespace SerialPortTerminal
 
                 case "Pastel":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-                //    Properties.Settings.Default.tracePalette = "Pastel";
+                    //    Properties.Settings.Default.tracePalette = "Pastel";
                     break;
 
                 case "EarthTones":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-                //    Properties.Settings.Default.tracePalette = "EarthTones";
+                    //    Properties.Settings.Default.tracePalette = "EarthTones";
                     break;
 
                 case "SemiTransparant":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-               //     Properties.Settings.Default.tracePalette = "SemiTransparant";
+                    //     Properties.Settings.Default.tracePalette = "SemiTransparant";
                     break;
 
                 case "Berry":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
-               //     Properties.Settings.Default.tracePalette = "Berry";
+                    //     Properties.Settings.Default.tracePalette = "Berry";
                     break;
 
                 case "Chocolate":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
-                //    Properties.Settings.Default.tracePalette = "Chocolate";
+                    //    Properties.Settings.Default.tracePalette = "Chocolate";
                     break;
 
                 case "Fire":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-                 //   Properties.Settings.Default.tracePalette = "Fire";
+                    //   Properties.Settings.Default.tracePalette = "Fire";
                     break;
 
                 case "SeaGreen":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-              //      Properties.Settings.Default.tracePalette = "SeaGreen";
+                    //      Properties.Settings.Default.tracePalette = "SeaGreen";
                     break;
 
                 case "BrightPastel":
                     this.GravityChart.Palette = this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.BrightPastel;
-               //     Properties.Settings.Default.tracePalette = "BrightPastel";
+                    //     Properties.Settings.Default.tracePalette = "BrightPastel";
                     break;
 
                 default:
@@ -1385,6 +1369,7 @@ namespace SerialPortTerminal
             }
             this.GravityChart.ApplyPaletteColors();
         }
+
         private void SetLegendLocation()
         {
             /*
@@ -1430,7 +1415,7 @@ namespace SerialPortTerminal
             legend1.IsTextAutoFit = false;
             legend1.Name = "Default";
             this.GravityChart.Legends.Add(legend1);
-  //          GravityChart.Legends["Legend1"].Docking = Docking.Bottom;
+            //          GravityChart.Legends["Legend1"].Docking = Docking.Bottom;
 
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 
@@ -1440,8 +1425,9 @@ namespace SerialPortTerminal
             legend2.IsTextAutoFit = false;
             legend2.Name = "Default";
             this.GravityChart.Legends.Add(legend2);
-  //          GravityChart.Legends["Legend2"].Docking = Docking.Bottom;
+            //          GravityChart.Legends["Legend2"].Docking = Docking.Bottom;
         }
+
         //*****************************************************************************
         //                       Chart Methods
         //*****************************************************************************
@@ -1496,6 +1482,7 @@ namespace SerialPortTerminal
             GravityChart.Series["AX"].BorderWidth = width;
             GravityChart.Series["AL"].BorderWidth = width;
         }
+
         public void SetChartColors()
         {
             GravityChart.Series["Digital Gravity"].Color = ChartColors.digitalGravity;
@@ -1511,7 +1498,6 @@ namespace SerialPortTerminal
             GravityChart.Series["XACC"].Color = ChartColors.XACC;
             GravityChart.Series["LACC"].Color = ChartColors.LACC;
             GravityChart.Update();
-  
         }
 
         private void SetChartMarkerSize(int size)
@@ -1534,7 +1520,6 @@ namespace SerialPortTerminal
         public void ChartMarkers(bool enable)
         {
             /*
-
 
             if (enable == true)
             {
@@ -1574,9 +1559,10 @@ namespace SerialPortTerminal
         private void ChartCallback()
         {
         }
+
         private void SetChartType()
         {
-            System.Windows.Forms.DataVisualization.Charting.SeriesChartType   myChartType = new System.Windows.Forms.DataVisualization.Charting.SeriesChartType();
+            System.Windows.Forms.DataVisualization.Charting.SeriesChartType myChartType = new System.Windows.Forms.DataVisualization.Charting.SeriesChartType();
             myChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             GravityChart.Series["Digital Gravity"].ChartType = myChartType;
             GravityChart.Series["Spring Tension"].ChartType = myChartType;
@@ -1590,6 +1576,7 @@ namespace SerialPortTerminal
             GravityChart.Series["XACC"].ChartType = myChartType;
             GravityChart.Series["LACC"].ChartType = myChartType;
         }
+
         private void ExtraChartStuff()
         {
             this.GravityChart.BackColor = System.Drawing.Color.WhiteSmoke;   //.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
@@ -1622,7 +1609,6 @@ namespace SerialPortTerminal
             //  GravityChart.ChartAreas["ChartArea1"].Name = "Default";
             GravityChart.ChartAreas["Gravity"].ShadowColor = System.Drawing.Color.Transparent;
             //   this.GravityChart.ChartAreas.Add(chartArea1);
-
 
             // Cross Coupling
 
@@ -1657,6 +1643,7 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].ShadowColor = System.Drawing.Color.Transparent;
             //   this.GravityChart.ChartAreas.Add(chartArea1);
         }
+
         #endregion Chart
 
         #region Serial Port
@@ -2144,19 +2131,15 @@ namespace SerialPortTerminal
             Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
 
-
-
         private void StartDataCollection()
         {
             OpenPort();
-            byte[] data = { 0x01, 0x08, 0x09 };                                      
+            byte[] data = { 0x01, 0x08, 0x09 };
 
             _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
             _timer1.Enabled = true;
             Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
-
-
 
         // Start data collection.  Send command 1 for meter to start data stream
         private void button2_Click(object sender, EventArgs e)
@@ -2199,15 +2182,6 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
-           
-
-
-
-
-
-
-
-
             dataGridView1.DataSource = bindingSource1;
             GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
             //   GetData("SELECT top 1  FROM [DynamicData].[dbo].[Data_Table_Simulated] ");// ORDER BY id desc
@@ -2228,7 +2202,6 @@ namespace SerialPortTerminal
         {
             DataStatusForm.Show();
         }
-
 
         public byte[] CreateTxArray(byte command, Single data1, Single data2, Single data3, Single data4, double data5, double data6)
         {
@@ -2619,19 +2592,6 @@ namespace SerialPortTerminal
 
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
-
-
-
-
-
-
-
-
-
-
-
-
-       
         }
 
         public void InitStuff()
@@ -2770,8 +2730,8 @@ namespace SerialPortTerminal
             AutoStart();
 
             AutoStartForm.Show();
-            
-           // AutoStartForm.FogCheck();
+
+            // AutoStartForm.FogCheck();
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -2803,17 +2763,10 @@ namespace SerialPortTerminal
                 System.Environment.Exit(1);
             }
         }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            GetData("junk");
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
