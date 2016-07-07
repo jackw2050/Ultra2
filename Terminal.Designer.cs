@@ -29,10 +29,10 @@ namespace SerialPortTerminal
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTerminal));
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.lnkAbout = new System.Windows.Forms.LinkLabel();
@@ -48,12 +48,6 @@ namespace SerialPortTerminal
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -72,6 +66,7 @@ namespace SerialPortTerminal
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.emergencyShutdownButton = new System.Windows.Forms.Button();
             this.gravityChartToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.surveyInfoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.surveyTextBox = new System.Windows.Forms.TextBox();
@@ -151,7 +146,6 @@ namespace SerialPortTerminal
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printGravityChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setDateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemAuxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,20 +166,16 @@ namespace SerialPortTerminal
             this.calFileLabel = new System.Windows.Forms.Label();
             this.configFileLabel = new System.Windows.Forms.Label();
             this.fileStartTimeLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.timeNowLabel = new System.Windows.Forms.Label();
             this.chartWindowGroupBox = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.viewAllDataRadioButton = new System.Windows.Forms.RadioButton();
             this.windowSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.button16 = new System.Windows.Forms.Button();
             this.showAllDataCheckBox = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.emergencyShutdownButton = new System.Windows.Forms.Button();
             this.dataFileTextBox = new System.Windows.Forms.TextBox();
             this.recordingLabel = new System.Windows.Forms.Label();
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.modeLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -210,7 +200,7 @@ namespace SerialPortTerminal
             // 
             this.lnkAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkAbout.AutoSize = true;
-            this.lnkAbout.Location = new System.Drawing.Point(931, 39);
+            this.lnkAbout.Location = new System.Drawing.Point(1159, 28);
             this.lnkAbout.Name = "lnkAbout";
             this.lnkAbout.Size = new System.Drawing.Size(35, 13);
             this.lnkAbout.TabIndex = 8;
@@ -227,7 +217,7 @@ namespace SerialPortTerminal
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(417, 46);
+            this.button2.Location = new System.Drawing.Point(669, 104);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 25);
             this.button2.TabIndex = 11;
@@ -259,7 +249,7 @@ namespace SerialPortTerminal
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(779, 155);
+            this.button1.Location = new System.Drawing.Point(705, 46);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 23);
             this.button1.TabIndex = 44;
@@ -270,7 +260,7 @@ namespace SerialPortTerminal
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(988, 131);
+            this.label16.Location = new System.Drawing.Point(988, 92);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(42, 13);
             this.label16.TabIndex = 50;
@@ -279,9 +269,9 @@ namespace SerialPortTerminal
             // textBox16
             // 
             this.textBox16.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox16.Location = new System.Drawing.Point(991, 147);
+            this.textBox16.Location = new System.Drawing.Point(991, 108);
             this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(100, 20);
+            this.textBox16.Size = new System.Drawing.Size(63, 20);
             this.textBox16.TabIndex = 49;
             // 
             // label17
@@ -296,7 +286,7 @@ namespace SerialPortTerminal
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(988, 89);
+            this.label18.Location = new System.Drawing.Point(1057, 49);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(54, 13);
             this.label18.TabIndex = 46;
@@ -305,76 +295,16 @@ namespace SerialPortTerminal
             // textBox18
             // 
             this.textBox18.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox18.Location = new System.Drawing.Point(991, 108);
+            this.textBox18.Location = new System.Drawing.Point(1060, 68);
             this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(100, 20);
+            this.textBox18.Size = new System.Drawing.Size(63, 20);
             this.textBox18.TabIndex = 45;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(417, 80);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(16, 23);
-            this.button3.TabIndex = 58;
-            this.button3.Text = "200Hz + parameters";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(439, 80);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(16, 23);
-            this.button4.TabIndex = 59;
-            this.button4.Text = "relays, control sw";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(461, 80);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(16, 23);
-            this.button5.TabIndex = 60;
-            this.button5.Text = "Wait 20 sec";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(483, 80);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(16, 23);
-            this.button6.TabIndex = 61;
-            this.button6.Text = "Next - 5 sec";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(505, 80);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(16, 23);
-            this.button7.TabIndex = 62;
-            this.button7.Text = "20 sec";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(527, 80);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(14, 23);
-            this.button8.TabIndex = 63;
-            this.button8.Text = "RelaySW = 0x81";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(588, 77);
+            this.button9.Location = new System.Drawing.Point(859, 79);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(127, 23);
+            this.button9.Size = new System.Drawing.Size(51, 23);
             this.button9.TabIndex = 64;
             this.button9.Text = "Torque Motor ON";
             this.button9.UseVisualStyleBackColor = true;
@@ -382,9 +312,9 @@ namespace SerialPortTerminal
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(721, 77);
+            this.button10.Location = new System.Drawing.Point(920, 77);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(127, 23);
+            this.button10.Size = new System.Drawing.Size(43, 23);
             this.button10.TabIndex = 65;
             this.button10.Text = "Torque Motor OFF";
             this.button10.UseVisualStyleBackColor = true;
@@ -393,9 +323,9 @@ namespace SerialPortTerminal
             // button11
             // 
             this.button11.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button11.Location = new System.Drawing.Point(588, 48);
+            this.button11.Location = new System.Drawing.Point(1105, 114);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(105, 23);
+            this.button11.Size = new System.Drawing.Size(42, 23);
             this.button11.TabIndex = 66;
             this.button11.Text = "Auto Start";
             this.button11.UseVisualStyleBackColor = true;
@@ -403,9 +333,9 @@ namespace SerialPortTerminal
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(666, 155);
+            this.button12.Location = new System.Drawing.Point(601, 41);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(107, 23);
+            this.button12.Size = new System.Drawing.Size(87, 23);
             this.button12.TabIndex = 67;
             this.button12.Text = "Status Form";
             this.button12.UseVisualStyleBackColor = true;
@@ -413,7 +343,7 @@ namespace SerialPortTerminal
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(884, 155);
+            this.button13.Location = new System.Drawing.Point(810, 46);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(82, 23);
             this.button13.TabIndex = 68;
@@ -423,20 +353,18 @@ namespace SerialPortTerminal
             // 
             // rtfTerminal
             // 
-            this.rtfTerminal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.rtfTerminal.BackColor = System.Drawing.SystemColors.Control;
-            this.rtfTerminal.Location = new System.Drawing.Point(15, 249);
+            this.rtfTerminal.Location = new System.Drawing.Point(15, 43);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(404, 23);
+            this.rtfTerminal.Size = new System.Drawing.Size(564, 47);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(540, 164);
+            this.button14.Location = new System.Drawing.Point(898, 48);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(104, 23);
+            this.button14.Size = new System.Drawing.Size(76, 23);
             this.button14.TabIndex = 85;
             this.button14.Text = "Serial Port Form";
             this.button14.UseVisualStyleBackColor = true;
@@ -450,48 +378,48 @@ namespace SerialPortTerminal
             this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
             this.GravityChart.BackSecondaryColor = System.Drawing.Color.White;
             this.GravityChart.BorderlineWidth = 5;
-            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisX2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisX2.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.InterlacedColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.ScaleBreakStyle.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY2.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea1.BackColor = System.Drawing.Color.Black;
-            chartArea1.BorderColor = System.Drawing.Color.LightGray;
-            chartArea1.Name = "Gravity";
-            chartArea2.BackColor = System.Drawing.Color.Black;
-            chartArea2.BorderColor = System.Drawing.Color.White;
-            chartArea2.Name = "CrossCoupling";
-            this.GravityChart.ChartAreas.Add(chartArea1);
-            this.GravityChart.ChartAreas.Add(chartArea2);
+            chartArea3.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea3.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisX2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisX2.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.InterlacedColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.MajorTickMark.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.MinorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.ScaleBreakStyle.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY2.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea3.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea3.BackColor = System.Drawing.Color.Black;
+            chartArea3.BorderColor = System.Drawing.Color.LightGray;
+            chartArea3.Name = "Gravity";
+            chartArea4.BackColor = System.Drawing.Color.Black;
+            chartArea4.BorderColor = System.Drawing.Color.White;
+            chartArea4.Name = "CrossCoupling";
+            this.GravityChart.ChartAreas.Add(chartArea3);
+            this.GravityChart.ChartAreas.Add(chartArea4);
             this.GravityChart.ContextMenuStrip = this.contextMenuStrip1;
-            legend1.Alignment = System.Drawing.StringAlignment.Far;
-            legend1.BackColor = System.Drawing.Color.White;
-            legend1.DockedToChartArea = "Gravity";
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend1.IsDockedInsideChartArea = false;
-            legend1.Name = "Gravity Legend";
-            legend2.Alignment = System.Drawing.StringAlignment.Far;
-            legend2.DockedToChartArea = "CrossCoupling";
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend2.IsDockedInsideChartArea = false;
-            legend2.Name = "Cross Coupling Legend";
-            this.GravityChart.Legends.Add(legend1);
-            this.GravityChart.Legends.Add(legend2);
-            this.GravityChart.Location = new System.Drawing.Point(33, 427);
+            legend3.Alignment = System.Drawing.StringAlignment.Far;
+            legend3.BackColor = System.Drawing.Color.White;
+            legend3.DockedToChartArea = "Gravity";
+            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend3.IsDockedInsideChartArea = false;
+            legend3.Name = "Gravity Legend";
+            legend4.Alignment = System.Drawing.StringAlignment.Far;
+            legend4.DockedToChartArea = "CrossCoupling";
+            legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend4.IsDockedInsideChartArea = false;
+            legend4.Name = "Cross Coupling Legend";
+            this.GravityChart.Legends.Add(legend3);
+            this.GravityChart.Legends.Add(legend4);
+            this.GravityChart.Location = new System.Drawing.Point(33, 155);
             this.GravityChart.Name = "GravityChart";
             this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            this.GravityChart.Size = new System.Drawing.Size(1129, 86);
+            this.GravityChart.Size = new System.Drawing.Size(1373, 463);
             this.GravityChart.TabIndex = 78;
             this.GravityChart.Text = "chart1";
             // 
@@ -515,10 +443,10 @@ namespace SerialPortTerminal
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 542);
+            this.dataGridView1.Location = new System.Drawing.Point(1, 624);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1129, 92);
+            this.dataGridView1.Size = new System.Drawing.Size(1373, 92);
             this.dataGridView1.TabIndex = 86;
             // 
             // contextMenuStripForm
@@ -541,19 +469,34 @@ namespace SerialPortTerminal
             this.textBox17.Font = new System.Drawing.Font("Trebuchet MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox17.Location = new System.Drawing.Point(991, 67);
             this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(100, 23);
+            this.textBox17.Size = new System.Drawing.Size(63, 23);
             this.textBox17.TabIndex = 88;
             this.textBox17.Text = "135.376";
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(439, 135);
+            this.button15.Location = new System.Drawing.Point(1153, 110);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(75, 23);
+            this.button15.Size = new System.Drawing.Size(58, 30);
             this.button15.TabIndex = 94;
             this.button15.Text = "update";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // emergencyShutdownButton
+            // 
+            this.emergencyShutdownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.emergencyShutdownButton.BackColor = System.Drawing.Color.Red;
+            this.emergencyShutdownButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.emergencyShutdownButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.emergencyShutdownButton.Location = new System.Drawing.Point(1136, 57);
+            this.emergencyShutdownButton.Name = "emergencyShutdownButton";
+            this.emergencyShutdownButton.Size = new System.Drawing.Size(75, 45);
+            this.emergencyShutdownButton.TabIndex = 82;
+            this.emergencyShutdownButton.Text = "Emergency Shutdown";
+            this.startStopButtonsToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
+            this.durationToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
+            this.emergencyShutdownButton.UseVisualStyleBackColor = false;
             // 
             // gravityChartToolTip
             // 
@@ -562,7 +505,7 @@ namespace SerialPortTerminal
             // surveyTextBox
             // 
             this.surveyTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.surveyTextBox.Location = new System.Drawing.Point(243, 148);
+            this.surveyTextBox.Location = new System.Drawing.Point(449, 108);
             this.surveyTextBox.Name = "surveyTextBox";
             this.surveyTextBox.Size = new System.Drawing.Size(130, 20);
             this.surveyTextBox.TabIndex = 100;
@@ -1071,7 +1014,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1130, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1374, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1079,8 +1022,7 @@ namespace SerialPortTerminal
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveConfigFileToolStripMenuItem,
-            this.printConfigFileToolStripMenuItem,
-            this.printGravityChartToolStripMenuItem});
+            this.printConfigFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -1088,20 +1030,14 @@ namespace SerialPortTerminal
             // saveConfigFileToolStripMenuItem
             // 
             this.saveConfigFileToolStripMenuItem.Name = "saveConfigFileToolStripMenuItem";
-            this.saveConfigFileToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.saveConfigFileToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveConfigFileToolStripMenuItem.Text = "Save Config file";
             // 
             // printConfigFileToolStripMenuItem
             // 
             this.printConfigFileToolStripMenuItem.Name = "printConfigFileToolStripMenuItem";
-            this.printConfigFileToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.printConfigFileToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.printConfigFileToolStripMenuItem.Text = "Print Config file";
-            // 
-            // printGravityChartToolStripMenuItem
-            // 
-            this.printGravityChartToolStripMenuItem.Name = "printGravityChartToolStripMenuItem";
-            this.printGravityChartToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.printGravityChartToolStripMenuItem.Text = "Print gravity charts";
             // 
             // tempToolStripMenuItem
             // 
@@ -1191,7 +1127,7 @@ namespace SerialPortTerminal
             // 
             this.label11.AutoSize = true;
             this.label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label11.Location = new System.Drawing.Point(185, 114);
+            this.label11.Location = new System.Drawing.Point(399, 93);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(44, 13);
             this.label11.TabIndex = 99;
@@ -1200,7 +1136,7 @@ namespace SerialPortTerminal
             // meterNumberTextBox
             // 
             this.meterNumberTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.meterNumberTextBox.Location = new System.Drawing.Point(188, 129);
+            this.meterNumberTextBox.Location = new System.Drawing.Point(400, 109);
             this.meterNumberTextBox.Name = "meterNumberTextBox";
             this.meterNumberTextBox.Size = new System.Drawing.Size(46, 20);
             this.meterNumberTextBox.TabIndex = 98;
@@ -1209,7 +1145,7 @@ namespace SerialPortTerminal
             // 
             this.label12.AutoSize = true;
             this.label12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label12.Location = new System.Drawing.Point(240, 132);
+            this.label12.Location = new System.Drawing.Point(449, 92);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(95, 13);
             this.label12.TabIndex = 101;
@@ -1218,7 +1154,7 @@ namespace SerialPortTerminal
             // calFileTextBox
             // 
             this.calFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.calFileTextBox.Location = new System.Drawing.Point(15, 209);
+            this.calFileTextBox.Location = new System.Drawing.Point(284, 110);
             this.calFileTextBox.Name = "calFileTextBox";
             this.calFileTextBox.Size = new System.Drawing.Size(110, 20);
             this.calFileTextBox.TabIndex = 106;
@@ -1226,7 +1162,7 @@ namespace SerialPortTerminal
             // configurationFileTextBox
             // 
             this.configurationFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.configurationFileTextBox.Location = new System.Drawing.Point(15, 165);
+            this.configurationFileTextBox.Location = new System.Drawing.Point(33, 109);
             this.configurationFileTextBox.Name = "configurationFileTextBox";
             this.configurationFileTextBox.Size = new System.Drawing.Size(110, 20);
             this.configurationFileTextBox.TabIndex = 105;
@@ -1235,7 +1171,7 @@ namespace SerialPortTerminal
             // 
             this.calFileLabel.AutoSize = true;
             this.calFileLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.calFileLabel.Location = new System.Drawing.Point(12, 193);
+            this.calFileLabel.Location = new System.Drawing.Point(281, 93);
             this.calFileLabel.Name = "calFileLabel";
             this.calFileLabel.Size = new System.Drawing.Size(72, 13);
             this.calFileLabel.TabIndex = 104;
@@ -1245,7 +1181,7 @@ namespace SerialPortTerminal
             // 
             this.configFileLabel.AutoSize = true;
             this.configFileLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.configFileLabel.Location = new System.Drawing.Point(12, 147);
+            this.configFileLabel.Location = new System.Drawing.Point(30, 93);
             this.configFileLabel.Name = "configFileLabel";
             this.configFileLabel.Size = new System.Drawing.Size(85, 13);
             this.configFileLabel.TabIndex = 103;
@@ -1256,22 +1192,11 @@ namespace SerialPortTerminal
             this.fileStartTimeLabel.AutoSize = true;
             this.fileStartTimeLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.fileStartTimeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.fileStartTimeLabel.Location = new System.Drawing.Point(12, 122);
+            this.fileStartTimeLabel.Location = new System.Drawing.Point(326, 24);
             this.fileStartTimeLabel.Name = "fileStartTimeLabel";
             this.fileStartTimeLabel.Size = new System.Drawing.Size(74, 13);
-            this.fileStartTimeLabel.TabIndex = 102;
+            this.fileStartTimeLabel.TabIndex = 108;
             this.fileStartTimeLabel.Text = "File start time: ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(299, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 108;
-            this.label1.Text = "File start time: ";
             // 
             // timeNowLabel
             // 
@@ -1287,65 +1212,28 @@ namespace SerialPortTerminal
             // chartWindowGroupBox
             // 
             this.chartWindowGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.chartWindowGroupBox.Controls.Add(this.radioButton2);
-            this.chartWindowGroupBox.Controls.Add(this.viewAllDataRadioButton);
+            this.chartWindowGroupBox.Controls.Add(this.comboBox1);
             this.chartWindowGroupBox.Controls.Add(this.windowSizeNumericUpDown);
-            this.chartWindowGroupBox.Controls.Add(this.button16);
             this.chartWindowGroupBox.Controls.Add(this.showAllDataCheckBox);
             this.chartWindowGroupBox.Controls.Add(this.label13);
-            this.chartWindowGroupBox.Location = new System.Drawing.Point(697, 218);
+            this.chartWindowGroupBox.Location = new System.Drawing.Point(1217, 28);
             this.chartWindowGroupBox.Name = "chartWindowGroupBox";
-            this.chartWindowGroupBox.Size = new System.Drawing.Size(391, 100);
+            this.chartWindowGroupBox.Size = new System.Drawing.Size(145, 95);
             this.chartWindowGroupBox.TabIndex = 110;
             this.chartWindowGroupBox.TabStop = false;
             this.chartWindowGroupBox.Text = "Chart Window Options";
             // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.radioButton2.Location = new System.Drawing.Point(173, 61);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(139, 17);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "View only recorded data";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // viewAllDataRadioButton
-            // 
-            this.viewAllDataRadioButton.AutoSize = true;
-            this.viewAllDataRadioButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.viewAllDataRadioButton.Location = new System.Drawing.Point(173, 38);
-            this.viewAllDataRadioButton.Name = "viewAllDataRadioButton";
-            this.viewAllDataRadioButton.Size = new System.Drawing.Size(85, 17);
-            this.viewAllDataRadioButton.TabIndex = 11;
-            this.viewAllDataRadioButton.TabStop = true;
-            this.viewAllDataRadioButton.Text = "View all data";
-            this.viewAllDataRadioButton.UseVisualStyleBackColor = true;
-            // 
             // windowSizeNumericUpDown
             // 
-            this.windowSizeNumericUpDown.Location = new System.Drawing.Point(11, 39);
+            this.windowSizeNumericUpDown.Location = new System.Drawing.Point(11, 41);
             this.windowSizeNumericUpDown.Name = "windowSizeNumericUpDown";
-            this.windowSizeNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.windowSizeNumericUpDown.Size = new System.Drawing.Size(45, 20);
             this.windowSizeNumericUpDown.TabIndex = 10;
             this.windowSizeNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            // 
-            // button16
-            // 
-            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button16.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button16.Location = new System.Drawing.Point(274, 23);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(75, 23);
-            this.button16.TabIndex = 3;
-            this.button16.Text = "Done";
-            this.button16.UseVisualStyleBackColor = true;
             // 
             // showAllDataCheckBox
             // 
@@ -1364,38 +1252,23 @@ namespace SerialPortTerminal
             this.label13.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label13.Location = new System.Drawing.Point(8, 23);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(123, 13);
+            this.label13.Size = new System.Drawing.Size(49, 13);
             this.label13.TabIndex = 1;
-            this.label13.Text = "Window  size in minutes.";
-            // 
-            // emergencyShutdownButton
-            // 
-            this.emergencyShutdownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.emergencyShutdownButton.BackColor = System.Drawing.Color.Red;
-            this.emergencyShutdownButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.emergencyShutdownButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.emergencyShutdownButton.Location = new System.Drawing.Point(891, 90);
-            this.emergencyShutdownButton.Name = "emergencyShutdownButton";
-            this.emergencyShutdownButton.Size = new System.Drawing.Size(75, 45);
-            this.emergencyShutdownButton.TabIndex = 82;
-            this.emergencyShutdownButton.Text = "Emergency Shutdown";
-            this.startStopButtonsToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
-            this.durationToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
-            this.emergencyShutdownButton.UseVisualStyleBackColor = false;
+            this.label13.Text = "Window ";
             // 
             // dataFileTextBox
             // 
             this.dataFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dataFileTextBox.Location = new System.Drawing.Point(243, 192);
+            this.dataFileTextBox.Location = new System.Drawing.Point(156, 109);
             this.dataFileTextBox.Name = "dataFileTextBox";
-            this.dataFileTextBox.Size = new System.Drawing.Size(322, 20);
+            this.dataFileTextBox.Size = new System.Drawing.Size(122, 20);
             this.dataFileTextBox.TabIndex = 112;
             // 
             // recordingLabel
             // 
             this.recordingLabel.AutoSize = true;
             this.recordingLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.recordingLabel.Location = new System.Drawing.Point(240, 174);
+            this.recordingLabel.Location = new System.Drawing.Point(153, 89);
             this.recordingLabel.Name = "recordingLabel";
             this.recordingLabel.Size = new System.Drawing.Size(95, 13);
             this.recordingLabel.TabIndex = 111;
@@ -1405,7 +1278,7 @@ namespace SerialPortTerminal
             // 
             this.recordingTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
             this.recordingTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.recordingTextBox.Location = new System.Drawing.Point(235, 53);
+            this.recordingTextBox.Location = new System.Drawing.Point(647, 27);
             this.recordingTextBox.Name = "recordingTextBox";
             this.recordingTextBox.Size = new System.Drawing.Size(100, 13);
             this.recordingTextBox.TabIndex = 113;
@@ -1415,17 +1288,30 @@ namespace SerialPortTerminal
             // modeLabel
             // 
             this.modeLabel.AutoSize = true;
-            this.modeLabel.Location = new System.Drawing.Point(739, 46);
+            this.modeLabel.Location = new System.Drawing.Point(1059, 28);
             this.modeLabel.Name = "modeLabel";
             this.modeLabel.Size = new System.Drawing.Size(59, 13);
             this.modeLabel.TabIndex = 114;
             this.modeLabel.Text = "modeLabel";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "hours",
+            "minutes",
+            "seconds"});
+            this.comboBox1.Location = new System.Drawing.Point(62, 40);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(77, 21);
+            this.comboBox1.TabIndex = 115;
+            this.comboBox1.Text = "minutes";
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1130, 633);
+            this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.contextMenuStripForm;
             this.Controls.Add(this.modeLabel);
             this.Controls.Add(this.recordingTextBox);
@@ -1434,13 +1320,12 @@ namespace SerialPortTerminal
             this.Controls.Add(this.emergencyShutdownButton);
             this.Controls.Add(this.chartWindowGroupBox);
             this.Controls.Add(this.recordingDurationLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.fileStartTimeLabel);
             this.Controls.Add(this.timeNowLabel);
             this.Controls.Add(this.calFileTextBox);
             this.Controls.Add(this.configurationFileTextBox);
             this.Controls.Add(this.calFileLabel);
             this.Controls.Add(this.configFileLabel);
-            this.Controls.Add(this.fileStartTimeLabel);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.surveyTextBox);
             this.Controls.Add(this.label11);
@@ -1457,12 +1342,6 @@ namespace SerialPortTerminal
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.textBox16);
             this.Controls.Add(this.label17);
@@ -1511,12 +1390,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label label18;
         public System.Windows.Forms.TextBox textBox16;
         public System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
@@ -1613,7 +1486,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveConfigFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printConfigFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem printGravityChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tempToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setDateTimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemAuxToolStripMenuItem;
@@ -1634,15 +1506,11 @@ namespace SerialPortTerminal
         private System.Windows.Forms.TextBox configurationFileTextBox;
         private System.Windows.Forms.Label calFileLabel;
         private System.Windows.Forms.Label configFileLabel;
-        private System.Windows.Forms.Label fileStartTimeLabel;
         private System.Windows.Forms.Label recordingDurationLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label fileStartTimeLabel;
         private System.Windows.Forms.Label timeNowLabel;
         private System.Windows.Forms.GroupBox chartWindowGroupBox;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton viewAllDataRadioButton;
         private System.Windows.Forms.NumericUpDown windowSizeNumericUpDown;
-        private System.Windows.Forms.Button button16;
         private System.Windows.Forms.CheckBox showAllDataCheckBox;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button emergencyShutdownButton;
@@ -1650,6 +1518,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label recordingLabel;
         private System.Windows.Forms.TextBox recordingTextBox;
         protected System.Windows.Forms.Label modeLabel;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

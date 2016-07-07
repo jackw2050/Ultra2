@@ -27,5 +27,7 @@ namespace SerialPortTerminal
         {
             this.Hide();
         }
+
+
     }
 }

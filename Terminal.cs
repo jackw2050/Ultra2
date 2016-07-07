@@ -19,9 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using FileHelpers;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+
 //  Delimited file operations using FileHelpers  http://www.filehelpers.net
 // iTextSharp  http://www.mikesdotnetting.com/article/89/itextsharp-page-layout-with-columns
 
@@ -41,14 +39,15 @@ namespace SerialPortTerminal
     {
         public CalculateMarineData mdt = new CalculateMarineData();
         public DataForm f2 = new DataForm();
-        private RelaySwitches RelaySwitches = new RelaySwitches();
+        public RelaySwitches RelaySwitches = new RelaySwitches();
         private ConfigData ConfigData = new ConfigData();
         private ControlSwitches ControlSwitches = new ControlSwitches();
         private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
         public AutoStartForm AutoStartForm = new AutoStartForm();
-        ArrayList listDataSource = new ArrayList();
+        private ArrayList listDataSource = new ArrayList();
+
         private delegate void SetTextCallback(string text);
 
         public static Boolean engineerDebug = false;
@@ -77,7 +76,6 @@ namespace SerialPortTerminal
         public static Int16 meter_status = 0;
         private Boolean autostart = false;
 
-
         public static DateTime fileStartTime;
         public static Boolean surveyNameSet = false;
         public static string customFileName;
@@ -96,6 +94,7 @@ namespace SerialPortTerminal
         public static bool firstTime = true;
         public static string fileType;
         public static DateTime oldTime = DateTime.Now;
+
         // public EngineeringForm EngineeringForm = new EngineeringForm();
         public static string gravityFileName;
 
@@ -109,11 +108,11 @@ namespace SerialPortTerminal
 
         private class Record
         {
-             DateTime dateTime;
-             double digitalGravity, springTension, crossCoupling, rawBeam, vcc, al, ax, ve, ax2;
-             double xacc2, lacc2, xacc, lacc, totalCorrection;
+            private DateTime dateTime;
+            private double digitalGravity, springTension, crossCoupling, rawBeam, vcc, al, ax, ve, ax2;
+            private double xacc2, lacc2, xacc, lacc, totalCorrection;
 
-            public Record(DateTime dateTime,  double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
+            public Record(DateTime dateTime, double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
             {
                 this.dateTime = dateTime;
                 this.digitalGravity = digitalGravity;
@@ -131,6 +130,7 @@ namespace SerialPortTerminal
                 this.lacc = lacc;
                 this.totalCorrection = totalCorrection;
             }
+
             public DateTime Date
             {
                 get { return dateTime; }
@@ -148,91 +148,99 @@ namespace SerialPortTerminal
                 get { return springTension; }
                 set { springTension = value; }
             }
+
             public double CrossCoupling
             {
                 get { return crossCoupling; }
                 set { crossCoupling = value; }
             }
+
             public double RawBeam
             {
                 get { return rawBeam; }
                 set { rawBeam = value; }
             }
+
             public double VCC
             {
                 get { return vcc; }
                 set { vcc = value; }
             }
+
             public double AL
             {
                 get { return al; }
                 set { al = value; }
             }
+
             public double AX
             {
                 get { return ax; }
                 set { ax = value; }
             }
+
             public double VE
             {
                 get { return ve; }
                 set { ve = value; }
             }
+
             public double AX2
             {
                 get { return ax2; }
                 set { ax2 = value; }
             }
+
             public double XACC2
             {
                 get { return xacc2; }
                 set { xacc2 = value; }
             }
+
             public double LACC2
             {
                 get { return lacc2; }
                 set { lacc2 = value; }
             }
+
             public double XACC
             {
                 get { return xacc; }
                 set { xacc = value; }
             }
+
             public double LACC
             {
                 get { return lacc; }
                 set { lacc = value; }
             }
+
             public double TotalCorrection
             {
                 get { return totalCorrection; }
                 set { totalCorrection = value; }
             }
+        }
 
-
-
-
-
-
-
-            
-
-            public void CleanUp(string timePeriod, int timeValue)
+        public void CleanUp(string timePeriod, int timeValue)
+        {
+            int maxArraySize = 60;// initialize for 60 seconds
+            if (timePeriod == "seconds")
             {
-                int maxArraySize = 60;// initialize for 60 seconds
-                if (timePeriod == "seconds")
-                {
-                    maxArraySize = timeValue;
-                }
-                else if (timePeriod == "minutes")
-                {
-                    maxArraySize = 60 * timeValue;
-                }
-                else if (timePeriod == "hours")
-                {
-                    maxArraySize = 3600 * timeValue;
-                }
-                
+                maxArraySize = timeValue;
+            }
+            else if (timePeriod == "minutes")
+            {
+                maxArraySize = 60 * timeValue;
+            }
+            else if (timePeriod == "hours")
+            {
+                maxArraySize = 3600 * timeValue;
+            }
+
+            if (listDataSource.Count > maxArraySize)
+            {
+                listDataSource.RemoveAt(0);
             }
         }
 
@@ -267,10 +275,6 @@ namespace SerialPortTerminal
             // Enable/disable controls based on the current state
             EnableControls();
 
-            // When data is recieved through the port, call this method
-
-            // THESE EVENT HANDLERS WILL NEED TO  BE REMOVED AND REPLACED WITH THE 1 SEC TIMER EVENT HANDLER
-            // NOT SURE WHAT THE PIN STATE HANDLER DOES.  NEED TO INVESTIGATE.
             //     comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
             //			comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
 
@@ -430,10 +434,15 @@ namespace SerialPortTerminal
         #region Callbacks
 
         public delegate void UpdateRecordBoxCallback(Boolean i);
+
         public delegate void UpdateFileNameLabelCallback();
+
         public delegate void UpdatedebugLabelCallback(string debugData);
+
         public delegate void UpdateTimeTextCallback();
+
         public delegate void UpdateFileTimeCallback();
+
         public delegate void ShutDownTextCallback();
 
         #endregion Callbacks
@@ -533,7 +542,6 @@ namespace SerialPortTerminal
         {
             // ADD 1 SEC TIMER.  START AT END
             bool error = false;
-            //           if (this.f2.GravityRichTextBox1.InvokeRequired)
 
             // If the port is open, close it.
             if (comport.IsOpen) comport.Close();
@@ -553,10 +561,10 @@ namespace SerialPortTerminal
                     UpdatePinState();
                 }
 
-                //f2.Show();
                 // START 1 SEC TIMER
-                //       timer1.Enabled = true;
-                //       timer1.Start();
+                _timer1.Interval = 1000;
+                _timer1.Enabled = true;
+                _timer1.Start();
             }
 
             // Change the state of the form's controls
@@ -653,7 +661,7 @@ namespace SerialPortTerminal
 
                     // Need to check how to sync threads or have all threads access same data source
                     ThreadProcSafe();//  Initially write data1 -data4 in text boxes
-                   
+
                     GravityChart.DataBind();
                     dataGridView1.Refresh();
                 }
@@ -697,7 +705,7 @@ namespace SerialPortTerminal
                 if (mdt.dataValid)
                 {
                     //   textBox1.Text = (mdt.gravity.ToString());
-                    
+
                     ThreadProcSafe();
                 }
 
@@ -719,7 +727,7 @@ namespace SerialPortTerminal
                 SetTextCallback d = new SetTextCallback(SetText);
                 this.Invoke(d, new object[] { text });
                 Thread.Sleep(2000);
-               
+
                 /*   textBox1.Text = (mdt.gravity.ToString());
                    textBox16.Text = mdt.altitude.ToString();
                    textBox17.Text = mdt.latitude.ToString();
@@ -760,15 +768,13 @@ namespace SerialPortTerminal
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
 
-
                 // Fill up list aray
 
                 listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
                 GravityChart.DataSource = listDataSource;
+                dataGridView1.DataSource = listDataSource;
 
-
-
-
+                CleanUp("minutes", 1);// limit chart to 10 min
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if (MeterStatus.lGyro_Fog == 0)
@@ -906,48 +912,45 @@ namespace SerialPortTerminal
 
         private void printGravityChartToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
             // Don't need to print chart
 
-/*
+            /*
 
-            ChartMarkers(true);
-            iTextSharp.text.Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-            pdfDoc.SetPageSize(iTextSharp.text.PageSize.A4.Rotate());
+                        ChartMarkers(true);
+                        iTextSharp.text.Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                        pdfDoc.SetPageSize(iTextSharp.text.PageSize.A4.Rotate());
 
-            iTextSharp.text.Font font16Normal = FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+                        iTextSharp.text.Font font16Normal = FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
-            PdfWriter wri = PdfWriter.GetInstance(pdfDoc, new FileStream("C:\\Ultrasys\\GravityChart.pdf", FileMode.Create));
-            pdfDoc.Open();//Open Document to write
-            pdfDoc.Add(new Paragraph("         Meter # " + SerialPortTerminal.meterNumber + "                            Survey: " + surveyName, font16Normal));
+                        PdfWriter wri = PdfWriter.GetInstance(pdfDoc, new FileStream("C:\\Ultrasys\\GravityChart.pdf", FileMode.Create));
+                        pdfDoc.Open();//Open Document to write
+                        pdfDoc.Add(new Paragraph("         Meter # " + SerialPortTerminal.meterNumber + "                            Survey: " + surveyName, font16Normal));
 
-            using (MemoryStream stream = new MemoryStream())
-            {
-                GravityChart.SaveImage(stream, ChartImageFormat.Png);
-                iTextSharp.text.Image chartImage = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
-                chartImage.ScalePercent(55f);// Scale to 70%
-                //doc.PageSize.Width gives the width in points of the document,
-                //remove the margin (36 points) and the width of the image (?? points)
-                //for the X-axis co-ordinate, and the margin and height of the image from the
-                //total height of the document for the Y-axis co-ordinate.
-                chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 200f);
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            GravityChart.SaveImage(stream, ChartImageFormat.Png);
+                            iTextSharp.text.Image chartImage = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
+                            chartImage.ScalePercent(55f);// Scale to 70%
+                            //doc.PageSize.Width gives the width in points of the document,
+                            //remove the margin (36 points) and the width of the image (?? points)
+                            //for the X-axis co-ordinate, and the margin and height of the image from the
+                            //total height of the document for the Y-axis co-ordinate.
+                            chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 200f);
 
-                crossCouplingChart.SaveImage(stream, ChartImageFormat.Png);
-                iTextSharp.text.Image chartImage2 = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
-                chartImage2.ScalePercent(55f);// Scale to 55%
-                chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 400f);
+                            crossCouplingChart.SaveImage(stream, ChartImageFormat.Png);
+                            iTextSharp.text.Image chartImage2 = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
+                            chartImage2.ScalePercent(55f);// Scale to 55%
+                            chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 400f);
 
-                pdfDoc.Add(chartImage);
-                pdfDoc.Add(chartImage2);
-                pdfDoc.Close();
+                            pdfDoc.Add(chartImage);
+                            pdfDoc.Add(chartImage2);
+                            pdfDoc.Close();
 
-                Process.Start("C:\\Ultrasys\\GravityChart.pdf");
-            }
-            ChartMarkers(false);
-            */
+                            Process.Start("C:\\Ultrasys\\GravityChart.pdf");
+                        }
+                        ChartMarkers(false);
+                        */
         }
-
-
 
         private void SetupChart()
         {
@@ -960,6 +963,7 @@ namespace SerialPortTerminal
             this.GravityChart.Series.Add("Cross Coupling");
             this.GravityChart.Series.Add("Raw Beam");
             this.GravityChart.Series.Add("Total Correction");
+
             //      SETUP MAIN PAIGE GRAVITY CHART
             this.GravityChart.Series["Digital Gravity"].XValueMember = "date";
             this.GravityChart.Series["Digital Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
@@ -1010,6 +1014,7 @@ namespace SerialPortTerminal
             this.GravityChart.Series.Add("AX2");
             this.GravityChart.Series.Add("XACC");
             this.GravityChart.Series.Add("LACC");
+
             //       this.GravityChart.Series["CrossCoupling"].ChartArea = "Raw Gravity";
             this.GravityChart.Series["AL"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["AX"].ChartArea = "CrossCoupling";
@@ -1028,31 +1033,34 @@ namespace SerialPortTerminal
                         //     this.GravityChart.DataSource = dataTable;
                         //       this.GravityChart.DataBind();
             */
+
+            this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
+            this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Angle = 0;
+
+            this.GravityChart.Series["AL"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["AL"].XValueMember = "date";
             this.GravityChart.Series["AL"].YValueMembers = "springTension";
-            this.GravityChart.Series["AL"].BorderWidth = 4;
+            this.GravityChart.Series["AL"].BorderWidth = 2;
 
             this.GravityChart.Series["AX"].XValueMember = "date";
             this.GravityChart.Series["AX"].YValueMembers = "crossCoupling";
-            this.GravityChart.Series["AX"].BorderWidth = 4;
+            this.GravityChart.Series["AX"].BorderWidth = 2;
 
             this.GravityChart.Series["VE"].XValueMember = "date";
             this.GravityChart.Series["VE"].YValueMembers = "RawBeam";
-            this.GravityChart.Series["VE"].BorderWidth = 4;
+            this.GravityChart.Series["VE"].BorderWidth = 2;
 
             this.GravityChart.Series["AX2"].XValueMember = "date";
             this.GravityChart.Series["AX2"].YValueMembers = "AX2";
-            this.GravityChart.Series["AX2"].BorderWidth = 4;
+            this.GravityChart.Series["AX2"].BorderWidth = 2;
 
             this.GravityChart.Series["XACC"].XValueMember = "date";
             this.GravityChart.Series["XACC"].YValueMembers = "XACC";
-            this.GravityChart.Series["XACC"].BorderWidth = 4;
+            this.GravityChart.Series["XACC"].BorderWidth = 2;
 
             this.GravityChart.Series["LACC"].XValueMember = "date";
             this.GravityChart.Series["LACC"].YValueMembers = "LACC";
-            this.GravityChart.Series["LACC"].BorderWidth = 4;
-
-            this.GravityChart.Titles.Add("Cross Coupling");
+            this.GravityChart.Series["LACC"].BorderWidth = 2;
 
             this.GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoom(2, 3);
             this.GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.ZoomReset(1);
@@ -1090,22 +1098,24 @@ namespace SerialPortTerminal
             // Set cursor interval properties
             GravityChart.ChartAreas["Gravity"].CursorX.Interval = .001D;
             GravityChart.ChartAreas["Gravity"].CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Seconds;
-            GravityChart.ChartAreas["Gravity"].CursorY.Interval = 1;
-
             GravityChart.ChartAreas["Gravity"].CursorX.IsUserEnabled = true;
             GravityChart.ChartAreas["Gravity"].CursorX.IsUserSelectionEnabled = true;
             GravityChart.ChartAreas["Gravity"].CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-            GravityChart.ChartAreas["Gravity"].CursorX.Interval = .01;// .1D;
+
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.Interval = .001D;
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Seconds;
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.IsUserEnabled = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.IsUserSelectionEnabled = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
 
             //  Y AXIS
-            //  this.GravityChart.ChartAreas["ChartArea1"].AxisY.ScaleView.ZoomReset(1);
             GravityChart.ChartAreas["Gravity"].CursorY.IsUserEnabled = true;
             GravityChart.ChartAreas["Gravity"].CursorY.IsUserSelectionEnabled = true;
+            GravityChart.ChartAreas["Gravity"].CursorY.Interval = 1;
 
-            GravityChart.ChartAreas["CrossCoupling"].CursorX.IsUserEnabled = true;
             GravityChart.ChartAreas["CrossCoupling"].CursorY.IsUserEnabled = true;
-            GravityChart.ChartAreas["CrossCoupling"].CursorX.IsUserSelectionEnabled = true;
             GravityChart.ChartAreas["CrossCoupling"].CursorY.IsUserSelectionEnabled = true;
+            GravityChart.ChartAreas["CrossCoupling"].CursorY.Interval = 1;
         }
 
         private void SetChartZoom()
@@ -1125,21 +1135,20 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSize = .1D;
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoomable = true;
-
-            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.MinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.MinSize = .1D;
-
-            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollMinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollMinSize = .1D;
-
             GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.Zoomable = true;
+
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
+            GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.ZoomReset(1);
+            GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.ZoomReset(1);
+
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.SmallScrollMinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.SmallScrollMinSize = .1D;
+            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.Zoomable = true;
 
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoom(2, 3);
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.ZoomReset(1);
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.ZoomReset(1);
-
-            GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoomable = true;
-            GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.Zoomable = true;
         }
 
         private void SetChartScroll()
@@ -1158,19 +1167,14 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = false;
-
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.Size = 12;
-            // show either just the center scroll button..
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
-            // .. or include the left and right buttons:
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.ButtonStyle =
-                 System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All ^ System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.ResetZoom;
+            System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All ^ System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.ResetZoom;
 
             // Scrollbars position
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.Enabled = true;
-            // this.GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 100;  // number (!) of data points visible
-
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
 
@@ -1182,17 +1186,13 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = false;
 
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.Size = 12;
-            // show either just the center scroll button..
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
-            // .. or include the left and right buttons:
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.ButtonStyle =
-                 System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All ^ System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.ResetZoom;
+            System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.All ^ System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.ResetZoom;
 
             // Scrollbars position
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.Enabled = true;
-            // this.GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Size = 100;  // number (!) of data points visible
-
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
         }
@@ -2173,6 +2173,7 @@ namespace SerialPortTerminal
 
             Log(LogMsgType.Incoming, Convert.ToString(StringOutput) + "\n");
         }
+
         private void TimeWorker()
         {
             while (true)
@@ -2194,12 +2195,10 @@ namespace SerialPortTerminal
             recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
         }
 
-
         private void UpdateNameLabel()
         {
             dataFileTextBox.Text = fileName;
         }
-
 
         public void RecordDataToFile(string fileOperation)
         {
@@ -2244,8 +2243,6 @@ namespace SerialPortTerminal
             }
         }
 
-
-
         // comment for now
         /*
 
@@ -2271,7 +2268,6 @@ namespace SerialPortTerminal
                 default:
                     break;
             }
-
 
             if (frmTerminal.gravityFileName == null)
             {
@@ -2325,7 +2321,7 @@ namespace SerialPortTerminal
 
                     + delimitor + Convert.ToString(MeterData.data1[15]) + delimitor + Convert.ToString(MeterData.data1[16])
                     + delimitor + Convert.ToString(MeterData.data1[17]) + delimitor + Convert.ToString(MeterData.data1[18]);
-                 
+
                 try
                 {
                     using (StreamWriter writer = File.AppendText(frmTerminal.fileName))
@@ -2344,10 +2340,10 @@ namespace SerialPortTerminal
 
         */
 
-
         public class FileClass
         {
         }
+
         private void UpdateTimeText()
         {
             DateTime nowDateTime = DateTime.Now;
@@ -2380,32 +2376,14 @@ namespace SerialPortTerminal
             }
         }
 
-
-
-
-
         private void frmTerminal_Load(object sender, EventArgs e)
         {
-
             Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
             TimeThread.IsBackground = true;
             TimeThread.Start();
 
-
-
-
-
-            dataGridView1.DataSource = bindingSource1;
-
-            GravityChart.DataSource = bindingSource1;
             SetupChart();
-            //SetupChart();
-            // Connect to database and leave connection open.
-            //  Need to add desconnect on exit or error.
-            // Database writes should be try with if connection open else connect for safety
-            //    DataBaseConnect();
-            //    Console.WriteLine(CheckDbConnection());
-            //    DataBaseReadConfigData();
+            // Setup DataGrid();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -2976,7 +2954,6 @@ namespace SerialPortTerminal
 
         private void button15_Click(object sender, EventArgs e)
         {
-           
         }
     }
 }
