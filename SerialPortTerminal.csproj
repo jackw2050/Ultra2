@@ -70,6 +70,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>packages\FileHelpers.3.1.5\lib\net45\FileHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -102,14 +110,6 @@
     </Compile>
     <Compile Include="DataStatusForm.Designer.cs">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicDataDataSet5.cs">
-      <DependentUpon>DynamicDataDataSet5.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DynamicDataDataSet5.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DynamicDataDataSet5.xsd</DependentUpon>
     </Compile>
     <Compile Include="Parameters.cs">
       <SubType>Form</SubType>
@@ -178,17 +178,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="App.config" />
-    <None Include="DynamicDataDataSet5.xsc">
-      <DependentUpon>DynamicDataDataSet5.xsd</DependentUpon>
-    </None>
-    <None Include="DynamicDataDataSet5.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DynamicDataDataSet5.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DynamicDataDataSet5.xss">
-      <DependentUpon>DynamicDataDataSet5.xsd</DependentUpon>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

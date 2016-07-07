@@ -8,23 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SerialPortTerminal
+namespace ChartBinding
 {
-    public partial class DataForm : Form
+    public partial class SurveyForm : Form
     {
-        public DataForm()
+        public SurveyForm()
         {
             InitializeComponent();
         }
 
-        private void DataForm_Load(object sender, EventArgs e)
-        {
-
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
+            Form1.surveyName = surveyTextBox.Text;
             this.Hide();
         }
     }

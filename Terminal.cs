@@ -7,6 +7,7 @@
 
 using SerialPortTerminal.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -18,6 +19,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using FileHelpers;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+//  Delimited file operations using FileHelpers  http://www.filehelpers.net
+// iTextSharp  http://www.mikesdotnetting.com/article/89/itextsharp-page-layout-with-columns
 
 #endregion Namespace Inclusions
 
@@ -42,7 +48,7 @@ namespace SerialPortTerminal
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
         public AutoStartForm AutoStartForm = new AutoStartForm();
-
+        ArrayList listDataSource = new ArrayList();
         private delegate void SetTextCallback(string text);
 
         public static Boolean engineerDebug = false;
@@ -70,6 +76,29 @@ namespace SerialPortTerminal
         public Single aLongLead = 0;
         public static Int16 meter_status = 0;
         private Boolean autostart = false;
+
+
+        public static DateTime fileStartTime;
+        public static Boolean surveyNameSet = false;
+        public static string customFileName;
+        public static string fileName = "";
+        public static string filePath = "c:\\Ultrasys\\data\\";
+        public static string programPath = "c:\\ZLS\\";
+        public static string calFilePath = "c:\\ZLS\\";
+        public static string calFileName;
+        public static string configFilePath = "c:\\ZLS\\";
+        public static string configFileName;
+        public static bool fileRecording = false;
+        public static Boolean userSelect = false;
+        public static Boolean yesShutDown = false;
+        public static Boolean NoShutDown = false;
+        public static string mode;
+        public static bool firstTime = true;
+        public static string fileType;
+        public static DateTime oldTime = DateTime.Now;
+        // public EngineeringForm EngineeringForm = new EngineeringForm();
+        public static string gravityFileName;
+
         public string connectionString = "Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True";
         private BindingSource bindingSource1 = new BindingSource();
 
@@ -78,118 +107,115 @@ namespace SerialPortTerminal
 
         public Boolean filterData = false;
 
-        private class MeterDataForDisplay
+        private class Record
         {
-             DateTime _dateTime;
-             double _digitalGravity, _springTension, _crossCoupling, _rawBeam, _vcc, _al, _ax, _ve, _ax2;
-             double _xacc2, _lacc2, _xacc, _lacc, _totalCorrection;
+             DateTime dateTime;
+             double digitalGravity, springTension, crossCoupling, rawBeam, vcc, al, ax, ve, ax2;
+             double xacc2, lacc2, xacc, lacc, totalCorrection;
 
-            public MeterDataForDisplay(DateTime _dateTime,  double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
+            public Record(DateTime dateTime,  double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
             {
-                this._dateTime = _dateTime;
-                this.digitalGravity
+                this.dateTime = dateTime;
+                this.digitalGravity = digitalGravity;
+                this.springTension = springTension;
+                this.crossCoupling = crossCoupling;
+                this.rawBeam = rawBeam;
+                this.vcc = vcc;
+                this.al = al;
+                this.ax = ax;
+                this.ve = ve;
+                this.ax2 = ax2;
+                this.xacc2 = xacc2;
+                this.lacc2 = lacc2;
+                this.xacc = xacc;
+                this.lacc = lacc;
+                this.totalCorrection = totalCorrection;
             }
-            public DateTime meterDate
+            public DateTime Date
             {
-                get { return _dateTime; }
-                set { _dateTime = value; }
-            }
-
-            public double digitalGravity
-            {
-                get { return _digitalGravity; }
-                set { _digitalGravity = value; }
-            }
-
-            public double springTension
-            {
-                get { return _springTension; }
-                set { _springTension = value; }
-            }
-            public double crossCoupling
-            {
-                get { return _crossCoupling; }
-                set { _crossCoupling = value; }
-            }
-            public double rawBeam
-            {
-                get { return _rawBeam; }
-                set { _rawBeam = value; }
-            }
-            public double vcc
-            {
-                get { return _vcc; }
-                set { _vcc = value; }
-            }
-            public double al
-            {
-                get { return _al; }
-                set { _al = value; }
-            }
-            public double ax
-            {
-                get { return _ax; }
-                set { _ax = value; }
-            }
-            public double ve
-            {
-                get { return _ve; }
-                set { _ve = value; }
-            }
-            public double ax2
-            {
-                get { return _ax2; }
-                set { _ax2 = value; }
-            }
-            public double xacc2
-            {
-                get { return _xacc2; }
-                set { _xacc2 = value; }
-            }
-            public double lacc2
-            {
-                get { return _lacc2; }
-                set { _lacc2 = value; }
-            }
-            public double xacc
-            {
-                get { return _xacc; }
-                set { _xacc = value; }
-            }
-            public double lacc
-            {
-                get { return _lacc; }
-                set { _lacc = value; }
-            }
-            public double totalCorrection
-            {
-                get { return _totalCorrection; }
-                set { _totalCorrection = value; }
+                get { return dateTime; }
+                set { dateTime = value; }
             }
 
-
-
-
-
-
-
-
-
-
-            public void PushDate(DateTime newDate)
+            public double DigitalGravity
             {
-                _dateTime.Add(newDate);
+                get { return digitalGravity; }
+                set { digitalGravity = value; }
             }
 
-            public void PushDigitalGravity(double digitalGravity)
+            public double SpringTension
             {
-                _digitalGravity.Add(digitalGravity);
+                get { return springTension; }
+                set { springTension = value; }
+            }
+            public double CrossCoupling
+            {
+                get { return crossCoupling; }
+                set { crossCoupling = value; }
+            }
+            public double RawBeam
+            {
+                get { return rawBeam; }
+                set { rawBeam = value; }
+            }
+            public double VCC
+            {
+                get { return vcc; }
+                set { vcc = value; }
+            }
+            public double AL
+            {
+                get { return al; }
+                set { al = value; }
+            }
+            public double AX
+            {
+                get { return ax; }
+                set { ax = value; }
+            }
+            public double VE
+            {
+                get { return ve; }
+                set { ve = value; }
+            }
+            public double AX2
+            {
+                get { return ax2; }
+                set { ax2 = value; }
+            }
+            public double XACC2
+            {
+                get { return xacc2; }
+                set { xacc2 = value; }
+            }
+            public double LACC2
+            {
+                get { return lacc2; }
+                set { lacc2 = value; }
+            }
+            public double XACC
+            {
+                get { return xacc; }
+                set { xacc = value; }
+            }
+            public double LACC
+            {
+                get { return lacc; }
+                set { lacc = value; }
+            }
+            public double TotalCorrection
+            {
+                get { return totalCorrection; }
+                set { totalCorrection = value; }
             }
 
-            public void PushSpringTension(double springTension)
-            {
-                _springTension.Add(springTension);
-            }
+
+
+
+
+
+
+            
 
             public void CleanUp(string timePeriod, int timeValue)
             {
@@ -206,11 +232,7 @@ namespace SerialPortTerminal
                 {
                     maxArraySize = 3600 * timeValue;
                 }
-
-                if (_dateTime.Count > maxArraySize)
-                {
-                    _dateTime.RemoveAt(maxArraySize);
-                }
+                
             }
         }
 
@@ -404,6 +426,17 @@ namespace SerialPortTerminal
         }
 
         #endregion Local Methods
+
+        #region Callbacks
+
+        public delegate void UpdateRecordBoxCallback(Boolean i);
+        public delegate void UpdateFileNameLabelCallback();
+        public delegate void UpdatedebugLabelCallback(string debugData);
+        public delegate void UpdateTimeTextCallback();
+        public delegate void UpdateFileTimeCallback();
+        public delegate void ShutDownTextCallback();
+
+        #endregion Callbacks
 
         #region Local Properties
 
@@ -620,7 +653,7 @@ namespace SerialPortTerminal
 
                     // Need to check how to sync threads or have all threads access same data source
                     ThreadProcSafe();//  Initially write data1 -data4 in text boxes
-                    DataBaseWrite(mdt);
+                   
                     GravityChart.DataBind();
                     dataGridView1.Refresh();
                 }
@@ -664,7 +697,7 @@ namespace SerialPortTerminal
                 if (mdt.dataValid)
                 {
                     //   textBox1.Text = (mdt.gravity.ToString());
-                    DataBaseWrite(mdt);
+                    
                     ThreadProcSafe();
                 }
 
@@ -686,7 +719,7 @@ namespace SerialPortTerminal
                 SetTextCallback d = new SetTextCallback(SetText);
                 this.Invoke(d, new object[] { text });
                 Thread.Sleep(2000);
-                DataBaseWrite(mdt);
+               
                 /*   textBox1.Text = (mdt.gravity.ToString());
                    textBox16.Text = mdt.altitude.ToString();
                    textBox17.Text = mdt.latitude.ToString();
@@ -727,6 +760,17 @@ namespace SerialPortTerminal
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
 
+
+                // Fill up list aray
+
+                listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+                GravityChart.DataSource = listDataSource;
+
+
+
+
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if (MeterStatus.lGyro_Fog == 0)
                 {
                     if (AutoStartForm.Visible)
@@ -842,214 +886,6 @@ namespace SerialPortTerminal
 
         #endregion Event Handlers
 
-        #region Database stuff
-
-        private void GetData(string selectCommand)
-        {
-            try
-            {
-                DateTime cutoffTime = DateTime.Now;
-                cutoffTime.AddDays(-1);
-                string cTimeString = cutoffTime.ToString("yyyy-MM-dd hh:mm:ss");
-
-                Int32 days = Int32.Parse(textBoxDay.Text);
-                Int32 hour = Int32.Parse(textBoxHour.Text);
-                Int32 min = Int32.Parse(textBoxMin.Text);
-                Int32 sec = Int32.Parse(textBoxSec.Text);
-                Int32 initDays = Int32.Parse(textBoxNow.Text);
-                var startDate = DateTime.Now.AddDays(initDays);
-                var endDate = startDate.AddDays(days).AddHours(hour).AddMinutes(min).AddSeconds(sec);
-
-                //          endDate.AddHours(8);
-                selectCommand = "SELECT * FROM Data_Table_Simulated WHERE date BETWEEN @endDate AND @startDate";
-                SqlCommand cmd = new SqlCommand(selectCommand, myConnection);
-
-                cmd.Parameters.AddWithValue("@startDate", SqlDbType.DateTime).Value = startDate;
-                cmd.Parameters.AddWithValue("@endDate", SqlDbType.DateTime).Value = endDate;
-
-                // Create a new data adapter based on the specified query.
-                //  SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
-
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-
-                // Populate a new data table and bind it to the BindingSource.
-                DataTable table = new DataTable();
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-
-                GravityChart.DataBind();
-
-                dataAdapter.Fill(table);
-                bindingSource1.DataSource = table;
-                //     GravityChart.DataSource = table;
-
-                // Resize the DataGridView columns to fit the newly loaded content.
-                dataGridView1.AutoResizeColumns(
-                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show("To run this example, replace the value of the " +
-                    "connectionString variable with a connection string that is " +
-                    "valid for your system.");
-            }
-        }
-
-        private void DataBaseConnect()
-        {
-            try { myConnection.Open(); }
-            catch (Exception) { MessageBox.Show("Error.  Unable to connect to database"); }
-        }
-
-        private void DataBaseDisconnect()
-        {
-            try { myConnection.Close(); }
-            catch (Exception) { MessageBox.Show("Error.  Unable to connect to database"); }
-        }
-
-        private Boolean CheckDbConnection()
-        {
-            if (myConnection.State == System.Data.ConnectionState.Open) { return true; }
-            else { return false; }
-        }
-
-        // SQL query to load config data.   Need keyword allowing for multiple versions
-        /*   SELECT        meterNumber, beamScale, engPassword, crossPeriod, longPeriod, crossDampFactor, longDampFactor, crossGain, longGain, crossLead, longLead, springTensionMax, crossBias, longBiass, id
-           FROM            ConfigData
-           WHERE        (meterNumber = 'S67')
-     */
-
-        private void DataBaseReadConfigData()
-        {
-            ConfigData ConfigData = new ConfigData();
-
-            string query = "SELECT beamScale, crossPeriod, longPeriod, crossDampFactor, longDampFactor, crossGain, longGain, crossLead, longLead, springTensionMax, crossBias, longBias FROM ConfigData WHERE meterNumber = 'S67'";
-
-            try
-            {
-                using (myConnection)
-                {
-                    SqlCommand cmd = new SqlCommand(query, myConnection);
-
-                    SqlDataReader read = cmd.ExecuteReader();
-                    while (read.Read())
-                    {
-                        ConfigData.beamScale = (double)read["beamScale"];
-                        ConfigData.crossPeriod = (Single)read["crossPeriod"];
-                        ConfigData.longPeriod = (Single)read["longPeriod"];
-                        ConfigData.crossDampFactor = (Single)read["crossDampFactor"];
-                        ConfigData.longDampFactor = (Single)read["longDampFactor"];
-                        ConfigData.crossGain = (Single)read["crossGain"];
-                        ConfigData.longGain = (Single)read["longGain"];
-                        ConfigData.crossLead = (Single)read["crossLead"];
-                        ConfigData.longLead = (Single)read["longLead"];
-                        ConfigData.springTensionMax = (double)read["springTensionMax"];
-                        ConfigData.crossBias = (double)read["crossBias"];
-                        ConfigData.longBias = (double)read["longBias"];
-                    }
-                    if (read != null)
-                    {
-                        cmd.Cancel();
-                        read.Close();
-                    }
-
-                    // close the connection
-                    if (myConnection != null)
-                    {
-                        cmd.Cancel();
-                        myConnection.Close();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace + "\n\n" + e.Message);
-            }
-        }
-
-        private void DataBaseWrite(CalculateMarineData CalculateMarineData)
-        {
-            if (true)
-            {
-                // CalculateMarineData CalculateMarineData = new CalculateMarineData();
-
-                string tableSelect = "INSERT INTO Data_Table_Simulated (";
-                string date = "Date, YEAR, DAYS, HOUR, MIN, SEC,";
-                //    string dataValues = "DigitalGravity, SpringTension, CrossCoupling, RawBeam, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC";
-                string data1 = "@DigitalGravity, @SpringTension, @CrossCoupling, @RawBeam,@VCC, @AL, @AX, @VE, @AX2, @XACC2. @LACC2, @XACC, @LACC ";
-                string gpsData = ",@Altitude, @Latitude, @Longitude, @GPS_Status, @Period";
-                string dateValues = " VALUES (@Date, @Year, @Days,  @Hour, @Min, @Sec";
-
-                var query1 = tableSelect + date + data1 + dateValues + gpsData;
-
-                var query = "INSERT INTO Data_Table_Simulated (Date, YEAR, DAYS, HOUR, MIN, SEC,DigitalGravity, SpringTension, CrossCoupling, RawBeam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC) VALUES (@Date, @Year, @Days,  @Hour, @Min, @Sec,@DigitalGravity, @SpringTension, @CrossCoupling, @RawBeam,@VCC, @AL, @AX, @VE, @AX2, @XACC2, @LACC2, @XACC, @LACC)";
-
-                using (var command = new SqlCommand(query, myConnection))
-                {
-                    if (CheckDbConnection() == false)
-                    {
-                        // DataBaseDisconnect();
-                        DataBaseConnect();
-                    }
-
-                    // Add your parameters
-                    command.Parameters.AddWithValue("@Date", CalculateMarineData.myDT);
-                    command.Parameters.AddWithValue("@Year", CalculateMarineData.year);
-                    command.Parameters.AddWithValue("@Days", CalculateMarineData.day);
-                    command.Parameters.AddWithValue("@Hour", CalculateMarineData.Hour);
-                    command.Parameters.AddWithValue("@Min", CalculateMarineData.Min);
-                    command.Parameters.AddWithValue("@Sec", CalculateMarineData.Sec);
-
-                    command.Parameters.AddWithValue("@DigitalGravity", CalculateMarineData.gravity);// this is calculated for now set  eq spring tenstion
-                    command.Parameters.AddWithValue("@SpringTension", CalculateMarineData.SpringTension);
-                    command.Parameters.AddWithValue("@CrossCoupling", 0);// CalculateMarineData.c);// calculated
-                    command.Parameters.AddWithValue("@RawBeam", CalculateMarineData.Beam);
-                    command.Parameters.AddWithValue("@VCC", CalculateMarineData.VCC);
-                    command.Parameters.AddWithValue("@AL", CalculateMarineData.AL);
-                    command.Parameters.AddWithValue("@AX", CalculateMarineData.AX);
-                    command.Parameters.AddWithValue("@VE", CalculateMarineData.VE);
-                    command.Parameters.AddWithValue("@AX2", CalculateMarineData.AX2);
-                    command.Parameters.AddWithValue("@XACC2", CalculateMarineData.XACC2);
-                    command.Parameters.AddWithValue("@LACC2", CalculateMarineData.LACC2);
-                    command.Parameters.AddWithValue("@XACC", CalculateMarineData.XACC);
-                    command.Parameters.AddWithValue("@LACC", CalculateMarineData.LACC);
-
-                    // Execute your query
-                    command.ExecuteNonQuery();
-                }
-                //   DataBaseDisconnect();
-
-                /*
-                            var debug = false;
-                            var GPS_Meter = false;
-                            if (!GPS_Meter || debug)
-                            {
-                                command.Parameters.AddWithValue("@P28V", CalculateMarineData.p28V);
-                                command.Parameters.AddWithValue("@M28V", CalculateMarineData.n28V);
-                                command.Parameters.AddWithValue("@P24V", CalculateMarineData.p24V);
-                                command.Parameters.AddWithValue("@P15V", CalculateMarineData.p15V);
-                                command.Parameters.AddWithValue("@M15V", CalculateMarineData.n15V);
-                                command.Parameters.AddWithValue("@P5V", CalculateMarineData.p5V);
-                            }
-                            else
-                            {
-                                command.Parameters.AddWithValue("@Altitude", CalculateMarineData.Altitude);
-                                command.Parameters.AddWithValue("@Latitude", CalculateMarineData.Latitude);
-                                command.Parameters.AddWithValue("@Longitude", CalculateMarineData.Longitude);
-                                command.Parameters.AddWithValue("@GPS_Status", CalculateMarineData.GPS_Status);
-                                command.Parameters.AddWithValue("@Period", CalculateMarineData.Period);
-                            }
-
-                            */
-                // GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated]");
-                //      GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
-                //      GravityChart.DataBind();
-            }
-        }
-
-        #endregion Database stuff
-
         #region Data Grid View
 
         private void InitDataGridView()
@@ -1068,9 +904,50 @@ namespace SerialPortTerminal
 
         #region Chart
 
-        private void InitChart()
+        private void printGravityChartToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+
+            // Don't need to print chart
+
+/*
+
+            ChartMarkers(true);
+            iTextSharp.text.Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            pdfDoc.SetPageSize(iTextSharp.text.PageSize.A4.Rotate());
+
+            iTextSharp.text.Font font16Normal = FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+            PdfWriter wri = PdfWriter.GetInstance(pdfDoc, new FileStream("C:\\Ultrasys\\GravityChart.pdf", FileMode.Create));
+            pdfDoc.Open();//Open Document to write
+            pdfDoc.Add(new Paragraph("         Meter # " + SerialPortTerminal.meterNumber + "                            Survey: " + surveyName, font16Normal));
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                GravityChart.SaveImage(stream, ChartImageFormat.Png);
+                iTextSharp.text.Image chartImage = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
+                chartImage.ScalePercent(55f);// Scale to 70%
+                //doc.PageSize.Width gives the width in points of the document,
+                //remove the margin (36 points) and the width of the image (?? points)
+                //for the X-axis co-ordinate, and the margin and height of the image from the
+                //total height of the document for the Y-axis co-ordinate.
+                chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 200f);
+
+                crossCouplingChart.SaveImage(stream, ChartImageFormat.Png);
+                iTextSharp.text.Image chartImage2 = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
+                chartImage2.ScalePercent(55f);// Scale to 55%
+                chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 400f);
+
+                pdfDoc.Add(chartImage);
+                pdfDoc.Add(chartImage2);
+                pdfDoc.Close();
+
+                Process.Start("C:\\Ultrasys\\GravityChart.pdf");
+            }
+            ChartMarkers(false);
+            */
         }
+
+
 
         private void SetupChart()
         {
@@ -2296,13 +2173,229 @@ namespace SerialPortTerminal
 
             Log(LogMsgType.Incoming, Convert.ToString(StringOutput) + "\n");
         }
+        private void TimeWorker()
+        {
+            while (true)
+            {
+                this.Invoke(new UpdateTimeTextCallback(this.UpdateTimeText), new object[] { });
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void UpdateRecordBox(Boolean i)
+        {
+            recordingTextBox.Visible = i;
+            DateTime nowDateTime = DateTime.Now;
+            fileStartTime = nowDateTime;
+            fileStartTimeLabel.Text = "File start time:  " + Convert.ToString(nowDateTime);
+
+            var runningTime = TimeSpan.FromTicks(DateTime.Now.Ticks - fileStartTime.Ticks);
+            string timeDuration = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+            recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+        }
+
+
+        private void UpdateNameLabel()
+        {
+            dataFileTextBox.Text = fileName;
+        }
+
+
+        public void RecordDataToFile(string fileOperation)
+        {
+            string delimitor = ",";
+
+            switch (frmTerminal.fileType)
+            {
+                case "csv":
+                    delimitor = ",";
+                    break;
+
+                case "tsv":
+                    delimitor = "\t";
+                    break;
+
+                case "txt":
+                    delimitor = " ";
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (fileOperation == "Open")
+            {
+                try
+                {
+                    using (StreamWriter writer = File.CreateText(frmTerminal.fileName))
+                    {
+                        string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Parallel Port" + delimitor
+                            + "Platform Period" + delimitor + "AUX1" + delimitor + "AUX2" + delimitor + "AUX3" + delimitor + "AUX4";
+                        writer.WriteLine(header);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+
+
+        // comment for now
+        /*
+
+        public void RecordDataToFile(string fileOperation, int d)
+        {
+            // fileOperation  0 - open,  1 - append, 2 - close
+            string delimitor = ",";
+
+            switch (frmTerminal.fileType)
+            {
+                case "csv":
+                    delimitor = ",";
+                    break;
+
+                case "tsv":
+                    delimitor = "\t";
+                    break;
+
+                case "txt":
+                    delimitor = " ";
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            if (frmTerminal.gravityFileName == null)
+            {
+                DateTime now = DateTime.Now;
+                // String.Format("{0:dds}", now);
+                //  fileName = "C:\\Ultrasys\\Data\\" + "GravityData" + now.ToString("yyyyMMddHHmmsstt") + ".csv";
+                //  fileName = Form1.filePath;
+            }
+            else
+            {
+                //  fileName = "C:\\Ultrasys\\Data\\" + Form1.gravityFileName;
+            }
+
+            if (fileOperation == "Open")
+            {
+                try
+                {
+                    using (StreamWriter writer = File.CreateText(frmTerminal.fileName))
+                    {
+                        string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Parallel Port" + delimitor
+                            + "Platform Period" + delimitor + "AUX1" + delimitor + "AUX2" + delimitor + "AUX3" + delimitor + "AUX4";
+                        writer.WriteLine(header);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else if (fileOperation == "Append")
+            {
+                string myString = Convert.ToString(d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+                     + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
+                     + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+                     + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.ParallelData)
+                     + delimitor + Convert.ToString(d.AUX1) + delimitor + Convert.ToString(d.AUX2) + delimitor + Convert.ToString(d.AUX3)
+                     + delimitor + Convert.ToString(d.AUX4);
+
+                 string myString = Convert.ToString(MeterData.dataTime) + delimitor + Convert.ToString(MeterData.data4[2] * ConfigData.beamScale)
+                   +delimitor + Convert.ToString(MeterData.data4[3]) + delimitor + Convert.ToString(MeterData.data4[4])
+                   + delimitor + Convert.ToString(MeterData.data1[5]) + delimitor + Convert.ToString(MeterData.data1[6])
+                   + delimitor + Convert.ToString(MeterData.data1[7]) + delimitor + Convert.ToString(MeterData.data1[8])
+                   + delimitor + Convert.ToString(MeterData.data1[9]) + delimitor + Convert.ToString(MeterData.data1[10])
+                   + delimitor + Convert.ToString(MeterData.data1[11]) + delimitor + Convert.ToString(MeterData.data1[12])
+                   + delimitor + Convert.ToString(MeterData.data1[13]) + delimitor + Convert.ToString(MeterData.data1[14])
+                   + delimitor + "I4PAR" + delimitor + "APERX * 1.0E6"
+
+                    + delimitor + Convert.ToString(MeterData.data1[15]) + delimitor + Convert.ToString(MeterData.data1[16])
+                    + delimitor + Convert.ToString(MeterData.data1[17]) + delimitor + Convert.ToString(MeterData.data1[18]);
+                 
+                try
+                {
+                    using (StreamWriter writer = File.AppendText(frmTerminal.fileName))
+                    {
+                        // writer.WriteLine("{0},{1},{2},{3},{4}, {5},{6}", MeterData.year, MeterData.day, MeterData.Hour, MeterData.Min, MeterData.Sec, MeterData.data4[2]);
+                        //  writer.WriteLine(Convert.ToString(MeterData.dataTime), ",",Convert.ToString(MeterData.data4[2]),",");
+                        writer.WriteLine(myString);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        */
+
+
+        public class FileClass
+        {
+        }
+        private void UpdateTimeText()
+        {
+            DateTime nowDateTime = DateTime.Now;
+            timeNowLabel.Text = Convert.ToString(nowDateTime);
+            modeLabel.Text = mode + " mode";
+            if (fileRecording == true)
+            {
+                //    this.Invoke(new UpdateFileTimeCallback(this.UpdateDurationTime), new object[] {  });
+                var myStartTime = DateTime.Now;
+                if (firstTime == true)
+                {
+                    this.Invoke(new UpdateFileNameLabelCallback(this.UpdateNameLabel), new object[] { });
+                    this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
+                    fileStartTime = myStartTime;// DateTime.Now;
+                    FileClass FileClass = new FileClass();
+                    //  Form1.gravityFileName = sampleFileNamelabel.Text;
+                    RecordDataToFile("Open");
+                    firstTime = false;
+                }
+                else
+                {
+                    var runningTime = TimeSpan.FromTicks(DateTime.Now.Ticks - fileStartTime.Ticks);
+                    string timeDuration = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+                    recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+                }
+            }
+            else
+            {
+                firstTime = true;
+            }
+        }
+
+
+
+
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+
+            Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
+            TimeThread.IsBackground = true;
+            TimeThread.Start();
+
+
+
+
+
             dataGridView1.DataSource = bindingSource1;
-            GetData("select * from [DynamicData].[dbo].[Data_Table_Simulated] ORDER BY id desc");
-            //   GetData("SELECT top 1  FROM [DynamicData].[dbo].[Data_Table_Simulated] ");// ORDER BY id desc
-            //     GetData("SELECT * FROM [DynamicData].[dbo].[Data_Table_Simulated] WHERE [date] >= (date >= DATEADD(M, -10, DateTime.Parse('2016-06-29 15:13:51')))  ");
 
             GravityChart.DataSource = bindingSource1;
             SetupChart();
@@ -2883,7 +2976,7 @@ namespace SerialPortTerminal
 
         private void button15_Click(object sender, EventArgs e)
         {
-            GetData("junk");
+           
         }
     }
 }
