@@ -54,6 +54,29 @@ namespace SerialPortTerminal
         public int enable = 1;
         public int clear = 0;
         public int disable = 0;
+ //       public static string fileType;
+        public static int fileDateFormat = 1;
+        public static string meterNumber;
+        public static string gravityFileName;
+ //       public static bool firstTime = true;
+  //      public static DateTime fileStartTime;
+        public static Boolean surveyNameSet = false;
+        public static string surveyName = null;
+        public static string customFileName;
+       // public static string fileName = "";
+        public static string filePath = "c:\\Ultrasys\\data\\";
+        public static string programPath = "c:\\ZLS\\";
+  //      public static string calFilePath = "c:\\ZLS\\";
+  //      public static string calFileName;
+        public static string configFilePath = "c:\\ZLS\\";
+        public static string configFileName;
+   //     public static bool fileRecording = false;
+        public static Boolean userSelect = false;
+        public static Boolean yesShutDown = false;
+        public static Boolean NoShutDown = false;
+        public static string mode;
+
+
 
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
@@ -76,27 +99,16 @@ namespace SerialPortTerminal
         private Boolean autostart = false;
 
         public static DateTime fileStartTime;
-        public static Boolean surveyNameSet = false;
-        public static string customFileName;
         public static string fileName = "";
-        public static string filePath = "c:\\Ultrasys\\data\\";
-        public static string programPath = "c:\\ZLS\\";
-        public static string calFilePath = "c:\\ZLS\\";
         public static string calFileName;
-        public static string configFilePath = "c:\\ZLS\\";
-        public static string configFileName;
         public static bool fileRecording = false;
-        public static Boolean userSelect = false;
-        public static Boolean yesShutDown = false;
-        public static Boolean NoShutDown = false;
-        public static string mode;
         public static bool firstTime = true;
         public static string fileType;
         public static DateTime oldTime = DateTime.Now;
         public string timePeriod;
         public int timeValue;
         // public EngineeringForm EngineeringForm = new EngineeringForm();
-        public static string gravityFileName;
+
 
         public string connectionString = "Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True";
         private BindingSource bindingSource1 = new BindingSource();
@@ -3005,6 +3017,18 @@ namespace SerialPortTerminal
         {
             DateTimeForm myDateForm = new DateTimeForm();
             myDateForm.Show();
+        }
+
+        private void fileFormatToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FileFormatForm myFileForm = new FileFormatForm();
+            myFileForm.Show();
+        }
+
+        private void recordingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RecordingForm RecordingForm = new RecordingForm();
+            RecordingForm.Show();
         }
     }
 }

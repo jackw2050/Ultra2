@@ -140,7 +140,6 @@ namespace SerialPortTerminal
             this.printConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setDateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemAuxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPortPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.engineeringPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -969,7 +968,6 @@ namespace SerialPortTerminal
             // 
             this.tempToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setDateTimeToolStripMenuItem,
-            this.systemAuxToolStripMenuItem,
             this.serialPortPreferencesToolStripMenuItem,
             this.engineeringPanelToolStripMenuItem});
             this.tempToolStripMenuItem.Name = "tempToolStripMenuItem";
@@ -982,12 +980,6 @@ namespace SerialPortTerminal
             this.setDateTimeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.setDateTimeToolStripMenuItem.Text = "Set Date/ Time";
             this.setDateTimeToolStripMenuItem.Click += new System.EventHandler(this.setDateTimeToolStripMenuItem_Click);
-            // 
-            // systemAuxToolStripMenuItem
-            // 
-            this.systemAuxToolStripMenuItem.Name = "systemAuxToolStripMenuItem";
-            this.systemAuxToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.systemAuxToolStripMenuItem.Text = "System Monitor";
             // 
             // serialPortPreferencesToolStripMenuItem
             // 
@@ -1013,14 +1005,16 @@ namespace SerialPortTerminal
             // fileFormatToolStripMenuItem1
             // 
             this.fileFormatToolStripMenuItem1.Name = "fileFormatToolStripMenuItem1";
-            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.fileFormatToolStripMenuItem1.Text = "File format";
+            this.fileFormatToolStripMenuItem1.Click += new System.EventHandler(this.fileFormatToolStripMenuItem1_Click);
             // 
             // recordingToolStripMenuItem
             // 
             this.recordingToolStripMenuItem.Name = "recordingToolStripMenuItem";
-            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.recordingToolStripMenuItem.Text = "Recording";
+            this.recordingToolStripMenuItem.Click += new System.EventHandler(this.recordingToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1432,7 +1426,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem printConfigFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tempToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setDateTimeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem systemAuxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serialPortPreferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem engineeringPanelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem configureToolStripMenuItem;
