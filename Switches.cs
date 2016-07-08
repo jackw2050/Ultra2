@@ -71,7 +71,7 @@ namespace SerialPortTerminal
         private void button8_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x81;// cmd 0
-            sendCmd("Send Relay Switches");           // 0 ----
+            frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button9_Click(object sender, EventArgs e)
         {

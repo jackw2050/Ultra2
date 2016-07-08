@@ -29,10 +29,10 @@ namespace SerialPortTerminal
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTerminal));
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.lnkAbout = new System.Windows.Forms.LinkLabel();
@@ -168,6 +168,7 @@ namespace SerialPortTerminal
             this.fileStartTimeLabel = new System.Windows.Forms.Label();
             this.timeNowLabel = new System.Windows.Forms.Label();
             this.chartWindowGroupBox = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.windowSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.showAllDataCheckBox = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -175,7 +176,6 @@ namespace SerialPortTerminal
             this.recordingLabel = new System.Windows.Forms.Label();
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.modeLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -378,44 +378,44 @@ namespace SerialPortTerminal
             this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
             this.GravityChart.BackSecondaryColor = System.Drawing.Color.White;
             this.GravityChart.BorderlineWidth = 5;
-            chartArea3.AxisX.LineColor = System.Drawing.Color.White;
-            chartArea3.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisX2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisX2.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.InterlacedColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.MajorTickMark.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.ScaleBreakStyle.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea3.BackColor = System.Drawing.Color.Black;
-            chartArea3.BorderColor = System.Drawing.Color.LightGray;
-            chartArea3.Name = "Gravity";
-            chartArea4.BackColor = System.Drawing.Color.Black;
-            chartArea4.BorderColor = System.Drawing.Color.White;
-            chartArea4.Name = "CrossCoupling";
-            this.GravityChart.ChartAreas.Add(chartArea3);
-            this.GravityChart.ChartAreas.Add(chartArea4);
+            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX2.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.InterlacedColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.ScaleBreakStyle.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.BorderColor = System.Drawing.Color.LightGray;
+            chartArea1.Name = "Gravity";
+            chartArea2.BackColor = System.Drawing.Color.Black;
+            chartArea2.BorderColor = System.Drawing.Color.White;
+            chartArea2.Name = "CrossCoupling";
+            this.GravityChart.ChartAreas.Add(chartArea1);
+            this.GravityChart.ChartAreas.Add(chartArea2);
             this.GravityChart.ContextMenuStrip = this.contextMenuStrip1;
-            legend3.Alignment = System.Drawing.StringAlignment.Far;
-            legend3.BackColor = System.Drawing.Color.White;
-            legend3.DockedToChartArea = "Gravity";
-            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend3.IsDockedInsideChartArea = false;
-            legend3.Name = "Gravity Legend";
-            legend4.Alignment = System.Drawing.StringAlignment.Far;
-            legend4.DockedToChartArea = "CrossCoupling";
-            legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend4.IsDockedInsideChartArea = false;
-            legend4.Name = "Cross Coupling Legend";
-            this.GravityChart.Legends.Add(legend3);
-            this.GravityChart.Legends.Add(legend4);
+            legend1.Alignment = System.Drawing.StringAlignment.Far;
+            legend1.BackColor = System.Drawing.Color.White;
+            legend1.DockedToChartArea = "Gravity";
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend1.IsDockedInsideChartArea = false;
+            legend1.Name = "Gravity Legend";
+            legend2.Alignment = System.Drawing.StringAlignment.Far;
+            legend2.DockedToChartArea = "CrossCoupling";
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend2.IsDockedInsideChartArea = false;
+            legend2.Name = "Cross Coupling Legend";
+            this.GravityChart.Legends.Add(legend1);
+            this.GravityChart.Legends.Add(legend2);
             this.GravityChart.Location = new System.Drawing.Point(33, 155);
             this.GravityChart.Name = "GravityChart";
             this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
@@ -1005,6 +1005,8 @@ namespace SerialPortTerminal
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.tempToolStripMenuItem,
@@ -1014,7 +1016,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1374, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(287, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1223,6 +1225,19 @@ namespace SerialPortTerminal
             this.chartWindowGroupBox.TabStop = false;
             this.chartWindowGroupBox.Text = "Chart Window Options";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "hours",
+            "minutes",
+            "seconds"});
+            this.comboBox1.Location = new System.Drawing.Point(62, 40);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(77, 21);
+            this.comboBox1.TabIndex = 115;
+            this.comboBox1.Text = "minutes";
+            // 
             // windowSizeNumericUpDown
             // 
             this.windowSizeNumericUpDown.Location = new System.Drawing.Point(11, 41);
@@ -1293,19 +1308,6 @@ namespace SerialPortTerminal
             this.modeLabel.Size = new System.Drawing.Size(59, 13);
             this.modeLabel.TabIndex = 114;
             this.modeLabel.Text = "modeLabel";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "hours",
-            "minutes",
-            "seconds"});
-            this.comboBox1.Location = new System.Drawing.Point(62, 40);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(77, 21);
-            this.comboBox1.TabIndex = 115;
-            this.comboBox1.Text = "minutes";
             // 
             // frmTerminal
             // 
