@@ -105,6 +105,12 @@
     <Compile Include="DataStatusForm.Designer.cs">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DateTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DateTimeForm.Designer.cs">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataStatusForm.resx">
       <DependentUpon>DataStatusForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateTimeForm.resx">
+      <DependentUpon>DateTimeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Parameters.resx">
       <DependentUpon>Parameters.cs</DependentUpon>

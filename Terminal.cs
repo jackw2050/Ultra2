@@ -3000,5 +3000,11 @@ namespace SerialPortTerminal
             Console.WriteLine(timePeriod);
           //  (string timePeriod, int timeValue)
         }
+
+        private void setDateTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DateTimeForm myDateForm = new DateTimeForm();
+            myDateForm.Show();
+        }
     }
 }

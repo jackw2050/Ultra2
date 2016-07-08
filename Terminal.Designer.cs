@@ -29,10 +29,10 @@ namespace SerialPortTerminal
     private void InitializeComponent()
     {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTerminal));
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.tmrCheckComPorts = new System.Windows.Forms.Timer(this.components);
@@ -123,8 +123,6 @@ namespace SerialPortTerminal
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chartWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setTraceVisabilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.setupContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setSpringSensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -316,44 +314,44 @@ namespace SerialPortTerminal
             this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
             this.GravityChart.BackSecondaryColor = System.Drawing.Color.White;
             this.GravityChart.BorderlineWidth = 5;
-            chartArea3.AxisX.LineColor = System.Drawing.Color.White;
-            chartArea3.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisX2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisX2.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.InterlacedColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.MajorTickMark.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.MinorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.ScaleBreakStyle.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
-            chartArea3.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
-            chartArea3.BackColor = System.Drawing.Color.Black;
-            chartArea3.BorderColor = System.Drawing.Color.LightGray;
-            chartArea3.Name = "Gravity";
-            chartArea4.BackColor = System.Drawing.Color.Black;
-            chartArea4.BorderColor = System.Drawing.Color.White;
-            chartArea4.Name = "CrossCoupling";
-            this.GravityChart.ChartAreas.Add(chartArea3);
-            this.GravityChart.ChartAreas.Add(chartArea4);
+            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisX2.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.InterlacedColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.MajorTickMark.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.ScaleBreakStyle.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
+            chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.BorderColor = System.Drawing.Color.LightGray;
+            chartArea1.Name = "Gravity";
+            chartArea2.BackColor = System.Drawing.Color.Black;
+            chartArea2.BorderColor = System.Drawing.Color.White;
+            chartArea2.Name = "CrossCoupling";
+            this.GravityChart.ChartAreas.Add(chartArea1);
+            this.GravityChart.ChartAreas.Add(chartArea2);
             this.GravityChart.ContextMenuStrip = this.contextMenuStrip1;
-            legend3.Alignment = System.Drawing.StringAlignment.Far;
-            legend3.BackColor = System.Drawing.Color.White;
-            legend3.DockedToChartArea = "Gravity";
-            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend3.IsDockedInsideChartArea = false;
-            legend3.Name = "Gravity Legend";
-            legend4.Alignment = System.Drawing.StringAlignment.Far;
-            legend4.DockedToChartArea = "CrossCoupling";
-            legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-            legend4.IsDockedInsideChartArea = false;
-            legend4.Name = "Cross Coupling Legend";
-            this.GravityChart.Legends.Add(legend3);
-            this.GravityChart.Legends.Add(legend4);
+            legend1.Alignment = System.Drawing.StringAlignment.Far;
+            legend1.BackColor = System.Drawing.Color.White;
+            legend1.DockedToChartArea = "Gravity";
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend1.IsDockedInsideChartArea = false;
+            legend1.Name = "Gravity Legend";
+            legend2.Alignment = System.Drawing.StringAlignment.Far;
+            legend2.DockedToChartArea = "CrossCoupling";
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
+            legend2.IsDockedInsideChartArea = false;
+            legend2.Name = "Cross Coupling Legend";
+            this.GravityChart.Legends.Add(legend1);
+            this.GravityChart.Legends.Add(legend2);
             this.GravityChart.Location = new System.Drawing.Point(33, 155);
             this.GravityChart.Name = "GravityChart";
             this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
@@ -860,20 +858,6 @@ namespace SerialPortTerminal
             this.setTraceVisabilityToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.setTraceVisabilityToolStripMenuItem.Text = "Set Trace Visability";
             // 
-            // printDialog1
-            // 
-            this.printDialog1.UseEXDialog = true;
-            // 
-            // printPreviewDialog
-            // 
-            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog.Enabled = true;
-            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
-            this.printPreviewDialog.Name = "printPreviewDialog";
-            this.printPreviewDialog.Visible = false;
-            // 
             // setupContextMenuStrip1
             // 
             this.setupContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -956,7 +940,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(408, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -997,6 +981,7 @@ namespace SerialPortTerminal
             this.setDateTimeToolStripMenuItem.Name = "setDateTimeToolStripMenuItem";
             this.setDateTimeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.setDateTimeToolStripMenuItem.Text = "Set Date/ Time";
+            this.setDateTimeToolStripMenuItem.Click += new System.EventHandler(this.setDateTimeToolStripMenuItem_Click);
             // 
             // systemAuxToolStripMenuItem
             // 
@@ -1128,7 +1113,7 @@ namespace SerialPortTerminal
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
