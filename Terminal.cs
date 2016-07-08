@@ -93,7 +93,8 @@ namespace SerialPortTerminal
         public static bool firstTime = true;
         public static string fileType;
         public static DateTime oldTime = DateTime.Now;
-
+        public string timePeriod;
+        public int timeValue;
         // public EngineeringForm EngineeringForm = new EngineeringForm();
         public static string gravityFileName;
 
@@ -220,7 +221,7 @@ namespace SerialPortTerminal
                 set { totalCorrection = value; }
             }
         }
-
+       
         public void CleanUp(string timePeriod, int timeValue)
         {
             int maxArraySize = 60;// initialize for 60 seconds
@@ -2126,12 +2127,12 @@ namespace SerialPortTerminal
 
         private void StartDataCollection()
         {
-            OpenPort();
+           // OpenPort();
             byte[] data = { 0x01, 0x08, 0x09 };
 
-            _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
-            _timer1.Enabled = true;
-            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+        //    _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+         //   _timer1.Enabled = true;
+         //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
 
         // Start data collection.  Send command 1 for meter to start data stream
@@ -2377,6 +2378,12 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+
+            comboBox1.SelectedItem = "minutes";
+            windowSizeNumericUpDown.Minimum = 1;
+            windowSizeNumericUpDown.Maximum = 60;
+
+
             Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
             TimeThread.IsBackground = true;
             TimeThread.Start();
@@ -2960,6 +2967,38 @@ namespace SerialPortTerminal
         private void dataStatusFormToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataStatusForm.Show();
+        }
+
+        private void serialPortFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SerialPortForm.Show();
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // Show the user the about dialog
+            (new frmAbout()).ShowDialog(this);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            timePeriod = comboBox1.SelectedItem.ToString();
+            windowSizeNumericUpDown.Minimum = 1;
+            if (timePeriod == "hours") 
+            {
+                windowSizeNumericUpDown.Maximum = 24;
+            }
+            else 
+            {
+                windowSizeNumericUpDown.Maximum = 60;
+            }
+
+
+
+
+
+            Console.WriteLine(timePeriod);
+          //  (string timePeriod, int timeValue)
         }
     }
 }
