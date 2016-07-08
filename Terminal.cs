@@ -47,7 +47,7 @@ namespace SerialPortTerminal
         private SerialPortForm SerialPortForm = new SerialPortForm();
         public AutoStartForm AutoStartForm = new AutoStartForm();
         private ArrayList listDataSource = new ArrayList();
-
+        public Parameters Parameters = new Parameters();
         private delegate void SetTextCallback(string text);
 
         public static Boolean engineerDebug = false;
@@ -2954,6 +2954,11 @@ namespace SerialPortTerminal
 
         private void button15_Click(object sender, EventArgs e)
         {
+        }
+
+        private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Parameters.Show();
         }
     }
 }

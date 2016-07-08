@@ -176,6 +176,15 @@ namespace SerialPortTerminal
             this.recordingLabel = new System.Windows.Forms.Label();
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.modeLabel = new System.Windows.Forms.Label();
+            this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataStatusFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serialPortFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.switchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -1012,11 +1021,13 @@ namespace SerialPortTerminal
             this.tempToolStripMenuItem,
             this.configureToolStripMenuItem,
             this.helpToolStripMenuItem,
-            this.exitProgramToolStripMenuItem1});
+            this.exitProgramToolStripMenuItem1,
+            this.navigationToolStripMenuItem,
+            this.helpToolStripMenuItem2});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(287, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1309,6 +1320,70 @@ namespace SerialPortTerminal
             this.modeLabel.TabIndex = 114;
             this.modeLabel.Text = "modeLabel";
             // 
+            // navigationToolStripMenuItem
+            // 
+            this.navigationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dataFormToolStripMenuItem,
+            this.dataStatusFormToolStripMenuItem,
+            this.parametersToolStripMenuItem,
+            this.serialPortFormToolStripMenuItem,
+            this.switchesToolStripMenuItem});
+            this.navigationToolStripMenuItem.Name = "navigationToolStripMenuItem";
+            this.navigationToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.navigationToolStripMenuItem.Text = "Navigation";
+            // 
+            // helpToolStripMenuItem2
+            // 
+            this.helpToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpFileToolStripMenuItem,
+            this.aboutToolStripMenuItem1});
+            this.helpToolStripMenuItem2.Name = "helpToolStripMenuItem2";
+            this.helpToolStripMenuItem2.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem2.Text = "Help";
+            // 
+            // helpFileToolStripMenuItem
+            // 
+            this.helpFileToolStripMenuItem.Name = "helpFileToolStripMenuItem";
+            this.helpFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpFileToolStripMenuItem.Text = "Help file";
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem1.Text = "About";
+            // 
+            // dataFormToolStripMenuItem
+            // 
+            this.dataFormToolStripMenuItem.Name = "dataFormToolStripMenuItem";
+            this.dataFormToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.dataFormToolStripMenuItem.Text = "Data form";
+            // 
+            // dataStatusFormToolStripMenuItem
+            // 
+            this.dataStatusFormToolStripMenuItem.Name = "dataStatusFormToolStripMenuItem";
+            this.dataStatusFormToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.dataStatusFormToolStripMenuItem.Text = "Data status form";
+            // 
+            // parametersToolStripMenuItem
+            // 
+            this.parametersToolStripMenuItem.Name = "parametersToolStripMenuItem";
+            this.parametersToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.parametersToolStripMenuItem.Text = "Parameters";
+            this.parametersToolStripMenuItem.Click += new System.EventHandler(this.parametersToolStripMenuItem_Click);
+            // 
+            // serialPortFormToolStripMenuItem
+            // 
+            this.serialPortFormToolStripMenuItem.Name = "serialPortFormToolStripMenuItem";
+            this.serialPortFormToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.serialPortFormToolStripMenuItem.Text = "Serial port form";
+            // 
+            // switchesToolStripMenuItem
+            // 
+            this.switchesToolStripMenuItem.Name = "switchesToolStripMenuItem";
+            this.switchesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.switchesToolStripMenuItem.Text = "Switches";
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1521,6 +1596,15 @@ namespace SerialPortTerminal
         private System.Windows.Forms.TextBox recordingTextBox;
         protected System.Windows.Forms.Label modeLabel;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ToolStripMenuItem navigationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dataFormToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dataStatusFormToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem parametersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem serialPortFormToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem switchesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem helpFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
     }
 }
 
