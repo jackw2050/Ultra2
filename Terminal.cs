@@ -38,7 +38,6 @@ namespace SerialPortTerminal
     public partial class frmTerminal : Form
     {
         public CalculateMarineData mdt = new CalculateMarineData();
-        public DataForm f2 = new DataForm();
         public RelaySwitches RelaySwitches = new RelaySwitches();
         private ConfigData ConfigData = new ConfigData();
         private ControlSwitches ControlSwitches = new ControlSwitches();
@@ -520,7 +519,7 @@ namespace SerialPortTerminal
                     UpdatePinState();
                 }
 
-                f2.Show();
+
                 // START 1 SEC TIMER
                 //       timer1.Enabled = true;
                 //       timer1.Start();
@@ -721,7 +720,7 @@ namespace SerialPortTerminal
 
             // Check if this method is running on a different thread
             // than the thread that created the control.
-            if (this.f2.InvokeRequired)
+            if (this.DataStatusForm.InvokeRequired)
             {
                 // It's on a different thread, so use Invoke.
                 SetTextCallback d = new SetTextCallback(SetText);
@@ -2929,10 +2928,7 @@ namespace SerialPortTerminal
             sendCmd("Send Control Switches");          // 1   -------
         }
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            f2.Show();
-        }
+
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -2959,6 +2955,11 @@ namespace SerialPortTerminal
         private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Parameters.Show();
+        }
+
+        private void dataStatusFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataStatusForm.Show();
         }
     }
 }
