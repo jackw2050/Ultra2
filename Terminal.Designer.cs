@@ -172,6 +172,9 @@ namespace SerialPortTerminal
             this.recordingLabel = new System.Windows.Forms.Label();
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.modeLabel = new System.Windows.Forms.Label();
+            this.surveyRecordGroupBox = new System.Windows.Forms.GroupBox();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -181,6 +184,7 @@ namespace SerialPortTerminal
             this.menuStrip1.SuspendLayout();
             this.chartWindowGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.windowSizeNumericUpDown)).BeginInit();
+            this.surveyRecordGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPort
@@ -300,7 +304,7 @@ namespace SerialPortTerminal
             this.rtfTerminal.BackColor = System.Drawing.SystemColors.Control;
             this.rtfTerminal.Location = new System.Drawing.Point(15, 43);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(564, 47);
+            this.rtfTerminal.Size = new System.Drawing.Size(285, 62);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
@@ -440,7 +444,7 @@ namespace SerialPortTerminal
             // surveyTextBox
             // 
             this.surveyTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.surveyTextBox.Location = new System.Drawing.Point(601, 69);
+            this.surveyTextBox.Location = new System.Drawing.Point(306, 96);
             this.surveyTextBox.Name = "surveyTextBox";
             this.surveyTextBox.Size = new System.Drawing.Size(130, 20);
             this.surveyTextBox.TabIndex = 100;
@@ -939,7 +943,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(408, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1133,7 +1137,7 @@ namespace SerialPortTerminal
             // 
             this.label12.AutoSize = true;
             this.label12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label12.Location = new System.Drawing.Point(601, 53);
+            this.label12.Location = new System.Drawing.Point(306, 80);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(95, 13);
             this.label12.TabIndex = 101;
@@ -1156,7 +1160,7 @@ namespace SerialPortTerminal
             this.timeNowLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.timeNowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeNowLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.timeNowLabel.Location = new System.Drawing.Point(411, 5);
+            this.timeNowLabel.Location = new System.Drawing.Point(442, 4);
             this.timeNowLabel.Name = "timeNowLabel";
             this.timeNowLabel.Size = new System.Drawing.Size(37, 16);
             this.timeNowLabel.TabIndex = 107;
@@ -1226,7 +1230,7 @@ namespace SerialPortTerminal
             // dataFileTextBox
             // 
             this.dataFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.dataFileTextBox.Location = new System.Drawing.Point(601, 25);
+            this.dataFileTextBox.Location = new System.Drawing.Point(306, 52);
             this.dataFileTextBox.Name = "dataFileTextBox";
             this.dataFileTextBox.Size = new System.Drawing.Size(122, 20);
             this.dataFileTextBox.TabIndex = 112;
@@ -1235,7 +1239,7 @@ namespace SerialPortTerminal
             // 
             this.recordingLabel.AutoSize = true;
             this.recordingLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.recordingLabel.Location = new System.Drawing.Point(598, 5);
+            this.recordingLabel.Location = new System.Drawing.Point(303, 32);
             this.recordingLabel.Name = "recordingLabel";
             this.recordingLabel.Size = new System.Drawing.Size(95, 13);
             this.recordingLabel.TabIndex = 111;
@@ -1261,12 +1265,52 @@ namespace SerialPortTerminal
             this.modeLabel.TabIndex = 114;
             this.modeLabel.Text = "modeLabel";
             // 
+            // surveyRecordGroupBox
+            // 
+            this.surveyRecordGroupBox.Controls.Add(this.stopButton);
+            this.surveyRecordGroupBox.Controls.Add(this.startButton);
+            this.surveyRecordGroupBox.Location = new System.Drawing.Point(506, 5);
+            this.surveyRecordGroupBox.Name = "surveyRecordGroupBox";
+            this.surveyRecordGroupBox.Size = new System.Drawing.Size(104, 52);
+            this.surveyRecordGroupBox.TabIndex = 115;
+            this.surveyRecordGroupBox.TabStop = false;
+            this.surveyRecordGroupBox.Text = "Survey Record";
+            // 
+            // stopButton
+            // 
+            this.stopButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.stopButton.Location = new System.Drawing.Point(6, 19);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(40, 23);
+            this.stopButton.TabIndex = 55;
+            this.stopButton.Text = "Stop";
+            this.startStopButtonsToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
+            this.durationToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.startButton.Location = new System.Drawing.Point(50, 19);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(40, 23);
+            this.startButton.TabIndex = 7;
+            this.startButton.Text = "Start";
+            this.startStopButtonsToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
+        "ter.");
+            this.durationToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
+        "ter.");
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.contextMenuStripForm;
+            this.Controls.Add(this.surveyRecordGroupBox);
             this.Controls.Add(this.modeLabel);
             this.Controls.Add(this.recordingTextBox);
             this.Controls.Add(this.dataFileTextBox);
@@ -1315,6 +1359,7 @@ namespace SerialPortTerminal
             this.chartWindowGroupBox.ResumeLayout(false);
             this.chartWindowGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.windowSizeNumericUpDown)).EndInit();
+            this.surveyRecordGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1461,6 +1506,9 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem helpFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         public System.Windows.Forms.NumericUpDown windowSizeNumericUpDown;
+        private System.Windows.Forms.GroupBox surveyRecordGroupBox;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button startButton;
     }
 }
 

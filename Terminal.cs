@@ -57,28 +57,24 @@ namespace SerialPortTerminal
         public int enable = 1;
         public int clear = 0;
         public int disable = 0;
- //       public static string fileType;
         public static int fileDateFormat = 1;
         public static string meterNumber;
         public static string gravityFileName;
- //       public static bool firstTime = true;
-  //      public static DateTime fileStartTime;
         public static Boolean surveyNameSet = false;
         public static string surveyName = null;
         public static string customFileName;
-       // public static string fileName = "";
         public static string filePath = "c:\\Ultrasys\\data\\";
         public static string programPath = "c:\\ZLS\\";
-  //      public static string calFilePath = "c:\\ZLS\\";
-  //      public static string calFileName;
         public static string configFilePath = "c:\\ZLS\\";
         public static string configFileName;
-   //     public static bool fileRecording = false;
         public static Boolean userSelect = false;
         public static Boolean yesShutDown = false;
         public static Boolean NoShutDown = false;
         public static string mode;
-
+        public static Boolean gyrosEnabled = false;
+        public static Boolean torqueMotorsEnabled = false;
+        public static Boolean springTensionEnabled = false;
+        public static Boolean alarmsEnabled = false;
 
 
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
@@ -102,7 +98,7 @@ namespace SerialPortTerminal
         private Boolean autostart = false;
 
         public static DateTime fileStartTime;
-        public static string fileName = "";
+        public static string fileName = programPath + "test.csv";// c:/zls
         public static string calFileName;
         public static bool fileRecording = false;
         public static bool firstTime = true;
@@ -120,6 +116,17 @@ namespace SerialPortTerminal
         private SqlConnection myConnection = new SqlConnection("Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True");
 
         public Boolean filterData = false;
+
+        public class startupData
+        {
+            public string Status;
+        }
+
+        public class shutdownData
+        {
+            public string shutDownText;
+        }
+
 
         private class Record
         {
@@ -294,7 +301,7 @@ namespace SerialPortTerminal
             //			comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
 
             _timer1 = new System.Windows.Forms.Timer();
-            //     _timer1.Interval = (1000 - DateTime.Now.Millisecond);
+            _timer1.Interval = (1000 - DateTime.Now.Millisecond);
             _timer1.Enabled = false;  // ENBALE WHEN FIRST DATAN IS SENT
             _timer1.Tick += new EventHandler(port_CheckDataReceived);
         }
@@ -789,6 +796,36 @@ namespace SerialPortTerminal
                 GravityChart.DataSource = listDataSource;
                 dataGridView1.DataSource = listDataSource;
 
+                myData myData = new myData();
+                myData.Date = mdt.Date;
+                myData.Gravity = mdt.gravity;
+                myData.SpringTension = mdt.SpringTension;
+                myData.CrossCoupling = mdt.CrossCoupling;
+                myData.RawBeam = mdt.Beam;
+                myData.VCC = mdt.VCC;
+                myData.AL = mdt.AL;
+                myData.AX = mdt.AX;
+                myData.VE = mdt.VE;
+                myData.AX2 = mdt.AX2;
+                myData.XACC2 = mdt.XACC2;
+                myData.LACC2 = mdt.LACC2;
+                myData.XACC = mdt.XACC;
+                myData.LACC = mdt.LACC;
+                myData.TotalCorrection = mdt.totalCorrection;
+                myData.longitude = mdt.longitude;
+                myData.latitude = mdt.latitude;
+                myData.altitude = mdt.altitude;
+                myData.gpsStatus = mdt.gpsStatus;
+
+
+
+
+
+
+
+
+
+                RecordDataToFile("Append", myData);
                 CleanUp("minutes", 1);// limit chart to 10 min
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2160,8 +2197,8 @@ namespace SerialPortTerminal
             // Send the binary data out the port
             //    comport.Write(data, 0, data.Length);
 
-            _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
-            _timer1.Enabled = true;
+   //         _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+   //         _timer1.Enabled = true;
             // Show the hex digits on in the terminal window
             Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
@@ -3826,10 +3863,10 @@ namespace SerialPortTerminal
                     using (StreamWriter writer = File.CreateText(frmTerminal.fileName))
                     {
                         string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
-                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Parallel Port" + delimitor
-                            + "Platform Period" + delimitor + "AUX1" + delimitor + "AUX2" + delimitor + "AUX3" + delimitor + "AUX4";
+                             + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                             + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                             + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor
+                             + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
                         writer.WriteLine(header);
                     }
                 }
@@ -3885,8 +3922,12 @@ namespace SerialPortTerminal
                         string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
                             + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
                             + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Parallel Port" + delimitor
-                            + "Platform Period" + delimitor + "AUX1" + delimitor + "AUX2" + delimitor + "AUX3" + delimitor + "AUX4";
+                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor 
+                            + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
+
+
+
+
                         writer.WriteLine(header);
                     }
                 }
@@ -3901,22 +3942,11 @@ namespace SerialPortTerminal
                      + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
                      + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
                      + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.ParallelData)
-                     + delimitor + Convert.ToString(d.AUX1) + delimitor + Convert.ToString(d.AUX2) + delimitor + Convert.ToString(d.AUX3)
-                     + delimitor + Convert.ToString(d.AUX4);
+                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor
+                     + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude)
+                     + delimitor + Convert.ToString(d.gpsStatus);
 
-                /*    string myString = Convert.ToString(MeterData.dataTime) + delimitor + Convert.ToString(MeterData.data4[2] * ConfigData.beamScale)
-                   +delimitor + Convert.ToString(MeterData.data4[3]) + delimitor + Convert.ToString(MeterData.data4[4])
-                   + delimitor + Convert.ToString(MeterData.data1[5]) + delimitor + Convert.ToString(MeterData.data1[6])
-                   + delimitor + Convert.ToString(MeterData.data1[7]) + delimitor + Convert.ToString(MeterData.data1[8])
-                   + delimitor + Convert.ToString(MeterData.data1[9]) + delimitor + Convert.ToString(MeterData.data1[10])
-                   + delimitor + Convert.ToString(MeterData.data1[11]) + delimitor + Convert.ToString(MeterData.data1[12])
-                   + delimitor + Convert.ToString(MeterData.data1[13]) + delimitor + Convert.ToString(MeterData.data1[14])
-                   + delimitor + "I4PAR" + delimitor + "APERX * 1.0E6"
-
-                    + delimitor + Convert.ToString(MeterData.data1[15]) + delimitor + Convert.ToString(MeterData.data1[16])
-                    + delimitor + Convert.ToString(MeterData.data1[17]) + delimitor + Convert.ToString(MeterData.data1[18]);
-                   */
+             
                 try
                 {
                     using (StreamWriter writer = File.AppendText(frmTerminal.fileName))
@@ -3971,7 +4001,123 @@ namespace SerialPortTerminal
             public double AUX2;
             public double AUX3;
             public double AUX4;
+            public double longitude;
+            public double latitude;
+            public double altitude;
+            public double gpsStatus;
+          
         }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            Boolean okToRun = false;
+
+            if (surveyNameSet == false)
+            {
+                MessageBox.Show("Warning! \nNo survey information was entered.");
+                surveyNameSet = true;
+            }
+            else
+            {
+                okToRun = true;
+            }
+
+            if (okToRun)
+            {
+                fileRecording = true;
+                recordingTextBox.Text = "Recording file";
+                recordingTextBox.BackColor = System.Drawing.Color.LightGreen;
+                surveyTextBox.Enabled = false;
+
+                //                Thread WorkerThread = new Thread(new ParameterizedThreadStart(ArrayDataWorker));
+                //                WorkerThread.IsBackground = true;
+                //                WorkerThread.Start(new Action<myData>(this.AddDataPoint));
+            }
+            okToRun = true;
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            // Close file
+            fileRecording = false;
+            surveyTextBox.Enabled = true;
+            recordingTextBox.Text = "Recording stopped";
+            recordingTextBox.BackColor = System.Drawing.Color.Red;
+        }
+
+
+        private void ShutdownDataWorker(object obj)
+        {
+            var _delegate = (Action<shutdownData>)obj;
+            // this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
+            //   this.Invoke(new Action<shutdownData>(this.UpdateShutdownText), new object[] { d });
+
+
+
+
+
+            _delegate(new shutdownData
+            {
+                shutDownText = "Preparing to shutdown..."
+            });
+            Thread.Sleep(1000);
+            fileRecording = false;
+            _delegate(new shutdownData
+            {
+                shutDownText = "Closing all open files."
+            });
+            Thread.Sleep(2000);
+
+            springTensionEnabled = false;
+            _delegate(new shutdownData
+            {
+                shutDownText = "Disabling spring tension"
+            });
+            Thread.Sleep(3000);
+            torqueMotorsEnabled = false;
+            _delegate(new shutdownData
+            {
+                shutDownText = "Turning off torque motors"
+            });
+            Thread.Sleep(3000);
+
+            gyrosEnabled = false;
+
+            _delegate(new shutdownData
+            {
+                shutDownText = "Turning off gyros"
+            });
+            Thread.Sleep(3000);
+
+            _delegate(new shutdownData
+            {
+                shutDownText = "Shutdown complete.  Program will now terminate."
+            });
+            Thread.Sleep(3000);
+
+            ExitProgram();
+        }
+
+        private void ExitProgram()
+        {
+            SaveSettings();
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                System.Environment.Exit(1);
+            }
+        }
+
+
+
+
+
+
 
 
 
