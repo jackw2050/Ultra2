@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using FileHelpers;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
@@ -52,7 +53,7 @@ namespace SerialPortTerminal
         public Parameters Parameters = new Parameters();
         private delegate void SetTextCallback(string text);
 
-        public static Boolean engineerDebug = false;
+        public static Boolean engineerDebug = true;
         public int set = 1;
         public int enable = 1;
         public int clear = 0;
@@ -66,6 +67,7 @@ namespace SerialPortTerminal
         public static string filePath = "c:\\Ultrasys\\data\\";
         public static string programPath = "c:\\ZLS\\";
         public static string configFilePath = "c:\\ZLS\\";
+        public static string calFilePath;
         public static string configFileName;
         public static Boolean userSelect = false;
         public static Boolean yesShutDown = false;
@@ -2385,6 +2387,12 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+            // SETUP DEFAULTS
+            configFilePath = Properties.Settings.Default.configFilePath;
+            configFileName = Properties.Settings.Default.configFileName;
+            calFilePath = Properties.Settings.Default.calFilePath;
+            calFileName = Properties.Settings.Default.calFileName;
+
 
             comboBox1.SelectedItem = "minutes";
             windowSizeNumericUpDown.Minimum = 1;
@@ -3032,20 +3040,43 @@ namespace SerialPortTerminal
 
         #region File Class
 
+
+
+
+
+        [DelimitedRecord(",")]
+        public class ConfigFileData
+        {
+           
+
+            public string EntryName;
+
+            [FieldConverter(ConverterKind.Double, ".")] // The decimal separator is .
+            public decimal configValue;
+
+
+
+        }
+
+
+
+
+
+
+
+
+
         public void ReadConfigFile(string configFile)
         {
+
+
+            var engine = new FileHelperAsyncEngine<ConfigFileData>();
+
             //  NEED TO ADD ERROR CHECKING FOR END OF FILE
             //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
             ConfigData ConfigData = new ConfigData();
-            FileStream myStream;
-            //    double[] CCFACT = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            //    double[] AFILT = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] tempByte = { 0, 0, 0, 0 };
-            byte[] byte2 = new byte[2];
-            byte[] byte4 = new byte[4];
-            byte[] byte10 = new byte[10];
 
-            if (configFile == null)
+            if (configFile == null)// load defaults - 
             {
                 ConfigData.alarmSwitch = 0;
                 ConfigData.beamScale = -1.9512490034103394;
@@ -3106,11 +3137,21 @@ namespace SerialPortTerminal
             {
                 try
                 {
-                    myStream = new FileStream(configFile, FileMode.Open);
-                    BinaryReader readBinary = new BinaryReader(myStream);
 
-                    readBinary.Read(byte2, 0, 2);
-                    readBinary.Read(byte4, 0, 4);
+
+                    using (engine.BeginReadFile(configFile))
+                    {
+                        // The engine is IEnumerable
+                        foreach (ConfigFileData dataItem in engine)
+                        {
+                            // your code here
+                            Console.WriteLine(dataItem.configValue.ToString(), dataItem.configValue);
+                        }
+                    }
+
+
+/*
+
 
                     ConfigData.beamScale = BitConverter.ToSingle(byte4, 0);
                     if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
@@ -3346,6 +3387,7 @@ namespace SerialPortTerminal
                     //LogConfigData(ConfigData);
 
                     meterNumberTextBox.Text = ConfigData.meterNumber;
+                    */
                 }
                 catch (Exception ex)
                 {
@@ -4113,6 +4155,84 @@ namespace SerialPortTerminal
             }
         }
 
+        private void surveyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            surveyName = surveyTextBox.Text;
+            surveyNameSet = true;
+            UpdateDataFileName();
+            UpdateNameLabel();
+        }
+
+
+        private void UpdateDataFileName()
+        {
+            DateTime now = DateTime.Now;
+            if (fileDateFormat == 1)
+            {
+                fileName = filePath + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-MMM-dd-HH-mm-ss") + "." + fileType;
+            }
+            else if (fileDateFormat == 2)
+            {
+                fileName = filePath + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-mm-dd-HH-mm-ss") + "." + fileType;
+            }
+            else if (fileDateFormat == 3)
+            {
+                fileName = filePath + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-dd-HH-mm-ss") + "." + fileType;
+            }
+            else if (fileDateFormat == 4)
+            {
+                fileName = filePath + customFileName + "." + fileType;
+            }
+ //           Properties.Settings.Default.fileDateFormat = fileDateFormat;
+        }
+
+        private void exitProgramToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                System.Environment.Exit(1);
+            }
+        }
+
+        private void setDataFileLocationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "*." + fileType + "|*." + fileType; //  " (*.csv, *.txt, *.tsv)|*.csv, *.txt, *.tsv";
+            UpdateDataFileName();
+            dialog.DefaultExt = fileType;
+            dialog.AddExtension = true;
+            dialog.FileName = ConfigData.meterNumber + "-" + surveyName + "-" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm-ss");
+
+            // add file name based on selected data             call dialog when start button is pressed
+            // maybe add a checkbox for do not show this again
+            dialog.InitialDirectory = "C:\\zls";//  need to get this from stored data
+            dialog.ShowDialog();
+            Console.WriteLine("file path = " + dialog.FileName);
+
+
+            Properties.Settings.Default.fileType = fileType;
+            Properties.Settings.Default.filePath = dialog.InitialDirectory;
+
+
+
+        }
+
+        private void loadConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+
+            OpenFileDialog.ShowDialog();
+
+            ReadConfigFile(OpenFileDialog.FileName);
+
+
+        }
 
 
 
@@ -4122,6 +4242,8 @@ namespace SerialPortTerminal
 
 
 
+
+        ///////////////////////////////////////////////
 
 
     }

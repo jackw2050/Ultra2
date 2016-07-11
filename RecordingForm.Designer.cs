@@ -28,177 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dailyRefreshPanel = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.userDurationPanel = new System.Windows.Forms.Panel();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.refreshTimeComboBox = new System.Windows.Forms.ComboBox();
             this.dailyComboBox = new System.Windows.Forms.ComboBox();
             this.hourlyComboBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.dailyRefreshPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            this.userDurationPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dailyRefreshPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            this.dailyRefreshPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dailyRefreshPanel
-            // 
-            this.dailyRefreshPanel.Controls.Add(this.label7);
-            this.dailyRefreshPanel.Controls.Add(this.label6);
-            this.dailyRefreshPanel.Controls.Add(this.numericUpDown5);
-            this.dailyRefreshPanel.Controls.Add(this.numericUpDown4);
-            this.dailyRefreshPanel.Location = new System.Drawing.Point(261, 186);
-            this.dailyRefreshPanel.Name = "dailyRefreshPanel";
-            this.dailyRefreshPanel.Size = new System.Drawing.Size(158, 100);
-            this.dailyRefreshPanel.TabIndex = 17;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(84, 57);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Minutes";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(84, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Hours";
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(16, 52);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown5.TabIndex = 13;
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(16, 20);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown4.TabIndex = 12;
-            // 
-            // userDurationPanel
-            // 
-            this.userDurationPanel.Controls.Add(this.numericUpDown3);
-            this.userDurationPanel.Controls.Add(this.numericUpDown2);
-            this.userDurationPanel.Controls.Add(this.numericUpDown1);
-            this.userDurationPanel.Controls.Add(this.label5);
-            this.userDurationPanel.Controls.Add(this.label4);
-            this.userDurationPanel.Controls.Add(this.label3);
-            this.userDurationPanel.Controls.Add(this.label2);
-            this.userDurationPanel.Location = new System.Drawing.Point(18, 206);
-            this.userDurationPanel.Name = "userDurationPanel";
-            this.userDurationPanel.Size = new System.Drawing.Size(200, 127);
-            this.userDurationPanel.TabIndex = 16;
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(136, 83);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown3.TabIndex = 12;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(136, 60);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown2.TabIndex = 11;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(136, 37);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            365,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown1.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(86, 85);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Minutes";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(95, 62);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Hours";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(99, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Days";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Please indicate file duration";
             // 
             // refreshTimeComboBox
             // 
@@ -229,7 +77,7 @@
             "2200",
             "2300",
             "3400"});
-            this.refreshTimeComboBox.Location = new System.Drawing.Point(261, 155);
+            this.refreshTimeComboBox.Location = new System.Drawing.Point(261, 120);
             this.refreshTimeComboBox.Name = "refreshTimeComboBox";
             this.refreshTimeComboBox.Size = new System.Drawing.Size(158, 21);
             this.refreshTimeComboBox.TabIndex = 15;
@@ -244,7 +92,7 @@
             "24 Hours From Start Time",
             "At Midnight",
             "At Other Time"});
-            this.dailyComboBox.Location = new System.Drawing.Point(261, 127);
+            this.dailyComboBox.Location = new System.Drawing.Point(261, 92);
             this.dailyComboBox.Name = "dailyComboBox";
             this.dailyComboBox.Size = new System.Drawing.Size(158, 21);
             this.dailyComboBox.TabIndex = 14;
@@ -258,7 +106,7 @@
             this.hourlyComboBox.Items.AddRange(new object[] {
             "From Start Time",
             "On The Hour"});
-            this.hourlyComboBox.Location = new System.Drawing.Point(261, 99);
+            this.hourlyComboBox.Location = new System.Drawing.Point(261, 64);
             this.hourlyComboBox.Name = "hourlyComboBox";
             this.hourlyComboBox.Size = new System.Drawing.Size(158, 21);
             this.hourlyComboBox.TabIndex = 13;
@@ -267,7 +115,6 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.radioButton4);
             this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.radioButton3);
             this.panel1.Controls.Add(this.radioButton2);
@@ -275,17 +122,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 123);
             this.panel1.TabIndex = 12;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(13, 85);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(123, 17);
-            this.radioButton4.TabIndex = 4;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "User defined Interval";
-            this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
@@ -343,6 +179,59 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Location = new System.Drawing.Point(16, 16);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDown4.TabIndex = 12;
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Location = new System.Drawing.Point(16, 42);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDown5.TabIndex = 13;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(75, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Hours";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(75, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Minutes";
+            // 
+            // dailyRefreshPanel
+            // 
+            this.dailyRefreshPanel.Controls.Add(this.label7);
+            this.dailyRefreshPanel.Controls.Add(this.label6);
+            this.dailyRefreshPanel.Controls.Add(this.numericUpDown5);
+            this.dailyRefreshPanel.Controls.Add(this.numericUpDown4);
+            this.dailyRefreshPanel.Location = new System.Drawing.Point(261, 151);
+            this.dailyRefreshPanel.Name = "dailyRefreshPanel";
+            this.dailyRefreshPanel.Size = new System.Drawing.Size(136, 74);
+            this.dailyRefreshPanel.TabIndex = 17;
+            // 
             // RecordingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,7 +239,6 @@
             this.ClientSize = new System.Drawing.Size(477, 358);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dailyRefreshPanel);
-            this.Controls.Add(this.userDurationPanel);
             this.Controls.Add(this.refreshTimeComboBox);
             this.Controls.Add(this.dailyComboBox);
             this.Controls.Add(this.hourlyComboBox);
@@ -358,46 +246,31 @@
             this.Controls.Add(this.label1);
             this.Name = "RecordingForm";
             this.Text = "RecordingForm";
-            this.dailyRefreshPanel.ResumeLayout(false);
-            this.dailyRefreshPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            this.userDurationPanel.ResumeLayout(false);
-            this.userDurationPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            this.dailyRefreshPanel.ResumeLayout(false);
+            this.dailyRefreshPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel dailyRefreshPanel;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.Panel userDurationPanel;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox refreshTimeComboBox;
         private System.Windows.Forms.ComboBox dailyComboBox;
         private System.Windows.Forms.ComboBox hourlyComboBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel dailyRefreshPanel;
     }
 }

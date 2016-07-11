@@ -40,7 +40,6 @@ namespace SerialPortTerminal
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            userDurationPanel.Visible = true;
             hourlyComboBox.Visible = false;
             dailyComboBox.Visible = false;
             refreshTimeComboBox.Visible = false;
@@ -52,7 +51,6 @@ namespace SerialPortTerminal
             hourlyComboBox.Visible = true;
             dailyComboBox.Visible = false;
             refreshTimeComboBox.Visible = false;
-            userDurationPanel.Visible = false;
             dailyRefreshPanel.Visible = false;
         }
 
@@ -61,7 +59,6 @@ namespace SerialPortTerminal
             hourlyComboBox.Visible = false;
             dailyComboBox.Visible = true;
             refreshTimeComboBox.Visible = false;
-            userDurationPanel.Visible = false;
             dailyRefreshPanel.Visible = false;
         }
     }
