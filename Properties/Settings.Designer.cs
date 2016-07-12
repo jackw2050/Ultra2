@@ -220,5 +220,185 @@ namespace SerialPortTerminal.Properties {
                 this["dataFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.298317")]
+        public double beamScale {
+            get {
+                return ((double)(this["beamScale"]));
+            }
+            set {
+                this["beamScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"S67\"")]
+        public string meterNumber {
+            get {
+                return ((string)(this["meterNumber"]));
+            }
+            set {
+                this["meterNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"zls\"")]
+        public string engPassword {
+            get {
+                return ((string)(this["engPassword"]));
+            }
+            set {
+                this["engPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.91E-05")]
+        public double crossPeriod {
+            get {
+                return ((double)(this["crossPeriod"]));
+            }
+            set {
+                this["crossPeriod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8.4000002971151844E-06")]
+        public double longPeriod {
+            get {
+                return ((double)(this["longPeriod"]));
+            }
+            set {
+                this["longPeriod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.212")]
+        public double crossDampFactor {
+            get {
+                return ((double)(this["crossDampFactor"]));
+            }
+            set {
+                this["crossDampFactor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.091499999165534973")]
+        public double longDampFactor {
+            get {
+                return ((double)(this["longDampFactor"]));
+            }
+            set {
+                this["longDampFactor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.15")]
+        public double crossGain {
+            get {
+                return ((double)(this["crossGain"]));
+            }
+            set {
+                this["crossGain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.11999999731779099")]
+        public double longGain {
+            get {
+                return ((double)(this["longGain"]));
+            }
+            set {
+                this["longGain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double crossLead {
+            get {
+                return ((double)(this["crossLead"]));
+            }
+            set {
+                this["crossLead"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.44999998807907104")]
+        public double longLead {
+            get {
+                return ((double)(this["longLead"]));
+            }
+            set {
+                this["longLead"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20000")]
+        public int springTensionMax {
+            get {
+                return ((int)(this["springTensionMax"]));
+            }
+            set {
+                this["springTensionMax"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"marine\"")]
+        public string modeSwitch {
+            get {
+                return ((string)(this["modeSwitch"]));
+            }
+            set {
+                this["modeSwitch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossBias {
+            get {
+                return ((double)(this["crossBias"]));
+            }
+            set {
+                this["crossBias"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double longBias {
+            get {
+                return ((double)(this["longBias"]));
+            }
+            set {
+                this["longBias"] = value;
+            }
+        }
     }
 }

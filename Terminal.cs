@@ -5,6 +5,9 @@
 
 #region Namespace Inclusions
 
+using FileHelpers;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using SerialPortTerminal.Properties;
 using System;
 using System.Collections;
@@ -19,9 +22,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using FileHelpers;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 
 //  Delimited file operations using FileHelpers  http://www.filehelpers.net
 // iTextSharp  http://www.mikesdotnetting.com/article/89/itextsharp-page-layout-with-columns
@@ -51,6 +51,7 @@ namespace SerialPortTerminal
         public AutoStartForm AutoStartForm = new AutoStartForm();
         private ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
+
         private delegate void SetTextCallback(string text);
 
         public static Boolean engineerDebug = true;
@@ -77,7 +78,6 @@ namespace SerialPortTerminal
         public static Boolean torqueMotorsEnabled = false;
         public static Boolean springTensionEnabled = false;
         public static Boolean alarmsEnabled = false;
-
 
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
@@ -110,7 +110,6 @@ namespace SerialPortTerminal
         public int timeValue;
         // public EngineeringForm EngineeringForm = new EngineeringForm();
 
-
         public string connectionString = "Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Security=True;Max Pool Size=50;Min Pool Size=5;Pooling=True";
         private BindingSource bindingSource1 = new BindingSource();
 
@@ -128,7 +127,6 @@ namespace SerialPortTerminal
         {
             public string shutDownText;
         }
-
 
         private class Record
         {
@@ -245,7 +243,7 @@ namespace SerialPortTerminal
                 set { totalCorrection = value; }
             }
         }
-       
+
         public void CleanUp(string timePeriod, int timeValue)
         {
             int maxArraySize = 60;// initialize for 60 seconds
@@ -544,7 +542,6 @@ namespace SerialPortTerminal
                     UpdatePinState();
                 }
 
-
                 // START 1 SEC TIMER
                 //       timer1.Enabled = true;
                 //       timer1.Start();
@@ -818,14 +815,6 @@ namespace SerialPortTerminal
                 myData.latitude = mdt.latitude;
                 myData.altitude = mdt.altitude;
                 myData.gpsStatus = mdt.gpsStatus;
-
-
-
-
-
-
-
-
 
                 RecordDataToFile("Append", myData);
                 CleanUp("minutes", 1);// limit chart to 10 min
@@ -2181,12 +2170,12 @@ namespace SerialPortTerminal
 
         private void StartDataCollection()
         {
-           // OpenPort();
+            // OpenPort();
             byte[] data = { 0x01, 0x08, 0x09 };
 
-        //    _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
-         //   _timer1.Enabled = true;
-         //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+            //    _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+            //   _timer1.Enabled = true;
+            //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
 
         // Start data collection.  Send command 1 for meter to start data stream
@@ -2199,8 +2188,8 @@ namespace SerialPortTerminal
             // Send the binary data out the port
             //    comport.Write(data, 0, data.Length);
 
-   //         _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
-   //         _timer1.Enabled = true;
+            //         _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+            //         _timer1.Enabled = true;
             // Show the hex digits on in the terminal window
             Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
@@ -2253,7 +2242,6 @@ namespace SerialPortTerminal
         {
             dataFileTextBox.Text = fileName;
         }
-
 
         // comment for now
         /*
@@ -2352,8 +2340,6 @@ namespace SerialPortTerminal
 
         */
 
-
-
         private void UpdateTimeText()
         {
             DateTime nowDateTime = DateTime.Now;
@@ -2393,11 +2379,9 @@ namespace SerialPortTerminal
             calFilePath = Properties.Settings.Default.calFilePath;
             calFileName = Properties.Settings.Default.calFileName;
 
-
             comboBox1.SelectedItem = "minutes";
             windowSizeNumericUpDown.Minimum = 1;
             windowSizeNumericUpDown.Maximum = 60;
-
 
             Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
             TimeThread.IsBackground = true;
@@ -2950,8 +2934,6 @@ namespace SerialPortTerminal
             sendCmd("Send Control Switches");          // 1   -------
         }
 
-
-
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
         }
@@ -2999,21 +2981,17 @@ namespace SerialPortTerminal
         {
             timePeriod = comboBox1.SelectedItem.ToString();
             windowSizeNumericUpDown.Minimum = 1;
-            if (timePeriod == "hours") 
+            if (timePeriod == "hours")
             {
                 windowSizeNumericUpDown.Maximum = 24;
             }
-            else 
+            else
             {
                 windowSizeNumericUpDown.Maximum = 60;
             }
 
-
-
-
-
             Console.WriteLine(timePeriod);
-          //  (string timePeriod, int timeValue)
+            //  (string timePeriod, int timeValue)
         }
 
         private void setDateTimeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3034,49 +3012,25 @@ namespace SerialPortTerminal
             RecordingForm.Show();
         }
 
-
-
-
-
         #region File Class
-
-
-
-
 
         [DelimitedRecord(",")]
         public class ConfigFileData
         {
-           
-
             public string EntryName;
 
-            [FieldConverter(ConverterKind.Double, ".")] // The decimal separator is .
-            public decimal configValue;
-
-
-
+            public string configValue;
         }
-
-
-
-
-
-
-
-
 
         public void ReadConfigFile(string configFile)
         {
-
-
             var engine = new FileHelperAsyncEngine<ConfigFileData>();
 
             //  NEED TO ADD ERROR CHECKING FOR END OF FILE
             //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
             ConfigData ConfigData = new ConfigData();
 
-            if (configFile == null)// load defaults - 
+            if (configFile == null)// load defaults -
             {
                 ConfigData.alarmSwitch = 0;
                 ConfigData.beamScale = -1.9512490034103394;
@@ -3137,257 +3091,257 @@ namespace SerialPortTerminal
             {
                 try
                 {
-
-
                     using (engine.BeginReadFile(configFile))
                     {
                         // The engine is IEnumerable
                         foreach (ConfigFileData dataItem in engine)
                         {
-                            // your code here
-                            Console.WriteLine(dataItem.configValue.ToString(), dataItem.configValue);
+                           // Console.WriteLine(dataItem.EntryName.ToString() + "\t" + dataItem.configValue.ToString());
+
+                            switch (dataItem.EntryName)
+                            {
+                                case "Version":
+                                    Console.WriteLine("Version number: " + dataItem.configValue);
+                                    break;
+
+                                case "Meter Number":
+                                    ConfigData.meterNumber = dataItem.configValue.Trim();
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Meter number is---------------------- \t" + ConfigData.meterNumber);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
+                                    break;
+
+                                case "Beam Scale Factor":
+                                    ConfigData.beamScale = Convert.ToDouble(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
+                                    break;
+
+                                case "Cross Axis Period":
+                                    ConfigData.crossPeriod = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
+                                    break;
+                                case "Long Axis Period":
+                                    ConfigData.longPeriod = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
+                                    break;
+
+                                case "Cross Axis Damping Factor":
+                                    ConfigData.crossDampFactor = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
+                                    break;
+                                case "Long Axis Damping Factor":
+                                    ConfigData.longDampFactor = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
+                                    break;
+
+                                case "Cross Axis Gain":
+                                    ConfigData.crossGain = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
+                                    break;
+                                case "Long Axis Gain":
+                                    ConfigData.longGain = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.longGain));
+                                    break;
+
+
+                                case "Cross Axis Lead":
+                                    ConfigData.crossLead = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
+                                    break;
+                                case "long Axis Lead":
+                                    ConfigData.longLead = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
+                                    break;
+                                case "Max Spring Tension":
+                                    ConfigData.springTensionMax = Convert.ToInt32(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
+                                    break;
+
+                                case "Cross Axis Bias":
+                                    ConfigData.crossBias = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
+                                    break;
+                                case "Long Axis Bias":
+                                    ConfigData.longBias = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias));
+                                    break;
+
+
+                                case "crossCouplingFactors[0]":
+                                    ConfigData.crossCouplingFactors[0] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[0]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[0]);
+                                    break;
+                                case "crossCouplingFactors[1]":
+                                    ConfigData.crossCouplingFactors[1] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[1]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[1]);
+                                    break;
+                                case "crossCouplingFactors[2]":
+                                    ConfigData.crossCouplingFactors[2] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[2]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[2]);
+                                    break;
+                                case "crossCouplingFactors[3]":
+                                    ConfigData.crossCouplingFactors[3] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[3]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[3]);
+                                    break;
+                                case "crossCouplingFactors[4]":
+                                    ConfigData.crossCouplingFactors[4] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[4]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[4]);
+                                    break;
+                                case "crossCouplingFactors[5]":
+                                    ConfigData.crossCouplingFactors[5] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[5]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[5]);
+                                    break;
+                                case "crossCouplingFactors[6]":
+                                    ConfigData.crossCouplingFactors[6] = Convert.ToSingle(dataItem.configValue);
+                                   // mdt.VCC = ConfigData.crossCouplingFactors[6];
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[6]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
+
+                                    break;
+                                case "crossCouplingFactors[7]":
+                                    ConfigData.crossCouplingFactors[7] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[7]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
+                                    break;
+                                case "crossCouplingFactors[8]":
+                                    ConfigData.crossCouplingFactors[8] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[8]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
+                                    break;
+                                case "crossCouplingFactors[9]":
+                                    ConfigData.crossCouplingFactors[9] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[9]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9]));
+
+                                    break;
+                                case "crossCouplingFactors[10]":
+                                    ConfigData.crossCouplingFactors[10] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[10]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10]));
+
+                                    break;
+                                case "crossCouplingFactors[11]":
+                                    ConfigData.crossCouplingFactors[11] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[11]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11]));
+
+                                    break;
+                                case "crossCouplingFactors[12]":
+                                    ConfigData.crossCouplingFactors[12] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[12]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12]));
+
+                                    break;
+                                case "crossCouplingFactors[13]":
+                                    ConfigData.crossCouplingFactors[13] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[13]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (13)---------- \t{0:e4}.", ConfigData.crossCouplingFactors[13]);
+
+                                    break;
+                                case "crossCouplingFactors[14]":
+                                    ConfigData.crossCouplingFactors[14] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[14]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (14)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14]));
+
+                                    break;
+                                case "crossCouplingFactors[15]":
+                                    ConfigData.crossCouplingFactors[14] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[15]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (15)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15]));
+
+                                    break;
+                                case "crossCouplingFactors[16]":
+                                    ConfigData.crossCouplingFactors[16] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[16]-------------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16]));
+                                    break;
+
+
+                                case "AX Phase":
+                                    ConfigData.analogFilter[1] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
+                                    break;
+                                case "AL Phase":
+                                    ConfigData.analogFilter[2] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
+                                    break;
+                                case "analogFilter[3]":
+                                    ConfigData.analogFilter[3] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[3]---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[3]));
+                                    break;
+                                case "VCC Phase":
+                                    ConfigData.analogFilter[4] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
+                                    break;
+                                case "Cross Axis Compensation Phase (4)":
+                                    ConfigData.analogFilter[5] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5]));
+                                    break;
+                                case "Long Axis Compensation Phase (4)":
+                                    ConfigData.analogFilter[6] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6]));
+                                    break;
+                                case "Cross Axis Compensation Phase (16":
+                                    ConfigData.analogFilter[7] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
+
+                                    break;
+                                case "Long Axis Compensation Phase (16)":
+                                    ConfigData.analogFilter[8] = Convert.ToSingle(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[8]));
+                                    break;
+
+
+
+
+                                default:
+
+                                    // set alert "xxx" entry is not found. check file and try again
+                                    break;
+                            }
                         }
                     }
 
+                    /*
 
-/*
+                                                           ConfigData.numAuxChan = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("NUMBER OF AUXILIARY ANALOG CHANNELS-- \t" + Convert.ToString(ConfigData.numAuxChan));
+
+                              
+                                                           ConfigData.linePrinterSwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
+
+                                                           ConfigData.fileNameSwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
+
+                                                           readBinary.Read(byte2, 0, 2);
+                                                           ConfigData.hardDiskSwitch = BitConverter.ToInt16(byte2, 0); ;
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
+
+                                                           ConfigData.engPassword = System.Text.Encoding.Default.GetString(byte10);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("Magic value is ---------------------- \t" + ConfigData.engPassword);
+
+                                                           ConfigData.monitorDisplaySwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
+
+                                                           ConfigData.serialPortSwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
 
 
-                    ConfigData.beamScale = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
+                                                           ConfigData.digitalInputSwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
 
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.numAuxChan = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("NUMBER OF AUXILIARY ANALOG CHANNELS-- \t" + Convert.ToString(ConfigData.numAuxChan));
+                                                           ConfigData.serialPortOutputSwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
 
-                    readBinary.Read(byte10, 0, 10);
-                    ConfigData.meterNumber = System.Text.Encoding.Default.GetString(byte10).Trim();
-                    // ConfigData.meterNumber.Trim();
-                    if (frmTerminal.engineerDebug) Console.WriteLine("Meter number is---------------------- \t" + ConfigData.meterNumber);
+                                                           ConfigData.alarmSwitch = BitConverter.ToInt16(byte2, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
 
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.linePrinterSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
 
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.fileNameSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
+                                                           ConfigData.iAuxGain = BitConverter.ToSingle(byte4, 0);
+                                                           if (frmTerminal.engineerDebug) Console.WriteLine("I aux gain value is --------------- \t" + Convert.ToString(ConfigData.iAuxGain));
 
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.hardDiskSwitch = BitConverter.ToInt16(byte2, 0); ;
-                    if (frmTerminal.engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
-
-                    readBinary.Read(byte10, 0, 10);
-                    ConfigData.engPassword = System.Text.Encoding.Default.GetString(byte10);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("Magic value is ---------------------- \t" + ConfigData.engPassword);
-
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.monitorDisplaySwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossPeriod = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.longPeriod = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossDampFactor = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.longDampFactor = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossGain = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.longGain = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.longGain));
-
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.serialPortSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
-
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.digitalInputSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
-
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.printerEmulationSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (ConfigData.printerEmulationSwitch == 2)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P");
-                    }
-                    if (ConfigData.printerEmulationSwitch == 3)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P2");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "DPL24C");
-                    }
-
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.serialPortOutputSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
-
-                    readBinary.Read(byte2, 0, 2);
-                    ConfigData.alarmSwitch = BitConverter.ToInt16(byte2, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossLead = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.longLead = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.springTensionMax = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.modeSwitch = BitConverter.ToInt16(byte4, 0);
-                    if (ConfigData.modeSwitch == 0)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Marine");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Hires");
-                    }
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.iAuxGain = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("I aux gain value is --------------- \t" + Convert.ToString(ConfigData.iAuxGain));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossBias = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.longBias = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias));
-
-                    readBinary.Read(byte2, 0, 2);// extra read for alignment.  need to find out why
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[6] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[7] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AL----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[7]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[8] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AX----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[8]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[9] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[10] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[11] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[12] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12]));
-
-                    readBinary.Read(byte2, 0, 2);
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[13] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)---------- \t{0:e4}.", ConfigData.crossCouplingFactors[13]);
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[14] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[15] = BitConverter.ToSingle(byte4, 0);
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15]));
-                    }
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.crossCouplingFactors[16] = BitConverter.ToSingle(byte4, 0);
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16]));
-                    }
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[1] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[2] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[3] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[3]---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[3]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[4] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[5] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[6] = BitConverter.ToSingle(byte4, 0);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6]));
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[7] = BitConverter.ToSingle(byte4, 0);
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                    }
-
-                    readBinary.Read(byte4, 0, 4);
-                    ConfigData.analogFilter[8] = BitConverter.ToSingle(byte4, 0);
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                    }
-
-                    Console.ReadLine();
-                    readBinary.Close();
-
-                    //LogConfigData(ConfigData);
+                    
+   */
 
                     meterNumberTextBox.Text = ConfigData.meterNumber;
-                    */
                 }
                 catch (Exception ex)
                 {
@@ -3397,101 +3351,7 @@ namespace SerialPortTerminal
         }
 
         /*
-                public void LogConfigData(ConfigData ConfigData)
-                {
-                    // ConfigData ConfigData = new ConfigData();
-                    if (frmTerminal.engineerDebug) Console.WriteLine("\n\nConfiguration data for meter number   \t" + ConfigData.meterNumber);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("\n\t User defined parameters\n");
-                    if (frmTerminal.engineerDebug) Console.WriteLine("Number of auxillary analog channels-- \t" + Convert.ToString(ConfigData.numAuxChan));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
-                    if (ConfigData.printerEmulationSwitch == 2)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P");
-                    }
-                    if (ConfigData.printerEmulationSwitch == 3)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P2");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "DPL24C");
-                    }
-                    if (ConfigData.modeSwitch == 0)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Marine");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Hires");
-                    }
-                    if (frmTerminal.engineerDebug) Console.WriteLine("\n\tParameters defined by ZLS.\n");
-                    if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)---------- \t{0:e4}.", ConfigData.crossCouplingFactors[13]);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5]));
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15]));
-                    }
-
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                    }
-                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t{0:n4}", ConfigData.longGain);
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6]));
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16]));
-                    }
-                    if (ConfigData.crossCouplingFactors[15] == 1)
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)---- \t" + "N/A");
-                    }
-                    else
-                    {
-                        if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                    }
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AL----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[7]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AX----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[8]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
-                    if (frmTerminal.engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
-                }
+             
 
                 //http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in#1
         */
@@ -3873,7 +3733,7 @@ namespace SerialPortTerminal
 
             //Step 6: Closing the Document:
             doc.Close();
-   //         Process.Start("C:\\ZLS\\Meter Configuration.pdf");
+            //         Process.Start("C:\\ZLS\\Meter Configuration.pdf");
         }
 
         public void RecordDataToFile(string fileOperation)
@@ -3942,7 +3802,6 @@ namespace SerialPortTerminal
                     break;
             }
 
-
             if (frmTerminal.gravityFileName == null)
             {
                 DateTime now = DateTime.Now;
@@ -3964,11 +3823,8 @@ namespace SerialPortTerminal
                         string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
                             + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
                             + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor 
+                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor
                             + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
-
-
-
 
                         writer.WriteLine(header);
                     }
@@ -3988,7 +3844,6 @@ namespace SerialPortTerminal
                      + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude)
                      + delimitor + Convert.ToString(d.gpsStatus);
 
-             
                 try
                 {
                     using (StreamWriter writer = File.AppendText(frmTerminal.fileName))
@@ -4006,12 +3861,6 @@ namespace SerialPortTerminal
         }
 
         #endregion File Class
-
-
-
-
-
-
 
         public class myData//  set this up so all chart data in in one class.  Maybe not need use MeterData
         {
@@ -4047,7 +3896,6 @@ namespace SerialPortTerminal
             public double latitude;
             public double altitude;
             public double gpsStatus;
-          
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -4087,16 +3935,11 @@ namespace SerialPortTerminal
             recordingTextBox.BackColor = System.Drawing.Color.Red;
         }
 
-
         private void ShutdownDataWorker(object obj)
         {
             var _delegate = (Action<shutdownData>)obj;
             // this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
             //   this.Invoke(new Action<shutdownData>(this.UpdateShutdownText), new object[] { d });
-
-
-
-
 
             _delegate(new shutdownData
             {
@@ -4163,7 +4006,6 @@ namespace SerialPortTerminal
             UpdateNameLabel();
         }
 
-
         private void UpdateDataFileName()
         {
             DateTime now = DateTime.Now;
@@ -4183,7 +4025,7 @@ namespace SerialPortTerminal
             {
                 fileName = filePath + customFileName + "." + fileType;
             }
- //           Properties.Settings.Default.fileDateFormat = fileDateFormat;
+            //           Properties.Settings.Default.fileDateFormat = fileDateFormat;
         }
 
         private void exitProgramToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -4215,12 +4057,8 @@ namespace SerialPortTerminal
             dialog.ShowDialog();
             Console.WriteLine("file path = " + dialog.FileName);
 
-
             Properties.Settings.Default.fileType = fileType;
             Properties.Settings.Default.filePath = dialog.InitialDirectory;
-
-
-
         }
 
         private void loadConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4230,21 +4068,8 @@ namespace SerialPortTerminal
             OpenFileDialog.ShowDialog();
 
             ReadConfigFile(OpenFileDialog.FileName);
-
-
         }
 
-
-
-
-
-
-
-
-
-
         ///////////////////////////////////////////////
-
-
     }
 }

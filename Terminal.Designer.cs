@@ -61,6 +61,8 @@ namespace SerialPortTerminal
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.emergencyShutdownButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             this.gravityChartToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.surveyInfoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.surveyTextBox = new System.Windows.Forms.TextBox();
@@ -137,7 +139,10 @@ namespace SerialPortTerminal
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadCalFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setDataFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setDateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPortPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,9 +160,6 @@ namespace SerialPortTerminal
             this.parametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPortFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.switchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label11 = new System.Windows.Forms.Label();
             this.meterNumberTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -173,16 +175,11 @@ namespace SerialPortTerminal
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.modeLabel = new System.Windows.Forms.Label();
             this.surveyRecordGroupBox = new System.Windows.Forms.GroupBox();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.gpsStartusTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.setDataFileLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.loadConfigFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadCalFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -447,6 +444,34 @@ namespace SerialPortTerminal
             this.startStopButtonsToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
             this.durationToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
             this.emergencyShutdownButton.UseVisualStyleBackColor = false;
+            // 
+            // stopButton
+            // 
+            this.stopButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.stopButton.Location = new System.Drawing.Point(6, 19);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(40, 23);
+            this.stopButton.TabIndex = 55;
+            this.stopButton.Text = "Stop";
+            this.startStopButtonsToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
+            this.durationToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.startButton.Location = new System.Drawing.Point(50, 19);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(40, 23);
+            this.startButton.TabIndex = 7;
+            this.startButton.Text = "Start";
+            this.startStopButtonsToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
+        "ter.");
+            this.durationToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
+        "ter.");
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // gravityChartToolTip
             // 
@@ -949,12 +974,11 @@ namespace SerialPortTerminal
             this.configureToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.exitProgramToolStripMenuItem1,
-            this.navigationToolStripMenuItem,
-            this.helpToolStripMenuItem2});
+            this.navigationToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(500, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(364, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -976,11 +1000,31 @@ namespace SerialPortTerminal
             this.saveConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.saveConfigFileToolStripMenuItem.Text = "Save Config file";
             // 
+            // loadConfigFileToolStripMenuItem
+            // 
+            this.loadConfigFileToolStripMenuItem.Name = "loadConfigFileToolStripMenuItem";
+            this.loadConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.loadConfigFileToolStripMenuItem.Text = "Load Config File";
+            this.loadConfigFileToolStripMenuItem.Click += new System.EventHandler(this.loadConfigFileToolStripMenuItem_Click);
+            // 
+            // loadCalFileToolStripMenuItem
+            // 
+            this.loadCalFileToolStripMenuItem.Name = "loadCalFileToolStripMenuItem";
+            this.loadCalFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.loadCalFileToolStripMenuItem.Text = "Load Cal File";
+            // 
             // printConfigFileToolStripMenuItem
             // 
             this.printConfigFileToolStripMenuItem.Name = "printConfigFileToolStripMenuItem";
             this.printConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.printConfigFileToolStripMenuItem.Text = "Print Config file";
+            // 
+            // setDataFileLocationToolStripMenuItem
+            // 
+            this.setDataFileLocationToolStripMenuItem.Name = "setDataFileLocationToolStripMenuItem";
+            this.setDataFileLocationToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.setDataFileLocationToolStripMenuItem.Text = "Set Data File Location";
+            this.setDataFileLocationToolStripMenuItem.Click += new System.EventHandler(this.setDataFileLocationToolStripMenuItem_Click);
             // 
             // tempToolStripMenuItem
             // 
@@ -1023,14 +1067,14 @@ namespace SerialPortTerminal
             // fileFormatToolStripMenuItem1
             // 
             this.fileFormatToolStripMenuItem1.Name = "fileFormatToolStripMenuItem1";
-            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
             this.fileFormatToolStripMenuItem1.Text = "File format";
             this.fileFormatToolStripMenuItem1.Click += new System.EventHandler(this.fileFormatToolStripMenuItem1_Click);
             // 
             // recordingToolStripMenuItem
             // 
             this.recordingToolStripMenuItem.Name = "recordingToolStripMenuItem";
-            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.recordingToolStripMenuItem.Text = "Recording";
             this.recordingToolStripMenuItem.Click += new System.EventHandler(this.recordingToolStripMenuItem_Click);
             // 
@@ -1047,13 +1091,13 @@ namespace SerialPortTerminal
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // exitProgramToolStripMenuItem1
@@ -1108,28 +1152,6 @@ namespace SerialPortTerminal
             this.switchesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.switchesToolStripMenuItem.Text = "Switches";
             // 
-            // helpToolStripMenuItem2
-            // 
-            this.helpToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpFileToolStripMenuItem,
-            this.aboutToolStripMenuItem1});
-            this.helpToolStripMenuItem2.Name = "helpToolStripMenuItem2";
-            this.helpToolStripMenuItem2.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem2.Text = "Help";
-            // 
-            // helpFileToolStripMenuItem
-            // 
-            this.helpFileToolStripMenuItem.Name = "helpFileToolStripMenuItem";
-            this.helpFileToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.helpFileToolStripMenuItem.Text = "Help file";
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
-            this.aboutToolStripMenuItem1.Text = "About";
-            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -1175,7 +1197,7 @@ namespace SerialPortTerminal
             this.timeNowLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.timeNowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeNowLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.timeNowLabel.Location = new System.Drawing.Point(442, 4);
+            this.timeNowLabel.Location = new System.Drawing.Point(378, 9);
             this.timeNowLabel.Name = "timeNowLabel";
             this.timeNowLabel.Size = new System.Drawing.Size(37, 16);
             this.timeNowLabel.TabIndex = 107;
@@ -1293,34 +1315,6 @@ namespace SerialPortTerminal
             this.surveyRecordGroupBox.TabStop = false;
             this.surveyRecordGroupBox.Text = "Survey Record";
             // 
-            // stopButton
-            // 
-            this.stopButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.stopButton.Location = new System.Drawing.Point(6, 19);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(40, 23);
-            this.stopButton.TabIndex = 55;
-            this.stopButton.Text = "Stop";
-            this.startStopButtonsToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
-            this.durationToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
-            this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-            // 
-            // startButton
-            // 
-            this.startButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.startButton.Location = new System.Drawing.Point(50, 19);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(40, 23);
-            this.startButton.TabIndex = 7;
-            this.startButton.Text = "Start";
-            this.startStopButtonsToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
-        "ter.");
-            this.durationToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
-        "ter.");
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.gpsStartusTextBox);
@@ -1338,6 +1332,14 @@ namespace SerialPortTerminal
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "GPS";
             // 
+            // gpsStartusTextBox
+            // 
+            this.gpsStartusTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.gpsStartusTextBox.Location = new System.Drawing.Point(109, 73);
+            this.gpsStartusTextBox.Name = "gpsStartusTextBox";
+            this.gpsStartusTextBox.Size = new System.Drawing.Size(76, 20);
+            this.gpsStartusTextBox.TabIndex = 90;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -1346,14 +1348,6 @@ namespace SerialPortTerminal
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 89;
             this.label1.Text = "GPS Status";
-            // 
-            // gpsStartusTextBox
-            // 
-            this.gpsStartusTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.gpsStartusTextBox.Location = new System.Drawing.Point(109, 73);
-            this.gpsStartusTextBox.Name = "gpsStartusTextBox";
-            this.gpsStartusTextBox.Size = new System.Drawing.Size(76, 20);
-            this.gpsStartusTextBox.TabIndex = 90;
             // 
             // groupBox2
             // 
@@ -1370,26 +1364,6 @@ namespace SerialPortTerminal
             this.groupBox2.TabIndex = 117;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
-            // 
-            // setDataFileLocationToolStripMenuItem
-            // 
-            this.setDataFileLocationToolStripMenuItem.Name = "setDataFileLocationToolStripMenuItem";
-            this.setDataFileLocationToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.setDataFileLocationToolStripMenuItem.Text = "Set Data File Location";
-            this.setDataFileLocationToolStripMenuItem.Click += new System.EventHandler(this.setDataFileLocationToolStripMenuItem_Click);
-            // 
-            // loadConfigFileToolStripMenuItem
-            // 
-            this.loadConfigFileToolStripMenuItem.Name = "loadConfigFileToolStripMenuItem";
-            this.loadConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.loadConfigFileToolStripMenuItem.Text = "Load Config File";
-            this.loadConfigFileToolStripMenuItem.Click += new System.EventHandler(this.loadConfigFileToolStripMenuItem_Click);
-            // 
-            // loadCalFileToolStripMenuItem
-            // 
-            this.loadCalFileToolStripMenuItem.Name = "loadCalFileToolStripMenuItem";
-            this.loadCalFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.loadCalFileToolStripMenuItem.Text = "Load Cal File";
             // 
             // frmTerminal
             // 
@@ -1582,9 +1556,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem parametersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serialPortFormToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem switchesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem helpFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         public System.Windows.Forms.NumericUpDown windowSizeNumericUpDown;
         private System.Windows.Forms.GroupBox surveyRecordGroupBox;
         private System.Windows.Forms.Button stopButton;
