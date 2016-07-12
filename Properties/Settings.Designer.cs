@@ -73,7 +73,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Text")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hex")]
         public global::SerialPortTerminal.DataMode DataMode {
             get {
                 return ((global::SerialPortTerminal.DataMode)(this["DataMode"]));
@@ -119,33 +119,15 @@ namespace SerialPortTerminal.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Secur" +
-            "ity=True")]
-        public string DynamicDataConnectionString {
-            get {
-                return ((string)(this["DynamicDataConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOPSERVER;Initial Catalog=DynamicData;Integrated Security=True")]
-        public string DynamicDataConnectionString1 {
-            get {
-                return ((string)(this["DynamicDataConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("S91.TAB")]
         public string calFileName {
             get {
                 return ((string)(this["calFileName"]));
+            }
+            set {
+                this["calFileName"] = value;
             }
         }
         
@@ -160,7 +142,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Config.30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sampleConfigFile.ref")]
         public string configFileName {
             get {
                 return ((string)(this["configFileName"]));
@@ -169,7 +151,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\")]
         public string configFilePath {
             get {
                 return ((string)(this["configFilePath"]));
@@ -178,10 +160,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int fileDateFormat {
             get {
-                return ((string)(this["Setting"]));
+                return ((int)(this["fileDateFormat"]));
             }
         }
         
@@ -199,7 +181,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"csv\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string fileType {
             get {
                 return ((string)(this["fileType"]));
@@ -211,7 +193,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\data\\\\\"")]
         public string dataFilePath {
             get {
                 return ((string)(this["dataFilePath"]));
@@ -398,6 +380,18 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["longBias"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dataFileName {
+            get {
+                return ((string)(this["dataFileName"]));
+            }
+            set {
+                this["dataFileName"] = value;
             }
         }
     }
