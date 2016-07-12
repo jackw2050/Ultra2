@@ -1006,18 +1006,24 @@ namespace SerialPortTerminal
             BindingSource SBind = new BindingSource();
             //   SBind.DataSource = dataTable;
 
+
+
+
+
+
             //   string chartAreaType = "Single chart area";
             this.GravityChart.Series.Add("Digital Gravity");
             this.GravityChart.Series.Add("Spring Tension");
             this.GravityChart.Series.Add("Cross Coupling");
+            this.GravityChart.Series["Cross Coupling"].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             this.GravityChart.Series.Add("Raw Beam");
             this.GravityChart.Series.Add("Total Correction");
 
             //      SETUP MAIN PAIGE GRAVITY CHART
-            this.GravityChart.Series["Digital Gravity"].XValueMember = "date";
-            this.GravityChart.Series["Digital Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;
+            this.GravityChart.Series["Digital Gravity"].XValueMember = "date";
+            this.GravityChart.Series["Digital Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["Digital Gravity"].YValueMembers = "DigitalGravity";
             this.GravityChart.Series["Digital Gravity"].BorderWidth = 4;
 
@@ -1060,7 +1066,9 @@ namespace SerialPortTerminal
             this.GravityChart.Series.Add("AL");
             this.GravityChart.Series.Add("AX");
             this.GravityChart.Series.Add("VE");
+            this.GravityChart.Series["VE"].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             this.GravityChart.Series.Add("AX2");
+            this.GravityChart.Series["AX2"].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             this.GravityChart.Series.Add("XACC");
             this.GravityChart.Series.Add("LACC");
 
@@ -2380,6 +2388,9 @@ namespace SerialPortTerminal
         private void frmTerminal_Load(object sender, EventArgs e)
         {
             // SETUP DEFAULTS
+
+            startupGroupBox.Visible = false;
+
             configFilePath = Properties.Settings.Default.configFilePath;
             configFileName = Properties.Settings.Default.configFileName;
             calFilePath = Properties.Settings.Default.calFilePath;
@@ -2935,8 +2946,8 @@ namespace SerialPortTerminal
         private void button11_Click(object sender, EventArgs e)// Autostart
         {
             autostart = true;
-            StartDataCollection();
-            AutoStart();
+           // StartDataCollection();
+           // AutoStart();
 
             AutoStartForm.Show();
 
@@ -4102,6 +4113,96 @@ namespace SerialPortTerminal
             OpenFileDialog.ShowDialog();
 
             ReadConfigFile(OpenFileDialog.FileName);
+        }
+
+        private void switchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Switches SwitchesForm = new Switches();
+            SwitchesForm.Show();
+        }
+
+        private void gyroCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (gyroCheckBox.Checked)
+            {
+
+
+                // 200 Hz etc
+                byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
+                RelaySwitches.stepperMotorEnable(enable);
+
+                //    RelaySwitches.RelaySwitchCalculate();// 0x80
+                RelaySwitches.relaySW = 0x80;// cmd 0
+                sendCmd("Send Relay Switches");           // 0 ----
+                sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
+                sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
+                sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
+
+                ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+
+                sendCmd("Send Control Switches");           // 1 ----
+                sendCmd("Send Control Switches");           // 1 ----
+                ////////////////////////////////////////////////////////////////////////////////////
+                // relay and control switches
+                RelaySwitches.relaySW = 0xB1;// cmd 0
+                sendCmd("Send Relay Switches");           // 0 ----
+                ControlSwitches.controlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
+                sendCmd("Send Control Switches");           // 1 ----
+                                                            ////////////////////////////////////////////////////////////////////////////////////
+                RelaySwitches.relaySW = 0x81;// cmd 0
+                sendCmd("Send Relay Switches");           // 0 ----
+                ControlSwitches.controlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
+                sendCmd("Send Control Switches");           // 1 ----
+                RelaySwitches.relaySW = 0x80;// cmd 0
+                sendCmd("Send Relay Switches");           // 0 ----
+                RelaySwitches.relaySW = 0x81;// cmd 0
+                sendCmd("Send Relay Switches");           // 0 ----
+
+            }
+            else
+            {
+                // stop gyros
+            }
+        }
+
+        private void torqueMotorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (torqueMotorCheckBox.Checked)
+            {
+                RelaySwitches.relaySW = 0x83;
+                sendCmd("Send Relay Switches");
+                ControlSwitches.TorqueMotor(enable);
+                sendCmd("Send Control Switches");          
+            }
+            else
+            {
+                RelaySwitches.relaySW = 0x81;// cmd 0
+                sendCmd("Send Relay Switches");           // 0 ----
+            }
+        }
+
+        private void alarmCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (alarmCheckBox.Checked)
+            {
+                ControlSwitches.Alarm(enable);
+                sendCmd("Send Control Switches");
+            }
+            else
+            {
+                ControlSwitches.Alarm(disable);
+                sendCmd("Send Control Switches");
+            }
+        }
+
+        private void startupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            startupGroupBox.Visible = true;
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            startupGroupBox.Visible = false;
         }
 
         ///////////////////////////////////////////////

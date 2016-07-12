@@ -37,7 +37,6 @@ namespace SerialPortTerminal
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.tmrCheckComPorts = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.button2 = new System.Windows.Forms.Button();
             this._timer1 = new System.Windows.Forms.Timer(this.components);
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,7 +46,6 @@ namespace SerialPortTerminal
             this.label18 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
             this.GravityChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -56,7 +54,6 @@ namespace SerialPortTerminal
             this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox17 = new System.Windows.Forms.TextBox();
-            this.button15 = new System.Windows.Forms.Button();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -180,6 +177,13 @@ namespace SerialPortTerminal
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.startupGroupBox = new System.Windows.Forms.GroupBox();
+            this.alarmCheckBox = new System.Windows.Forms.CheckBox();
+            this.springTensionCheckBox = new System.Windows.Forms.CheckBox();
+            this.torqueMotorCheckBox = new System.Windows.Forms.CheckBox();
+            this.gyroCheckBox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -192,6 +196,7 @@ namespace SerialPortTerminal
             this.surveyRecordGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.startupGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPort
@@ -208,17 +213,6 @@ namespace SerialPortTerminal
             this.tmrCheckComPorts.Enabled = true;
             this.tmrCheckComPorts.Interval = 500;
             this.tmrCheckComPorts.Tick += new System.EventHandler(this.tmrCheckComPorts_Tick);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(1129, 65);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 25);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Start data collection";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // _timer1
             // 
@@ -289,30 +283,20 @@ namespace SerialPortTerminal
             // button11
             // 
             this.button11.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button11.Location = new System.Drawing.Point(1226, 109);
+            this.button11.Location = new System.Drawing.Point(134, 48);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(42, 23);
+            this.button11.Size = new System.Drawing.Size(51, 43);
             this.button11.TabIndex = 66;
             this.button11.Text = "Auto Start";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(1133, 106);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(87, 23);
-            this.button12.TabIndex = 67;
-            this.button12.Text = "data col";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
             // rtfTerminal
             // 
             this.rtfTerminal.BackColor = System.Drawing.SystemColors.Control;
-            this.rtfTerminal.Location = new System.Drawing.Point(15, 43);
+            this.rtfTerminal.Location = new System.Drawing.Point(15, 70);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(285, 62);
+            this.rtfTerminal.Size = new System.Drawing.Size(214, 62);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
@@ -399,14 +383,15 @@ namespace SerialPortTerminal
             // contextMenuStripForm
             // 
             this.contextMenuStripForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startupToolStripMenuItem,
             this.Exit});
             this.contextMenuStripForm.Name = "contextMenuStripForm";
-            this.contextMenuStripForm.Size = new System.Drawing.Size(93, 26);
+            this.contextMenuStripForm.Size = new System.Drawing.Size(113, 48);
             // 
             // Exit
             // 
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(92, 22);
+            this.Exit.Size = new System.Drawing.Size(112, 22);
             this.Exit.Text = "Exit";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
@@ -419,16 +404,6 @@ namespace SerialPortTerminal
             this.textBox17.Size = new System.Drawing.Size(97, 20);
             this.textBox17.TabIndex = 88;
             this.textBox17.Text = "135.376";
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(1274, 102);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(58, 30);
-            this.button15.TabIndex = 94;
-            this.button15.Text = "update";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // emergencyShutdownButton
             // 
@@ -978,7 +953,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(456, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(364, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1091,13 +1066,13 @@ namespace SerialPortTerminal
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // exitProgramToolStripMenuItem1
@@ -1150,7 +1125,8 @@ namespace SerialPortTerminal
             // 
             this.switchesToolStripMenuItem.Name = "switchesToolStripMenuItem";
             this.switchesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.switchesToolStripMenuItem.Text = "Switches";
+            this.switchesToolStripMenuItem.Text = "Startup";
+            this.switchesToolStripMenuItem.Click += new System.EventHandler(this.switchesToolStripMenuItem_Click);
             // 
             // label11
             // 
@@ -1365,12 +1341,88 @@ namespace SerialPortTerminal
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
+            // startupGroupBox
+            // 
+            this.startupGroupBox.Controls.Add(this.button1);
+            this.startupGroupBox.Controls.Add(this.alarmCheckBox);
+            this.startupGroupBox.Controls.Add(this.springTensionCheckBox);
+            this.startupGroupBox.Controls.Add(this.torqueMotorCheckBox);
+            this.startupGroupBox.Controls.Add(this.gyroCheckBox);
+            this.startupGroupBox.Controls.Add(this.button11);
+            this.startupGroupBox.Location = new System.Drawing.Point(352, 41);
+            this.startupGroupBox.Name = "startupGroupBox";
+            this.startupGroupBox.Size = new System.Drawing.Size(200, 111);
+            this.startupGroupBox.TabIndex = 118;
+            this.startupGroupBox.TabStop = false;
+            this.startupGroupBox.Text = "Startup";
+            // 
+            // alarmCheckBox
+            // 
+            this.alarmCheckBox.AutoSize = true;
+            this.alarmCheckBox.Location = new System.Drawing.Point(10, 88);
+            this.alarmCheckBox.Name = "alarmCheckBox";
+            this.alarmCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.alarmCheckBox.TabIndex = 104;
+            this.alarmCheckBox.Text = "Alarm";
+            this.alarmCheckBox.UseVisualStyleBackColor = true;
+            this.alarmCheckBox.CheckedChanged += new System.EventHandler(this.alarmCheckBox_CheckedChanged);
+            // 
+            // springTensionCheckBox
+            // 
+            this.springTensionCheckBox.AutoSize = true;
+            this.springTensionCheckBox.Location = new System.Drawing.Point(10, 65);
+            this.springTensionCheckBox.Name = "springTensionCheckBox";
+            this.springTensionCheckBox.Size = new System.Drawing.Size(97, 17);
+            this.springTensionCheckBox.TabIndex = 103;
+            this.springTensionCheckBox.Text = "Spring Tension";
+            this.springTensionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // torqueMotorCheckBox
+            // 
+            this.torqueMotorCheckBox.AutoSize = true;
+            this.torqueMotorCheckBox.Location = new System.Drawing.Point(10, 42);
+            this.torqueMotorCheckBox.Name = "torqueMotorCheckBox";
+            this.torqueMotorCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.torqueMotorCheckBox.TabIndex = 102;
+            this.torqueMotorCheckBox.Text = "Torque Motors";
+            this.torqueMotorCheckBox.UseVisualStyleBackColor = true;
+            this.torqueMotorCheckBox.CheckedChanged += new System.EventHandler(this.torqueMotorCheckBox_CheckedChanged);
+            // 
+            // gyroCheckBox
+            // 
+            this.gyroCheckBox.AutoSize = true;
+            this.gyroCheckBox.Location = new System.Drawing.Point(10, 19);
+            this.gyroCheckBox.Name = "gyroCheckBox";
+            this.gyroCheckBox.Size = new System.Drawing.Size(53, 17);
+            this.gyroCheckBox.TabIndex = 101;
+            this.gyroCheckBox.Text = "Gyros";
+            this.gyroCheckBox.UseVisualStyleBackColor = true;
+            this.gyroCheckBox.CheckedChanged += new System.EventHandler(this.gyroCheckBox_CheckedChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(134, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(51, 23);
+            this.button1.TabIndex = 105;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // startupToolStripMenuItem
+            // 
+            this.startupToolStripMenuItem.Name = "startupToolStripMenuItem";
+            this.startupToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.startupToolStripMenuItem.Text = "Startup";
+            this.startupToolStripMenuItem.Click += new System.EventHandler(this.startupToolStripMenuItem_Click);
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.contextMenuStripForm;
+            this.Controls.Add(this.startupGroupBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.surveyRecordGroupBox);
@@ -1380,15 +1432,11 @@ namespace SerialPortTerminal
             this.Controls.Add(this.fileStartTimeLabel);
             this.Controls.Add(this.timeNowLabel);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.button15);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.rtfTerminal);
             this.Controls.Add(this.GravityChart);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnOpenPort);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(505, 250);
@@ -1414,6 +1462,8 @@ namespace SerialPortTerminal
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.startupGroupBox.ResumeLayout(false);
+            this.startupGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1423,7 +1473,6 @@ namespace SerialPortTerminal
     private System.Windows.Forms.Button btnOpenPort;
 		private System.Windows.Forms.Timer tmrCheckComPorts;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer _timer1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label16;
@@ -1432,7 +1481,6 @@ namespace SerialPortTerminal
         public System.Windows.Forms.TextBox textBox16;
         public System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
         public System.Windows.Forms.RichTextBox rtfTerminal;
         protected System.Windows.Forms.DataGridView dataGridView1;
@@ -1442,7 +1490,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem Exit;
         public System.Windows.Forms.TextBox textBox17;
         public System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolTip startStopButtonsToolTip;
@@ -1506,8 +1553,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem leftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chartWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setTraceVisabilityToolStripMenuItem;
-        private System.Windows.Forms.PrintDialog printDialog1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Windows.Forms.ContextMenuStrip setupContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem setSpringSensionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setModeToolStripMenuItem;
@@ -1568,6 +1613,13 @@ namespace SerialPortTerminal
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem loadConfigFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadCalFileToolStripMenuItem;
+        private System.Windows.Forms.GroupBox startupGroupBox;
+        private System.Windows.Forms.CheckBox alarmCheckBox;
+        private System.Windows.Forms.CheckBox springTensionCheckBox;
+        private System.Windows.Forms.CheckBox torqueMotorCheckBox;
+        private System.Windows.Forms.CheckBox gyroCheckBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem startupToolStripMenuItem;
     }
 }
 
