@@ -51,7 +51,7 @@ namespace SerialPortTerminal
         public AutoStartForm AutoStartForm = new AutoStartForm();
         private ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
-
+        public UserDataForm UserDataForm = new UserDataForm();
         private delegate void SetTextCallback(string text);
 
         public static Boolean engineerDebug = false;
@@ -684,7 +684,7 @@ namespace SerialPortTerminal
                     ThreadProcSafe();//  Initially write data1 -data4 in text boxes
 
                     GravityChart.DataBind();
-                    dataGridView1.Refresh();
+                    
                 }
             }
         }
@@ -749,16 +749,11 @@ namespace SerialPortTerminal
                 this.Invoke(d, new object[] { text });
                 Thread.Sleep(2000);
 
-                /*   textBox1.Text = (mdt.gravity.ToString());
-                   textBox16.Text = mdt.altitude.ToString();
-                   textBox17.Text = mdt.latitude.ToString();
-                   textBox18.Text = mdt.longitude.ToString();*/
+              
             }
             else
             {
-                // It's on the same thread, no need for Invoke
-                //   this.f2.GravityRichTextBox1.Text = text;
-                //   DataBaseWrite();
+              
 
                 if (DataStatusForm.Visible == true)
                 {
@@ -785,6 +780,61 @@ namespace SerialPortTerminal
                     DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.relaySW, 2);
                     DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.controlSw, 2);
                 }
+
+
+
+                if (UserDataForm.Visible)
+                {
+                    UserDataForm.textBox1.Text =  (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox2.Text =  (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox3.Text =  (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox4.Text =  (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox5.Text =  (mdt.myDT.ToString());
+                    UserDataForm.textBox6.Text =  (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox7.Text =  (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox8.Text =  (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox9.Text =  (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox13.Text = (mdt.LACC2.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
+
+                    if (MeterStatus.lGyro_Fog == 0)
+                    {
+                        UserDataForm.longGyroStatusLabel.ForeColor = Color.Green;
+                        UserDataForm.longGyroStatusLabel.Text = "Ready";
+                    }
+                    else
+                    {
+                        UserDataForm.longGyroStatusLabel.ForeColor = Color.Red;
+                        UserDataForm.longGyroStatusLabel.Text = "Not Ready";
+                    }
+                    if (MeterStatus.xGyro_Fog == 0)
+                    {
+                        UserDataForm.crossGyroStatusLabel.ForeColor = Color.Green;
+                        UserDataForm.crossGyroStatusLabel.Text = "Ready";
+                    }
+                    else
+                    {
+                        UserDataForm.crossGyroStatusLabel.ForeColor = Color.Red;
+                        UserDataForm.crossGyroStatusLabel.Text = "Not Ready";
+                    }
+                    if (MeterStatus.meterHeater == 0)
+                    {
+                        UserDataForm.heaterStatusLabel.ForeColor = Color.Green;
+                        UserDataForm.heaterStatusLabel.Text = "Ready";
+                    }
+                    else
+                    {
+                        UserDataForm.heaterStatusLabel.ForeColor = Color.Red;
+                        UserDataForm.heaterStatusLabel.Text = "Not Ready";
+                    }
+
+                }
+                
+
                 string specifier;
                 specifier = "000.000000";
                 textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
@@ -795,7 +845,7 @@ namespace SerialPortTerminal
 
                 listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
                 GravityChart.DataSource = listDataSource;
-                dataGridView1.DataSource = listDataSource;
+               
 
                 myData myData = new myData();
                 myData.Date = mdt.Date;
@@ -828,6 +878,9 @@ namespace SerialPortTerminal
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if (MeterStatus.lGyro_Fog == 0)
                 {
+
+
+
                     if (AutoStartForm.Visible)
                     {
                         AutoStartForm.crossGyroStatusLabel.ForeColor = Color.Green;
@@ -1038,6 +1091,8 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Raw Beam"].XValueMember = "date";
             this.GravityChart.Series["Raw Beam"].YValueMembers = "RawBeam";
             this.GravityChart.Series["Raw Beam"].BorderWidth = 4;
+            
+
             /*
                         this.GravityChart.Series["Total Correction"].XValueMember = "date";
                         this.GravityChart.Series["Total Correction"].YValueMembers = "TotalCorrection";
@@ -1079,6 +1134,14 @@ namespace SerialPortTerminal
             this.GravityChart.Series["AX2"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["XACC"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["LACC"].ChartArea = "CrossCoupling";
+
+
+            this.GravityChart.Series["AL"].Legend = "Cross Coupling Legend";
+            this.GravityChart.Series["AX"].Legend = "Cross Coupling Legend";
+            this.GravityChart.Series["VE"].Legend = "Cross Coupling Legend";
+            this.GravityChart.Series["AX2"].Legend = "Cross Coupling Legend";
+            this.GravityChart.Series["XACC"].Legend = "Cross Coupling Legend";
+            this.GravityChart.Series["LACC"].Legend = "Cross Coupling Legend";
 
             /*
                         this.GravityChart.Series["Raw Gravity"].XValueMember = "dateTime";
@@ -2254,7 +2317,7 @@ namespace SerialPortTerminal
 
         private void UpdateNameLabel()
         {
-            dataFileTextBox.Text = fileName;
+            UserDataForm.dataFileTextBox.Text = fileName;
         }
 
         // comment for now
@@ -2358,7 +2421,7 @@ namespace SerialPortTerminal
         {
             DateTime nowDateTime = DateTime.Now;
             timeNowLabel.Text = Convert.ToString(nowDateTime);
-            modeLabel.Text = mode + " mode";
+            UserDataForm.modeLabel.Text = mode + " mode";
             if (fileRecording == true)
             {
                 //    this.Invoke(new UpdateFileTimeCallback(this.UpdateDurationTime), new object[] {  });
@@ -2405,6 +2468,7 @@ namespace SerialPortTerminal
 
             // load config file
             ReadConfigFile(configFilePath + "\\" + configFileName);
+            UserDataForm.configurationFileTextBox.Text = configFilePath + "\\" + configFileName;
 
             comboBox1.SelectedItem = "minutes";
             windowSizeNumericUpDown.Minimum = 1;
@@ -3053,6 +3117,10 @@ namespace SerialPortTerminal
         {
             var engine = new FileHelperAsyncEngine<ConfigFileData>();
 
+
+            UserDataForm.configurationFileTextBox.Text = configFile;
+
+
             //  NEED TO ADD ERROR CHECKING FOR END OF FILE
             //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
             ConfigData ConfigData = new ConfigData();
@@ -3112,7 +3180,7 @@ namespace SerialPortTerminal
                 ConfigData.analogFilter[6] = 0.60000002384185791;
                 ConfigData.analogFilter[7] = 1.0;
                 ConfigData.analogFilter[8] = 1.0;
-                meterNumberTextBox.Text = ConfigData.meterNumber;
+                UserDataForm.meterNumberTextBox.Text = ConfigData.meterNumber;
             }
             else
             {
@@ -3387,7 +3455,7 @@ namespace SerialPortTerminal
 
    */
 
-                    meterNumberTextBox.Text = ConfigData.meterNumber;
+                    UserDataForm.meterNumberTextBox.Text = ConfigData.meterNumber;
                 }
                 catch (Exception ex)
                 {
@@ -4203,6 +4271,17 @@ namespace SerialPortTerminal
         private void button1_Click_2(object sender, EventArgs e)
         {
             startupGroupBox.Visible = false;
+        }
+
+        private void dataPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            UserDataForm.Show();
+        }
+
+        private void surveyTextBox_TextChanged_1(object sender, EventArgs e)
+        {
+            UserDataForm.surveyTextBox.Text = surveyTextBox.Text;
         }
 
         ///////////////////////////////////////////////
