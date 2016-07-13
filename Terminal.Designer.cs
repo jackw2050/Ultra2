@@ -53,6 +53,7 @@ namespace SerialPortTerminal
             this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -177,7 +178,11 @@ namespace SerialPortTerminal
             this.gyroCheckBox = new System.Windows.Forms.CheckBox();
             this.surveyTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
@@ -325,7 +330,7 @@ namespace SerialPortTerminal
             chartArea2.Name = "CrossCoupling";
             this.GravityChart.ChartAreas.Add(chartArea1);
             this.GravityChart.ChartAreas.Add(chartArea2);
-            this.GravityChart.ContextMenuStrip = this.contextMenuStrip1;
+            this.GravityChart.ContextMenuStrip = this.chartContextMenuStrip;
             legend1.Alignment = System.Drawing.StringAlignment.Far;
             legend1.BackColor = System.Drawing.Color.White;
             legend1.DockedToChartArea = "Gravity";
@@ -382,6 +387,13 @@ namespace SerialPortTerminal
             this.Exit.Size = new System.Drawing.Size(124, 22);
             this.Exit.Text = "Exit";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // dataPageToolStripMenuItem
+            // 
+            this.dataPageToolStripMenuItem.Name = "dataPageToolStripMenuItem";
+            this.dataPageToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.dataPageToolStripMenuItem.Text = "DataPage";
+            this.dataPageToolStripMenuItem.Click += new System.EventHandler(this.dataPageToolStripMenuItem_Click);
             // 
             // textBox17
             // 
@@ -466,10 +478,14 @@ namespace SerialPortTerminal
             this.chartWindowToolStripMenuItem,
             this.setTraceVisabilityToolStripMenuItem});
             this.chartContextMenuStrip.Name = "contextMenuStrip1";
-            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 202);
+            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 224);
             // 
             // toolStripMenuItemBackgroundColor
             // 
+            this.toolStripMenuItemBackgroundColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blackToolStripMenuItem,
+            this.whiteToolStripMenuItem,
+            this.greyToolStripMenuItem});
             this.toolStripMenuItemBackgroundColor.Name = "toolStripMenuItemBackgroundColor";
             this.toolStripMenuItemBackgroundColor.Size = new System.Drawing.Size(202, 22);
             this.toolStripMenuItemBackgroundColor.Text = "Chart Background Color";
@@ -495,68 +511,79 @@ namespace SerialPortTerminal
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem2.Text = "0 ";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem3.Text = "1";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem4.Text = "2";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem5.Text = "3";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem6.Text = "4";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem7.Text = "5";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem8.Text = "6";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem9.Text = "7";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem10.Text = "8";
+            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem11.Text = "9";
+            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(86, 22);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem12.Text = "10";
+            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
             // toolStripMenuItemColorPalette
             // 
@@ -582,72 +609,84 @@ namespace SerialPortTerminal
             this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
             this.grayToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.grayToolStripMenuItem.Text = "Grayscale";
+            this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
             // 
             // brightToolStripMenuItem
             // 
             this.brightToolStripMenuItem.Name = "brightToolStripMenuItem";
             this.brightToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.brightToolStripMenuItem.Text = "Bright";
+            this.brightToolStripMenuItem.Click += new System.EventHandler(this.brightToolStripMenuItem_Click);
             // 
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
             this.excelToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.excelToolStripMenuItem.Text = "Excel";
+            this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
             // lightToolStripMenuItem
             // 
             this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
             this.lightToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.lightToolStripMenuItem.Text = "Light";
+            this.lightToolStripMenuItem.Click += new System.EventHandler(this.lightToolStripMenuItem_Click);
             // 
             // pastelToolStripMenuItem
             // 
             this.pastelToolStripMenuItem.Name = "pastelToolStripMenuItem";
             this.pastelToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.pastelToolStripMenuItem.Text = "Pastel";
+            this.pastelToolStripMenuItem.Click += new System.EventHandler(this.pastelToolStripMenuItem_Click);
             // 
             // brightPastelToolStripMenuItem
             // 
             this.brightPastelToolStripMenuItem.Name = "brightPastelToolStripMenuItem";
             this.brightPastelToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.brightPastelToolStripMenuItem.Text = "BrightPastel";
+            this.brightPastelToolStripMenuItem.Click += new System.EventHandler(this.brightPastelToolStripMenuItem_Click);
             // 
             // earthTonesToolStripMenuItem
             // 
             this.earthTonesToolStripMenuItem.Name = "earthTonesToolStripMenuItem";
             this.earthTonesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.earthTonesToolStripMenuItem.Text = "EarthTones";
+            this.earthTonesToolStripMenuItem.Click += new System.EventHandler(this.earthTonesToolStripMenuItem_Click);
             // 
             // semiTransparantToolStripMenuItem
             // 
             this.semiTransparantToolStripMenuItem.Name = "semiTransparantToolStripMenuItem";
             this.semiTransparantToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.semiTransparantToolStripMenuItem.Text = "SemiTransparent";
+            this.semiTransparantToolStripMenuItem.Click += new System.EventHandler(this.semiTransparantToolStripMenuItem_Click);
             // 
             // berryToolStripMenuItem
             // 
             this.berryToolStripMenuItem.Name = "berryToolStripMenuItem";
             this.berryToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.berryToolStripMenuItem.Text = "Berry";
+            this.berryToolStripMenuItem.Click += new System.EventHandler(this.berryToolStripMenuItem_Click);
             // 
             // chocolateToolStripMenuItem
             // 
             this.chocolateToolStripMenuItem.Name = "chocolateToolStripMenuItem";
             this.chocolateToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.chocolateToolStripMenuItem.Text = "Chocolate";
+            this.chocolateToolStripMenuItem.Click += new System.EventHandler(this.chocolateToolStripMenuItem_Click);
             // 
             // fireToolStripMenuItem
             // 
             this.fireToolStripMenuItem.Name = "fireToolStripMenuItem";
             this.fireToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.fireToolStripMenuItem.Text = "Fire";
+            this.fireToolStripMenuItem.Click += new System.EventHandler(this.fireToolStripMenuItem_Click);
             // 
             // seaGreenToolStripMenuItem
             // 
             this.seaGreenToolStripMenuItem.Name = "seaGreenToolStripMenuItem";
             this.seaGreenToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.seaGreenToolStripMenuItem.Text = "SeaGreen";
+            this.seaGreenToolStripMenuItem.Click += new System.EventHandler(this.seaGreenToolStripMenuItem_Click);
             // 
             // toolStripMenuItemTraceMarkers
             // 
@@ -661,13 +700,13 @@ namespace SerialPortTerminal
             // onToolStripMenuItem
             // 
             this.onToolStripMenuItem.Name = "onToolStripMenuItem";
-            this.onToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
+            this.onToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.onToolStripMenuItem.Text = "On";
             // 
             // offToolStripMenuItem
             // 
             this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.offToolStripMenuItem.Text = "Off";
             // 
             // markerSizeToolStripMenuItem
@@ -858,9 +897,11 @@ namespace SerialPortTerminal
             this.autoStartNowToolStripMenuItem,
             this.manualOperationToolStripMenuItem,
             this.setConfigFIleToolStripMenuItem,
-            this.setCalFileToolStripMenuItem});
+            this.setCalFileToolStripMenuItem,
+            this.dataPageToolStripMenuItem1,
+            this.exitToolStripMenuItem});
             this.setupContextMenuStrip1.Name = "setupContextMenuStrip1";
-            this.setupContextMenuStrip1.Size = new System.Drawing.Size(171, 136);
+            this.setupContextMenuStrip1.Size = new System.Drawing.Size(171, 180);
             // 
             // setSpringSensionToolStripMenuItem
             // 
@@ -880,13 +921,13 @@ namespace SerialPortTerminal
             // marineToolStripMenuItem
             // 
             this.marineToolStripMenuItem.Name = "marineToolStripMenuItem";
-            this.marineToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.marineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.marineToolStripMenuItem.Text = "Marine";
             // 
             // hiResolutionToolStripMenuItem
             // 
             this.hiResolutionToolStripMenuItem.Name = "hiResolutionToolStripMenuItem";
-            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.hiResolutionToolStripMenuItem.Text = "Hi resolution";
             // 
             // autoStartNowToolStripMenuItem
@@ -900,6 +941,7 @@ namespace SerialPortTerminal
             this.manualOperationToolStripMenuItem.Name = "manualOperationToolStripMenuItem";
             this.manualOperationToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.manualOperationToolStripMenuItem.Text = "Manual Operation";
+            this.manualOperationToolStripMenuItem.Click += new System.EventHandler(this.manualOperationToolStripMenuItem_Click);
             // 
             // setConfigFIleToolStripMenuItem
             // 
@@ -1335,19 +1377,47 @@ namespace SerialPortTerminal
             this.label2.TabIndex = 120;
             this.label2.Text = "Survey Information";
             // 
-            // dataPageToolStripMenuItem
+            // dataPageToolStripMenuItem1
             // 
-            this.dataPageToolStripMenuItem.Name = "dataPageToolStripMenuItem";
-            this.dataPageToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.dataPageToolStripMenuItem.Text = "DataPage";
-            this.dataPageToolStripMenuItem.Click += new System.EventHandler(this.dataPageToolStripMenuItem_Click);
+            this.dataPageToolStripMenuItem1.Name = "dataPageToolStripMenuItem1";
+            this.dataPageToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.dataPageToolStripMenuItem1.Text = "Data Page";
+            this.dataPageToolStripMenuItem1.Click += new System.EventHandler(this.dataPageToolStripMenuItem1_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // blackToolStripMenuItem
+            // 
+            this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blackToolStripMenuItem.Text = "Black";
+            this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
+            // 
+            // whiteToolStripMenuItem
+            // 
+            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.whiteToolStripMenuItem.Text = "White";
+            this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
+            // 
+            // greyToolStripMenuItem
+            // 
+            this.greyToolStripMenuItem.Name = "greyToolStripMenuItem";
+            this.greyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greyToolStripMenuItem.Text = "Grey";
+            this.greyToolStripMenuItem.Click += new System.EventHandler(this.greyToolStripMenuItem_Click);
             // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 715);
-            this.ContextMenuStrip = this.contextMenuStripForm;
+            this.ContextMenuStrip = this.setupContextMenuStrip1;
             this.Controls.Add(this.surveyTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.startupGroupBox);
@@ -1537,6 +1607,11 @@ namespace SerialPortTerminal
         public System.Windows.Forms.TextBox surveyTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem dataPageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dataPageToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greyToolStripMenuItem;
     }
 }
 

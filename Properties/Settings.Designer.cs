@@ -394,5 +394,17 @@ namespace SerialPortTerminal.Properties {
                 this["dataFileName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hi-Res")]
+        public string dataAquisitionMode {
+            get {
+                return ((string)(this["dataAquisitionMode"]));
+            }
+            set {
+                this["dataAquisitionMode"] = value;
+            }
+        }
     }
 }

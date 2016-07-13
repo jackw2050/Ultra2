@@ -73,7 +73,7 @@ namespace SerialPortTerminal
         public static Boolean userSelect = false;
         public static Boolean yesShutDown = false;
         public static Boolean NoShutDown = false;
-        public static string mode;
+        public static string dataAquisitionMode;
         public static Boolean gyrosEnabled = false;
         public static Boolean torqueMotorsEnabled = false;
         public static Boolean springTensionEnabled = false;
@@ -297,11 +297,10 @@ namespace SerialPortTerminal
             // Enable/disable controls based on the current state
             EnableControls();
 
-            //     comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
-            //			comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
+ 
 
             _timer1 = new System.Windows.Forms.Timer();
-            _timer1.Interval = (1000 - DateTime.Now.Millisecond);
+            _timer1.Interval = (3000 - DateTime.Now.Millisecond);
             _timer1.Enabled = false;  // ENBALE WHEN FIRST DATAN IS SENT
             _timer1.Tick += new EventHandler(port_CheckDataReceived);
         }
@@ -583,7 +582,7 @@ namespace SerialPortTerminal
                 }
 
                 // START 1 SEC TIMER
-                _timer1.Interval = 1000;
+                _timer1.Interval = 1000;//  (1000 - DateTime.Now.Millisecond);
                 _timer1.Enabled = true;
                 _timer1.Start();
             }
@@ -1012,57 +1011,12 @@ namespace SerialPortTerminal
 
         #region Chart
 
-        private void printGravityChartToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            // Don't need to print chart
 
-            /*
-
-                        ChartMarkers(true);
-                        iTextSharp.text.Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-                        pdfDoc.SetPageSize(iTextSharp.text.PageSize.A4.Rotate());
-
-                        iTextSharp.text.Font font16Normal = FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-
-                        PdfWriter wri = PdfWriter.GetInstance(pdfDoc, new FileStream("C:\\Ultrasys\\GravityChart.pdf", FileMode.Create));
-                        pdfDoc.Open();//Open Document to write
-                        pdfDoc.Add(new Paragraph("         Meter # " + SerialPortTerminal.meterNumber + "                            Survey: " + surveyName, font16Normal));
-
-                        using (MemoryStream stream = new MemoryStream())
-                        {
-                            GravityChart.SaveImage(stream, ChartImageFormat.Png);
-                            iTextSharp.text.Image chartImage = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
-                            chartImage.ScalePercent(55f);// Scale to 70%
-                            //doc.PageSize.Width gives the width in points of the document,
-                            //remove the margin (36 points) and the width of the image (?? points)
-                            //for the X-axis co-ordinate, and the margin and height of the image from the
-                            //total height of the document for the Y-axis co-ordinate.
-                            chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 200f);
-
-                            crossCouplingChart.SaveImage(stream, ChartImageFormat.Png);
-                            iTextSharp.text.Image chartImage2 = iTextSharp.text.Image.GetInstance(stream.GetBuffer());
-                            chartImage2.ScalePercent(55f);// Scale to 55%
-                            chartImage.SetAbsolutePosition(pdfDoc.PageSize.Width - 72f - 750f, pdfDoc.PageSize.Height - 36f - 400f);
-
-                            pdfDoc.Add(chartImage);
-                            pdfDoc.Add(chartImage2);
-                            pdfDoc.Close();
-
-                            Process.Start("C:\\Ultrasys\\GravityChart.pdf");
-                        }
-                        ChartMarkers(false);
-                        */
-        }
 
         private void SetupChart()
         {
             BindingSource SBind = new BindingSource();
             //   SBind.DataSource = dataTable;
-
-
-
-
-
 
             //   string chartAreaType = "Single chart area";
             this.GravityChart.Series.Add("Digital Gravity");
@@ -1200,7 +1154,7 @@ namespace SerialPortTerminal
             //    SetTraceColor(Properties.Settings.Default
 
             SetChartType();
-            SetTraceColor();// Properties.Settings.Default.tracePalette);//              Set trace color palette
+            SetTraceColor("bright");// Properties.Settings.Default.tracePalette);//              Set trace color palette
             SetChartAreaColors(2);// Properties.Settings.Default.chartColor);//           Set chart background color
             SetChartBorderWidth(2); // Properties.Settings.Default.traceWidth);//          Set trace width
             ChartMarkers(false);// Properties.Settings.Default.traceMarkers);//               Enable/ disable trace markers
@@ -1327,7 +1281,7 @@ namespace SerialPortTerminal
                 GravityChart.Series["Spring Tension"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Cross Coupling"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Raw Beam"].ToolTip = "Time = #VALX\n#VALY";
-                //        GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["AL"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["AX"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["VE"].ToolTip = "Time = #VALX\n#VALY";
@@ -1339,18 +1293,17 @@ namespace SerialPortTerminal
             else if (mode == "Value")
             {
                 //     myData d = new myData();
-                GravityChart.Series["Digital Gravity"].ToolTip = "Gravity =  " + "#VALY";
-                //  GravityChart.Series["Digital Gravity"].ToolTip = "#VALY";
-                GravityChart.Series["Spring Tension"].ToolTip = "#VALY";
-                GravityChart.Series["Cross Coupling"].ToolTip = "#VALY";
-                GravityChart.Series["Raw Beam"].ToolTip = "#VALY";
-                //        GravityChart.Series["Total Correction"].ToolTip = "#VALY";
-                GravityChart.Series["AL"].ToolTip = "#VALY";
-                GravityChart.Series["AX"].ToolTip = "#VALY";
-                GravityChart.Series["VE"].ToolTip = "#VALY";
-                GravityChart.Series["AX2"].ToolTip = "#VALY";
-                GravityChart.Series["XACC"].ToolTip = "#VALY";
-                GravityChart.Series["LACC"].ToolTip = "#VALY";
+                GravityChart.Series["Digital Gravity"].ToolTip  = "Gravity =  " + "#VALY";
+                GravityChart.Series["Spring Tension"].ToolTip   = "Spring Tension = "  + "#VALY";
+                GravityChart.Series["Cross Coupling"].ToolTip   = "Cross Coupling = " +  "#VALY";
+                GravityChart.Series["Raw Beam"].ToolTip         = "Raw Beam = " +"#VALY";
+                GravityChart.Series["Total Correction"].ToolTip = "Total Correction = " + "#VALY";
+                GravityChart.Series["AL"].ToolTip               = "AL = " + "#VALY";
+                GravityChart.Series["AX"].ToolTip               = "XL = " + "#VALY";
+                GravityChart.Series["VE"].ToolTip               = "VE = " + "#VALY";
+                GravityChart.Series["AX2"].ToolTip              = "AX2 = " + "#VALY";
+                GravityChart.Series["XACC"].ToolTip             = "XACC = " + "#VALY";
+                GravityChart.Series["LACC"].ToolTip             = "LACC = " + "#VALY";
             }
         }
 
@@ -1409,9 +1362,9 @@ namespace SerialPortTerminal
             }
         }
 
-        private void SetTraceColor()
+        private void SetTraceColor(string colorPalette)
         {
-            string colorPalette = "Bright";
+           // colorPalette = "Bright";
             switch (colorPalette)
             {
                 case "None":
@@ -2250,7 +2203,7 @@ namespace SerialPortTerminal
             // OpenPort();
             byte[] data = { 0x01, 0x08, 0x09 };
 
-            //    _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+                _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
             //   _timer1.Enabled = true;
             //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
@@ -2421,7 +2374,7 @@ namespace SerialPortTerminal
         {
             DateTime nowDateTime = DateTime.Now;
             timeNowLabel.Text = Convert.ToString(nowDateTime);
-            UserDataForm.modeLabel.Text = mode + " mode";
+            UserDataForm.modeLabel.Text = dataAquisitionMode + " mode";
             if (fileRecording == true)
             {
                 //    this.Invoke(new UpdateFileTimeCallback(this.UpdateDurationTime), new object[] {  });
@@ -2453,7 +2406,7 @@ namespace SerialPortTerminal
             // SETUP DEFAULTS
 
             startupGroupBox.Visible = false;
-
+            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
             configFilePath = Properties.Settings.Default.configFilePath;
             configFileName = Properties.Settings.Default.configFileName;
             calFilePath = Properties.Settings.Default.calFilePath;
@@ -4282,6 +4235,160 @@ namespace SerialPortTerminal
         private void surveyTextBox_TextChanged_1(object sender, EventArgs e)
         {
             UserDataForm.surveyTextBox.Text = surveyTextBox.Text;
+        }
+
+        private void manualOperationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            startupGroupBox.Visible = true;
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+                // WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+                // Console app
+                System.Environment.Exit(1);
+            }
+        }
+
+        private void dataPageToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            UserDataForm.Show();
+        }
+
+        private void brightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void blackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetChartAreaColors(3);
+        }
+
+        private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetChartAreaColors(1);
+        }
+
+        private void greyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetChartAreaColors(2);
+        }
+
+        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void excelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void pastelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void brightPastelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void earthTonesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void semiTransparantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void berryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void chocolateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void fireToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(brightToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void seaGreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTraceColor(seaGreenToolStripMenuItem.AccessibilityObject.Name);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16( toolStripMenuItem2.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem3.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem4.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem5.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem6.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem7.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem8.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem9.AccessibilityObject.Name)));
+        }
+
+        private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+
         }
 
         ///////////////////////////////////////////////

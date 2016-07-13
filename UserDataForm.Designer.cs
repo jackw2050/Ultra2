@@ -97,6 +97,7 @@
             // 
             // heaterStatusLabel
             // 
+            this.heaterStatusLabel.BackColor = System.Drawing.SystemColors.Control;
             this.heaterStatusLabel.Location = new System.Drawing.Point(100, 92);
             this.heaterStatusLabel.Name = "heaterStatusLabel";
             this.heaterStatusLabel.Size = new System.Drawing.Size(100, 20);
@@ -115,6 +116,7 @@
             // 
             this.textBox13.Location = new System.Drawing.Point(113, 167);
             this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
             this.textBox13.Size = new System.Drawing.Size(100, 20);
             this.textBox13.TabIndex = 114;
             // 
@@ -131,6 +133,7 @@
             // 
             this.textBox14.Location = new System.Drawing.Point(113, 217);
             this.textBox14.Name = "textBox14";
+            this.textBox14.ReadOnly = true;
             this.textBox14.Size = new System.Drawing.Size(100, 20);
             this.textBox14.TabIndex = 112;
             // 
@@ -147,6 +150,7 @@
             // 
             this.textBox15.Location = new System.Drawing.Point(113, 142);
             this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(100, 20);
             this.textBox15.TabIndex = 110;
             // 
@@ -163,6 +167,7 @@
             // 
             this.textBox7.Location = new System.Drawing.Point(113, 192);
             this.textBox7.Name = "textBox7";
+            this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(100, 20);
             this.textBox7.TabIndex = 108;
             // 
@@ -179,6 +184,7 @@
             // 
             this.textBox8.Location = new System.Drawing.Point(113, 42);
             this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(100, 20);
             this.textBox8.TabIndex = 106;
             // 
@@ -195,6 +201,7 @@
             // 
             this.textBox9.Location = new System.Drawing.Point(113, 117);
             this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(100, 20);
             this.textBox9.TabIndex = 104;
             // 
@@ -211,6 +218,7 @@
             // 
             this.textBox10.Location = new System.Drawing.Point(113, 67);
             this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(100, 20);
             this.textBox10.TabIndex = 102;
             // 
@@ -227,6 +235,7 @@
             // 
             this.textBox11.Location = new System.Drawing.Point(113, 92);
             this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(100, 20);
             this.textBox11.TabIndex = 100;
             // 
@@ -243,6 +252,7 @@
             // 
             this.textBox12.Location = new System.Drawing.Point(113, 242);
             this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
             this.textBox12.Size = new System.Drawing.Size(100, 20);
             this.textBox12.TabIndex = 98;
             // 
@@ -257,6 +267,7 @@
             // 
             // textBox6
             // 
+            this.textBox6.BackColor = System.Drawing.SystemColors.Control;
             this.textBox6.Location = new System.Drawing.Point(100, 167);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(100, 20);
@@ -265,7 +276,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 49);
+            this.label5.Location = new System.Drawing.Point(6, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 95;
@@ -273,9 +284,10 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(100, 42);
+            this.textBox5.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox5.Location = new System.Drawing.Point(69, 42);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.Size = new System.Drawing.Size(131, 20);
             this.textBox5.TabIndex = 94;
             // 
             // label4
@@ -289,6 +301,7 @@
             // 
             // textBox4
             // 
+            this.textBox4.BackColor = System.Drawing.SystemColors.Control;
             this.textBox4.Location = new System.Drawing.Point(100, 67);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 20);
@@ -305,6 +318,7 @@
             // 
             // textBox3
             // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
             this.textBox3.Location = new System.Drawing.Point(100, 117);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
@@ -321,6 +335,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
             this.textBox2.Location = new System.Drawing.Point(100, 92);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
@@ -337,6 +352,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.Location = new System.Drawing.Point(100, 142);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
@@ -344,7 +360,7 @@
             // 
             // calFileTextBox
             // 
-            this.calFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.calFileTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.calFileTextBox.Location = new System.Drawing.Point(21, 174);
             this.calFileTextBox.Name = "calFileTextBox";
             this.calFileTextBox.Size = new System.Drawing.Size(340, 20);
@@ -362,7 +378,7 @@
             // 
             // configurationFileTextBox
             // 
-            this.configurationFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.configurationFileTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.configurationFileTextBox.Location = new System.Drawing.Point(21, 124);
             this.configurationFileTextBox.Name = "configurationFileTextBox";
             this.configurationFileTextBox.Size = new System.Drawing.Size(340, 20);
@@ -389,6 +405,7 @@
             // 
             // longGyroStatusLabel
             // 
+            this.longGyroStatusLabel.BackColor = System.Drawing.SystemColors.Control;
             this.longGyroStatusLabel.Location = new System.Drawing.Point(100, 67);
             this.longGyroStatusLabel.Name = "longGyroStatusLabel";
             this.longGyroStatusLabel.Size = new System.Drawing.Size(100, 20);
@@ -405,6 +422,7 @@
             // 
             // crossGyroStatusLabel
             // 
+            this.crossGyroStatusLabel.BackColor = System.Drawing.SystemColors.Control;
             this.crossGyroStatusLabel.Location = new System.Drawing.Point(100, 42);
             this.crossGyroStatusLabel.Name = "crossGyroStatusLabel";
             this.crossGyroStatusLabel.Size = new System.Drawing.Size(100, 20);
@@ -418,6 +436,7 @@
             this.groupBox1.Controls.Add(this.longGyroStatusLabel);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Location = new System.Drawing.Point(36, 267);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(237, 137);
@@ -457,7 +476,7 @@
             // 
             // surveyTextBox
             // 
-            this.surveyTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.surveyTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.surveyTextBox.Location = new System.Drawing.Point(18, 74);
             this.surveyTextBox.Name = "surveyTextBox";
             this.surveyTextBox.Size = new System.Drawing.Size(340, 20);
@@ -475,7 +494,7 @@
             // 
             // dataFileTextBox
             // 
-            this.dataFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dataFileTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.dataFileTextBox.Location = new System.Drawing.Point(21, 224);
             this.dataFileTextBox.Name = "dataFileTextBox";
             this.dataFileTextBox.Size = new System.Drawing.Size(340, 20);
@@ -522,6 +541,7 @@
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.textBox6);
             this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.Location = new System.Drawing.Point(36, 25);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(237, 216);
@@ -549,6 +569,7 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.textBox15);
+            this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox4.Location = new System.Drawing.Point(293, 25);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(259, 285);

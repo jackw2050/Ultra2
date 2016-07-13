@@ -98,5 +98,8 @@
     <Setting Name="dataFileName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Hi-Res</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
