@@ -48,26 +48,11 @@ namespace SerialPortTerminal
             this.button11 = new System.Windows.Forms.Button();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
             this.GravityChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.emergencyShutdownButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
-            this.gravityChartToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.surveyInfoToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.durationToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.recordingDurationLabel = new System.Windows.Forms.Label();
-            this.startupToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.chartContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemTraceWidth = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +107,24 @@ namespace SerialPortTerminal
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chartWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setTraceVisabilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.emergencyShutdownButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.gravityChartToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.surveyInfoToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.durationToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.recordingDurationLabel = new System.Windows.Forms.Label();
+            this.startupToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.setupContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.setSpringSensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,6 +134,8 @@ namespace SerialPortTerminal
             this.manualOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setConfigFIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setCalFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -178,15 +183,10 @@ namespace SerialPortTerminal
             this.gyroCheckBox = new System.Windows.Forms.CheckBox();
             this.surveyTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.greyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
+            this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
-            this.chartContextMenuStrip.SuspendLayout();
             this.setupContextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.chartWindowGroupBox.SuspendLayout();
@@ -351,120 +351,6 @@ namespace SerialPortTerminal
             this.GravityChart.TabIndex = 78;
             this.GravityChart.Text = "chart1";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 26);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
-            this.toolStripMenuItem1.Text = "Background Color";
-            // 
-            // contextMenuStripForm
-            // 
-            this.contextMenuStripForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startupToolStripMenuItem,
-            this.Exit,
-            this.dataPageToolStripMenuItem});
-            this.contextMenuStripForm.Name = "contextMenuStripForm";
-            this.contextMenuStripForm.Size = new System.Drawing.Size(125, 70);
-            // 
-            // startupToolStripMenuItem
-            // 
-            this.startupToolStripMenuItem.Name = "startupToolStripMenuItem";
-            this.startupToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.startupToolStripMenuItem.Text = "Startup";
-            this.startupToolStripMenuItem.Click += new System.EventHandler(this.startupToolStripMenuItem_Click);
-            // 
-            // Exit
-            // 
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(124, 22);
-            this.Exit.Text = "Exit";
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
-            // dataPageToolStripMenuItem
-            // 
-            this.dataPageToolStripMenuItem.Name = "dataPageToolStripMenuItem";
-            this.dataPageToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.dataPageToolStripMenuItem.Text = "DataPage";
-            this.dataPageToolStripMenuItem.Click += new System.EventHandler(this.dataPageToolStripMenuItem_Click);
-            // 
-            // textBox17
-            // 
-            this.textBox17.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox17.Font = new System.Drawing.Font("Trebuchet MS", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox17.Location = new System.Drawing.Point(6, 33);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(97, 20);
-            this.textBox17.TabIndex = 88;
-            this.textBox17.Text = "135.376";
-            // 
-            // emergencyShutdownButton
-            // 
-            this.emergencyShutdownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.emergencyShutdownButton.BackColor = System.Drawing.Color.Red;
-            this.emergencyShutdownButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.emergencyShutdownButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.emergencyShutdownButton.Location = new System.Drawing.Point(1145, 8);
-            this.emergencyShutdownButton.Name = "emergencyShutdownButton";
-            this.emergencyShutdownButton.Size = new System.Drawing.Size(75, 45);
-            this.emergencyShutdownButton.TabIndex = 82;
-            this.emergencyShutdownButton.Text = "Emergency Shutdown";
-            this.startStopButtonsToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
-            this.durationToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
-            this.emergencyShutdownButton.UseVisualStyleBackColor = false;
-            // 
-            // stopButton
-            // 
-            this.stopButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.stopButton.Location = new System.Drawing.Point(6, 19);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(40, 23);
-            this.stopButton.TabIndex = 55;
-            this.stopButton.Text = "Stop";
-            this.startStopButtonsToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
-            this.durationToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
-            this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-            // 
-            // startButton
-            // 
-            this.startButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.startButton.Location = new System.Drawing.Point(50, 19);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(40, 23);
-            this.startButton.TabIndex = 7;
-            this.startButton.Text = "Start";
-            this.startStopButtonsToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
-        "ter.");
-            this.durationToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
-        "ter.");
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // gravityChartToolTip
-            // 
-            this.gravityChartToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // recordingDurationLabel
-            // 
-            this.recordingDurationLabel.AutoSize = true;
-            this.recordingDurationLabel.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.recordingDurationLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.recordingDurationLabel.Location = new System.Drawing.Point(232, 23);
-            this.recordingDurationLabel.Name = "recordingDurationLabel";
-            this.recordingDurationLabel.Size = new System.Drawing.Size(53, 17);
-            this.recordingDurationLabel.TabIndex = 109;
-            this.recordingDurationLabel.Text = "Duration: ";
-            this.durationToolTip.SetToolTip(this.recordingDurationLabel, "Indicates total time data has been recorded to file.");
-            this.recordingDurationLabel.UseCompatibleTextRendering = true;
-            // 
             // chartContextMenuStrip
             // 
             this.chartContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -478,7 +364,7 @@ namespace SerialPortTerminal
             this.chartWindowToolStripMenuItem,
             this.setTraceVisabilityToolStripMenuItem});
             this.chartContextMenuStrip.Name = "contextMenuStrip1";
-            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 224);
+            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 202);
             // 
             // toolStripMenuItemBackgroundColor
             // 
@@ -489,6 +375,27 @@ namespace SerialPortTerminal
             this.toolStripMenuItemBackgroundColor.Name = "toolStripMenuItemBackgroundColor";
             this.toolStripMenuItemBackgroundColor.Size = new System.Drawing.Size(202, 22);
             this.toolStripMenuItemBackgroundColor.Text = "Chart Background Color";
+            // 
+            // blackToolStripMenuItem
+            // 
+            this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.blackToolStripMenuItem.Text = "Black";
+            this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
+            // 
+            // whiteToolStripMenuItem
+            // 
+            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.whiteToolStripMenuItem.Text = "White";
+            this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
+            // 
+            // greyToolStripMenuItem
+            // 
+            this.greyToolStripMenuItem.Name = "greyToolStripMenuItem";
+            this.greyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.greyToolStripMenuItem.Text = "Grey";
+            this.greyToolStripMenuItem.Click += new System.EventHandler(this.greyToolStripMenuItem_Click);
             // 
             // toolStripMenuItemTraceWidth
             // 
@@ -511,77 +418,77 @@ namespace SerialPortTerminal
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem2.Text = "0 ";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem3.Text = "1";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem4.Text = "2";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem5.Text = "3";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem6.Text = "4";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem7.Text = "5";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem8.Text = "6";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem9.Text = "7";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem10.Text = "8";
             this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem11.Text = "9";
             this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem12.Text = "10";
             this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
@@ -700,13 +607,13 @@ namespace SerialPortTerminal
             // onToolStripMenuItem
             // 
             this.onToolStripMenuItem.Name = "onToolStripMenuItem";
-            this.onToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.onToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
             this.onToolStripMenuItem.Text = "On";
             // 
             // offToolStripMenuItem
             // 
             this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
             this.offToolStripMenuItem.Text = "Off";
             // 
             // markerSizeToolStripMenuItem
@@ -889,6 +796,120 @@ namespace SerialPortTerminal
             this.setTraceVisabilityToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.setTraceVisabilityToolStripMenuItem.Text = "Set Trace Visability";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripMenuItem1.Text = "Background Color";
+            // 
+            // contextMenuStripForm
+            // 
+            this.contextMenuStripForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startupToolStripMenuItem,
+            this.Exit,
+            this.dataPageToolStripMenuItem});
+            this.contextMenuStripForm.Name = "contextMenuStripForm";
+            this.contextMenuStripForm.Size = new System.Drawing.Size(125, 70);
+            // 
+            // startupToolStripMenuItem
+            // 
+            this.startupToolStripMenuItem.Name = "startupToolStripMenuItem";
+            this.startupToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.startupToolStripMenuItem.Text = "Startup";
+            this.startupToolStripMenuItem.Click += new System.EventHandler(this.startupToolStripMenuItem_Click);
+            // 
+            // Exit
+            // 
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(124, 22);
+            this.Exit.Text = "Exit";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // dataPageToolStripMenuItem
+            // 
+            this.dataPageToolStripMenuItem.Name = "dataPageToolStripMenuItem";
+            this.dataPageToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.dataPageToolStripMenuItem.Text = "DataPage";
+            this.dataPageToolStripMenuItem.Click += new System.EventHandler(this.dataPageToolStripMenuItem_Click);
+            // 
+            // textBox17
+            // 
+            this.textBox17.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox17.Font = new System.Drawing.Font("Trebuchet MS", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox17.Location = new System.Drawing.Point(6, 33);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(97, 20);
+            this.textBox17.TabIndex = 88;
+            this.textBox17.Text = "135.376";
+            // 
+            // emergencyShutdownButton
+            // 
+            this.emergencyShutdownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.emergencyShutdownButton.BackColor = System.Drawing.Color.Red;
+            this.emergencyShutdownButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.emergencyShutdownButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.emergencyShutdownButton.Location = new System.Drawing.Point(1145, 8);
+            this.emergencyShutdownButton.Name = "emergencyShutdownButton";
+            this.emergencyShutdownButton.Size = new System.Drawing.Size(75, 45);
+            this.emergencyShutdownButton.TabIndex = 82;
+            this.emergencyShutdownButton.Text = "Emergency Shutdown";
+            this.startStopButtonsToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
+            this.durationToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
+            this.emergencyShutdownButton.UseVisualStyleBackColor = false;
+            // 
+            // stopButton
+            // 
+            this.stopButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.stopButton.Location = new System.Drawing.Point(6, 19);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(40, 23);
+            this.stopButton.TabIndex = 55;
+            this.stopButton.Text = "Stop";
+            this.startStopButtonsToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
+            this.durationToolTip.SetToolTip(this.stopButton, "Stop recording data to file.  ");
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.startButton.Location = new System.Drawing.Point(50, 19);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(40, 23);
+            this.startButton.TabIndex = 7;
+            this.startButton.Text = "Start";
+            this.startStopButtonsToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
+        "ter.");
+            this.durationToolTip.SetToolTip(this.startButton, "Start recording data to file.  \r\nDoes not affect data from meter or startup of me" +
+        "ter.");
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // gravityChartToolTip
+            // 
+            this.gravityChartToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // recordingDurationLabel
+            // 
+            this.recordingDurationLabel.AutoSize = true;
+            this.recordingDurationLabel.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.recordingDurationLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.recordingDurationLabel.Location = new System.Drawing.Point(232, 23);
+            this.recordingDurationLabel.Name = "recordingDurationLabel";
+            this.recordingDurationLabel.Size = new System.Drawing.Size(53, 17);
+            this.recordingDurationLabel.TabIndex = 109;
+            this.recordingDurationLabel.Text = "Duration: ";
+            this.durationToolTip.SetToolTip(this.recordingDurationLabel, "Indicates total time data has been recorded to file.");
+            this.recordingDurationLabel.UseCompatibleTextRendering = true;
+            // 
             // setupContextMenuStrip1
             // 
             this.setupContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -921,13 +942,13 @@ namespace SerialPortTerminal
             // marineToolStripMenuItem
             // 
             this.marineToolStripMenuItem.Name = "marineToolStripMenuItem";
-            this.marineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.marineToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.marineToolStripMenuItem.Text = "Marine";
             // 
             // hiResolutionToolStripMenuItem
             // 
             this.hiResolutionToolStripMenuItem.Name = "hiResolutionToolStripMenuItem";
-            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.hiResolutionToolStripMenuItem.Text = "Hi resolution";
             // 
             // autoStartNowToolStripMenuItem
@@ -955,6 +976,20 @@ namespace SerialPortTerminal
             this.setCalFileToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.setCalFileToolStripMenuItem.Text = "Set Cal File";
             // 
+            // dataPageToolStripMenuItem1
+            // 
+            this.dataPageToolStripMenuItem1.Name = "dataPageToolStripMenuItem1";
+            this.dataPageToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.dataPageToolStripMenuItem1.Text = "Data Page";
+            this.dataPageToolStripMenuItem1.Click += new System.EventHandler(this.dataPageToolStripMenuItem1_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -973,7 +1008,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(364, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(456, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1007,6 +1042,7 @@ namespace SerialPortTerminal
             this.loadCalFileToolStripMenuItem.Name = "loadCalFileToolStripMenuItem";
             this.loadCalFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.loadCalFileToolStripMenuItem.Text = "Load Cal File";
+            this.loadCalFileToolStripMenuItem.Click += new System.EventHandler(this.loadCalFileToolStripMenuItem_Click);
             // 
             // printConfigFileToolStripMenuItem
             // 
@@ -1377,41 +1413,6 @@ namespace SerialPortTerminal
             this.label2.TabIndex = 120;
             this.label2.Text = "Survey Information";
             // 
-            // dataPageToolStripMenuItem1
-            // 
-            this.dataPageToolStripMenuItem1.Name = "dataPageToolStripMenuItem1";
-            this.dataPageToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
-            this.dataPageToolStripMenuItem1.Text = "Data Page";
-            this.dataPageToolStripMenuItem1.Click += new System.EventHandler(this.dataPageToolStripMenuItem1_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // blackToolStripMenuItem
-            // 
-            this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
-            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.blackToolStripMenuItem.Text = "Black";
-            this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
-            // 
-            // whiteToolStripMenuItem
-            // 
-            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
-            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.whiteToolStripMenuItem.Text = "White";
-            this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
-            // 
-            // greyToolStripMenuItem
-            // 
-            this.greyToolStripMenuItem.Name = "greyToolStripMenuItem";
-            this.greyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.greyToolStripMenuItem.Text = "Grey";
-            this.greyToolStripMenuItem.Click += new System.EventHandler(this.greyToolStripMenuItem_Click);
-            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1442,9 +1443,9 @@ namespace SerialPortTerminal
             this.Load += new System.EventHandler(this.frmTerminal_Load);
             this.Shown += new System.EventHandler(this.frmTerminal_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).EndInit();
+            this.chartContextMenuStrip.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStripForm.ResumeLayout(false);
-            this.chartContextMenuStrip.ResumeLayout(false);
             this.setupContextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

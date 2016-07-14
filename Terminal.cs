@@ -52,6 +52,7 @@ namespace SerialPortTerminal
         private ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
+
         private delegate void SetTextCallback(string text);
 
         public static Boolean engineerDebug = false;
@@ -102,6 +103,7 @@ namespace SerialPortTerminal
         public static DateTime fileStartTime;
         public static string fileName = programPath + "test.csv";// c:/zls
         public static string calFileName;
+
         public static bool fileRecording = false;
         public static bool firstTime = true;
         public static string fileType;
@@ -296,8 +298,6 @@ namespace SerialPortTerminal
 
             // Enable/disable controls based on the current state
             EnableControls();
-
- 
 
             _timer1 = new System.Windows.Forms.Timer();
             _timer1.Interval = (3000 - DateTime.Now.Millisecond);
@@ -683,7 +683,6 @@ namespace SerialPortTerminal
                     ThreadProcSafe();//  Initially write data1 -data4 in text boxes
 
                     GravityChart.DataBind();
-                    
                 }
             }
         }
@@ -747,13 +746,9 @@ namespace SerialPortTerminal
                 SetTextCallback d = new SetTextCallback(SetText);
                 this.Invoke(d, new object[] { text });
                 Thread.Sleep(2000);
-
-              
             }
             else
             {
-              
-
                 if (DataStatusForm.Visible == true)
                 {
                     DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
@@ -780,19 +775,17 @@ namespace SerialPortTerminal
                     DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.controlSw, 2);
                 }
 
-
-
                 if (UserDataForm.Visible)
                 {
-                    UserDataForm.textBox1.Text =  (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox2.Text =  (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox3.Text =  (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox4.Text =  (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox5.Text =  (mdt.myDT.ToString());
-                    UserDataForm.textBox6.Text =  (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox7.Text =  (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox8.Text =  (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox9.Text =  (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox4.Text = (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox5.Text = (mdt.myDT.ToString());
+                    UserDataForm.textBox6.Text = (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox7.Text = (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox8.Text = (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
+                    UserDataForm.textBox9.Text = (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
                     UserDataForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
                     UserDataForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
                     UserDataForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
@@ -830,9 +823,7 @@ namespace SerialPortTerminal
                         UserDataForm.heaterStatusLabel.ForeColor = Color.Red;
                         UserDataForm.heaterStatusLabel.Text = "Not Ready";
                     }
-
                 }
-                
 
                 string specifier;
                 specifier = "000.000000";
@@ -844,7 +835,6 @@ namespace SerialPortTerminal
 
                 listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
                 GravityChart.DataSource = listDataSource;
-               
 
                 myData myData = new myData();
                 myData.Date = mdt.Date;
@@ -868,7 +858,6 @@ namespace SerialPortTerminal
                 myData.gpsStatus = mdt.gpsStatus;
                 if (fileRecording == true)
                 {
-
                     RecordDataToFile("Append", myData);
                 }
 
@@ -877,9 +866,6 @@ namespace SerialPortTerminal
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if (MeterStatus.lGyro_Fog == 0)
                 {
-
-
-
                     if (AutoStartForm.Visible)
                     {
                         AutoStartForm.crossGyroStatusLabel.ForeColor = Color.Green;
@@ -1011,8 +997,6 @@ namespace SerialPortTerminal
 
         #region Chart
 
-
-
         private void SetupChart()
         {
             BindingSource SBind = new BindingSource();
@@ -1045,7 +1029,6 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Raw Beam"].XValueMember = "date";
             this.GravityChart.Series["Raw Beam"].YValueMembers = "RawBeam";
             this.GravityChart.Series["Raw Beam"].BorderWidth = 4;
-            
 
             /*
                         this.GravityChart.Series["Total Correction"].XValueMember = "date";
@@ -1088,7 +1071,6 @@ namespace SerialPortTerminal
             this.GravityChart.Series["AX2"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["XACC"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["LACC"].ChartArea = "CrossCoupling";
-
 
             this.GravityChart.Series["AL"].Legend = "Cross Coupling Legend";
             this.GravityChart.Series["AX"].Legend = "Cross Coupling Legend";
@@ -1293,17 +1275,17 @@ namespace SerialPortTerminal
             else if (mode == "Value")
             {
                 //     myData d = new myData();
-                GravityChart.Series["Digital Gravity"].ToolTip  = "Gravity =  " + "#VALY";
-                GravityChart.Series["Spring Tension"].ToolTip   = "Spring Tension = "  + "#VALY";
-                GravityChart.Series["Cross Coupling"].ToolTip   = "Cross Coupling = " +  "#VALY";
-                GravityChart.Series["Raw Beam"].ToolTip         = "Raw Beam = " +"#VALY";
+                GravityChart.Series["Digital Gravity"].ToolTip = "Gravity =  " + "#VALY";
+                GravityChart.Series["Spring Tension"].ToolTip = "Spring Tension = " + "#VALY";
+                GravityChart.Series["Cross Coupling"].ToolTip = "Cross Coupling = " + "#VALY";
+                GravityChart.Series["Raw Beam"].ToolTip = "Raw Beam = " + "#VALY";
                 GravityChart.Series["Total Correction"].ToolTip = "Total Correction = " + "#VALY";
-                GravityChart.Series["AL"].ToolTip               = "AL = " + "#VALY";
-                GravityChart.Series["AX"].ToolTip               = "XL = " + "#VALY";
-                GravityChart.Series["VE"].ToolTip               = "VE = " + "#VALY";
-                GravityChart.Series["AX2"].ToolTip              = "AX2 = " + "#VALY";
-                GravityChart.Series["XACC"].ToolTip             = "XACC = " + "#VALY";
-                GravityChart.Series["LACC"].ToolTip             = "LACC = " + "#VALY";
+                GravityChart.Series["AL"].ToolTip = "AL = " + "#VALY";
+                GravityChart.Series["AX"].ToolTip = "XL = " + "#VALY";
+                GravityChart.Series["VE"].ToolTip = "VE = " + "#VALY";
+                GravityChart.Series["AX2"].ToolTip = "AX2 = " + "#VALY";
+                GravityChart.Series["XACC"].ToolTip = "XACC = " + "#VALY";
+                GravityChart.Series["LACC"].ToolTip = "LACC = " + "#VALY";
             }
         }
 
@@ -1364,7 +1346,7 @@ namespace SerialPortTerminal
 
         private void SetTraceColor(string colorPalette)
         {
-           // colorPalette = "Bright";
+            // colorPalette = "Bright";
             switch (colorPalette)
             {
                 case "None":
@@ -2203,7 +2185,7 @@ namespace SerialPortTerminal
             // OpenPort();
             byte[] data = { 0x01, 0x08, 0x09 };
 
-                _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+            _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
             //   _timer1.Enabled = true;
             //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
         }
@@ -2418,10 +2400,11 @@ namespace SerialPortTerminal
             frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
             Console.WriteLine(fileName);
 
-
             // load config file
             ReadConfigFile(configFilePath + "\\" + configFileName);
             UserDataForm.configurationFileTextBox.Text = configFilePath + "\\" + configFileName;
+
+            readCalibrationFile(calFilePath + "\\" + calFileName);
 
             comboBox1.SelectedItem = "minutes";
             windowSizeNumericUpDown.Minimum = 1;
@@ -2963,8 +2946,8 @@ namespace SerialPortTerminal
         private void button11_Click(object sender, EventArgs e)// Autostart
         {
             autostart = true;
-           // StartDataCollection();
-           // AutoStart();
+            // StartDataCollection();
+            // AutoStart();
 
             AutoStartForm.Show();
 
@@ -3070,9 +3053,7 @@ namespace SerialPortTerminal
         {
             var engine = new FileHelperAsyncEngine<ConfigFileData>();
 
-
             UserDataForm.configurationFileTextBox.Text = configFile;
-
 
             //  NEED TO ADD ERROR CHECKING FOR END OF FILE
             //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
@@ -4146,8 +4127,6 @@ namespace SerialPortTerminal
         {
             if (gyroCheckBox.Checked)
             {
-
-
                 // 200 Hz etc
                 byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
                 RelaySwitches.stepperMotorEnable(enable);
@@ -4178,7 +4157,6 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");           // 0 ----
                 RelaySwitches.relaySW = 0x81;// cmd 0
                 sendCmd("Send Relay Switches");           // 0 ----
-
             }
             else
             {
@@ -4193,7 +4171,7 @@ namespace SerialPortTerminal
                 RelaySwitches.relaySW = 0x83;
                 sendCmd("Send Relay Switches");
                 ControlSwitches.TorqueMotor(enable);
-                sendCmd("Send Control Switches");          
+                sendCmd("Send Control Switches");
             }
             else
             {
@@ -4228,7 +4206,6 @@ namespace SerialPortTerminal
 
         private void dataPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
             UserDataForm.Show();
         }
 
@@ -4338,7 +4315,7 @@ namespace SerialPortTerminal
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            SetChartBorderWidth((Convert.ToInt16( toolStripMenuItem2.AccessibilityObject.Name)));
+            SetChartBorderWidth((Convert.ToInt16(toolStripMenuItem2.AccessibilityObject.Name)));
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -4378,17 +4355,63 @@ namespace SerialPortTerminal
 
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
         {
-
         }
 
         private void toolStripMenuItem11_Click(object sender, EventArgs e)
         {
-
         }
 
         private void toolStripMenuItem12_Click(object sender, EventArgs e)
         {
+        }
 
+        [DelimitedRecord(",")]
+        public class calFileData
+        {
+            [FieldConverter(ConverterKind.Double)]
+            public double value1;
+
+            [FieldConverter(ConverterKind.Double)]
+            public double value2;
+        }
+
+        public void readCalibrationFile(string calFile)
+        {
+            var engine = new FileHelperAsyncEngine<calFileData>();
+            UserDataForm.calFileTextBox.Text = calFile;
+
+            if (calFile == null || calFile == "")
+            {
+                // do nothing.  use generic
+            }
+            else
+            {
+                try
+                {
+                    using (engine.BeginReadFile(calFile))
+                    {
+                        var i = 0;
+                        foreach (calFileData dataItem in engine)
+                        {
+                            CalculateMarineData.table1[i] = dataItem.value1;
+                            CalculateMarineData.table2[i] = dataItem.value2;
+                            i++;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+          //  Console.WriteLine( "success");
+        }
+
+        private void loadCalFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {           
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.ShowDialog();
+            readCalibrationFile(OpenFileDialog.FileName);
         }
 
         ///////////////////////////////////////////////

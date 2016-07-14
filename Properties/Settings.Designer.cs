@@ -121,7 +121,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("S91.TAB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("S67-tab.csv")]
         public string calFileName {
             get {
                 return ((string)(this["calFileName"]));
@@ -133,7 +133,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\")]
         public string calFilePath {
             get {
                 return ((string)(this["calFilePath"]));
