@@ -84,6 +84,15 @@
             this.byte76TextBox = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.byte77TextBox = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.relaySwitchesTextBox = new System.Windows.Forms.TextBox();
+            this.controlSwitchesTextBox = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.configurationFileTextBox = new System.Windows.Forms.TextBox();
+            this.configFileLabel = new System.Windows.Forms.Label();
+            this.calFileTextBox = new System.Windows.Forms.TextBox();
+            this.calFileLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label13
@@ -361,7 +370,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(430, 189);
+            this.label19.Location = new System.Drawing.Point(432, 192);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(56, 13);
             this.label19.TabIndex = 79;
@@ -377,7 +386,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(430, 140);
+            this.label20.Location = new System.Drawing.Point(430, 143);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(58, 13);
             this.label20.TabIndex = 77;
@@ -534,11 +543,98 @@
             this.byte77TextBox.Size = new System.Drawing.Size(118, 20);
             this.byte77TextBox.TabIndex = 96;
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(406, 276);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(80, 13);
+            this.label29.TabIndex = 100;
+            this.label29.Text = "Relay Switches";
+            // 
+            // relaySwitchesTextBox
+            // 
+            this.relaySwitchesTextBox.Location = new System.Drawing.Point(409, 294);
+            this.relaySwitchesTextBox.Name = "relaySwitchesTextBox";
+            this.relaySwitchesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.relaySwitchesTextBox.TabIndex = 101;
+            // 
+            // controlSwitchesTextBox
+            // 
+            this.controlSwitchesTextBox.Location = new System.Drawing.Point(583, 295);
+            this.controlSwitchesTextBox.Name = "controlSwitchesTextBox";
+            this.controlSwitchesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.controlSwitchesTextBox.TabIndex = 103;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(580, 277);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(86, 13);
+            this.label30.TabIndex = 102;
+            this.label30.Text = "Control Switches";
+            // 
+            // configurationFileTextBox
+            // 
+            this.configurationFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.configurationFileTextBox.Location = new System.Drawing.Point(780, 203);
+            this.configurationFileTextBox.Name = "configurationFileTextBox";
+            this.configurationFileTextBox.Size = new System.Drawing.Size(110, 20);
+            this.configurationFileTextBox.TabIndex = 107;
+            // 
+            // configFileLabel
+            // 
+            this.configFileLabel.AutoSize = true;
+            this.configFileLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.configFileLabel.Location = new System.Drawing.Point(777, 187);
+            this.configFileLabel.Name = "configFileLabel";
+            this.configFileLabel.Size = new System.Drawing.Size(85, 13);
+            this.configFileLabel.TabIndex = 106;
+            this.configFileLabel.Text = "Configuration file";
+            // 
+            // calFileTextBox
+            // 
+            this.calFileTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.calFileTextBox.Location = new System.Drawing.Point(780, 252);
+            this.calFileTextBox.Name = "calFileTextBox";
+            this.calFileTextBox.Size = new System.Drawing.Size(110, 20);
+            this.calFileTextBox.TabIndex = 109;
+            // 
+            // calFileLabel
+            // 
+            this.calFileLabel.AutoSize = true;
+            this.calFileLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.calFileLabel.Location = new System.Drawing.Point(777, 235);
+            this.calFileLabel.Name = "calFileLabel";
+            this.calFileLabel.Size = new System.Drawing.Size(72, 13);
+            this.calFileLabel.TabIndex = 108;
+            this.calFileLabel.Text = "Calibration file";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(642, 387);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 110;
+            this.button1.Text = "close";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DataStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 472);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.calFileTextBox);
+            this.Controls.Add(this.calFileLabel);
+            this.Controls.Add(this.configurationFileTextBox);
+            this.Controls.Add(this.configFileLabel);
+            this.Controls.Add(this.controlSwitchesTextBox);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.relaySwitchesTextBox);
+            this.Controls.Add(this.label29);
             this.Controls.Add(this.label27);
             this.Controls.Add(this.byte76TextBox);
             this.Controls.Add(this.label28);
@@ -658,8 +754,17 @@
         public System.Windows.Forms.Label label26;
         public System.Windows.Forms.TextBox inhibitFlagTextBox;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox byte76TextBox;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox byte77TextBox;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        public System.Windows.Forms.TextBox relaySwitchesTextBox;
+        public System.Windows.Forms.TextBox controlSwitchesTextBox;
+        public System.Windows.Forms.TextBox byte76TextBox;
+        public System.Windows.Forms.TextBox byte77TextBox;
+        private System.Windows.Forms.TextBox configurationFileTextBox;
+        private System.Windows.Forms.Label configFileLabel;
+        private System.Windows.Forms.TextBox calFileTextBox;
+        private System.Windows.Forms.Label calFileLabel;
+        private System.Windows.Forms.Button button1;
     }
 }

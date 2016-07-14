@@ -73,7 +73,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Text")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hex")]
         public global::SerialPortTerminal.DataMode DataMode {
             get {
                 return ((global::SerialPortTerminal.DataMode)(this["DataMode"]));
@@ -119,24 +119,291 @@ namespace SerialPortTerminal.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOPSERVER\\ULTRASYSDEV;Initial Catalog=DynamicData;Integrated Secur" +
-            "ity=True")]
-        public string DynamicDataConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("S67-tab.csv")]
+        public string calFileName {
             get {
-                return ((string)(this["DynamicDataConnectionString"]));
+                return ((string)(this["calFileName"]));
+            }
+            set {
+                this["calFileName"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOPSERVER;Initial Catalog=DynamicData;Integrated Security=True")]
-        public string DynamicDataConnectionString1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\")]
+        public string calFilePath {
             get {
-                return ((string)(this["DynamicDataConnectionString1"]));
+                return ((string)(this["calFilePath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sampleConfigFile.ref")]
+        public string configFileName {
+            get {
+                return ((string)(this["configFileName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\")]
+        public string configFilePath {
+            get {
+                return ((string)(this["configFilePath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int fileDateFormat {
+            get {
+                return ((int)(this["fileDateFormat"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\data\\\\\"")]
+        public string filePath {
+            get {
+                return ((string)(this["filePath"]));
+            }
+            set {
+                this["filePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fileType {
+            get {
+                return ((string)(this["fileType"]));
+            }
+            set {
+                this["fileType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\data\\\\\"")]
+        public string dataFilePath {
+            get {
+                return ((string)(this["dataFilePath"]));
+            }
+            set {
+                this["dataFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.298317")]
+        public double beamScale {
+            get {
+                return ((double)(this["beamScale"]));
+            }
+            set {
+                this["beamScale"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"S67\"")]
+        public string meterNumber {
+            get {
+                return ((string)(this["meterNumber"]));
+            }
+            set {
+                this["meterNumber"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"zls\"")]
+        public string engPassword {
+            get {
+                return ((string)(this["engPassword"]));
+            }
+            set {
+                this["engPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.91E-05")]
+        public double crossPeriod {
+            get {
+                return ((double)(this["crossPeriod"]));
+            }
+            set {
+                this["crossPeriod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8.4000002971151844E-06")]
+        public double longPeriod {
+            get {
+                return ((double)(this["longPeriod"]));
+            }
+            set {
+                this["longPeriod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.212")]
+        public double crossDampFactor {
+            get {
+                return ((double)(this["crossDampFactor"]));
+            }
+            set {
+                this["crossDampFactor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.091499999165534973")]
+        public double longDampFactor {
+            get {
+                return ((double)(this["longDampFactor"]));
+            }
+            set {
+                this["longDampFactor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.15")]
+        public double crossGain {
+            get {
+                return ((double)(this["crossGain"]));
+            }
+            set {
+                this["crossGain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.11999999731779099")]
+        public double longGain {
+            get {
+                return ((double)(this["longGain"]));
+            }
+            set {
+                this["longGain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double crossLead {
+            get {
+                return ((double)(this["crossLead"]));
+            }
+            set {
+                this["crossLead"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.44999998807907104")]
+        public double longLead {
+            get {
+                return ((double)(this["longLead"]));
+            }
+            set {
+                this["longLead"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20000")]
+        public int springTensionMax {
+            get {
+                return ((int)(this["springTensionMax"]));
+            }
+            set {
+                this["springTensionMax"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"marine\"")]
+        public string modeSwitch {
+            get {
+                return ((string)(this["modeSwitch"]));
+            }
+            set {
+                this["modeSwitch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossBias {
+            get {
+                return ((double)(this["crossBias"]));
+            }
+            set {
+                this["crossBias"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double longBias {
+            get {
+                return ((double)(this["longBias"]));
+            }
+            set {
+                this["longBias"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dataFileName {
+            get {
+                return ((string)(this["dataFileName"]));
+            }
+            set {
+                this["dataFileName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hi-Res")]
+        public string dataAquisitionMode {
+            get {
+                return ((string)(this["dataAquisitionMode"]));
+            }
+            set {
+                this["dataAquisitionMode"] = value;
             }
         }
     }

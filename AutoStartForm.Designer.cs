@@ -1,6 +1,6 @@
 ﻿namespace SerialPortTerminal
 {
-    partial class StatusForm1
+    partial class AutoStartForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,9 +35,9 @@
             this.longGyroStatusLabel = new System.Windows.Forms.Label();
             this.gyroStatusGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButtonWait = new System.Windows.Forms.RadioButton();
-            this.radioButtonContinue = new System.Windows.Forms.RadioButton();
             this.radioButtonCancel = new System.Windows.Forms.RadioButton();
+            this.radioButtonContinue = new System.Windows.Forms.RadioButton();
+            this.radioButtonWait = new System.Windows.Forms.RadioButton();
             this.gyroStatusGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -102,7 +102,7 @@
             this.gyroStatusGroupBox.Controls.Add(this.crossGyroStatusLabel);
             this.gyroStatusGroupBox.Controls.Add(this.label6);
             this.gyroStatusGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gyroStatusGroupBox.Location = new System.Drawing.Point(12, 28);
+            this.gyroStatusGroupBox.Location = new System.Drawing.Point(12, 13);
             this.gyroStatusGroupBox.Name = "gyroStatusGroupBox";
             this.gyroStatusGroupBox.Size = new System.Drawing.Size(240, 184);
             this.gyroStatusGroupBox.TabIndex = 8;
@@ -116,12 +116,36 @@
             this.groupBox2.Controls.Add(this.radioButtonWait);
             this.groupBox2.Controls.Add(this.heaterStatusLabel);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(296, 28);
+            this.groupBox2.Location = new System.Drawing.Point(296, 13);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 184);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Heater Status";
+            // 
+            // radioButtonCancel
+            // 
+            this.radioButtonCancel.AutoSize = true;
+            this.radioButtonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonCancel.Location = new System.Drawing.Point(24, 149);
+            this.radioButtonCancel.Name = "radioButtonCancel";
+            this.radioButtonCancel.Size = new System.Drawing.Size(128, 20);
+            this.radioButtonCancel.TabIndex = 9;
+            this.radioButtonCancel.Text = "Cancel Auto Start";
+            this.radioButtonCancel.UseVisualStyleBackColor = true;
+            this.radioButtonCancel.CheckedChanged += new System.EventHandler(this.radioButtonCancel_CheckedChanged);
+            // 
+            // radioButtonContinue
+            // 
+            this.radioButtonContinue.AutoSize = true;
+            this.radioButtonContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonContinue.Location = new System.Drawing.Point(24, 123);
+            this.radioButtonContinue.Name = "radioButtonContinue";
+            this.radioButtonContinue.Size = new System.Drawing.Size(165, 20);
+            this.radioButtonContinue.TabIndex = 8;
+            this.radioButtonContinue.Text = "Continue without Heater";
+            this.radioButtonContinue.UseVisualStyleBackColor = true;
+            this.radioButtonContinue.CheckedChanged += new System.EventHandler(this.radioButtonContinue_CheckedChanged);
             // 
             // radioButtonWait
             // 
@@ -137,39 +161,16 @@
             this.radioButtonWait.UseVisualStyleBackColor = true;
             this.radioButtonWait.CheckedChanged += new System.EventHandler(this.radioButtonWait_CheckedChanged);
             // 
-            // radioButtonContinue
-            // 
-            this.radioButtonContinue.AutoSize = true;
-            this.radioButtonContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonContinue.Location = new System.Drawing.Point(24, 123);
-            this.radioButtonContinue.Name = "radioButtonContinue";
-            this.radioButtonContinue.Size = new System.Drawing.Size(165, 20);
-            this.radioButtonContinue.TabIndex = 8;
-            this.radioButtonContinue.Text = "Continue without Heater";
-            this.radioButtonContinue.UseVisualStyleBackColor = true;
-            this.radioButtonContinue.CheckedChanged += new System.EventHandler(this.radioButtonContinue_CheckedChanged);
-            // 
-            // radioButtonCancel
-            // 
-            this.radioButtonCancel.AutoSize = true;
-            this.radioButtonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonCancel.Location = new System.Drawing.Point(24, 149);
-            this.radioButtonCancel.Name = "radioButtonCancel";
-            this.radioButtonCancel.Size = new System.Drawing.Size(128, 20);
-            this.radioButtonCancel.TabIndex = 9;
-            this.radioButtonCancel.Text = "Cancel Auto Start";
-            this.radioButtonCancel.UseVisualStyleBackColor = true;
-            this.radioButtonCancel.CheckedChanged += new System.EventHandler(this.radioButtonCancel_CheckedChanged);
-            // 
-            // StatusForm1
+            // AutoStartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(545, 260);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gyroStatusGroupBox);
-            this.Name = "StatusForm1";
+            this.Name = "AutoStartForm";
             this.Text = "Status";
+            this.Load += new System.EventHandler(this.AutoStartForm_Load);
             this.gyroStatusGroupBox.ResumeLayout(false);
             this.gyroStatusGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -181,15 +182,14 @@
         #endregion
 
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label crossGyroStatusLabel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label heaterStatusLabel;
-        private System.Windows.Forms.Label longGyroStatusLabel;
         private System.Windows.Forms.GroupBox gyroStatusGroupBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radioButtonCancel;
         private System.Windows.Forms.RadioButton radioButtonContinue;
         private System.Windows.Forms.RadioButton radioButtonWait;
-
+        public System.Windows.Forms.Label crossGyroStatusLabel;
+        public System.Windows.Forms.Label heaterStatusLabel;
+        public System.Windows.Forms.Label longGyroStatusLabel;
     }
 }

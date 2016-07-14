@@ -8,7 +8,7 @@ namespace SerialPortTerminal
         private CalculateMarineData CMd = new CalculateMarineData();
         private RelaySwitches RelaySwitches = new RelaySwitches();
 
-        //    private frmTerminal frmTerminal = new frmTerminal();
+        private frmTerminal frmTerminal = new frmTerminal();
         private ControlSwitches ControlSwitches = new ControlSwitches();
        // private frmTerminal frmTerminal = new frmTerminal();
         private Comms Comms = new Comms();
@@ -31,63 +31,47 @@ namespace SerialPortTerminal
         private void button3_Click(object sender, EventArgs e)
         {
             byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
+            RelaySwitches.stepperMotorEnable(enable);
+            
+            //    RelaySwitches.RelaySwitchCalculate();// 0x80
+            RelaySwitches.relaySW = 0x80;// cmd 0
+            frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
+            frmTerminal.sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
+            frmTerminal.sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
+            frmTerminal.sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
+
+            ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+
+            frmTerminal.sendCmd("Send Control Switches");           // 1 ----
+            frmTerminal.sendCmd("Send Control Switches");           // 1 ----
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // turn on 200 Hz
-            // RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
-            //  RelaySwitches.slew4 = enable;
-            //   RelaySwitches.slew5 = enable;
-            RelaySwitches.stepperMotorEnable(enable); 
-
-            //    RelaySwitches.RelaySwitchCalculate();// 0x80
-            RelaySwitches.relaySW  = 0x80;// cmd 0
-    //        frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
-   //         frmTerminal.sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
-   //         frmTerminal.sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
-   //         frmTerminal.sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
-
-            ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
-
-    //        frmTerminal.sendCmd("Send Control Switches");           // 1 ----
-   //         frmTerminal.sendCmd("Send Control Switches");           // 1 ----   // turn on 200 Hz
-            // RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
-            //  RelaySwitches.slew4 = enable;
-            //   RelaySwitches.slew5 = enable;
-            RelaySwitches.stepperMotorEnable( enable);
-
-            //    RelaySwitches.RelaySwitchCalculate();// 0x80
-            RelaySwitches.relaySW = 0x80;// cmd 0
-    //        frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
-    //        frmTerminal.sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
-    //        frmTerminal.sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
-    //        frmTerminal.sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
-
-            ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
-
-    //        frmTerminal.sendCmd("Send Control Switches");           // 1 ----
-    //        frmTerminal.sendCmd("Send Control Switches");           // 1 ----
+            RelaySwitches.relaySW = 0xB1;// cmd 0
+            frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
+            ControlSwitches.controlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
+            frmTerminal.sendCmd("Send Control Switches");           // 1 ----
         }
         private void button5_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x81;// cmd 0
-     //       frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
+            frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button6_Click(object sender, EventArgs e)
         {
             ControlSwitches.controlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
-   //         frmTerminal.sendCmd("Send Control Switches");           // 1 ----
+            frmTerminal.sendCmd("Send Control Switches");           // 1 ----
         }
         private void button7_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x80;// cmd 0
-   //         frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
+            frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button8_Click(object sender, EventArgs e)
         {
             RelaySwitches.relaySW = 0x81;// cmd 0
-  //          frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
+            frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button9_Click(object sender, EventArgs e)
         {
@@ -175,6 +159,19 @@ namespace SerialPortTerminal
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+            byte[] data = { 0x01, 0x08, 0x09 };
+
+
+
+
+          
+            
+          //  Log(LogMsgType.Outgoing, frmTerminal.ByteArrayToHexString(data) + "\n");
         }
 
         /*

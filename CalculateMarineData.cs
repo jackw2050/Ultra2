@@ -65,6 +65,7 @@ namespace SerialPortTerminal
 
     public class MeterStatus// Byte 76
     {
+       // CalculateMarineData CalculateMarineData = new CalculateMarineData();
         public int alarmIndicated = 0;
         public int xGyro_Fog = 0;   // cross gyro or FOG status
         public int lGyro_Fog = 0;   // cross gyro or FOG status
@@ -75,10 +76,11 @@ namespace SerialPortTerminal
         public int receiveDataCheckSumError = 0;
 
         // reserved
-        public int meterStatus = 0;
+        public static int meterStatus = 0;
 
-        public void GetMeterStatus(Int16 meterStatus)
+        public void GetMeterStatus(Int16 meterUpdate)
         {
+            frmTerminal frmTerminal = new frmTerminal();
             alarmIndicated = (meterStatus & 0x01);
             xGyro_Fog = (meterStatus & 0x02) >> 1;
             lGyro_Fog = (meterStatus & 0x04) >> 2;
@@ -87,6 +89,8 @@ namespace SerialPortTerminal
             incorrectCommandReceived = (meterStatus & 0x20) >> 10;
             serialPortTimeout = (meterStatus & 0x40) >> 20;
             receiveDataCheckSumError = (meterStatus & 0x80) >> 40;
+            meterStatus = meterUpdate;
+            frmTerminal.meter_status = meterUpdate;
             if (false)
             {
                 Console.WriteLine("alarmIndicated " + alarmIndicated);
@@ -389,11 +393,11 @@ namespace SerialPortTerminal
         public double gravity;
         public float Beam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, AUX1, AUX2, AUX3, AUX4;
         public double p28V, n28V, p24V, p15V, n15V, p5V;
-        public int MeterSTATUS;
+        public static int MeterSTATUS;
         public int REMOTEREBOOTED;
         public int TimeSetSuccess;
         public int G2000Bias;
-        private Int16 portCStatus;
+        public Int16 portCStatus;
         public int year;
         public int day;
         public double Hour, Min, Sec;
@@ -875,6 +879,7 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[76];
                 Int16 meterStatus = BitConverter.ToInt16(tempByte, 0);
                 MeterStatus.GetMeterStatus(meterStatus);
+                Console.WriteLine("Meter status " + meterStatus);
 
 
                 //GET PORT C INPUT
@@ -882,7 +887,7 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[77];
                 portCStatus = BitConverter.ToInt16(tempByte, 0);//  make global later
                 Port_C.Port_C_MeterStatus(portCStatus);
-
+                Console.WriteLine("PortC status " + portCStatus);
                 // CHECK FOR REMOTE EMBEDDED COMPUTER REBOOT
                 tempByte[0] = meterBytes[1];
                 if (tempByte[0] == 1)//remote rebooted

@@ -46,6 +46,7 @@
             this.torqueMotorCheckBox = new System.Windows.Forms.CheckBox();
             this.springTensionCheckBox = new System.Windows.Forms.CheckBox();
             this.alarmCheckBox = new System.Windows.Forms.CheckBox();
+            this.button15 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button14
@@ -228,11 +229,23 @@
             this.alarmCheckBox.UseVisualStyleBackColor = true;
             this.alarmCheckBox.CheckedChanged += new System.EventHandler(this.alarmCheckBox_CheckedChanged);
             // 
+            // button15
+            // 
+            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button15.Location = new System.Drawing.Point(316, 147);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(144, 25);
+            this.button15.TabIndex = 101;
+            this.button15.Text = "Start data collection";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // Switches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(489, 412);
+            this.Controls.Add(this.button15);
             this.Controls.Add(this.alarmCheckBox);
             this.Controls.Add(this.springTensionCheckBox);
             this.Controls.Add(this.torqueMotorCheckBox);
@@ -279,7 +292,6 @@
         private System.Windows.Forms.CheckBox torqueMotorCheckBox;
         private System.Windows.Forms.CheckBox springTensionCheckBox;
         private System.Windows.Forms.CheckBox alarmCheckBox;
-
-
+        private System.Windows.Forms.Button button15;
     }
 }

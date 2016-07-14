@@ -5,24 +5,21 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SerialPortTerminal
+namespace ChartBinding
 {
-    public partial class Parameters : Form
+    public partial class SurveyForm : Form
     {
-        public Parameters()
+        public SurveyForm()
         {
             InitializeComponent();
         }
 
-        private void textBox27_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
+            Form1.surveyName = surveyTextBox.Text;
             this.Hide();
         }
     }
