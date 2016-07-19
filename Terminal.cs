@@ -49,7 +49,7 @@ namespace SerialPortTerminal
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
         public AutoStartForm AutoStartForm = new AutoStartForm();
-        private ArrayList listDataSource = new ArrayList();
+        private static ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
 
@@ -318,9 +318,9 @@ namespace SerialPortTerminal
             }
 
             if (listDataSource.Count > maxArraySize)
-            {
+          {
                 listDataSource.RemoveAt(0);
-            }
+           }
         }
 
         #region Local Variables
@@ -888,8 +888,8 @@ namespace SerialPortTerminal
 
                 // Fill up list aray
 
-        //        listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
-        //        GravityChart.DataSource = listDataSource;
+                listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+                GravityChart.DataSource = listDataSource;
 
                 myData myData = new myData();
                 myData.Date = mdt.Date;
