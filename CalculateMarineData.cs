@@ -387,6 +387,7 @@ namespace SerialPortTerminal
 
         public int dataCounter = 0;
         public int dataLength;
+
         public DateTime Date;
         public float SpringTension;
         public double CrossCoupling;
@@ -664,105 +665,7 @@ namespace SerialPortTerminal
                 Boolean oldMeter = false;
                 if (oldMeter)
                 {
-                    //GET AUX1  ------------------------------------------------------------
-                    Array.Clear(tempByte, 0, tempByte.Length);
-                    tempByte[0] = meterBytes[53];
-                    tempByte[1] = meterBytes[54];
-                    AUX1 = BitConverter.ToInt16(tempByte, 0);
-                    data1[15] = AUX1;
-
-                    //GET AUX2  ------------------------------------------------------------
-                    tempByte[0] = meterBytes[55];
-                    tempByte[1] = meterBytes[56];
-                    AUX2 = BitConverter.ToInt16(tempByte, 0);
-
-                    //GET AUX3  ------------------------------------------------------------
-                    tempByte[0] = meterBytes[57];
-                    tempByte[1] = meterBytes[58];
-                    AUX3 = BitConverter.ToInt16(tempByte, 0);
-                    //     LiveMeterData[dataCounter].AUX3 = AUX3;
-
-                    //GET AUX4  ------------------------------------------------------------
-                    // foreach (byte c in tempByte) tempByte[c] = 0x00;
-                    tempByte[0] = meterBytes[59];
-                    tempByte[1] = meterBytes[60];
-                    AUX4 = BitConverter.ToInt16(tempByte, 0);
-                    //     LiveMeterData[dataCounter].AUX4 = AUX4;
-
-                    //GET +28V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[64];
-                    // tempByte[1] = meterBytes[65];
-                    int p28Vi = BitConverter.ToInt32(tempByte, 0);
-                    double p28vd = BitConverter.ToDouble(tempByte, 0);
-                    p28V = Convert.ToDouble(p28Vi * 2 / 3276.7);
-
-                    Console.WriteLine(p28V + "\t" + p28Vi + "\t" + p28vd + "\n");
-
-                    //    LiveMeterData[dataCounter].p28V = p28V;
-                    byte[] myTempByte = { meterBytes[64] };
-                    string myString;
-                    myString = ByteArrayToHexString(myTempByte);
-                    int numVal;
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[65];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[66];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[67];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-
-                    // what the  hell am I doing here???
-
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[70];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[71];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[72];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    Console.WriteLine(numVal);
-
-                    //GET -28V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[66];
-                    tempByte[1] = meterBytes[67];
-                    int n28Vi = BitConverter.ToInt32(tempByte, 0);
-                    n28V = Convert.ToDouble(n28Vi * -5 / 3276.7);   //  check this conversion
-                    Console.WriteLine("-28V: " + n28V);
-                    //GET +24V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[68];
-                    tempByte[1] = meterBytes[69];
-                    int p24Vi = BitConverter.ToInt32(tempByte, 0);
-                    p24V = Convert.ToDouble(p24Vi * 2 / 3276.7);
-
-                    //GET+15V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[70];
-                    tempByte[1] = meterBytes[71];
-                    int p15Vi = BitConverter.ToInt32(tempByte, 0);
-                    p15V = Convert.ToDouble(p15Vi / 3276.7);   //  check this conversion
-
-                    //GET -15V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[72];
-                    tempByte[1] = meterBytes[73];
-                    int n15Vi = BitConverter.ToInt32(tempByte, 0);
-                    n15V = Convert.ToDouble(n15Vi * -3 / 3276.7);   //  check this conversion
-
-                    //GET +5V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[74];
-                    tempByte[1] = meterBytes[75];
-                    int p5Vi = BitConverter.ToInt32(tempByte, 0);
-                    p5V = Convert.ToDouble(p5Vi / 3 / 3276.7);   //  check this conversion
+               
                 }
                 else
                 {
@@ -871,6 +774,12 @@ namespace SerialPortTerminal
 
                 }
 
+
+
+
+
+                /*
+
                 //GET PRINTER STATUS  -- No longer used
                 tempByte[0] = meterBytes[75];
 
@@ -936,6 +845,7 @@ namespace SerialPortTerminal
                 {
                     //get digital and aux
                 }
+                */
                 oneSecStuff();
             }
             else

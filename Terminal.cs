@@ -134,10 +134,13 @@ namespace SerialPortTerminal
         {
             private DateTime dateTime;
             private double digitalGravity, springTension, crossCoupling, rawBeam, vcc, al, ax, ve, ax2;
-            private double xacc2, lacc2, xacc, lacc, totalCorrection;
+            private double xacc2, lacc2, xacc, lacc, totalCorrection, longitude, latitude, altitude;
+            private int year, day, hour, minute, second;
+            private Single gpsStatus;
 
             public Record(DateTime dateTime, double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
             {
+                
                 this.dateTime = dateTime;
                 this.digitalGravity = digitalGravity;
                 this.springTension = springTension;
@@ -153,6 +156,36 @@ namespace SerialPortTerminal
                 this.xacc = xacc;
                 this.lacc = lacc;
                 this.totalCorrection = totalCorrection;
+            }
+
+            public int Year
+            {
+                get { return  year; }
+                set { year = value; }
+            }
+
+            public int Day
+            {
+                get { return day; }
+                set { day = value; }
+            }
+
+            public int Hour
+            {
+                get { return hour; }
+                set { hour = value; }
+            }
+
+            public int Minute
+            {
+                get { return Minute; }
+                set { Minute = value; }
+            }
+
+            public int Second
+            {
+                get { return Second; }
+                set { Second = value; }
             }
 
             public DateTime Date
@@ -243,6 +276,28 @@ namespace SerialPortTerminal
             {
                 get { return totalCorrection; }
                 set { totalCorrection = value; }
+            }
+
+
+            public double Latitude
+            {
+                get { return latitude; }
+                set { latitude = value; }
+            }
+            public double Longitude
+            {
+                get { return longitude; }
+                set { longitude = value; }
+            }
+            public double Altitude
+            {
+                get { return altitude; }
+                set { altitude = value; }
+            }
+            public Single GPS_Status
+            {
+                get { return gpsStatus; }
+                set { gpsStatus = value; }
             }
         }
 
@@ -833,8 +888,8 @@ namespace SerialPortTerminal
 
                 // Fill up list aray
 
-                listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
-                GravityChart.DataSource = listDataSource;
+        //        listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+        //        GravityChart.DataSource = listDataSource;
 
                 myData myData = new myData();
                 myData.Date = mdt.Date;
