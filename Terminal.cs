@@ -55,7 +55,7 @@ namespace SerialPortTerminal
 
         private delegate void SetTextCallback(string text);
 
-        public static Boolean engineerDebug = false;
+        public static Boolean engineerDebug = true;
         public int set = 1;
         public int enable = 1;
         public int clear = 0;
