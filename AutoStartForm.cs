@@ -46,7 +46,7 @@ namespace SerialPortTerminal
         public void FogCheck()
         {
 
-           
+                crossGyroStatusLabel.Text = "Not Ready...";
                 // Check Cross FOG status
                 if (MeterStatus.xGyro_Fog == 0)
                 {crossFogNotReady = false;}

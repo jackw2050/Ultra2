@@ -11,6 +11,7 @@ namespace SerialPortTerminal
         private frmTerminal frmTerminal = new frmTerminal();
         private ControlSwitches ControlSwitches = new ControlSwitches();
        // private frmTerminal frmTerminal = new frmTerminal();
+        private Comms Comms = new Comms();
         private ConfigData ConfigData = new ConfigData();
 
         public int set = 1;

@@ -306,7 +306,7 @@ namespace SerialPortTerminal
 
 
 
-/*
+
 
     public class ControlSwitchesOld
     {
@@ -330,7 +330,7 @@ namespace SerialPortTerminal
     }
 
 
-*/
+
 
 
 
