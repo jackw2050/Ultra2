@@ -885,6 +885,17 @@ namespace SerialPortTerminal
                 textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
+                if ((mdt.gpsNstatus == 0) & (mdt.gpsTstatus ==0) & (mdt.gpsSstatus == 0))
+                {
+                    gpsStartusTextBox.ForeColor = Color.Green;
+                    gpsStartusTextBox.Text = "Good";
+                }
+                else
+                {
+                    gpsStartusTextBox.ForeColor = Color.Red;
+                    gpsStartusTextBox.Text = "Error";
+                }
+
 
                 // Fill up list aray
 

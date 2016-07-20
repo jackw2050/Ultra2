@@ -408,6 +408,10 @@ namespace SerialPortTerminal
         public double longitude = 0;
         public double latitude = 0;
         public double altitude = 0;
+        public int gpsNstatus;
+        public int gpsTstatus;
+        public int gpsSstatus;
+        public int gpsNumSatelites;
 
         public static double[] table1 = {
     	0.0, 100.0, 200.0, 300.0 ,400.0, 500.0, 600.0,700.0, 800.0, 900.0, 1000.0, 1100.0 ,1200.0,
@@ -834,17 +838,17 @@ namespace SerialPortTerminal
              //   gpsStatus = tempByte[0];
                 gpsStatus = BitConverter.ToInt16(tempByte, 0);
 
-                var gps1 = (gpsStatus >> 4) & 0x01; // & 0x10;
-                var gps2 = (gpsStatus >> 5) & 0x01;
-                var gps3 = (gpsStatus >> 6) & 0x01;
-                int numSat = gpsStatus  & 0xF;
+                 gpsNstatus = (gpsStatus >> 4) & 0x01; // & 0x10;
+                 gpsTstatus = (gpsStatus >> 5) & 0x01;
+                 gpsSstatus = (gpsStatus >> 6) & 0x01;
+                 gpsNumSatelites = gpsStatus  & 0xF;
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("GPS Status Word = " + Convert.ToString(gpsStatus, 2));
-                    Console.WriteLine("GPS N Status = " + Convert.ToString(gps1, 2));
-                    Console.WriteLine("GPS T Status = " + Convert.ToString(gps2, 2));
-                    Console.WriteLine("GPS S Status = " + Convert.ToString(gps3, 2));
-                    Console.WriteLine("GPS # of satelites = " +  Convert.ToString(numSat));
+                    Console.WriteLine("GPS N Status = " + Convert.ToString(gpsNstatus, 2));
+                    Console.WriteLine("GPS T Status = " + Convert.ToString(gpsTstatus, 2));
+                    Console.WriteLine("GPS S Status = " + Convert.ToString(gpsSstatus, 2));
+                    Console.WriteLine("GPS # of satelites = " +  Convert.ToString(gpsNumSatelites));
                 }
 
 
