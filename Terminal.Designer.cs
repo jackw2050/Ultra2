@@ -848,7 +848,6 @@ namespace SerialPortTerminal
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(97, 20);
             this.textBox17.TabIndex = 88;
-            this.textBox17.Text = "135.376";
             // 
             // emergencyShutdownButton
             // 
@@ -1008,7 +1007,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(456, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(364, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 

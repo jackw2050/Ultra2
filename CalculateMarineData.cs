@@ -387,6 +387,7 @@ namespace SerialPortTerminal
 
         public int dataCounter = 0;
         public int dataLength;
+
         public DateTime Date;
         public float SpringTension;
         public double CrossCoupling;
@@ -402,11 +403,15 @@ namespace SerialPortTerminal
         public int day;
         public double Hour, Min, Sec;
         public Boolean dataValid = false;
-        public Single gpsStatus;
+        public short gpsStatus;
         private static int nPoint = 0;
         public double longitude = 0;
         public double latitude = 0;
         public double altitude = 0;
+        public int gpsNstatus;
+        public int gpsTstatus;
+        public int gpsSstatus;
+        public int gpsNumSatelites;
 
         public static double[] table1 = {
     	0.0, 100.0, 200.0, 300.0 ,400.0, 500.0, 600.0,700.0, 800.0, 900.0, 1000.0, 1100.0 ,1200.0,
@@ -534,7 +539,10 @@ namespace SerialPortTerminal
                 byte[] array = new byte[4];
                 array[0] = meterBytes[6]; // Lowest
                 Hour = BitConverter.ToInt16(array, 0);
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Hour = " + Hour);
+                }
                 tempByte[0] = meterBytes[7];
                 tempByte[1] = 0;
                 tempByte[2] = 0;
@@ -542,13 +550,21 @@ namespace SerialPortTerminal
 
                 //      tempByte = SetTempByte(meterBytes, 1, 7);
                 Min = BitConverter.ToInt16(tempByte, 0);
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Minutes = " + Min);
+                }
                 tempByte[0] = meterBytes[8];
                 tempByte[1] = 0;
                 tempByte[2] = 0;
                 tempByte[3] = 0;
                 //          tempByte = SetTempByte(meterBytes, 1, 8);
                 Sec = BitConverter.ToInt16(tempByte, 0);
+
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Seconds = " + Sec);
+                }
 
                 myDT = myDT.AddHours(Hour);
                 myDT = myDT.AddMinutes(Min);
@@ -560,14 +576,20 @@ namespace SerialPortTerminal
                 day = BitConverter.ToInt32(tempByte, 0);
                 day = day - 1;
                 myDT = myDT.AddDays(day);
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Day of the year = " + day);
+                }
                 Array.Clear(tempByte, 0, tempByte.Length);
                 tempByte[0] = meterBytes[2];
                 tempByte[1] = meterBytes[3];
                 //       tempByte = SetTempByte(meterBytes, 2, 2);
                 year = BitConverter.ToInt16(tempByte, 0);
                 Date = myDT;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Date = " + Date);
+                }
                 tempByte[0] = meterBytes[9];
                 tempByte[1] = meterBytes[10];
                 tempByte[2] = meterBytes[11];
@@ -575,7 +597,10 @@ namespace SerialPortTerminal
                 //     tempByte = SetTempByte(meterBytes, 4, 9);
                 SpringTension = BitConverter.ToSingle(tempByte, 0);
                 data1[3] = SpringTension;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Spring Tension = " + SpringTension);
+                }
                 //GET RAW BEAM  ------------------------------------------------------------
                 tempByte[0] = meterBytes[13];
                 tempByte[1] = meterBytes[14];
@@ -584,7 +609,10 @@ namespace SerialPortTerminal
                 //    tempByte = SetTempByte(meterBytes, 4, 13);
                 Beam = BitConverter.ToSingle(tempByte, 0);
                 data1[5] = Beam;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Raw Beam = " + Beam);
+                }
                 //GET VCC  ------------------------------------------------------------
                 tempByte[0] = meterBytes[17];
                 tempByte[1] = meterBytes[18];
@@ -593,7 +621,10 @@ namespace SerialPortTerminal
                 //     tempByte = SetTempByte(meterBytes, 4, 17);
                 VCC = BitConverter.ToSingle(tempByte, 0);
                 data1[6] = VCC;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("VCC = " + VCC);
+                }
                 //GET AL  ------------------------------------------------------------
                 tempByte[0] = meterBytes[21];
                 tempByte[1] = meterBytes[22];
@@ -601,7 +632,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[24];
                 AL = BitConverter.ToSingle(tempByte, 0);
                 data1[7] = AL;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("AL = " + AL);
+                }
                 //GET AX  ------------------------------------------------------------
                 tempByte[0] = meterBytes[25];
                 tempByte[1] = meterBytes[26];
@@ -609,7 +643,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[28];
                 AX = BitConverter.ToSingle(tempByte, 0);
                 data1[8] = AX;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("AX = " + AX);
+                }
                 //GET VE  ------------------------------------------------------------
                 tempByte[0] = meterBytes[29];
                 tempByte[1] = meterBytes[30];
@@ -617,7 +654,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[32];
                 VE = BitConverter.ToSingle(tempByte, 0);
                 data1[9] = VE;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("VE = " + VE);
+                }
                 //GET AX2  ------------------------------------------------------------
                 tempByte[0] = meterBytes[33];
                 tempByte[1] = meterBytes[34];
@@ -625,7 +665,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[36];
                 AX2 = BitConverter.ToSingle(tempByte, 0);
                 data1[10] = AX2;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("AX2 = " + AX2);
+                }
                 //GET XACC2  ------------------------------------------------------------
                 // foreach (byte c in tempByte) tempByte[c] = 0x00;
                 tempByte[0] = meterBytes[37];
@@ -634,7 +677,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[40];
                 XACC2 = BitConverter.ToSingle(tempByte, 0);
                 data1[11] = XACC2;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("XACC2 = " + XACC2);
+                }
                 //GET LACC2  ------------------------------------------------------------
                 tempByte[0] = meterBytes[41];
                 tempByte[1] = meterBytes[42];
@@ -642,7 +688,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[44];
                 LACC2 = BitConverter.ToSingle(tempByte, 0);
                 data1[12] = LACC2;
-
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("LACC2 = " + LACC2);
+                }
                 //GET XACC  ------------------------------------------------------------
                 // foreach (byte c in tempByte) tempByte[c] = 0x00;
                 tempByte[0] = meterBytes[45];
@@ -651,6 +700,10 @@ namespace SerialPortTerminal
                 tempByte[3] = meterBytes[48];
                 XACC = BitConverter.ToSingle(tempByte, 0);
                 data1[13] = XACC;
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("XACC = " + XACC);
+                }
 
                 //GET LACC  ------------------------------------------------------------
                 tempByte[0] = meterBytes[49];
@@ -660,115 +713,15 @@ namespace SerialPortTerminal
                 LACC = BitConverter.ToSingle(tempByte, 0);
                 data1[14] = LACC;
 
-                // place if here for GPS vs OLD
-                Boolean oldMeter = false;
-                if (oldMeter)
+                if (frmTerminal.engineerDebug)
                 {
-                    //GET AUX1  ------------------------------------------------------------
-                    Array.Clear(tempByte, 0, tempByte.Length);
-                    tempByte[0] = meterBytes[53];
-                    tempByte[1] = meterBytes[54];
-                    AUX1 = BitConverter.ToInt16(tempByte, 0);
-                    data1[15] = AUX1;
-
-                    //GET AUX2  ------------------------------------------------------------
-                    tempByte[0] = meterBytes[55];
-                    tempByte[1] = meterBytes[56];
-                    AUX2 = BitConverter.ToInt16(tempByte, 0);
-
-                    //GET AUX3  ------------------------------------------------------------
-                    tempByte[0] = meterBytes[57];
-                    tempByte[1] = meterBytes[58];
-                    AUX3 = BitConverter.ToInt16(tempByte, 0);
-                    //     LiveMeterData[dataCounter].AUX3 = AUX3;
-
-                    //GET AUX4  ------------------------------------------------------------
-                    // foreach (byte c in tempByte) tempByte[c] = 0x00;
-                    tempByte[0] = meterBytes[59];
-                    tempByte[1] = meterBytes[60];
-                    AUX4 = BitConverter.ToInt16(tempByte, 0);
-                    //     LiveMeterData[dataCounter].AUX4 = AUX4;
-
-                    //GET +28V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[64];
-                    // tempByte[1] = meterBytes[65];
-                    int p28Vi = BitConverter.ToInt32(tempByte, 0);
-                    double p28vd = BitConverter.ToDouble(tempByte, 0);
-                    p28V = Convert.ToDouble(p28Vi * 2 / 3276.7);
-
-                    Console.WriteLine(p28V + "\t" + p28Vi + "\t" + p28vd + "\n");
-
-                    //    LiveMeterData[dataCounter].p28V = p28V;
-                    byte[] myTempByte = { meterBytes[64] };
-                    string myString;
-                    myString = ByteArrayToHexString(myTempByte);
-                    int numVal;
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[65];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[66];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[67];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-
-                    // what the  hell am I doing here???
-
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[70];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[71];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    myTempByte[0] = meterBytes[72];
-                    myString = ByteArrayToHexString(myTempByte);
-                    Int32.TryParse(myString, out numVal);
-                    Console.WriteLine(numVal);
-
-                    //GET -28V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[66];
-                    tempByte[1] = meterBytes[67];
-                    int n28Vi = BitConverter.ToInt32(tempByte, 0);
-                    n28V = Convert.ToDouble(n28Vi * -5 / 3276.7);   //  check this conversion
-                    Console.WriteLine("-28V: " + n28V);
-                    //GET +24V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[68];
-                    tempByte[1] = meterBytes[69];
-                    int p24Vi = BitConverter.ToInt32(tempByte, 0);
-                    p24V = Convert.ToDouble(p24Vi * 2 / 3276.7);
-
-                    //GET+15V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[70];
-                    tempByte[1] = meterBytes[71];
-                    int p15Vi = BitConverter.ToInt32(tempByte, 0);
-                    p15V = Convert.ToDouble(p15Vi / 3276.7);   //  check this conversion
-
-                    //GET -15V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[72];
-                    tempByte[1] = meterBytes[73];
-                    int n15Vi = BitConverter.ToInt32(tempByte, 0);
-                    n15V = Convert.ToDouble(n15Vi * -3 / 3276.7);   //  check this conversion
-
-                    //GET +5V  ------------------------------------------------------------
-                    for (int i = 0; i < 4; i++) { tempByte[i] = 0x00; }
-                    tempByte[0] = meterBytes[74];
-                    tempByte[1] = meterBytes[75];
-                    int p5Vi = BitConverter.ToInt32(tempByte, 0);
-                    p5V = Convert.ToDouble(p5Vi / 3 / 3276.7);   //  check this conversion
+                    Console.WriteLine("LACC = " + LACC);
                 }
-                else
-                {
+
+                // place if here for GPS vs OLD
 
 
-                    altitude = 0;
+                altitude = 0;
                     latitude = 0;
                     longitude = 0;
 
@@ -804,12 +757,14 @@ namespace SerialPortTerminal
                     {
                         altitude *= -1;
                     }
-                    Console.WriteLine("Altitude: " + altitude);
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Altitude = " + altitude);
+                }
 
-                    // Longigude
+                // Longitude
 
-                    //     double longitude = 0;
-                    Array.Clear(tempByte, 0, tempByte.Length);
+                Array.Clear(tempByte, 0, tempByte.Length);
                     tempByte[0] = meterBytes[64];
                     gTemp = BitConverter.ToInt32(tempByte, 0);
                     gTemp = gTemp & 0x0F;
@@ -839,9 +794,12 @@ namespace SerialPortTerminal
                     {
                         longitude *= -1;
                     }
-                    Console.WriteLine("Longitude: " + longitude);
-                    // Latitude
-                    gTemp = 0;
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Longitude = " + longitude);
+                }
+                // Latitude
+                gTemp = 0;
                     //  double latitude = 0;
                     Array.Clear(tempByte, 0, tempByte.Length);
                     tempByte[0] = meterBytes[70];
@@ -869,7 +827,30 @@ namespace SerialPortTerminal
                         latitude *= -1;
                     }
 
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Latitude = " + latitude);
                 }
+
+
+
+                tempByte[0] = meterBytes[74];
+             //   gpsStatus = tempByte[0];
+                gpsStatus = BitConverter.ToInt16(tempByte, 0);
+
+                 gpsNstatus = (gpsStatus >> 4) & 0x01; // & 0x10;
+                 gpsTstatus = (gpsStatus >> 5) & 0x01;
+                 gpsSstatus = (gpsStatus >> 6) & 0x01;
+                 gpsNumSatelites = gpsStatus  & 0xF;
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("GPS Status Word = " + Convert.ToString(gpsStatus, 2));
+                    Console.WriteLine("GPS N Status = " + Convert.ToString(gpsNstatus, 2));
+                    Console.WriteLine("GPS T Status = " + Convert.ToString(gpsTstatus, 2));
+                    Console.WriteLine("GPS S Status = " + Convert.ToString(gpsSstatus, 2));
+                    Console.WriteLine("GPS # of satelites = " +  Convert.ToString(gpsNumSatelites));
+                }
+
 
                 //GET PRINTER STATUS  -- No longer used
                 tempByte[0] = meterBytes[75];
@@ -879,7 +860,11 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[76];
                 Int16 meterStatus = BitConverter.ToInt16(tempByte, 0);
                 MeterStatus.GetMeterStatus(meterStatus);
-                Console.WriteLine("Meter status " + meterStatus);
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Meter status " + meterStatus);
+                }
+               
 
 
                 //GET PORT C INPUT
@@ -890,21 +875,34 @@ namespace SerialPortTerminal
                 Console.WriteLine("PortC status " + portCStatus);
                 // CHECK FOR REMOTE EMBEDDED COMPUTER REBOOT
                 tempByte[0] = meterBytes[1];
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Meter status byte " + tempByte[0]);
+                }
                 if (tempByte[0] == 1)//remote rebooted
                 {
                     //  var iError = -4;
+                    Console.WriteLine("Remote rebooted");
 
                     // need error routine here.  if pulse is ok just re-sync otherwise set alert to reboot
                 }
                 // CHECK FOR TIME SET SUCCESSFULL/ FAIL
                 else if (tempByte[0] == 2)//
                 {
+                    if (frmTerminal.engineerDebug)
+                    {
+                        Console.WriteLine("Time set Successful ");
+                    }
                     //   var iError = -10;
                     // timeBusy = false;
                     // gpFlg = 1;
                 }
                 else if (tempByte[0] == 2)// Time set failed
                 {
+                    if (frmTerminal.engineerDebug)
+                    {
+                        Console.WriteLine("Time set Failed ");
+                    }
                     //   var iError = -11;
                     // timeBusy = false;
                 }
@@ -917,26 +915,34 @@ namespace SerialPortTerminal
                     tempByte[2] = meterBytes[4];
                     tempByte[3] = meterBytes[5];
                     var gxTemp = BitConverter.ToDouble(tempByte, 0);
-
+                    if (frmTerminal.engineerDebug)
+                    {
+                        Console.WriteLine("G2000 - cross " + gxTemp);
+                    }
                     Array.Clear(tempByte, 0, tempByte.Length);
                     tempByte[0] = meterBytes[6];
                     tempByte[1] = meterBytes[7];
                     tempByte[2] = meterBytes[8];
                     tempByte[3] = meterBytes[9];
                     var glTemp = BitConverter.ToDouble(tempByte, 0);
+                    if (frmTerminal.engineerDebug)
+                    {
+                        Console.WriteLine("G2000 - long " + glTemp);
+                    }
                 }
 
-                //               foreach (var item in data1) { Console.WriteLine("data1 " + item.ToString()); }
-                var pdbType = "GPS";// alt is "old"  :)
-                if (pdbType == "GPS")
-                {
+        
                     // get gps and period
-                }
-                else if (pdbType == "old")
-                {
-                    //get digital and aux
-                }
-                oneSecStuff();
+         
+             
+
+
+                /////////////////////////////////////////////////////////////////
+
+
+                oneSecStuff();  ////// NEED TO DECIDE - LEAVE THIS HERE OR CALL FROM TERMINAL
+
+                //////////////////////////////////////////////////////////////////
             }
             else
             {
