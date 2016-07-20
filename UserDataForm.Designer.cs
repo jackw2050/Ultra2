@@ -80,10 +80,20 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.gps1HzSynchTextBox = new System.Windows.Forms.TextBox();
+            this.gpsNavigationTextBox = new System.Windows.Forms.TextBox();
+            this.gpsTimeSetTextBox = new System.Windows.Forms.TextBox();
+            this.gpsSatelitesTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label21
@@ -587,12 +597,94 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.gpsSatelitesTextBox);
+            this.groupBox5.Controls.Add(this.gpsTimeSetTextBox);
+            this.groupBox5.Controls.Add(this.gpsNavigationTextBox);
+            this.groupBox5.Controls.Add(this.gps1HzSynchTextBox);
+            this.groupBox5.Controls.Add(this.label24);
+            this.groupBox5.Controls.Add(this.label23);
+            this.groupBox5.Controls.Add(this.label22);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Location = new System.Drawing.Point(293, 316);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(409, 129);
+            this.groupBox5.TabIndex = 131;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "GPS Status";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(26, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(74, 13);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "GPS Time Set";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(27, 78);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "1Hz Synch";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(27, 52);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(58, 13);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Navigation";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(281, 23);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(57, 13);
+            this.label24.TabIndex = 3;
+            this.label24.Text = "# Satelites";
+            // 
+            // gps1HzSynchTextBox
+            // 
+            this.gps1HzSynchTextBox.Location = new System.Drawing.Point(113, 78);
+            this.gps1HzSynchTextBox.Name = "gps1HzSynchTextBox";
+            this.gps1HzSynchTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gps1HzSynchTextBox.TabIndex = 4;
+            // 
+            // gpsNavigationTextBox
+            // 
+            this.gpsNavigationTextBox.Location = new System.Drawing.Point(113, 49);
+            this.gpsNavigationTextBox.Name = "gpsNavigationTextBox";
+            this.gpsNavigationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gpsNavigationTextBox.TabIndex = 5;
+            // 
+            // gpsTimeSetTextBox
+            // 
+            this.gpsTimeSetTextBox.Location = new System.Drawing.Point(113, 19);
+            this.gpsTimeSetTextBox.Name = "gpsTimeSetTextBox";
+            this.gpsTimeSetTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gpsTimeSetTextBox.TabIndex = 6;
+            // 
+            // gpsSatelitesTextBox
+            // 
+            this.gpsSatelitesTextBox.Location = new System.Drawing.Point(284, 46);
+            this.gpsSatelitesTextBox.Name = "gpsSatelitesTextBox";
+            this.gpsSatelitesTextBox.Size = new System.Drawing.Size(54, 20);
+            this.gpsSatelitesTextBox.TabIndex = 7;
+            // 
             // UserDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 457);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -608,6 +700,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -666,5 +760,14 @@
         public System.Windows.Forms.TextBox configurationFileTextBox;
         public System.Windows.Forms.TextBox dataFileTextBox;
         public System.Windows.Forms.Label modeLabel;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label18;
+        public System.Windows.Forms.TextBox gpsSatelitesTextBox;
+        public System.Windows.Forms.TextBox gpsTimeSetTextBox;
+        public System.Windows.Forms.TextBox gpsNavigationTextBox;
+        public System.Windows.Forms.TextBox gps1HzSynchTextBox;
     }
 }

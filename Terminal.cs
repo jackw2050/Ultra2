@@ -897,6 +897,46 @@ namespace SerialPortTerminal
                 }
 
 
+                if (UserDataForm.Visible)
+                {
+                    UserDataForm.gpsSatelitesTextBox.Text = mdt.gpsNumSatelites.ToString();
+
+                    if (mdt.gpsNstatus == 0)
+                    {
+                        UserDataForm.gpsNavigationTextBox.ForeColor = Color.Green;
+                        UserDataForm.gpsNavigationTextBox.Text = "Good";
+                    }
+                    else
+                    {
+                        UserDataForm.gpsNavigationTextBox.ForeColor = Color.Red;
+                        UserDataForm.gpsNavigationTextBox.Text = "Navigation data not available";
+                    }
+                    if (mdt.gpsSstatus == 0)
+                    {
+                        UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Green;
+                        UserDataForm.gps1HzSynchTextBox.Text = "Good";
+                    }
+                    else
+                    {
+                        UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Red;
+                        UserDataForm.gps1HzSynchTextBox.Text = "1 Hz synch pulse not present";
+                    }
+                    if (mdt.gpsTstatus == 0)
+                    {
+                        UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Green;
+                        UserDataForm.gpsTimeSetTextBox.Text = "Good";
+                    }
+                    else
+                    {
+                        UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Red;
+                        UserDataForm.gpsTimeSetTextBox.Text = "GPS time set unsuccesful";
+                    }
+
+
+
+                }
+
+
                 // Fill up list aray
 
                 listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
