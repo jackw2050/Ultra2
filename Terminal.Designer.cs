@@ -183,6 +183,11 @@ namespace SerialPortTerminal
             this.gyroCheckBox = new System.Windows.Forms.CheckBox();
             this.surveyTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.STtextBox = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1413,12 +1418,64 @@ namespace SerialPortTerminal
             this.label2.TabIndex = 120;
             this.label2.Text = "Survey Information";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(748, 125);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 121;
+            this.button2.Text = "Slew spring tenstion";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(842, 123);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 122;
+            this.button3.Text = "Finish";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_2);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(652, 125);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 123;
+            this.button4.Text = "Prep";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // STtextBox
+            // 
+            this.STtextBox.Location = new System.Drawing.Point(686, 52);
+            this.STtextBox.Name = "STtextBox";
+            this.STtextBox.Size = new System.Drawing.Size(100, 20);
+            this.STtextBox.TabIndex = 124;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(793, 52);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 125;
+            this.button5.Text = "Set ST";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.setupContextMenuStrip1;
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.STtextBox);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.surveyTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.startupGroupBox);
@@ -1613,6 +1670,11 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem greyToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox STtextBox;
+        private System.Windows.Forms.Button button5;
     }
 }
 

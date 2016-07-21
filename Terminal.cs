@@ -55,6 +55,14 @@ namespace SerialPortTerminal
 
         private delegate void SetTextCallback(string text);
 
+
+        public static double springTensionScale = .0347222;
+        public static int springTensionMaxStep = 2200;
+        public static int springTensionFPM = 525;
+        public static int springTensionMax = 20000;
+
+
+
         public static Boolean engineerDebug = true;
         public int set = 1;
         public int enable = 1;
@@ -2274,6 +2282,69 @@ namespace SerialPortTerminal
 
         #endregion Config File
 
+
+
+        private void SpringTensionStep(double target, string slewType)
+        {
+            switch (slewType)
+            {
+                case "absolute":
+                    break;
+                case "relative":
+                    break;
+                case "park":
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            var shift = 0;
+            // not sure where to put these yet
+            if (Math.Abs(shift) > springTensionFPM)
+            {
+                if (engineerDebug)
+                {
+                    Console.log(Math.Abs(shift) / springTensionFPM);
+                }
+                // print to some label or text box etc
+                
+            }
+
+            if (shift + CalculateMarineData.data1[3] > springTensionMax)
+            {
+                // goto 1000
+            }
+            var M = Math.Abs(shift / springTensionScale);
+            CalculateMarineData.data1[3] += 1;// FORTRAN SIGN(M * springTensionScale, shift
+           // int iStep[] = { 0, 0, 0, 0 };
+           // iStep[4] = -springTensionMaxStep;
+
+
+            if (shift > 0)
+            {
+
+            }
+
+
+
+
+            if (target > springTensionMax)
+            {
+                // error popup   x is outside max ST
+            }
+
+
+
+
+
+
+        }
+
+
+
+
         private void button1_Click(object sender, EventArgs e)// Send data button.  For debug only.  Remove in final app.
         {
             // create hex data stream.  Convert to string and place in text box for sending.
@@ -2591,12 +2662,17 @@ namespace SerialPortTerminal
                     break;
 
                 case "Slew Spring Tension": //  3
-                    // trcmd(2) = iStep[4]
-                    // trcmde(3) = iStep[4] <<8
-                    // nByte = 4;
+                                            // trcmd(2) = iStep[4]
+                                            // trcmde(3) = iStep[4] <<8
+                                            // nByte = 4;
 
                     //     data = CreateTxArray(3, iStep[4] );
                     //   comport.Write(data, 0, 4);
+
+                 //   03 ac f4 5b
+                     byte[] data2 =  { 0x03, 0xAC, 0xFA, 0x5B };
+                    comport.Write(data2, 0, 4);
+
 
                     break;
 
@@ -4158,6 +4234,14 @@ namespace SerialPortTerminal
                 sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
                 sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
                 sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
+                var iGyroSw = 1;
+                if (iGyroSw == 2)
+                {
+                    sendCmd("Update Gyro Bias Offset");
+                }
+
+
+
 
                 ControlSwitches.Alarm(enable);
              //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
@@ -4208,12 +4292,14 @@ namespace SerialPortTerminal
                 ControlSwitches.TorqueMotor(enable);
                 sendCmd("Send Control Switches");
                 gyroCheckBox.Enabled = false;
+                springTensionCheckBox.Enabled = true;
             }
             else
             {
                 RelaySwitches.relaySW = 0x81;// cmd 0
                 sendCmd("Send Relay Switches");           // 0 ----
                 gyroCheckBox.Enabled = true;
+                springTensionCheckBox.Enabled = false;
             }
         }
 
@@ -4471,6 +4557,34 @@ namespace SerialPortTerminal
             }
    
 
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+
+
+            byte[] data3 = { 0x03, 0xC0, 0x03, 0xC0 };
+            comport.Write(data3, 0, 4);
+
+            //sendCmd( "Slew Spring Tension");
+        }
+
+        private void button3_Click_2(object sender, EventArgs e)
+        {
+            byte[] data2 = { 0x01, 0x09, 0x08 };
+            comport.Write(data2, 0, 3);
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            byte[] data2 = { 0x01, 0x09, 0x08 };
+            comport.Write(data2, 0, 3);
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            mdt.SpringTension = Convert.ToInt16(STtextBox.Text);
         }
 
         ///////////////////////////////////////////////
