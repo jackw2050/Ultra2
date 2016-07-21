@@ -408,9 +408,9 @@ namespace SerialPortTerminal
         public double longitude = 0;
         public double latitude = 0;
         public double altitude = 0;
-        public int gpsNstatus;
-        public int gpsTstatus;
-        public int gpsSstatus;
+        public int gpsSyncStatus;
+        public int gpsTimeStatus;
+        public int gpsNavigationStatus;
         public int gpsNumSatelites;
 
         public static double[] table1 = {
@@ -838,16 +838,16 @@ namespace SerialPortTerminal
              //   gpsStatus = tempByte[0];
                 gpsStatus = BitConverter.ToInt16(tempByte, 0);
 
-                 gpsNstatus = (gpsStatus >> 4) & 0x01; // & 0x10;
-                 gpsTstatus = (gpsStatus >> 5) & 0x01;
-                 gpsSstatus = (gpsStatus >> 6) & 0x01;
+                 gpsSyncStatus = (gpsStatus >> 4) & 0x01; // 1Hz pulse
+                gpsTimeStatus = (gpsStatus >> 5) & 0x01;
+                gpsNavigationStatus = (gpsStatus >> 6) & 0x01;
                  gpsNumSatelites = gpsStatus  & 0xF;
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("GPS Status Word = " + Convert.ToString(gpsStatus, 2));
-                    Console.WriteLine("GPS N Status = " + Convert.ToString(gpsNstatus, 2));
-                    Console.WriteLine("GPS T Status = " + Convert.ToString(gpsTstatus, 2));
-                    Console.WriteLine("GPS S Status = " + Convert.ToString(gpsSstatus, 2));
+                    Console.WriteLine("GPS 1Hz sync pulse Status = " + Convert.ToString(gpsSyncStatus, 2));
+                    Console.WriteLine("GPS Time Status = " + Convert.ToString(gpsTimeStatus, 2));
+                    Console.WriteLine("GPS Navigation Status = " + Convert.ToString(gpsNavigationStatus, 2));
                     Console.WriteLine("GPS # of satelites = " +  Convert.ToString(gpsNumSatelites));
                 }
 

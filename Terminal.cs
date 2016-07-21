@@ -637,9 +637,11 @@ namespace SerialPortTerminal
                 }
 
                 // START 1 SEC TIMER
-                _timer1.Interval = 1000;//  (1000 - DateTime.Now.Millisecond);
+                _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
                 _timer1.Enabled = true;
                 _timer1.Start();
+                ControlSwitches.DataCollection(enable);
+                sendCmd("Send Control Switches");           // 1 ----
             }
 
             // Change the state of the form's controls
@@ -885,7 +887,7 @@ namespace SerialPortTerminal
                 textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
-                if ((mdt.gpsNstatus == 0) & (mdt.gpsTstatus ==0) & (mdt.gpsSstatus == 0))
+                if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus ==0) & (mdt.gpsSyncStatus == 0))
                 {
                     gpsStartusTextBox.ForeColor = Color.Green;
                     gpsStartusTextBox.Text = "Good";
@@ -901,7 +903,7 @@ namespace SerialPortTerminal
                 {
                     UserDataForm.gpsSatelitesTextBox.Text = mdt.gpsNumSatelites.ToString();
 
-                    if (mdt.gpsNstatus == 0)
+                    if (mdt.gpsNavigationStatus == 0)
                     {
                         UserDataForm.gpsNavigationTextBox.ForeColor = Color.Green;
                         UserDataForm.gpsNavigationTextBox.Text = "Good";
@@ -911,7 +913,7 @@ namespace SerialPortTerminal
                         UserDataForm.gpsNavigationTextBox.ForeColor = Color.Red;
                         UserDataForm.gpsNavigationTextBox.Text = "Navigation data not available";
                     }
-                    if (mdt.gpsSstatus == 0)
+                    if (mdt.gpsSyncStatus == 0)
                     {
                         UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Green;
                         UserDataForm.gps1HzSynchTextBox.Text = "Good";
@@ -921,7 +923,7 @@ namespace SerialPortTerminal
                         UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Red;
                         UserDataForm.gps1HzSynchTextBox.Text = "1 Hz synch pulse not present";
                     }
-                    if (mdt.gpsTstatus == 0)
+                    if (mdt.gpsTimeStatus == 0)
                     {
                         UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Green;
                         UserDataForm.gpsTimeSetTextBox.Text = "Good";
@@ -2360,103 +2362,7 @@ namespace SerialPortTerminal
         {
             UserDataForm.dataFileTextBox.Text = fileName;
         }
-
-        // comment for now
-        /*
-
-        public void RecordDataToFile(string fileOperation, int d)
-        {
-            // fileOperation  0 - open,  1 - append, 2 - close
-            string delimitor = ",";
-
-            switch (frmTerminal.fileType)
-            {
-                case "csv":
-                    delimitor = ",";
-                    break;
-
-                case "tsv":
-                    delimitor = "\t";
-                    break;
-
-                case "txt":
-                    delimitor = " ";
-                    break;
-
-                default:
-                    break;
-            }
-
-            if (frmTerminal.gravityFileName == null)
-            {
-                DateTime now = DateTime.Now;
-                // String.Format("{0:dds}", now);
-                //  fileName = "C:\\Ultrasys\\Data\\" + "GravityData" + now.ToString("yyyyMMddHHmmsstt") + ".csv";
-                //  fileName = frmTerminal.filePath;
-            }
-            else
-            {
-                //  fileName = "C:\\Ultrasys\\Data\\" + frmTerminal.gravityFileName;
-            }
-
-            if (fileOperation == "Open")
-            {
-                try
-                {
-                    using (StreamWriter writer = File.CreateText(frmTerminal.fileName))
-                    {
-                        string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
-                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Parallel Port" + delimitor
-                            + "Platform Period" + delimitor + "AUX1" + delimitor + "AUX2" + delimitor + "AUX3" + delimitor + "AUX4";
-                        writer.WriteLine(header);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-            else if (fileOperation == "Append")
-            {
-                string myString = Convert.ToString(d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
-                     + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
-                     + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
-                     + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.ParallelData)
-                     + delimitor + Convert.ToString(d.AUX1) + delimitor + Convert.ToString(d.AUX2) + delimitor + Convert.ToString(d.AUX3)
-                     + delimitor + Convert.ToString(d.AUX4);
-
-                 string myString = Convert.ToString(MeterData.dataTime) + delimitor + Convert.ToString(MeterData.data4[2] * ConfigData.beamScale)
-                   +delimitor + Convert.ToString(MeterData.data4[3]) + delimitor + Convert.ToString(MeterData.data4[4])
-                   + delimitor + Convert.ToString(MeterData.data1[5]) + delimitor + Convert.ToString(MeterData.data1[6])
-                   + delimitor + Convert.ToString(MeterData.data1[7]) + delimitor + Convert.ToString(MeterData.data1[8])
-                   + delimitor + Convert.ToString(MeterData.data1[9]) + delimitor + Convert.ToString(MeterData.data1[10])
-                   + delimitor + Convert.ToString(MeterData.data1[11]) + delimitor + Convert.ToString(MeterData.data1[12])
-                   + delimitor + Convert.ToString(MeterData.data1[13]) + delimitor + Convert.ToString(MeterData.data1[14])
-                   + delimitor + "I4PAR" + delimitor + "APERX * 1.0E6"
-
-                    + delimitor + Convert.ToString(MeterData.data1[15]) + delimitor + Convert.ToString(MeterData.data1[16])
-                    + delimitor + Convert.ToString(MeterData.data1[17]) + delimitor + Convert.ToString(MeterData.data1[18]);
-
-                try
-                {
-                    using (StreamWriter writer = File.AppendText(frmTerminal.fileName))
-                    {
-                        // writer.WriteLine("{0},{1},{2},{3},{4}, {5},{6}", MeterData.year, MeterData.day, MeterData.Hour, MeterData.Min, MeterData.Sec, MeterData.data4[2]);
-                        //  writer.WriteLine(Convert.ToString(MeterData.dataTime), ",",Convert.ToString(MeterData.data4[2]),",");
-                        writer.WriteLine(myString);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-        }
-
-        */
+        
 
         private void UpdateTimeText()
         {
@@ -4239,13 +4145,14 @@ namespace SerialPortTerminal
 
                 //    RelaySwitches.RelaySwitchCalculate();// 0x80
                 RelaySwitches.relaySW = 0x80;// cmd 0
+                
                 sendCmd("Send Relay Switches");           // 0 ----
                 sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
                 sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
                 sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
 
                 ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
-
+                ControlSwitches.DataCollection(enable);
                 sendCmd("Send Control Switches");           // 1 ----
                 sendCmd("Send Control Switches");           // 1 ----
                 ////////////////////////////////////////////////////////////////////////////////////
