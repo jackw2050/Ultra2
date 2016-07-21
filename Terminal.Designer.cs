@@ -927,7 +927,7 @@ namespace SerialPortTerminal
             // 
             this.setSpringSensionToolStripMenuItem.Name = "setSpringSensionToolStripMenuItem";
             this.setSpringSensionToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.setSpringSensionToolStripMenuItem.Text = "Spring Sension";
+            this.setSpringSensionToolStripMenuItem.Text = "Spring Tension";
             // 
             // setModeToolStripMenuItem
             // 
@@ -941,13 +941,13 @@ namespace SerialPortTerminal
             // marineToolStripMenuItem
             // 
             this.marineToolStripMenuItem.Name = "marineToolStripMenuItem";
-            this.marineToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.marineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.marineToolStripMenuItem.Text = "Marine";
             // 
             // hiResolutionToolStripMenuItem
             // 
             this.hiResolutionToolStripMenuItem.Name = "hiResolutionToolStripMenuItem";
-            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.hiResolutionToolStripMenuItem.Text = "Hi resolution";
             // 
             // autoStartNowToolStripMenuItem
@@ -1370,6 +1370,7 @@ namespace SerialPortTerminal
             this.springTensionCheckBox.TabIndex = 103;
             this.springTensionCheckBox.Text = "Spring Tension";
             this.springTensionCheckBox.UseVisualStyleBackColor = true;
+            this.springTensionCheckBox.CheckedChanged += new System.EventHandler(this.springTensionCheckBox_CheckedChanged);
             // 
             // torqueMotorCheckBox
             // 

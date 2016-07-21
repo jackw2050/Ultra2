@@ -2397,6 +2397,14 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+
+            torqueMotorCheckBox.Enabled = false;
+            springTensionCheckBox.Enabled = false;
+
+
+
+
+            //   MOVE THIS TO SEPERATE FUNCTION
             // SETUP DEFAULTS
 
             startupGroupBox.Visible = false;
@@ -4141,39 +4149,53 @@ namespace SerialPortTerminal
             {
                 // 200 Hz etc
                 byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
-                RelaySwitches.stepperMotorEnable(enable);
 
-                //    RelaySwitches.RelaySwitchCalculate();// 0x80
-                RelaySwitches.relaySW = 0x80;// cmd 0
-                
+                RelaySwitches.stepperMotorEnable(enable);
                 sendCmd("Send Relay Switches");           // 0 ----
+               // RelaySwitches.relaySW = 0x80;// cmd 0
+
+
                 sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
                 sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
                 sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
 
-                ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+                ControlSwitches.Alarm(enable);
+             //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
                 ControlSwitches.DataCollection(enable);
-                sendCmd("Send Control Switches");           // 1 ----
-                sendCmd("Send Control Switches");           // 1 ----
+                sendCmd("Send Control Switches");          
+
+                RelaySwitches.relay200Hz(enable);
+                RelaySwitches.slew4(enable);
+                RelaySwitches.slew5(enable);
+                RelaySwitches.stepperMotorEnable(enable);
+
                 ////////////////////////////////////////////////////////////////////////////////////
                 // relay and control switches
-                RelaySwitches.relaySW = 0xB1;// cmd 0
-                sendCmd("Send Relay Switches");           // 0 ----
-                ControlSwitches.controlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
-                sendCmd("Send Control Switches");           // 1 ----
-                                                            ////////////////////////////////////////////////////////////////////////////////////
-                RelaySwitches.relaySW = 0x81;// cmd 0
-                sendCmd("Send Relay Switches");           // 0 ----
-                ControlSwitches.controlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
-                sendCmd("Send Control Switches");           // 1 ----
-                RelaySwitches.relaySW = 0x80;// cmd 0
-                sendCmd("Send Relay Switches");           // 0 ----
-                RelaySwitches.relaySW = 0x81;// cmd 0
-                sendCmd("Send Relay Switches");           // 0 ----
+              //  RelaySwitches.relaySW = 0xB1;// cmd 0
+                sendCmd("Send Relay Switches");
+
+
+
+                ControlSwitches.DataCollection(enable);
+                sendCmd("Send Control Switches");
+                ////////////////////////////////////////////////////////////////////////////////////
+
+                RelaySwitches.slew4(disable);
+                RelaySwitches.slew5(disable);
+
+
+
+
+              //  RelaySwitches.relaySW = 0x81;// cmd 0
+                sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
+                torqueMotorCheckBox.Enabled = true;
+                
             }
             else
             {
                 // stop gyros
+            //    RelaySwitches.relay200Hz(enable);    //  This option should be grayed out until spring tenstion and torwue motors are off
+             //   sendCmd("Send Relay Switches");
             }
         }
 
@@ -4185,11 +4207,13 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");
                 ControlSwitches.TorqueMotor(enable);
                 sendCmd("Send Control Switches");
+                gyroCheckBox.Enabled = false;
             }
             else
             {
                 RelaySwitches.relaySW = 0x81;// cmd 0
                 sendCmd("Send Relay Switches");           // 0 ----
+                gyroCheckBox.Enabled = true;
             }
         }
 
@@ -4425,6 +4449,28 @@ namespace SerialPortTerminal
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.ShowDialog();
             readCalibrationFile(OpenFileDialog.FileName);
+        }
+
+        private void springTensionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (springTensionCheckBox.Checked)
+            {
+                ControlSwitches.SpringTension(enable);
+                RelaySwitches.stepperMotorEnable(enable);
+                sendCmd("Send Relay Switches");
+                sendCmd("Send Control Switches");
+                torqueMotorCheckBox.Enabled = false;
+            }
+            else
+            {
+                ControlSwitches.SpringTension(disable);
+                RelaySwitches.stepperMotorEnable(disable);
+                sendCmd("Send Relay Switches");
+                sendCmd("Send Control Switches");
+                torqueMotorCheckBox.Enabled = true;
+            }
+   
+
         }
 
         ///////////////////////////////////////////////

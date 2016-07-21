@@ -165,77 +165,77 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable Torque Motor
             {
-                relaySW = relaySW | 0x02;// Set bit 1
+                relaySW = relaySW | 0x02;// Set bit 2
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xFD;// Clear bit 1
+                relaySW = relaySW & 0xFD;// Clear bit 2
             }
         }
         public void alarm(int state)
         {
             if (state == 1)// Enable alarm
             {
-                relaySW = relaySW | 0x04;// Set bit 1
+                relaySW = relaySW | 0x04;// Set bit 3
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xFB;// Clear bit 1
+                relaySW = relaySW & 0xFB;// Clear bit 3
             }
         }
         public void steppingMotorDirection(int state)
         {
             if (state == 1)
             {
-                relaySW = relaySW | 0x08;// Set bit 1
+                relaySW = relaySW | 0x08;// Set bit 4
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xF7;// Clear bit 1
+                relaySW = relaySW & 0xF7;// Clear bit 4
             }
         }
         public void slew4(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)
             {
-                relaySW = relaySW | 0x10;// Set bit 1
+                relaySW = relaySW | 0x10;// Set bit 5
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xEF;// Clear bit 1
+                relaySW = relaySW & 0xEF;// Clear bit 5
             }
         }
         public void slew5(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)
             {
-                relaySW = relaySW | 0x20;// Set bit 1
+                relaySW = relaySW | 0x20;// Set bit 6
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xDF;// Clear bit 1
+                relaySW = relaySW & 0xDF;// Clear bit 6
             }
         }
         public void triggerStepperMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
             {
-                relaySW = relaySW | 0x40;// Set bit 1
+                relaySW = relaySW | 0x40;// Set bit 7
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xBF;// Clear bit 1
+                relaySW = relaySW & 0xBF;// Clear bit 7
             }
         }
         public void stepperMotorEnable(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)// Enable stepper Motor
             {
-                relaySW = relaySW | 0x80;// Set bit 1
+                relaySW = relaySW | 0x80;// Set bit 8
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0x7F;// Clear bit 1
+                relaySW = relaySW & 0x7F;// Clear bit 8
             }
         }
     }
