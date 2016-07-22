@@ -57,9 +57,14 @@ namespace SerialPortTerminal
 
 
         public static double springTensionScale = .0347222;
-        public static int springTensionMaxStep = 2200;
+        public static int springTensionMaxStep = 2900;
         public static int springTensionFPM = 525;
-        public static int springTensionMax = 20000;
+        public static double springTensionMax = 20000;
+        public static int iStop;
+        public static int fmpm = 2340;
+        public static int[] iStep = { 0, 0, 0, 0, 0 };
+     
+
 
 
 
@@ -2283,49 +2288,121 @@ namespace SerialPortTerminal
         #endregion Config File
 
 
+        private void WSlew(double target)
+        {
+            double shift = 0;
+            if (iStop == 2)
+            {
+                //write 5
+                // read target  error 60
+            }
+            else if (iStop == 3)
+            {
+                shift = 500 - CalculateMarineData.data1[3];
+                // goto 100
+            }
+
+            else if (iStop == 4)
+            {
+                shift =  target - CalculateMarineData.data1[3];
+            }
+        }
+
 
         private void SpringTensionStep(double target, string slewType)
         {
+            double shift = 0;
+            
+
+
             switch (slewType)
             {
                 case "absolute":
+                    shift = target - CalculateMarineData.data1[3];
                     break;
+
                 case "relative":
+                    if (iStop > 1)
+                    {
+                        // goto 109  startup wizard is active
+                    }
+                    if (Math.Abs(shift) > fmpm)
+                    {
+                        Console.WriteLine(Math.Abs(shift) / fmpm);
+                        // this is currently printed to screen
+
+                    }
+
+
                     break;
+
                 case "park":
+                    shift = springTensionMax - CalculateMarineData.data1[3] - 500;
                     break;
 
                 default:
                     break;
             }
 
-
-            var shift = 0;
-            // not sure where to put these yet
-            if (Math.Abs(shift) > springTensionFPM)
-            {
-                if (engineerDebug)
-                {
-                    Console.log(Math.Abs(shift) / springTensionFPM);
-                }
-                // print to some label or text box etc
-                
-            }
-
-            if (shift + CalculateMarineData.data1[3] > springTensionMax)
+            if ((shift + CalculateMarineData.data1[3] > springTensionMax) || shift + CalculateMarineData.data1[3] < 100)
             {
                 // goto 1000
             }
-            var M = Math.Abs(shift / springTensionScale);
-            CalculateMarineData.data1[3] += 1;// FORTRAN SIGN(M * springTensionScale, shift
-           // int iStep[] = { 0, 0, 0, 0 };
-           // iStep[4] = -springTensionMaxStep;
+            
+
+
+            var M = Math.Abs(shift / springTensionScale); // scale == .1041666
+
+
+            double sign = 1;
+            
+            if (shift > 0)
+            {
+                sign = Math.Abs(M * springTensionScale);
+            }
+            else
+            {
+                sign = -1 * Math.Abs(M * springTensionScale);
+            }
+
+            CalculateMarineData.data1[3] += sign;// FORTRAN SIGN(M * springTensionScale, shift
+
+             iStep[4] = -springTensionMaxStep;
 
 
             if (shift > 0)
             {
-
+                iStep[4] = springTensionMaxStep;
             }
+            if (M < springTensionMaxStep)
+            {
+                // goto 120
+            }
+            else
+            {
+                Console.WriteLine("Please wait 10 sec" + (.5 * M * springTensionScale));
+                // convert text box etc.
+                // send_cmd 3
+                // sleep 10 sec  need to stop timer for this
+                M -= springTensionMaxStep;
+            }
+
+
+
+
+            // 120
+            iStep[4] = -1 *  Convert.ToInt16(M);
+            if (shift > 0)
+            {
+                iStep[4] *= -1;
+            }
+
+            Console.WriteLine("Please wait 10 sec" + (.5 * M * springTensionScale));
+            // convert text box etc.
+            // send_cmd 3
+            // sleep 10 sec  need to stop timer for this
+            // return
+
 
 
 
@@ -2335,7 +2412,16 @@ namespace SerialPortTerminal
                 // error popup   x is outside max ST
             }
 
+            // not sure where to put these yet
+            if (Math.Abs(shift) > springTensionFPM)
+            {
+                if (engineerDebug)
+                {
+                    Console.WriteLine(Math.Abs(shift) / springTensionFPM);
+                }
+                // print to some label or text box etc
 
+            }
 
 
 
@@ -2468,6 +2554,13 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+            // Create an instance of NumericTextBox.
+            NumericTextBox numericTextBox1 = new NumericTextBox();
+            numericTextBox1.Parent = this;
+
+            //Draw the bounds of the NumericTextBox.
+            numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
+
 
             torqueMotorCheckBox.Enabled = false;
             springTensionCheckBox.Enabled = false;
@@ -4586,6 +4679,18 @@ namespace SerialPortTerminal
         {
             mdt.SpringTension = Convert.ToInt16(STtextBox.Text);
         }
+
+        private void slewSpringTensionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            springTensionGroupBox.Visible = true;
+        }
+
+        private void setSpringSensionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            springTensionGroupBox.Visible = true;
+        }
+
+
 
         ///////////////////////////////////////////////
     }

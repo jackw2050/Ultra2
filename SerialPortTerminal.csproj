@@ -117,6 +117,9 @@
     <Compile Include="FileFormatForm.Designer.cs">
       <DependentUpon>FileFormatForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NumericTextBox .cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Parameters.cs">
       <SubType>Form</SubType>
     </Compile>
