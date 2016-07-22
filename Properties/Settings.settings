@@ -101,5 +101,8 @@
     <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hi-Res</Value>
     </Setting>
+    <Setting Name="springTension" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1414.5</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

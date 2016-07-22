@@ -194,7 +194,9 @@ namespace SerialPortTerminal
             this.springTensionParkRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionRelativeRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionAbsoluteRadioButton = new System.Windows.Forms.RadioButton();
+            this.springTensionStatusLabel = new System.Windows.Forms.Label();
             this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
+            this.springTensionValueLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -934,7 +936,7 @@ namespace SerialPortTerminal
             this.dataPageToolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.setupContextMenuStrip1.Name = "setupContextMenuStrip1";
-            this.setupContextMenuStrip1.Size = new System.Drawing.Size(171, 202);
+            this.setupContextMenuStrip1.Size = new System.Drawing.Size(171, 180);
             // 
             // setSpringSensionToolStripMenuItem
             // 
@@ -1476,6 +1478,8 @@ namespace SerialPortTerminal
             // 
             // springTensionGroupBox
             // 
+            this.springTensionGroupBox.Controls.Add(this.springTensionValueLabel);
+            this.springTensionGroupBox.Controls.Add(this.springTensionStatusLabel);
             this.springTensionGroupBox.Controls.Add(this.springTensionTargetNumericTextBox);
             this.springTensionGroupBox.Controls.Add(this.button6);
             this.springTensionGroupBox.Controls.Add(this.springTensionLabel);
@@ -1497,11 +1501,12 @@ namespace SerialPortTerminal
             this.button6.TabIndex = 5;
             this.button6.Text = "Go";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
             // springTensionLabel
             // 
             this.springTensionLabel.AutoSize = true;
-            this.springTensionLabel.Location = new System.Drawing.Point(146, 13);
+            this.springTensionLabel.Location = new System.Drawing.Point(114, 18);
             this.springTensionLabel.Name = "springTensionLabel";
             this.springTensionLabel.Size = new System.Drawing.Size(38, 13);
             this.springTensionLabel.TabIndex = 4;
@@ -1517,6 +1522,7 @@ namespace SerialPortTerminal
             this.springTensionParkRadioButton.TabStop = true;
             this.springTensionParkRadioButton.Text = "Park";
             this.springTensionParkRadioButton.UseVisualStyleBackColor = true;
+            this.springTensionParkRadioButton.CheckedChanged += new System.EventHandler(this.springTensionParkRadioButton_CheckedChanged);
             // 
             // springTensionRelativeRadioButton
             // 
@@ -1540,13 +1546,31 @@ namespace SerialPortTerminal
             this.springTensionAbsoluteRadioButton.Text = "Absolute";
             this.springTensionAbsoluteRadioButton.UseVisualStyleBackColor = true;
             // 
+            // springTensionStatusLabel
+            // 
+            this.springTensionStatusLabel.AutoSize = true;
+            this.springTensionStatusLabel.Location = new System.Drawing.Point(89, 40);
+            this.springTensionStatusLabel.Name = "springTensionStatusLabel";
+            this.springTensionStatusLabel.Size = new System.Drawing.Size(35, 13);
+            this.springTensionStatusLabel.TabIndex = 7;
+            this.springTensionStatusLabel.Text = "label3";
+            // 
             // springTensionTargetNumericTextBox
             // 
             this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(149, 29);
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(168, 15);
             this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
             this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
             this.springTensionTargetNumericTextBox.TabIndex = 6;
+            // 
+            // springTensionValueLabel
+            // 
+            this.springTensionValueLabel.AutoSize = true;
+            this.springTensionValueLabel.Location = new System.Drawing.Point(89, 64);
+            this.springTensionValueLabel.Name = "springTensionValueLabel";
+            this.springTensionValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.springTensionValueLabel.TabIndex = 8;
+            this.springTensionValueLabel.Text = "label3";
             // 
             // frmTerminal
             // 
@@ -1768,6 +1792,8 @@ namespace SerialPortTerminal
         private System.Windows.Forms.RadioButton springTensionRelativeRadioButton;
         private System.Windows.Forms.RadioButton springTensionAbsoluteRadioButton;
         private NumericTextBox springTensionTargetNumericTextBox;
+        private System.Windows.Forms.Label springTensionStatusLabel;
+        private System.Windows.Forms.Label springTensionValueLabel;
     }
 }
 

@@ -389,7 +389,7 @@ namespace SerialPortTerminal
         public int dataLength;
 
         public DateTime Date;
-        public float SpringTension;
+        public double SpringTension;
         public double CrossCoupling;
         public double gravity;
         public float Beam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, AUX1, AUX2, AUX3, AUX4;
