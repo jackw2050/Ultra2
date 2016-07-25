@@ -65,8 +65,9 @@ namespace SerialPortTerminal
 
     public class MeterStatus// Byte 76
     {
-       // CalculateMarineData CalculateMarineData = new CalculateMarineData();
+        // CalculateMarineData CalculateMarineData = new CalculateMarineData();
         public int alarmIndicated = 0;
+
         public int xGyro_Fog = 0;   // cross gyro or FOG status
         public int lGyro_Fog = 0;   // cross gyro or FOG status
         public int meterHeater = 0;
@@ -144,8 +145,6 @@ namespace SerialPortTerminal
         }
     }
 
-
-
     public class RelaySwitches
     {
         public int relaySW = 0;
@@ -161,6 +160,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xFE;// Clear bit 1
             }
         }
+
         public void relayTorqueMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -172,6 +172,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xFD;// Clear bit 2
             }
         }
+
         public void alarm(int state)
         {
             if (state == 1)// Enable alarm
@@ -183,6 +184,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xFB;// Clear bit 3
             }
         }
+
         public void steppingMotorDirection(int state)
         {
             if (state == 1)
@@ -194,6 +196,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xF7;// Clear bit 4
             }
         }
+
         public void slew4(int state)
         {
             if (state == 1)
@@ -205,6 +208,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xEF;// Clear bit 5
             }
         }
+
         public void slew5(int state)
         {
             if (state == 1)
@@ -216,6 +220,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xDF;// Clear bit 6
             }
         }
+
         public void triggerStepperMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -227,6 +232,7 @@ namespace SerialPortTerminal
                 relaySW = relaySW & 0xBF;// Clear bit 7
             }
         }
+
         public void stepperMotorEnable(int state)
         {
             if (state == 1)// Enable stepper Motor
@@ -239,9 +245,6 @@ namespace SerialPortTerminal
             }
         }
     }
-
-
-
 
     public class ControlSwitches
     {
@@ -258,6 +261,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xFE;// Clear bit 1
             }
         }
+
         public void SpringTension(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -269,6 +273,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xFD;// Clear bit 1
             }
         }
+
         public void Alarm(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -280,6 +285,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xF7;// Clear bit 1
             }
         }
+
         public void DataCollection(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -291,6 +297,7 @@ namespace SerialPortTerminal
                 controlSw = controlSw & 0xFB;// Clear bit 1
             }
         }
+
         public void AlarmFlag(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -303,10 +310,6 @@ namespace SerialPortTerminal
             }
         }
     }
-
-
-
-
 
     public class ControlSwitchesOld
     {
@@ -325,44 +328,59 @@ namespace SerialPortTerminal
                 alarmSwitch * 0x04 +
                 dataSwitch * 0x08 +
                 alarmFlag * 0x10;
-
         }
     }
 
-
-
-
-
-
-
-    public class ConfigData
+    public class ConfigData// Change all single to double
     {
         public static double beamScale = 1.298317;
+        public static string meterNumber = "S67";
+        public static Single crossPeriod = System.Convert.ToSingle(8.4E-06);
+        public static Single longPeriod = System.Convert.ToSingle(8.4E-06);
+        public static Single crossDampFactor = System.Convert.ToSingle(0.0915);
+        public static Single longDampFactor = System.Convert.ToSingle(0.0915);
+        public static Single crossGain = System.Convert.ToSingle(0.2);
+        public static Single longGain = System.Convert.ToSingle(0.2);
+        public static Single crossLead = System.Convert.ToSingle(0.45);
+        public static Single longLead = System.Convert.ToSingle(0.45);
+        public static double springTensionMax = 20000.0;
+
+        public static double crossBias = 0.0;
+        public static double longBias = 0.0;
+        public static double crossCompFactor_4 = 0;
+        public static double crossCompPhase_4 = 1;
+        public static double crossCompFactor_16 = 1;
+        public static double crossCompPhase_16 = 1;
+        public static double longCompFactor_4 = 0;
+        public static double longCompPhase_4 = 1;
+        public static double longCompFactor_16 = 1;
+        public static double longCompPhase_16 = 1;
+
+        public static double CML_Fact = 0;
+        public static double AL_Fact = 0;
+        public static double AX_Fact = 0;
+        public static double VE_Fact = 0;
+        public static double CMX_Fact = 0;
+        public static double XACC2_Fact = 0;
+        public static double LACC2_Fact = 0;
+        public static double XACC_Phase = 0.217;
+        public static double LAXX_AL_Phase = 0.6196;
+        public static double LACC_CML_Phase = 0.195;
+        public static double LACC_CMXPhase = 0.185;
+
         public static Int16 numAuxChan = 0;
-        public static string meterNumber = "S91";
-        public static Int16 linePrinterSwitch = 0;
-        public static Int16 fileNameSwitch = 1;
-        public static Int16 hardDiskSwitch = 1;
-        public static string engPassword = "zls";
-        public static Int16 monitorDisplaySwitch = 2;
-        public static Single crossPeriod = System.Convert.ToSingle(0.0000191);
-        public static Single longPeriod = System.Convert.ToSingle(0.0000084000002971151844);
-        public static Single crossDampFactor = System.Convert.ToSingle(0.212);
-        public static Single longDampFactor = System.Convert.ToSingle(0.091499999165534973);
-        public static Single crossGain = System.Convert.ToSingle(0.15);
-        public static Single longGain = System.Convert.ToSingle(0.11999999731779099);
+        public static Int16 modeSwitch = 1;
+        public static double iAuxGain = 0.0;// IAUXGAIN -> not sure what this is
         public static Int16 serialPortSwitch = 1;
         public static Int16 digitalInputSwitch = 0;
         public static Int16 printerEmulationSwitch = 3;
         public static Int16 serialPortOutputSwitch = -1;
         public static Int16 alarmSwitch = 0;
-        public static Single crossLead = System.Convert.ToSingle(0.5);
-        public static Single longLead = System.Convert.ToSingle(0.44999998807907104);
-        public static double springTensionMax = 20000.0;
-        public static Int16 modeSwitch = 1;
-        public static double iAuxGain = 0.0;// IAUXGAIN -> not sure what this is
-        public static double crossBias = 0.0;
-        public static double longBias = 0.0;
+        public static Int16 linePrinterSwitch = 0;
+        public static Int16 fileNameSwitch = 1;
+        public static Int16 hardDiskSwitch = 1;
+        public static string engPassword = "zls";
+        public static Int16 monitorDisplaySwitch = 2;
 
         //   public static double[] crossCouplingFactors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };// CCFACT  CROSS COUPLING FACTORS
         //                                               0    1    2    3    4    5       6        7           8        9    10   11   12   13
@@ -414,7 +432,7 @@ namespace SerialPortTerminal
         public int gpsNumSatelites;
 
         public static double[] table1 = {
-    	0.0, 100.0, 200.0, 300.0 ,400.0, 500.0, 600.0,700.0, 800.0, 900.0, 1000.0, 1100.0 ,1200.0,
+        0.0, 100.0, 200.0, 300.0 ,400.0, 500.0, 600.0,700.0, 800.0, 900.0, 1000.0, 1100.0 ,1200.0,
         1300.0, 1400.0, 1500.0, 1600.0, 1700.0, 1800.0, 1900.0, 2000.0, 2100.0, 2200.0, 2300.0 ,2400.0,
         2500.0, 2600.0, 2700.0, 2800.0, 2900.0, 3000.0, 3100.0, 3200.0, 3300.0, 3400.0, 3500.0, 3600.0,
         3700.0, 3800.0, 3900.0, 4000.0, 4100.0, 4200.0, 4300.0, 4400.0, 4500.0, 4600.0, 4700.0, 4800.0,
@@ -477,11 +495,8 @@ namespace SerialPortTerminal
 
         //     MeterData[] LiveMeterData;
 
-
-
         private Byte[] SetTempByte(Byte[] meterData, int numBytes, int startByte)
         {
-
             Byte[] tempB = new Byte[numBytes];
 
             for (int i = 0; i < numBytes; i++)
@@ -490,16 +505,7 @@ namespace SerialPortTerminal
             }
 
             return tempB;
-
         }
-
-
-
-
-
-
-
-
 
         public void initializeDataCounter(int newval)
         {
@@ -720,43 +726,39 @@ namespace SerialPortTerminal
 
                 // place if here for GPS vs OLD
 
-
                 altitude = 0;
-                    latitude = 0;
-                    longitude = 0;
+                latitude = 0;
+                longitude = 0;
 
+                // Altitude
+                Int32 gTemp = 0;
+                // calculate latitude
+                // double altitude = 0;
+                Array.Clear(tempByte, 0, tempByte.Length);
+                tempByte[0] = meterBytes[59];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = gTemp & 0x0F;
+                altitude = Convert.ToDouble(gTemp) * 10000;
 
+                tempByte[0] = meterBytes[60];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + gTemp;
+                altitude = Convert.ToDouble(gTemp) * 100 + altitude;
 
+                tempByte[0] = meterBytes[61];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + gTemp;
+                altitude = Convert.ToDouble(gTemp) + altitude;
 
-                    // Altitude
-                    Int32 gTemp = 0;
-                    // calculate latitude
-                    // double altitude = 0;
-                    Array.Clear(tempByte, 0, tempByte.Length);
-                    tempByte[0] = meterBytes[59];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = gTemp & 0x0F;
-                    altitude = Convert.ToDouble(gTemp) * 10000;
+                tempByte[0] = meterBytes[62];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + gTemp;
+                altitude = Convert.ToDouble(gTemp) / 100 + altitude;
 
-                    tempByte[0] = meterBytes[60];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + gTemp;
-                    altitude = Convert.ToDouble(gTemp) * 100 + altitude;
-
-                    tempByte[0] = meterBytes[61];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + gTemp;
-                    altitude = Convert.ToDouble(gTemp) + altitude;
-
-                    tempByte[0] = meterBytes[62];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + gTemp;
-                    altitude = Convert.ToDouble(gTemp) / 100 + altitude;
-
-                    if ((meterBytes[59] & 0xF0) != 0)
-                    {
-                        altitude *= -1;
-                    }
+                if ((meterBytes[59] & 0xF0) != 0)
+                {
+                    altitude *= -1;
+                }
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("Altitude = " + altitude);
@@ -765,92 +767,89 @@ namespace SerialPortTerminal
                 // Longitude
 
                 Array.Clear(tempByte, 0, tempByte.Length);
-                    tempByte[0] = meterBytes[64];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = gTemp & 0x0F;
-                    longitude = Convert.ToDouble(gTemp) * 100;
+                tempByte[0] = meterBytes[64];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = gTemp & 0x0F;
+                longitude = Convert.ToDouble(gTemp) * 100;
 
-                    tempByte[0] = meterBytes[65];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    longitude = Convert.ToDouble(gTemp) + longitude;
+                tempByte[0] = meterBytes[65];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                longitude = Convert.ToDouble(gTemp) + longitude;
 
-                    tempByte[0] = meterBytes[66];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    longitude = Convert.ToDouble(gTemp) / 60 + longitude;
+                tempByte[0] = meterBytes[66];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                longitude = Convert.ToDouble(gTemp) / 60 + longitude;
 
-                    tempByte[0] = meterBytes[67];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    longitude = Convert.ToDouble(gTemp) / 6000 + longitude;
+                tempByte[0] = meterBytes[67];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                longitude = Convert.ToDouble(gTemp) / 6000 + longitude;
 
-                    tempByte[0] = meterBytes[68];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    longitude = Convert.ToDouble(gTemp) / 60000 + longitude;
+                tempByte[0] = meterBytes[68];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                longitude = Convert.ToDouble(gTemp) / 60000 + longitude;
 
-                    if (meterBytes[63] != 0)
-                    {
-                        longitude *= -1;
-                    }
+                if (meterBytes[63] != 0)
+                {
+                    longitude *= -1;
+                }
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("Longitude = " + longitude);
                 }
                 // Latitude
                 gTemp = 0;
-                    //  double latitude = 0;
-                    Array.Clear(tempByte, 0, tempByte.Length);
-                    tempByte[0] = meterBytes[70];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    latitude = gTemp;
+                //  double latitude = 0;
+                Array.Clear(tempByte, 0, tempByte.Length);
+                tempByte[0] = meterBytes[70];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                latitude = gTemp;
 
-                    tempByte[0] = meterBytes[71];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    latitude = Convert.ToDouble(gTemp) / 60 + latitude;
+                tempByte[0] = meterBytes[71];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                latitude = Convert.ToDouble(gTemp) / 60 + latitude;
 
-                    tempByte[0] = meterBytes[72];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    latitude = Convert.ToDouble(gTemp) / 6000 + latitude;
+                tempByte[0] = meterBytes[72];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                latitude = Convert.ToDouble(gTemp) / 6000 + latitude;
 
-                    tempByte[0] = meterBytes[73];
-                    gTemp = BitConverter.ToInt32(tempByte, 0);
-                    gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
-                    latitude = Convert.ToDouble(gTemp) / 60000 + latitude;
+                tempByte[0] = meterBytes[73];
+                gTemp = BitConverter.ToInt32(tempByte, 0);
+                gTemp = (gTemp >> 4) * 10 + (gTemp & 0x0F);
+                latitude = Convert.ToDouble(gTemp) / 60000 + latitude;
 
-                    if (meterBytes[69] != 0)
-                    {
-                        latitude *= -1;
-                    }
+                if (meterBytes[69] != 0)
+                {
+                    latitude *= -1;
+                }
 
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("Latitude = " + latitude);
                 }
 
-
-
                 tempByte[0] = meterBytes[74];
-             //   gpsStatus = tempByte[0];
+                //   gpsStatus = tempByte[0];
                 gpsStatus = BitConverter.ToInt16(tempByte, 0);
 
-                 gpsSyncStatus = (gpsStatus >> 4) & 0x01; // 1Hz pulse
+                gpsSyncStatus = (gpsStatus >> 4) & 0x01; // 1Hz pulse
                 gpsTimeStatus = (gpsStatus >> 5) & 0x01;
                 gpsNavigationStatus = (gpsStatus >> 6) & 0x01;
-                 gpsNumSatelites = gpsStatus  & 0xF;
+                gpsNumSatelites = gpsStatus & 0xF;
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("GPS Status Word = " + Convert.ToString(gpsStatus, 2));
                     Console.WriteLine("GPS 1Hz sync pulse Status = " + Convert.ToString(gpsSyncStatus, 2));
                     Console.WriteLine("GPS Time Status = " + Convert.ToString(gpsTimeStatus, 2));
                     Console.WriteLine("GPS Navigation Status = " + Convert.ToString(gpsNavigationStatus, 2));
-                    Console.WriteLine("GPS # of satelites = " +  Convert.ToString(gpsNumSatelites));
+                    Console.WriteLine("GPS # of satelites = " + Convert.ToString(gpsNumSatelites));
                 }
-
 
                 //GET PRINTER STATUS  -- No longer used
                 tempByte[0] = meterBytes[75];
@@ -864,8 +863,6 @@ namespace SerialPortTerminal
                 {
                     Console.WriteLine("Meter status " + meterStatus);
                 }
-               
-
 
                 //GET PORT C INPUT
                 Array.Clear(tempByte, 0, tempByte.Length);
@@ -931,14 +928,9 @@ namespace SerialPortTerminal
                     }
                 }
 
-        
-                    // get gps and period
-         
-             
-
+                // get gps and period
 
                 /////////////////////////////////////////////////////////////////
-
 
                 oneSecStuff();  ////// NEED TO DECIDE - LEAVE THIS HERE OR CALL FROM TERMINAL
 
@@ -951,13 +943,6 @@ namespace SerialPortTerminal
         }
 
         // add routine for error accumulation
-
-
-
-
-
-
-
 
         // I don't remember where I use this
         private string ByteArrayToHexString(byte[] data)

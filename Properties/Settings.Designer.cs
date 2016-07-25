@@ -241,7 +241,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.91E-05")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8.4E-06")]
         public double crossPeriod {
             get {
                 return ((double)(this["crossPeriod"]));
@@ -253,7 +253,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8.4000002971151844E-06")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8.4E-06")]
         public double longPeriod {
             get {
                 return ((double)(this["longPeriod"]));
@@ -265,7 +265,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.212")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0915")]
         public double crossDampFactor {
             get {
                 return ((double)(this["crossDampFactor"]));
@@ -277,7 +277,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.091499999165534973")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0915")]
         public double longDampFactor {
             get {
                 return ((double)(this["longDampFactor"]));
@@ -289,7 +289,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
         public double crossGain {
             get {
                 return ((double)(this["crossGain"]));
@@ -301,7 +301,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.11999999731779099")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
         public double longGain {
             get {
                 return ((double)(this["longGain"]));
@@ -313,7 +313,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.45")]
         public double crossLead {
             get {
                 return ((double)(this["crossLead"]));
@@ -325,7 +325,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.44999998807907104")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.45")]
         public double longLead {
             get {
                 return ((double)(this["longLead"]));
@@ -416,6 +416,138 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["springTension"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-2")]
+        public double kFactor {
+            get {
+                return ((double)(this["kFactor"]));
+            }
+            set {
+                this["kFactor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int gyroType {
+            get {
+                return ((int)(this["gyroType"]));
+            }
+            set {
+                this["gyroType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCompFactor_4 {
+            get {
+                return ((double)(this["crossCompFactor_4"]));
+            }
+            set {
+                this["crossCompFactor_4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double crossCompPhase_4 {
+            get {
+                return ((double)(this["crossCompPhase_4"]));
+            }
+            set {
+                this["crossCompPhase_4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double crossCompFactor_16 {
+            get {
+                return ((double)(this["crossCompFactor_16"]));
+            }
+            set {
+                this["crossCompFactor_16"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double crossCompPhase_16 {
+            get {
+                return ((double)(this["crossCompPhase_16"]));
+            }
+            set {
+                this["crossCompPhase_16"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double longCompFactor_4 {
+            get {
+                return ((double)(this["longCompFactor_4"]));
+            }
+            set {
+                this["longCompFactor_4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double longCompPhase_4 {
+            get {
+                return ((double)(this["longCompPhase_4"]));
+            }
+            set {
+                this["longCompPhase_4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double longCompFactor_16 {
+            get {
+                return ((double)(this["longCompFactor_16"]));
+            }
+            set {
+                this["longCompFactor_16"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double longCompPhase_16 {
+            get {
+                return ((double)(this["longCompPhase_16"]));
+            }
+            set {
+                this["longCompPhase_16"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double Setting {
+            get {
+                return ((double)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
             }
         }
     }
