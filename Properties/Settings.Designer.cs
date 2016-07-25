@@ -542,12 +542,132 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Setting {
+        public double CML_Fact {
             get {
-                return ((double)(this["Setting"]));
+                return ((double)(this["CML_Fact"]));
             }
             set {
-                this["Setting"] = value;
+                this["CML_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double AL_Fact {
+            get {
+                return ((double)(this["AL_Fact"]));
+            }
+            set {
+                this["AL_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double AX_Fact {
+            get {
+                return ((double)(this["AX_Fact"]));
+            }
+            set {
+                this["AX_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double VE_Fact {
+            get {
+                return ((double)(this["VE_Fact"]));
+            }
+            set {
+                this["VE_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double CMX_Fact {
+            get {
+                return ((double)(this["CMX_Fact"]));
+            }
+            set {
+                this["CMX_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double XACC2_Fact {
+            get {
+                return ((double)(this["XACC2_Fact"]));
+            }
+            set {
+                this["XACC2_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double LACC2_Fact {
+            get {
+                return ((double)(this["LACC2_Fact"]));
+            }
+            set {
+                this["LACC2_Fact"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.217")]
+        public double XACC_Phase {
+            get {
+                return ((double)(this["XACC_Phase"]));
+            }
+            set {
+                this["XACC_Phase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.6196")]
+        public double LAXX_AL_Phase {
+            get {
+                return ((double)(this["LAXX_AL_Phase"]));
+            }
+            set {
+                this["LAXX_AL_Phase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.195")]
+        public double LACC_CML_Phase {
+            get {
+                return ((double)(this["LACC_CML_Phase"]));
+            }
+            set {
+                this["LACC_CML_Phase"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.185")]
+        public double LACC_CMX_Phase {
+            get {
+                return ((double)(this["LACC_CMX_Phase"]));
+            }
+            set {
+                this["LACC_CMX_Phase"] = value;
             }
         }
     }

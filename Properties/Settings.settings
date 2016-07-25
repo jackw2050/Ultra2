@@ -134,8 +134,38 @@
     <Setting Name="longCompPhase_16" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.Double" Scope="User">
+    <Setting Name="CML_Fact" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AL_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AX_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="VE_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CMX_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="XACC2_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LACC2_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="XACC_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.217</Value>
+    </Setting>
+    <Setting Name="LAXX_AL_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.6196</Value>
+    </Setting>
+    <Setting Name="LACC_CML_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.195</Value>
+    </Setting>
+    <Setting Name="LACC_CMX_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.185</Value>
     </Setting>
   </Settings>
 </SettingsFile>

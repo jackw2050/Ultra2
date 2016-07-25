@@ -335,14 +335,14 @@ namespace SerialPortTerminal
     {
         public static double beamScale = 1.298317;
         public static string meterNumber = "S67";
-        public static Single crossPeriod = System.Convert.ToSingle(8.4E-06);
-        public static Single longPeriod = System.Convert.ToSingle(8.4E-06);
-        public static Single crossDampFactor = System.Convert.ToSingle(0.0915);
-        public static Single longDampFactor = System.Convert.ToSingle(0.0915);
-        public static Single crossGain = System.Convert.ToSingle(0.2);
-        public static Single longGain = System.Convert.ToSingle(0.2);
-        public static Single crossLead = System.Convert.ToSingle(0.45);
-        public static Single longLead = System.Convert.ToSingle(0.45);
+        public static double crossPeriod = System.Convert.ToSingle(8.4E-06);
+        public static double longPeriod = System.Convert.ToSingle(8.4E-06);
+        public static double crossDampFactor = System.Convert.ToSingle(0.0915);
+        public static double longDampFactor = System.Convert.ToSingle(0.0915);
+        public static double crossGain = System.Convert.ToSingle(0.2);
+        public static double longGain = System.Convert.ToSingle(0.2);
+        public static double crossLead = System.Convert.ToSingle(0.45);
+        public static double longLead = System.Convert.ToSingle(0.45);
         public static double springTensionMax = 20000.0;
 
         public static double crossBias = 0.0;
@@ -366,7 +366,7 @@ namespace SerialPortTerminal
         public static double XACC_Phase = 0.217;
         public static double LAXX_AL_Phase = 0.6196;
         public static double LACC_CML_Phase = 0.195;
-        public static double LACC_CMXPhase = 0.185;
+        public static double LACC_CMX_Phase = 0.185;
 
         public static Int16 numAuxChan = 0;
         public static Int16 modeSwitch = 1;
@@ -410,7 +410,7 @@ namespace SerialPortTerminal
         public double SpringTension;
         public double CrossCoupling;
         public double gravity;
-        public float Beam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, AUX1, AUX2, AUX3, AUX4;
+        public double Beam, VCC, AL, AX, VE, AX2, XACC2, LACC2, XACC, LACC, AUX1, AUX2, AUX3, AUX4;
         public double p28V, n28V, p24V, p15V, n15V, p5V;
         public static int MeterSTATUS;
         public int REMOTEREBOOTED;
