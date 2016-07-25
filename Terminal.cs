@@ -2422,14 +2422,16 @@ namespace SerialPortTerminal
             {
                 springTensionStatusLabel.Text = ("Please wait 10 sec");
                 springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
-
+                sendCmd("Slew Spring Tension");
                 Task taskA = Task.Factory.StartNew(() => DoSomeWork(5000));
                 taskA.Wait();
                 STtextBox.Text = Convert.ToString(mdt.SpringTension);
+
+
                 // send_cmd 3
                 // sleep 10 sec  need to stop timer for this
                 // Thread.Sleep(2000);
-                //        sendCmd("Slew Spring Tension");
+                
                 M -= springTensionMaxStep;
             }
 
@@ -2441,7 +2443,7 @@ namespace SerialPortTerminal
             }
             springTensionStatusLabel.Text = ("Please wait 10 sec");
             springTensionValueLabel.Text = Convert.ToString(Math.Round( .5 + M * springTensionScale));
-
+            sendCmd("Slew Spring Tension");
             // convert text box etc.
             // send_cmd 3
             Task taskB = Task.Factory.StartNew(() => DoSomeWork(5000));
@@ -2798,8 +2800,8 @@ namespace SerialPortTerminal
                                             // trcmde(3) = iStep[4] <<8
                                             // nByte = 4;
 
-                         data = CreateTxArray(3, iStep[4] );
-                       comport.Write(data, 0, 4);
+                       data = CreateTxArray(3, iStep[4] );
+                       comport.Write(data, 0, data.Length);
 
                  //   03 ac f4 5b
                    //  byte[] data2 =  { 0x03, 0xAC, 0xFA, 0x5B };
@@ -4778,10 +4780,15 @@ namespace SerialPortTerminal
                 {
                     SpringTensionStep(springTensionTarget, "relative");
                 }
-                else
+                else if (springTensionParkRadioButton.Checked)
                 {
                     SpringTensionStep(0, "park");
                 }
+                else if(springTensionSetRadioButton.Checked)
+                {
+                    mdt.SpringTension = Convert.ToDouble( springTensionTargetNumericTextBox.Text);
+                }
+
             }
         
         }
@@ -4796,6 +4803,16 @@ namespace SerialPortTerminal
             {
                 springTensionTargetNumericTextBox.Enabled = true;
             }
+        }
+
+        private void springTensionTargetNumericTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void springTensionRelativeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
 
