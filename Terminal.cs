@@ -56,7 +56,6 @@ namespace SerialPortTerminal
 
         private delegate void SetTextCallback(string text);
 
-
         public static double springTensionScale = .1041666;
         public static int springTensionMaxStep = 2900;
         public static int springTensionFPM = 525;
@@ -64,11 +63,8 @@ namespace SerialPortTerminal
         public static int iStop;
         public static int fmpm = 2340;
         public static int[] iStep = { 0, 0, 0, 0, 0 };
-     
 
-
-
-
+        public Single newSpringTension;
         public static Boolean engineerDebug = true;
         public int set = 1;
         public int enable = 1;
@@ -154,7 +150,6 @@ namespace SerialPortTerminal
 
             public Record(DateTime dateTime, double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
             {
-                
                 this.dateTime = dateTime;
                 this.digitalGravity = digitalGravity;
                 this.springTension = springTension;
@@ -174,7 +169,7 @@ namespace SerialPortTerminal
 
             public int Year
             {
-                get { return  year; }
+                get { return year; }
                 set { year = value; }
             }
 
@@ -292,22 +287,24 @@ namespace SerialPortTerminal
                 set { totalCorrection = value; }
             }
 
-
             public double Latitude
             {
                 get { return latitude; }
                 set { latitude = value; }
             }
+
             public double Longitude
             {
                 get { return longitude; }
                 set { longitude = value; }
             }
+
             public double Altitude
             {
                 get { return altitude; }
                 set { altitude = value; }
             }
+
             public Single GPS_Status
             {
                 get { return gpsStatus; }
@@ -332,9 +329,9 @@ namespace SerialPortTerminal
             }
 
             if (listDataSource.Count > maxArraySize)
-          {
+            {
                 listDataSource.RemoveAt(0);
-           }
+            }
         }
 
         #region Local Variables
@@ -901,7 +898,7 @@ namespace SerialPortTerminal
                 textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
                 textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
-                if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus ==0) & (mdt.gpsSyncStatus == 0))
+                if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus == 0) & (mdt.gpsSyncStatus == 0))
                 {
                     gpsStartusTextBox.ForeColor = Color.Green;
                     gpsStartusTextBox.Text = "Good";
@@ -911,7 +908,6 @@ namespace SerialPortTerminal
                     gpsStartusTextBox.ForeColor = Color.Red;
                     gpsStartusTextBox.Text = "Error";
                 }
-
 
                 if (UserDataForm.Visible)
                 {
@@ -947,11 +943,7 @@ namespace SerialPortTerminal
                         UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Red;
                         UserDataForm.gpsTimeSetTextBox.Text = "GPS time set unsuccesful";
                     }
-
-
-
                 }
-
 
                 // Fill up list aray
 
@@ -2288,7 +2280,6 @@ namespace SerialPortTerminal
 
         #endregion Config File
 
-
         private void WSlew(double target)
         {
             double shift = 0;
@@ -2302,13 +2293,13 @@ namespace SerialPortTerminal
                 shift = 500 - CalculateMarineData.data1[3];
                 // goto 100
             }
-
             else if (iStop == 4)
             {
-                shift =  target - CalculateMarineData.data1[3];
+                shift = target - CalculateMarineData.data1[3];
             }
         }
-                static void DoSomeWork(int val)
+
+        private static void DoSomeWork(int val)
         {
             // Pretend to do something.
             Thread.Sleep(val);
@@ -2317,13 +2308,12 @@ namespace SerialPortTerminal
         private void SpringTensionStep(double target, string slewType)
         {
             double shift = target;// target = 100
-          //  shift = springTensionMax - CalculateMarineData.data1[3] - 500;
-            //shift = 100
-            // istop = 1
-            // spring tension = 1414.5
-            // stscale = .1041666
-            // M = 960
-
+                                  //  shift = springTensionMax - CalculateMarineData.data1[3] - 500;
+                                  //shift = 100
+                                  // istop = 1
+                                  // spring tension = 1414.5
+                                  // stscale = .1041666
+                                  // M = 960
 
             if (engineerDebug)
             {
@@ -2331,13 +2321,12 @@ namespace SerialPortTerminal
                 Console.WriteLine("Slew " + slewType);
                 Console.WriteLine("Current ST " + mdt.SpringTension);
                 Console.WriteLine("Initial shift = " + shift);
-
             }
 
             switch (slewType)
             {
                 case "absolute":
-                  //  shift = target - CalculateMarineData.data1[3];
+                    //  shift = target - CalculateMarineData.data1[3];
                     shift = target - mdt.SpringTension;
                     break;
 
@@ -2348,16 +2337,14 @@ namespace SerialPortTerminal
                     }
                     if (Math.Abs(shift) > fmpm)  // FMPM is MGAL/Min
                     {
-                        springTensionValueLabel.Text =  Convert.ToString(Math.Abs(shift) / fmpm);
+                        springTensionValueLabel.Text = Convert.ToString(Math.Abs(shift) / fmpm);
                         // this is currently printed to screen
-
                     }
-
 
                     break;
 
                 case "park":
-                   // shift = springTensionMax - CalculateMarineData.data1[3] - 500;
+                    // shift = springTensionMax - CalculateMarineData.data1[3] - 500;
                     shift = springTensionMax - mdt.SpringTension - 500;
                     break;
 
@@ -2374,14 +2361,11 @@ namespace SerialPortTerminal
                     Console.WriteLine("Target ST is out of range");// need to print to screen
                 }
             }
-            
 
-
-            int M = Convert.ToInt32( Math.Abs(shift / springTensionScale)); // scale == .1041666
-
+            int M = Convert.ToInt32(Math.Abs(shift / springTensionScale)); // scale == .1041666
 
             double sign = 1;
-            
+
             if (shift > 0)
             {
                 sign = Math.Abs(M * springTensionScale);
@@ -2401,7 +2385,7 @@ namespace SerialPortTerminal
                 }
             }
 
-          //  CalculateMarineData.data1[3] += sign;// FORTRAN SIGN(M * springTensionScale, shift
+            //  CalculateMarineData.data1[3] += sign;// FORTRAN SIGN(M * springTensionScale, shift
             mdt.SpringTension += sign;
             mdt.SpringTension = Math.Round(mdt.SpringTension, 1);
             if (engineerDebug)
@@ -2411,12 +2395,10 @@ namespace SerialPortTerminal
 
             iStep[4] = -springTensionMaxStep;
 
-
             if (shift > 0)
             {
                 iStep[4] = springTensionMaxStep;
             }
-
 
             while (M >= springTensionMaxStep)
             {
@@ -2427,22 +2409,21 @@ namespace SerialPortTerminal
                 taskA.Wait();
                 STtextBox.Text = Convert.ToString(mdt.SpringTension);
 
-
                 // send_cmd 3
                 // sleep 10 sec  need to stop timer for this
                 // Thread.Sleep(2000);
-                
+
                 M -= springTensionMaxStep;
             }
 
             // 120
-            iStep[4] = -1 *  Convert.ToInt32(M);
+            iStep[4] = -1 * Convert.ToInt32(M);
             if (shift > 0)
             {
                 iStep[4] *= -1;
             }
             springTensionStatusLabel.Text = ("Please wait 10 sec");
-            springTensionValueLabel.Text = Convert.ToString(Math.Round( .5 + M * springTensionScale));
+            springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
             sendCmd("Slew Spring Tension");
             // convert text box etc.
             // send_cmd 3
@@ -2453,8 +2434,6 @@ namespace SerialPortTerminal
             // return
 
             springTensionStatusLabel.Text = ("All done");
-
-
 
             if (target > springTensionMax)
             {
@@ -2469,16 +2448,8 @@ namespace SerialPortTerminal
                     Console.WriteLine(Math.Abs(shift) / springTensionFPM);
                 }
                 // print to some label or text box etc
-
             }
-
-
-
-
         }
-
-
-
 
         private void button1_Click(object sender, EventArgs e)// Send data button.  For debug only.  Remove in final app.
         {
@@ -2568,7 +2539,6 @@ namespace SerialPortTerminal
         {
             UserDataForm.dataFileTextBox.Text = fileName;
         }
-        
 
         private void UpdateTimeText()
         {
@@ -2615,13 +2585,11 @@ namespace SerialPortTerminal
             springTensionRelativeRadioButton.Checked = true;
             startupGroupBox.Visible = true;
 
-
             //  Load stored state
             InitStoredVariables();
 
-
             UpdateDataFileName();
-            
+
             Console.WriteLine(fileName);
             STtextBox.Text = Convert.ToString(mdt.SpringTension);
 
@@ -2680,7 +2648,7 @@ namespace SerialPortTerminal
             return outputBytes;
         }
 
-        public byte[] CreateTxArray(byte command, Single data1, Single data2, Single data3, Single data4, double data5)
+        public byte[] CreateTxArray(byte command, double data1, double data2, double data3, double data4, double data5)
         {
             byte[] cmdByte = { command };
             byte[] checkSum = new byte[1];
@@ -2700,6 +2668,34 @@ namespace SerialPortTerminal
             Buffer.BlockCopy(byteArray4, 0, outputBytes, cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length, byteArray4.Length);
             Buffer.BlockCopy(byteArray5, 0, outputBytes, cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length + byteArray4.Length, byteArray5.Length);
             Buffer.BlockCopy(byteArray5, 0, outputBytes, cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length + byteArray4.Length + byteArray5.Length + byteArray5.Length, checkSum.Length);
+
+            checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
+            byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
+            outputBytes[outputBytes.Length - 1] = checkSum[0];
+            // outputBytes[0] = nByte;
+            Console.WriteLine("Transmit array: " + outputBytes);
+            Console.WriteLine("Done");
+
+            return outputBytes;
+        }
+
+        public byte[] CreateTxArray4(byte command, double data1, double data2, double data3, double data4)
+        {
+            byte[] cmdByte = { command };
+            byte[] checkSum = new byte[1];
+            byte[] byteArray1 = BitConverter.GetBytes(data1);
+            byte[] byteArray2 = BitConverter.GetBytes(data2);
+            byte[] byteArray3 = BitConverter.GetBytes(data3);
+            byte[] byteArray4 = BitConverter.GetBytes(data4);
+
+            int[] myByteArray = { cmdByte.Length, byteArray1.Length, byteArray2.Length, byteArray3.Length, byteArray4.Length, checkSum.Length };
+            byte[] outputBytes = new byte[cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length + byteArray4.Length + checkSum.Length];
+
+            Buffer.BlockCopy(cmdByte, 0, outputBytes, 0, cmdByte.Length);
+            Buffer.BlockCopy(byteArray1, 0, outputBytes, cmdByte.Length, byteArray1.Length);
+            Buffer.BlockCopy(byteArray2, 0, outputBytes, cmdByte.Length + byteArray1.Length, byteArray2.Length);
+            Buffer.BlockCopy(byteArray3, 0, outputBytes, cmdByte.Length + byteArray1.Length + byteArray2.Length, byteArray3.Length);
+            Buffer.BlockCopy(byteArray4, 0, outputBytes, cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length + byteArray4.Length, checkSum.Length);
 
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
@@ -2742,6 +2738,31 @@ namespace SerialPortTerminal
 
             Buffer.BlockCopy(cmdByte, 0, outputBytes, 0, cmdByte.Length);
             Buffer.BlockCopy(byteArray1, 0, outputBytes, cmdByte.Length, byteArray1.Length);
+
+            checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
+            byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
+            outputBytes[outputBytes.Length - 1] = checkSum[0];
+            // outputBytes[0] = nByte;
+            Console.WriteLine("Transmit array: " + outputBytes);
+            Console.WriteLine("Done");
+
+            return outputBytes;
+        }
+
+        public byte[] CreateTxSTArray(byte command, Single data1)
+        {
+            byte[] cmdByte = { command };
+            byte[] checkSum = new byte[1];
+            // byte[] byteArrayTemp = BitConverter.GetBytes(data1);
+            byte[] byteArray1 = BitConverter.GetBytes( data1);
+
+            // int[] byteArray1 = { byteArrayTemp[0] };
+            byte[] outputBytes = new byte[6]; //cmdByte.Length + byteArray1.Length + checkSum.Length];
+            outputBytes[0] = 0x07;
+            outputBytes[1] = byteArray1[0];
+            outputBytes[2] = byteArray1[1];
+            outputBytes[3] = byteArray1[2];
+            outputBytes[4] = byteArray1[3];
 
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
@@ -2800,13 +2821,12 @@ namespace SerialPortTerminal
                                             // trcmde(3) = iStep[4] <<8
                                             // nByte = 4;
 
-                       data = CreateTxArray(3, iStep[4] );
-                       comport.Write(data, 0, data.Length);
+                    data = CreateTxArray(3, iStep[4]);
+                    comport.Write(data, 0, data.Length);
 
-                 //   03 ac f4 5b
-                   //  byte[] data2 =  { 0x03, 0xAC, 0xFA, 0x5B };
-                   // comport.Write(data2, 0, 4);
-
+                    //   03 ac f4 5b
+                    //  byte[] data2 =  { 0x03, 0xAC, 0xFA, 0x5B };
+                    // comport.Write(data2, 0, 4);
 
                     break;
 
@@ -2915,10 +2935,19 @@ namespace SerialPortTerminal
                     //nByte = 6
                     break;
 
-                case "Update Spring Tension Value":  //  7
+                case "Update Spring Tension Value":   //  7
+
                     // dice( SpringTension( trCms(5), trCms(4), trCms(3), trCms(2))
                     // nByte = 4;
                     //comport.Write(data, 0, 6);
+
+                    data = CreateTxSTArray(4, newSpringTension);
+                    //  Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+                      comport.Write(data, 0, data.Length);
+
+                   
+                 
+
                     break;
 
                 case "Update Cross Coupling Values":  //   8
@@ -3046,7 +3075,6 @@ namespace SerialPortTerminal
 
         public void InitStoredVariables()
         {
-
             // Load configuration data from stored defaults
 
             ConfigData.beamScale = Properties.Settings.Default.beamScale;
@@ -3061,12 +3089,11 @@ namespace SerialPortTerminal
             ConfigData.longLead = Properties.Settings.Default.longLead;
             ConfigData.springTensionMax = Properties.Settings.Default.springTensionMax;
 
-          //  public static double[] crossCouplingFactors = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.9e-2, 2.499999e-3, -1.681e-2, 0.0, 0.0, 0.0, 0.0, -8.9999998e-4, -3.7e-3, 1.0, 1.0 };
+            //  public static double[] crossCouplingFactors = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.9e-2, 2.499999e-3, -1.681e-2, 0.0, 0.0, 0.0, 0.0, -8.9999998e-4, -3.7e-3, 1.0, 1.0 };
 
+            // Load program defaults
 
-        // Load program defaults
-
-        dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
+            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
             configFilePath = Properties.Settings.Default.configFilePath;
             configFileName = Properties.Settings.Default.configFileName;
             calFilePath = Properties.Settings.Default.calFilePath;
@@ -3077,11 +3104,6 @@ namespace SerialPortTerminal
             mdt.SpringTension = Properties.Settings.Default.springTension;
             frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
 
-
-
-
-
-
             ControlSwitches.DataCollection(enable);// ControlSwitches.dataSwitch = enable;// ICNTLSW = 8; // data on
 
             double aCrossPeriod = ConfigData.crossPeriod; ;
@@ -3089,8 +3111,6 @@ namespace SerialPortTerminal
 
             double aLongPeriod = ConfigData.longPeriod;
             double aLongDampFactor = ConfigData.longDampFactor;
-
-           
         }
 
         private void TorqueMotorButton_Click(object sender, EventArgs e)
@@ -3354,8 +3374,6 @@ namespace SerialPortTerminal
                         {
                             // Console.WriteLine(dataItem.EntryName.ToString() + "\t" + dataItem.configValue.ToString());
 
-
-
                             switch (dataItem.EntryName)
                             {
                                 case "Version":
@@ -3545,7 +3563,7 @@ namespace SerialPortTerminal
                                     break;
 
                                 case "AX Phase":
-                                    ConfigData.analogFilter[1] =   Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.analogFilter[1] = Convert.ToSingle(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("AX PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
                                     break;
 
@@ -3594,10 +3612,10 @@ namespace SerialPortTerminal
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [8]---------------------- \t" + Convert.ToString(ConfigData.analogFilter[8]));
                                     if (frmTerminal.engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.longCompPhase_16));
 
-
                                     break;
+
                                 case "Mode":
-                                    dataAquisitionMode =  dataItem.configValue.Trim();
+                                    dataAquisitionMode = dataItem.configValue.Trim();
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Data mode ------------------------------ \t" + Convert.ToString(dataAquisitionMode));
 
                                     break;
@@ -4391,8 +4409,7 @@ namespace SerialPortTerminal
 
                 RelaySwitches.stepperMotorEnable(enable);
                 sendCmd("Send Relay Switches");           // 0 ----
-               // RelaySwitches.relaySW = 0x80;// cmd 0
-
+                                                          // RelaySwitches.relaySW = 0x80;// cmd 0
 
                 sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
                 sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
@@ -4403,13 +4420,10 @@ namespace SerialPortTerminal
                     sendCmd("Update Gyro Bias Offset");
                 }
 
-
-
-
                 ControlSwitches.Alarm(enable);
-             //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+                //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
                 ControlSwitches.DataCollection(enable);
-                sendCmd("Send Control Switches");          
+                sendCmd("Send Control Switches");
 
                 RelaySwitches.relay200Hz(enable);
                 RelaySwitches.slew4(enable);
@@ -4418,10 +4432,8 @@ namespace SerialPortTerminal
 
                 ////////////////////////////////////////////////////////////////////////////////////
                 // relay and control switches
-              //  RelaySwitches.relaySW = 0xB1;// cmd 0
+                //  RelaySwitches.relaySW = 0xB1;// cmd 0
                 sendCmd("Send Relay Switches");
-
-
 
                 ControlSwitches.DataCollection(enable);
                 sendCmd("Send Control Switches");
@@ -4430,19 +4442,15 @@ namespace SerialPortTerminal
                 RelaySwitches.slew4(disable);
                 RelaySwitches.slew5(disable);
 
-
-
-
-              //  RelaySwitches.relaySW = 0x81;// cmd 0
+                //  RelaySwitches.relaySW = 0x81;// cmd 0
                 sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
                 torqueMotorCheckBox.Enabled = true;
-                
             }
             else
             {
                 // stop gyros
-            //    RelaySwitches.relay200Hz(enable);    //  This option should be grayed out until spring tenstion and torwue motors are off
-             //   sendCmd("Send Relay Switches");
+                //    RelaySwitches.relay200Hz(enable);    //  This option should be grayed out until spring tenstion and torwue motors are off
+                //   sendCmd("Send Relay Switches");
             }
         }
 
@@ -4690,11 +4698,11 @@ namespace SerialPortTerminal
                     MessageBox.Show(ex.ToString());
                 }
             }
-          //  Console.WriteLine( "success");
+            //  Console.WriteLine( "success");
         }
 
         private void loadCalFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {           
+        {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.ShowDialog();
             readCalibrationFile(OpenFileDialog.FileName);
@@ -4707,7 +4715,6 @@ namespace SerialPortTerminal
                 ControlSwitches.SpringTension(enable);
                 ControlSwitches.TorqueMotor(enable);
                 ControlSwitches.DataCollection(enable);
-
 
                 RelaySwitches.relay200Hz(enable);
                 RelaySwitches.stepperMotorEnable(enable);
@@ -4724,15 +4731,10 @@ namespace SerialPortTerminal
                 sendCmd("Send Control Switches");
                 torqueMotorCheckBox.Enabled = true;
             }
-   
-
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-
-
-
             byte[] data3 = { 0x03, 0xC0, 0x03, 0xC0 };
             comport.Write(data3, 0, 4);
 
@@ -4770,7 +4772,7 @@ namespace SerialPortTerminal
         {
             if (springTensionTargetNumericTextBox.Text != "")
             {
-                double springTensionTarget = Convert.ToDouble(springTensionTargetNumericTextBox.Text);
+                Single springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
 
                 if (springTensionAbsoluteRadioButton.Checked)
                 {
@@ -4784,13 +4786,12 @@ namespace SerialPortTerminal
                 {
                     SpringTensionStep(0, "park");
                 }
-                else if(springTensionSetRadioButton.Checked)
+                else if (springTensionSetRadioButton.Checked)
                 {
-                    mdt.SpringTension = Convert.ToDouble( springTensionTargetNumericTextBox.Text);
+                    newSpringTension = springTensionTarget;
+                    sendCmd("Update Spring Tension Value");
                 }
-
             }
-        
         }
 
         private void springTensionParkRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -4807,15 +4808,11 @@ namespace SerialPortTerminal
 
         private void springTensionTargetNumericTextBox_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void springTensionRelativeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-
         }
-
-
 
         ///////////////////////////////////////////////
     }
