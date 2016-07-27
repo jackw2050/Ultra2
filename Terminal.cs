@@ -2433,7 +2433,7 @@ namespace SerialPortTerminal
                 springTensionStatusLabel.Text = ("Please wait 10 sec");
                 springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
                 sendCmd("Slew Spring Tension");
-                Task taskA = Task.Factory.StartNew(() => DoSomeWork(5000));
+                Task taskA = Task.Factory.StartNew(() => DoSomeWork(10000));
                 taskA.Wait();
                 STtextBox.Text = Convert.ToString(mdt.SpringTension);
 
@@ -2455,14 +2455,14 @@ namespace SerialPortTerminal
             sendCmd("Slew Spring Tension");
             // convert text box etc.
             // send_cmd 3
-            Task taskB = Task.Factory.StartNew(() => DoSomeWork(5000));
+            Task taskB = Task.Factory.StartNew(() => DoSomeWork(10000));
             taskB.Wait();
             STtextBox.Text = Convert.ToString(mdt.SpringTension);
             // sleep 10 sec  need to stop timer for this
             // return
 
             springTensionStatusLabel.Text = ("All done");
-
+          
             if (target > springTensionMax)
             {
                 // error popup   x is outside max ST
@@ -2729,8 +2729,8 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
             // outputBytes[0] = nByte;
-            Console.WriteLine("Transmit array: " + outputBytes);
-            Console.WriteLine("Done");
+         //   Console.WriteLine("Transmit array: " + outputBytes);
+         //   Console.WriteLine("Done");
 
             return outputBytes;
         }
@@ -2802,6 +2802,35 @@ namespace SerialPortTerminal
             return outputBytes;
         }
 
+
+
+        public byte[] CreateTxStSlewArray(byte command, Single data1)
+        {
+            byte[] cmdByte = { command };
+            byte[] checkSum = new byte[1];
+            // byte[] byteArrayTemp = BitConverter.GetBytes(data1);
+            byte[] byteArray1 = BitConverter.GetBytes(Convert.ToInt16( data1 ));
+
+            // int[] byteArray1 = { byteArrayTemp[0] };
+            byte[] outputBytes = new byte[4]; //cmdByte.Length + byteArray1.Length + checkSum.Length];
+            outputBytes[0] = 0x03;
+            outputBytes[1] = byteArray1[0];
+            outputBytes[2] = byteArray1[1];
+
+
+
+            checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
+            byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
+            outputBytes[outputBytes.Length - 1] = checkSum[0];
+            // outputBytes[0] = nByte;
+          //  Console.WriteLine("Transmit array: " + outputBytes);
+           // Console.WriteLine("Done");
+
+            return outputBytes;
+        }
+
+
+
         public void sendCmd(string cmd)
         {
             byte[] data;
@@ -2849,16 +2878,18 @@ namespace SerialPortTerminal
                                             // trcmde(3) = iStep[4] <<8
                                             // nByte = 4;
 
-                    data = CreateTxArray(3, iStep[4]);
-                    //  comport.Write(data, 0, data.Length);
-                    byte[] data2 = { 0x0, 0x81, 0x81 };// 200 Hz enabled, stepper motor enabled
-                    comport.Write(data2, 0, 3);
+                //    data = CreateTxArray(3, iStep[4]);
+                 //   //  comport.Write(data, 0, data.Length);
 
-                    byte[] data4 = { 0x1, 0x8, 0x9 };// Data collection enabled
-                    comport.Write(data4, 0, 3);
 
-                    byte[] data3 =  { 0x03, 0xc0, 0x03, 0xc0 };// Slew ST info
-                     comport.Write(data3, 0, 4);
+                    //        byte[] data3 =  { 0x03, 0xc0, 0x03, 0xc0 };// Slew ST info
+                    //          comport.Write(data3, 0, 4);
+
+                     data = CreateTxStSlewArray(3, iStep[4]);
+                    comport.Write(data, 0, 4);
+
+
+
 
                     break;
 
@@ -4819,6 +4850,13 @@ namespace SerialPortTerminal
             {
                 Single springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
 
+                byte[] data2 = { 0x0, 0x81, 0x81 };// 200 Hz enabled, stepper motor enabled
+                comport.Write(data2, 0, 3);
+
+               // byte[] data4 = { 0x1, 0x8, 0x9 };// Data collection enabled
+               // comport.Write(data4, 0, 3);
+
+
                 ControlSwitches.controlSw = 0x08;
                 sendCmd("Send Control Switches");
 
@@ -4838,6 +4876,7 @@ namespace SerialPortTerminal
                 {
                     newSpringTension = springTensionTarget;
                     sendCmd("Update Spring Tension Value");
+                    STtextBox.Text = Convert.ToString(newSpringTension);
                 }
             }
         }
@@ -4860,6 +4899,18 @@ namespace SerialPortTerminal
 
         private void springTensionRelativeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            if (springTensionRelativeRadioButton.Checked)
+            {
+                springTensionGroupBox.Text = null;
+            }
+        }
+
+        private void springTensionAbsoluteRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (springTensionAbsoluteRadioButton.Checked)
+            {
+                springTensionGroupBox.Text = null;
+            }
         }
 
         ///////////////////////////////////////////////
