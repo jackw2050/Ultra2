@@ -646,13 +646,14 @@ namespace SerialPortTerminal
                 {
                     UpdatePinState();
                 }
-
+                /*
                 // START 1 SEC TIMER
                 _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
                 _timer1.Enabled = true;
                 _timer1.Start();
                 ControlSwitches.DataCollection(enable);
                 sendCmd("Send Control Switches");           // 1 ----
+                */
             }
 
             // Change the state of the form's controls
@@ -665,6 +666,32 @@ namespace SerialPortTerminal
                 if (SerialPortForm.chkClearOnOpen.Checked) ClearTerminal();
             }
         }
+
+
+
+        private void TimerWithDataCollection( string state)
+        {
+            switch (state)
+            {
+                case "start":// enables data collection and starts 1 second timer
+                    _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
+                    _timer1.Enabled = true;
+                    _timer1.Start();
+                    ControlSwitches.DataCollection(enable);
+                    sendCmd("Send Control Switches");           // 1 ----
+                    break;
+                case "stop":// disables data collection and stops 1 second timer
+                    _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
+                    _timer1.Enabled = true;
+                    _timer1.Stop();
+                    ControlSwitches.DataCollection(disable);
+                    sendCmd("Send Control Switches");           // 1 ----
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         private void btnSend_Click(object sender, EventArgs e)
         { SendData(); }
@@ -2331,6 +2358,7 @@ namespace SerialPortTerminal
                     break;
 
                 case "relative":
+
                     if (iStop > 1)
                     {
                         // goto 109  startup wizard is active
@@ -2822,11 +2850,15 @@ namespace SerialPortTerminal
                                             // nByte = 4;
 
                     data = CreateTxArray(3, iStep[4]);
-                    comport.Write(data, 0, data.Length);
+                    //  comport.Write(data, 0, data.Length);
+                    byte[] data2 = { 0x0, 0x81, 0x81 };// 200 Hz enabled, stepper motor enabled
+                    comport.Write(data2, 0, 3);
 
-                    //   03 ac f4 5b
-                    //  byte[] data2 =  { 0x03, 0xAC, 0xFA, 0x5B };
-                    // comport.Write(data2, 0, 4);
+                    byte[] data4 = { 0x1, 0x8, 0x9 };// Data collection enabled
+                    comport.Write(data4, 0, 3);
+
+                    byte[] data3 =  { 0x03, 0xc0, 0x03, 0xc0 };// Slew ST info
+                     comport.Write(data3, 0, 4);
 
                     break;
 
@@ -4412,8 +4444,15 @@ namespace SerialPortTerminal
                                                           // RelaySwitches.relaySW = 0x80;// cmd 0
 
                 sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
+                Task taskA = Task.Factory.StartNew(() => DoSomeWork(500));
+                taskA.Wait();
+
                 sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
+                taskA = Task.Factory.StartNew(() => DoSomeWork(500));
+                taskA.Wait();
                 sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
+                taskA = Task.Factory.StartNew(() => DoSomeWork(500));
+                taskA.Wait();
                 var iGyroSw = 1;
                 if (iGyroSw == 2)
                 {
@@ -4496,6 +4535,7 @@ namespace SerialPortTerminal
         private void button1_Click_2(object sender, EventArgs e)
         {
             startupGroupBox.Visible = false;
+            TimerWithDataCollection("start");
         }
 
         private void dataPageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4735,27 +4775,32 @@ namespace SerialPortTerminal
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            byte[] data3 = { 0x03, 0xC0, 0x03, 0xC0 };
-            comport.Write(data3, 0, 4);
-
-            //sendCmd( "Slew Spring Tension");
+            RelaySwitches.stepperMotorEnable(disable);
+            sendCmd("Send Relay Switches");
         }
 
         private void button3_Click_2(object sender, EventArgs e)
         {
-            byte[] data2 = { 0x01, 0x09, 0x08 };
-            comport.Write(data2, 0, 3);
+            RelaySwitches.stepperMotorEnable(enable);
+            sendCmd("Send Relay Switches");
+            // byte[] data2 = { 0x01, 0x09, 0x08 };
+            // comport.Write(data2, 0, 3);
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            byte[] data2 = { 0x01, 0x09, 0x08 };
-            comport.Write(data2, 0, 3);
+            ControlSwitches.SpringTension(disable);
+          
+            sendCmd("Send Control Switches");
+            
+            //  byte[] data2 = { 0x01, 0x09, 0x08 };
+                                             //  comport.Write(data2, 0, 3);
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            mdt.SpringTension = Convert.ToInt16(STtextBox.Text);
+            ControlSwitches.SpringTension(enable);
+            sendCmd("Send Control Switches");
         }
 
         private void slewSpringTensionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4773,6 +4818,9 @@ namespace SerialPortTerminal
             if (springTensionTargetNumericTextBox.Text != "")
             {
                 Single springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
+
+                ControlSwitches.controlSw = 0x08;
+                sendCmd("Send Control Switches");
 
                 if (springTensionAbsoluteRadioButton.Checked)
                 {

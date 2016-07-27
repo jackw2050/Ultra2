@@ -186,18 +186,18 @@ namespace SerialPortTerminal
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.STtextBox = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.springTensionGroupBox = new System.Windows.Forms.GroupBox();
+            this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.springTensionParkRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionRelativeRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionAbsoluteRadioButton = new System.Windows.Forms.RadioButton();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
-            this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
+            this.STtextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1432,48 +1432,41 @@ namespace SerialPortTerminal
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(748, 125);
+            this.button2.Location = new System.Drawing.Point(584, 118);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(109, 23);
             this.button2.TabIndex = 121;
-            this.button2.Text = "Slew spring tenstion";
+            this.button2.Text = "ST motor disable";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(842, 123);
+            this.button3.Location = new System.Drawing.Point(584, 89);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(109, 23);
             this.button3.TabIndex = 122;
-            this.button3.Text = "Finish";
+            this.button3.Text = "ST motor enable";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_2);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(652, 125);
+            this.button4.Location = new System.Drawing.Point(703, 118);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 123;
-            this.button4.Text = "Prep";
+            this.button4.Text = "Disabale ST";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
-            // STtextBox
-            // 
-            this.STtextBox.Location = new System.Drawing.Point(686, 52);
-            this.STtextBox.Name = "STtextBox";
-            this.STtextBox.Size = new System.Drawing.Size(92, 20);
-            this.STtextBox.TabIndex = 124;
-            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(793, 52);
+            this.button5.Location = new System.Drawing.Point(703, 89);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 125;
-            this.button5.Text = "Set ST";
+            this.button5.Text = "Enable ST";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
@@ -1495,6 +1488,17 @@ namespace SerialPortTerminal
             this.springTensionGroupBox.TabStop = false;
             this.springTensionGroupBox.Text = "Spring Tension";
             // 
+            // springTensionSetRadioButton
+            // 
+            this.springTensionSetRadioButton.AutoSize = true;
+            this.springTensionSetRadioButton.Location = new System.Drawing.Point(6, 87);
+            this.springTensionSetRadioButton.Name = "springTensionSetRadioButton";
+            this.springTensionSetRadioButton.Size = new System.Drawing.Size(58, 17);
+            this.springTensionSetRadioButton.TabIndex = 9;
+            this.springTensionSetRadioButton.TabStop = true;
+            this.springTensionSetRadioButton.Text = "Set ST";
+            this.springTensionSetRadioButton.UseVisualStyleBackColor = true;
+            // 
             // springTensionValueLabel
             // 
             this.springTensionValueLabel.AutoSize = true;
@@ -1512,6 +1516,15 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.Size = new System.Drawing.Size(35, 13);
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
+            // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(234, 15);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // button6
             // 
@@ -1567,25 +1580,12 @@ namespace SerialPortTerminal
             this.springTensionAbsoluteRadioButton.Text = "Absolute Slew";
             this.springTensionAbsoluteRadioButton.UseVisualStyleBackColor = true;
             // 
-            // springTensionTargetNumericTextBox
+            // STtextBox
             // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(234, 15);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
-            // 
-            // springTensionSetRadioButton
-            // 
-            this.springTensionSetRadioButton.AutoSize = true;
-            this.springTensionSetRadioButton.Location = new System.Drawing.Point(6, 87);
-            this.springTensionSetRadioButton.Name = "springTensionSetRadioButton";
-            this.springTensionSetRadioButton.Size = new System.Drawing.Size(58, 17);
-            this.springTensionSetRadioButton.TabIndex = 9;
-            this.springTensionSetRadioButton.TabStop = true;
-            this.springTensionSetRadioButton.Text = "Set ST";
-            this.springTensionSetRadioButton.UseVisualStyleBackColor = true;
+            this.STtextBox.Location = new System.Drawing.Point(686, 52);
+            this.STtextBox.Name = "STtextBox";
+            this.STtextBox.Size = new System.Drawing.Size(92, 20);
+            this.STtextBox.TabIndex = 124;
             // 
             // frmTerminal
             // 
@@ -1798,7 +1798,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox STtextBox;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.GroupBox springTensionGroupBox;
         private System.Windows.Forms.Button button6;
@@ -1810,6 +1809,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label springTensionStatusLabel;
         private System.Windows.Forms.Label springTensionValueLabel;
         private System.Windows.Forms.RadioButton springTensionSetRadioButton;
+        private System.Windows.Forms.TextBox STtextBox;
     }
 }
 
