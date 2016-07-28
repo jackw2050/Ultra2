@@ -442,8 +442,8 @@ namespace SerialPortTerminal
             SerialPortForm.txtSendData.Enabled = SerialPortForm.btnSend.Enabled = comport.IsOpen;
             //chkDTR.Enabled = chkRTS.Enabled = comport.IsOpen;
 
-            if (comport.IsOpen) btnOpenPort.Text = "&Close Port";
-            else btnOpenPort.Text = "&Open Port";
+            if (comport.IsOpen) btnOpenPort.Text = "&Disconnect Meter";
+            else btnOpenPort.Text = "&Connecto to Meter";
         }
 
         /// <summary> Send the user's data currently entered in the 'send' box.</summary>
@@ -646,6 +646,12 @@ namespace SerialPortTerminal
                 {
                     UpdatePinState();
                 }
+
+                startupGroupBox.Visible = true;
+                gyroCheckBox.Enabled = true;
+                alarmCheckBox.Enabled = true;
+
+
                 /*
                 // START 1 SEC TIMER
                 _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
@@ -2462,7 +2468,7 @@ namespace SerialPortTerminal
             // return
 
             springTensionStatusLabel.Text = ("All done");
-          
+            springTensionTargetNumericTextBox.Text = null;
             if (target > springTensionMax)
             {
                 // error popup   x is outside max ST
@@ -2608,10 +2614,13 @@ namespace SerialPortTerminal
             numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
             torqueMotorCheckBox.Enabled = false;
             springTensionCheckBox.Enabled = false;
+            gyroCheckBox.Enabled = false;
+            alarmCheckBox.Enabled = false;
+
 
             springTensionGroupBox.Visible = false;
             springTensionRelativeRadioButton.Checked = true;
-            startupGroupBox.Visible = true;
+            startupGroupBox.Visible = false;
 
             //  Load stored state
             InitStoredVariables();
@@ -4820,18 +4829,12 @@ namespace SerialPortTerminal
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            ControlSwitches.SpringTension(disable);
-          
-            sendCmd("Send Control Switches");
-            
-            //  byte[] data2 = { 0x01, 0x09, 0x08 };
-                                             //  comport.Write(data2, 0, 3);
+            TimerWithDataCollection("stop");
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            ControlSwitches.SpringTension(enable);
-            sendCmd("Send Control Switches");
+            TimerWithDataCollection("start");
         }
 
         private void slewSpringTensionToolStripMenuItem_Click(object sender, EventArgs e)

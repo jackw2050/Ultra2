@@ -214,11 +214,13 @@ namespace SerialPortTerminal
             // 
             // btnOpenPort
             // 
-            this.btnOpenPort.Location = new System.Drawing.Point(1145, 68);
+            this.btnOpenPort.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnOpenPort.Location = new System.Drawing.Point(793, 50);
             this.btnOpenPort.Name = "btnOpenPort";
-            this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenPort.Size = new System.Drawing.Size(110, 23);
             this.btnOpenPort.TabIndex = 6;
-            this.btnOpenPort.Text = "&Open Port";
+            this.btnOpenPort.Text = "&Connecto to Meter";
+            this.btnOpenPort.UseVisualStyleBackColor = false;
             this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
             // 
             // tmrCheckComPorts
@@ -1454,9 +1456,9 @@ namespace SerialPortTerminal
             // 
             this.button4.Location = new System.Drawing.Point(703, 118);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(90, 23);
             this.button4.TabIndex = 123;
-            this.button4.Text = "Disabale ST";
+            this.button4.Text = "Disabale Data";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
@@ -1464,9 +1466,9 @@ namespace SerialPortTerminal
             // 
             this.button5.Location = new System.Drawing.Point(703, 89);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(90, 23);
             this.button5.TabIndex = 125;
-            this.button5.Text = "Enable ST";
+            this.button5.Text = "Enable Data";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
