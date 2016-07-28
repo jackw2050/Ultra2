@@ -55,7 +55,7 @@ namespace SerialPortTerminal
         public UserDataForm UserDataForm = new UserDataForm();
 
         private delegate void SetTextCallback(string text);
-
+        private int countDown = 5;
         public static double springTensionScale = .1041666;
         public static int springTensionMaxStep = 2900;
         public static int springTensionFPM = 525;
@@ -1009,13 +1009,10 @@ namespace SerialPortTerminal
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
                 if (meterStatusGroupBox.Visible)
                 {
                     FogCheck();
                 }
-
-
 
                 if (MeterStatus.lGyro_Fog == 0)
                 {
@@ -1096,15 +1093,19 @@ namespace SerialPortTerminal
                     DataStatusForm.textBox22.Text = "Checksum error";
                 }
 
-
                 if (meterStatusGroupBox.Visible)
                 {
-                   // FogCheck();
+                    // FogCheck();
                     if (completed)
                     {
+                        countDown --;
+                    }
+
+                    if (completed = true & countDown == 0)
+                    {
                         //Console.WriteLine("ready for gyros");
-                        Task taskC = Task.Factory.StartNew(() => CloseMeterStatus());
-                        taskC.Wait();
+                        //    Task taskC = Task.Factory.StartNew(() => CloseMeterStatus());
+                        //   taskC.Wait();
                         meterStatusGroupBox.Visible = false;
                         startupGroupBox.Visible = true;
                     }
@@ -2376,6 +2377,8 @@ namespace SerialPortTerminal
                 case "absolute":
                     //  shift = target - CalculateMarineData.data1[3];
                     shift = target - mdt.SpringTension;
+                    // goto 100
+
                     break;
 
                 case "relative":
@@ -2395,6 +2398,8 @@ namespace SerialPortTerminal
                 case "park":
                     // shift = springTensionMax - CalculateMarineData.data1[3] - 500;
                     shift = springTensionMax - mdt.SpringTension - 500;
+                    // goto 100
+
                     break;
 
                 default:
@@ -2624,7 +2629,7 @@ namespace SerialPortTerminal
         {
             GravityChart.Visible = false;
             meterStatusGroupBox.Visible = false;
-
+            surveyRecordGroupBox.Visible = false;
             // Create an instance of NumericTextBox.
             NumericTextBox numericTextBox1 = new NumericTextBox();
             numericTextBox1.Parent = this;
@@ -2634,10 +2639,11 @@ namespace SerialPortTerminal
             springTensionCheckBox.Enabled = false;
             gyroCheckBox.Enabled = false;
             alarmCheckBox.Enabled = false;
-
+            gpsGroupBox.Visible = false;
             springTensionGroupBox.Visible = false;
             springTensionRelativeRadioButton.Checked = true;
             startupGroupBox.Visible = false;
+            chartWindowGroupBox.Visible = false;
 
             //  Load stored state
             InitStoredVariables();
@@ -3151,8 +3157,11 @@ namespace SerialPortTerminal
 
         public void InitStoredVariables()
         {
+
             // Load configuration data from stored defaults
 
+
+            mdt.SpringTension = Properties.Settings.Default.springTension;
             ConfigData.beamScale = Properties.Settings.Default.beamScale;
             ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
             ConfigData.crossPeriod = Properties.Settings.Default.crossPeriod;
@@ -4431,6 +4440,9 @@ namespace SerialPortTerminal
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
+                Properties.Settings.Default.Save();
+
+
                 System.Windows.Forms.Application.Exit();
             }
             else
@@ -4856,25 +4868,17 @@ namespace SerialPortTerminal
 
         private void button6_Click_1(object sender, EventArgs e)
         {
-            if (springTensionTargetNumericTextBox.Text != "")
+            Single springTensionTarget;
+            if (springTensionTargetNumericTextBox.Text != "" | springTensionParkRadioButton.Checked )
             {
-                Single springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
-
-                byte[] data2 = { 0x0, 0x81, 0x81 };// 200 Hz enabled, stepper motor enabled
-                comport.Write(data2, 0, 3);
-
-                // byte[] data4 = { 0x1, 0x8, 0x9 };// Data collection enabled
-                // comport.Write(data4, 0, 3);
-
-                ControlSwitches.controlSw = 0x08;
-                sendCmd("Send Control Switches");
-
                 if (springTensionAbsoluteRadioButton.Checked)
                 {
+                    springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
                     SpringTensionStep(springTensionTarget, "absolute");
                 }
                 else if (springTensionRelativeRadioButton.Checked)
                 {
+                    springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
                     SpringTensionStep(springTensionTarget, "relative");
                 }
                 else if (springTensionParkRadioButton.Checked)
@@ -4883,8 +4887,19 @@ namespace SerialPortTerminal
                 }
                 else if (springTensionSetRadioButton.Checked)
                 {
+                    RelaySwitches.relay200Hz(enable);
+                    RelaySwitches.stepperMotorEnable(enable);
+                    sendCmd("Send Relay Switches");
+
+                    ControlSwitches.DataCollection(enable);
+                    //   ControlSwitches.controlSw = 0x08;
+                    sendCmd("Send Control Switches");
+                    springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
                     newSpringTension = springTensionTarget;
                     sendCmd("Update Spring Tension Value");
+
+                    Properties.Settings.Default.springTension = newSpringTension;
+                    Properties.Settings.Default.Save();
                     STtextBox.Text = Convert.ToString(newSpringTension);
                 }
             }
@@ -4910,7 +4925,7 @@ namespace SerialPortTerminal
         {
             if (springTensionRelativeRadioButton.Checked)
             {
-                springTensionGroupBox.Text = null;
+                springTensionTargetNumericTextBox.Text = null;
             }
         }
 
@@ -4918,7 +4933,7 @@ namespace SerialPortTerminal
         {
             if (springTensionAbsoluteRadioButton.Checked)
             {
-                springTensionGroupBox.Text = null;
+                springTensionTargetNumericTextBox.Text = null;
             }
         }
 

@@ -102,7 +102,7 @@
       <Value Profile="(Default)">Hi-Res</Value>
     </Setting>
     <Setting Name="springTension" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1414.5</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="kFactor" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-2</Value>

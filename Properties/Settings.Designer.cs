@@ -409,7 +409,6 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1414.5")]
         public double springTension {
             get {
                 return ((double)(this["springTension"]));

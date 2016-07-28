@@ -266,11 +266,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable Torque Motor
             {
-                controlSw = controlSw | 0x02;// Set bit 1
+                controlSw = controlSw | 0x02;// Set bit 2
             }
             else// Disable Torque Motor
             {
-                controlSw = controlSw & 0xFD;// Clear bit 1
+                controlSw = controlSw & 0xFD;// Clear bit 2
             }
         }
 
@@ -278,11 +278,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable Torque Motor
             {
-                controlSw = controlSw | 0x08;// Set bit 1
+                controlSw = controlSw | 0x08;// Set bit 3
             }
             else// Disable Torque Motor
             {
-                controlSw = controlSw & 0xF7;// Clear bit 1
+                controlSw = controlSw & 0xF7;// Clear bit 3
             }
         }
 
@@ -290,11 +290,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable Torque Motor
             {
-                controlSw = controlSw | 0x04;// Set bit 1
+                controlSw = controlSw | 0x04;// Set bit 4
             }
             else// Disable Torque Motor
             {
-                controlSw = controlSw & 0xFB;// Clear bit 1
+                controlSw = controlSw & 0xFB;// Clear bit 4
             }
         }
 
@@ -302,11 +302,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable Torque Motor
             {
-                controlSw = controlSw | 0x10;// Set bit 1
+                controlSw = controlSw | 0x10;// Set bit 5
             }
             else// Disable Torque Motor
             {
-                controlSw = controlSw & 0xEF;// Clear bit 1
+                controlSw = controlSw & 0xEF;// Clear bit 5
             }
         }
     }
