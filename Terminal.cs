@@ -49,7 +49,7 @@ namespace SerialPortTerminal
         private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
-        public AutoStartForm AutoStartForm = new AutoStartForm();
+
         private static ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
@@ -63,7 +63,11 @@ namespace SerialPortTerminal
         public static int iStop;
         public static int fmpm = 2340;
         public static int[] iStep = { 0, 0, 0, 0, 0 };
-
+        public Boolean completed = false;
+        private Boolean crossFogNotReady = true;
+        private Boolean longFogNotReady = true;
+        private Boolean heaterNotReady = true;
+        private int heaterWaitOptions;
         public Single newSpringTension;
         public static Boolean engineerDebug = true;
         public int set = 1;
@@ -646,11 +650,12 @@ namespace SerialPortTerminal
                 {
                     UpdatePinState();
                 }
-
-                startupGroupBox.Visible = true;
-                gyroCheckBox.Enabled = true;
-                alarmCheckBox.Enabled = true;
-
+                initMeter();
+                meterStatusGroupBox.Visible = true;
+                //  startupGroupBox.Visible = true;
+                //  gyroCheckBox.Enabled = true;
+                //  alarmCheckBox.Enabled = true;
+                TimerWithDataCollection("start");
 
                 /*
                 // START 1 SEC TIMER
@@ -664,18 +669,9 @@ namespace SerialPortTerminal
 
             // Change the state of the form's controls
             EnableControls();
-
-            // If the port is open, send focus to the send data box
-            if (comport.IsOpen)
-            {
-                SerialPortForm.txtSendData.Focus();
-                if (SerialPortForm.chkClearOnOpen.Checked) ClearTerminal();
-            }
         }
 
-
-
-        private void TimerWithDataCollection( string state)
+        public void TimerWithDataCollection(string state)
         {
             switch (state)
             {
@@ -686,6 +682,7 @@ namespace SerialPortTerminal
                     ControlSwitches.DataCollection(enable);
                     sendCmd("Send Control Switches");           // 1 ----
                     break;
+
                 case "stop":// disables data collection and stops 1 second timer
                     _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
                     _timer1.Enabled = true;
@@ -693,11 +690,11 @@ namespace SerialPortTerminal
                     ControlSwitches.DataCollection(disable);
                     sendCmd("Send Control Switches");           // 1 ----
                     break;
+
                 default:
                     break;
             }
         }
-
 
         private void btnSend_Click(object sender, EventArgs e)
         { SendData(); }
@@ -1011,50 +1008,59 @@ namespace SerialPortTerminal
                 CleanUp("minutes", 1);// limit chart to 10 min
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                if (meterStatusGroupBox.Visible)
+                {
+                    FogCheck();
+                }
+
+
+
                 if (MeterStatus.lGyro_Fog == 0)
                 {
-                    if (AutoStartForm.Visible)
+                    if (meterStatusGroupBox.Visible)
                     {
-                        AutoStartForm.crossGyroStatusLabel.ForeColor = Color.Green;
-                        AutoStartForm.crossGyroStatusLabel.Text = "Ready";
+                        crossGyroStatusLabel.ForeColor = Color.Green;
+                        crossGyroStatusLabel.Text = "Ready";
                     }
                     DataStatusForm.textBox19.Text = "OK";
                 }
                 else
                 {
-                    if (AutoStartForm.Visible)
+                    if (meterStatusGroupBox.Visible)
                     {
-                        AutoStartForm.crossGyroStatusLabel.ForeColor = Color.Red;
-                        AutoStartForm.crossGyroStatusLabel.Text = "Not Ready";
+                        crossGyroStatusLabel.ForeColor = Color.Red;
+                        crossGyroStatusLabel.Text = "Not Ready";
                     }
-                    { }
+
                     DataStatusForm.textBox19.Text = "Bad";
                 }
                 if (MeterStatus.xGyro_Fog == 0)
                 {
-                    if (AutoStartForm.Visible)
+                    if (meterStatusGroupBox.Visible)
                     {
-                        AutoStartForm.longGyroStatusLabel.ForeColor = Color.Green;
-                        AutoStartForm.longGyroStatusLabel.Text = "Ready";
+                        longGyroStatusLabel.ForeColor = Color.Green;
+                        longGyroStatusLabel.Text = "Ready";
                     }
                     DataStatusForm.textBox20.Text = "OK";
                 }
                 else
                 {
-                    if (AutoStartForm.Visible)
+                    if (meterStatusGroupBox.Visible)
                     {
-                        AutoStartForm.longGyroStatusLabel.ForeColor = Color.Red;
-                        AutoStartForm.longGyroStatusLabel.Text = "Not Ready";
+                        longGyroStatusLabel.ForeColor = Color.Red;
+                        longGyroStatusLabel.Text = "Not Ready";
                     }
 
                     DataStatusForm.textBox20.Text = "Bad";
                 }
                 if (meter_status == 0)
                 {
-                    if (AutoStartForm.Visible)
+                    if (meterStatusGroupBox.Visible)
                     {
-                        AutoStartForm.heaterStatusLabel.ForeColor = Color.Green;
-                        AutoStartForm.heaterStatusLabel.Text = "Ready";
+                        heaterStatusLabel.ForeColor = Color.Green;
+                        heaterStatusLabel.Text = "Ready";
                     }
                     if (DataStatusForm.Visible)
                     {
@@ -1063,10 +1069,10 @@ namespace SerialPortTerminal
                 }
                 else
                 {
-                    if (AutoStartForm.Visible)
+                    if (meterStatusGroupBox.Visible)
                     {
-                        AutoStartForm.heaterStatusLabel.ForeColor = Color.Red;
-                        AutoStartForm.heaterStatusLabel.Text = "Not ready";
+                        heaterStatusLabel.ForeColor = Color.Red;
+                        heaterStatusLabel.Text = "Not ready";
                     }
                     if (DataStatusForm.Visible)
                     {
@@ -1090,13 +1096,17 @@ namespace SerialPortTerminal
                     DataStatusForm.textBox22.Text = "Checksum error";
                 }
 
-                if (autostart)
+
+                if (meterStatusGroupBox.Visible)
                 {
-                    AutoStartForm.FogCheck();
-                    if (AutoStartForm.completed)
+                   // FogCheck();
+                    if (completed)
                     {
-                        Console.WriteLine("ready for gyros");
-                        // AutoStartForm.Hide();
+                        //Console.WriteLine("ready for gyros");
+                        Task taskC = Task.Factory.StartNew(() => CloseMeterStatus());
+                        taskC.Wait();
+                        meterStatusGroupBox.Visible = false;
+                        startupGroupBox.Visible = true;
                     }
                 }
 
@@ -1106,6 +1116,11 @@ namespace SerialPortTerminal
             }
 
             //        this.Invoke(d, new object[] { text });
+        }
+
+        private void CloseMeterStatus()
+        {
+            Thread.Sleep(5);
         }
 
         // This method is passed in to the SetTextCallBack delegate
@@ -2607,6 +2622,9 @@ namespace SerialPortTerminal
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
+            GravityChart.Visible = false;
+            meterStatusGroupBox.Visible = false;
+
             // Create an instance of NumericTextBox.
             NumericTextBox numericTextBox1 = new NumericTextBox();
             numericTextBox1.Parent = this;
@@ -2616,7 +2634,6 @@ namespace SerialPortTerminal
             springTensionCheckBox.Enabled = false;
             gyroCheckBox.Enabled = false;
             alarmCheckBox.Enabled = false;
-
 
             springTensionGroupBox.Visible = false;
             springTensionRelativeRadioButton.Checked = true;
@@ -2738,8 +2755,8 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
             // outputBytes[0] = nByte;
-         //   Console.WriteLine("Transmit array: " + outputBytes);
-         //   Console.WriteLine("Done");
+            //   Console.WriteLine("Transmit array: " + outputBytes);
+            //   Console.WriteLine("Done");
 
             return outputBytes;
         }
@@ -2791,7 +2808,7 @@ namespace SerialPortTerminal
             byte[] cmdByte = { command };
             byte[] checkSum = new byte[1];
             // byte[] byteArrayTemp = BitConverter.GetBytes(data1);
-            byte[] byteArray1 = BitConverter.GetBytes( data1);
+            byte[] byteArray1 = BitConverter.GetBytes(data1);
 
             // int[] byteArray1 = { byteArrayTemp[0] };
             byte[] outputBytes = new byte[6]; //cmdByte.Length + byteArray1.Length + checkSum.Length];
@@ -2811,14 +2828,12 @@ namespace SerialPortTerminal
             return outputBytes;
         }
 
-
-
         public byte[] CreateTxStSlewArray(byte command, Single data1)
         {
             byte[] cmdByte = { command };
             byte[] checkSum = new byte[1];
             // byte[] byteArrayTemp = BitConverter.GetBytes(data1);
-            byte[] byteArray1 = BitConverter.GetBytes(Convert.ToInt16( data1 ));
+            byte[] byteArray1 = BitConverter.GetBytes(Convert.ToInt16(data1));
 
             // int[] byteArray1 = { byteArrayTemp[0] };
             byte[] outputBytes = new byte[4]; //cmdByte.Length + byteArray1.Length + checkSum.Length];
@@ -2826,19 +2841,15 @@ namespace SerialPortTerminal
             outputBytes[1] = byteArray1[0];
             outputBytes[2] = byteArray1[1];
 
-
-
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
             // outputBytes[0] = nByte;
-          //  Console.WriteLine("Transmit array: " + outputBytes);
-           // Console.WriteLine("Done");
+            //  Console.WriteLine("Transmit array: " + outputBytes);
+            // Console.WriteLine("Done");
 
             return outputBytes;
         }
-
-
 
         public void sendCmd(string cmd)
         {
@@ -2887,18 +2898,14 @@ namespace SerialPortTerminal
                                             // trcmde(3) = iStep[4] <<8
                                             // nByte = 4;
 
-                //    data = CreateTxArray(3, iStep[4]);
-                 //   //  comport.Write(data, 0, data.Length);
-
+                    //    data = CreateTxArray(3, iStep[4]);
+                    //   //  comport.Write(data, 0, data.Length);
 
                     //        byte[] data3 =  { 0x03, 0xc0, 0x03, 0xc0 };// Slew ST info
                     //          comport.Write(data3, 0, 4);
 
-                     data = CreateTxStSlewArray(3, iStep[4]);
+                    data = CreateTxStSlewArray(3, iStep[4]);
                     comport.Write(data, 0, 4);
-
-
-
 
                     break;
 
@@ -3015,10 +3022,7 @@ namespace SerialPortTerminal
 
                     data = CreateTxSTArray(4, newSpringTension);
                     //  Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-                      comport.Write(data, 0, data.Length);
-
-                   
-                 
+                    comport.Write(data, 0, data.Length);
 
                     break;
 
@@ -3267,8 +3271,6 @@ namespace SerialPortTerminal
             autostart = true;
             // StartDataCollection();
             // AutoStart();
-
-            AutoStartForm.Show();
 
             // AutoStartForm.FogCheck();
         }
@@ -4472,58 +4474,62 @@ namespace SerialPortTerminal
             SwitchesForm.Show();
         }
 
+        private void initMeter()
+        {
+            // 200 Hz etc
+            byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
+
+            RelaySwitches.stepperMotorEnable(enable);
+            sendCmd("Send Relay Switches");
+
+            sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
+            Task taskA = Task.Factory.StartNew(() => DoSomeWork(500));
+            taskA.Wait();
+
+            sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
+            taskA = Task.Factory.StartNew(() => DoSomeWork(500));
+            taskA.Wait();
+            sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
+            taskA = Task.Factory.StartNew(() => DoSomeWork(500));
+            taskA.Wait();
+            var iGyroSw = 1;
+            if (iGyroSw == 2)
+            {
+                sendCmd("Update Gyro Bias Offset");
+            }
+
+            ControlSwitches.Alarm(enable);
+            //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.DataCollection(enable);
+            sendCmd("Send Control Switches");
+
+            RelaySwitches.relay200Hz(enable);
+            RelaySwitches.slew4(enable);
+            RelaySwitches.slew5(enable);
+            RelaySwitches.stepperMotorEnable(enable);
+
+            ////////////////////////////////////////////////////////////////////////////////////
+            // relay and control switches
+            //  RelaySwitches.relaySW = 0xB1;// cmd 0
+            sendCmd("Send Relay Switches");
+
+            ControlSwitches.DataCollection(enable);
+            sendCmd("Send Control Switches");
+            ////////////////////////////////////////////////////////////////////////////////////
+
+            RelaySwitches.slew4(disable);
+            RelaySwitches.slew5(disable);
+
+            //  RelaySwitches.relaySW = 0x81;// cmd 0
+            sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
+            torqueMotorCheckBox.Enabled = true;
+        }
+
         private void gyroCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (gyroCheckBox.Checked)
             {
-                // 200 Hz etc
-                byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
-
-                RelaySwitches.stepperMotorEnable(enable);
-                sendCmd("Send Relay Switches");           // 0 ----
-                                                          // RelaySwitches.relaySW = 0x80;// cmd 0
-
-                sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
-                Task taskA = Task.Factory.StartNew(() => DoSomeWork(500));
-                taskA.Wait();
-
-                sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
-                taskA = Task.Factory.StartNew(() => DoSomeWork(500));
-                taskA.Wait();
-                sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
-                taskA = Task.Factory.StartNew(() => DoSomeWork(500));
-                taskA.Wait();
-                var iGyroSw = 1;
-                if (iGyroSw == 2)
-                {
-                    sendCmd("Update Gyro Bias Offset");
-                }
-
-                ControlSwitches.Alarm(enable);
-                //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
-                ControlSwitches.DataCollection(enable);
-                sendCmd("Send Control Switches");
-
-                RelaySwitches.relay200Hz(enable);
-                RelaySwitches.slew4(enable);
-                RelaySwitches.slew5(enable);
-                RelaySwitches.stepperMotorEnable(enable);
-
-                ////////////////////////////////////////////////////////////////////////////////////
-                // relay and control switches
-                //  RelaySwitches.relaySW = 0xB1;// cmd 0
-                sendCmd("Send Relay Switches");
-
-                ControlSwitches.DataCollection(enable);
-                sendCmd("Send Control Switches");
-                ////////////////////////////////////////////////////////////////////////////////////
-
-                RelaySwitches.slew4(disable);
-                RelaySwitches.slew5(disable);
-
-                //  RelaySwitches.relaySW = 0x81;// cmd 0
-                sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
-                torqueMotorCheckBox.Enabled = true;
+                initMeter();
             }
             else
             {
@@ -4576,6 +4582,7 @@ namespace SerialPortTerminal
         {
             startupGroupBox.Visible = false;
             TimerWithDataCollection("start");
+            GravityChart.Visible = true;
         }
 
         private void dataPageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4856,9 +4863,8 @@ namespace SerialPortTerminal
                 byte[] data2 = { 0x0, 0x81, 0x81 };// 200 Hz enabled, stepper motor enabled
                 comport.Write(data2, 0, 3);
 
-               // byte[] data4 = { 0x1, 0x8, 0x9 };// Data collection enabled
-               // comport.Write(data4, 0, 3);
-
+                // byte[] data4 = { 0x1, 0x8, 0x9 };// Data collection enabled
+                // comport.Write(data4, 0, 3);
 
                 ControlSwitches.controlSw = 0x08;
                 sendCmd("Send Control Switches");
@@ -4914,6 +4920,48 @@ namespace SerialPortTerminal
             {
                 springTensionGroupBox.Text = null;
             }
+        }
+
+        public void FogCheck()
+        {
+            if (engineerDebug)
+            {
+                Console.WriteLine("CHecking FOG and Heater status");
+            }
+            // Check Cross FOG status
+            if (MeterStatus.xGyro_Fog == 0)
+            { crossFogNotReady = false; }
+            else
+            { crossFogNotReady = true; }
+
+            // Check Long FOG status
+            if (MeterStatus.xGyro_Fog == 0)
+            { longFogNotReady = false; }
+            else
+            { longFogNotReady = true; }
+
+            // Check Heater status
+            if (MeterStatus.meterHeater == 0)
+            { heaterNotReady = false; }
+            else
+            { heaterNotReady = true; }
+            if (heaterWaitOptions == 2)
+            {
+                heaterNotReady = false;
+            }
+            if ((!crossFogNotReady) & (!longFogNotReady) & !(heaterNotReady))
+            {
+                completed = true;
+            }
+            else if ((heaterWaitOptions == 2))
+            {
+                completed = true;
+            }
+        }
+
+        private void radioButtonContinue_CheckedChanged(object sender, EventArgs e)
+        {
+            heaterWaitOptions = 2;
         }
 
         ///////////////////////////////////////////////
