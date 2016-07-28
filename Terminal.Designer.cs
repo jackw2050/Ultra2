@@ -38,8 +38,6 @@ namespace SerialPortTerminal
             this.tmrCheckComPorts = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._timer1 = new System.Windows.Forms.Timer(this.components);
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -171,7 +169,9 @@ namespace SerialPortTerminal
             this.label13 = new System.Windows.Forms.Label();
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.surveyRecordGroupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.surveyTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.gpsGroupBox = new System.Windows.Forms.GroupBox();
             this.gpsStartusTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -181,8 +181,26 @@ namespace SerialPortTerminal
             this.springTensionCheckBox = new System.Windows.Forms.CheckBox();
             this.torqueMotorCheckBox = new System.Windows.Forms.CheckBox();
             this.gyroCheckBox = new System.Windows.Forms.CheckBox();
-            this.surveyTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.springTensionGroupBox = new System.Windows.Forms.GroupBox();
+            this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
+            this.springTensionValueLabel = new System.Windows.Forms.Label();
+            this.springTensionStatusLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.springTensionLabel = new System.Windows.Forms.Label();
+            this.springTensionParkRadioButton = new System.Windows.Forms.RadioButton();
+            this.springTensionRelativeRadioButton = new System.Windows.Forms.RadioButton();
+            this.springTensionAbsoluteRadioButton = new System.Windows.Forms.RadioButton();
+            this.STtextBox = new System.Windows.Forms.TextBox();
+            this.meterStatusGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.longGyroStatusLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.crossGyroStatusLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButtonContinue = new System.Windows.Forms.RadioButton();
+            this.heaterStatusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -192,17 +210,23 @@ namespace SerialPortTerminal
             this.chartWindowGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.windowSizeNumericUpDown)).BeginInit();
             this.surveyRecordGroupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gpsGroupBox.SuspendLayout();
             this.startupGroupBox.SuspendLayout();
+            this.springTensionGroupBox.SuspendLayout();
+            this.meterStatusGroupBox.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenPort
             // 
-            this.btnOpenPort.Location = new System.Drawing.Point(1145, 68);
+            this.btnOpenPort.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnOpenPort.Location = new System.Drawing.Point(1187, 102);
             this.btnOpenPort.Name = "btnOpenPort";
-            this.btnOpenPort.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenPort.Size = new System.Drawing.Size(110, 23);
             this.btnOpenPort.TabIndex = 6;
-            this.btnOpenPort.Text = "&Open Port";
+            this.btnOpenPort.Text = "&Connecto to Meter";
+            this.btnOpenPort.UseVisualStyleBackColor = false;
             this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
             // 
             // tmrCheckComPorts
@@ -214,24 +238,6 @@ namespace SerialPortTerminal
             // _timer1
             // 
             this._timer1.Interval = 1000;
-            // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox5.HideSelection = false;
-            this.textBox5.Location = new System.Drawing.Point(991, 190);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(118, 20);
-            this.textBox5.TabIndex = 22;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(988, 175);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "Date";
             // 
             // label16
             // 
@@ -293,7 +299,7 @@ namespace SerialPortTerminal
             this.rtfTerminal.BackColor = System.Drawing.SystemColors.Control;
             this.rtfTerminal.Location = new System.Drawing.Point(15, 42);
             this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(270, 62);
+            this.rtfTerminal.Size = new System.Drawing.Size(331, 41);
             this.rtfTerminal.TabIndex = 84;
             this.rtfTerminal.Text = "";
             // 
@@ -344,7 +350,7 @@ namespace SerialPortTerminal
             legend2.Name = "Cross Coupling Legend";
             this.GravityChart.Legends.Add(legend1);
             this.GravityChart.Legends.Add(legend2);
-            this.GravityChart.Location = new System.Drawing.Point(1, 155);
+            this.GravityChart.Location = new System.Drawing.Point(0, 169);
             this.GravityChart.Name = "GravityChart";
             this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             this.GravityChart.Size = new System.Drawing.Size(1373, 562);
@@ -928,6 +934,7 @@ namespace SerialPortTerminal
             this.setSpringSensionToolStripMenuItem.Name = "setSpringSensionToolStripMenuItem";
             this.setSpringSensionToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.setSpringSensionToolStripMenuItem.Text = "Spring Tension";
+            this.setSpringSensionToolStripMenuItem.Click += new System.EventHandler(this.setSpringSensionToolStripMenuItem_Click);
             // 
             // setModeToolStripMenuItem
             // 
@@ -941,13 +948,13 @@ namespace SerialPortTerminal
             // marineToolStripMenuItem
             // 
             this.marineToolStripMenuItem.Name = "marineToolStripMenuItem";
-            this.marineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.marineToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.marineToolStripMenuItem.Text = "Marine";
             // 
             // hiResolutionToolStripMenuItem
             // 
             this.hiResolutionToolStripMenuItem.Name = "hiResolutionToolStripMenuItem";
-            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hiResolutionToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.hiResolutionToolStripMenuItem.Text = "Hi resolution";
             // 
             // autoStartNowToolStripMenuItem
@@ -1284,29 +1291,50 @@ namespace SerialPortTerminal
             this.surveyRecordGroupBox.Controls.Add(this.stopButton);
             this.surveyRecordGroupBox.Controls.Add(this.startButton);
             this.surveyRecordGroupBox.Controls.Add(this.recordingTextBox);
+            this.surveyRecordGroupBox.Controls.Add(this.surveyTextBox);
+            this.surveyRecordGroupBox.Controls.Add(this.label2);
             this.surveyRecordGroupBox.Location = new System.Drawing.Point(573, 8);
             this.surveyRecordGroupBox.Name = "surveyRecordGroupBox";
-            this.surveyRecordGroupBox.Size = new System.Drawing.Size(104, 72);
+            this.surveyRecordGroupBox.Size = new System.Drawing.Size(285, 72);
             this.surveyRecordGroupBox.TabIndex = 115;
             this.surveyRecordGroupBox.TabStop = false;
             this.surveyRecordGroupBox.Text = "Survey Record";
             // 
-            // groupBox1
+            // surveyTextBox
             // 
-            this.groupBox1.Controls.Add(this.gpsStartusTextBox);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox17);
-            this.groupBox1.Controls.Add(this.textBox18);
-            this.groupBox1.Controls.Add(this.label18);
-            this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.textBox16);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Location = new System.Drawing.Point(923, 8);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 104);
-            this.groupBox1.TabIndex = 116;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "GPS";
+            this.surveyTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.surveyTextBox.Location = new System.Drawing.Point(140, 34);
+            this.surveyTextBox.Name = "surveyTextBox";
+            this.surveyTextBox.Size = new System.Drawing.Size(130, 20);
+            this.surveyTextBox.TabIndex = 119;
+            this.surveyTextBox.TextChanged += new System.EventHandler(this.surveyTextBox_TextChanged_1);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label2.Location = new System.Drawing.Point(175, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 120;
+            this.label2.Text = "Survey Information";
+            // 
+            // gpsGroupBox
+            // 
+            this.gpsGroupBox.Controls.Add(this.gpsStartusTextBox);
+            this.gpsGroupBox.Controls.Add(this.label1);
+            this.gpsGroupBox.Controls.Add(this.textBox17);
+            this.gpsGroupBox.Controls.Add(this.textBox18);
+            this.gpsGroupBox.Controls.Add(this.label18);
+            this.gpsGroupBox.Controls.Add(this.label17);
+            this.gpsGroupBox.Controls.Add(this.textBox16);
+            this.gpsGroupBox.Controls.Add(this.label16);
+            this.gpsGroupBox.Location = new System.Drawing.Point(923, 8);
+            this.gpsGroupBox.Name = "gpsGroupBox";
+            this.gpsGroupBox.Size = new System.Drawing.Size(200, 104);
+            this.gpsGroupBox.TabIndex = 116;
+            this.gpsGroupBox.TabStop = false;
+            this.gpsGroupBox.Text = "GPS";
             // 
             // gpsStartusTextBox
             // 
@@ -1394,24 +1422,225 @@ namespace SerialPortTerminal
             this.gyroCheckBox.UseVisualStyleBackColor = true;
             this.gyroCheckBox.CheckedChanged += new System.EventHandler(this.gyroCheckBox_CheckedChanged);
             // 
-            // surveyTextBox
+            // springTensionGroupBox
             // 
-            this.surveyTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.surveyTextBox.Location = new System.Drawing.Point(683, 25);
-            this.surveyTextBox.Name = "surveyTextBox";
-            this.surveyTextBox.Size = new System.Drawing.Size(130, 20);
-            this.surveyTextBox.TabIndex = 119;
-            this.surveyTextBox.TextChanged += new System.EventHandler(this.surveyTextBox_TextChanged_1);
+            this.springTensionGroupBox.Controls.Add(this.springTensionSetRadioButton);
+            this.springTensionGroupBox.Controls.Add(this.springTensionValueLabel);
+            this.springTensionGroupBox.Controls.Add(this.springTensionStatusLabel);
+            this.springTensionGroupBox.Controls.Add(this.springTensionTargetNumericTextBox);
+            this.springTensionGroupBox.Controls.Add(this.button6);
+            this.springTensionGroupBox.Controls.Add(this.springTensionLabel);
+            this.springTensionGroupBox.Controls.Add(this.STtextBox);
+            this.springTensionGroupBox.Controls.Add(this.springTensionParkRadioButton);
+            this.springTensionGroupBox.Controls.Add(this.springTensionRelativeRadioButton);
+            this.springTensionGroupBox.Controls.Add(this.springTensionAbsoluteRadioButton);
+            this.springTensionGroupBox.Location = new System.Drawing.Point(15, 42);
+            this.springTensionGroupBox.Name = "springTensionGroupBox";
+            this.springTensionGroupBox.Size = new System.Drawing.Size(331, 110);
+            this.springTensionGroupBox.TabIndex = 126;
+            this.springTensionGroupBox.TabStop = false;
+            this.springTensionGroupBox.Text = "Spring Tension";
             // 
-            // label2
+            // springTensionSetRadioButton
             // 
-            this.label2.AutoSize = true;
-            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(683, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
-            this.label2.TabIndex = 120;
-            this.label2.Text = "Survey Information";
+            this.springTensionSetRadioButton.AutoSize = true;
+            this.springTensionSetRadioButton.Location = new System.Drawing.Point(6, 87);
+            this.springTensionSetRadioButton.Name = "springTensionSetRadioButton";
+            this.springTensionSetRadioButton.Size = new System.Drawing.Size(58, 17);
+            this.springTensionSetRadioButton.TabIndex = 9;
+            this.springTensionSetRadioButton.TabStop = true;
+            this.springTensionSetRadioButton.Text = "Set ST";
+            this.springTensionSetRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // springTensionValueLabel
+            // 
+            this.springTensionValueLabel.AutoSize = true;
+            this.springTensionValueLabel.Location = new System.Drawing.Point(141, 64);
+            this.springTensionValueLabel.Name = "springTensionValueLabel";
+            this.springTensionValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.springTensionValueLabel.TabIndex = 8;
+            this.springTensionValueLabel.Text = "label3";
+            // 
+            // springTensionStatusLabel
+            // 
+            this.springTensionStatusLabel.AutoSize = true;
+            this.springTensionStatusLabel.Location = new System.Drawing.Point(141, 39);
+            this.springTensionStatusLabel.Name = "springTensionStatusLabel";
+            this.springTensionStatusLabel.Size = new System.Drawing.Size(35, 13);
+            this.springTensionStatusLabel.TabIndex = 7;
+            this.springTensionStatusLabel.Text = "label3";
+            // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(234, 15);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(264, 67);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(51, 23);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Go";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
+            // springTensionLabel
+            // 
+            this.springTensionLabel.AutoSize = true;
+            this.springTensionLabel.Location = new System.Drawing.Point(190, 19);
+            this.springTensionLabel.Name = "springTensionLabel";
+            this.springTensionLabel.Size = new System.Drawing.Size(38, 13);
+            this.springTensionLabel.TabIndex = 4;
+            this.springTensionLabel.Text = "Target";
+            // 
+            // springTensionParkRadioButton
+            // 
+            this.springTensionParkRadioButton.AutoSize = true;
+            this.springTensionParkRadioButton.Location = new System.Drawing.Point(7, 65);
+            this.springTensionParkRadioButton.Name = "springTensionParkRadioButton";
+            this.springTensionParkRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.springTensionParkRadioButton.TabIndex = 2;
+            this.springTensionParkRadioButton.TabStop = true;
+            this.springTensionParkRadioButton.Text = "Park";
+            this.springTensionParkRadioButton.UseVisualStyleBackColor = true;
+            this.springTensionParkRadioButton.CheckedChanged += new System.EventHandler(this.springTensionParkRadioButton_CheckedChanged);
+            // 
+            // springTensionRelativeRadioButton
+            // 
+            this.springTensionRelativeRadioButton.AutoSize = true;
+            this.springTensionRelativeRadioButton.Location = new System.Drawing.Point(7, 42);
+            this.springTensionRelativeRadioButton.Name = "springTensionRelativeRadioButton";
+            this.springTensionRelativeRadioButton.Size = new System.Drawing.Size(90, 17);
+            this.springTensionRelativeRadioButton.TabIndex = 1;
+            this.springTensionRelativeRadioButton.TabStop = true;
+            this.springTensionRelativeRadioButton.Text = "Relative Slew";
+            this.springTensionRelativeRadioButton.UseVisualStyleBackColor = true;
+            this.springTensionRelativeRadioButton.CheckedChanged += new System.EventHandler(this.springTensionRelativeRadioButton_CheckedChanged);
+            // 
+            // springTensionAbsoluteRadioButton
+            // 
+            this.springTensionAbsoluteRadioButton.AutoSize = true;
+            this.springTensionAbsoluteRadioButton.Location = new System.Drawing.Point(7, 20);
+            this.springTensionAbsoluteRadioButton.Name = "springTensionAbsoluteRadioButton";
+            this.springTensionAbsoluteRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.springTensionAbsoluteRadioButton.TabIndex = 0;
+            this.springTensionAbsoluteRadioButton.TabStop = true;
+            this.springTensionAbsoluteRadioButton.Text = "Absolute Slew";
+            this.springTensionAbsoluteRadioButton.UseVisualStyleBackColor = true;
+            this.springTensionAbsoluteRadioButton.CheckedChanged += new System.EventHandler(this.springTensionAbsoluteRadioButton_CheckedChanged);
+            // 
+            // STtextBox
+            // 
+            this.STtextBox.Location = new System.Drawing.Point(109, 80);
+            this.STtextBox.Name = "STtextBox";
+            this.STtextBox.Size = new System.Drawing.Size(92, 20);
+            this.STtextBox.TabIndex = 124;
+            // 
+            // meterStatusGroupBox
+            // 
+            this.meterStatusGroupBox.Controls.Add(this.groupBox4);
+            this.meterStatusGroupBox.Controls.Add(this.groupBox3);
+            this.meterStatusGroupBox.Location = new System.Drawing.Point(559, 87);
+            this.meterStatusGroupBox.Name = "meterStatusGroupBox";
+            this.meterStatusGroupBox.Size = new System.Drawing.Size(364, 166);
+            this.meterStatusGroupBox.TabIndex = 127;
+            this.meterStatusGroupBox.TabStop = false;
+            this.meterStatusGroupBox.Text = "Meter Status";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.longGyroStatusLabel);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.crossGyroStatusLabel);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Location = new System.Drawing.Point(14, 17);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(151, 143);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "FOG";
+            // 
+            // longGyroStatusLabel
+            // 
+            this.longGyroStatusLabel.AutoSize = true;
+            this.longGyroStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.longGyroStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.longGyroStatusLabel.Location = new System.Drawing.Point(22, 101);
+            this.longGyroStatusLabel.Name = "longGyroStatusLabel";
+            this.longGyroStatusLabel.Size = new System.Drawing.Size(82, 16);
+            this.longGyroStatusLabel.TabIndex = 8;
+            this.longGyroStatusLabel.Text = "Not Ready";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(22, 84);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 17);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Long";
+            // 
+            // crossGyroStatusLabel
+            // 
+            this.crossGyroStatusLabel.AutoSize = true;
+            this.crossGyroStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.crossGyroStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.crossGyroStatusLabel.Location = new System.Drawing.Point(22, 50);
+            this.crossGyroStatusLabel.Name = "crossGyroStatusLabel";
+            this.crossGyroStatusLabel.Size = new System.Drawing.Size(82, 16);
+            this.crossGyroStatusLabel.TabIndex = 5;
+            this.crossGyroStatusLabel.Text = "Not Ready";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(22, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Cross";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButtonContinue);
+            this.groupBox3.Controls.Add(this.heaterStatusLabel);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(171, 17);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(179, 143);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Heater";
+            // 
+            // radioButtonContinue
+            // 
+            this.radioButtonContinue.AutoSize = true;
+            this.radioButtonContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButtonContinue.Location = new System.Drawing.Point(6, 50);
+            this.radioButtonContinue.Name = "radioButtonContinue";
+            this.radioButtonContinue.Size = new System.Drawing.Size(165, 20);
+            this.radioButtonContinue.TabIndex = 8;
+            this.radioButtonContinue.Text = "Continue without Heater";
+            this.radioButtonContinue.UseVisualStyleBackColor = true;
+            this.radioButtonContinue.CheckedChanged += new System.EventHandler(this.radioButtonContinue_CheckedChanged);
+            // 
+            // heaterStatusLabel
+            // 
+            this.heaterStatusLabel.AutoSize = true;
+            this.heaterStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heaterStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.heaterStatusLabel.Location = new System.Drawing.Point(6, 26);
+            this.heaterStatusLabel.Name = "heaterStatusLabel";
+            this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
+            this.heaterStatusLabel.TabIndex = 6;
+            this.heaterStatusLabel.Text = "Not Ready";
             // 
             // frmTerminal
             // 
@@ -1419,10 +1648,10 @@ namespace SerialPortTerminal
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.setupContextMenuStrip1;
-            this.Controls.Add(this.surveyTextBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.meterStatusGroupBox);
+            this.Controls.Add(this.springTensionGroupBox);
             this.Controls.Add(this.startupGroupBox);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gpsGroupBox);
             this.Controls.Add(this.surveyRecordGroupBox);
             this.Controls.Add(this.emergencyShutdownButton);
             this.Controls.Add(this.chartWindowGroupBox);
@@ -1432,8 +1661,6 @@ namespace SerialPortTerminal
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.rtfTerminal);
             this.Controls.Add(this.GravityChart);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.btnOpenPort);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(505, 250);
@@ -1454,10 +1681,17 @@ namespace SerialPortTerminal
             ((System.ComponentModel.ISupportInitialize)(this.windowSizeNumericUpDown)).EndInit();
             this.surveyRecordGroupBox.ResumeLayout(false);
             this.surveyRecordGroupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gpsGroupBox.ResumeLayout(false);
+            this.gpsGroupBox.PerformLayout();
             this.startupGroupBox.ResumeLayout(false);
             this.startupGroupBox.PerformLayout();
+            this.springTensionGroupBox.ResumeLayout(false);
+            this.springTensionGroupBox.PerformLayout();
+            this.meterStatusGroupBox.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1468,7 +1702,6 @@ namespace SerialPortTerminal
 		private System.Windows.Forms.Timer tmrCheckComPorts;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Timer _timer1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
@@ -1482,7 +1715,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForm;
         private System.Windows.Forms.ToolStripMenuItem Exit;
         public System.Windows.Forms.TextBox textBox17;
-        public System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolTip startStopButtonsToolTip;
@@ -1591,7 +1823,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.GroupBox surveyRecordGroupBox;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpsGroupBox;
         public System.Windows.Forms.TextBox gpsStartusTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem setDataFileLocationToolStripMenuItem;
@@ -1613,6 +1845,26 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem greyToolStripMenuItem;
+        private System.Windows.Forms.GroupBox springTensionGroupBox;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label springTensionLabel;
+        private System.Windows.Forms.RadioButton springTensionParkRadioButton;
+        private System.Windows.Forms.RadioButton springTensionRelativeRadioButton;
+        private System.Windows.Forms.RadioButton springTensionAbsoluteRadioButton;
+        private NumericTextBox springTensionTargetNumericTextBox;
+        private System.Windows.Forms.Label springTensionStatusLabel;
+        private System.Windows.Forms.Label springTensionValueLabel;
+        private System.Windows.Forms.RadioButton springTensionSetRadioButton;
+        private System.Windows.Forms.TextBox STtextBox;
+        private System.Windows.Forms.GroupBox meterStatusGroupBox;
+        private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label crossGyroStatusLabel;
+        private System.Windows.Forms.Label label6;
+        public System.Windows.Forms.Label longGyroStatusLabel;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButtonContinue;
+        public System.Windows.Forms.Label heaterStatusLabel;
     }
 }
 

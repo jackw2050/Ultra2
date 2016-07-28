@@ -60,28 +60,28 @@
       <Value Profile="(Default)">"zls"</Value>
     </Setting>
     <Setting Name="crossPeriod" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1.91E-05</Value>
+      <Value Profile="(Default)">8.4E-06</Value>
     </Setting>
     <Setting Name="longPeriod" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">8.4000002971151844E-06</Value>
+      <Value Profile="(Default)">8.4E-06</Value>
     </Setting>
     <Setting Name="crossDampFactor" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.212</Value>
+      <Value Profile="(Default)">0.0915</Value>
     </Setting>
     <Setting Name="longDampFactor" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.091499999165534973</Value>
+      <Value Profile="(Default)">0.0915</Value>
     </Setting>
     <Setting Name="crossGain" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.15</Value>
+      <Value Profile="(Default)">0.2</Value>
     </Setting>
     <Setting Name="longGain" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.11999999731779099</Value>
+      <Value Profile="(Default)">0.2</Value>
     </Setting>
     <Setting Name="crossLead" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.5</Value>
+      <Value Profile="(Default)">0.45</Value>
     </Setting>
     <Setting Name="longLead" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.44999998807907104</Value>
+      <Value Profile="(Default)">0.45</Value>
     </Setting>
     <Setting Name="springTensionMax" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20000</Value>
@@ -100,6 +100,72 @@
     </Setting>
     <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hi-Res</Value>
+    </Setting>
+    <Setting Name="springTension" Type="System.Double" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="kFactor" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-2</Value>
+    </Setting>
+    <Setting Name="gyroType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="crossCompFactor_4" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCompPhase_4" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="crossCompFactor_16" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="crossCompPhase_16" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="longCompFactor_4" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="longCompPhase_4" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="longCompFactor_16" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="longCompPhase_16" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="CML_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AL_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AX_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="VE_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CMX_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="XACC2_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LACC2_Fact" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="XACC_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.217</Value>
+    </Setting>
+    <Setting Name="LAXX_AL_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.6196</Value>
+    </Setting>
+    <Setting Name="LACC_CML_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.195</Value>
+    </Setting>
+    <Setting Name="LACC_CMX_Phase" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.185</Value>
     </Setting>
   </Settings>
 </SettingsFile>
