@@ -28,42 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.crossPeriodTextBox = new System.Windows.Forms.TextBox();
+            this.crossPeriodCheckBox = new System.Windows.Forms.CheckBox();
+            this.crossDampingCheckBox = new System.Windows.Forms.CheckBox();
+            this.crossGainCheckBox = new System.Windows.Forms.CheckBox();
+            this.crossLeadCheckBox = new System.Windows.Forms.CheckBox();
+            this.crossCompFactor4CheckBox = new System.Windows.Forms.CheckBox();
+            this.crossCompPhase4CheckBox = new System.Windows.Forms.CheckBox();
+            this.crossCompFactor16CheckBox = new System.Windows.Forms.CheckBox();
+            this.crossCompPhase16CheckBox = new System.Windows.Forms.CheckBox();
+            this.crossCompPhase16TextBox = new System.Windows.Forms.TextBox();
+            this.crossCompFactor16TextBox = new System.Windows.Forms.TextBox();
+            this.crossCompPhase4TextBox = new System.Windows.Forms.TextBox();
+            this.crossCompFactor4TextBox = new System.Windows.Forms.TextBox();
+            this.crossLeadTextBox = new System.Windows.Forms.TextBox();
+            this.crossGainTextBox = new System.Windows.Forms.TextBox();
+            this.crossDampingTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.checkBox14 = new System.Windows.Forms.CheckBox();
-            this.checkBox15 = new System.Windows.Forms.CheckBox();
-            this.checkBox16 = new System.Windows.Forms.CheckBox();
+            this.longDampingTextBox = new System.Windows.Forms.TextBox();
+            this.longPeriodTextBox = new System.Windows.Forms.TextBox();
+            this.longGainTextBox = new System.Windows.Forms.TextBox();
+            this.longPeriodCheckBox = new System.Windows.Forms.CheckBox();
+            this.longLeadTextBox = new System.Windows.Forms.TextBox();
+            this.longDampingCheckBox = new System.Windows.Forms.CheckBox();
+            this.longCompFactor4TextBox = new System.Windows.Forms.TextBox();
+            this.longGainCheckBox = new System.Windows.Forms.CheckBox();
+            this.longCompPhase4TextBox = new System.Windows.Forms.TextBox();
+            this.longLeadCheckBox = new System.Windows.Forms.CheckBox();
+            this.longCompFactor16TextBox = new System.Windows.Forms.TextBox();
+            this.longCompFactor4CheckBox = new System.Windows.Forms.CheckBox();
+            this.longCompPhase16TextBox = new System.Windows.Forms.TextBox();
+            this.longCompPhase4CheckBox = new System.Windows.Forms.CheckBox();
+            this.longCompPhase16CheckBox = new System.Windows.Forms.CheckBox();
+            this.longCompFactor16CheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox25 = new System.Windows.Forms.TextBox();
             this.textBox26 = new System.Windows.Forms.TextBox();
@@ -71,7 +69,6 @@
             this.checkBox27 = new System.Windows.Forms.CheckBox();
             this.checkBox26 = new System.Windows.Forms.CheckBox();
             this.checkBox25 = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.textBox19 = new System.Windows.Forms.TextBox();
@@ -88,192 +85,191 @@
             this.checkBox22 = new System.Windows.Forms.CheckBox();
             this.checkBox23 = new System.Windows.Forms.CheckBox();
             this.checkBox24 = new System.Windows.Forms.CheckBox();
+            this.updateMeterButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBox28 = new System.Windows.Forms.TextBox();
             this.textBox29 = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.textBox30 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox31 = new System.Windows.Forms.TextBox();
-            this.textBox32 = new System.Windows.Forms.TextBox();
+            this.maxSpringTensionTextBox = new System.Windows.Forms.TextBox();
+            this.maxSpringTensionCheckBox = new System.Windows.Forms.CheckBox();
+            this.screenDisplayFilterCheckBox = new System.Windows.Forms.CheckBox();
+            this.gyroTypeCheckBox = new System.Windows.Forms.CheckBox();
+            this.meterNumberCheckBox = new System.Windows.Forms.CheckBox();
+            this.kFactorCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // crossPeriodTextBox
             // 
-            this.button1.Location = new System.Drawing.Point(137, 248);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Update to Meter";
-            this.button1.UseVisualStyleBackColor = true;
+            this.crossPeriodTextBox.Location = new System.Drawing.Point(137, 33);
+            this.crossPeriodTextBox.Name = "crossPeriodTextBox";
+            this.crossPeriodTextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossPeriodTextBox.TabIndex = 2;
             // 
-            // textBox1
+            // crossPeriodCheckBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(137, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.crossPeriodCheckBox.AutoSize = true;
+            this.crossPeriodCheckBox.Location = new System.Drawing.Point(25, 36);
+            this.crossPeriodCheckBox.Name = "crossPeriodCheckBox";
+            this.crossPeriodCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.crossPeriodCheckBox.TabIndex = 3;
+            this.crossPeriodCheckBox.Text = "Period";
+            this.crossPeriodCheckBox.UseVisualStyleBackColor = true;
+            this.crossPeriodCheckBox.CheckedChanged += new System.EventHandler(this.crossPeriodCheckBox_CheckedChanged);
             // 
-            // checkBox1
+            // crossDampingCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(25, 36);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(56, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Period";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.crossDampingCheckBox.AutoSize = true;
+            this.crossDampingCheckBox.Location = new System.Drawing.Point(25, 61);
+            this.crossDampingCheckBox.Name = "crossDampingCheckBox";
+            this.crossDampingCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.crossDampingCheckBox.TabIndex = 4;
+            this.crossDampingCheckBox.Text = "Damping";
+            this.crossDampingCheckBox.UseVisualStyleBackColor = true;
+            this.crossDampingCheckBox.CheckedChanged += new System.EventHandler(this.crossDampingCheckBox_CheckedChanged);
             // 
-            // checkBox2
+            // crossGainCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(25, 61);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(68, 17);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "Damping";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.crossGainCheckBox.AutoSize = true;
+            this.crossGainCheckBox.Location = new System.Drawing.Point(25, 86);
+            this.crossGainCheckBox.Name = "crossGainCheckBox";
+            this.crossGainCheckBox.Size = new System.Drawing.Size(48, 17);
+            this.crossGainCheckBox.TabIndex = 5;
+            this.crossGainCheckBox.Text = "Gain";
+            this.crossGainCheckBox.UseVisualStyleBackColor = true;
+            this.crossGainCheckBox.CheckedChanged += new System.EventHandler(this.crossGainCheckBox_CheckedChanged);
             // 
-            // checkBox3
+            // crossLeadCheckBox
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(25, 86);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(48, 17);
-            this.checkBox3.TabIndex = 5;
-            this.checkBox3.Text = "Gain";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.crossLeadCheckBox.AutoSize = true;
+            this.crossLeadCheckBox.Location = new System.Drawing.Point(25, 111);
+            this.crossLeadCheckBox.Name = "crossLeadCheckBox";
+            this.crossLeadCheckBox.Size = new System.Drawing.Size(50, 17);
+            this.crossLeadCheckBox.TabIndex = 6;
+            this.crossLeadCheckBox.Text = "Lead";
+            this.crossLeadCheckBox.UseVisualStyleBackColor = true;
+            this.crossLeadCheckBox.CheckedChanged += new System.EventHandler(this.crossLeadCheckBox_CheckedChanged);
             // 
-            // checkBox4
+            // crossCompFactor4CheckBox
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(25, 111);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(50, 17);
-            this.checkBox4.TabIndex = 6;
-            this.checkBox4.Text = "Lead";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.crossCompFactor4CheckBox.AutoSize = true;
+            this.crossCompFactor4CheckBox.Location = new System.Drawing.Point(25, 136);
+            this.crossCompFactor4CheckBox.Name = "crossCompFactor4CheckBox";
+            this.crossCompFactor4CheckBox.Size = new System.Drawing.Size(101, 17);
+            this.crossCompFactor4CheckBox.TabIndex = 7;
+            this.crossCompFactor4CheckBox.Text = "Comp Factor (4)";
+            this.crossCompFactor4CheckBox.UseVisualStyleBackColor = true;
+            this.crossCompFactor4CheckBox.CheckedChanged += new System.EventHandler(this.crossCompFactor4CheckBox_CheckedChanged);
             // 
-            // checkBox5
+            // crossCompPhase4CheckBox
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(25, 136);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(101, 17);
-            this.checkBox5.TabIndex = 7;
-            this.checkBox5.Text = "Comp Factor (4)";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.crossCompPhase4CheckBox.AutoSize = true;
+            this.crossCompPhase4CheckBox.Location = new System.Drawing.Point(25, 161);
+            this.crossCompPhase4CheckBox.Name = "crossCompPhase4CheckBox";
+            this.crossCompPhase4CheckBox.Size = new System.Drawing.Size(101, 17);
+            this.crossCompPhase4CheckBox.TabIndex = 8;
+            this.crossCompPhase4CheckBox.Text = "Comp Phase (4)";
+            this.crossCompPhase4CheckBox.UseVisualStyleBackColor = true;
+            this.crossCompPhase4CheckBox.CheckedChanged += new System.EventHandler(this.crossCompPhase4CheckBox_CheckedChanged);
             // 
-            // checkBox6
+            // crossCompFactor16CheckBox
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(25, 161);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(101, 17);
-            this.checkBox6.TabIndex = 8;
-            this.checkBox6.Text = "Comp Phase (4)";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.crossCompFactor16CheckBox.AutoSize = true;
+            this.crossCompFactor16CheckBox.Location = new System.Drawing.Point(25, 186);
+            this.crossCompFactor16CheckBox.Name = "crossCompFactor16CheckBox";
+            this.crossCompFactor16CheckBox.Size = new System.Drawing.Size(107, 17);
+            this.crossCompFactor16CheckBox.TabIndex = 9;
+            this.crossCompFactor16CheckBox.Text = "Comp Factor (16)";
+            this.crossCompFactor16CheckBox.UseVisualStyleBackColor = true;
+            this.crossCompFactor16CheckBox.CheckedChanged += new System.EventHandler(this.crossCompFactor16CheckBox_CheckedChanged);
             // 
-            // checkBox7
+            // crossCompPhase16CheckBox
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(25, 186);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(107, 17);
-            this.checkBox7.TabIndex = 9;
-            this.checkBox7.Text = "Comp Factor (16)";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.crossCompPhase16CheckBox.AutoSize = true;
+            this.crossCompPhase16CheckBox.Location = new System.Drawing.Point(25, 211);
+            this.crossCompPhase16CheckBox.Name = "crossCompPhase16CheckBox";
+            this.crossCompPhase16CheckBox.Size = new System.Drawing.Size(107, 17);
+            this.crossCompPhase16CheckBox.TabIndex = 10;
+            this.crossCompPhase16CheckBox.Text = "Comp Phase (16)";
+            this.crossCompPhase16CheckBox.UseVisualStyleBackColor = true;
+            this.crossCompPhase16CheckBox.CheckedChanged += new System.EventHandler(this.crossCompPhase16CheckBox_CheckedChanged);
             // 
-            // checkBox8
+            // crossCompPhase16TextBox
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(25, 211);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(107, 17);
-            this.checkBox8.TabIndex = 10;
-            this.checkBox8.Text = "Comp Phase (16)";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.crossCompPhase16TextBox.Location = new System.Drawing.Point(138, 208);
+            this.crossCompPhase16TextBox.Name = "crossCompPhase16TextBox";
+            this.crossCompPhase16TextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossCompPhase16TextBox.TabIndex = 11;
             // 
-            // textBox2
+            // crossCompFactor16TextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(138, 208);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 11;
+            this.crossCompFactor16TextBox.Location = new System.Drawing.Point(138, 183);
+            this.crossCompFactor16TextBox.Name = "crossCompFactor16TextBox";
+            this.crossCompFactor16TextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossCompFactor16TextBox.TabIndex = 12;
             // 
-            // textBox3
+            // crossCompPhase4TextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(138, 183);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 12;
+            this.crossCompPhase4TextBox.Location = new System.Drawing.Point(137, 158);
+            this.crossCompPhase4TextBox.Name = "crossCompPhase4TextBox";
+            this.crossCompPhase4TextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossCompPhase4TextBox.TabIndex = 13;
             // 
-            // textBox4
+            // crossCompFactor4TextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(137, 158);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 13;
+            this.crossCompFactor4TextBox.Location = new System.Drawing.Point(137, 133);
+            this.crossCompFactor4TextBox.Name = "crossCompFactor4TextBox";
+            this.crossCompFactor4TextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossCompFactor4TextBox.TabIndex = 14;
             // 
-            // textBox5
+            // crossLeadTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(137, 133);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 14;
+            this.crossLeadTextBox.Location = new System.Drawing.Point(137, 108);
+            this.crossLeadTextBox.Name = "crossLeadTextBox";
+            this.crossLeadTextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossLeadTextBox.TabIndex = 15;
             // 
-            // textBox6
+            // crossGainTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(137, 108);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 15;
+            this.crossGainTextBox.Location = new System.Drawing.Point(137, 83);
+            this.crossGainTextBox.Name = "crossGainTextBox";
+            this.crossGainTextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossGainTextBox.TabIndex = 16;
             // 
-            // textBox7
+            // crossDampingTextBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(137, 83);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 16;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(137, 58);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 17;
+            this.crossDampingTextBox.Location = new System.Drawing.Point(137, 58);
+            this.crossDampingTextBox.Name = "crossDampingTextBox";
+            this.crossDampingTextBox.Size = new System.Drawing.Size(100, 20);
+            this.crossDampingTextBox.TabIndex = 17;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBox8);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.textBox7);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.textBox6);
-            this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.checkBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.checkBox5);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.checkBox6);
-            this.groupBox1.Controls.Add(this.checkBox8);
-            this.groupBox1.Controls.Add(this.checkBox7);
+            this.groupBox1.Controls.Add(this.crossDampingTextBox);
+            this.groupBox1.Controls.Add(this.crossPeriodTextBox);
+            this.groupBox1.Controls.Add(this.crossGainTextBox);
+            this.groupBox1.Controls.Add(this.crossPeriodCheckBox);
+            this.groupBox1.Controls.Add(this.crossLeadTextBox);
+            this.groupBox1.Controls.Add(this.crossDampingCheckBox);
+            this.groupBox1.Controls.Add(this.crossCompFactor4TextBox);
+            this.groupBox1.Controls.Add(this.crossGainCheckBox);
+            this.groupBox1.Controls.Add(this.crossCompPhase4TextBox);
+            this.groupBox1.Controls.Add(this.crossLeadCheckBox);
+            this.groupBox1.Controls.Add(this.crossCompFactor16TextBox);
+            this.groupBox1.Controls.Add(this.crossCompFactor4CheckBox);
+            this.groupBox1.Controls.Add(this.crossCompPhase16TextBox);
+            this.groupBox1.Controls.Add(this.crossCompPhase4CheckBox);
+            this.groupBox1.Controls.Add(this.crossCompPhase16CheckBox);
+            this.groupBox1.Controls.Add(this.crossCompFactor16CheckBox);
             this.groupBox1.Location = new System.Drawing.Point(35, 25);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(276, 305);
@@ -283,23 +279,22 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.textBox9);
-            this.groupBox2.Controls.Add(this.textBox10);
-            this.groupBox2.Controls.Add(this.textBox11);
-            this.groupBox2.Controls.Add(this.checkBox9);
-            this.groupBox2.Controls.Add(this.textBox12);
-            this.groupBox2.Controls.Add(this.checkBox10);
-            this.groupBox2.Controls.Add(this.textBox13);
-            this.groupBox2.Controls.Add(this.checkBox11);
-            this.groupBox2.Controls.Add(this.textBox14);
-            this.groupBox2.Controls.Add(this.checkBox12);
-            this.groupBox2.Controls.Add(this.textBox15);
-            this.groupBox2.Controls.Add(this.checkBox13);
-            this.groupBox2.Controls.Add(this.textBox16);
-            this.groupBox2.Controls.Add(this.checkBox14);
-            this.groupBox2.Controls.Add(this.checkBox15);
-            this.groupBox2.Controls.Add(this.checkBox16);
+            this.groupBox2.Controls.Add(this.longDampingTextBox);
+            this.groupBox2.Controls.Add(this.longPeriodTextBox);
+            this.groupBox2.Controls.Add(this.longGainTextBox);
+            this.groupBox2.Controls.Add(this.longPeriodCheckBox);
+            this.groupBox2.Controls.Add(this.longLeadTextBox);
+            this.groupBox2.Controls.Add(this.longDampingCheckBox);
+            this.groupBox2.Controls.Add(this.longCompFactor4TextBox);
+            this.groupBox2.Controls.Add(this.longGainCheckBox);
+            this.groupBox2.Controls.Add(this.longCompPhase4TextBox);
+            this.groupBox2.Controls.Add(this.longLeadCheckBox);
+            this.groupBox2.Controls.Add(this.longCompFactor16TextBox);
+            this.groupBox2.Controls.Add(this.longCompFactor4CheckBox);
+            this.groupBox2.Controls.Add(this.longCompPhase16TextBox);
+            this.groupBox2.Controls.Add(this.longCompPhase4CheckBox);
+            this.groupBox2.Controls.Add(this.longCompPhase16CheckBox);
+            this.groupBox2.Controls.Add(this.longCompFactor16CheckBox);
             this.groupBox2.Location = new System.Drawing.Point(333, 25);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(276, 305);
@@ -307,150 +302,149 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Long-Axis Parameters";
             // 
-            // button2
+            // longDampingTextBox
             // 
-            this.button2.Location = new System.Drawing.Point(137, 248);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Update to Meter";
-            this.button2.UseVisualStyleBackColor = true;
+            this.longDampingTextBox.Location = new System.Drawing.Point(137, 58);
+            this.longDampingTextBox.Name = "longDampingTextBox";
+            this.longDampingTextBox.Size = new System.Drawing.Size(100, 20);
+            this.longDampingTextBox.TabIndex = 17;
             // 
-            // textBox9
+            // longPeriodTextBox
             // 
-            this.textBox9.Location = new System.Drawing.Point(137, 58);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 17;
+            this.longPeriodTextBox.Location = new System.Drawing.Point(137, 33);
+            this.longPeriodTextBox.Name = "longPeriodTextBox";
+            this.longPeriodTextBox.Size = new System.Drawing.Size(100, 20);
+            this.longPeriodTextBox.TabIndex = 2;
             // 
-            // textBox10
+            // longGainTextBox
             // 
-            this.textBox10.Location = new System.Drawing.Point(137, 33);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 20);
-            this.textBox10.TabIndex = 2;
+            this.longGainTextBox.Location = new System.Drawing.Point(137, 83);
+            this.longGainTextBox.Name = "longGainTextBox";
+            this.longGainTextBox.Size = new System.Drawing.Size(100, 20);
+            this.longGainTextBox.TabIndex = 16;
             // 
-            // textBox11
+            // longPeriodCheckBox
             // 
-            this.textBox11.Location = new System.Drawing.Point(137, 83);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 20);
-            this.textBox11.TabIndex = 16;
+            this.longPeriodCheckBox.AutoSize = true;
+            this.longPeriodCheckBox.Location = new System.Drawing.Point(25, 36);
+            this.longPeriodCheckBox.Name = "longPeriodCheckBox";
+            this.longPeriodCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.longPeriodCheckBox.TabIndex = 3;
+            this.longPeriodCheckBox.Text = "Period";
+            this.longPeriodCheckBox.UseVisualStyleBackColor = true;
+            this.longPeriodCheckBox.CheckedChanged += new System.EventHandler(this.longPeriodCheckBox_CheckedChanged);
             // 
-            // checkBox9
+            // longLeadTextBox
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(25, 36);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(56, 17);
-            this.checkBox9.TabIndex = 3;
-            this.checkBox9.Text = "Period";
-            this.checkBox9.UseVisualStyleBackColor = true;
+            this.longLeadTextBox.Location = new System.Drawing.Point(137, 108);
+            this.longLeadTextBox.Name = "longLeadTextBox";
+            this.longLeadTextBox.Size = new System.Drawing.Size(100, 20);
+            this.longLeadTextBox.TabIndex = 15;
             // 
-            // textBox12
+            // longDampingCheckBox
             // 
-            this.textBox12.Location = new System.Drawing.Point(137, 108);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 20);
-            this.textBox12.TabIndex = 15;
+            this.longDampingCheckBox.AutoSize = true;
+            this.longDampingCheckBox.Location = new System.Drawing.Point(25, 61);
+            this.longDampingCheckBox.Name = "longDampingCheckBox";
+            this.longDampingCheckBox.Size = new System.Drawing.Size(68, 17);
+            this.longDampingCheckBox.TabIndex = 4;
+            this.longDampingCheckBox.Text = "Damping";
+            this.longDampingCheckBox.UseVisualStyleBackColor = true;
+            this.longDampingCheckBox.CheckedChanged += new System.EventHandler(this.longDampingCheckBox_CheckedChanged);
             // 
-            // checkBox10
+            // longCompFactor4TextBox
             // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(25, 61);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(68, 17);
-            this.checkBox10.TabIndex = 4;
-            this.checkBox10.Text = "Damping";
-            this.checkBox10.UseVisualStyleBackColor = true;
+            this.longCompFactor4TextBox.Location = new System.Drawing.Point(137, 133);
+            this.longCompFactor4TextBox.Name = "longCompFactor4TextBox";
+            this.longCompFactor4TextBox.Size = new System.Drawing.Size(100, 20);
+            this.longCompFactor4TextBox.TabIndex = 14;
             // 
-            // textBox13
+            // longGainCheckBox
             // 
-            this.textBox13.Location = new System.Drawing.Point(137, 133);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(100, 20);
-            this.textBox13.TabIndex = 14;
+            this.longGainCheckBox.AutoSize = true;
+            this.longGainCheckBox.Location = new System.Drawing.Point(25, 86);
+            this.longGainCheckBox.Name = "longGainCheckBox";
+            this.longGainCheckBox.Size = new System.Drawing.Size(48, 17);
+            this.longGainCheckBox.TabIndex = 5;
+            this.longGainCheckBox.Text = "Gain";
+            this.longGainCheckBox.UseVisualStyleBackColor = true;
+            this.longGainCheckBox.CheckedChanged += new System.EventHandler(this.longGainCheckBox_CheckedChanged);
             // 
-            // checkBox11
+            // longCompPhase4TextBox
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(25, 86);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(48, 17);
-            this.checkBox11.TabIndex = 5;
-            this.checkBox11.Text = "Gain";
-            this.checkBox11.UseVisualStyleBackColor = true;
+            this.longCompPhase4TextBox.Location = new System.Drawing.Point(137, 158);
+            this.longCompPhase4TextBox.Name = "longCompPhase4TextBox";
+            this.longCompPhase4TextBox.Size = new System.Drawing.Size(100, 20);
+            this.longCompPhase4TextBox.TabIndex = 13;
             // 
-            // textBox14
+            // longLeadCheckBox
             // 
-            this.textBox14.Location = new System.Drawing.Point(137, 158);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(100, 20);
-            this.textBox14.TabIndex = 13;
+            this.longLeadCheckBox.AutoSize = true;
+            this.longLeadCheckBox.Location = new System.Drawing.Point(25, 111);
+            this.longLeadCheckBox.Name = "longLeadCheckBox";
+            this.longLeadCheckBox.Size = new System.Drawing.Size(50, 17);
+            this.longLeadCheckBox.TabIndex = 6;
+            this.longLeadCheckBox.Text = "Lead";
+            this.longLeadCheckBox.UseVisualStyleBackColor = true;
+            this.longLeadCheckBox.CheckedChanged += new System.EventHandler(this.longLeadCheckBox_CheckedChanged);
             // 
-            // checkBox12
+            // longCompFactor16TextBox
             // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(25, 111);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(50, 17);
-            this.checkBox12.TabIndex = 6;
-            this.checkBox12.Text = "Lead";
-            this.checkBox12.UseVisualStyleBackColor = true;
+            this.longCompFactor16TextBox.Location = new System.Drawing.Point(138, 183);
+            this.longCompFactor16TextBox.Name = "longCompFactor16TextBox";
+            this.longCompFactor16TextBox.Size = new System.Drawing.Size(100, 20);
+            this.longCompFactor16TextBox.TabIndex = 12;
             // 
-            // textBox15
+            // longCompFactor4CheckBox
             // 
-            this.textBox15.Location = new System.Drawing.Point(138, 183);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(100, 20);
-            this.textBox15.TabIndex = 12;
+            this.longCompFactor4CheckBox.AutoSize = true;
+            this.longCompFactor4CheckBox.Location = new System.Drawing.Point(25, 136);
+            this.longCompFactor4CheckBox.Name = "longCompFactor4CheckBox";
+            this.longCompFactor4CheckBox.Size = new System.Drawing.Size(101, 17);
+            this.longCompFactor4CheckBox.TabIndex = 7;
+            this.longCompFactor4CheckBox.Text = "Comp Factor (4)";
+            this.longCompFactor4CheckBox.UseVisualStyleBackColor = true;
+            this.longCompFactor4CheckBox.CheckedChanged += new System.EventHandler(this.longCompFactor4CheckBox_CheckedChanged);
             // 
-            // checkBox13
+            // longCompPhase16TextBox
             // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(25, 136);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(101, 17);
-            this.checkBox13.TabIndex = 7;
-            this.checkBox13.Text = "Comp Factor (4)";
-            this.checkBox13.UseVisualStyleBackColor = true;
+            this.longCompPhase16TextBox.Location = new System.Drawing.Point(138, 208);
+            this.longCompPhase16TextBox.Name = "longCompPhase16TextBox";
+            this.longCompPhase16TextBox.Size = new System.Drawing.Size(100, 20);
+            this.longCompPhase16TextBox.TabIndex = 11;
             // 
-            // textBox16
+            // longCompPhase4CheckBox
             // 
-            this.textBox16.Location = new System.Drawing.Point(138, 208);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(100, 20);
-            this.textBox16.TabIndex = 11;
+            this.longCompPhase4CheckBox.AutoSize = true;
+            this.longCompPhase4CheckBox.Location = new System.Drawing.Point(25, 161);
+            this.longCompPhase4CheckBox.Name = "longCompPhase4CheckBox";
+            this.longCompPhase4CheckBox.Size = new System.Drawing.Size(101, 17);
+            this.longCompPhase4CheckBox.TabIndex = 8;
+            this.longCompPhase4CheckBox.Text = "Comp Phase (4)";
+            this.longCompPhase4CheckBox.UseVisualStyleBackColor = true;
+            this.longCompPhase4CheckBox.CheckedChanged += new System.EventHandler(this.longCompPhase4CheckBox_CheckedChanged);
             // 
-            // checkBox14
+            // longCompPhase16CheckBox
             // 
-            this.checkBox14.AutoSize = true;
-            this.checkBox14.Location = new System.Drawing.Point(25, 161);
-            this.checkBox14.Name = "checkBox14";
-            this.checkBox14.Size = new System.Drawing.Size(101, 17);
-            this.checkBox14.TabIndex = 8;
-            this.checkBox14.Text = "Comp Phase (4)";
-            this.checkBox14.UseVisualStyleBackColor = true;
+            this.longCompPhase16CheckBox.AutoSize = true;
+            this.longCompPhase16CheckBox.Location = new System.Drawing.Point(25, 211);
+            this.longCompPhase16CheckBox.Name = "longCompPhase16CheckBox";
+            this.longCompPhase16CheckBox.Size = new System.Drawing.Size(107, 17);
+            this.longCompPhase16CheckBox.TabIndex = 10;
+            this.longCompPhase16CheckBox.Text = "Comp Phase (16)";
+            this.longCompPhase16CheckBox.UseVisualStyleBackColor = true;
+            this.longCompPhase16CheckBox.CheckedChanged += new System.EventHandler(this.longCompPhase16CheckBox_CheckedChanged);
             // 
-            // checkBox15
+            // longCompFactor16CheckBox
             // 
-            this.checkBox15.AutoSize = true;
-            this.checkBox15.Location = new System.Drawing.Point(25, 211);
-            this.checkBox15.Name = "checkBox15";
-            this.checkBox15.Size = new System.Drawing.Size(107, 17);
-            this.checkBox15.TabIndex = 10;
-            this.checkBox15.Text = "Comp Phase (16)";
-            this.checkBox15.UseVisualStyleBackColor = true;
-            // 
-            // checkBox16
-            // 
-            this.checkBox16.AutoSize = true;
-            this.checkBox16.Location = new System.Drawing.Point(25, 186);
-            this.checkBox16.Name = "checkBox16";
-            this.checkBox16.Size = new System.Drawing.Size(107, 17);
-            this.checkBox16.TabIndex = 9;
-            this.checkBox16.Text = "Comp Factor (16)";
-            this.checkBox16.UseVisualStyleBackColor = true;
+            this.longCompFactor16CheckBox.AutoSize = true;
+            this.longCompFactor16CheckBox.Location = new System.Drawing.Point(25, 186);
+            this.longCompFactor16CheckBox.Name = "longCompFactor16CheckBox";
+            this.longCompFactor16CheckBox.Size = new System.Drawing.Size(107, 17);
+            this.longCompFactor16CheckBox.TabIndex = 9;
+            this.longCompFactor16CheckBox.Text = "Comp Factor (16)";
+            this.longCompFactor16CheckBox.UseVisualStyleBackColor = true;
+            this.longCompFactor16CheckBox.CheckedChanged += new System.EventHandler(this.longCompFactor16CheckBox_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -460,7 +454,6 @@
             this.groupBox3.Controls.Add(this.checkBox27);
             this.groupBox3.Controls.Add(this.checkBox26);
             this.groupBox3.Controls.Add(this.checkBox25);
-            this.groupBox3.Controls.Add(this.button3);
             this.groupBox3.Controls.Add(this.textBox17);
             this.groupBox3.Controls.Add(this.textBox18);
             this.groupBox3.Controls.Add(this.textBox19);
@@ -535,15 +528,6 @@
             this.checkBox25.TabIndex = 18;
             this.checkBox25.Text = "LACC (AL)  Phase";
             this.checkBox25.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(151, 323);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Update to Meter";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // textBox17
             // 
@@ -681,6 +665,15 @@
             this.checkBox24.Text = "XACC Phase";
             this.checkBox24.UseVisualStyleBackColor = true;
             // 
+            // updateMeterButton
+            // 
+            this.updateMeterButton.Location = new System.Drawing.Point(424, 448);
+            this.updateMeterButton.Name = "updateMeterButton";
+            this.updateMeterButton.Size = new System.Drawing.Size(104, 23);
+            this.updateMeterButton.TabIndex = 0;
+            this.updateMeterButton.Text = "Update to Meter";
+            this.updateMeterButton.UseVisualStyleBackColor = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -693,11 +686,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(415, 410);
+            this.label2.Location = new System.Drawing.Point(411, 535);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(353, 13);
+            this.label2.Size = new System.Drawing.Size(356, 13);
             this.label2.TabIndex = 22;
-            this.label2.Text = "Only Parametersyou have checked can be changed and written to meter.";
+            this.label2.Text = "Only Parameters you have checked can be changed and written to meter.";
             // 
             // button4
             // 
@@ -711,18 +704,18 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.screenDisplayFilterCheckBox);
+            this.groupBox4.Controls.Add(this.kFactorCheckBox);
             this.groupBox4.Controls.Add(this.textBox28);
+            this.groupBox4.Controls.Add(this.meterNumberCheckBox);
             this.groupBox4.Controls.Add(this.textBox29);
-            this.groupBox4.Controls.Add(this.label26);
-            this.groupBox4.Controls.Add(this.label25);
-            this.groupBox4.Controls.Add(this.label24);
-            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.gyroTypeCheckBox);
+            this.groupBox4.Controls.Add(this.maxSpringTensionCheckBox);
             this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.textBox30);
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.textBox31);
-            this.groupBox4.Controls.Add(this.textBox32);
+            this.groupBox4.Controls.Add(this.maxSpringTensionTextBox);
             this.groupBox4.Location = new System.Drawing.Point(47, 349);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(294, 199);
@@ -732,53 +725,17 @@
             // 
             // textBox28
             // 
-            this.textBox28.Location = new System.Drawing.Point(142, 158);
+            this.textBox28.Location = new System.Drawing.Point(179, 158);
             this.textBox28.Name = "textBox28";
             this.textBox28.Size = new System.Drawing.Size(100, 20);
             this.textBox28.TabIndex = 189;
             // 
             // textBox29
             // 
-            this.textBox29.Location = new System.Drawing.Point(142, 106);
+            this.textBox29.Location = new System.Drawing.Point(179, 106);
             this.textBox29.Name = "textBox29";
             this.textBox29.Size = new System.Drawing.Size(100, 20);
             this.textBox29.TabIndex = 180;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(7, 113);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(74, 13);
-            this.label26.TabIndex = 181;
-            this.label26.Text = "Meter Number";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(7, 139);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(79, 13);
-            this.label25.TabIndex = 182;
-            this.label25.Text = "Digital K Factor";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(7, 165);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(103, 13);
-            this.label24.TabIndex = 183;
-            this.label24.Text = "Screen Display Filter";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(7, 35);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(125, 13);
-            this.label23.TabIndex = 184;
-            this.label23.Text = "Maximum Spring Tension";
             // 
             // comboBox1
             // 
@@ -787,23 +744,14 @@
             "GG49",
             "Gyro pack",
             "FOG pack"});
-            this.comboBox1.Location = new System.Drawing.Point(142, 53);
+            this.comboBox1.Location = new System.Drawing.Point(179, 53);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 21);
             this.comboBox1.TabIndex = 192;
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(7, 61);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(56, 13);
-            this.label22.TabIndex = 185;
-            this.label22.Text = "Gyro Type";
-            // 
             // textBox30
             // 
-            this.textBox30.Location = new System.Drawing.Point(142, 132);
+            this.textBox30.Location = new System.Drawing.Point(179, 132);
             this.textBox30.Name = "textBox30";
             this.textBox30.Size = new System.Drawing.Size(100, 20);
             this.textBox30.TabIndex = 190;
@@ -819,29 +767,81 @@
             // 
             // textBox31
             // 
-            this.textBox31.Location = new System.Drawing.Point(142, 80);
+            this.textBox31.Location = new System.Drawing.Point(179, 80);
             this.textBox31.Name = "textBox31";
             this.textBox31.Size = new System.Drawing.Size(100, 20);
             this.textBox31.TabIndex = 187;
             // 
-            // textBox32
+            // maxSpringTensionTextBox
             // 
-            this.textBox32.Location = new System.Drawing.Point(142, 28);
-            this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(100, 20);
-            this.textBox32.TabIndex = 188;
+            this.maxSpringTensionTextBox.Location = new System.Drawing.Point(179, 28);
+            this.maxSpringTensionTextBox.Name = "maxSpringTensionTextBox";
+            this.maxSpringTensionTextBox.Size = new System.Drawing.Size(100, 20);
+            this.maxSpringTensionTextBox.TabIndex = 188;
+            // 
+            // maxSpringTensionCheckBox
+            // 
+            this.maxSpringTensionCheckBox.AutoSize = true;
+            this.maxSpringTensionCheckBox.Location = new System.Drawing.Point(6, 31);
+            this.maxSpringTensionCheckBox.Name = "maxSpringTensionCheckBox";
+            this.maxSpringTensionCheckBox.Size = new System.Drawing.Size(144, 17);
+            this.maxSpringTensionCheckBox.TabIndex = 221;
+            this.maxSpringTensionCheckBox.Text = "Maximum Spring Tension";
+            this.maxSpringTensionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // screenDisplayFilterCheckBox
+            // 
+            this.screenDisplayFilterCheckBox.AutoSize = true;
+            this.screenDisplayFilterCheckBox.Location = new System.Drawing.Point(6, 161);
+            this.screenDisplayFilterCheckBox.Name = "screenDisplayFilterCheckBox";
+            this.screenDisplayFilterCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.screenDisplayFilterCheckBox.TabIndex = 222;
+            this.screenDisplayFilterCheckBox.Text = "Screen Display Filter";
+            this.screenDisplayFilterCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // gyroTypeCheckBox
+            // 
+            this.gyroTypeCheckBox.AutoSize = true;
+            this.gyroTypeCheckBox.Location = new System.Drawing.Point(6, 57);
+            this.gyroTypeCheckBox.Name = "gyroTypeCheckBox";
+            this.gyroTypeCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.gyroTypeCheckBox.TabIndex = 223;
+            this.gyroTypeCheckBox.Text = "Gyro Type";
+            this.gyroTypeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // meterNumberCheckBox
+            // 
+            this.meterNumberCheckBox.AutoSize = true;
+            this.meterNumberCheckBox.Location = new System.Drawing.Point(6, 109);
+            this.meterNumberCheckBox.Name = "meterNumberCheckBox";
+            this.meterNumberCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.meterNumberCheckBox.TabIndex = 224;
+            this.meterNumberCheckBox.Text = "Meter Number";
+            this.meterNumberCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // kFactorCheckBox
+            // 
+            this.kFactorCheckBox.AutoSize = true;
+            this.kFactorCheckBox.Location = new System.Drawing.Point(6, 135);
+            this.kFactorCheckBox.Name = "kFactorCheckBox";
+            this.kFactorCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.kFactorCheckBox.TabIndex = 225;
+            this.kFactorCheckBox.Text = "Digital K Factor";
+            this.kFactorCheckBox.UseVisualStyleBackColor = true;
             // 
             // Parameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 566);
+            this.ControlBox = false;
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.updateMeterButton);
             this.Controls.Add(this.groupBox1);
             this.Name = "Parameters";
             this.Text = "Parameters";
@@ -859,82 +859,79 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.CheckBox checkBox12;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.CheckBox checkBox13;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.CheckBox checkBox14;
-        private System.Windows.Forms.CheckBox checkBox15;
-        private System.Windows.Forms.CheckBox checkBox16;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox checkBox25;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.CheckBox checkBox17;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.CheckBox checkBox18;
-        private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.CheckBox checkBox19;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.CheckBox checkBox20;
-        private System.Windows.Forms.TextBox textBox23;
-        private System.Windows.Forms.CheckBox checkBox21;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.CheckBox checkBox22;
-        private System.Windows.Forms.CheckBox checkBox23;
-        private System.Windows.Forms.CheckBox checkBox24;
-        private System.Windows.Forms.TextBox textBox25;
-        private System.Windows.Forms.TextBox textBox26;
-        private System.Windows.Forms.TextBox textBox27;
-        private System.Windows.Forms.CheckBox checkBox27;
-        private System.Windows.Forms.CheckBox checkBox26;
+        private System.Windows.Forms.Button updateMeterButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox28;
-        private System.Windows.Forms.TextBox textBox29;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox textBox30;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox31;
-        private System.Windows.Forms.TextBox textBox32;
+        public System.Windows.Forms.TextBox crossPeriodTextBox;
+        public System.Windows.Forms.CheckBox crossPeriodCheckBox;
+        public System.Windows.Forms.CheckBox crossDampingCheckBox;
+        public System.Windows.Forms.CheckBox crossGainCheckBox;
+        public System.Windows.Forms.CheckBox crossLeadCheckBox;
+        public System.Windows.Forms.CheckBox crossCompFactor4CheckBox;
+        public System.Windows.Forms.CheckBox crossCompPhase4CheckBox;
+        public System.Windows.Forms.CheckBox crossCompFactor16CheckBox;
+        public System.Windows.Forms.CheckBox crossCompPhase16CheckBox;
+        public System.Windows.Forms.TextBox crossCompPhase16TextBox;
+        public System.Windows.Forms.TextBox crossCompFactor16TextBox;
+        public System.Windows.Forms.TextBox crossCompPhase4TextBox;
+        public System.Windows.Forms.TextBox crossCompFactor4TextBox;
+        public System.Windows.Forms.TextBox crossLeadTextBox;
+        public System.Windows.Forms.TextBox crossGainTextBox;
+        public System.Windows.Forms.TextBox crossDampingTextBox;
+        public System.Windows.Forms.TextBox longDampingTextBox;
+        public System.Windows.Forms.TextBox longPeriodTextBox;
+        public System.Windows.Forms.TextBox longGainTextBox;
+        public System.Windows.Forms.CheckBox longPeriodCheckBox;
+        public System.Windows.Forms.TextBox longLeadTextBox;
+        public System.Windows.Forms.CheckBox longDampingCheckBox;
+        public System.Windows.Forms.TextBox longCompFactor4TextBox;
+        public System.Windows.Forms.CheckBox longGainCheckBox;
+        public System.Windows.Forms.TextBox longCompPhase4TextBox;
+        public System.Windows.Forms.CheckBox longLeadCheckBox;
+        public System.Windows.Forms.TextBox longCompFactor16TextBox;
+        public System.Windows.Forms.CheckBox longCompFactor4CheckBox;
+        public System.Windows.Forms.TextBox longCompPhase16TextBox;
+        public System.Windows.Forms.CheckBox longCompPhase4CheckBox;
+        public System.Windows.Forms.CheckBox longCompPhase16CheckBox;
+        public System.Windows.Forms.CheckBox longCompFactor16CheckBox;
+        public System.Windows.Forms.CheckBox checkBox25;
+        public System.Windows.Forms.TextBox textBox17;
+        public System.Windows.Forms.TextBox textBox18;
+        public System.Windows.Forms.TextBox textBox19;
+        public System.Windows.Forms.CheckBox checkBox17;
+        public System.Windows.Forms.TextBox textBox20;
+        public System.Windows.Forms.CheckBox checkBox18;
+        public System.Windows.Forms.TextBox textBox21;
+        public System.Windows.Forms.CheckBox checkBox19;
+        public System.Windows.Forms.TextBox textBox22;
+        public System.Windows.Forms.CheckBox checkBox20;
+        public System.Windows.Forms.TextBox textBox23;
+        public System.Windows.Forms.CheckBox checkBox21;
+        public System.Windows.Forms.TextBox textBox24;
+        public System.Windows.Forms.CheckBox checkBox22;
+        public System.Windows.Forms.CheckBox checkBox23;
+        public System.Windows.Forms.CheckBox checkBox24;
+        public System.Windows.Forms.TextBox textBox25;
+        public System.Windows.Forms.TextBox textBox26;
+        public System.Windows.Forms.TextBox textBox27;
+        public System.Windows.Forms.CheckBox checkBox27;
+        public System.Windows.Forms.CheckBox checkBox26;
+        public System.Windows.Forms.TextBox textBox28;
+        public System.Windows.Forms.TextBox textBox29;
+        public System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.TextBox textBox30;
+        public System.Windows.Forms.Label label21;
+        public System.Windows.Forms.TextBox textBox31;
+        public System.Windows.Forms.TextBox maxSpringTensionTextBox;
+        public System.Windows.Forms.CheckBox screenDisplayFilterCheckBox;
+        public System.Windows.Forms.CheckBox kFactorCheckBox;
+        public System.Windows.Forms.CheckBox meterNumberCheckBox;
+        public System.Windows.Forms.CheckBox gyroTypeCheckBox;
+        public System.Windows.Forms.CheckBox maxSpringTensionCheckBox;
     }
 }

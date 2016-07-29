@@ -49,7 +49,6 @@ namespace SerialPortTerminal
         private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
-
         private static ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
@@ -981,6 +980,83 @@ namespace SerialPortTerminal
                 {
                     listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
                     GravityChart.DataSource = listDataSource;
+                }
+
+
+                Boolean updateRequired = true;
+
+                // write config values to parameter form when required
+                if (updateRequired)
+                {
+                    Parameters.crossPeriodTextBox.Text = Convert.ToString( ConfigData.crossPeriod );
+                    Parameters.crossDampingTextBox.Text = Convert.ToString(ConfigData.crossDampFactor);
+                    Parameters.crossGainTextBox.Text = Convert.ToString(ConfigData.crossGain);
+                    Parameters.crossLeadTextBox.Text = Convert.ToString(ConfigData.crossLead);
+                    Parameters.crossCompFactor4TextBox.Text = Convert.ToString(ConfigData.crossCompFactor_4);
+                    Parameters.crossCompPhase4TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_4 );
+                    Parameters.crossCompFactor16TextBox.Text = Convert.ToString(ConfigData.crossCompFactor_16);
+                    Parameters.crossCompPhase16TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_16);
+
+
+
+                    Parameters.longPeriodTextBox.Text = Convert.ToString(ConfigData.longPeriod);
+                    Parameters.longDampingTextBox.Text = Convert.ToString(ConfigData.longDampFactor);
+                    Parameters.longGainTextBox.Text = Convert.ToString(ConfigData.longGain);
+                    Parameters.longLeadTextBox.Text = Convert.ToString(ConfigData.longLead);
+                    Parameters.longCompFactor4TextBox.Text = Convert.ToString(ConfigData.longCompFactor_4);
+                    Parameters.longCompPhase4TextBox.Text = Convert.ToString(ConfigData.longCompPhase_4);
+                    Parameters.longCompFactor16TextBox.Text = Convert.ToString(ConfigData.longCompFactor_16);
+                    Parameters.longCompPhase16TextBox.Text = Convert.ToString(ConfigData.longCompPhase_16);
+
+
+
+
+
+
+
+
+                    // reset checkboxs
+                    Parameters.crossPeriodCheckBox.Checked = false;
+                    Parameters.crossPeriodTextBox.Enabled = false;
+                    Parameters.crossDampingCheckBox.Checked = false;
+                    Parameters.crossDampingTextBox.Enabled = false; 
+                    Parameters.crossGainCheckBox.Checked = false;
+                    Parameters.crossGainTextBox.Enabled = false;
+                    Parameters.crossLeadCheckBox.Checked = false;
+                    Parameters.crossLeadTextBox.Enabled = false;
+                    Parameters.crossCompFactor4CheckBox.Checked = false;
+                    Parameters.crossCompFactor4TextBox.Enabled = false;
+                    Parameters.crossCompPhase4CheckBox.Checked = false;
+                    Parameters.crossCompPhase4TextBox.Enabled = false;
+                    Parameters.crossCompFactor16CheckBox.Checked = false;
+                    Parameters.crossCompFactor16TextBox.Enabled = false;
+                    Parameters.crossCompPhase16CheckBox.Checked = false;
+                    Parameters.crossCompPhase16TextBox.Enabled =false;
+
+
+                    Parameters.longPeriodCheckBox.Checked = false;
+                    Parameters.longPeriodTextBox.Enabled = false;
+                    Parameters.longDampingCheckBox.Checked = false;
+                    Parameters.longDampingTextBox.Enabled = false;
+                    Parameters.longGainCheckBox.Checked = false;
+                    Parameters.longGainTextBox.Enabled = false;
+                    Parameters.longLeadCheckBox.Checked = false;
+                    Parameters.longLeadTextBox.Enabled = false;
+                    Parameters.longCompFactor4CheckBox.Checked = false;
+                    Parameters.longCompFactor4TextBox.Enabled = false;
+                    Parameters.longCompPhase4CheckBox.Checked = false;
+                    Parameters.longCompPhase4TextBox.Enabled = false;
+                    Parameters.longCompFactor16CheckBox.Checked = false;
+                    Parameters.longCompFactor16TextBox.Enabled = false;
+                    Parameters.longCompPhase16CheckBox.Checked = false;
+                    Parameters.longCompPhase16TextBox.Enabled = false;
+
+
+
+
+
+
+
                 }
 
                 myData myData = new myData();
