@@ -333,40 +333,42 @@ namespace SerialPortTerminal
 
     public class ConfigData// Change all single to double
     {
-        public static double beamScale = 1.298317;
-        public static string meterNumber = "S67";
-        public static double crossPeriod = System.Convert.ToSingle(8.4E-06);
-        public static double longPeriod = System.Convert.ToSingle(8.4E-06);
-        public static double crossDampFactor = System.Convert.ToSingle(0.0915);
-        public static double longDampFactor = System.Convert.ToSingle(0.0915);
-        public static double crossGain = System.Convert.ToSingle(0.2);
-        public static double longGain = System.Convert.ToSingle(0.2);
-        public static double crossLead = System.Convert.ToSingle(0.45);
-        public static double longLead = System.Convert.ToSingle(0.45);
-        public static double springTensionMax = 20000.0;
+        public static double beamScale;
+        public static string meterNumber;
+        public static double crossPeriod;
+        public static double longPeriod;
+        public static double crossDampFactor;
+        public static double longDampFactor;
+        public static double crossGain;
+        public static double longGain;
+        public static double crossLead;
+        public static double longLead;
+        public static double springTensionMax;
 
-        public static double crossBias = 0.0;
-        public static double longBias = 0.0;
-        public static double crossCompFactor_4 = 0;
-        public static double crossCompPhase_4 = 1;
-        public static double crossCompFactor_16 = 1;
-        public static double crossCompPhase_16 = 1;
-        public static double longCompFactor_4 = 0;
-        public static double longCompPhase_4 = 1;
-        public static double longCompFactor_16 = 1;
-        public static double longCompPhase_16 = 1;
+        public static double crossBias;
+        public static double longBias;
+        public static double crossCompFactor_4;
+        public static double crossCompPhase_4;
+        public static double crossCompFactor_16;
+        public static double crossCompPhase_16;
+        public static double longCompFactor_4;
+        public static double longCompPhase_4;
+        public static double longCompFactor_16;
+        public static double longCompPhase_16;
 
-        public static double CML_Fact = 0;
-        public static double AL_Fact = 0;
-        public static double AX_Fact = 0;
-        public static double VE_Fact = 0;
-        public static double CMX_Fact = 0;
-        public static double XACC2_Fact = 0;
-        public static double LACC2_Fact = 0;
-        public static double XACC_Phase = 0.217;
-        public static double LAXX_AL_Phase = 0.6196;
-        public static double LACC_CML_Phase = 0.195;
-        public static double LACC_CMX_Phase = 0.185;
+        public static double CML_Fact;
+        public static double AL_Fact;
+        public static double AX_Fact;
+        public static double VE_Fact;
+        public static double CMX_Fact;
+        public static double XACC2_Fact;
+        public static double LACC2_Fact;
+        public static double XACC_Phase;
+        public static double LACC_AL_Phase;
+        public static double LACC_CML_Phase;
+        public static double LACC_CMX_Phase;
+        public static Double kFactor;
+        public static string gyroType;
 
         public static Int16 numAuxChan = 0;
         public static Int16 modeSwitch = 1;
@@ -381,6 +383,7 @@ namespace SerialPortTerminal
         public static Int16 hardDiskSwitch = 1;
         public static string engPassword = "zls";
         public static Int16 monitorDisplaySwitch = 2;
+        public static int screenDisplayFilter = 3;
 
         //   public static double[] crossCouplingFactors = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };// CCFACT  CROSS COUPLING FACTORS
         //                                               0    1    2    3    4    5       6        7           8        9    10   11   12   13

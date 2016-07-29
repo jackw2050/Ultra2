@@ -83,7 +83,7 @@
     <Setting Name="longLead" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.45</Value>
     </Setting>
-    <Setting Name="springTensionMax" Type="System.Int32" Scope="User">
+    <Setting Name="springTensionMax" Type="System.Double" Scope="User">
       <Value Profile="(Default)">20000</Value>
     </Setting>
     <Setting Name="modeSwitch" Type="System.String" Scope="User">
@@ -107,8 +107,8 @@
     <Setting Name="kFactor" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-2</Value>
     </Setting>
-    <Setting Name="gyroType" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+    <Setting Name="gyroType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FOG pack</Value>
     </Setting>
     <Setting Name="crossCompFactor_4" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>

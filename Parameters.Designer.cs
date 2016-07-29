@@ -63,45 +63,45 @@
             this.longCompPhase16CheckBox = new System.Windows.Forms.CheckBox();
             this.longCompFactor16CheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox25 = new System.Windows.Forms.TextBox();
-            this.textBox26 = new System.Windows.Forms.TextBox();
-            this.textBox27 = new System.Windows.Forms.TextBox();
-            this.checkBox27 = new System.Windows.Forms.CheckBox();
-            this.checkBox26 = new System.Windows.Forms.CheckBox();
-            this.checkBox25 = new System.Windows.Forms.CheckBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.checkBox17 = new System.Windows.Forms.CheckBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.checkBox18 = new System.Windows.Forms.CheckBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.checkBox19 = new System.Windows.Forms.CheckBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.checkBox20 = new System.Windows.Forms.CheckBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.checkBox21 = new System.Windows.Forms.CheckBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.checkBox22 = new System.Windows.Forms.CheckBox();
-            this.checkBox23 = new System.Windows.Forms.CheckBox();
-            this.checkBox24 = new System.Windows.Forms.CheckBox();
+            this.LACC_AL_PhaseTextBox = new System.Windows.Forms.TextBox();
+            this.LACC_CML_PhaseTextBox = new System.Windows.Forms.TextBox();
+            this.LACC_CMX_PhaseTextBox = new System.Windows.Forms.TextBox();
+            this.LACC_CMX_PhaseCheckBox = new System.Windows.Forms.CheckBox();
+            this.LACC_CML_PhaseCheckBox = new System.Windows.Forms.CheckBox();
+            this.LACC_AL_PhaseCheckBox = new System.Windows.Forms.CheckBox();
+            this.ALFactorTextBox = new System.Windows.Forms.TextBox();
+            this.CMLFactorTextBox = new System.Windows.Forms.TextBox();
+            this.AXFactorTextBox = new System.Windows.Forms.TextBox();
+            this.CMLFactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.VEFactorTextBox = new System.Windows.Forms.TextBox();
+            this.ALFactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.CMXFactorTextBox = new System.Windows.Forms.TextBox();
+            this.AXFactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.XACC2FactorTextBox = new System.Windows.Forms.TextBox();
+            this.VEFactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.LACC2FactorTextBox = new System.Windows.Forms.TextBox();
+            this.CMXFactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.XACCPhasetextBox = new System.Windows.Forms.TextBox();
+            this.XACC2FactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.LACC2FactorCheckBox = new System.Windows.Forms.CheckBox();
+            this.XACCPhaseCheckBox = new System.Windows.Forms.CheckBox();
             this.updateMeterButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.screenDisplayFilterCheckBox = new System.Windows.Forms.CheckBox();
+            this.kFactorCheckBox = new System.Windows.Forms.CheckBox();
             this.screenDisplayFilterTextBox = new System.Windows.Forms.TextBox();
+            this.meterNumberCheckBox = new System.Windows.Forms.CheckBox();
             this.meterNumberTextBox = new System.Windows.Forms.TextBox();
+            this.gyroTypeCheckBox = new System.Windows.Forms.CheckBox();
+            this.maxSpringTensionCheckBox = new System.Windows.Forms.CheckBox();
             this.gyroTypeComboBox = new System.Windows.Forms.ComboBox();
             this.kFactorTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox31 = new System.Windows.Forms.TextBox();
             this.maxSpringTensionTextBox = new System.Windows.Forms.TextBox();
-            this.maxSpringTensionCheckBox = new System.Windows.Forms.CheckBox();
-            this.screenDisplayFilterCheckBox = new System.Windows.Forms.CheckBox();
-            this.gyroTypeCheckBox = new System.Windows.Forms.CheckBox();
-            this.meterNumberCheckBox = new System.Windows.Forms.CheckBox();
-            this.kFactorCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -448,28 +448,28 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox25);
-            this.groupBox3.Controls.Add(this.textBox26);
-            this.groupBox3.Controls.Add(this.textBox27);
-            this.groupBox3.Controls.Add(this.checkBox27);
-            this.groupBox3.Controls.Add(this.checkBox26);
-            this.groupBox3.Controls.Add(this.checkBox25);
-            this.groupBox3.Controls.Add(this.textBox17);
-            this.groupBox3.Controls.Add(this.textBox18);
-            this.groupBox3.Controls.Add(this.textBox19);
-            this.groupBox3.Controls.Add(this.checkBox17);
-            this.groupBox3.Controls.Add(this.textBox20);
-            this.groupBox3.Controls.Add(this.checkBox18);
-            this.groupBox3.Controls.Add(this.textBox21);
-            this.groupBox3.Controls.Add(this.checkBox19);
-            this.groupBox3.Controls.Add(this.textBox22);
-            this.groupBox3.Controls.Add(this.checkBox20);
-            this.groupBox3.Controls.Add(this.textBox23);
-            this.groupBox3.Controls.Add(this.checkBox21);
-            this.groupBox3.Controls.Add(this.textBox24);
-            this.groupBox3.Controls.Add(this.checkBox22);
-            this.groupBox3.Controls.Add(this.checkBox23);
-            this.groupBox3.Controls.Add(this.checkBox24);
+            this.groupBox3.Controls.Add(this.LACC_AL_PhaseTextBox);
+            this.groupBox3.Controls.Add(this.LACC_CML_PhaseTextBox);
+            this.groupBox3.Controls.Add(this.LACC_CMX_PhaseTextBox);
+            this.groupBox3.Controls.Add(this.LACC_CMX_PhaseCheckBox);
+            this.groupBox3.Controls.Add(this.LACC_CML_PhaseCheckBox);
+            this.groupBox3.Controls.Add(this.LACC_AL_PhaseCheckBox);
+            this.groupBox3.Controls.Add(this.ALFactorTextBox);
+            this.groupBox3.Controls.Add(this.CMLFactorTextBox);
+            this.groupBox3.Controls.Add(this.AXFactorTextBox);
+            this.groupBox3.Controls.Add(this.CMLFactorCheckBox);
+            this.groupBox3.Controls.Add(this.VEFactorTextBox);
+            this.groupBox3.Controls.Add(this.ALFactorCheckBox);
+            this.groupBox3.Controls.Add(this.CMXFactorTextBox);
+            this.groupBox3.Controls.Add(this.AXFactorCheckBox);
+            this.groupBox3.Controls.Add(this.XACC2FactorTextBox);
+            this.groupBox3.Controls.Add(this.VEFactorCheckBox);
+            this.groupBox3.Controls.Add(this.LACC2FactorTextBox);
+            this.groupBox3.Controls.Add(this.CMXFactorCheckBox);
+            this.groupBox3.Controls.Add(this.XACCPhasetextBox);
+            this.groupBox3.Controls.Add(this.XACC2FactorCheckBox);
+            this.groupBox3.Controls.Add(this.LACC2FactorCheckBox);
+            this.groupBox3.Controls.Add(this.XACCPhaseCheckBox);
             this.groupBox3.Location = new System.Drawing.Point(632, 25);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(282, 370);
@@ -477,193 +477,204 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other Parameters";
             // 
-            // textBox25
+            // LACC_AL_PhaseTextBox
             // 
-            this.textBox25.Location = new System.Drawing.Point(151, 231);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(100, 20);
-            this.textBox25.TabIndex = 23;
+            this.LACC_AL_PhaseTextBox.Location = new System.Drawing.Point(151, 234);
+            this.LACC_AL_PhaseTextBox.Name = "LACC_AL_PhaseTextBox";
+            this.LACC_AL_PhaseTextBox.Size = new System.Drawing.Size(100, 20);
+            this.LACC_AL_PhaseTextBox.TabIndex = 23;
             // 
-            // textBox26
+            // LACC_CML_PhaseTextBox
             // 
-            this.textBox26.Location = new System.Drawing.Point(150, 257);
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(100, 20);
-            this.textBox26.TabIndex = 22;
+            this.LACC_CML_PhaseTextBox.Location = new System.Drawing.Point(150, 260);
+            this.LACC_CML_PhaseTextBox.Name = "LACC_CML_PhaseTextBox";
+            this.LACC_CML_PhaseTextBox.Size = new System.Drawing.Size(100, 20);
+            this.LACC_CML_PhaseTextBox.TabIndex = 22;
             // 
-            // textBox27
+            // LACC_CMX_PhaseTextBox
             // 
-            this.textBox27.Location = new System.Drawing.Point(151, 283);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(100, 20);
-            this.textBox27.TabIndex = 21;
-            this.textBox27.TextChanged += new System.EventHandler(this.textBox27_TextChanged);
+            this.LACC_CMX_PhaseTextBox.Location = new System.Drawing.Point(151, 286);
+            this.LACC_CMX_PhaseTextBox.Name = "LACC_CMX_PhaseTextBox";
+            this.LACC_CMX_PhaseTextBox.Size = new System.Drawing.Size(100, 20);
+            this.LACC_CMX_PhaseTextBox.TabIndex = 21;
+            this.LACC_CMX_PhaseTextBox.TextChanged += new System.EventHandler(this.textBox27_TextChanged);
             // 
-            // checkBox27
+            // LACC_CMX_PhaseCheckBox
             // 
-            this.checkBox27.AutoSize = true;
-            this.checkBox27.Location = new System.Drawing.Point(24, 286);
-            this.checkBox27.Name = "checkBox27";
-            this.checkBox27.Size = new System.Drawing.Size(121, 17);
-            this.checkBox27.TabIndex = 20;
-            this.checkBox27.Text = "LACC (CMX)  Phase";
-            this.checkBox27.UseVisualStyleBackColor = true;
+            this.LACC_CMX_PhaseCheckBox.AutoSize = true;
+            this.LACC_CMX_PhaseCheckBox.Location = new System.Drawing.Point(24, 289);
+            this.LACC_CMX_PhaseCheckBox.Name = "LACC_CMX_PhaseCheckBox";
+            this.LACC_CMX_PhaseCheckBox.Size = new System.Drawing.Size(121, 17);
+            this.LACC_CMX_PhaseCheckBox.TabIndex = 20;
+            this.LACC_CMX_PhaseCheckBox.Text = "LACC (CMX)  Phase";
+            this.LACC_CMX_PhaseCheckBox.UseVisualStyleBackColor = true;
+            this.LACC_CMX_PhaseCheckBox.CheckedChanged += new System.EventHandler(this.LACC_CMX_PhaseCheckBox_CheckedChanged);
             // 
-            // checkBox26
+            // LACC_CML_PhaseCheckBox
             // 
-            this.checkBox26.AutoSize = true;
-            this.checkBox26.Location = new System.Drawing.Point(25, 261);
-            this.checkBox26.Name = "checkBox26";
-            this.checkBox26.Size = new System.Drawing.Size(120, 17);
-            this.checkBox26.TabIndex = 19;
-            this.checkBox26.Text = "LACC (CML)  Phase";
-            this.checkBox26.UseVisualStyleBackColor = true;
+            this.LACC_CML_PhaseCheckBox.AutoSize = true;
+            this.LACC_CML_PhaseCheckBox.Location = new System.Drawing.Point(25, 264);
+            this.LACC_CML_PhaseCheckBox.Name = "LACC_CML_PhaseCheckBox";
+            this.LACC_CML_PhaseCheckBox.Size = new System.Drawing.Size(120, 17);
+            this.LACC_CML_PhaseCheckBox.TabIndex = 19;
+            this.LACC_CML_PhaseCheckBox.Text = "LACC (CML)  Phase";
+            this.LACC_CML_PhaseCheckBox.UseVisualStyleBackColor = true;
+            this.LACC_CML_PhaseCheckBox.CheckedChanged += new System.EventHandler(this.LACC_CML_PhaseCheckBox_CheckedChanged);
             // 
-            // checkBox25
+            // LACC_AL_PhaseCheckBox
             // 
-            this.checkBox25.AutoSize = true;
-            this.checkBox25.Location = new System.Drawing.Point(25, 236);
-            this.checkBox25.Name = "checkBox25";
-            this.checkBox25.Size = new System.Drawing.Size(111, 17);
-            this.checkBox25.TabIndex = 18;
-            this.checkBox25.Text = "LACC (AL)  Phase";
-            this.checkBox25.UseVisualStyleBackColor = true;
+            this.LACC_AL_PhaseCheckBox.AutoSize = true;
+            this.LACC_AL_PhaseCheckBox.Location = new System.Drawing.Point(25, 239);
+            this.LACC_AL_PhaseCheckBox.Name = "LACC_AL_PhaseCheckBox";
+            this.LACC_AL_PhaseCheckBox.Size = new System.Drawing.Size(111, 17);
+            this.LACC_AL_PhaseCheckBox.TabIndex = 18;
+            this.LACC_AL_PhaseCheckBox.Text = "LACC (AL)  Phase";
+            this.LACC_AL_PhaseCheckBox.UseVisualStyleBackColor = true;
+            this.LACC_AL_PhaseCheckBox.CheckedChanged += new System.EventHandler(this.LACC_AL_PhaseCheckBox_CheckedChanged);
             // 
-            // textBox17
+            // ALFactorTextBox
             // 
-            this.textBox17.Location = new System.Drawing.Point(150, 56);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(100, 20);
-            this.textBox17.TabIndex = 17;
+            this.ALFactorTextBox.Location = new System.Drawing.Point(150, 83);
+            this.ALFactorTextBox.Name = "ALFactorTextBox";
+            this.ALFactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ALFactorTextBox.TabIndex = 17;
             // 
-            // textBox18
+            // CMLFactorTextBox
             // 
-            this.textBox18.Location = new System.Drawing.Point(150, 31);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(100, 20);
-            this.textBox18.TabIndex = 2;
+            this.CMLFactorTextBox.Location = new System.Drawing.Point(150, 31);
+            this.CMLFactorTextBox.Name = "CMLFactorTextBox";
+            this.CMLFactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.CMLFactorTextBox.TabIndex = 2;
             // 
-            // textBox19
+            // AXFactorTextBox
             // 
-            this.textBox19.Location = new System.Drawing.Point(150, 81);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(100, 20);
-            this.textBox19.TabIndex = 16;
+            this.AXFactorTextBox.Location = new System.Drawing.Point(150, 108);
+            this.AXFactorTextBox.Name = "AXFactorTextBox";
+            this.AXFactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.AXFactorTextBox.TabIndex = 16;
             // 
-            // checkBox17
+            // CMLFactorCheckBox
             // 
-            this.checkBox17.AutoSize = true;
-            this.checkBox17.Location = new System.Drawing.Point(25, 36);
-            this.checkBox17.Name = "checkBox17";
-            this.checkBox17.Size = new System.Drawing.Size(81, 17);
-            this.checkBox17.TabIndex = 3;
-            this.checkBox17.Text = "CML Factor";
-            this.checkBox17.UseVisualStyleBackColor = true;
+            this.CMLFactorCheckBox.AutoSize = true;
+            this.CMLFactorCheckBox.Location = new System.Drawing.Point(25, 36);
+            this.CMLFactorCheckBox.Name = "CMLFactorCheckBox";
+            this.CMLFactorCheckBox.Size = new System.Drawing.Size(81, 17);
+            this.CMLFactorCheckBox.TabIndex = 3;
+            this.CMLFactorCheckBox.Text = "CML Factor";
+            this.CMLFactorCheckBox.UseVisualStyleBackColor = true;
+            this.CMLFactorCheckBox.CheckedChanged += new System.EventHandler(this.CMLFactorCheckBox_CheckedChanged);
             // 
-            // textBox20
+            // VEFactorTextBox
             // 
-            this.textBox20.Location = new System.Drawing.Point(150, 106);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(100, 20);
-            this.textBox20.TabIndex = 15;
+            this.VEFactorTextBox.Location = new System.Drawing.Point(150, 133);
+            this.VEFactorTextBox.Name = "VEFactorTextBox";
+            this.VEFactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.VEFactorTextBox.TabIndex = 15;
             // 
-            // checkBox18
+            // ALFactorCheckBox
             // 
-            this.checkBox18.AutoSize = true;
-            this.checkBox18.Location = new System.Drawing.Point(25, 61);
-            this.checkBox18.Name = "checkBox18";
-            this.checkBox18.Size = new System.Drawing.Size(72, 17);
-            this.checkBox18.TabIndex = 4;
-            this.checkBox18.Text = "AL Factor";
-            this.checkBox18.UseVisualStyleBackColor = true;
+            this.ALFactorCheckBox.AutoSize = true;
+            this.ALFactorCheckBox.Location = new System.Drawing.Point(25, 88);
+            this.ALFactorCheckBox.Name = "ALFactorCheckBox";
+            this.ALFactorCheckBox.Size = new System.Drawing.Size(72, 17);
+            this.ALFactorCheckBox.TabIndex = 4;
+            this.ALFactorCheckBox.Text = "AL Factor";
+            this.ALFactorCheckBox.UseVisualStyleBackColor = true;
+            this.ALFactorCheckBox.CheckedChanged += new System.EventHandler(this.ALFactorCheckBox_CheckedChanged);
             // 
-            // textBox21
+            // CMXFactorTextBox
             // 
-            this.textBox21.Location = new System.Drawing.Point(150, 131);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(100, 20);
-            this.textBox21.TabIndex = 14;
+            this.CMXFactorTextBox.Location = new System.Drawing.Point(150, 57);
+            this.CMXFactorTextBox.Name = "CMXFactorTextBox";
+            this.CMXFactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.CMXFactorTextBox.TabIndex = 14;
             // 
-            // checkBox19
+            // AXFactorCheckBox
             // 
-            this.checkBox19.AutoSize = true;
-            this.checkBox19.Location = new System.Drawing.Point(25, 86);
-            this.checkBox19.Name = "checkBox19";
-            this.checkBox19.Size = new System.Drawing.Size(73, 17);
-            this.checkBox19.TabIndex = 5;
-            this.checkBox19.Text = "AX Factor";
-            this.checkBox19.UseVisualStyleBackColor = true;
+            this.AXFactorCheckBox.AutoSize = true;
+            this.AXFactorCheckBox.Location = new System.Drawing.Point(25, 113);
+            this.AXFactorCheckBox.Name = "AXFactorCheckBox";
+            this.AXFactorCheckBox.Size = new System.Drawing.Size(73, 17);
+            this.AXFactorCheckBox.TabIndex = 5;
+            this.AXFactorCheckBox.Text = "AX Factor";
+            this.AXFactorCheckBox.UseVisualStyleBackColor = true;
+            this.AXFactorCheckBox.CheckedChanged += new System.EventHandler(this.AXFactorCheckBox_CheckedChanged);
             // 
-            // textBox22
+            // XACC2FactorTextBox
             // 
-            this.textBox22.Location = new System.Drawing.Point(150, 156);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(100, 20);
-            this.textBox22.TabIndex = 13;
+            this.XACC2FactorTextBox.Location = new System.Drawing.Point(150, 159);
+            this.XACC2FactorTextBox.Name = "XACC2FactorTextBox";
+            this.XACC2FactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.XACC2FactorTextBox.TabIndex = 13;
             // 
-            // checkBox20
+            // VEFactorCheckBox
             // 
-            this.checkBox20.AutoSize = true;
-            this.checkBox20.Location = new System.Drawing.Point(25, 111);
-            this.checkBox20.Name = "checkBox20";
-            this.checkBox20.Size = new System.Drawing.Size(73, 17);
-            this.checkBox20.TabIndex = 6;
-            this.checkBox20.Text = "VE Factor";
-            this.checkBox20.UseVisualStyleBackColor = true;
+            this.VEFactorCheckBox.AutoSize = true;
+            this.VEFactorCheckBox.Location = new System.Drawing.Point(25, 138);
+            this.VEFactorCheckBox.Name = "VEFactorCheckBox";
+            this.VEFactorCheckBox.Size = new System.Drawing.Size(73, 17);
+            this.VEFactorCheckBox.TabIndex = 6;
+            this.VEFactorCheckBox.Text = "VE Factor";
+            this.VEFactorCheckBox.UseVisualStyleBackColor = true;
+            this.VEFactorCheckBox.CheckedChanged += new System.EventHandler(this.VEFactorCheckBox_CheckedChanged);
             // 
-            // textBox23
+            // LACC2FactorTextBox
             // 
-            this.textBox23.Location = new System.Drawing.Point(151, 181);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(100, 20);
-            this.textBox23.TabIndex = 12;
+            this.LACC2FactorTextBox.Location = new System.Drawing.Point(151, 184);
+            this.LACC2FactorTextBox.Name = "LACC2FactorTextBox";
+            this.LACC2FactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.LACC2FactorTextBox.TabIndex = 12;
             // 
-            // checkBox21
+            // CMXFactorCheckBox
             // 
-            this.checkBox21.AutoSize = true;
-            this.checkBox21.Location = new System.Drawing.Point(25, 136);
-            this.checkBox21.Name = "checkBox21";
-            this.checkBox21.Size = new System.Drawing.Size(82, 17);
-            this.checkBox21.TabIndex = 7;
-            this.checkBox21.Text = "CMX Factor";
-            this.checkBox21.UseVisualStyleBackColor = true;
+            this.CMXFactorCheckBox.AutoSize = true;
+            this.CMXFactorCheckBox.Location = new System.Drawing.Point(25, 62);
+            this.CMXFactorCheckBox.Name = "CMXFactorCheckBox";
+            this.CMXFactorCheckBox.Size = new System.Drawing.Size(82, 17);
+            this.CMXFactorCheckBox.TabIndex = 7;
+            this.CMXFactorCheckBox.Text = "CMX Factor";
+            this.CMXFactorCheckBox.UseVisualStyleBackColor = true;
+            this.CMXFactorCheckBox.CheckedChanged += new System.EventHandler(this.CMXFactorCheckBox_CheckedChanged);
             // 
-            // textBox24
+            // XACCPhasetextBox
             // 
-            this.textBox24.Location = new System.Drawing.Point(151, 206);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(100, 20);
-            this.textBox24.TabIndex = 11;
+            this.XACCPhasetextBox.Location = new System.Drawing.Point(151, 209);
+            this.XACCPhasetextBox.Name = "XACCPhasetextBox";
+            this.XACCPhasetextBox.Size = new System.Drawing.Size(100, 20);
+            this.XACCPhasetextBox.TabIndex = 11;
             // 
-            // checkBox22
+            // XACC2FactorCheckBox
             // 
-            this.checkBox22.AutoSize = true;
-            this.checkBox22.Location = new System.Drawing.Point(25, 161);
-            this.checkBox22.Name = "checkBox22";
-            this.checkBox22.Size = new System.Drawing.Size(125, 17);
-            this.checkBox22.TabIndex = 8;
-            this.checkBox22.Text = "XACC * XACC Factor";
-            this.checkBox22.UseVisualStyleBackColor = true;
+            this.XACC2FactorCheckBox.AutoSize = true;
+            this.XACC2FactorCheckBox.Location = new System.Drawing.Point(25, 164);
+            this.XACC2FactorCheckBox.Name = "XACC2FactorCheckBox";
+            this.XACC2FactorCheckBox.Size = new System.Drawing.Size(125, 17);
+            this.XACC2FactorCheckBox.TabIndex = 8;
+            this.XACC2FactorCheckBox.Text = "XACC * XACC Factor";
+            this.XACC2FactorCheckBox.UseVisualStyleBackColor = true;
+            this.XACC2FactorCheckBox.CheckedChanged += new System.EventHandler(this.XACC2FactorCheckBox_CheckedChanged);
             // 
-            // checkBox23
+            // LACC2FactorCheckBox
             // 
-            this.checkBox23.AutoSize = true;
-            this.checkBox23.Location = new System.Drawing.Point(25, 186);
-            this.checkBox23.Name = "checkBox23";
-            this.checkBox23.Size = new System.Drawing.Size(123, 17);
-            this.checkBox23.TabIndex = 10;
-            this.checkBox23.Text = "LACC * LACC Factor";
-            this.checkBox23.UseVisualStyleBackColor = true;
+            this.LACC2FactorCheckBox.AutoSize = true;
+            this.LACC2FactorCheckBox.Location = new System.Drawing.Point(25, 189);
+            this.LACC2FactorCheckBox.Name = "LACC2FactorCheckBox";
+            this.LACC2FactorCheckBox.Size = new System.Drawing.Size(123, 17);
+            this.LACC2FactorCheckBox.TabIndex = 10;
+            this.LACC2FactorCheckBox.Text = "LACC * LACC Factor";
+            this.LACC2FactorCheckBox.UseVisualStyleBackColor = true;
+            this.LACC2FactorCheckBox.CheckedChanged += new System.EventHandler(this.LACC2FactorCheckBox_CheckedChanged);
             // 
-            // checkBox24
+            // XACCPhaseCheckBox
             // 
-            this.checkBox24.AutoSize = true;
-            this.checkBox24.Location = new System.Drawing.Point(25, 211);
-            this.checkBox24.Name = "checkBox24";
-            this.checkBox24.Size = new System.Drawing.Size(87, 17);
-            this.checkBox24.TabIndex = 9;
-            this.checkBox24.Text = "XACC Phase";
-            this.checkBox24.UseVisualStyleBackColor = true;
+            this.XACCPhaseCheckBox.AutoSize = true;
+            this.XACCPhaseCheckBox.Location = new System.Drawing.Point(25, 214);
+            this.XACCPhaseCheckBox.Name = "XACCPhaseCheckBox";
+            this.XACCPhaseCheckBox.Size = new System.Drawing.Size(87, 17);
+            this.XACCPhaseCheckBox.TabIndex = 9;
+            this.XACCPhaseCheckBox.Text = "XACC Phase";
+            this.XACCPhaseCheckBox.UseVisualStyleBackColor = true;
+            this.XACCPhaseCheckBox.CheckedChanged += new System.EventHandler(this.XACCPhaseCheckBox_CheckedChanged);
             // 
             // updateMeterButton
             // 
@@ -673,6 +684,7 @@
             this.updateMeterButton.TabIndex = 0;
             this.updateMeterButton.Text = "Update to Meter";
             this.updateMeterButton.UseVisualStyleBackColor = true;
+            this.updateMeterButton.Click += new System.EventHandler(this.updateMeterButton_Click);
             // 
             // label1
             // 
@@ -723,12 +735,45 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Misc. Parameters";
             // 
+            // screenDisplayFilterCheckBox
+            // 
+            this.screenDisplayFilterCheckBox.AutoSize = true;
+            this.screenDisplayFilterCheckBox.Location = new System.Drawing.Point(6, 161);
+            this.screenDisplayFilterCheckBox.Name = "screenDisplayFilterCheckBox";
+            this.screenDisplayFilterCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.screenDisplayFilterCheckBox.TabIndex = 222;
+            this.screenDisplayFilterCheckBox.Text = "Screen Display Filter";
+            this.screenDisplayFilterCheckBox.UseVisualStyleBackColor = true;
+            this.screenDisplayFilterCheckBox.CheckedChanged += new System.EventHandler(this.screenDisplayFilterCheckBox_CheckedChanged);
+            // 
+            // kFactorCheckBox
+            // 
+            this.kFactorCheckBox.AutoSize = true;
+            this.kFactorCheckBox.Location = new System.Drawing.Point(6, 135);
+            this.kFactorCheckBox.Name = "kFactorCheckBox";
+            this.kFactorCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.kFactorCheckBox.TabIndex = 225;
+            this.kFactorCheckBox.Text = "Digital K Factor";
+            this.kFactorCheckBox.UseVisualStyleBackColor = true;
+            this.kFactorCheckBox.CheckedChanged += new System.EventHandler(this.kFactorCheckBox_CheckedChanged);
+            // 
             // screenDisplayFilterTextBox
             // 
             this.screenDisplayFilterTextBox.Location = new System.Drawing.Point(179, 158);
             this.screenDisplayFilterTextBox.Name = "screenDisplayFilterTextBox";
             this.screenDisplayFilterTextBox.Size = new System.Drawing.Size(100, 20);
             this.screenDisplayFilterTextBox.TabIndex = 189;
+            // 
+            // meterNumberCheckBox
+            // 
+            this.meterNumberCheckBox.AutoSize = true;
+            this.meterNumberCheckBox.Location = new System.Drawing.Point(6, 109);
+            this.meterNumberCheckBox.Name = "meterNumberCheckBox";
+            this.meterNumberCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.meterNumberCheckBox.TabIndex = 224;
+            this.meterNumberCheckBox.Text = "Meter Number";
+            this.meterNumberCheckBox.UseVisualStyleBackColor = true;
+            this.meterNumberCheckBox.CheckedChanged += new System.EventHandler(this.meterNumberCheckBox_CheckedChanged);
             // 
             // meterNumberTextBox
             // 
@@ -737,13 +782,34 @@
             this.meterNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.meterNumberTextBox.TabIndex = 180;
             // 
+            // gyroTypeCheckBox
+            // 
+            this.gyroTypeCheckBox.AutoSize = true;
+            this.gyroTypeCheckBox.Location = new System.Drawing.Point(6, 57);
+            this.gyroTypeCheckBox.Name = "gyroTypeCheckBox";
+            this.gyroTypeCheckBox.Size = new System.Drawing.Size(75, 17);
+            this.gyroTypeCheckBox.TabIndex = 223;
+            this.gyroTypeCheckBox.Text = "Gyro Type";
+            this.gyroTypeCheckBox.UseVisualStyleBackColor = true;
+            this.gyroTypeCheckBox.CheckedChanged += new System.EventHandler(this.gyroTypeCheckBox_CheckedChanged);
+            // 
+            // maxSpringTensionCheckBox
+            // 
+            this.maxSpringTensionCheckBox.AutoSize = true;
+            this.maxSpringTensionCheckBox.Location = new System.Drawing.Point(6, 31);
+            this.maxSpringTensionCheckBox.Name = "maxSpringTensionCheckBox";
+            this.maxSpringTensionCheckBox.Size = new System.Drawing.Size(144, 17);
+            this.maxSpringTensionCheckBox.TabIndex = 221;
+            this.maxSpringTensionCheckBox.Text = "Maximum Spring Tension";
+            this.maxSpringTensionCheckBox.UseVisualStyleBackColor = true;
+            this.maxSpringTensionCheckBox.CheckedChanged += new System.EventHandler(this.maxSpringTensionCheckBox_CheckedChanged);
+            // 
             // gyroTypeComboBox
             // 
             this.gyroTypeComboBox.FormattingEnabled = true;
             this.gyroTypeComboBox.Items.AddRange(new object[] {
-            "GG49",
-            "Gyro pack",
-            "FOG pack"});
+            "FOG pack",
+            "Gyro pack"});
             this.gyroTypeComboBox.Location = new System.Drawing.Point(179, 53);
             this.gyroTypeComboBox.Name = "gyroTypeComboBox";
             this.gyroTypeComboBox.Size = new System.Drawing.Size(100, 21);
@@ -779,56 +845,6 @@
             this.maxSpringTensionTextBox.Size = new System.Drawing.Size(100, 20);
             this.maxSpringTensionTextBox.TabIndex = 188;
             // 
-            // maxSpringTensionCheckBox
-            // 
-            this.maxSpringTensionCheckBox.AutoSize = true;
-            this.maxSpringTensionCheckBox.Location = new System.Drawing.Point(6, 31);
-            this.maxSpringTensionCheckBox.Name = "maxSpringTensionCheckBox";
-            this.maxSpringTensionCheckBox.Size = new System.Drawing.Size(144, 17);
-            this.maxSpringTensionCheckBox.TabIndex = 221;
-            this.maxSpringTensionCheckBox.Text = "Maximum Spring Tension";
-            this.maxSpringTensionCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // screenDisplayFilterCheckBox
-            // 
-            this.screenDisplayFilterCheckBox.AutoSize = true;
-            this.screenDisplayFilterCheckBox.Location = new System.Drawing.Point(6, 161);
-            this.screenDisplayFilterCheckBox.Name = "screenDisplayFilterCheckBox";
-            this.screenDisplayFilterCheckBox.Size = new System.Drawing.Size(122, 17);
-            this.screenDisplayFilterCheckBox.TabIndex = 222;
-            this.screenDisplayFilterCheckBox.Text = "Screen Display Filter";
-            this.screenDisplayFilterCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // gyroTypeCheckBox
-            // 
-            this.gyroTypeCheckBox.AutoSize = true;
-            this.gyroTypeCheckBox.Location = new System.Drawing.Point(6, 57);
-            this.gyroTypeCheckBox.Name = "gyroTypeCheckBox";
-            this.gyroTypeCheckBox.Size = new System.Drawing.Size(75, 17);
-            this.gyroTypeCheckBox.TabIndex = 223;
-            this.gyroTypeCheckBox.Text = "Gyro Type";
-            this.gyroTypeCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // meterNumberCheckBox
-            // 
-            this.meterNumberCheckBox.AutoSize = true;
-            this.meterNumberCheckBox.Location = new System.Drawing.Point(6, 109);
-            this.meterNumberCheckBox.Name = "meterNumberCheckBox";
-            this.meterNumberCheckBox.Size = new System.Drawing.Size(93, 17);
-            this.meterNumberCheckBox.TabIndex = 224;
-            this.meterNumberCheckBox.Text = "Meter Number";
-            this.meterNumberCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // kFactorCheckBox
-            // 
-            this.kFactorCheckBox.AutoSize = true;
-            this.kFactorCheckBox.Location = new System.Drawing.Point(6, 135);
-            this.kFactorCheckBox.Name = "kFactorCheckBox";
-            this.kFactorCheckBox.Size = new System.Drawing.Size(98, 17);
-            this.kFactorCheckBox.TabIndex = 225;
-            this.kFactorCheckBox.Text = "Digital K Factor";
-            this.kFactorCheckBox.UseVisualStyleBackColor = true;
-            // 
             // Parameters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -845,6 +861,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Parameters";
             this.Text = "Parameters";
+            this.Load += new System.EventHandler(this.Parameters_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -899,28 +916,28 @@
         public System.Windows.Forms.CheckBox longCompPhase4CheckBox;
         public System.Windows.Forms.CheckBox longCompPhase16CheckBox;
         public System.Windows.Forms.CheckBox longCompFactor16CheckBox;
-        public System.Windows.Forms.CheckBox checkBox25;
-        public System.Windows.Forms.TextBox textBox17;
-        public System.Windows.Forms.TextBox textBox18;
-        public System.Windows.Forms.TextBox textBox19;
-        public System.Windows.Forms.CheckBox checkBox17;
-        public System.Windows.Forms.TextBox textBox20;
-        public System.Windows.Forms.CheckBox checkBox18;
-        public System.Windows.Forms.TextBox textBox21;
-        public System.Windows.Forms.CheckBox checkBox19;
-        public System.Windows.Forms.TextBox textBox22;
-        public System.Windows.Forms.CheckBox checkBox20;
-        public System.Windows.Forms.TextBox textBox23;
-        public System.Windows.Forms.CheckBox checkBox21;
-        public System.Windows.Forms.TextBox textBox24;
-        public System.Windows.Forms.CheckBox checkBox22;
-        public System.Windows.Forms.CheckBox checkBox23;
-        public System.Windows.Forms.CheckBox checkBox24;
-        public System.Windows.Forms.TextBox textBox25;
-        public System.Windows.Forms.TextBox textBox26;
-        public System.Windows.Forms.TextBox textBox27;
-        public System.Windows.Forms.CheckBox checkBox27;
-        public System.Windows.Forms.CheckBox checkBox26;
+        public System.Windows.Forms.CheckBox LACC_AL_PhaseCheckBox;
+        public System.Windows.Forms.TextBox ALFactorTextBox;
+        public System.Windows.Forms.TextBox CMLFactorTextBox;
+        public System.Windows.Forms.TextBox AXFactorTextBox;
+        public System.Windows.Forms.CheckBox CMLFactorCheckBox;
+        public System.Windows.Forms.TextBox VEFactorTextBox;
+        public System.Windows.Forms.CheckBox ALFactorCheckBox;
+        public System.Windows.Forms.TextBox CMXFactorTextBox;
+        public System.Windows.Forms.CheckBox AXFactorCheckBox;
+        public System.Windows.Forms.TextBox XACC2FactorTextBox;
+        public System.Windows.Forms.CheckBox VEFactorCheckBox;
+        public System.Windows.Forms.TextBox LACC2FactorTextBox;
+        public System.Windows.Forms.CheckBox CMXFactorCheckBox;
+        public System.Windows.Forms.TextBox XACCPhasetextBox;
+        public System.Windows.Forms.CheckBox XACC2FactorCheckBox;
+        public System.Windows.Forms.CheckBox LACC2FactorCheckBox;
+        public System.Windows.Forms.CheckBox XACCPhaseCheckBox;
+        public System.Windows.Forms.TextBox LACC_AL_PhaseTextBox;
+        public System.Windows.Forms.TextBox LACC_CML_PhaseTextBox;
+        public System.Windows.Forms.TextBox LACC_CMX_PhaseTextBox;
+        public System.Windows.Forms.CheckBox LACC_CMX_PhaseCheckBox;
+        public System.Windows.Forms.CheckBox LACC_CML_PhaseCheckBox;
         public System.Windows.Forms.TextBox screenDisplayFilterTextBox;
         public System.Windows.Forms.TextBox meterNumberTextBox;
         public System.Windows.Forms.ComboBox gyroTypeComboBox;

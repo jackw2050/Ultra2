@@ -983,12 +983,13 @@ namespace SerialPortTerminal
                 }
 
 
-                Boolean updateRequired = true;
+            
 
                 // write config values to parameter form when required
-                if (updateRequired)
+                if (Parameters.updateConfigData)
                 {
-                    Parameters.crossPeriodTextBox.Text = Convert.ToString( ConfigData.crossPeriod );
+                    Parameters.updateConfigData = false;
+                    Parameters.crossPeriodTextBox.Text = (ConfigData.crossPeriod.ToString("N", CultureInfo.InvariantCulture));  // Convert.ToString( ConfigData.crossPeriod, 6 );
                     Parameters.crossDampingTextBox.Text = Convert.ToString(ConfigData.crossDampFactor);
                     Parameters.crossGainTextBox.Text = Convert.ToString(ConfigData.crossGain);
                     Parameters.crossLeadTextBox.Text = Convert.ToString(ConfigData.crossLead);
@@ -1009,48 +1010,114 @@ namespace SerialPortTerminal
                     Parameters.longCompPhase16TextBox.Text = Convert.ToString(ConfigData.longCompPhase_16);
 
 
+                    Parameters.CMLFactorTextBox.Text = Convert.ToString(ConfigData.CML_Fact);
+                    Parameters.ALFactorTextBox.Text = Convert.ToString(ConfigData.AL_Fact);
+                    Parameters.AXFactorTextBox.Text = Convert.ToString(ConfigData.AX_Fact);
+                    Parameters.VEFactorTextBox.Text = Convert.ToString(ConfigData.VE_Fact);
+                    Parameters.CMXFactorTextBox.Text = Convert.ToString(ConfigData.CMX_Fact);
+                    Parameters.XACC2FactorTextBox.Text = Convert.ToString(ConfigData.XACC2_Fact);
+                    Parameters.LACC2FactorTextBox.Text = Convert.ToString(ConfigData.LACC2_Fact);
+                    Parameters.XACCPhasetextBox.Text = Convert.ToString(ConfigData.XACC_Phase);
+                    Parameters.LACC_AL_PhaseTextBox.Text = Convert.ToString(ConfigData.LACC_AL_Phase);
+                    Parameters.LACC_CML_PhaseTextBox.Text = Convert.ToString(ConfigData.LACC_CML_Phase);
+                    Parameters.LACC_CMX_PhaseTextBox.Text = Convert.ToString(ConfigData.LACC_CMX_Phase);
+
+                    Parameters.maxSpringTensionTextBox.Text = Convert.ToString(ConfigData.springTensionMax);
+                    Parameters.gyroTypeComboBox.SelectedText = ConfigData.gyroType;
+                    Parameters.meterNumberTextBox.Text = ConfigData.meterNumber;
+                    Parameters.kFactorTextBox.Text = Convert.ToString(ConfigData.kFactor);
+                    Parameters.screenDisplayFilterTextBox.Text = Convert.ToString(ConfigData.screenDisplayFilter);
+                    
 
 
 
 
 
+                    Boolean clearCheckedBoxes = true;
+                    if (clearCheckedBoxes)
+                    {
 
-                    // reset checkboxs
-                    Parameters.crossPeriodCheckBox.Checked = false;
-                    Parameters.crossPeriodTextBox.Enabled = false;
-                    Parameters.crossDampingCheckBox.Checked = false;
-                    Parameters.crossDampingTextBox.Enabled = false; 
-                    Parameters.crossGainCheckBox.Checked = false;
-                    Parameters.crossGainTextBox.Enabled = false;
-                    Parameters.crossLeadCheckBox.Checked = false;
-                    Parameters.crossLeadTextBox.Enabled = false;
-                    Parameters.crossCompFactor4CheckBox.Checked = false;
-                    Parameters.crossCompFactor4TextBox.Enabled = false;
-                    Parameters.crossCompPhase4CheckBox.Checked = false;
-                    Parameters.crossCompPhase4TextBox.Enabled = false;
-                    Parameters.crossCompFactor16CheckBox.Checked = false;
-                    Parameters.crossCompFactor16TextBox.Enabled = false;
-                    Parameters.crossCompPhase16CheckBox.Checked = false;
-                    Parameters.crossCompPhase16TextBox.Enabled =false;
+                        // reset checkboxs
+                        Parameters.crossPeriodTextBox.Enabled = false;
+                        Parameters.crossDampingTextBox.Enabled = false;
+                        Parameters.crossGainTextBox.Enabled = false;
+                        Parameters.crossLeadTextBox.Enabled = false;
+                        Parameters.crossCompFactor4TextBox.Enabled = false;
+                        Parameters.crossCompPhase4TextBox.Enabled = false;
+                        Parameters.crossCompFactor16TextBox.Enabled = false;                  
+                        Parameters.crossCompPhase16TextBox.Enabled = false;
+                        Parameters.longPeriodTextBox.Enabled = false;
+                        Parameters.longDampingTextBox.Enabled = false;
+                        Parameters.longGainTextBox.Enabled = false;
+                        Parameters.longLeadTextBox.Enabled = false;
+                        Parameters.longCompFactor4TextBox.Enabled = false;
+                        Parameters.longCompPhase4TextBox.Enabled = false;
+                        Parameters.longCompFactor16TextBox.Enabled = false;
+                        Parameters.longCompPhase16TextBox.Enabled = false;
 
 
-                    Parameters.longPeriodCheckBox.Checked = false;
-                    Parameters.longPeriodTextBox.Enabled = false;
-                    Parameters.longDampingCheckBox.Checked = false;
-                    Parameters.longDampingTextBox.Enabled = false;
-                    Parameters.longGainCheckBox.Checked = false;
-                    Parameters.longGainTextBox.Enabled = false;
-                    Parameters.longLeadCheckBox.Checked = false;
-                    Parameters.longLeadTextBox.Enabled = false;
-                    Parameters.longCompFactor4CheckBox.Checked = false;
-                    Parameters.longCompFactor4TextBox.Enabled = false;
-                    Parameters.longCompPhase4CheckBox.Checked = false;
-                    Parameters.longCompPhase4TextBox.Enabled = false;
-                    Parameters.longCompFactor16CheckBox.Checked = false;
-                    Parameters.longCompFactor16TextBox.Enabled = false;
-                    Parameters.longCompPhase16CheckBox.Checked = false;
-                    Parameters.longCompPhase16TextBox.Enabled = false;
 
+                        Parameters.crossPeriodCheckBox.Checked = false;
+                        Parameters.crossDampingCheckBox.Checked = false;
+                        Parameters.crossGainCheckBox.Checked = false;
+                        Parameters.crossLeadCheckBox.Checked = false;
+                        Parameters.crossCompFactor4CheckBox.Checked = false;
+                        Parameters.crossCompPhase4CheckBox.Checked = false;
+                        Parameters.crossCompFactor16CheckBox.Checked = false;
+                        Parameters.crossCompPhase16CheckBox.Checked = false;
+                        Parameters.longPeriodCheckBox.Checked = false;
+                        Parameters.longDampingCheckBox.Checked = false;
+                        Parameters.longGainCheckBox.Checked = false;
+                        Parameters.longLeadCheckBox.Checked = false;
+                        Parameters.longCompFactor4CheckBox.Checked = false;
+                        Parameters.longCompPhase4CheckBox.Checked = false;
+                        Parameters.longCompFactor16CheckBox.Checked = false;
+                        Parameters.longCompPhase16CheckBox.Checked = false;
+
+
+
+                        Parameters.CMLFactorTextBox.Enabled = false;
+                        Parameters.ALFactorTextBox.Enabled = false;
+                        Parameters.AXFactorTextBox.Enabled = false;
+                        Parameters.VEFactorTextBox.Enabled = false;
+                        Parameters.CMXFactorTextBox.Enabled = false;
+                        Parameters.XACC2FactorTextBox.Enabled = false;
+                        Parameters.LACC2FactorTextBox.Enabled = false;
+                        Parameters.XACCPhasetextBox.Enabled = false;
+                        Parameters.LACC_AL_PhaseTextBox.Enabled = false;
+                        Parameters.LACC_CML_PhaseTextBox.Enabled = false;
+                        Parameters.LACC_CMX_PhaseTextBox.Enabled = false;
+
+                        Parameters.CMLFactorCheckBox.Checked = false;
+                        Parameters.ALFactorCheckBox.Checked = false;
+                        Parameters.AXFactorCheckBox.Checked = false;
+                        Parameters.VEFactorCheckBox.Checked = false;
+                        Parameters.CMXFactorCheckBox.Checked = false;
+                        Parameters.XACC2FactorCheckBox.Checked = false;
+                        Parameters.LACC2FactorCheckBox.Checked = false;
+                        Parameters.XACCPhaseCheckBox.Checked = false;
+                        Parameters.LACC_AL_PhaseCheckBox.Checked = false;
+                        Parameters.LACC_CML_PhaseCheckBox.Checked = false;
+                        Parameters.LACC_CMX_PhaseCheckBox.Checked = false;
+
+
+
+                        Parameters.maxSpringTensionTextBox.Enabled = false;
+                        Parameters.gyroTypeComboBox.Enabled = false;
+                        Parameters.meterNumberTextBox.Enabled = false;
+                        Parameters.kFactorTextBox.Enabled = false;
+                        Parameters.screenDisplayFilterTextBox.Enabled = false;
+
+
+
+                        Parameters.maxSpringTensionCheckBox.Checked = false;
+                        Parameters.gyroTypeCheckBox.Checked = false;
+                        Parameters.meterNumberCheckBox.Checked = false;
+                        Parameters.kFactorCheckBox.Checked = false;
+                        Parameters.screenDisplayFilterCheckBox.Checked = false;
+
+
+                    }
 
 
 
@@ -2710,9 +2777,30 @@ namespace SerialPortTerminal
             }
         }
 
+
+        private void SetInitialVisibility()
+        {
+            GravityChart.Visible = false;
+            meterStatusGroupBox.Visible = false;
+            surveyRecordGroupBox.Visible = false;
+            gpsGroupBox.Visible = false;
+            springTensionGroupBox.Visible = false;
+            startupGroupBox.Visible = false;
+            chartWindowGroupBox.Visible = false;
+            //---------------------------------------------------
+            torqueMotorCheckBox.Enabled = false;
+            springTensionCheckBox.Enabled = false;
+            gyroCheckBox.Enabled = false;
+            alarmCheckBox.Enabled = false;
+            springTensionRelativeRadioButton.Checked = true;
+
+
+        }
+
+
         private void frmTerminal_Load(object sender, EventArgs e)
         {
-
+            SetInitialVisibility();
             if (engineerDebug)
             {
                 rtfTerminal.Visible = true;
@@ -2721,23 +2809,14 @@ namespace SerialPortTerminal
             {
                 rtfTerminal.Visible = false;
             }
-            GravityChart.Visible = false;
-            meterStatusGroupBox.Visible = false;
-            surveyRecordGroupBox.Visible = false;
+
             // Create an instance of NumericTextBox.
             NumericTextBox numericTextBox1 = new NumericTextBox();
             numericTextBox1.Parent = this;
             //Draw the bounds of the NumericTextBox.
             numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
-            torqueMotorCheckBox.Enabled = false;
-            springTensionCheckBox.Enabled = false;
-            gyroCheckBox.Enabled = false;
-            alarmCheckBox.Enabled = false;
-            gpsGroupBox.Visible = false;
-            springTensionGroupBox.Visible = false;
-            springTensionRelativeRadioButton.Checked = true;
-            startupGroupBox.Visible = false;
-            chartWindowGroupBox.Visible = false;
+
+
 
             //  Load stored state
             InitStoredVariables();
@@ -3248,7 +3327,72 @@ namespace SerialPortTerminal
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
         }
+        public void StoreDefaultVariables()
+        {
+            // Load configuration data from stored defaults
 
+            Properties.Settings.Default.springTension = mdt.SpringTension;
+            Properties.Settings.Default.beamScale = ConfigData.beamScale;
+            Properties.Settings.Default.meterNumber = ConfigData.meterNumber;
+            Properties.Settings.Default.crossPeriod = ConfigData.crossPeriod;
+            Properties.Settings.Default.longPeriod = ConfigData.longPeriod;
+            Properties.Settings.Default.crossDampFactor = ConfigData.crossDampFactor;
+            Properties.Settings.Default.longDampFactor = ConfigData.longDampFactor;
+            Properties.Settings.Default.crossGain = ConfigData.crossGain;
+            Properties.Settings.Default.longGain = ConfigData.longGain;
+            Properties.Settings.Default.crossLead = ConfigData.crossLead;
+            Properties.Settings.Default.longLead = ConfigData.longLead;
+            Properties.Settings.Default.springTensionMax = ConfigData.springTensionMax;
+
+            Properties.Settings.Default.crossBias = ConfigData.crossBias;
+            Properties.Settings.Default.longBias = ConfigData.longBias;
+            Properties.Settings.Default.crossCompFactor_4 = ConfigData.crossCompFactor_4;
+            Properties.Settings.Default.crossCompPhase_4 = ConfigData.crossCompPhase_4;
+            Properties.Settings.Default.crossCompFactor_16 = ConfigData.crossCompFactor_16;
+            Properties.Settings.Default.crossCompPhase_16 = ConfigData.crossCompPhase_16;
+            Properties.Settings.Default.longCompFactor_4 = ConfigData.longCompFactor_4;
+            Properties.Settings.Default.longCompPhase_4 = ConfigData.longCompPhase_4;
+            Properties.Settings.Default.longCompFactor_16 = ConfigData.longCompFactor_16;
+            Properties.Settings.Default.longCompPhase_16 = ConfigData.longCompPhase_16;
+
+            Properties.Settings.Default.CML_Fact = ConfigData.CML_Fact;
+            Properties.Settings.Default.AL_Fact = ConfigData.AL_Fact;
+            Properties.Settings.Default.AX_Fact = ConfigData.AX_Fact;
+            Properties.Settings.Default.VE_Fact = ConfigData.VE_Fact;
+            Properties.Settings.Default.CMX_Fact = ConfigData.CMX_Fact;
+            Properties.Settings.Default.XACC2_Fact = ConfigData.XACC2_Fact;
+            Properties.Settings.Default.LACC2_Fact = ConfigData.LACC2_Fact;
+            Properties.Settings.Default.XACC2_Fact = ConfigData.XACC_Phase;
+            Properties.Settings.Default.LAXX_AL_Phase = ConfigData.LACC_AL_Phase;
+            Properties.Settings.Default.LACC_CMX_Phase = ConfigData.LACC_CML_Phase;
+            Properties.Settings.Default.LACC_CMX_Phase = ConfigData.LACC_CMX_Phase;
+            Properties.Settings.Default.kFactor = ConfigData.kFactor;
+            Properties.Settings.Default.gyroType = ConfigData.gyroType;
+
+
+
+
+
+
+            //  public static double[] crossCouplingFactors = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.9e-2, 2.499999e-3, -1.681e-2, 0.0, 0.0, 0.0, 0.0, -8.9999998e-4, -3.7e-3, 1.0, 1.0 };
+
+/*
+
+            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
+            configFilePath = Properties.Settings.Default.configFilePath;
+            configFileName = Properties.Settings.Default.configFileName;
+            calFilePath = Properties.Settings.Default.calFilePath;
+            calFileName = Properties.Settings.Default.calFileName;
+            filePath = Properties.Settings.Default.filePath;
+            fileType = Properties.Settings.Default.fileType;
+            fileName = Properties.Settings.Default.dataFileName;
+            frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
+*/
+
+            Properties.Settings.Default.Save();
+
+
+        }
         public void InitStoredVariables()
         {
             // Load configuration data from stored defaults
@@ -3265,6 +3409,36 @@ namespace SerialPortTerminal
             ConfigData.crossLead = Properties.Settings.Default.crossLead;
             ConfigData.longLead = Properties.Settings.Default.longLead;
             ConfigData.springTensionMax = Properties.Settings.Default.springTensionMax;
+
+            ConfigData.crossBias = Properties.Settings.Default.crossBias;
+            ConfigData.longBias = Properties.Settings.Default.longBias;
+            ConfigData.crossCompFactor_4 = Properties.Settings.Default.crossCompFactor_4;
+            ConfigData.crossCompPhase_4 = Properties.Settings.Default.crossCompPhase_4;
+            ConfigData.crossCompFactor_16 = Properties.Settings.Default.crossCompFactor_16;
+            ConfigData.crossCompPhase_16 = Properties.Settings.Default.crossCompPhase_16;
+            ConfigData.longCompFactor_4 = Properties.Settings.Default.longCompFactor_4;
+            ConfigData.longCompPhase_4 = Properties.Settings.Default.longCompPhase_4;
+            ConfigData.longCompFactor_16 = Properties.Settings.Default.longCompFactor_16;
+            ConfigData.longCompPhase_16 = Properties.Settings.Default.longCompPhase_16;
+
+            ConfigData.CML_Fact = Properties.Settings.Default.CML_Fact;
+            ConfigData.AL_Fact = Properties.Settings.Default.AL_Fact;
+            ConfigData.AX_Fact = Properties.Settings.Default.AX_Fact;
+            ConfigData.VE_Fact = Properties.Settings.Default.VE_Fact;
+            ConfigData.CMX_Fact = Properties.Settings.Default.CMX_Fact;
+            ConfigData.XACC2_Fact = Properties.Settings.Default.XACC2_Fact;
+            ConfigData.LACC2_Fact = Properties.Settings.Default.LACC2_Fact;
+            ConfigData.XACC_Phase = Properties.Settings.Default.XACC2_Fact;
+            ConfigData.LACC_AL_Phase = Properties.Settings.Default.LAXX_AL_Phase;
+            ConfigData.LACC_CML_Phase = Properties.Settings.Default.LACC_CMX_Phase;
+            ConfigData.LACC_CMX_Phase = Properties.Settings.Default.LACC_CMX_Phase;
+            ConfigData.kFactor = Properties.Settings.Default.kFactor;
+            ConfigData.gyroType = Properties.Settings.Default.gyroType;
+
+
+
+
+
 
             //  public static double[] crossCouplingFactors = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.9e-2, 2.499999e-3, -1.681e-2, 0.0, 0.0, 0.0, 0.0, -8.9999998e-4, -3.7e-3, 1.0, 1.0 };
 
@@ -4532,13 +4706,14 @@ namespace SerialPortTerminal
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
-                Properties.Settings.Default.Save();
+                StoreDefaultVariables();
 
                 System.Windows.Forms.Application.Exit();
             }
             else
             {
                 // Console app
+                StoreDefaultVariables();
                 System.Environment.Exit(1);
             }
         }
@@ -4710,11 +4885,13 @@ namespace SerialPortTerminal
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
+                StoreDefaultVariables();
                 System.Windows.Forms.Application.Exit();
             }
             else
             {
                 // Console app
+                StoreDefaultVariables();
                 System.Environment.Exit(1);
             }
         }

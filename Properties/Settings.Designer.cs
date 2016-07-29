@@ -338,9 +338,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20000")]
-        public int springTensionMax {
+        public double springTensionMax {
             get {
-                return ((int)(this["springTensionMax"]));
+                return ((double)(this["springTensionMax"]));
             }
             set {
                 this["springTensionMax"] = value;
@@ -432,10 +432,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int gyroType {
+        [global::System.Configuration.DefaultSettingValueAttribute("FOG pack")]
+        public string gyroType {
             get {
-                return ((int)(this["gyroType"]));
+                return ((string)(this["gyroType"]));
             }
             set {
                 this["gyroType"] = value;

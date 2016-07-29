@@ -11,6 +11,7 @@ namespace SerialPortTerminal
 {
     public partial class Parameters : Form
     {
+        public static Boolean updateConfigData = false;
         public Parameters()
         {
             InitializeComponent();
@@ -216,6 +217,208 @@ namespace SerialPortTerminal
             {
                 longCompPhase16TextBox.Enabled = false;
             }
+        }
+
+        private void CMLFactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CMLFactorCheckBox.Checked)
+            {
+                CMLFactorTextBox.Enabled = true;
+            }
+            else
+            {
+                CMLFactorTextBox.Enabled = false;
+            }
+        }
+
+        private void ALFactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ALFactorCheckBox.Checked)
+            {
+                ALFactorTextBox.Enabled = true;
+            }
+            else
+            {
+                ALFactorTextBox.Enabled = false;
+            }
+        }
+
+        private void AXFactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AXFactorCheckBox.Checked)
+            {
+                AXFactorTextBox.Enabled = true;
+            }
+            else
+            {
+                AXFactorTextBox.Enabled = false;
+            }
+        }
+
+        private void VEFactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (VEFactorCheckBox.Checked)
+            {
+                VEFactorTextBox.Enabled = true;
+            }
+            else
+            {
+                VEFactorTextBox.Enabled = false;
+            }
+        }
+
+        private void CMXFactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CMXFactorCheckBox.Checked)
+            {
+                CMXFactorTextBox.Enabled = true;
+            }
+            else
+            {
+                CMXFactorTextBox.Enabled = false;
+            }
+        }
+
+        private void XACC2FactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (XACC2FactorCheckBox.Checked)
+            {
+                XACC2FactorTextBox.Enabled = true;
+            }
+            else
+            {
+                XACC2FactorTextBox.Enabled = false;
+            }
+        }
+
+        private void LACC2FactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (LACC2FactorCheckBox.Checked)
+            {
+                LACC2FactorTextBox.Enabled = true;
+            }
+            else
+            {
+                LACC2FactorTextBox.Enabled = false;
+            }
+        }
+
+        private void XACCPhaseCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (XACCPhaseCheckBox.Checked)
+            {
+                XACCPhasetextBox.Enabled = true;
+            }
+            else
+            {
+                XACCPhasetextBox.Enabled = false;
+            }
+        }
+
+        private void LACC_AL_PhaseCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (LACC_AL_PhaseCheckBox.Checked)
+            {
+                LACC_AL_PhaseTextBox.Enabled = true;
+            }
+            else
+            {
+                LACC_AL_PhaseTextBox.Enabled = true;
+            }
+        }
+
+        private void LACC_CML_PhaseCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (LACC_CML_PhaseCheckBox.Checked)
+            {
+                LACC_CML_PhaseTextBox.Enabled = true;
+            }
+            else
+            {
+                LACC_CML_PhaseTextBox.Enabled = false;
+            }
+        }
+
+        private void LACC_CMX_PhaseCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (LACC_CMX_PhaseCheckBox.Checked)
+            {
+                LACC_CMX_PhaseTextBox.Enabled = true;
+            }
+            else
+            {
+                LACC_CMX_PhaseTextBox.Enabled = false;
+            }
+        }
+
+        private void maxSpringTensionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (maxSpringTensionCheckBox.Checked)
+            {
+                maxSpringTensionTextBox.Enabled = true;
+            }
+            else
+            {
+                maxSpringTensionTextBox.Enabled = false;
+            }
+        }
+
+        private void gyroTypeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (gyroTypeCheckBox.Checked)
+            {
+                gyroTypeComboBox.Enabled = true;
+            }
+            else
+            {
+                gyroTypeComboBox.Enabled = false;
+            }
+        }
+
+        private void meterNumberCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (meterNumberCheckBox.Checked)
+            {
+                meterNumberTextBox.Enabled = true;
+            }
+            else
+            {
+                meterNumberTextBox.Enabled = false;
+            }
+        }
+
+        private void kFactorCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (kFactorCheckBox.Checked)
+            {
+                kFactorTextBox.Enabled = true;
+            }
+            else
+            {
+                kFactorTextBox.Enabled = false;
+            }
+        }
+
+        private void screenDisplayFilterCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (screenDisplayFilterCheckBox.Checked)
+            {
+                screenDisplayFilterTextBox.Enabled = true;
+            }
+            else
+            {
+                screenDisplayFilterTextBox.Enabled = false;
+            }
+        }
+
+        private void updateMeterButton_Click(object sender, EventArgs e)
+        {
+            updateConfigData = true;
+        }
+
+        private void Parameters_Load(object sender, EventArgs e)
+        {
+            updateConfigData = true;
         }
     }
 }
