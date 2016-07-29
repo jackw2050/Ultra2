@@ -90,10 +90,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox28 = new System.Windows.Forms.TextBox();
-            this.textBox29 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox30 = new System.Windows.Forms.TextBox();
+            this.screenDisplayFilterTextBox = new System.Windows.Forms.TextBox();
+            this.meterNumberTextBox = new System.Windows.Forms.TextBox();
+            this.gyroTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.kFactorTextBox = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox31 = new System.Windows.Forms.TextBox();
             this.maxSpringTensionTextBox = new System.Windows.Forms.TextBox();
@@ -706,13 +706,13 @@
             // 
             this.groupBox4.Controls.Add(this.screenDisplayFilterCheckBox);
             this.groupBox4.Controls.Add(this.kFactorCheckBox);
-            this.groupBox4.Controls.Add(this.textBox28);
+            this.groupBox4.Controls.Add(this.screenDisplayFilterTextBox);
             this.groupBox4.Controls.Add(this.meterNumberCheckBox);
-            this.groupBox4.Controls.Add(this.textBox29);
+            this.groupBox4.Controls.Add(this.meterNumberTextBox);
             this.groupBox4.Controls.Add(this.gyroTypeCheckBox);
             this.groupBox4.Controls.Add(this.maxSpringTensionCheckBox);
-            this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Controls.Add(this.textBox30);
+            this.groupBox4.Controls.Add(this.gyroTypeComboBox);
+            this.groupBox4.Controls.Add(this.kFactorTextBox);
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.textBox31);
             this.groupBox4.Controls.Add(this.maxSpringTensionTextBox);
@@ -723,38 +723,38 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Misc. Parameters";
             // 
-            // textBox28
+            // screenDisplayFilterTextBox
             // 
-            this.textBox28.Location = new System.Drawing.Point(179, 158);
-            this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(100, 20);
-            this.textBox28.TabIndex = 189;
+            this.screenDisplayFilterTextBox.Location = new System.Drawing.Point(179, 158);
+            this.screenDisplayFilterTextBox.Name = "screenDisplayFilterTextBox";
+            this.screenDisplayFilterTextBox.Size = new System.Drawing.Size(100, 20);
+            this.screenDisplayFilterTextBox.TabIndex = 189;
             // 
-            // textBox29
+            // meterNumberTextBox
             // 
-            this.textBox29.Location = new System.Drawing.Point(179, 106);
-            this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(100, 20);
-            this.textBox29.TabIndex = 180;
+            this.meterNumberTextBox.Location = new System.Drawing.Point(179, 106);
+            this.meterNumberTextBox.Name = "meterNumberTextBox";
+            this.meterNumberTextBox.Size = new System.Drawing.Size(100, 20);
+            this.meterNumberTextBox.TabIndex = 180;
             // 
-            // comboBox1
+            // gyroTypeComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.gyroTypeComboBox.FormattingEnabled = true;
+            this.gyroTypeComboBox.Items.AddRange(new object[] {
             "GG49",
             "Gyro pack",
             "FOG pack"});
-            this.comboBox1.Location = new System.Drawing.Point(179, 53);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 192;
+            this.gyroTypeComboBox.Location = new System.Drawing.Point(179, 53);
+            this.gyroTypeComboBox.Name = "gyroTypeComboBox";
+            this.gyroTypeComboBox.Size = new System.Drawing.Size(100, 21);
+            this.gyroTypeComboBox.TabIndex = 192;
             // 
-            // textBox30
+            // kFactorTextBox
             // 
-            this.textBox30.Location = new System.Drawing.Point(179, 132);
-            this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(100, 20);
-            this.textBox30.TabIndex = 190;
+            this.kFactorTextBox.Location = new System.Drawing.Point(179, 132);
+            this.kFactorTextBox.Name = "kFactorTextBox";
+            this.kFactorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.kFactorTextBox.TabIndex = 190;
             // 
             // label21
             // 
@@ -921,10 +921,10 @@
         public System.Windows.Forms.TextBox textBox27;
         public System.Windows.Forms.CheckBox checkBox27;
         public System.Windows.Forms.CheckBox checkBox26;
-        public System.Windows.Forms.TextBox textBox28;
-        public System.Windows.Forms.TextBox textBox29;
-        public System.Windows.Forms.ComboBox comboBox1;
-        public System.Windows.Forms.TextBox textBox30;
+        public System.Windows.Forms.TextBox screenDisplayFilterTextBox;
+        public System.Windows.Forms.TextBox meterNumberTextBox;
+        public System.Windows.Forms.ComboBox gyroTypeComboBox;
+        public System.Windows.Forms.TextBox kFactorTextBox;
         public System.Windows.Forms.Label label21;
         public System.Windows.Forms.TextBox textBox31;
         public System.Windows.Forms.TextBox maxSpringTensionTextBox;
