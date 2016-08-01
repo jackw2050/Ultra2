@@ -24,6 +24,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 //  Delimited file operations using FileHelpers  http://www.filehelpers.net
 // iTextSharp  http://www.mikesdotnetting.com/article/89/itextsharp-page-layout-with-columns
 //http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in#1
@@ -93,6 +94,12 @@ namespace SerialPortTerminal
         public static Boolean torqueMotorsEnabled = false;
         public static Boolean springTensionEnabled = false;
         public static Boolean alarmsEnabled = false;
+        public  Boolean engPasswordValid = false;
+        public  Boolean mgrPasswordValid = false;
+        public  Boolean userPasswordValid = false;
+
+
+
 
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
@@ -3575,13 +3582,48 @@ namespace SerialPortTerminal
             }
         }
 
-        private void button15_Click(object sender, EventArgs e)
+ 
+
+
+
+        private void CheckPassword()
         {
+            PasswordForm PasswordForm = new PasswordForm();
+            
+            while (PasswordForm.passwordValid == null)
+            {
+                if (PasswordForm.passwordValid == "userPasswordValid")
+                {
+                    userPasswordValid = true;
+                }
+                else if (PasswordForm.passwordValid == "managerPasswordValid")
+                {
+                    mgrPasswordValid = true;
+                }
+                else if (PasswordForm.passwordValid == "zlsPasswordValid")
+                {
+                    engPasswordValid = true;
+                }
+            }
+          //  return PasswordForm.passwordValid;
+    
+
         }
+
+
 
         private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Parameters.Show();
+            PasswordForm PasswordForm = new PasswordForm();
+            if (engPasswordValid || mgrPasswordValid)
+            {
+                Parameters.Show();
+            }
+            else
+            {
+                MessageBox.Show("You must be logged in to access this.");
+            }
+            
         }
 
         private void dataStatusFormToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4707,6 +4749,7 @@ namespace SerialPortTerminal
             {
                 // WinForms app
                 StoreDefaultVariables();
+                
 
                 System.Windows.Forms.Application.Exit();
             }
@@ -5247,6 +5290,12 @@ namespace SerialPortTerminal
         private void radioButtonContinue_CheckedChanged(object sender, EventArgs e)
         {
             heaterWaitOptions = 2;
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PasswordForm PasswordForm = new PasswordForm();
+            PasswordForm.Show();
         }
 
         ///////////////////////////////////////////////

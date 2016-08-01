@@ -669,5 +669,41 @@ namespace SerialPortTerminal.Properties {
                 this["LACC_CMX_Phase"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("password")]
+        public string userPassword {
+            get {
+                return ((string)(this["userPassword"]));
+            }
+            set {
+                this["userPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("password")]
+        public string managerPassword {
+            get {
+                return ((string)(this["managerPassword"]));
+            }
+            set {
+                this["managerPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("password")]
+        public string zlsPassword {
+            get {
+                return ((string)(this["zlsPassword"]));
+            }
+            set {
+                this["zlsPassword"] = value;
+            }
+        }
     }
 }
