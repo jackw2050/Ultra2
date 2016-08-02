@@ -110,6 +110,7 @@
             // 
             // crossPeriodTextBox
             // 
+            this.crossPeriodTextBox.Enabled = false;
             this.crossPeriodTextBox.Location = new System.Drawing.Point(137, 33);
             this.crossPeriodTextBox.Name = "crossPeriodTextBox";
             this.crossPeriodTextBox.Size = new System.Drawing.Size(100, 20);
@@ -205,6 +206,7 @@
             // 
             // crossCompPhase16TextBox
             // 
+            this.crossCompPhase16TextBox.Enabled = false;
             this.crossCompPhase16TextBox.Location = new System.Drawing.Point(138, 208);
             this.crossCompPhase16TextBox.Name = "crossCompPhase16TextBox";
             this.crossCompPhase16TextBox.Size = new System.Drawing.Size(100, 20);
@@ -212,6 +214,7 @@
             // 
             // crossCompFactor16TextBox
             // 
+            this.crossCompFactor16TextBox.Enabled = false;
             this.crossCompFactor16TextBox.Location = new System.Drawing.Point(138, 183);
             this.crossCompFactor16TextBox.Name = "crossCompFactor16TextBox";
             this.crossCompFactor16TextBox.Size = new System.Drawing.Size(100, 20);
@@ -219,6 +222,7 @@
             // 
             // crossCompPhase4TextBox
             // 
+            this.crossCompPhase4TextBox.Enabled = false;
             this.crossCompPhase4TextBox.Location = new System.Drawing.Point(137, 158);
             this.crossCompPhase4TextBox.Name = "crossCompPhase4TextBox";
             this.crossCompPhase4TextBox.Size = new System.Drawing.Size(100, 20);
@@ -226,6 +230,7 @@
             // 
             // crossCompFactor4TextBox
             // 
+            this.crossCompFactor4TextBox.Enabled = false;
             this.crossCompFactor4TextBox.Location = new System.Drawing.Point(137, 133);
             this.crossCompFactor4TextBox.Name = "crossCompFactor4TextBox";
             this.crossCompFactor4TextBox.Size = new System.Drawing.Size(100, 20);
@@ -233,6 +238,7 @@
             // 
             // crossLeadTextBox
             // 
+            this.crossLeadTextBox.Enabled = false;
             this.crossLeadTextBox.Location = new System.Drawing.Point(137, 108);
             this.crossLeadTextBox.Name = "crossLeadTextBox";
             this.crossLeadTextBox.Size = new System.Drawing.Size(100, 20);
@@ -240,6 +246,7 @@
             // 
             // crossGainTextBox
             // 
+            this.crossGainTextBox.Enabled = false;
             this.crossGainTextBox.Location = new System.Drawing.Point(137, 83);
             this.crossGainTextBox.Name = "crossGainTextBox";
             this.crossGainTextBox.Size = new System.Drawing.Size(100, 20);
@@ -247,6 +254,7 @@
             // 
             // crossDampingTextBox
             // 
+            this.crossDampingTextBox.Enabled = false;
             this.crossDampingTextBox.Location = new System.Drawing.Point(137, 58);
             this.crossDampingTextBox.Name = "crossDampingTextBox";
             this.crossDampingTextBox.Size = new System.Drawing.Size(100, 20);
@@ -304,6 +312,7 @@
             // 
             // longDampingTextBox
             // 
+            this.longDampingTextBox.Enabled = false;
             this.longDampingTextBox.Location = new System.Drawing.Point(137, 58);
             this.longDampingTextBox.Name = "longDampingTextBox";
             this.longDampingTextBox.Size = new System.Drawing.Size(100, 20);
@@ -311,6 +320,7 @@
             // 
             // longPeriodTextBox
             // 
+            this.longPeriodTextBox.Enabled = false;
             this.longPeriodTextBox.Location = new System.Drawing.Point(137, 33);
             this.longPeriodTextBox.Name = "longPeriodTextBox";
             this.longPeriodTextBox.Size = new System.Drawing.Size(100, 20);
@@ -318,6 +328,7 @@
             // 
             // longGainTextBox
             // 
+            this.longGainTextBox.Enabled = false;
             this.longGainTextBox.Location = new System.Drawing.Point(137, 83);
             this.longGainTextBox.Name = "longGainTextBox";
             this.longGainTextBox.Size = new System.Drawing.Size(100, 20);
@@ -336,6 +347,7 @@
             // 
             // longLeadTextBox
             // 
+            this.longLeadTextBox.Enabled = false;
             this.longLeadTextBox.Location = new System.Drawing.Point(137, 108);
             this.longLeadTextBox.Name = "longLeadTextBox";
             this.longLeadTextBox.Size = new System.Drawing.Size(100, 20);
@@ -354,6 +366,7 @@
             // 
             // longCompFactor4TextBox
             // 
+            this.longCompFactor4TextBox.Enabled = false;
             this.longCompFactor4TextBox.Location = new System.Drawing.Point(137, 133);
             this.longCompFactor4TextBox.Name = "longCompFactor4TextBox";
             this.longCompFactor4TextBox.Size = new System.Drawing.Size(100, 20);
@@ -372,6 +385,7 @@
             // 
             // longCompPhase4TextBox
             // 
+            this.longCompPhase4TextBox.Enabled = false;
             this.longCompPhase4TextBox.Location = new System.Drawing.Point(137, 158);
             this.longCompPhase4TextBox.Name = "longCompPhase4TextBox";
             this.longCompPhase4TextBox.Size = new System.Drawing.Size(100, 20);
@@ -390,6 +404,7 @@
             // 
             // longCompFactor16TextBox
             // 
+            this.longCompFactor16TextBox.Enabled = false;
             this.longCompFactor16TextBox.Location = new System.Drawing.Point(138, 183);
             this.longCompFactor16TextBox.Name = "longCompFactor16TextBox";
             this.longCompFactor16TextBox.Size = new System.Drawing.Size(100, 20);
@@ -408,6 +423,7 @@
             // 
             // longCompPhase16TextBox
             // 
+            this.longCompPhase16TextBox.Enabled = false;
             this.longCompPhase16TextBox.Location = new System.Drawing.Point(138, 208);
             this.longCompPhase16TextBox.Name = "longCompPhase16TextBox";
             this.longCompPhase16TextBox.Size = new System.Drawing.Size(100, 20);
@@ -479,6 +495,7 @@
             // 
             // LACC_AL_PhaseTextBox
             // 
+            this.LACC_AL_PhaseTextBox.Enabled = false;
             this.LACC_AL_PhaseTextBox.Location = new System.Drawing.Point(151, 234);
             this.LACC_AL_PhaseTextBox.Name = "LACC_AL_PhaseTextBox";
             this.LACC_AL_PhaseTextBox.Size = new System.Drawing.Size(100, 20);
@@ -486,6 +503,7 @@
             // 
             // LACC_CML_PhaseTextBox
             // 
+            this.LACC_CML_PhaseTextBox.Enabled = false;
             this.LACC_CML_PhaseTextBox.Location = new System.Drawing.Point(150, 260);
             this.LACC_CML_PhaseTextBox.Name = "LACC_CML_PhaseTextBox";
             this.LACC_CML_PhaseTextBox.Size = new System.Drawing.Size(100, 20);
@@ -493,6 +511,7 @@
             // 
             // LACC_CMX_PhaseTextBox
             // 
+            this.LACC_CMX_PhaseTextBox.Enabled = false;
             this.LACC_CMX_PhaseTextBox.Location = new System.Drawing.Point(151, 286);
             this.LACC_CMX_PhaseTextBox.Name = "LACC_CMX_PhaseTextBox";
             this.LACC_CMX_PhaseTextBox.Size = new System.Drawing.Size(100, 20);
@@ -534,6 +553,7 @@
             // 
             // ALFactorTextBox
             // 
+            this.ALFactorTextBox.Enabled = false;
             this.ALFactorTextBox.Location = new System.Drawing.Point(150, 83);
             this.ALFactorTextBox.Name = "ALFactorTextBox";
             this.ALFactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -541,6 +561,7 @@
             // 
             // CMLFactorTextBox
             // 
+            this.CMLFactorTextBox.Enabled = false;
             this.CMLFactorTextBox.Location = new System.Drawing.Point(150, 31);
             this.CMLFactorTextBox.Name = "CMLFactorTextBox";
             this.CMLFactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -548,6 +569,7 @@
             // 
             // AXFactorTextBox
             // 
+            this.AXFactorTextBox.Enabled = false;
             this.AXFactorTextBox.Location = new System.Drawing.Point(150, 108);
             this.AXFactorTextBox.Name = "AXFactorTextBox";
             this.AXFactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -566,6 +588,7 @@
             // 
             // VEFactorTextBox
             // 
+            this.VEFactorTextBox.Enabled = false;
             this.VEFactorTextBox.Location = new System.Drawing.Point(150, 133);
             this.VEFactorTextBox.Name = "VEFactorTextBox";
             this.VEFactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -584,6 +607,7 @@
             // 
             // CMXFactorTextBox
             // 
+            this.CMXFactorTextBox.Enabled = false;
             this.CMXFactorTextBox.Location = new System.Drawing.Point(150, 57);
             this.CMXFactorTextBox.Name = "CMXFactorTextBox";
             this.CMXFactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -602,6 +626,7 @@
             // 
             // XACC2FactorTextBox
             // 
+            this.XACC2FactorTextBox.Enabled = false;
             this.XACC2FactorTextBox.Location = new System.Drawing.Point(150, 159);
             this.XACC2FactorTextBox.Name = "XACC2FactorTextBox";
             this.XACC2FactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -620,6 +645,7 @@
             // 
             // LACC2FactorTextBox
             // 
+            this.LACC2FactorTextBox.Enabled = false;
             this.LACC2FactorTextBox.Location = new System.Drawing.Point(151, 184);
             this.LACC2FactorTextBox.Name = "LACC2FactorTextBox";
             this.LACC2FactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -638,6 +664,7 @@
             // 
             // XACCPhasetextBox
             // 
+            this.XACCPhasetextBox.Enabled = false;
             this.XACCPhasetextBox.Location = new System.Drawing.Point(151, 209);
             this.XACCPhasetextBox.Name = "XACCPhasetextBox";
             this.XACCPhasetextBox.Size = new System.Drawing.Size(100, 20);
@@ -759,6 +786,7 @@
             // 
             // screenDisplayFilterTextBox
             // 
+            this.screenDisplayFilterTextBox.Enabled = false;
             this.screenDisplayFilterTextBox.Location = new System.Drawing.Point(179, 158);
             this.screenDisplayFilterTextBox.Name = "screenDisplayFilterTextBox";
             this.screenDisplayFilterTextBox.Size = new System.Drawing.Size(100, 20);
@@ -777,6 +805,7 @@
             // 
             // meterNumberTextBox
             // 
+            this.meterNumberTextBox.Enabled = false;
             this.meterNumberTextBox.Location = new System.Drawing.Point(179, 106);
             this.meterNumberTextBox.Name = "meterNumberTextBox";
             this.meterNumberTextBox.Size = new System.Drawing.Size(100, 20);
@@ -806,6 +835,7 @@
             // 
             // gyroTypeComboBox
             // 
+            this.gyroTypeComboBox.Enabled = false;
             this.gyroTypeComboBox.FormattingEnabled = true;
             this.gyroTypeComboBox.Items.AddRange(new object[] {
             "FOG pack",
@@ -817,6 +847,7 @@
             // 
             // kFactorTextBox
             // 
+            this.kFactorTextBox.Enabled = false;
             this.kFactorTextBox.Location = new System.Drawing.Point(179, 132);
             this.kFactorTextBox.Name = "kFactorTextBox";
             this.kFactorTextBox.Size = new System.Drawing.Size(100, 20);
@@ -833,6 +864,7 @@
             // 
             // textBox31
             // 
+            this.textBox31.Enabled = false;
             this.textBox31.Location = new System.Drawing.Point(179, 80);
             this.textBox31.Name = "textBox31";
             this.textBox31.Size = new System.Drawing.Size(100, 20);
@@ -840,6 +872,7 @@
             // 
             // maxSpringTensionTextBox
             // 
+            this.maxSpringTensionTextBox.Enabled = false;
             this.maxSpringTensionTextBox.Location = new System.Drawing.Point(179, 28);
             this.maxSpringTensionTextBox.Name = "maxSpringTensionTextBox";
             this.maxSpringTensionTextBox.Size = new System.Drawing.Size(100, 20);

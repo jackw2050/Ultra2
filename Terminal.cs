@@ -54,7 +54,7 @@ namespace SerialPortTerminal
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
 
-
+        public DateTime  myDatetime = DateTime.Now;
         private delegate void SetTextCallback(string text);
 
         private int countDown = 5;
@@ -2115,8 +2115,8 @@ namespace SerialPortTerminal
             }
             txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
 
-            Console.WriteLine(txCmd);
-            Console.WriteLine(checkSum);
+         //   Console.WriteLine(txCmd);
+        //    Console.WriteLine(checkSum);
             return BitConverter.GetBytes(checkSum);
 
             //  comport.Write(txCmd, 0, txCmd.Length);
@@ -3059,17 +3059,62 @@ namespace SerialPortTerminal
                     break;
 
                 case "Update Date and Time": // 2
-
-                    DateTime myDatetime = DateTime.Now;
+                    byte[] timeData = new byte[20]; // { 2, 0, 0, 0, 0, 0, 0, 0, 0};
+                //    DateTime myDatetime = DateTime.Now;
                     int year = myDatetime.Year;
                     int day = myDatetime.DayOfYear;
                     int hour = myDatetime.Hour;
                     int min = myDatetime.Minute;
                     int sec = myDatetime.Second;
 
-                    data = CreateTxArray(2, year, day, hour, min, sec);
-                    comport.Write(data, 0, 9);
+                    
+                    byte[] byteArrayYr = BitConverter.GetBytes(year);
+                    byte[] byteArrayDay = BitConverter.GetBytes(day);
+                    byte[] byteArrayHr = BitConverter.GetBytes(hour);
+                    byte[] byteArrayMin = BitConverter.GetBytes(min);
+                    byte[] byteArraySec = BitConverter.GetBytes(sec);
 
+                    // data = CreateTxArray(2, year, day, hour, min, sec);
+                    // comport.Write(data, 0, 9);
+
+                    timeData[0] = 2;
+                    timeData[1] = byteArrayYr[0];
+                    timeData[2] = byteArrayYr[1];
+                    timeData[3] = byteArrayDay[0];
+                    timeData[4] = byteArrayDay[1];
+                    timeData[5] = byteArrayHr[0];
+                    timeData[6] = byteArrayMin[0];
+                    timeData[7] = byteArraySec[0];
+                    timeData[8] = 0;
+
+
+
+                    var checkSum = 0;
+                    Array.Resize(ref timeData, 8);
+                    byte[] txCmd = new byte[8];
+
+                 //   Buffer.BlockCopy(timeData, 0, txCmd, 1, timeData.Length);
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        checkSum = checkSum ^ timeData[i];
+                    }
+                  //  txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
+                    timeData[8] = Convert.ToByte( checkSum);
+                    //   Console.WriteLine(txCmd);
+                        Console.WriteLine(checkSum);
+                    //   return BitConverter.GetBytes(checkSum);
+
+
+
+
+
+                    //    byte[] outputBytes = new byte[cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length + byteArray4.Length + byteArray5.Length + byteArray6.Length + checkSum.Length];
+              //      byte[] newData = CalculateCheckSum(timeData, timeData.Length);
+                //    timeData[8] = newData[0];
+
+
+                    Console.WriteLine(timeData);
                     // trcmd(2) = iyr                   iYr = 07E0
                     // trcmd(3) = iyr <<8
                     // trcmd(4) =  iday                 IDAY = 009A
@@ -3081,16 +3126,6 @@ namespace SerialPortTerminal
                     break;
 
                 case "Slew Spring Tension": //  3
-                                            // trcmd(2) = iStep[4]
-                                            // trcmde(3) = iStep[4] <<8
-                                            // nByte = 4;
-
-                    //    data = CreateTxArray(3, iStep[4]);
-                    //   //  comport.Write(data, 0, data.Length);
-
-                    //        byte[] data3 =  { 0x03, 0xc0, 0x03, 0xc0 };// Slew ST info
-                    //          comport.Write(data3, 0, 4);
-
                     data = CreateTxStSlewArray(3, iStep[4]);
                     comport.Write(data, 0, 4);
 
@@ -3202,15 +3237,8 @@ namespace SerialPortTerminal
                     break;
 
                 case "Update Spring Tension Value":   //  7
-
-                    // dice( SpringTension( trCms(5), trCms(4), trCms(3), trCms(2))
-                    // nByte = 4;
-                    //comport.Write(data, 0, 6);
-
                     data = CreateTxSTArray(4, newSpringTension);
-                    //  Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
                     comport.Write(data, 0, data.Length);
-
                     break;
 
                 case "Update Cross Coupling Values":  //   8

@@ -418,6 +418,7 @@ namespace SerialPortTerminal
 
         private void Parameters_Load(object sender, EventArgs e)
         {
+
             updateConfigData = true;
         }
     }

@@ -34,6 +34,10 @@
             this.setDateTimeButton = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.dayLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // setDateTimeSuccessLabel
@@ -59,10 +63,10 @@
             // dayOfYearLabel
             // 
             this.dayOfYearLabel.AutoSize = true;
-            this.dayOfYearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dayOfYearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dayOfYearLabel.Location = new System.Drawing.Point(17, 100);
             this.dayOfYearLabel.Name = "dayOfYearLabel";
-            this.dayOfYearLabel.Size = new System.Drawing.Size(41, 20);
+            this.dayOfYearLabel.Size = new System.Drawing.Size(37, 17);
             this.dayOfYearLabel.TabIndex = 12;
             this.dayOfYearLabel.Text = "Day ";
             // 
@@ -87,7 +91,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(257, 197);
+            this.button1.Location = new System.Drawing.Point(302, 226);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
@@ -95,11 +99,51 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(192, 100);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(189, 23);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Set to current Local Date/ Time";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(192, 190);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(189, 20);
+            this.textBox1.TabIndex = 17;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(192, 129);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(189, 23);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "Set to current Universal Date/ Time";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // dayLabel
+            // 
+            this.dayLabel.AutoSize = true;
+            this.dayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dayLabel.Location = new System.Drawing.Point(60, 100);
+            this.dayLabel.Name = "dayLabel";
+            this.dayLabel.Size = new System.Drawing.Size(0, 17);
+            this.dayLabel.TabIndex = 19;
+            // 
             // DateTimeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 261);
+            this.Controls.Add(this.dayLabel);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.setDateTimeSuccessLabel);
             this.Controls.Add(this.label1);
@@ -121,5 +165,9 @@
         private System.Windows.Forms.Button setDateTimeButton;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label dayLabel;
     }
 }
