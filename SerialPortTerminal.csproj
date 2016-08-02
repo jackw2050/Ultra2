@@ -132,6 +132,7 @@
     <Compile Include="PasswordForm.Designer.cs">
       <DependentUpon>PasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PasswordsClass.cs" />
     <Compile Include="RecordingForm.cs">
       <SubType>Form</SubType>
     </Compile>

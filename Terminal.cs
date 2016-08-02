@@ -54,6 +54,7 @@ namespace SerialPortTerminal
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
 
+
         private delegate void SetTextCallback(string text);
 
         private int countDown = 5;
@@ -94,9 +95,9 @@ namespace SerialPortTerminal
         public static Boolean torqueMotorsEnabled = false;
         public static Boolean springTensionEnabled = false;
         public static Boolean alarmsEnabled = false;
-        public  Boolean engPasswordValid = false;
-        public  Boolean mgrPasswordValid = false;
-        public  Boolean userPasswordValid = false;
+  //      public  Boolean engPasswordValid = false;
+  //      public  Boolean mgrPasswordValid = false;
+  //      public  Boolean userPasswordValid = false;
 
 
 
@@ -3594,15 +3595,15 @@ namespace SerialPortTerminal
             {
                 if (PasswordForm.passwordValid == "userPasswordValid")
                 {
-                    userPasswordValid = true;
+                    PasswordsClass.userPasswordValid = true;
                 }
                 else if (PasswordForm.passwordValid == "managerPasswordValid")
                 {
-                    mgrPasswordValid = true;
+                    PasswordsClass.mgrPasswordValid = true;
                 }
                 else if (PasswordForm.passwordValid == "zlsPasswordValid")
                 {
-                    engPasswordValid = true;
+                    PasswordsClass.engPasswordValid = true;
                 }
             }
           //  return PasswordForm.passwordValid;
@@ -3615,7 +3616,7 @@ namespace SerialPortTerminal
         private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PasswordForm PasswordForm = new PasswordForm();
-            if (engPasswordValid || mgrPasswordValid)
+            if (PasswordsClass.engPasswordValid || PasswordsClass.mgrPasswordValid)
             {
                 Parameters.Show();
             }

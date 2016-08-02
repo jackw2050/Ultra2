@@ -13,7 +13,7 @@ namespace SerialPortTerminal
     public partial class PasswordForm : Form
     {
         public static string passwordValid = null;
-        frmTerminal fm = new frmTerminal();
+
        
         public PasswordForm()
         {
@@ -27,13 +27,16 @@ namespace SerialPortTerminal
             {
                 if (passwordTextBox.Text == Properties.Settings.Default.userPassword)
                 {
-                    passwordValid = "userPasswordValid";
-                    fm.userPasswordValid = true;
+                    passwordValid = "PasswordValid";
+                    PasswordsClass.userPasswordValid = true;
                 }
                 else
                 {
+                    MessageBox.Show("The password you entered is invalid.", "Critical Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     passwordValid = "passwordInvalid";
-                    fm.userPasswordValid = false;
+                    PasswordsClass.userPasswordValid = false;
                 }
 
             }
@@ -41,31 +44,42 @@ namespace SerialPortTerminal
             {
                 if (passwordTextBox.Text == Properties.Settings.Default.managerPassword)
                 {
-                    passwordValid = "managerPasswordValid";
-                    fm.mgrPasswordValid = true;
+                    passwordValid = "PasswordValid";
+                    PasswordsClass.mgrPasswordValid = true;
                 }
                 else
                 {
+                    MessageBox.Show("The password you entered is invalid.", "Critical Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     passwordValid = "passwordInvalid";
-                    fm.mgrPasswordValid = false;
+                    PasswordsClass.mgrPasswordValid = false;
                 }
             }
             else if (Convert.ToString( userComboBox.SelectedItem) ==  "ZLS")
             
                 if (passwordTextBox.Text == Properties.Settings.Default.zlsPassword)
                 {
-                    passwordValid = "zlsPasswordValid";
-                    fm.engPasswordValid = true;
+                    passwordValid = "PasswordValid";
+                    PasswordsClass.engPasswordValid = true;
                 }
                 else
                 {
+                    MessageBox.Show("The password you entered is invalid.", "Critical Warning",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     passwordValid = "passwordInvalid";
-                    fm.engPasswordValid = false;
+                    PasswordsClass.engPasswordValid = false;
                 }
+            if (passwordValid == "PasswordValid")
+            {
+                this.Hide();
+            }
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            passwordValid = "passwordInvalid";
             this.Hide();
         }
-       
-
-     
     }
 }
