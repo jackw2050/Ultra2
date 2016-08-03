@@ -1014,7 +1014,7 @@ namespace SerialPortTerminal
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(364, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(456, 24);
             this.menuStrip1.TabIndex = 97;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1085,6 +1085,7 @@ namespace SerialPortTerminal
             this.serialPortPreferencesToolStripMenuItem.Name = "serialPortPreferencesToolStripMenuItem";
             this.serialPortPreferencesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.serialPortPreferencesToolStripMenuItem.Text = "Serial Port Preferences";
+            this.serialPortPreferencesToolStripMenuItem.Click += new System.EventHandler(this.serialPortPreferencesToolStripMenuItem_Click);
             // 
             // engineeringPanelToolStripMenuItem
             // 
@@ -1104,14 +1105,14 @@ namespace SerialPortTerminal
             // fileFormatToolStripMenuItem1
             // 
             this.fileFormatToolStripMenuItem1.Name = "fileFormatToolStripMenuItem1";
-            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.fileFormatToolStripMenuItem1.Text = "File format";
             this.fileFormatToolStripMenuItem1.Click += new System.EventHandler(this.fileFormatToolStripMenuItem1_Click);
             // 
             // recordingToolStripMenuItem
             // 
             this.recordingToolStripMenuItem.Name = "recordingToolStripMenuItem";
-            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.recordingToolStripMenuItem.Text = "Recording";
             this.recordingToolStripMenuItem.Click += new System.EventHandler(this.recordingToolStripMenuItem_Click);
             // 

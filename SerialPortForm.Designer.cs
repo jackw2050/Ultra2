@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox24 = new System.Windows.Forms.TextBox();
             this.gbPortSettings = new System.Windows.Forms.GroupBox();
             this.cmbPortName = new System.Windows.Forms.ComboBox();
             this.lblComPort = new System.Windows.Forms.Label();
@@ -36,33 +35,39 @@
             this.gbMode = new System.Windows.Forms.GroupBox();
             this.rbText = new System.Windows.Forms.RadioButton();
             this.rbHex = new System.Windows.Forms.RadioButton();
-            this.lblSend = new System.Windows.Forms.Label();
-            this.txtSendData = new System.Windows.Forms.TextBox();
             this.openPortButton = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.cmbDataPortName = new System.Windows.Forms.ComboBox();
+            this.lblDataComPort = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.gbPortSettings.SuspendLayout();
             this.gbMode.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBox24
-            // 
-            this.textBox24.Location = new System.Drawing.Point(423, 28);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(376, 20);
-            this.textBox24.TabIndex = 78;
             // 
             // gbPortSettings
             // 
+            this.gbPortSettings.Controls.Add(this.button3);
             this.gbPortSettings.Controls.Add(this.cmbPortName);
             this.gbPortSettings.Controls.Add(this.lblComPort);
-            this.gbPortSettings.Location = new System.Drawing.Point(191, 57);
+            this.gbPortSettings.Location = new System.Drawing.Point(12, 12);
             this.gbPortSettings.Name = "gbPortSettings";
-            this.gbPortSettings.Size = new System.Drawing.Size(214, 64);
+            this.gbPortSettings.Size = new System.Drawing.Size(226, 168);
             this.gbPortSettings.TabIndex = 76;
             this.gbPortSettings.TabStop = false;
-            this.gbPortSettings.Text = "COM Serial Port Settings";
+            this.gbPortSettings.Text = "Meter Serial Port Settings";
             // 
             // cmbPortName
             // 
@@ -75,7 +80,7 @@
             "COM4",
             "COM5",
             "COM6"});
-            this.cmbPortName.Location = new System.Drawing.Point(84, 15);
+            this.cmbPortName.Location = new System.Drawing.Point(84, 26);
             this.cmbPortName.Name = "cmbPortName";
             this.cmbPortName.Size = new System.Drawing.Size(67, 21);
             this.cmbPortName.TabIndex = 1;
@@ -83,7 +88,7 @@
             // lblComPort
             // 
             this.lblComPort.AutoSize = true;
-            this.lblComPort.Location = new System.Drawing.Point(12, 19);
+            this.lblComPort.Location = new System.Drawing.Point(6, 29);
             this.lblComPort.Name = "lblComPort";
             this.lblComPort.Size = new System.Drawing.Size(56, 13);
             this.lblComPort.TabIndex = 0;
@@ -93,7 +98,7 @@
             // 
             this.chkClearOnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkClearOnOpen.AutoSize = true;
-            this.chkClearOnOpen.Location = new System.Drawing.Point(670, 190);
+            this.chkClearOnOpen.Location = new System.Drawing.Point(357, 289);
             this.chkClearOnOpen.Name = "chkClearOnOpen";
             this.chkClearOnOpen.Size = new System.Drawing.Size(94, 17);
             this.chkClearOnOpen.TabIndex = 10;
@@ -105,7 +110,7 @@
             this.gbMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gbMode.Controls.Add(this.rbText);
             this.gbMode.Controls.Add(this.rbHex);
-            this.gbMode.Location = new System.Drawing.Point(670, 213);
+            this.gbMode.Location = new System.Drawing.Point(241, 256);
             this.gbMode.Name = "gbMode";
             this.gbMode.Size = new System.Drawing.Size(89, 64);
             this.gbMode.TabIndex = 77;
@@ -130,28 +135,10 @@
             this.rbHex.TabIndex = 1;
             this.rbHex.Text = "Hex";
             // 
-            // lblSend
-            // 
-            this.lblSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSend.AutoSize = true;
-            this.lblSend.Location = new System.Drawing.Point(606, 158);
-            this.lblSend.Name = "lblSend";
-            this.lblSend.Size = new System.Drawing.Size(61, 13);
-            this.lblSend.TabIndex = 74;
-            this.lblSend.Text = "Send &Data:";
-            // 
-            // txtSendData
-            // 
-            this.txtSendData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtSendData.Location = new System.Drawing.Point(670, 155);
-            this.txtSendData.Name = "txtSendData";
-            this.txtSendData.Size = new System.Drawing.Size(110, 20);
-            this.txtSendData.TabIndex = 75;
-            // 
             // openPortButton
             // 
             this.openPortButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.openPortButton.Location = new System.Drawing.Point(12, 98);
+            this.openPortButton.Location = new System.Drawing.Point(12, 256);
             this.openPortButton.Name = "openPortButton";
             this.openPortButton.Size = new System.Drawing.Size(75, 23);
             this.openPortButton.TabIndex = 79;
@@ -160,7 +147,7 @@
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(423, 199);
+            this.btnClear.Location = new System.Drawing.Point(108, 285);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 81;
@@ -169,7 +156,7 @@
             // btnSend
             // 
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(423, 170);
+            this.btnSend.Location = new System.Drawing.Point(108, 256);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 80;
@@ -177,7 +164,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 190);
+            this.button1.Location = new System.Drawing.Point(12, 285);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 82;
@@ -185,21 +172,167 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // cmbDataPortName
+            // 
+            this.cmbDataPortName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDataPortName.FormattingEnabled = true;
+            this.cmbDataPortName.Items.AddRange(new object[] {
+            "COM1",
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6"});
+            this.cmbDataPortName.Location = new System.Drawing.Point(83, 23);
+            this.cmbDataPortName.Name = "cmbDataPortName";
+            this.cmbDataPortName.Size = new System.Drawing.Size(67, 21);
+            this.cmbDataPortName.TabIndex = 1;
+            // 
+            // lblDataComPort
+            // 
+            this.lblDataComPort.AutoSize = true;
+            this.lblDataComPort.Location = new System.Drawing.Point(12, 26);
+            this.lblDataComPort.Name = "lblDataComPort";
+            this.lblDataComPort.Size = new System.Drawing.Size(56, 13);
+            this.lblDataComPort.TabIndex = 0;
+            this.lblDataComPort.Text = "COM Port:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.lblDataComPort);
+            this.groupBox1.Controls.Add(this.cmbDataPortName);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Location = new System.Drawing.Point(315, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(420, 216);
+            this.groupBox1.TabIndex = 83;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Data Serial Port Settings";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(16, 66);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(120, 17);
+            this.checkBox1.TabIndex = 78;
+            this.checkBox1.Text = "Enable Data Output";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Standard Long Format",
+            "Standard ShortFormat",
+            "Norstar Format"});
+            this.comboBox1.Location = new System.Drawing.Point(257, 39);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 79;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(254, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 80;
+            this.label1.Text = "Data Format";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(257, 174);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 23);
+            this.button2.TabIndex = 81;
+            this.button2.Text = "Test Connection";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(9, 87);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(103, 23);
+            this.button3.TabIndex = 84;
+            this.button3.Text = "Test Connection";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(254, 87);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(131, 13);
+            this.label2.TabIndex = 83;
+            this.label2.Text = "Data Output Interval (Sec)";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(257, 114);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(71, 17);
+            this.radioButton1.TabIndex = 84;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "1 Second";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(257, 137);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(77, 17);
+            this.radioButton2.TabIndex = 85;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "10 Second";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 13);
+            this.label3.TabIndex = 87;
+            this.label3.Text = "Data Delimitor";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Comma",
+            "Space",
+            "Tab"});
+            this.comboBox2.Location = new System.Drawing.Point(15, 114);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 86;
+            // 
             // SerialPortForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 320);
+            this.ControlBox = false;
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.openPortButton);
             this.Controls.Add(this.chkClearOnOpen);
-            this.Controls.Add(this.textBox24);
             this.Controls.Add(this.gbPortSettings);
             this.Controls.Add(this.gbMode);
-            this.Controls.Add(this.lblSend);
-            this.Controls.Add(this.txtSendData);
             this.Name = "SerialPortForm";
             this.Text = "SerialPortForm";
             this.Load += new System.EventHandler(this.SerialPortForm_Load);
@@ -207,6 +340,8 @@
             this.gbPortSettings.PerformLayout();
             this.gbMode.ResumeLayout(false);
             this.gbMode.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,17 +350,27 @@
         #endregion
         private System.Windows.Forms.Label lblComPort;
         private System.Windows.Forms.GroupBox gbMode;
-        private System.Windows.Forms.Label lblSend;
         public System.Windows.Forms.CheckBox chkClearOnOpen;
         public System.Windows.Forms.ComboBox cmbPortName;
         public System.Windows.Forms.RadioButton rbText;
         public System.Windows.Forms.RadioButton rbHex;
-        public System.Windows.Forms.TextBox txtSendData;
         public System.Windows.Forms.Button openPortButton;
-        public System.Windows.Forms.TextBox textBox24;
         public System.Windows.Forms.Button btnClear;
         public System.Windows.Forms.Button btnSend;
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.GroupBox gbPortSettings;
+        public System.Windows.Forms.ComboBox cmbDataPortName;
+        private System.Windows.Forms.Label lblDataComPort;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

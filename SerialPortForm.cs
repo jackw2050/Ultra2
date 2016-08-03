@@ -26,5 +26,11 @@ namespace SerialPortTerminal
         {
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmTerminal mainForm = new frmTerminal();
+            mainForm.testDataPort();
+        }
     }
 }

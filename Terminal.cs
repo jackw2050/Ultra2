@@ -343,7 +343,7 @@ namespace SerialPortTerminal
 
         // The main control for communicating through the RS-232 port
         private SerialPort comport = new SerialPort();
-
+        private SerialPort dataport = new SerialPort();
         // Various colors for logging info
         private Color[] LogMsgTypeColor = { Color.Blue, Color.Green, Color.Black, Color.Orange, Color.Red };
 
@@ -444,7 +444,7 @@ namespace SerialPortTerminal
         {
             // Enable/disable controls based on whether the port is open or not
             SerialPortForm.gbPortSettings.Enabled = !comport.IsOpen;
-            SerialPortForm.txtSendData.Enabled = SerialPortForm.btnSend.Enabled = comport.IsOpen;
+     //       SerialPortForm.txtSendData.Enabled = SerialPortForm.btnSend.Enabled = comport.IsOpen;
             //chkDTR.Enabled = chkRTS.Enabled = comport.IsOpen;
 
             if (comport.IsOpen) btnOpenPort.Text = "&Disconnect Meter";
@@ -458,31 +458,31 @@ namespace SerialPortTerminal
             if (CurrentDataMode == DataMode.Text)
             {
                 // Send the user's text straight out the port
-                comport.Write(SerialPortForm.txtSendData.Text);
+          //      comport.Write(SerialPortForm.txtSendData.Text);
 
                 // Show in the terminal window the user's text
-                Log(LogMsgType.Outgoing, SerialPortForm.txtSendData.Text + "\n");
+           //     Log(LogMsgType.Outgoing, SerialPortForm.txtSendData.Text + "\n");
             }
             else
             {
                 try
                 {
                     // Convert the user's string of hex digits (ex: B4 CA E2) to a byte array
-                    byte[] data = HexStringToByteArray(SerialPortForm.txtSendData.Text);
+       //             byte[] data = HexStringToByteArray(SerialPortForm.txtSendData.Text);
 
                     // Send the binary data out the port
-                    comport.Write(data, 0, data.Length);
+              //      comport.Write(data, 0, data.Length);
 
                     // Show the hex digits on in the terminal window
-                    Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+             //       Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
                 }
                 catch (FormatException)
                 {
                     // Inform the user if the hex string was not properly formatted
-                    Log(LogMsgType.Error, "Not properly formatted hex string: " + SerialPortForm.txtSendData.Text + "\n");
+               //     Log(LogMsgType.Error, "Not properly formatted hex string: " + SerialPortForm.txtSendData.Text + "\n");
                 }
             }
-            SerialPortForm.txtSendData.SelectAll();
+         //   SerialPortForm.txtSendData.SelectAll();
         }
 
         /// <summary> Log data to the terminal window. </summary>
@@ -623,8 +623,7 @@ namespace SerialPortTerminal
             // If the port is open, send focus to the send data box
             if (comport.IsOpen)
             {
-                SerialPortForm.txtSendData.Focus();
-                if (SerialPortForm.chkClearOnOpen.Checked) ClearTerminal();
+               // SerialPortForm.txtSendData.Focus();
             }
         }
 
@@ -671,6 +670,43 @@ namespace SerialPortTerminal
             // Change the state of the form's controls
             EnableControls();
         }
+
+
+
+        public void testDataPort()
+        {
+            bool error = false;
+
+            // If the port is open, close it.
+            if (comport.IsOpen) comport.Close();
+            else
+            {
+                // Set the port's settings
+                comport.PortName = SerialPortForm.cmbDataPortName.Text;
+
+                try { comport.Open(); }// Open serial port
+                catch (UnauthorizedAccessException) { error = true; }
+                catch (IOException) { error = true; }
+                catch (ArgumentException) { error = true; }
+
+                if (error) MessageBox.Show(this, "Could not open the COM port.  Most likely it is already in use, has been removed, or is unavailable.", "COM Port Unavalible", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                else
+                {
+                    MessageBox.Show(this, "Test passed.  This port is available.", "COM Port Test OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    comport.Close();
+                }
+
+
+            }
+
+
+        }
+
+
+
+
+
+
 
         public void TimerWithDataCollection(string state)
         {
@@ -1863,15 +1899,7 @@ namespace SerialPortTerminal
 
         #region Serial Port
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearTerminal();
-        }
 
-        private void ClearTerminal()
-        {
-            rtfTerminal.Clear();
-        }
 
         private void tmrCheckComPorts_Tick(object sender, EventArgs e)
         {
@@ -1891,12 +1919,15 @@ namespace SerialPortTerminal
                 SerialPortForm.cmbPortName.Items.Clear();
                 SerialPortForm.cmbPortName.Items.AddRange(OrderedPortNames());
                 SerialPortForm.cmbPortName.SelectedItem = selected;
+
+                SerialPortForm.cmbDataPortName.Items.Clear();
+                SerialPortForm.cmbDataPortName.Items.AddRange(OrderedPortNames());
+                SerialPortForm.cmbDataPortName.SelectedItem = selected;
             }
         }
 
         private string[] OrderedPortNames()
         {
-            // Just a placeholder for a successful parsing of a string to an integer
             int num;
 
             // Order the serial port names in numberic order (if possible)
@@ -1942,9 +1973,7 @@ namespace SerialPortTerminal
             return selected;
         }
 
-        private void rtfTerminal_TextChanged(object sender, EventArgs e)
-        {
-        }
+
 
         public byte[] CalculateCheckSum(byte[] intBytes, int numBytes)
         {
@@ -2885,14 +2914,12 @@ namespace SerialPortTerminal
                     data = CreateTxArray(0, RelaySwitches.relaySW);
                     Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
                     comport.Write(data, 0, 3);
-                    SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     break;
 
                 case "Send Control Switches"://1
                     data = CreateTxArray(1, ControlSwitches.controlSw);
                     Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
                     comport.Write(data, 0, 3);
-                    SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     break;
 
                 case "Update Date and Time": // 2
@@ -2972,7 +2999,6 @@ namespace SerialPortTerminal
                     data[24] = 0x3F;
                     data[25] = 0xCF;
 
-                    SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     comport.Write(data, 0, 26);
                     // transmit command
 
@@ -3024,7 +3050,6 @@ namespace SerialPortTerminal
                     data[24] = 0x3F;
                     data[25] = 0xEF;
 
-                    SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     comport.Write(data, 0, 26);
                     // transmit command
 
@@ -3092,7 +3117,6 @@ namespace SerialPortTerminal
                     data[24] = 0x45;
                     data[25] = 0x75;
 
-                    SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     comport.Write(data, 0, 26);
 
                     break;
@@ -4994,6 +5018,11 @@ namespace SerialPortTerminal
         private void radioButtonContinue_CheckedChanged(object sender, EventArgs e)
         {
             heaterWaitOptions = 2;
+        }
+
+        private void serialPortPreferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SerialPortForm.Show();
         }
 
         ///////////////////////////////////////////////
