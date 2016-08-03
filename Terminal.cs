@@ -3085,11 +3085,11 @@ namespace SerialPortTerminal
                     timeData[5] = byteArrayHr[0];
                     timeData[6] = byteArrayMin[0];
                     timeData[7] = byteArraySec[0];
-                    timeData[8] = 0;
+                    timeData[8] = 5;
 
 
 
-                    var checkSum = 0;
+                    int checkSum = 0;
                     Array.Resize(ref timeData, 8);
                     byte[] txCmd = new byte[8];
 
@@ -3114,7 +3114,7 @@ namespace SerialPortTerminal
                 //    timeData[8] = newData[0];
 
 
-                    Console.WriteLine(timeData);
+                    Console.WriteLine(Convert.ToByte(timeData));
                     // trcmd(2) = iyr                   iYr = 07E0
                     // trcmd(3) = iyr <<8
                     // trcmd(4) =  iday                 IDAY = 009A
