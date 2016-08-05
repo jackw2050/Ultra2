@@ -12,8 +12,12 @@ namespace SerialPortTerminal
 
     public class Errors
     {
-        public Boolean remoteRebooted = false;
-        public Boolean timeSetSuccessful = false;
+        public static Boolean remoteRebooted = false;
+        public static Boolean setTimeSuccess = false;
+        public static Boolean platformLevel = false;
+
+        public static int timeSetErrorCount = 0;
+        public static int serialCommErrorCount = 0;
     }
 
     public class PortC //  Byte 77
