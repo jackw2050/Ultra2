@@ -145,6 +145,7 @@
     <Compile Include="SerialPortForm.Designer.cs">
       <DependentUpon>SerialPortForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Switches.cs">
       <SubType>Form</SubType>
     </Compile>

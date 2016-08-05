@@ -3155,13 +3155,31 @@ namespace SerialPortTerminal
                     data = CreateTxArray(4, aCrossPeriod, aCrossDampFactor, aCrossGain, aCrossLead, crossCouplingFactor13, analogFilter5);
                     // Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
 
+
+                    byte[] byteArrayCPeriod = BitConverter.GetBytes(Convert.ToSingle( ConfigData.crossPeriod));
+                    byte[] byteArrayCDampFactor = BitConverter.GetBytes(ConfigData.crossDampFactor);
+                    byte[] byteArrayCGain = BitConverter.GetBytes(ConfigData.crossGain);
+                    byte[] byteArrayCLead = BitConverter.GetBytes(ConfigData.crossLead);
+                    byte[] byteArrayCC13 = BitConverter.GetBytes(crossCouplingFactor13);
+                    byte[] byteArrayAF13 = BitConverter.GetBytes(analogFilter5);
+
+
+
+
+                    data[0] = 0x04;
+                    data[1] = byteArrayCPeriod[4];
+                    data[2] = byteArrayCPeriod[5];
+                    data[3] = byteArrayCPeriod[6];
+                    data[4] = byteArrayCPeriod[7];
+
+
                     data[0] = 0X04;
-                    data[1] = 0xF0;
+ /*                   data[1] = 0xF0;
                     data[2] = 0x38;
                     data[3] = 0xa0;
                     data[4] = 0x37;
                     data[5] = 0x87;
-                    data[6] = 0x16;
+                    data[6] = 0x16;  */
                     data[7] = 0x59;
                     data[8] = 0x3E;
                     data[9] = 0x9A;
@@ -3448,6 +3466,9 @@ namespace SerialPortTerminal
             mdt.SpringTension = Properties.Settings.Default.springTension;
             ConfigData.beamScale = Properties.Settings.Default.beamScale;
             ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
+
+            Console.WriteLine(Properties.Settings.Default.crossPeriod);
+
             ConfigData.crossPeriod = Properties.Settings.Default.crossPeriod;
             ConfigData.longPeriod = Properties.Settings.Default.longPeriod;
             ConfigData.crossDampFactor = Properties.Settings.Default.crossDampFactor;
@@ -4103,6 +4124,7 @@ namespace SerialPortTerminal
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
+                    GetConfigFileDialog();
                 }
             }
         }
@@ -4821,13 +4843,18 @@ namespace SerialPortTerminal
             Properties.Settings.Default.Save();
         }
 
-        private void loadConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+
+        public void GetConfigFileDialog()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
 
             OpenFileDialog.ShowDialog();
 
             ReadConfigFile(OpenFileDialog.FileName);
+        }
+        private void loadConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetConfigFileDialog();
         }
 
         private void switchesToolStripMenuItem_Click(object sender, EventArgs e)
