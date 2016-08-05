@@ -521,6 +521,7 @@ namespace SerialPortTerminal
 
         public void GetMeterData(byte[] meterBytes)
         {
+
             dataValid = false;
             myDT = new DateTime(DateTime.Now.Year, 1, 1, new GregorianCalendar());
             //GET SPRING TENSION
@@ -542,13 +543,24 @@ namespace SerialPortTerminal
 
             //          Add checksum verification.  Only record valid data
 
-            if (meterBytes.Length < 10)
+            if  ( (meterBytes.Length == 0 ) ||  (meterBytes[0] != meterBytes.Length - 1))
             {
+                Errors.serialCommErrorCount++;
+                if (frmTerminal.engineerDebug)
+                {
+                    Console.WriteLine("Serial comm error count = " + Errors.serialCommErrorCount);
+                }
+                if (Errors.serialCommErrorCount > 5)
+                {
+                    frmTerminal frmTerminal = new frmTerminal();
+                    frmTerminal.TimerWithDataCollection("stop");
+                    frmTerminal.TimerWithDataCollection("start");
+                }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {
                 dataValid = true;
-
+                Errors.serialCommErrorCount = 0;
                 byte[] array = new byte[4];
                 array[0] = meterBytes[6]; // Lowest
                 Hour = BitConverter.ToInt16(array, 0);
@@ -893,22 +905,21 @@ namespace SerialPortTerminal
                 // CHECK FOR TIME SET SUCCESSFULL/ FAIL
                 else if (tempByte[0] == 2)//
                 {
+                    Errors.setTimeSuccess = true;
                     if (frmTerminal.engineerDebug)
                     {
-                        Console.WriteLine("Time set Successful ");
+                        Console.WriteLine("Time set Successful");
                     }
-                    //   var iError = -10;
-                    // timeBusy = false;
-                    // gpFlg = 1;
+
                 }
                 else if (tempByte[0] == 2)// Time set failed
                 {
+                    Errors.setTimeSuccess = false;
                     if (frmTerminal.engineerDebug)
                     {
-                        Console.WriteLine("Time set Failed ");
+                        Console.WriteLine("Time set Failed");
                     }
-                    //   var iError = -11;
-                    // timeBusy = false;
+
                 }
                 //CHECK G2000 BIAS
                 else if (tempByte[0] == 4)

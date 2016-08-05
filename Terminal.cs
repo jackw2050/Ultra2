@@ -71,7 +71,7 @@ namespace SerialPortTerminal
         private Boolean heaterNotReady = true;
         private int heaterWaitOptions;
         public Single newSpringTension;
-        public static Boolean engineerDebug = false;
+        public static Boolean engineerDebug = true;
         public int set = 1;
         public int enable = 1;
         public int clear = 0;
@@ -498,6 +498,7 @@ namespace SerialPortTerminal
         /// // Change this to console.writeLine() with if(debug)
         public void Log(LogMsgType msgtype, string msg)
         {
+            /*
             Invoke(new EventHandler(delegate
             {
                 rtfTerminal.SelectedText = string.Empty;
@@ -506,6 +507,7 @@ namespace SerialPortTerminal
                 rtfTerminal.AppendText(msg);
                 rtfTerminal.ScrollToCaret();
             }));
+            */
         }
 
         private byte[] HexStringToByteArray(string s)
@@ -3054,7 +3056,17 @@ namespace SerialPortTerminal
                 case "Send Control Switches"://1
                     data = CreateTxArray(1, ControlSwitches.controlSw);
                     Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-                    comport.Write(data, 0, 3);
+                    try
+                    {
+                        comport.Write(data, 0, 3);
+                    }
+                    catch (Exception e)
+                    {
+
+                        MessageBox.Show(Convert.ToString( e));
+                        
+                    }
+                    
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     break;
 
