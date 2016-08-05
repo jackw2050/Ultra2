@@ -545,13 +545,14 @@ namespace SerialPortTerminal
         {
             get
             {
-                if (SerialPortForm.rbHex.Checked) return DataMode.Hex;
-                else return DataMode.Text;
+             
+                    return DataMode.Hex;
+              
             }
             set
             {
-                if (value == DataMode.Text) SerialPortForm.rbText.Checked = true;
-                else SerialPortForm.rbHex.Checked = true;
+             ////   if (value == DataMode.Text) SerialPortForm.rbText.Checked = true;
+               // else SerialPortForm.rbHex.Checked = true;
             }
         }
 
@@ -577,11 +578,8 @@ namespace SerialPortTerminal
             SaveSettings();
         }
 
-        private void rbText_CheckedChanged(object sender, EventArgs e)
-        { if (SerialPortForm.rbText.Checked) CurrentDataMode = DataMode.Text; }
+ 
 
-        private void rbHex_CheckedChanged(object sender, EventArgs e)
-        { if (SerialPortForm.rbHex.Checked) CurrentDataMode = DataMode.Hex; }
 
         private void OpenPort()
         {

@@ -31,13 +31,6 @@
             this.gbPortSettings = new System.Windows.Forms.GroupBox();
             this.cmbPortName = new System.Windows.Forms.ComboBox();
             this.lblComPort = new System.Windows.Forms.Label();
-            this.chkClearOnOpen = new System.Windows.Forms.CheckBox();
-            this.gbMode = new System.Windows.Forms.GroupBox();
-            this.rbText = new System.Windows.Forms.RadioButton();
-            this.rbHex = new System.Windows.Forms.RadioButton();
-            this.openPortButton = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnSend = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.cmbDataPortName = new System.Windows.Forms.ComboBox();
             this.lblDataComPort = new System.Windows.Forms.Label();
@@ -53,7 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.gbPortSettings.SuspendLayout();
-            this.gbMode.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,77 +86,9 @@
             this.lblComPort.TabIndex = 0;
             this.lblComPort.Text = "COM Port:";
             // 
-            // chkClearOnOpen
-            // 
-            this.chkClearOnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkClearOnOpen.AutoSize = true;
-            this.chkClearOnOpen.Location = new System.Drawing.Point(357, 289);
-            this.chkClearOnOpen.Name = "chkClearOnOpen";
-            this.chkClearOnOpen.Size = new System.Drawing.Size(94, 17);
-            this.chkClearOnOpen.TabIndex = 10;
-            this.chkClearOnOpen.Text = "Clear on Open";
-            this.chkClearOnOpen.UseVisualStyleBackColor = true;
-            // 
-            // gbMode
-            // 
-            this.gbMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbMode.Controls.Add(this.rbText);
-            this.gbMode.Controls.Add(this.rbHex);
-            this.gbMode.Location = new System.Drawing.Point(241, 256);
-            this.gbMode.Name = "gbMode";
-            this.gbMode.Size = new System.Drawing.Size(89, 64);
-            this.gbMode.TabIndex = 77;
-            this.gbMode.TabStop = false;
-            this.gbMode.Text = "Data &Mode";
-            // 
-            // rbText
-            // 
-            this.rbText.AutoSize = true;
-            this.rbText.Location = new System.Drawing.Point(12, 19);
-            this.rbText.Name = "rbText";
-            this.rbText.Size = new System.Drawing.Size(46, 17);
-            this.rbText.TabIndex = 0;
-            this.rbText.Text = "Text";
-            // 
-            // rbHex
-            // 
-            this.rbHex.AutoSize = true;
-            this.rbHex.Location = new System.Drawing.Point(12, 39);
-            this.rbHex.Name = "rbHex";
-            this.rbHex.Size = new System.Drawing.Size(44, 17);
-            this.rbHex.TabIndex = 1;
-            this.rbHex.Text = "Hex";
-            // 
-            // openPortButton
-            // 
-            this.openPortButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.openPortButton.Location = new System.Drawing.Point(12, 256);
-            this.openPortButton.Name = "openPortButton";
-            this.openPortButton.Size = new System.Drawing.Size(75, 23);
-            this.openPortButton.TabIndex = 79;
-            this.openPortButton.Text = "&Open Port";
-            // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(108, 285);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 81;
-            this.btnClear.Text = "&Clear";
-            // 
-            // btnSend
-            // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(108, 256);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
-            this.btnSend.TabIndex = 80;
-            this.btnSend.Text = "Send";
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 285);
+            this.button1.Location = new System.Drawing.Point(12, 205);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 82;
@@ -266,6 +190,7 @@
             this.button3.TabIndex = 84;
             this.button3.Text = "Test Connection";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label2
             // 
@@ -327,36 +252,21 @@
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.openPortButton);
-            this.Controls.Add(this.chkClearOnOpen);
             this.Controls.Add(this.gbPortSettings);
-            this.Controls.Add(this.gbMode);
             this.Name = "SerialPortForm";
             this.Text = "SerialPortForm";
             this.Load += new System.EventHandler(this.SerialPortForm_Load);
             this.gbPortSettings.ResumeLayout(false);
             this.gbPortSettings.PerformLayout();
-            this.gbMode.ResumeLayout(false);
-            this.gbMode.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Label lblComPort;
-        private System.Windows.Forms.GroupBox gbMode;
-        public System.Windows.Forms.CheckBox chkClearOnOpen;
         public System.Windows.Forms.ComboBox cmbPortName;
-        public System.Windows.Forms.RadioButton rbText;
-        public System.Windows.Forms.RadioButton rbHex;
-        public System.Windows.Forms.Button openPortButton;
-        public System.Windows.Forms.Button btnClear;
-        public System.Windows.Forms.Button btnSend;
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.GroupBox gbPortSettings;
         public System.Windows.Forms.ComboBox cmbDataPortName;

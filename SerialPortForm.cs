@@ -32,5 +32,11 @@ namespace SerialPortTerminal
             frmTerminal mainForm = new frmTerminal();
             mainForm.testDataPort();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            frmTerminal mainForm = new frmTerminal();
+            mainForm.testDataPort();
+        }
     }
 }
