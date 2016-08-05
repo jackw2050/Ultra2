@@ -9,11 +9,22 @@ namespace SerialPortTerminal
 
     // iport[2] 6 airplane mode
     //iport[2]  portC input?
+    
 
     public class Errors
     {
-        public Boolean remoteRebooted = false;
-        public Boolean timeSetSuccessful = false;
+        public static Boolean remoteRebooted = false;
+        public static Boolean setTimeSuccess = false;
+        public static Boolean platformLevel = false;
+
+        public static int timeSetErrorCount = 0;
+        public static int serialCommErrorCount = 0;
+
+
+
+
+
+
     }
 
     public class PortC //  Byte 77
@@ -395,10 +406,11 @@ namespace SerialPortTerminal
     {
         // need to create constructor and make variables private
         public static Boolean myDebug = false;
-
+       
         private PortC Port_C = new PortC();
         private MeterStatus MeterStatus = new MeterStatus();
         public static double cper = 18;
+
 
         // Take serial data from meter and separate into various variables and commands
         public byte[] meterBytes;
@@ -514,6 +526,7 @@ namespace SerialPortTerminal
 
         public void GetMeterData(byte[] meterBytes)
         {
+            Errors Errors = new Errors();
             dataValid = false;
             myDT = new DateTime(DateTime.Now.Year, 1, 1, new GregorianCalendar());
             //GET SPRING TENSION
@@ -537,6 +550,7 @@ namespace SerialPortTerminal
 
             if (meterBytes.Length < 10)
             {
+                Errors.serialCommErrorCount++;
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {
@@ -724,7 +738,7 @@ namespace SerialPortTerminal
                     Console.WriteLine("LACC = " + LACC);
                 }
 
-                // place if here for GPS vs OLD
+ 
 
                 altitude = 0;
                 latitude = 0;
@@ -854,6 +868,8 @@ namespace SerialPortTerminal
                 //GET PRINTER STATUS  -- No longer used
                 tempByte[0] = meterBytes[75];
 
+
+
                 // GET METER STATUS
                 Array.Clear(tempByte, 0, tempByte.Length);
                 tempByte[0] = meterBytes[76];
@@ -886,22 +902,21 @@ namespace SerialPortTerminal
                 // CHECK FOR TIME SET SUCCESSFULL/ FAIL
                 else if (tempByte[0] == 2)//
                 {
+                    Errors.setTimeSuccess = true;
                     if (frmTerminal.engineerDebug)
                     {
-                        Console.WriteLine("Time set Successful ");
+                        Console.WriteLine("Time set Successful");
                     }
-                    //   var iError = -10;
-                    // timeBusy = false;
-                    // gpFlg = 1;
+
                 }
                 else if (tempByte[0] == 2)// Time set failed
                 {
+                    Errors.setTimeSuccess = false;
                     if (frmTerminal.engineerDebug)
                     {
-                        Console.WriteLine("Time set Failed ");
+                        Console.WriteLine("Time set Failed");
                     }
-                    //   var iError = -11;
-                    // timeBusy = false;
+
                 }
                 //CHECK G2000 BIAS
                 else if (tempByte[0] == 4)

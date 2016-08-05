@@ -424,7 +424,6 @@ namespace SerialPortTerminal
             // This clears the terminal window which is for debug only.
             // Final  app delete rich text box and replace with console.writeLine(data);
             // Use if(debug){};
-            SerialPortForm.chkClearOnOpen.Checked = settings.ClearOnOpen;
 
             // If it is still avalible, select the last com port used
             // Again.  Duplicate for output data port
