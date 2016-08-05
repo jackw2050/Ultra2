@@ -550,7 +550,19 @@ namespace SerialPortTerminal
 
             if (meterBytes.Length < 10)
             {
+                Console.WriteLine("Data length mismatch - too short");
                 Errors.serialCommErrorCount++;
+            }
+            else if (meterBytes[0] != meterBytes.Length - 1)
+            {
+                Console.WriteLine("Data length mismatch");
+                Errors.serialCommErrorCount++;
+                if (Errors.serialCommErrorCount > 5)
+                {
+                    frmTerminal frmTerminal = new frmTerminal();
+                    frmTerminal.TimerWithDataCollection("stop");
+                    frmTerminal.TimerWithDataCollection("start");
+                }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {

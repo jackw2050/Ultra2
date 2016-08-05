@@ -2535,7 +2535,7 @@ namespace SerialPortTerminal
                 springTensionTargetNumericTextBox.Text = null;
                 taskB = Task.Factory.StartNew(() => DoSomeWork(300));
                 taskB.Wait();
-                TimerWithDataCollection("stop");
+                TimerWithDataCollection("start");
                 springTensionGroupBox.Visible = false;
             }
         }
