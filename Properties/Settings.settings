@@ -32,13 +32,13 @@
     <Setting Name="calFilePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">c:\zls\</Value>
     </Setting>
-    <Setting Name="configFileName" Type="System.String" Scope="Application">
+    <Setting Name="configFileName" Type="System.String" Scope="User">
       <Value Profile="(Default)">sampleConfigFile.csv</Value>
     </Setting>
-    <Setting Name="configFilePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">c:\zls\</Value>
+    <Setting Name="configFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\zls\data\</Value>
     </Setting>
-    <Setting Name="fileDateFormat" Type="System.Int32" Scope="Application">
+    <Setting Name="fileDateFormat" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="filePath" Type="System.String" Scope="User">
@@ -175,6 +175,87 @@
     </Setting>
     <Setting Name="zlsPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">password</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors1" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors2" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors3" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors4" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors5" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors6" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.035199999809265137</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors7" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-0.0032800000626593828</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors8" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-0.058649998158216476</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors9" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.0094400001689791679</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors10" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors11" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors12" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors13" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-0.0011992008658125997</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors14" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-0.0013000000035390258</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors15" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors16" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="crossCouplingFactors0" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="analogFilter0" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="analogFilter1" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.22400000691413879</Value>
+    </Setting>
+    <Setting Name="analogFilter2" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.24250000715255737</Value>
+    </Setting>
+    <Setting Name="analogFilter3" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.20000000298023224</Value>
+    </Setting>
+    <Setting Name="analogFilter4" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.28999999165534973</Value>
+    </Setting>
+    <Setting Name="analogFilter5" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.60000002384185791</Value>
+    </Setting>
+    <Setting Name="analogFilter6" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.60000002384185791</Value>
+    </Setting>
+    <Setting Name="analogFilter7" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="analogFilter8" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

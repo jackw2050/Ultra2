@@ -153,6 +153,7 @@ namespace SerialPortTerminal
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitProgramToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,7 +186,6 @@ namespace SerialPortTerminal
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -201,7 +201,8 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButtonContinue = new System.Windows.Forms.RadioButton();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
-            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
+            this.saveDefaultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1026,7 +1027,8 @@ namespace SerialPortTerminal
             this.loadConfigFileToolStripMenuItem,
             this.loadCalFileToolStripMenuItem,
             this.printConfigFileToolStripMenuItem,
-            this.setDataFileLocationToolStripMenuItem});
+            this.setDataFileLocationToolStripMenuItem,
+            this.saveDefaultsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -1036,6 +1038,7 @@ namespace SerialPortTerminal
             this.saveConfigFileToolStripMenuItem.Name = "saveConfigFileToolStripMenuItem";
             this.saveConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.saveConfigFileToolStripMenuItem.Text = "Save Config file";
+            this.saveConfigFileToolStripMenuItem.Click += new System.EventHandler(this.saveConfigFileToolStripMenuItem_Click);
             // 
             // loadConfigFileToolStripMenuItem
             // 
@@ -1056,6 +1059,7 @@ namespace SerialPortTerminal
             this.printConfigFileToolStripMenuItem.Name = "printConfigFileToolStripMenuItem";
             this.printConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.printConfigFileToolStripMenuItem.Text = "Print Config file";
+            this.printConfigFileToolStripMenuItem.Click += new System.EventHandler(this.printConfigFileToolStripMenuItem_Click);
             // 
             // setDataFileLocationToolStripMenuItem
             // 
@@ -1105,14 +1109,14 @@ namespace SerialPortTerminal
             // fileFormatToolStripMenuItem1
             // 
             this.fileFormatToolStripMenuItem1.Name = "fileFormatToolStripMenuItem1";
-            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.fileFormatToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.fileFormatToolStripMenuItem1.Text = "File format";
             this.fileFormatToolStripMenuItem1.Click += new System.EventHandler(this.fileFormatToolStripMenuItem1_Click);
             // 
             // recordingToolStripMenuItem
             // 
             this.recordingToolStripMenuItem.Name = "recordingToolStripMenuItem";
-            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.recordingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.recordingToolStripMenuItem.Text = "Recording";
             this.recordingToolStripMenuItem.Click += new System.EventHandler(this.recordingToolStripMenuItem_Click);
             // 
@@ -1138,6 +1142,13 @@ namespace SerialPortTerminal
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // exitProgramToolStripMenuItem1
             // 
@@ -1474,15 +1485,6 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
             // 
-            // springTensionTargetNumericTextBox
-            // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(234, 15);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
-            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(264, 67);
@@ -1647,12 +1649,21 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
             // 
-            // loginToolStripMenuItem
+            // springTensionTargetNumericTextBox
             // 
-            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loginToolStripMenuItem.Text = "Login";
-            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(234, 15);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
+            // 
+            // saveDefaultsToolStripMenuItem
+            // 
+            this.saveDefaultsToolStripMenuItem.Name = "saveDefaultsToolStripMenuItem";
+            this.saveDefaultsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.saveDefaultsToolStripMenuItem.Text = "Save Defaults";
+            this.saveDefaultsToolStripMenuItem.Click += new System.EventHandler(this.saveDefaultsToolStripMenuItem_Click);
             // 
             // frmTerminal
             // 
@@ -1878,6 +1889,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.RadioButton radioButtonContinue;
         public System.Windows.Forms.Label heaterStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveDefaultsToolStripMenuItem;
     }
 }
 

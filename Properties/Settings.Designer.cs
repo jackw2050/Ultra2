@@ -140,30 +140,39 @@ namespace SerialPortTerminal.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("sampleConfigFile.csv")]
         public string configFileName {
             get {
                 return ((string)(this["configFileName"]));
             }
+            set {
+                this["configFileName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\data\\")]
         public string configFilePath {
             get {
                 return ((string)(this["configFilePath"]));
             }
+            set {
+                this["configFilePath"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int fileDateFormat {
             get {
                 return ((int)(this["fileDateFormat"]));
+            }
+            set {
+                this["fileDateFormat"] = value;
             }
         }
         
@@ -703,6 +712,330 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["zlsPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors1 {
+            get {
+                return ((double)(this["crossCouplingFactors1"]));
+            }
+            set {
+                this["crossCouplingFactors1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors2 {
+            get {
+                return ((double)(this["crossCouplingFactors2"]));
+            }
+            set {
+                this["crossCouplingFactors2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors3 {
+            get {
+                return ((double)(this["crossCouplingFactors3"]));
+            }
+            set {
+                this["crossCouplingFactors3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors4 {
+            get {
+                return ((double)(this["crossCouplingFactors4"]));
+            }
+            set {
+                this["crossCouplingFactors4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors5 {
+            get {
+                return ((double)(this["crossCouplingFactors5"]));
+            }
+            set {
+                this["crossCouplingFactors5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.035199999809265137")]
+        public double crossCouplingFactors6 {
+            get {
+                return ((double)(this["crossCouplingFactors6"]));
+            }
+            set {
+                this["crossCouplingFactors6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.0032800000626593828")]
+        public double crossCouplingFactors7 {
+            get {
+                return ((double)(this["crossCouplingFactors7"]));
+            }
+            set {
+                this["crossCouplingFactors7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.058649998158216476")]
+        public double crossCouplingFactors8 {
+            get {
+                return ((double)(this["crossCouplingFactors8"]));
+            }
+            set {
+                this["crossCouplingFactors8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0094400001689791679")]
+        public double crossCouplingFactors9 {
+            get {
+                return ((double)(this["crossCouplingFactors9"]));
+            }
+            set {
+                this["crossCouplingFactors9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors10 {
+            get {
+                return ((double)(this["crossCouplingFactors10"]));
+            }
+            set {
+                this["crossCouplingFactors10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors11 {
+            get {
+                return ((double)(this["crossCouplingFactors11"]));
+            }
+            set {
+                this["crossCouplingFactors11"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors12 {
+            get {
+                return ((double)(this["crossCouplingFactors12"]));
+            }
+            set {
+                this["crossCouplingFactors12"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.0011992008658125997")]
+        public double crossCouplingFactors13 {
+            get {
+                return ((double)(this["crossCouplingFactors13"]));
+            }
+            set {
+                this["crossCouplingFactors13"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.0013000000035390258")]
+        public double crossCouplingFactors14 {
+            get {
+                return ((double)(this["crossCouplingFactors14"]));
+            }
+            set {
+                this["crossCouplingFactors14"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double crossCouplingFactors15 {
+            get {
+                return ((double)(this["crossCouplingFactors15"]));
+            }
+            set {
+                this["crossCouplingFactors15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double crossCouplingFactors16 {
+            get {
+                return ((double)(this["crossCouplingFactors16"]));
+            }
+            set {
+                this["crossCouplingFactors16"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double crossCouplingFactors0 {
+            get {
+                return ((double)(this["crossCouplingFactors0"]));
+            }
+            set {
+                this["crossCouplingFactors0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double analogFilter0 {
+            get {
+                return ((double)(this["analogFilter0"]));
+            }
+            set {
+                this["analogFilter0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.22400000691413879")]
+        public double analogFilter1 {
+            get {
+                return ((double)(this["analogFilter1"]));
+            }
+            set {
+                this["analogFilter1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.24250000715255737")]
+        public double analogFilter2 {
+            get {
+                return ((double)(this["analogFilter2"]));
+            }
+            set {
+                this["analogFilter2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.20000000298023224")]
+        public double analogFilter3 {
+            get {
+                return ((double)(this["analogFilter3"]));
+            }
+            set {
+                this["analogFilter3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.28999999165534973")]
+        public double analogFilter4 {
+            get {
+                return ((double)(this["analogFilter4"]));
+            }
+            set {
+                this["analogFilter4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.60000002384185791")]
+        public double analogFilter5 {
+            get {
+                return ((double)(this["analogFilter5"]));
+            }
+            set {
+                this["analogFilter5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.60000002384185791")]
+        public double analogFilter6 {
+            get {
+                return ((double)(this["analogFilter6"]));
+            }
+            set {
+                this["analogFilter6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double analogFilter7 {
+            get {
+                return ((double)(this["analogFilter7"]));
+            }
+            set {
+                this["analogFilter7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double analogFilter8 {
+            get {
+                return ((double)(this["analogFilter8"]));
+            }
+            set {
+                this["analogFilter8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double Setting {
+            get {
+                return ((double)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
             }
         }
     }

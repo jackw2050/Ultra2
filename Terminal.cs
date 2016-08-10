@@ -3167,10 +3167,10 @@ namespace SerialPortTerminal
 
 
                     data[0] = 0x04;
-                    data[1] = byteArrayCPeriod[4];
-                    data[2] = byteArrayCPeriod[5];
-                    data[3] = byteArrayCPeriod[6];
-                    data[4] = byteArrayCPeriod[7];
+                    data[1] = byteArrayCPeriod[0];
+                    data[2] = byteArrayCPeriod[1];
+                    data[3] = byteArrayCPeriod[2];
+                    data[4] = byteArrayCPeriod[3];
 
 
                     data[0] = 0X04;
@@ -3759,65 +3759,123 @@ namespace SerialPortTerminal
             //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
             ConfigData ConfigData = new ConfigData();
 
-            if (configFile == null)// load defaults -
+
+            var fileName = @configFile;
+
+            var fileExists =
+                File.Exists(fileName) ||
+                File.Exists(
+                    Path.Combine(
+                        Directory.GetParent(Path.GetDirectoryName(fileName)).FullName,
+                        Path.GetFileName(fileName)
+                    )
+                );
+
+
+
+          
+            DialogResult result = DialogResult.No;
+            if (fileExists == false)
             {
-                ConfigData.alarmSwitch = 0;
-                ConfigData.beamScale = -1.9512490034103394;
-                ConfigData.crossBias = 0.0;
-                ConfigData.crossCouplingFactors[0] = 0.0;
-                ConfigData.crossCouplingFactors[1] = 0.0;
-                ConfigData.crossCouplingFactors[2] = 0.0;
-                ConfigData.crossCouplingFactors[3] = 0.0;
-                ConfigData.crossCouplingFactors[4] = 0.0;
-                ConfigData.crossCouplingFactors[5] = 0.0;
-                ConfigData.crossCouplingFactors[6] = 0.035199999809265137;
-                ConfigData.crossCouplingFactors[7] = -0.0032800000626593828;
-                ConfigData.crossCouplingFactors[8] = -0.058649998158216476;
-                ConfigData.crossCouplingFactors[9] = 0.0094400001689791679;
-                ConfigData.crossCouplingFactors[10] = 0.0;
-                ConfigData.crossCouplingFactors[11] = 0.0;
-                ConfigData.crossCouplingFactors[12] = 0.0;
-                ConfigData.crossCouplingFactors[13] = -0.0011992008658125997;
-                ConfigData.crossCouplingFactors[14] = -0.0013000000035390258;
-                ConfigData.crossCouplingFactors[15] = 1.0;
-                ConfigData.crossCouplingFactors[16] = 1.0;
-                ConfigData.crossDampFactor = Convert.ToSingle(0.091499999165534973);
-                ConfigData.crossGain = Convert.ToSingle(0.11999999731779099);
-                ConfigData.crossLead = Convert.ToSingle(0.44999998807907104);
-                ConfigData.crossPeriod = Convert.ToSingle(0.0000084000002971151844);
-                ConfigData.digitalInputSwitch = 0;
+                string message = "Config file not found?  Load defaults from last session?  No will open file dialog";
+                string title = "File not found";
+
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                 result = MessageBox.Show(message, title, buttons);
+
+                if (result == DialogResult.Yes)
+
+                {
+                    this.Close();
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+
+
+
+
+
+            if (result == DialogResult.Yes)// load defaults -
+            {
+              //  ConfigData.alarmSwitch = Properties.Settings.Default.al; ;
+                ConfigData.beamScale = Properties.Settings.Default.beamScale;
+                ConfigData.crossBias = Properties.Settings.Default.crossBias;
+                ConfigData.crossCouplingFactors[0] = Properties.Settings.Default.crossCouplingFactors0;
+                ConfigData.crossCouplingFactors[1] = Properties.Settings.Default.crossCouplingFactors1;
+                ConfigData.crossCouplingFactors[2] = Properties.Settings.Default.crossCouplingFactors2;
+                ConfigData.crossCouplingFactors[3] = Properties.Settings.Default.crossCouplingFactors3;
+                ConfigData.crossCouplingFactors[4] = Properties.Settings.Default.crossCouplingFactors4;
+                ConfigData.crossCouplingFactors[5] = Properties.Settings.Default.crossCouplingFactors5;
+                ConfigData.crossCouplingFactors[6] = Properties.Settings.Default.crossCouplingFactors6;
+                ConfigData.crossCouplingFactors[7] = Properties.Settings.Default.crossCouplingFactors7;
+                ConfigData.crossCouplingFactors[8] = Properties.Settings.Default.crossCouplingFactors8;
+                ConfigData.crossCouplingFactors[9] = Properties.Settings.Default.crossCouplingFactors9;
+                ConfigData.crossCouplingFactors[10] = Properties.Settings.Default.crossCouplingFactors10;
+                ConfigData.crossCouplingFactors[11] = Properties.Settings.Default.crossCouplingFactors11;
+                ConfigData.crossCouplingFactors[12] = Properties.Settings.Default.crossCouplingFactors12;
+                ConfigData.crossCouplingFactors[13] = Properties.Settings.Default.crossCouplingFactors13;
+                ConfigData.crossCouplingFactors[14] = Properties.Settings.Default.crossCouplingFactors14;
+                ConfigData.crossCouplingFactors[15] = Properties.Settings.Default.crossCouplingFactors15;
+                ConfigData.crossCouplingFactors[16] = Properties.Settings.Default.crossCouplingFactors16;
+                ConfigData.crossDampFactor = Properties.Settings.Default.crossDampFactor;
+                ConfigData.crossGain = Properties.Settings.Default.crossGain;
+                ConfigData.crossLead = Properties.Settings.Default.crossLead;
+                ConfigData.crossPeriod = Properties.Settings.Default.crossPeriod;
+                ConfigData.digitalInputSwitch = 0;// not needed
                 ConfigData.engPassword = "zls";
-                ConfigData.fileNameSwitch = 1;
-                ConfigData.hardDiskSwitch = 1;
-                ConfigData.iAuxGain = 0.0;
-                ConfigData.linePrinterSwitch = 0;
-                ConfigData.longBias = 0.0;
-                ConfigData.longDampFactor = Convert.ToSingle(0.091499999165534973);
-                ConfigData.longGain = Convert.ToSingle(0.11999999731779099);
-                ConfigData.longLead = Convert.ToSingle(0.44999998807907104);
-                ConfigData.longPeriod = Convert.ToSingle(0.0000084000002971151844);
-                ConfigData.meterNumber = "S91";
-                ConfigData.modeSwitch = 1;
-                ConfigData.monitorDisplaySwitch = 2;
-                ConfigData.numAuxChan = 0;
-                ConfigData.printerEmulationSwitch = 3;
-                ConfigData.serialPortOutputSwitch = -1;
-                ConfigData.serialPortSwitch = 1;
-                ConfigData.springTensionMax = 20000.0;
-                ConfigData.alarmSwitch = 0;
-                ConfigData.analogFilter[0] = 0.0;
-                ConfigData.analogFilter[1] = 0.22400000691413879;
-                ConfigData.analogFilter[2] = 0.24250000715255737;
-                ConfigData.analogFilter[3] = 0.20000000298023224;
-                ConfigData.analogFilter[4] = 0.28999999165534973;
-                ConfigData.analogFilter[5] = 0.60000002384185791;
-                ConfigData.analogFilter[6] = 0.60000002384185791;
-                ConfigData.analogFilter[7] = 1.0;
-                ConfigData.analogFilter[8] = 1.0;
+                ConfigData.fileNameSwitch = 1;// not needed
+                ConfigData.hardDiskSwitch = 1;// not needed
+                ConfigData.iAuxGain = 0.0;// not needed
+                ConfigData.linePrinterSwitch = 0;// not needed
+                ConfigData.longBias = Properties.Settings.Default.longBias;
+                ConfigData.longDampFactor = Properties.Settings.Default.longDampFactor;
+                ConfigData.longGain = Properties.Settings.Default.longGain;
+                ConfigData.longLead = Properties.Settings.Default.longLead;
+                ConfigData.longPeriod = Properties.Settings.Default.longPeriod;
+                ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
+                ConfigData.modeSwitch = 1;// hires or marine??
+                ConfigData.monitorDisplaySwitch = 2;// not needed
+                ConfigData.numAuxChan = 0;// not needed
+                ConfigData.printerEmulationSwitch = 3;// not needed
+                ConfigData.serialPortOutputSwitch = -1;// check on function
+                ConfigData.serialPortSwitch = 1;// check on function - should save default port for meter and data output
+                ConfigData.springTensionMax = Properties.Settings.Default.springTensionMax;
+                ConfigData.alarmSwitch = 0;// check on function
+                ConfigData.analogFilter[0] = Properties.Settings.Default.analogFilter0;
+                ConfigData.analogFilter[1] = Properties.Settings.Default.analogFilter1;
+                ConfigData.analogFilter[2] = Properties.Settings.Default.analogFilter2;
+                ConfigData.analogFilter[3] = Properties.Settings.Default.analogFilter3;
+                ConfigData.analogFilter[4] = Properties.Settings.Default.analogFilter4;
+                ConfigData.analogFilter[5] = Properties.Settings.Default.analogFilter5;
+                ConfigData.analogFilter[6] = Properties.Settings.Default.analogFilter6;
+                ConfigData.analogFilter[7] = Properties.Settings.Default.analogFilter7;
+                ConfigData.analogFilter[8] = Properties.Settings.Default.analogFilter8;
                 UserDataForm.meterNumberTextBox.Text = ConfigData.meterNumber;
             }
             else
             {
+                // If file not found and user selected not to load defaults open file dialog to find file.
+                if (result == DialogResult.No)
+                {
+                    OpenFileDialog OpenFileDialog = new OpenFileDialog();
+                    OpenFileDialog.InitialDirectory = Properties.Settings.Default.configFilePath;
+                    OpenFileDialog.Filter = "Comma delimited Files (.csv)|*.csv|All Files (*.*)|*.*";
+                    OpenFileDialog.FilterIndex = 1;
+                    OpenFileDialog.RestoreDirectory = true;
+                    OpenFileDialog.Multiselect = true;
+                    OpenFileDialog.ShowDialog();
+                    // save path and file name to defaults
+                    Properties.Settings.Default.configFilePath = Path.GetDirectoryName(OpenFileDialog.FileName);
+
+                    configFile = OpenFileDialog.FileName;
+                }
+
+
+
+
                 try
                 {
                     using (engine.BeginReadFile(configFile))
@@ -3841,46 +3899,46 @@ namespace SerialPortTerminal
 
                                 case "Beam Scale Factor":
                                     ConfigData.beamScale = Convert.ToDouble(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}", ConfigData.beamScale);
                                     break;
 
                                 case "Cross Axis Period":
-                                    ConfigData.crossPeriod = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.crossPeriod = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
                                     break;
 
                                 case "Long Axis Period":
-                                    ConfigData.longPeriod = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.longPeriod = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
                                     break;
 
                                 case "Cross Axis Damping Factor":
-                                    ConfigData.crossDampFactor = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.crossDampFactor = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
                                     break;
 
                                 case "Long Axis Damping Factor":
-                                    ConfigData.longDampFactor = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.longDampFactor = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
                                     break;
 
                                 case "Cross Axis Gain":
-                                    ConfigData.crossGain = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.crossGain = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
                                     break;
 
                                 case "Long Axis Gain":
-                                    ConfigData.longGain = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.longGain = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.longGain));
                                     break;
 
                                 case "Cross Axis Lead":
-                                    ConfigData.crossLead = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.crossLead = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
                                     break;
 
                                 case "Long Axis Lead":
-                                    ConfigData.longLead = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.longLead = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
                                     break;
 
@@ -3890,181 +3948,236 @@ namespace SerialPortTerminal
                                     break;
 
                                 case "Cross Axis Bias":
-                                    ConfigData.crossBias = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.crossBias = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
                                     break;
 
                                 case "Long Axis Bias":
-                                    ConfigData.longBias = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.longBias = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS BIAS----------------------- \t" + Convert.ToString(ConfigData.longBias));
                                     break;
 
-                                case "crossCouplingFactors[0]": // Not used
-                                    ConfigData.crossCouplingFactors[0] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors0": // Not used
+                                    ConfigData.crossCouplingFactors[0] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[0]------------- \t{0:e4}", ConfigData.crossCouplingFactors[0]);
                                     break;
 
-                                case "crossCouplingFactors[1]": // Not used
-                                    ConfigData.crossCouplingFactors[1] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors1": // Not used
+                                    ConfigData.crossCouplingFactors[1] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[1]------------- \t{0:e4}", ConfigData.crossCouplingFactors[1]);
                                     break;
 
-                                case "crossCouplingFactors[2]": // Not used
-                                    ConfigData.crossCouplingFactors[2] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors2": // Not used
+                                    ConfigData.crossCouplingFactors[2] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[2]------------- \t{0:e4}", ConfigData.crossCouplingFactors[2]);
                                     break;
 
-                                case "crossCouplingFactors[3]": // Not used
-                                    ConfigData.crossCouplingFactors[3] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors3": // Not used
+                                    ConfigData.crossCouplingFactors[3] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[3]------------- \t{0:e4}", ConfigData.crossCouplingFactors[3]);
                                     break;
 
-                                case "crossCouplingFactors[4]": // Not used
-                                    ConfigData.crossCouplingFactors[4] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors4": // Not used
+                                    ConfigData.crossCouplingFactors[4] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[4]------------- \t{0:e4}", ConfigData.crossCouplingFactors[4]);
                                     break;
 
-                                case "crossCouplingFactors[5]": // Not used
-                                    ConfigData.crossCouplingFactors[5] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors5": // Not used
+                                    ConfigData.crossCouplingFactors[5] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[5]------------- \t{0:e4}", ConfigData.crossCouplingFactors[5]);
                                     break;
 
-                                case "VCC":// VCC
-                                    ConfigData.crossCouplingFactors[6] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors6": // VCC
+                                    ConfigData.crossCouplingFactors[6] = Convert.ToDouble(dataItem.configValue);
                                     mdt.VCC = ConfigData.crossCouplingFactors[6];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[6]------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[6]/VCC------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
                                     break;
-
-                                case "AL":// AL
-                                    ConfigData.crossCouplingFactors[7] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors7": // AL
+                                    ConfigData.crossCouplingFactors[7] = Convert.ToDouble(dataItem.configValue);
                                     mdt.AL = ConfigData.crossCouplingFactors[7];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[7]-------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AL------------------------------------- \t" + Convert.ToString(mdt.AL));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[7]/AL------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
                                     break;
-
-                                case "AX":// AX
-                                    ConfigData.crossCouplingFactors[8] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors8": // AX
+                                    ConfigData.crossCouplingFactors[8] = Convert.ToDouble(dataItem.configValue);
                                     mdt.AX = ConfigData.crossCouplingFactors[8];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[8]-------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AL------------------------------------- \t" + Convert.ToString(mdt.AX));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[8]/AX------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
                                     break;
-
-                                case "VE":// VE
-                                    ConfigData.crossCouplingFactors[9] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors9": // VE
+                                    ConfigData.crossCouplingFactors[9] = Convert.ToDouble(dataItem.configValue);
                                     mdt.VE = ConfigData.crossCouplingFactors[9];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[9]-------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("VE------------------------------------- \t" + Convert.ToString(mdt.VE));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[9]/VE------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
                                     break;
-
-                                case "AX2":// AX2
-                                    ConfigData.crossCouplingFactors[10] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors10": // AX2
+                                    ConfigData.crossCouplingFactors[10] = Convert.ToDouble(dataItem.configValue);
                                     mdt.AX2 = ConfigData.crossCouplingFactors[10];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[10]------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AX2------------------------------------ \t" + Convert.ToString(mdt.AX2));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[10]/AX2------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
                                     break;
-
-                                case "XACC2"://XACC2
-                                    ConfigData.crossCouplingFactors[11] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors11": // XACC2
+                                    ConfigData.crossCouplingFactors[11] = Convert.ToDouble(dataItem.configValue);
                                     mdt.XACC2 = ConfigData.crossCouplingFactors[11];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[11]------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("XACC2---------------------------------- \t" + Convert.ToString(mdt.XACC2));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[11]/XACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
                                     break;
-
-                                case "LACC2":// LACC2
-                                    ConfigData.crossCouplingFactors[12] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors12": // LACC2
+                                    ConfigData.crossCouplingFactors[12] = Convert.ToDouble(dataItem.configValue);
                                     mdt.LACC2 = ConfigData.crossCouplingFactors[12];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[12]------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LACC2---------------------------------- \t" + Convert.ToString(mdt.LACC2));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[12]/LACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
                                     break;
-
-                                case "Cross Axis Compensation (4)":// XCOMP (4)
-                                    ConfigData.crossCouplingFactors[13] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors13": // Cross Axis Compensation (4)
+                                    ConfigData.crossCouplingFactors[13] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.crossCompFactor_4 = ConfigData.crossCouplingFactors[13];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[13]------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)------------ \t{0:e4}.", ConfigData.crossCompFactor_4);
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[13]/Cross Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
                                     break;
-
-                                case "Long Axis Compensation (4)":// LCOMP (4)
-                                    ConfigData.crossCouplingFactors[14] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors14": // Long Axis Compensation (4)
+                                    ConfigData.crossCouplingFactors[14] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.longCompFactor_4 = ConfigData.crossCouplingFactors[14];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[14]------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)------------- \t" + Convert.ToString(ConfigData.longCompFactor_4));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[14]/Long Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
                                     break;
-
-                                case "Cross Axis Compensation (16)":// XCOMP (16)
-                                    ConfigData.crossCouplingFactors[15] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors15": // Cross Axis Compensation (16)
+                                    ConfigData.crossCouplingFactors[15] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.crossCompFactor_16 = ConfigData.crossCouplingFactors[15];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[15]------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)----------- \t" + Convert.ToString(ConfigData.crossCompFactor_16));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[15]/Cross Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
                                     break;
-
-                                case "Long Axis Compensation (16)":// LCOMP (16)
-                                    ConfigData.crossCouplingFactors[16] = Convert.ToSingle(dataItem.configValue);
+                                case "crossCouplingFactors16": // Long Axis Compensation (16)
+                                    ConfigData.crossCouplingFactors[16] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.longCompFactor_16 = ConfigData.crossCouplingFactors[16];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[16]------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)------------ \t" + Convert.ToString(ConfigData.longCompFactor_16));
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[16]/Long Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
                                     break;
 
-                                case "AX Phase":
-                                    ConfigData.analogFilter[1] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AX PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
+
+                                /*
+
+                                                                case "VCC":// VCC
+                                                                    ConfigData.crossCouplingFactors[6] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.VCC = ConfigData.crossCouplingFactors[6];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[6]------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
+                                                                    break;
+
+                                                                case "AL":// AL
+                                                                    ConfigData.crossCouplingFactors[7] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.AL = ConfigData.crossCouplingFactors[7];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[7]-------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("AL------------------------------------- \t" + Convert.ToString(mdt.AL));
+
+                                                                    break;
+
+                                                                case "AX":// AX
+                                                                    ConfigData.crossCouplingFactors[8] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.AX = ConfigData.crossCouplingFactors[8];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[8]-------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("AX------------------------------------- \t" + Convert.ToString(mdt.AX));
+
+                                                                    break;
+
+                                                                case "VE":// VE
+                                                                    ConfigData.crossCouplingFactors[9] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.VE = ConfigData.crossCouplingFactors[9];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[9]-------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("VE------------------------------------- \t" + Convert.ToString(mdt.VE));
+
+                                                                    break;
+
+                                                                case "AX2":// AX2
+                                                                    ConfigData.crossCouplingFactors[10] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.AX2 = ConfigData.crossCouplingFactors[10];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[10]------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("AX2------------------------------------ \t" + Convert.ToString(mdt.AX2));
+
+                                                                    break;
+
+                                                                case "XACC2"://XACC2
+                                                                    ConfigData.crossCouplingFactors[11] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.XACC2 = ConfigData.crossCouplingFactors[11];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[11]------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("XACC2---------------------------------- \t" + Convert.ToString(mdt.XACC2));
+
+                                                                    break;
+
+                                                                case "LACC2":// LACC2
+                                                                    ConfigData.crossCouplingFactors[12] = Convert.ToDouble(dataItem.configValue);
+                                                                    mdt.LACC2 = ConfigData.crossCouplingFactors[12];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[12]------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("LACC2---------------------------------- \t" + Convert.ToString(mdt.LACC2));
+
+                                                                    break;
+
+
+
+                                                                case "Cross Axis Compensation (4)":// XCOMP (4)
+                                                                    ConfigData.crossCouplingFactors[13] = Convert.ToDouble(dataItem.configValue);
+                                                                    ConfigData.crossCompFactor_4 = ConfigData.crossCouplingFactors[13];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[13]------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)------------ \t{0:e4}", ConfigData.crossCompFactor_4);
+
+                                                                    break;
+
+                                                                case "Long Axis Compensation (4)":// LCOMP (4)
+                                                                    ConfigData.crossCouplingFactors[14] = Convert.ToDouble(dataItem.configValue);
+                                                                    ConfigData.longCompFactor_4 = ConfigData.crossCouplingFactors[14];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[14]------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)------------- \t" + Convert.ToString(ConfigData.longCompFactor_4));
+
+                                                                    break;
+
+                                                                case "Cross Axis Compensation (16)":// XCOMP (16)
+                                                                    ConfigData.crossCouplingFactors[15] = Convert.ToDouble(dataItem.configValue);
+                                                                    ConfigData.crossCompFactor_16 = ConfigData.crossCouplingFactors[15];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[15]------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)----------- \t" + Convert.ToString(ConfigData.crossCompFactor_16));
+
+                                                                    break;
+
+                                                                case "Long Axis Compensation (16)":// LCOMP (16)
+                                                                    ConfigData.crossCouplingFactors[16] = Convert.ToDouble(dataItem.configValue);
+                                                                    ConfigData.longCompFactor_16 = ConfigData.crossCouplingFactors[16];
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[16]------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
+                                                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)------------ \t" + Convert.ToString(ConfigData.longCompFactor_16));
+                                                                    break;
+                                                                       */
+                                case "analogFilter[1]":// AX Phase
+                                    ConfigData.analogFilter[1] = Convert.ToDouble(dataItem.configValue);
+                                    ConfigData.XACC_Phase = ConfigData.analogFilter[1];
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[1]/AX PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
                                     break;
 
-                                case "AL Phase":
-                                    ConfigData.analogFilter[2] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AL PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
+                                case "analogFilter[2]"://  AL Phase
+                                    ConfigData.analogFilter[2] = Convert.ToDouble(dataItem.configValue);
+                                    ConfigData.LACC_AL_Phase = ConfigData.analogFilter[2];
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[2]/AL PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
                                     break;
 
                                 case "analogFilter[3]":
-                                    ConfigData.analogFilter[3] = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.analogFilter[3] = Convert.ToDouble(dataItem.configValue);
                                     if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[3]------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[3]));
                                     break;
 
-                                case "VCC Phase":
-                                    ConfigData.analogFilter[4] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("VCC PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
+                                case "analogFilter[4]":// VCC Phase
+                                    ConfigData.analogFilter[4] = Convert.ToDouble(dataItem.configValue);
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[3]/VCC PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
                                     break;
 
                                 case "Cross Axis Compensation Phase (4)":
-                                    ConfigData.analogFilter[5] = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.analogFilter[5] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.crossCompPhase_4 = ConfigData.analogFilter[5];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [5]----------------------- \t" + Convert.ToString(ConfigData.analogFilter[5]));
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)------- \t" + Convert.ToString(ConfigData.crossCompPhase_4));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [5]/CROSS-AXIS COMPENSATION PHASE (4)------- \t" + Convert.ToString(ConfigData.crossCompPhase_4));
                                     break;
 
                                 case "Long Axis Compensation Phase (4)":
-                                    ConfigData.analogFilter[6] = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.analogFilter[6] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.longCompPhase_4 = ConfigData.analogFilter[6];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [6]----------------------- \t" + Convert.ToString(ConfigData.analogFilter[6]));
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)-------- \t" + Convert.ToString(ConfigData.longCompPhase_4));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [6]/LONG AXIS COMPENSATION PHASE (4)-------- \t" + Convert.ToString(ConfigData.longCompPhase_4));
                                     break;
 
                                 case "Cross Axis Compensation Phase (16)":
-                                    ConfigData.analogFilter[7] = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.analogFilter[7] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.crossCompPhase_16 = ConfigData.analogFilter[7];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [7]----------------------- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.crossCompPhase_16));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [7]/Cross AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.crossCompPhase_16));
                                     break;
 
                                 case "Long Axis Compensation Phase (16)":
-                                    ConfigData.analogFilter[8] = Convert.ToSingle(dataItem.configValue);
+                                    ConfigData.analogFilter[8] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.longCompPhase_16 = ConfigData.analogFilter[8];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [8]---------------------- \t" + Convert.ToString(ConfigData.analogFilter[8]));
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.longCompPhase_16));
-
+                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [8]/LONG AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.longCompPhase_16));
                                     break;
 
                                 case "Mode":
@@ -4076,6 +4189,13 @@ namespace SerialPortTerminal
                                 default:
 
                                     // set alert "xxx" entry is not found. check file and try again
+                                    //Print to  log file
+
+                                    string message = dataItem.EntryName + "is not a valid property for config file";
+                                    string title = "Bad Entry";
+                                    MessageBox.Show(message, title);
+                                    
+
                                     break;
                             }
                         }
@@ -4847,8 +4967,19 @@ namespace SerialPortTerminal
         public void GetConfigFileDialog()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.InitialDirectory = Properties.Settings.Default.configFilePath;
+
+            OpenFileDialog.Filter = "Comma delimited Files (.csv)|*.csv|All Files (*.*)|*.*";
+            OpenFileDialog.FilterIndex = 1;
+            OpenFileDialog.RestoreDirectory = true;
+
+            OpenFileDialog.Multiselect = true;
+
+
 
             OpenFileDialog.ShowDialog();
+            // save path and file name to defaults
+            Properties.Settings.Default.configFilePath = Path.GetDirectoryName(OpenFileDialog.FileName);
 
             ReadConfigFile(OpenFileDialog.FileName);
         }
@@ -5364,6 +5495,21 @@ namespace SerialPortTerminal
         {
             PasswordForm PasswordForm = new PasswordForm();
             PasswordForm.Show();
+        }
+
+        private void saveConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void printConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
 
         ///////////////////////////////////////////////
