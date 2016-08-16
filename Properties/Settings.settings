@@ -30,25 +30,25 @@
       <Value Profile="(Default)">S67-tab.csv</Value>
     </Setting>
     <Setting Name="calFilePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">c:\zls\</Value>
+      <Value Profile="(Default)">E:\ZLS\</Value>
     </Setting>
     <Setting Name="configFileName" Type="System.String" Scope="User">
       <Value Profile="(Default)">sampleConfigFile.csv</Value>
     </Setting>
     <Setting Name="configFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">c:\zls\data\</Value>
+      <Value Profile="(Default)">e:\ZLS\</Value>
     </Setting>
     <Setting Name="fileDateFormat" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="filePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"c:\\zls\\data\\"</Value>
+      <Value Profile="(Default)">"E:\\ZLS\\data\\"</Value>
     </Setting>
     <Setting Name="fileType" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dataFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"c:\\zls\\data\\"</Value>
+      <Value Profile="(Default)">"E:\\ZLS\\data\\"</Value>
     </Setting>
     <Setting Name="beamScale" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1.298317</Value>
@@ -191,37 +191,37 @@
     <Setting Name="crossCouplingFactors5" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors6" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors6_VCC" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.035199999809265137</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors7" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors7_AL" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-0.0032800000626593828</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors8" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors8_AX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-0.058649998158216476</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors9" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors9_VE" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.0094400001689791679</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors10" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors10_AX2" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors11" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors11_XACC2" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors12" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors12_LACC2" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors13" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors13_CrossAxisCompensation4" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-0.0011992008658125997</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors14" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors14_LongAxisCompensation4" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-0.0013000000035390258</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors15" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors15_CrossAxisCompensation16" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors16" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors16_LongAxisCompensation16" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="crossCouplingFactors0" Type="System.Double" Scope="User">
@@ -230,25 +230,25 @@
     <Setting Name="analogFilter0" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="analogFilter1" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter1_AXPhase" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.22400000691413879</Value>
     </Setting>
-    <Setting Name="analogFilter2" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter2_ALPhase" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.24250000715255737</Value>
     </Setting>
     <Setting Name="analogFilter3" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.20000000298023224</Value>
     </Setting>
-    <Setting Name="analogFilter4" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter4_VCCPhase" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.28999999165534973</Value>
     </Setting>
-    <Setting Name="analogFilter5" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter5_CrossAxisCompensationPhase4" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.60000002384185791</Value>
     </Setting>
-    <Setting Name="analogFilter6" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter6_LongAxisCompensationPhase4" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.60000002384185791</Value>
     </Setting>
-    <Setting Name="analogFilter7" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter8_LongAxisCompensationPhase16" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="analogFilter8" Type="System.Double" Scope="User">

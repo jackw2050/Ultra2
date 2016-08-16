@@ -24,7 +24,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 //  Delimited file operations using FileHelpers  http://www.filehelpers.net
 // iTextSharp  http://www.mikesdotnetting.com/article/89/itextsharp-page-layout-with-columns
 //http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in#1
@@ -54,7 +53,8 @@ namespace SerialPortTerminal
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
 
-        public DateTime  myDatetime = DateTime.Now;
+        public DateTime myDatetime = DateTime.Now;
+
         private delegate void SetTextCallback(string text);
 
         private int countDown = 5;
@@ -82,9 +82,9 @@ namespace SerialPortTerminal
         public static Boolean surveyNameSet = false;
         public static string surveyName = null;
         public static string customFileName;
-        public static string filePath = "c:\\Ultrasys\\data\\";
-        public static string programPath = "c:\\ZLS\\";
-        public static string configFilePath = "c:\\ZLS\\";
+        public static string filePath ;
+        public static string programPath;
+        public static string configFilePath;
         public static string calFilePath;
         public static string configFileName;
         public static Boolean userSelect = false;
@@ -95,12 +95,9 @@ namespace SerialPortTerminal
         public static Boolean torqueMotorsEnabled = false;
         public static Boolean springTensionEnabled = false;
         public static Boolean alarmsEnabled = false;
-  //      public  Boolean engPasswordValid = false;
-  //      public  Boolean mgrPasswordValid = false;
-  //      public  Boolean userPasswordValid = false;
-
-
-
+        //      public  Boolean engPasswordValid = false;
+        //      public  Boolean mgrPasswordValid = false;
+        //      public  Boolean userPasswordValid = false;
 
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
@@ -992,9 +989,6 @@ namespace SerialPortTerminal
                     GravityChart.DataSource = listDataSource;
                 }
 
-
-            
-
                 // write config values to parameter form when required
                 if (Parameters.updateConfigData)
                 {
@@ -1004,11 +998,9 @@ namespace SerialPortTerminal
                     Parameters.crossGainTextBox.Text = Convert.ToString(ConfigData.crossGain);
                     Parameters.crossLeadTextBox.Text = Convert.ToString(ConfigData.crossLead);
                     Parameters.crossCompFactor4TextBox.Text = Convert.ToString(ConfigData.crossCompFactor_4);
-                    Parameters.crossCompPhase4TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_4 );
+                    Parameters.crossCompPhase4TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_4);
                     Parameters.crossCompFactor16TextBox.Text = Convert.ToString(ConfigData.crossCompFactor_16);
                     Parameters.crossCompPhase16TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_16);
-
-
 
                     Parameters.longPeriodTextBox.Text = Convert.ToString(ConfigData.longPeriod);
                     Parameters.longDampingTextBox.Text = Convert.ToString(ConfigData.longDampFactor);
@@ -1018,7 +1010,6 @@ namespace SerialPortTerminal
                     Parameters.longCompPhase4TextBox.Text = Convert.ToString(ConfigData.longCompPhase_4);
                     Parameters.longCompFactor16TextBox.Text = Convert.ToString(ConfigData.longCompFactor_16);
                     Parameters.longCompPhase16TextBox.Text = Convert.ToString(ConfigData.longCompPhase_16);
-
 
                     Parameters.CMLFactorTextBox.Text = Convert.ToString(ConfigData.CML_Fact);
                     Parameters.ALFactorTextBox.Text = Convert.ToString(ConfigData.AL_Fact);
@@ -1037,16 +1028,10 @@ namespace SerialPortTerminal
                     Parameters.meterNumberTextBox.Text = ConfigData.meterNumber;
                     Parameters.kFactorTextBox.Text = Convert.ToString(ConfigData.kFactor);
                     Parameters.screenDisplayFilterTextBox.Text = Convert.ToString(ConfigData.screenDisplayFilter);
-                    
-
-
-
-
 
                     Boolean clearCheckedBoxes = true;
                     if (clearCheckedBoxes)
                     {
-
                         // reset checkboxs
                         Parameters.crossPeriodTextBox.Enabled = false;
                         Parameters.crossDampingTextBox.Enabled = false;
@@ -1054,7 +1039,7 @@ namespace SerialPortTerminal
                         Parameters.crossLeadTextBox.Enabled = false;
                         Parameters.crossCompFactor4TextBox.Enabled = false;
                         Parameters.crossCompPhase4TextBox.Enabled = false;
-                        Parameters.crossCompFactor16TextBox.Enabled = false;                  
+                        Parameters.crossCompFactor16TextBox.Enabled = false;
                         Parameters.crossCompPhase16TextBox.Enabled = false;
                         Parameters.longPeriodTextBox.Enabled = false;
                         Parameters.longDampingTextBox.Enabled = false;
@@ -1064,8 +1049,6 @@ namespace SerialPortTerminal
                         Parameters.longCompPhase4TextBox.Enabled = false;
                         Parameters.longCompFactor16TextBox.Enabled = false;
                         Parameters.longCompPhase16TextBox.Enabled = false;
-
-
 
                         Parameters.crossPeriodCheckBox.Checked = false;
                         Parameters.crossDampingCheckBox.Checked = false;
@@ -1083,8 +1066,6 @@ namespace SerialPortTerminal
                         Parameters.longCompPhase4CheckBox.Checked = false;
                         Parameters.longCompFactor16CheckBox.Checked = false;
                         Parameters.longCompPhase16CheckBox.Checked = false;
-
-
 
                         Parameters.CMLFactorTextBox.Enabled = false;
                         Parameters.ALFactorTextBox.Enabled = false;
@@ -1110,30 +1091,18 @@ namespace SerialPortTerminal
                         Parameters.LACC_CML_PhaseCheckBox.Checked = false;
                         Parameters.LACC_CMX_PhaseCheckBox.Checked = false;
 
-
-
                         Parameters.maxSpringTensionTextBox.Enabled = false;
                         Parameters.gyroTypeComboBox.Enabled = false;
                         Parameters.meterNumberTextBox.Enabled = false;
                         Parameters.kFactorTextBox.Enabled = false;
                         Parameters.screenDisplayFilterTextBox.Enabled = false;
 
-
-
                         Parameters.maxSpringTensionCheckBox.Checked = false;
                         Parameters.gyroTypeCheckBox.Checked = false;
                         Parameters.meterNumberCheckBox.Checked = false;
                         Parameters.kFactorCheckBox.Checked = false;
                         Parameters.screenDisplayFilterCheckBox.Checked = false;
-
-
                     }
-
-
-
-
-
-
                 }
 
                 myData myData = new myData();
@@ -2117,8 +2086,8 @@ namespace SerialPortTerminal
             }
             txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
 
-         //   Console.WriteLine(txCmd);
-        //    Console.WriteLine(checkSum);
+            //   Console.WriteLine(txCmd);
+            //    Console.WriteLine(checkSum);
             return BitConverter.GetBytes(checkSum);
 
             //  comport.Write(txCmd, 0, txCmd.Length);
@@ -2787,7 +2756,6 @@ namespace SerialPortTerminal
             }
         }
 
-
         private void SetInitialVisibility()
         {
             GravityChart.Visible = false;
@@ -2803,10 +2771,7 @@ namespace SerialPortTerminal
             gyroCheckBox.Enabled = false;
             alarmCheckBox.Enabled = false;
             springTensionRelativeRadioButton.Checked = true;
-
-
         }
-
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
@@ -2826,19 +2791,21 @@ namespace SerialPortTerminal
             //Draw the bounds of the NumericTextBox.
             numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
 
-
-
             //  Load stored state
             InitStoredVariables();
 
             UpdateDataFileName();
-
-            Console.WriteLine(fileName);
+            if (engineerDebug)
+            {
+                Console.WriteLine("Data file name " + fileName);
+            }
+            
             STtextBox.Text = Convert.ToString(mdt.SpringTension);
 
             // load config file
-            ReadConfigFile(configFilePath + "\\" + configFileName);
-            UserDataForm.configurationFileTextBox.Text = configFilePath + "\\" + configFileName;
+            CheckConfigFile(configFilePath + "\\" + configFileName);
+            //  ReadConfigFile(configFilePath + "\\" + configFileName);
+            //  UserDataForm.configurationFileTextBox.Text = configFilePath + "\\" + configFileName;
 
             readCalibrationFile(calFilePath + "\\" + calFileName);
 
@@ -3062,24 +3029,21 @@ namespace SerialPortTerminal
                     }
                     catch (Exception e)
                     {
-
-                        MessageBox.Show(Convert.ToString( e));
-                        
+                        MessageBox.Show(Convert.ToString(e));
                     }
-                    
+
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     break;
 
                 case "Update Date and Time": // 2
                     byte[] timeData = new byte[20]; // { 2, 0, 0, 0, 0, 0, 0, 0, 0};
-                //    DateTime myDatetime = DateTime.Now;
+                                                    //    DateTime myDatetime = DateTime.Now;
                     int year = myDatetime.Year;
                     int day = myDatetime.DayOfYear;
                     int hour = myDatetime.Hour;
                     int min = myDatetime.Minute;
                     int sec = myDatetime.Second;
 
-                    
                     byte[] byteArrayYr = BitConverter.GetBytes(year);
                     byte[] byteArrayDay = BitConverter.GetBytes(day);
                     byte[] byteArrayHr = BitConverter.GetBytes(hour);
@@ -3099,32 +3063,25 @@ namespace SerialPortTerminal
                     timeData[7] = byteArraySec[0];
                     timeData[8] = 5;
 
-
-
                     int checkSum = 0;
                     Array.Resize(ref timeData, 8);
                     byte[] txCmd = new byte[8];
 
-                 //   Buffer.BlockCopy(timeData, 0, txCmd, 1, timeData.Length);
+                    //   Buffer.BlockCopy(timeData, 0, txCmd, 1, timeData.Length);
 
                     for (int i = 0; i < 8; i++)
                     {
                         checkSum = checkSum ^ timeData[i];
                     }
-                  //  txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
-                    timeData[8] = Convert.ToByte( checkSum);
+                    //  txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
+                    timeData[8] = Convert.ToByte(checkSum);
                     //   Console.WriteLine(txCmd);
-                        Console.WriteLine(checkSum);
+                    Console.WriteLine(checkSum);
                     //   return BitConverter.GetBytes(checkSum);
 
-
-
-
-
                     //    byte[] outputBytes = new byte[cmdByte.Length + byteArray1.Length + byteArray2.Length + byteArray3.Length + byteArray4.Length + byteArray5.Length + byteArray6.Length + checkSum.Length];
-              //      byte[] newData = CalculateCheckSum(timeData, timeData.Length);
-                //    timeData[8] = newData[0];
-
+                    //      byte[] newData = CalculateCheckSum(timeData, timeData.Length);
+                    //    timeData[8] = newData[0];
 
                     Console.WriteLine(Convert.ToByte(timeData));
                     // trcmd(2) = iyr                   iYr = 07E0
@@ -3155,16 +3112,12 @@ namespace SerialPortTerminal
                     data = CreateTxArray(4, aCrossPeriod, aCrossDampFactor, aCrossGain, aCrossLead, crossCouplingFactor13, analogFilter5);
                     // Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
 
-
-                    byte[] byteArrayCPeriod = BitConverter.GetBytes(Convert.ToSingle( ConfigData.crossPeriod));
+                    byte[] byteArrayCPeriod = BitConverter.GetBytes(Convert.ToSingle(ConfigData.crossPeriod));
                     byte[] byteArrayCDampFactor = BitConverter.GetBytes(ConfigData.crossDampFactor);
                     byte[] byteArrayCGain = BitConverter.GetBytes(ConfigData.crossGain);
                     byte[] byteArrayCLead = BitConverter.GetBytes(ConfigData.crossLead);
                     byte[] byteArrayCC13 = BitConverter.GetBytes(crossCouplingFactor13);
                     byte[] byteArrayAF13 = BitConverter.GetBytes(analogFilter5);
-
-
-
 
                     data[0] = 0x04;
                     data[1] = byteArrayCPeriod[0];
@@ -3172,14 +3125,13 @@ namespace SerialPortTerminal
                     data[3] = byteArrayCPeriod[2];
                     data[4] = byteArrayCPeriod[3];
 
-
                     data[0] = 0X04;
- /*                   data[1] = 0xF0;
-                    data[2] = 0x38;
-                    data[3] = 0xa0;
-                    data[4] = 0x37;
-                    data[5] = 0x87;
-                    data[6] = 0x16;  */
+                    /*                   data[1] = 0xF0;
+                                       data[2] = 0x38;
+                                       data[3] = 0xa0;
+                                       data[4] = 0x37;
+                                       data[5] = 0x87;
+                                       data[6] = 0x16;  */
                     data[7] = 0x59;
                     data[8] = 0x3E;
                     data[9] = 0x9A;
@@ -3393,6 +3345,7 @@ namespace SerialPortTerminal
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
         }
+
         public void StoreDefaultVariables()
         {
             // Load configuration data from stored defaults
@@ -3435,30 +3388,24 @@ namespace SerialPortTerminal
             Properties.Settings.Default.kFactor = ConfigData.kFactor;
             Properties.Settings.Default.gyroType = ConfigData.gyroType;
 
-
-
-
-
-
             //  public static double[] crossCouplingFactors = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.9e-2, 2.499999e-3, -1.681e-2, 0.0, 0.0, 0.0, 0.0, -8.9999998e-4, -3.7e-3, 1.0, 1.0 };
 
-/*
+            /*
 
-            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
-            configFilePath = Properties.Settings.Default.configFilePath;
-            configFileName = Properties.Settings.Default.configFileName;
-            calFilePath = Properties.Settings.Default.calFilePath;
-            calFileName = Properties.Settings.Default.calFileName;
-            filePath = Properties.Settings.Default.filePath;
-            fileType = Properties.Settings.Default.fileType;
-            fileName = Properties.Settings.Default.dataFileName;
-            frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
-*/
+                        dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
+                        configFilePath = Properties.Settings.Default.configFilePath;
+                        configFileName = Properties.Settings.Default.configFileName;
+                        calFilePath = Properties.Settings.Default.calFilePath;
+                        calFileName = Properties.Settings.Default.calFileName;
+                        filePath = Properties.Settings.Default.filePath;
+                        fileType = Properties.Settings.Default.fileType;
+                        fileName = Properties.Settings.Default.dataFileName;
+                        frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
+            */
 
             Properties.Settings.Default.Save();
-
-
         }
+
         public void InitStoredVariables()
         {
             // Load configuration data from stored defaults
@@ -3467,7 +3414,9 @@ namespace SerialPortTerminal
             ConfigData.beamScale = Properties.Settings.Default.beamScale;
             ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
 
-            Console.WriteLine(Properties.Settings.Default.crossPeriod);
+
+
+
 
             ConfigData.crossPeriod = Properties.Settings.Default.crossPeriod;
             ConfigData.longPeriod = Properties.Settings.Default.longPeriod;
@@ -3482,13 +3431,13 @@ namespace SerialPortTerminal
             ConfigData.crossBias = Properties.Settings.Default.crossBias;
             ConfigData.longBias = Properties.Settings.Default.longBias;
             ConfigData.crossCompFactor_4 = Properties.Settings.Default.crossCompFactor_4;
-            ConfigData.crossCompPhase_4 = Properties.Settings.Default.crossCompPhase_4;
+         //   ConfigData.crossCompPhase_4 = Properties.Settings.Default.crossCompPhase_4;
             ConfigData.crossCompFactor_16 = Properties.Settings.Default.crossCompFactor_16;
-            ConfigData.crossCompPhase_16 = Properties.Settings.Default.crossCompPhase_16;
+         //   ConfigData.crossCompPhase_16 = Properties.Settings.Default.crossCompPhase_16;
             ConfigData.longCompFactor_4 = Properties.Settings.Default.longCompFactor_4;
-            ConfigData.longCompPhase_4 = Properties.Settings.Default.longCompPhase_4;
+         //   ConfigData.longCompPhase_4 = Properties.Settings.Default.longCompPhase_4;
             ConfigData.longCompFactor_16 = Properties.Settings.Default.longCompFactor_16;
-            ConfigData.longCompPhase_16 = Properties.Settings.Default.longCompPhase_16;
+         //   ConfigData.longCompPhase_16 = Properties.Settings.Default.longCompPhase_16;
 
             ConfigData.CML_Fact = Properties.Settings.Default.CML_Fact;
             ConfigData.AL_Fact = Properties.Settings.Default.AL_Fact;
@@ -3503,6 +3452,134 @@ namespace SerialPortTerminal
             ConfigData.LACC_CMX_Phase = Properties.Settings.Default.LACC_CMX_Phase;
             ConfigData.kFactor = Properties.Settings.Default.kFactor;
             ConfigData.gyroType = Properties.Settings.Default.gyroType;
+
+
+            ConfigData.beamScale = Properties.Settings.Default.beamScale;
+            ConfigData.crossBias = Properties.Settings.Default.crossBias;
+            ConfigData.crossCouplingFactors[0] = Properties.Settings.Default.crossCouplingFactors0;
+            ConfigData.crossCouplingFactors[1] = Properties.Settings.Default.crossCouplingFactors1;
+            ConfigData.crossCouplingFactors[2] = Properties.Settings.Default.crossCouplingFactors2;
+            ConfigData.crossCouplingFactors[3] = Properties.Settings.Default.crossCouplingFactors3;
+            ConfigData.crossCouplingFactors[4] = Properties.Settings.Default.crossCouplingFactors4;
+            ConfigData.crossCouplingFactors[5] = Properties.Settings.Default.crossCouplingFactors5;
+            ConfigData.crossCouplingFactors[6] = Properties.Settings.Default.crossCouplingFactors6_VCC;
+            ConfigData.crossCouplingFactors[7] = Properties.Settings.Default.crossCouplingFactors7_AL;
+            ConfigData.crossCouplingFactors[8] = Properties.Settings.Default.crossCouplingFactors8_AX;
+            ConfigData.crossCouplingFactors[9] = Properties.Settings.Default.crossCouplingFactors9_VE;
+            ConfigData.crossCouplingFactors[10] = Properties.Settings.Default.crossCouplingFactors10_AX2;
+            ConfigData.crossCouplingFactors[11] = Properties.Settings.Default.crossCouplingFactors11_XACC2;
+            ConfigData.crossCouplingFactors[12] = Properties.Settings.Default.crossCouplingFactors12_LACC2;
+            ConfigData.crossCouplingFactors[13] = Properties.Settings.Default.crossCouplingFactors13_CrossAxisCompensation4;
+            ConfigData.crossCouplingFactors[14] = Properties.Settings.Default.crossCouplingFactors14_LongAxisCompensation4;
+            ConfigData.crossCouplingFactors[15] = Properties.Settings.Default.crossCouplingFactors15_CrossAxisCompensation16;
+            ConfigData.crossCouplingFactors[16] = Properties.Settings.Default.crossCouplingFactors16_LongAxisCompensation16;
+            ConfigData.crossDampFactor = Properties.Settings.Default.crossDampFactor;
+            ConfigData.crossGain = Properties.Settings.Default.crossGain;
+            ConfigData.crossLead = Properties.Settings.Default.crossLead;
+            ConfigData.crossPeriod = Properties.Settings.Default.crossPeriod;
+            ConfigData.digitalInputSwitch = 0;// not needed
+            ConfigData.engPassword = "zls";
+            ConfigData.fileNameSwitch = 1;// not needed
+            ConfigData.hardDiskSwitch = 1;// not needed
+            ConfigData.iAuxGain = 0.0;// not needed
+            ConfigData.linePrinterSwitch = 0;// not needed
+            ConfigData.longBias = Properties.Settings.Default.longBias;
+            ConfigData.longDampFactor = Properties.Settings.Default.longDampFactor;
+            ConfigData.longGain = Properties.Settings.Default.longGain;
+            ConfigData.longLead = Properties.Settings.Default.longLead;
+            ConfigData.longPeriod = Properties.Settings.Default.longPeriod;
+            ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
+            ConfigData.modeSwitch = 1;// hires or marine??
+            ConfigData.monitorDisplaySwitch = 2;// not needed
+            ConfigData.numAuxChan = 0;// not needed
+            ConfigData.printerEmulationSwitch = 3;// not needed
+            ConfigData.serialPortOutputSwitch = -1;// check on function
+            ConfigData.serialPortSwitch = 1;// check on function - should save default port for meter and data output
+            ConfigData.springTensionMax = Properties.Settings.Default.springTensionMax;
+            ConfigData.alarmSwitch = 0;// check on function
+            ConfigData.analogFilter[0] = Properties.Settings.Default.analogFilter0;
+            ConfigData.analogFilter[1] = Properties.Settings.Default.analogFilter1_AXPhase;
+            ConfigData.analogFilter[2] = Properties.Settings.Default.analogFilter2_ALPhase;
+            ConfigData.analogFilter[3] = Properties.Settings.Default.analogFilter3;// N/A
+            ConfigData.analogFilter[4] = Properties.Settings.Default.analogFilter4_VCCPhase;
+            ConfigData.analogFilter[5] = Properties.Settings.Default.analogFilter5_CrossAxisCompensationPhase4;
+            ConfigData.analogFilter[6] = Properties.Settings.Default.analogFilter6_LongAxisCompensationPhase4;
+            ConfigData.analogFilter[7] = Properties.Settings.Default.analogFilter8_LongAxisCompensationPhase16;
+            ConfigData.analogFilter[8] = Properties.Settings.Default.analogFilter8_LongAxisCompensationPhase16;
+
+
+            if (engineerDebug)
+            {
+
+                Console.WriteLine("Beam scale: " + ConfigData.beamScale);
+                Console.WriteLine("Meter number: " + ConfigData.meterNumber);
+                Console.WriteLine("Cross period: " + Properties.Settings.Default.crossPeriod);
+                Console.WriteLine("Cross damping: " + Properties.Settings.Default.crossDampFactor);
+                Console.WriteLine("Cross gain: " + Properties.Settings.Default.crossGain);
+                Console.WriteLine("Cross lead: " + Properties.Settings.Default.crossLead);
+                Console.WriteLine("Cross bias: " + Properties.Settings.Default.crossBias);
+                Console.WriteLine("Long period: " + Properties.Settings.Default.longPeriod);
+                Console.WriteLine("Long damping: " + Properties.Settings.Default.longDampFactor);
+                Console.WriteLine("Long gain: " + Properties.Settings.Default.longGain);
+                Console.WriteLine("Long lead: " + Properties.Settings.Default.longLead);
+                Console.WriteLine("Long bias: " + Properties.Settings.Default.longBias);
+                Console.WriteLine("Max spring tension: " + Properties.Settings.Default.springTensionMax);
+                Console.WriteLine("Mode: " + Properties.Settings.Default.DataMode);
+                Console.WriteLine("crossCouplingFactors0: " + ConfigData.crossCouplingFactors[0]);
+                Console.WriteLine("crossCouplingFactors1: " + ConfigData.crossCouplingFactors[1]);
+                Console.WriteLine("crossCouplingFactors2: " + ConfigData.crossCouplingFactors[2]);
+                Console.WriteLine("crossCouplingFactors3: " + ConfigData.crossCouplingFactors[3]);
+                Console.WriteLine("crossCouplingFactors4: " + ConfigData.crossCouplingFactors[4]);
+                Console.WriteLine("crossCouplingFactors5: " + ConfigData.crossCouplingFactors[5]);
+                Console.WriteLine("crossCouplingFactors6_VCC: " + ConfigData.crossCouplingFactors[6]);
+                Console.WriteLine("crossCouplingFactors7_AL: " + ConfigData.crossCouplingFactors[7]);
+                Console.WriteLine("crossCouplingFactors8_AX: " + ConfigData.crossCouplingFactors[8]);
+                Console.WriteLine("crossCouplingFactors9_VE: " + ConfigData.crossCouplingFactors[9]);
+                Console.WriteLine("crossCouplingFactors10_AX2: " + ConfigData.crossCouplingFactors[10]);
+                Console.WriteLine("crossCouplingFactors11_XACC2: " + ConfigData.crossCouplingFactors[11]);
+                Console.WriteLine("crossCouplingFactors12_LACC2: " + ConfigData.crossCouplingFactors[12]);
+                Console.WriteLine("crossCouplingFactors13_CrossAxisCompensation4: " + ConfigData.crossCouplingFactors[13]);
+                Console.WriteLine("crossCouplingFactors14_LongAxisCompensation4: "  + ConfigData.crossCouplingFactors[14]);
+                Console.WriteLine("crossCouplingFactors15_CrossAxisCompensation16: " + ConfigData.crossCouplingFactors[15]);
+                Console.WriteLine("crossCouplingFactors16_LongAxisCompensation16: " + ConfigData.crossCouplingFactors[16]);
+
+
+                Console.WriteLine( ConfigData.analogFilter[0]);
+                Console.WriteLine( ConfigData.analogFilter[1]);
+                Console.WriteLine( ConfigData.analogFilter[2]);
+                Console.WriteLine( ConfigData.analogFilter[3]);
+                Console.WriteLine( ConfigData.analogFilter[4]);
+                Console.WriteLine( ConfigData.analogFilter[5]);
+                Console.WriteLine( ConfigData.analogFilter[6]);
+                Console.WriteLine( ConfigData.analogFilter[7]);
+                Console.WriteLine( ConfigData.analogFilter[8]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
 
 
 
@@ -3644,14 +3721,10 @@ namespace SerialPortTerminal
             }
         }
 
- 
-
-
-
         private void CheckPassword()
         {
             PasswordForm PasswordForm = new PasswordForm();
-            
+
             while (PasswordForm.passwordValid == null)
             {
                 if (PasswordForm.passwordValid == "userPasswordValid")
@@ -3667,12 +3740,8 @@ namespace SerialPortTerminal
                     PasswordsClass.engPasswordValid = true;
                 }
             }
-          //  return PasswordForm.passwordValid;
-    
-
+            //  return PasswordForm.passwordValid;
         }
-
-
 
         private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -3685,7 +3754,6 @@ namespace SerialPortTerminal
             {
                 MessageBox.Show("You must be logged in to access this.");
             }
-            
         }
 
         private void dataStatusFormToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3745,121 +3813,38 @@ namespace SerialPortTerminal
         public class ConfigFileData
         {
             public string EntryName;
-
             public string configValue;
         }
 
-        public void ReadConfigFile(string configFile)
+        private void CheckConfigFile(string configFile)
         {
-            var engine = new FileHelperAsyncEngine<ConfigFileData>();
+            var fileExists = File.Exists(configFile) || File.Exists(Path.Combine(Directory.GetParent(Path.GetDirectoryName(fileName)).FullName, Path.GetFileName(fileName)));
 
-            UserDataForm.configurationFileTextBox.Text = configFile;
-
-            //  NEED TO ADD ERROR CHECKING FOR END OF FILE
-            //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
-            ConfigData ConfigData = new ConfigData();
-
-
-            var fileName = @configFile;
-
-            var fileExists =
-                File.Exists(fileName) ||
-                File.Exists(
-                    Path.Combine(
-                        Directory.GetParent(Path.GetDirectoryName(fileName)).FullName,
-                        Path.GetFileName(fileName)
-                    )
-                );
-
-
-
-          
+            if (engineerDebug)
+            {
+                Console.WriteLine("Config file name " + Path.GetFileName(configFile));
+                Console.WriteLine("Config file path " + Path.GetDirectoryName(configFile));
+            }
             DialogResult result = DialogResult.No;
+
             if (fileExists == false)
             {
-                string message = "Config file not found?  Load defaults from last session?  No will open file dialog";
+                string message = "Config file not found!  Load default values from last session?";
                 string title = "File not found";
 
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                 result = MessageBox.Show(message, title, buttons);
+                result = MessageBox.Show(message, title, buttons);
 
                 if (result == DialogResult.Yes)
 
                 {
-                    this.Close();
+                    // Defaults are already loaded.  Do nothing
+                  //  this.Close();
                 }
                 else
                 {
-                    this.Close();
-                }
-            }
-
-
-
-
-
-            if (result == DialogResult.Yes)// load defaults -
-            {
-              //  ConfigData.alarmSwitch = Properties.Settings.Default.al; ;
-                ConfigData.beamScale = Properties.Settings.Default.beamScale;
-                ConfigData.crossBias = Properties.Settings.Default.crossBias;
-                ConfigData.crossCouplingFactors[0] = Properties.Settings.Default.crossCouplingFactors0;
-                ConfigData.crossCouplingFactors[1] = Properties.Settings.Default.crossCouplingFactors1;
-                ConfigData.crossCouplingFactors[2] = Properties.Settings.Default.crossCouplingFactors2;
-                ConfigData.crossCouplingFactors[3] = Properties.Settings.Default.crossCouplingFactors3;
-                ConfigData.crossCouplingFactors[4] = Properties.Settings.Default.crossCouplingFactors4;
-                ConfigData.crossCouplingFactors[5] = Properties.Settings.Default.crossCouplingFactors5;
-                ConfigData.crossCouplingFactors[6] = Properties.Settings.Default.crossCouplingFactors6;
-                ConfigData.crossCouplingFactors[7] = Properties.Settings.Default.crossCouplingFactors7;
-                ConfigData.crossCouplingFactors[8] = Properties.Settings.Default.crossCouplingFactors8;
-                ConfigData.crossCouplingFactors[9] = Properties.Settings.Default.crossCouplingFactors9;
-                ConfigData.crossCouplingFactors[10] = Properties.Settings.Default.crossCouplingFactors10;
-                ConfigData.crossCouplingFactors[11] = Properties.Settings.Default.crossCouplingFactors11;
-                ConfigData.crossCouplingFactors[12] = Properties.Settings.Default.crossCouplingFactors12;
-                ConfigData.crossCouplingFactors[13] = Properties.Settings.Default.crossCouplingFactors13;
-                ConfigData.crossCouplingFactors[14] = Properties.Settings.Default.crossCouplingFactors14;
-                ConfigData.crossCouplingFactors[15] = Properties.Settings.Default.crossCouplingFactors15;
-                ConfigData.crossCouplingFactors[16] = Properties.Settings.Default.crossCouplingFactors16;
-                ConfigData.crossDampFactor = Properties.Settings.Default.crossDampFactor;
-                ConfigData.crossGain = Properties.Settings.Default.crossGain;
-                ConfigData.crossLead = Properties.Settings.Default.crossLead;
-                ConfigData.crossPeriod = Properties.Settings.Default.crossPeriod;
-                ConfigData.digitalInputSwitch = 0;// not needed
-                ConfigData.engPassword = "zls";
-                ConfigData.fileNameSwitch = 1;// not needed
-                ConfigData.hardDiskSwitch = 1;// not needed
-                ConfigData.iAuxGain = 0.0;// not needed
-                ConfigData.linePrinterSwitch = 0;// not needed
-                ConfigData.longBias = Properties.Settings.Default.longBias;
-                ConfigData.longDampFactor = Properties.Settings.Default.longDampFactor;
-                ConfigData.longGain = Properties.Settings.Default.longGain;
-                ConfigData.longLead = Properties.Settings.Default.longLead;
-                ConfigData.longPeriod = Properties.Settings.Default.longPeriod;
-                ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
-                ConfigData.modeSwitch = 1;// hires or marine??
-                ConfigData.monitorDisplaySwitch = 2;// not needed
-                ConfigData.numAuxChan = 0;// not needed
-                ConfigData.printerEmulationSwitch = 3;// not needed
-                ConfigData.serialPortOutputSwitch = -1;// check on function
-                ConfigData.serialPortSwitch = 1;// check on function - should save default port for meter and data output
-                ConfigData.springTensionMax = Properties.Settings.Default.springTensionMax;
-                ConfigData.alarmSwitch = 0;// check on function
-                ConfigData.analogFilter[0] = Properties.Settings.Default.analogFilter0;
-                ConfigData.analogFilter[1] = Properties.Settings.Default.analogFilter1;
-                ConfigData.analogFilter[2] = Properties.Settings.Default.analogFilter2;
-                ConfigData.analogFilter[3] = Properties.Settings.Default.analogFilter3;
-                ConfigData.analogFilter[4] = Properties.Settings.Default.analogFilter4;
-                ConfigData.analogFilter[5] = Properties.Settings.Default.analogFilter5;
-                ConfigData.analogFilter[6] = Properties.Settings.Default.analogFilter6;
-                ConfigData.analogFilter[7] = Properties.Settings.Default.analogFilter7;
-                ConfigData.analogFilter[8] = Properties.Settings.Default.analogFilter8;
-                UserDataForm.meterNumberTextBox.Text = ConfigData.meterNumber;
-            }
-            else
-            {
-                // If file not found and user selected not to load defaults open file dialog to find file.
-                if (result == DialogResult.No)
-                {
+                    // this.Close();
+                    //Open file dialog then read file
                     OpenFileDialog OpenFileDialog = new OpenFileDialog();
                     OpenFileDialog.InitialDirectory = Properties.Settings.Default.configFilePath;
                     OpenFileDialog.Filter = "Comma delimited Files (.csv)|*.csv|All Files (*.*)|*.*";
@@ -3869,12 +3854,35 @@ namespace SerialPortTerminal
                     OpenFileDialog.ShowDialog();
                     // save path and file name to defaults
                     Properties.Settings.Default.configFilePath = Path.GetDirectoryName(OpenFileDialog.FileName);
-
+                    Properties.Settings.Default.Save();
                     configFile = OpenFileDialog.FileName;
+                    ReadConfigFile(configFile);// Load config file selected
                 }
+            }
+            else
+            {
+                ReadConfigFile(configFile);
+            }
+        }
 
+        public void ReadConfigFile(string configFile)
+        {
+            var engine = new FileHelperAsyncEngine<ConfigFileData>();
+            UserDataForm.configurationFileTextBox.Text = configFile;
+            ConfigData ConfigData = new ConfigData();
 
+            var fileName = @configFile;// Double check the selected file exists
+            var fileExists =
+                File.Exists(fileName) ||
+                File.Exists(
+                    Path.Combine(
+                        Directory.GetParent(Path.GetDirectoryName(fileName)).FullName,
+                        Path.GetFileName(fileName)
+                    )
+                );
 
+            if (fileExists)// Load the data
+            {
 
                 try
                 {
@@ -3889,7 +3897,6 @@ namespace SerialPortTerminal
                             {
                                 case "Version":
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Version number: ---------------------- \t" + Convert.ToString(dataItem.configValue));
-
                                     break;
 
                                 case "Meter Number":
@@ -3992,57 +3999,66 @@ namespace SerialPortTerminal
                                     mdt.VCC = ConfigData.crossCouplingFactors[6];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[6]/VCC------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
                                     break;
+
                                 case "crossCouplingFactors7-AL": // AL
                                     ConfigData.crossCouplingFactors[7] = Convert.ToDouble(dataItem.configValue);
                                     mdt.AL = ConfigData.crossCouplingFactors[7];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[7]/AL------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
                                     break;
+
                                 case "crossCouplingFactors8-AX": // AX
                                     ConfigData.crossCouplingFactors[8] = Convert.ToDouble(dataItem.configValue);
                                     mdt.AX = ConfigData.crossCouplingFactors[8];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[8]/AX------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
                                     break;
-                                case "crossCouplingFactors-VE": // VE
+
+                                case "crossCouplingFactors9-VE": // VE
                                     ConfigData.crossCouplingFactors[9] = Convert.ToDouble(dataItem.configValue);
                                     mdt.VE = ConfigData.crossCouplingFactors[9];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[9]/VE------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
                                     break;
+
                                 case "crossCouplingFactors10-AX2": // AX2
                                     ConfigData.crossCouplingFactors[10] = Convert.ToDouble(dataItem.configValue);
                                     mdt.AX2 = ConfigData.crossCouplingFactors[10];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[10]/AX2------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
                                     break;
+
                                 case "crossCouplingFactors11-XACC2": // XACC2
                                     ConfigData.crossCouplingFactors[11] = Convert.ToDouble(dataItem.configValue);
                                     mdt.XACC2 = ConfigData.crossCouplingFactors[11];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[11]/XACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
                                     break;
-                                case "crossCouplingFactors12-LAXX2": // LACC2
+
+                                case "crossCouplingFactors12-LACC2": // LACC2
                                     ConfigData.crossCouplingFactors[12] = Convert.ToDouble(dataItem.configValue);
                                     mdt.LACC2 = ConfigData.crossCouplingFactors[12];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[12]/LACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
                                     break;
+
                                 case "crossCouplingFactors13-Cross Axis Compensation(4)": // Cross Axis Compensation (4)
                                     ConfigData.crossCouplingFactors[13] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.crossCompFactor_4 = ConfigData.crossCouplingFactors[13];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[13]/Cross Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
                                     break;
+
                                 case "crossCouplingFactors14-Long Axis Compensation(4)": // Long Axis Compensation (4)
                                     ConfigData.crossCouplingFactors[14] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.longCompFactor_4 = ConfigData.crossCouplingFactors[14];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[14]/Long Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
                                     break;
+
                                 case "crossCouplingFactors15-Cross Axis Compensation(16)": // Cross Axis Compensation (16)
                                     ConfigData.crossCouplingFactors[15] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.crossCompFactor_16 = ConfigData.crossCouplingFactors[15];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[15]/Cross Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
                                     break;
+
                                 case "crossCouplingFactors16-Long Axis Compensation(16)": // Long Axis Compensation (16)
                                     ConfigData.crossCouplingFactors[16] = Convert.ToDouble(dataItem.configValue);
                                     ConfigData.longCompFactor_16 = ConfigData.crossCouplingFactors[16];
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[16]/Long Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
                                     break;
-
 
                                 case "analogFilter1-AX Phase":// AX Phase
                                     ConfigData.analogFilter[1] = Convert.ToDouble(dataItem.configValue);
@@ -4093,71 +4109,39 @@ namespace SerialPortTerminal
                                 case "Mode":
                                     dataAquisitionMode = dataItem.configValue.Trim();
                                     if (frmTerminal.engineerDebug) Console.WriteLine("Data mode ------------------------------ \t" + Convert.ToString(dataAquisitionMode));
-
                                     break;
 
                                 default:
-
                                     // set alert "xxx" entry is not found. check file and try again
                                     //Print to  log file
-
                                     string message = dataItem.EntryName + "is not a valid property for config file";
                                     string title = "Bad Entry";
                                     MessageBox.Show(message, title);
-                                    
-
                                     break;
-                            }
-                        }
-                    }
-
-                    /*
-
-                                                           ConfigData.numAuxChan = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("NUMBER OF AUXILIARY ANALOG CHANNELS-- \t" + Convert.ToString(ConfigData.numAuxChan));
-
-                                                           ConfigData.linePrinterSwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
-
-                                                           ConfigData.fileNameSwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
-
-                                                           readBinary.Read(byte2, 0, 2);
-                                                           ConfigData.hardDiskSwitch = BitConverter.ToInt16(byte2, 0); ;
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
-
-                                                           ConfigData.engPassword = System.Text.Encoding.Default.GetString(byte10);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("Magic value is ---------------------- \t" + ConfigData.engPassword);
-
-                                                           ConfigData.monitorDisplaySwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
-
-                                                           ConfigData.serialPortSwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
-
-                                                           ConfigData.digitalInputSwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
-
-                                                           ConfigData.serialPortOutputSwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
-
-                                                           ConfigData.alarmSwitch = BitConverter.ToInt16(byte2, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
-
-                                                           ConfigData.iAuxGain = BitConverter.ToSingle(byte4, 0);
-                                                           if (frmTerminal.engineerDebug) Console.WriteLine("I aux gain value is --------------- \t" + Convert.ToString(ConfigData.iAuxGain));
-
-   */
-
+                            }// switch
+                        }// for each
+                    }// using
                     UserDataForm.meterNumberTextBox.Text = ConfigData.meterNumber;
-                }
+                }// try
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
                     GetConfigFileDialog();
                 }
             }
-        }
+
+
+            else
+            {
+                CheckConfigFile(configFile);// File does not exist. Have user pick a new file.
+            }
+
+
+
+        }// ReadConfigFile
+
+
+
 
         /*
 
@@ -4842,7 +4826,6 @@ namespace SerialPortTerminal
             {
                 // WinForms app
                 StoreDefaultVariables();
-                
 
                 System.Windows.Forms.Application.Exit();
             }
@@ -4873,7 +4856,6 @@ namespace SerialPortTerminal
             Properties.Settings.Default.Save();
         }
 
-
         public void GetConfigFileDialog()
         {
             OpenFileDialog OpenFileDialog = new OpenFileDialog();
@@ -4885,14 +4867,13 @@ namespace SerialPortTerminal
 
             OpenFileDialog.Multiselect = true;
 
-
-
             OpenFileDialog.ShowDialog();
             // save path and file name to defaults
             Properties.Settings.Default.configFilePath = Path.GetDirectoryName(OpenFileDialog.FileName);
 
             ReadConfigFile(OpenFileDialog.FileName);
         }
+
         private void loadConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GetConfigFileDialog();
@@ -5409,12 +5390,10 @@ namespace SerialPortTerminal
 
         private void saveConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void printConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void saveDefaultsToolStripMenuItem_Click(object sender, EventArgs e)

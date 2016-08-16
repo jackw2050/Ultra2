@@ -133,7 +133,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\")]
         public string calFilePath {
             get {
                 return ((string)(this["calFilePath"]));
@@ -154,7 +154,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\zls\\data\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("e:\\ZLS\\")]
         public string configFilePath {
             get {
                 return ((string)(this["configFilePath"]));
@@ -178,7 +178,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\data\\\\\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"E:\\\\ZLS\\\\data\\\\\"")]
         public string filePath {
             get {
                 return ((string)(this["filePath"]));
@@ -202,7 +202,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"c:\\\\zls\\\\data\\\\\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"E:\\\\ZLS\\\\data\\\\\"")]
         public string dataFilePath {
             get {
                 return ((string)(this["dataFilePath"]));
@@ -778,132 +778,132 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.035199999809265137")]
-        public double crossCouplingFactors6 {
+        public double crossCouplingFactors6_VCC {
             get {
-                return ((double)(this["crossCouplingFactors6"]));
+                return ((double)(this["crossCouplingFactors6_VCC"]));
             }
             set {
-                this["crossCouplingFactors6"] = value;
+                this["crossCouplingFactors6_VCC"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-0.0032800000626593828")]
-        public double crossCouplingFactors7 {
+        public double crossCouplingFactors7_AL {
             get {
-                return ((double)(this["crossCouplingFactors7"]));
+                return ((double)(this["crossCouplingFactors7_AL"]));
             }
             set {
-                this["crossCouplingFactors7"] = value;
+                this["crossCouplingFactors7_AL"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-0.058649998158216476")]
-        public double crossCouplingFactors8 {
+        public double crossCouplingFactors8_AX {
             get {
-                return ((double)(this["crossCouplingFactors8"]));
+                return ((double)(this["crossCouplingFactors8_AX"]));
             }
             set {
-                this["crossCouplingFactors8"] = value;
+                this["crossCouplingFactors8_AX"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.0094400001689791679")]
-        public double crossCouplingFactors9 {
+        public double crossCouplingFactors9_VE {
             get {
-                return ((double)(this["crossCouplingFactors9"]));
+                return ((double)(this["crossCouplingFactors9_VE"]));
             }
             set {
-                this["crossCouplingFactors9"] = value;
+                this["crossCouplingFactors9_VE"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors10 {
+        public double crossCouplingFactors10_AX2 {
             get {
-                return ((double)(this["crossCouplingFactors10"]));
+                return ((double)(this["crossCouplingFactors10_AX2"]));
             }
             set {
-                this["crossCouplingFactors10"] = value;
+                this["crossCouplingFactors10_AX2"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors11 {
+        public double crossCouplingFactors11_XACC2 {
             get {
-                return ((double)(this["crossCouplingFactors11"]));
+                return ((double)(this["crossCouplingFactors11_XACC2"]));
             }
             set {
-                this["crossCouplingFactors11"] = value;
+                this["crossCouplingFactors11_XACC2"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors12 {
+        public double crossCouplingFactors12_LACC2 {
             get {
-                return ((double)(this["crossCouplingFactors12"]));
+                return ((double)(this["crossCouplingFactors12_LACC2"]));
             }
             set {
-                this["crossCouplingFactors12"] = value;
+                this["crossCouplingFactors12_LACC2"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-0.0011992008658125997")]
-        public double crossCouplingFactors13 {
+        public double crossCouplingFactors13_CrossAxisCompensation4 {
             get {
-                return ((double)(this["crossCouplingFactors13"]));
+                return ((double)(this["crossCouplingFactors13_CrossAxisCompensation4"]));
             }
             set {
-                this["crossCouplingFactors13"] = value;
+                this["crossCouplingFactors13_CrossAxisCompensation4"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-0.0013000000035390258")]
-        public double crossCouplingFactors14 {
+        public double crossCouplingFactors14_LongAxisCompensation4 {
             get {
-                return ((double)(this["crossCouplingFactors14"]));
+                return ((double)(this["crossCouplingFactors14_LongAxisCompensation4"]));
             }
             set {
-                this["crossCouplingFactors14"] = value;
+                this["crossCouplingFactors14_LongAxisCompensation4"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCouplingFactors15 {
+        public double crossCouplingFactors15_CrossAxisCompensation16 {
             get {
-                return ((double)(this["crossCouplingFactors15"]));
+                return ((double)(this["crossCouplingFactors15_CrossAxisCompensation16"]));
             }
             set {
-                this["crossCouplingFactors15"] = value;
+                this["crossCouplingFactors15_CrossAxisCompensation16"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCouplingFactors16 {
+        public double crossCouplingFactors16_LongAxisCompensation16 {
             get {
-                return ((double)(this["crossCouplingFactors16"]));
+                return ((double)(this["crossCouplingFactors16_LongAxisCompensation16"]));
             }
             set {
-                this["crossCouplingFactors16"] = value;
+                this["crossCouplingFactors16_LongAxisCompensation16"] = value;
             }
         }
         
@@ -934,24 +934,24 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.22400000691413879")]
-        public double analogFilter1 {
+        public double analogFilter1_AXPhase {
             get {
-                return ((double)(this["analogFilter1"]));
+                return ((double)(this["analogFilter1_AXPhase"]));
             }
             set {
-                this["analogFilter1"] = value;
+                this["analogFilter1_AXPhase"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.24250000715255737")]
-        public double analogFilter2 {
+        public double analogFilter2_ALPhase {
             get {
-                return ((double)(this["analogFilter2"]));
+                return ((double)(this["analogFilter2_ALPhase"]));
             }
             set {
-                this["analogFilter2"] = value;
+                this["analogFilter2_ALPhase"] = value;
             }
         }
         
@@ -970,48 +970,48 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.28999999165534973")]
-        public double analogFilter4 {
+        public double analogFilter4_VCCPhase {
             get {
-                return ((double)(this["analogFilter4"]));
+                return ((double)(this["analogFilter4_VCCPhase"]));
             }
             set {
-                this["analogFilter4"] = value;
+                this["analogFilter4_VCCPhase"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.60000002384185791")]
-        public double analogFilter5 {
+        public double analogFilter5_CrossAxisCompensationPhase4 {
             get {
-                return ((double)(this["analogFilter5"]));
+                return ((double)(this["analogFilter5_CrossAxisCompensationPhase4"]));
             }
             set {
-                this["analogFilter5"] = value;
+                this["analogFilter5_CrossAxisCompensationPhase4"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.60000002384185791")]
-        public double analogFilter6 {
+        public double analogFilter6_LongAxisCompensationPhase4 {
             get {
-                return ((double)(this["analogFilter6"]));
+                return ((double)(this["analogFilter6_LongAxisCompensationPhase4"]));
             }
             set {
-                this["analogFilter6"] = value;
+                this["analogFilter6_LongAxisCompensationPhase4"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double analogFilter7 {
+        public double analogFilter8_LongAxisCompensationPhase16 {
             get {
-                return ((double)(this["analogFilter7"]));
+                return ((double)(this["analogFilter8_LongAxisCompensationPhase16"]));
             }
             set {
-                this["analogFilter7"] = value;
+                this["analogFilter8_LongAxisCompensationPhase16"] = value;
             }
         }
         
