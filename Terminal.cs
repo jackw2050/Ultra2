@@ -3843,7 +3843,7 @@ namespace SerialPortTerminal
                 }
                 else
                 {
-                    // this.Close();
+                    
                     //Open file dialog then read file
                     OpenFileDialog OpenFileDialog = new OpenFileDialog();
                     OpenFileDialog.InitialDirectory = Properties.Settings.Default.configFilePath;
