@@ -484,21 +484,18 @@ namespace SerialPortTerminal
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
             this.toolStripMenuItem10.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem10.Text = "8";
-            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
             this.toolStripMenuItem11.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem11.Text = "9";
-            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
             this.toolStripMenuItem12.Size = new System.Drawing.Size(86, 22);
             this.toolStripMenuItem12.Text = "10";
-            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
             // toolStripMenuItemColorPalette
             // 
@@ -1059,7 +1056,6 @@ namespace SerialPortTerminal
             this.printConfigFileToolStripMenuItem.Name = "printConfigFileToolStripMenuItem";
             this.printConfigFileToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.printConfigFileToolStripMenuItem.Text = "Print Config file";
-            this.printConfigFileToolStripMenuItem.Click += new System.EventHandler(this.printConfigFileToolStripMenuItem_Click);
             // 
             // setDataFileLocationToolStripMenuItem
             // 

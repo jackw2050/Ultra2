@@ -337,6 +337,7 @@ namespace SerialPortTerminal
 
     public class ConfigData// Change all single to double
     {
+        public static string version;
         public static double beamScale;
         public static string meterNumber;
         public static double crossPeriod;

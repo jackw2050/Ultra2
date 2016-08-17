@@ -131,12 +131,15 @@ namespace SerialPortTerminal.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\")]
         public string calFilePath {
             get {
                 return ((string)(this["calFilePath"]));
+            }
+            set {
+                this["calFilePath"] = value;
             }
         }
         
@@ -1036,6 +1039,18 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["Setting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0")]
+        public string version {
+            get {
+                return ((string)(this["version"]));
+            }
+            set {
+                this["version"] = value;
             }
         }
     }

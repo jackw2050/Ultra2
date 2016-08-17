@@ -29,7 +29,7 @@
     <Setting Name="calFileName" Type="System.String" Scope="User">
       <Value Profile="(Default)">S67-tab.csv</Value>
     </Setting>
-    <Setting Name="calFilePath" Type="System.String" Scope="Application">
+    <Setting Name="calFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">E:\ZLS\</Value>
     </Setting>
     <Setting Name="configFileName" Type="System.String" Scope="User">
@@ -256,6 +256,9 @@
     </Setting>
     <Setting Name="Setting" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1.0</Value>
     </Setting>
   </Settings>
 </SettingsFile>
