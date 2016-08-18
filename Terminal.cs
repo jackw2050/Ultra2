@@ -3007,17 +3007,17 @@ namespace SerialPortTerminal
             return outputBytes;
         }
 
-
-        public byte[] CreateCrossAxisParametersArray(byte command, double data1, double data2, double data3, double data4, double data5, double data6 )
+        public byte[] CreateCrossAxisParametersArray(byte command, double data1, double data2, double data3, double data4, double data5, double data6)
         {
-            byte cmdByte =  command;
+            byte cmdByte = command;
 
             byte[] checkSum = new byte[1];
             byte[] byteArray1 = BitConverter.GetBytes(data1);
+            Single sdata1 = Convert.ToSingle(0.0000191 * 1000) / 1000;
 
             byte[] outputBytes = new byte[26];
-
-            byte[] byte1 = BitConverter.GetBytes(Convert.ToSingle(data1));
+            data1 = Convert.ToSingle(data1);
+            byte[] byte1 = BitConverter.GetBytes(sdata1);
             byte[] byte2 = BitConverter.GetBytes(Convert.ToSingle(data2));
             byte[] byte3 = BitConverter.GetBytes(Convert.ToSingle(data3));
             byte[] byte4 = BitConverter.GetBytes(Convert.ToSingle(data4));
@@ -3055,15 +3055,14 @@ namespace SerialPortTerminal
             outputBytes[23] = byte6[2];
             outputBytes[24] = byte6[3];
 
-
-//------------------------------------------------------------------------------------------------------------
-/*
-            outputBytes[0] = 0x07;
-            outputBytes[1] = byteArray1[0];
-            outputBytes[2] = byteArray1[1];
-            outputBytes[3] = byteArray1[2];
-            outputBytes[4] = byteArray1[3];
-*/
+            //------------------------------------------------------------------------------------------------------------
+            /*
+                        outputBytes[0] = 0x07;
+                        outputBytes[1] = byteArray1[0];
+                        outputBytes[2] = byteArray1[1];
+                        outputBytes[3] = byteArray1[2];
+                        outputBytes[4] = byteArray1[3];
+            */
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
@@ -3073,13 +3072,6 @@ namespace SerialPortTerminal
 
             return outputBytes;
         }
-
-
-
-
-
-
-
 
         public void sendCmd(string cmd)
         {
@@ -3183,29 +3175,17 @@ namespace SerialPortTerminal
                     crossCouplingFactor13 = System.Convert.ToSingle(ConfigData.crossCouplingFactors[13]);
                     analogFilter5 = System.Convert.ToSingle(ConfigData.analogFilter[5]);
 
-                    data = CreateTxArray(4, aCrossPeriod, aCrossDampFactor, aCrossGain, aCrossLead, crossCouplingFactor13, analogFilter5);
-                    // Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+                   // data = CreateTxArray(4, aCrossPeriod, aCrossDampFactor, aCrossGain, aCrossLead, crossCouplingFactor13, analogFilter5);
 
-                    byte[] byteArrayCPeriod = BitConverter.GetBytes(Convert.ToSingle(ConfigData.crossPeriod));
-                    byte[] byteArrayCDampFactor = BitConverter.GetBytes(ConfigData.crossDampFactor);
-                    byte[] byteArrayCGain = BitConverter.GetBytes(ConfigData.crossGain);
-                    byte[] byteArrayCLead = BitConverter.GetBytes(ConfigData.crossLead);
-                    byte[] byteArrayCC13 = BitConverter.GetBytes(crossCouplingFactor13);
-                    byte[] byteArrayAF13 = BitConverter.GetBytes(analogFilter5);
-
-
-
-
-
-
-
-                    // data[0] = 0X04;
-                    /*                   data[1] = 0xF0;
-                                       data[2] = 0x38;
-                                       data[3] = 0xa0;
-                                       data[4] = 0x37;
-                                       data[5] = 0x87;
-                                       data[6] = 0x16;  */
+                    data = CreateCrossAxisParametersArray(0x04, 1.91e-5, .212, .15, .5, -8.99998e-4, 1.0);
+/*
+                    data[0] = 0X04;
+                    data[1] = 0xF0;
+                    data[2] = 0x38;
+                    data[3] = 0xa0;
+                    data[4] = 0x37;
+                    data[5] = 0x87;
+                    data[6] = 0x16;
                     data[7] = 0x59;
                     data[8] = 0x3E;
                     data[9] = 0x9A;
@@ -3225,25 +3205,18 @@ namespace SerialPortTerminal
                     data[23] = 0x80;
                     data[24] = 0x3F;
                     data[25] = 0xCF;
-
+        */            
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
 
-
-                    data = CreateCrossAxisParametersArray(0x04, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
+                    //      data = CreateCrossAxisParametersArray(0x04, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
                     comport.Write(data, 0, 26);
                     // transmit command
 
                     break;
 
                 case "Set Long Axis Parameters": //  5
-                    // dice( aLongPeriod( trCms(5), trCms(4), trCms(3), trCms(2))
-                    // dice( aLongDampFactor( trCms(9), trCms(8), trCms(7), trCms(6))
-                    // dice( againl( trCms(13), trCms(12), trCms11), trCms(10))
-                    // dice( aleadl( trCms(17), trCms(16), trCms(15), trCms(14))
-                    // dice( crossCouplingFactor14( trCms(21), trCms(20), trCms(19), trCms(18))
-                    // dice( analogFilter6( trCms25), trCms(24), trCms(23), trCms(22))
-                    // nByte = 24;
+
 
                     aLongPeriod = ConfigData.longPeriod;        //     Convert.ToSingle(0.000075); //ConfigData.longPeriod;
                     aLongDampFactor = ConfigData.longDampFactor;//  Convert.ToSingle(.82); //ConfigData.longDampFactor;
@@ -3251,10 +3224,10 @@ namespace SerialPortTerminal
                     aLongLead = ConfigData.longLead;            // Convert.ToSingle(.1); // ConfigData.longLead;
                     crossCouplingFactor14 = System.Convert.ToSingle(ConfigData.crossCouplingFactors[14]);
                     analogFilter6 = System.Convert.ToSingle(ConfigData.analogFilter[6]);
+                //    data = CreateCrossAxisParametersArray(0x05, 1.91e-5, .213, .15, .5, -2e-3, 1.0);
 
                     data = CreateTxArray(5, aLongPeriod, aLongDampFactor, aLongGain, aLongLead, crossCouplingFactor14, analogFilter6);
-                    // Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-
+                   /*
                     data[0] = 0X05;
                     data[1] = 0xF0;
                     data[2] = 0x38;
@@ -3281,12 +3254,10 @@ namespace SerialPortTerminal
                     data[23] = 0x80;
                     data[24] = 0x3F;
                     data[25] = 0xEF;
-
+                    */
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
-
-                    data = CreateCrossAxisParametersArray(0x04, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[16]);
-                    
+             //       data = CreateCrossAxisParametersArray(0x04, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
 
                     comport.Write(data, 0, 26);
                     // transmit command
@@ -3317,39 +3288,40 @@ namespace SerialPortTerminal
 
                     //          data = CreateTxArray(8, System.Convert.ToSingle(ConfigData.analogFilter[1]), System.Convert.ToSingle(ConfigData.analogFilter[2]), System.Convert.ToSingle(ConfigData.analogFilter[4]), System.Convert.ToSingle(ConfigData.analogFilter[3]), crossCouplingFactor14, ConfigData.springTensionMax);
 
-                    data = CreateCrossAxisParametersArray(0x04, ConfigData.analogFilter[1], ConfigData.analogFilter[2], ConfigData.analogFilter[4], ConfigData.analogFilter[3], ConfigData.crossCouplingFactors[14], ConfigData.springTensionMax);
+                 //   data = CreateCrossAxisParametersArray(0x04, ConfigData.analogFilter[1], ConfigData.analogFilter[2], ConfigData.analogFilter[4], ConfigData.analogFilter[3], ConfigData.crossCouplingFactors[14], ConfigData.springTensionMax);
+                 //   data = CreateCrossAxisParametersArray(0x08, .219, .2185, .247, .19, -1.046, 7000);
 
-                 //   data = CreateTxArray(8, System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), crossCouplingFactor14, ConfigData.springTensionMax);
+                       data = CreateTxArray(8, System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), crossCouplingFactor14, ConfigData.springTensionMax);
 
                     //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-
-            /*        data[0] = 0X08;
-                    data[1] = 0x89;
-                    data[2] = 0x41;
-                    data[3] = 0x60;
-                    data[4] = 0x3E;
-                    data[5] = 0x77;
-                    data[6] = 0xBE;
-                    data[7] = 0x5F;
-                    data[8] = 0x3E;
-                    data[9] = 0x91;
-                    data[10] = 0xED;
-                    data[11] = 0x7C;
-                    data[12] = 0x3E;
-                    data[13] = 0x5C;
-                    data[14] = 0x8F;
-                    data[15] = 0x42;
-                    data[16] = 0x3E;
-                    data[17] = 0x54;
-                    data[18] = 0xE3;
-                    data[19] = 0x85;
-                    data[20] = 0xBF;
-                    data[21] = 0x00;
-                    data[22] = 0xC0;
-                    data[23] = 0xDA;
-                    data[24] = 0x45;
-                    data[25] = 0x75;
-                    */
+                   
+                          data[0] = 0X08;
+                            data[1] = 0x89;
+                            data[2] = 0x41;
+                            data[3] = 0x60;
+                            data[4] = 0x3E;
+                            data[5] = 0x77;
+                            data[6] = 0xBE;
+                            data[7] = 0x5F;
+                            data[8] = 0x3E;
+                            data[9] = 0x91;
+                            data[10] = 0xED;
+                            data[11] = 0x7C;
+                            data[12] = 0x3E;
+                            data[13] = 0x5C;
+                            data[14] = 0x8F;
+                            data[15] = 0x42;
+                            data[16] = 0x3E;
+                            data[17] = 0x54;
+                            data[18] = 0xE3;
+                            data[19] = 0x85;
+                            data[20] = 0xBF;
+                            data[21] = 0x00;
+                            data[22] = 0xC0;
+                            data[23] = 0xDA;
+                            data[24] = 0x45;
+                            data[25] = 0x75;
+                        
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     comport.Write(data, 0, 26);
 
