@@ -1004,43 +1004,45 @@ namespace SerialPortTerminal
                     sendCmd("Set Long Axis Parameters");
                     sendCmd("Update Cross Coupling Values");
 
-
+                  //  String.Format("{0:0.##}", 123.4567);
 
                     Parameters.updateConfigData = false;
-                    Parameters.crossPeriodTextBox.Text = (ConfigData.crossPeriod.ToString("N", CultureInfo.InvariantCulture));  // Convert.ToString( ConfigData.crossPeriod, 6 );
-                    Parameters.crossDampingTextBox.Text = Convert.ToString(ConfigData.crossDampFactor);
-                    Parameters.crossGainTextBox.Text = Convert.ToString(ConfigData.crossGain);
-                    Parameters.crossLeadTextBox.Text = Convert.ToString(ConfigData.crossLead);
-                    Parameters.crossCompFactor4TextBox.Text = Convert.ToString(ConfigData.crossCompFactor_4);
-                    Parameters.crossCompPhase4TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_4);
-                    Parameters.crossCompFactor16TextBox.Text = Convert.ToString(ConfigData.crossCompFactor_16);
-                    Parameters.crossCompPhase16TextBox.Text = Convert.ToString(ConfigData.crossCompPhase_16);
 
-                    Parameters.longPeriodTextBox.Text = Convert.ToString(ConfigData.longPeriod);
-                    Parameters.longDampingTextBox.Text = Convert.ToString(ConfigData.longDampFactor);
-                    Parameters.longGainTextBox.Text = Convert.ToString(ConfigData.longGain);
-                    Parameters.longLeadTextBox.Text = Convert.ToString(ConfigData.longLead);
-                    Parameters.longCompFactor4TextBox.Text = Convert.ToString(ConfigData.longCompFactor_4);
-                    Parameters.longCompPhase4TextBox.Text = Convert.ToString(ConfigData.longCompPhase_4);
-                    Parameters.longCompFactor16TextBox.Text = Convert.ToString(ConfigData.longCompFactor_16);
-                    Parameters.longCompPhase16TextBox.Text = Convert.ToString(ConfigData.longCompPhase_16);
+                    Parameters.crossPeriodTextBox.Text = String.Format("{0:E6}", ConfigData.crossPeriod);
+                 //   Parameters.crossPeriodTextBox.Text = (ConfigData.crossPeriod.ToString("N", CultureInfo.InvariantCulture));  // Convert.ToString( ConfigData.crossPeriod, 6 );
+                    Parameters.crossDampingTextBox.Text = String.Format("{0:E6}", ConfigData.crossDampFactor);
+                    Parameters.crossGainTextBox.Text = String.Format("{0:E6}", ConfigData.crossGain);
+                    Parameters.crossLeadTextBox.Text = String.Format("{0:E6}", ConfigData.crossLead);
+                    Parameters.crossCompFactor4TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompFactor_4);
+                    Parameters.crossCompPhase4TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompPhase_4);
+                    Parameters.crossCompFactor16TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompFactor_16);
+                    Parameters.crossCompPhase16TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompPhase_16);
 
-                    Parameters.CMLFactorTextBox.Text = Convert.ToString(ConfigData.CML_Fact);
-                    Parameters.ALFactorTextBox.Text = Convert.ToString(ConfigData.AL_Fact);
-                    Parameters.AXFactorTextBox.Text = Convert.ToString(ConfigData.AX_Fact);
-                    Parameters.VEFactorTextBox.Text = Convert.ToString(ConfigData.VE_Fact);
-                    Parameters.CMXFactorTextBox.Text = Convert.ToString(ConfigData.CMX_Fact);
-                    Parameters.XACC2FactorTextBox.Text = Convert.ToString(ConfigData.XACC2_Fact);
-                    Parameters.LACC2FactorTextBox.Text = Convert.ToString(ConfigData.LACC2_Fact);
-                    Parameters.XACCPhasetextBox.Text = Convert.ToString(ConfigData.XACC_Phase);
-                    Parameters.LACC_AL_PhaseTextBox.Text = Convert.ToString(ConfigData.LACC_AL_Phase);
-                    Parameters.LACC_CML_PhaseTextBox.Text = Convert.ToString(ConfigData.LACC_CML_Phase);
-                    Parameters.LACC_CMX_PhaseTextBox.Text = Convert.ToString(ConfigData.LACC_CMX_Phase);
+                    Parameters.longPeriodTextBox.Text = String.Format("{0:E6}", ConfigData.longPeriod);
+                    Parameters.longDampingTextBox.Text = String.Format("{0:E6}", ConfigData.longDampFactor);
+                    Parameters.longGainTextBox.Text = String.Format("{0:E6}", ConfigData.longGain);
+                    Parameters.longLeadTextBox.Text = String.Format("{0:E6}", ConfigData.longLead);
+                    Parameters.longCompFactor4TextBox.Text = String.Format("{0:E6}", ConfigData.longCompFactor_4);
+                    Parameters.longCompPhase4TextBox.Text = String.Format("{0:E6}", ConfigData.longCompPhase_4);
+                    Parameters.longCompFactor16TextBox.Text = String.Format("{0:E6}", ConfigData.longCompFactor_16);
+                    Parameters.longCompPhase16TextBox.Text = String.Format("{0:E6}", ConfigData.longCompPhase_16);
 
-                    Parameters.maxSpringTensionTextBox.Text = Convert.ToString(ConfigData.springTensionMax);
+                    Parameters.CMLFactorTextBox.Text = String.Format("{0:E6}", ConfigData.CML_Fact);
+                    Parameters.ALFactorTextBox.Text = String.Format("{0:E6}", ConfigData.AL_Fact);
+                    Parameters.AXFactorTextBox.Text = String.Format("{0:E6}", ConfigData.AX_Fact);
+                    Parameters.VEFactorTextBox.Text = String.Format("{0:E6}", ConfigData.VE_Fact);
+                    Parameters.CMXFactorTextBox.Text = String.Format("{0:E6}", ConfigData.CMX_Fact);
+                    Parameters.XACC2FactorTextBox.Text = String.Format("{0:E6}", ConfigData.XACC2_Fact);
+                    Parameters.LACC2FactorTextBox.Text = String.Format("{0:E6}", ConfigData.LACC2_Fact);
+                    Parameters.XACCPhasetextBox.Text = String.Format("{0:E6}", ConfigData.XACC_Phase);
+                    Parameters.LACC_AL_PhaseTextBox.Text = String.Format("{0:E6}", ConfigData.LACC_AL_Phase);
+                    Parameters.LACC_CML_PhaseTextBox.Text = String.Format("{0:E6}", ConfigData.LACC_CML_Phase);
+                    Parameters.LACC_CMX_PhaseTextBox.Text = String.Format("{0:E6}", ConfigData.LACC_CMX_Phase);
+
+                    Parameters.maxSpringTensionTextBox.Text = String.Format("{0:0.##}", ConfigData.springTensionMax);
                     Parameters.gyroTypeComboBox.SelectedText = ConfigData.gyroType;
                     Parameters.meterNumberTextBox.Text = ConfigData.meterNumber;
-                    Parameters.kFactorTextBox.Text = Convert.ToString(ConfigData.kFactor);
+                    Parameters.kFactorTextBox.Text = String.Format("{0:E6}", ConfigData.kFactor);
                     Parameters.screenDisplayFilterTextBox.Text = Convert.ToString(ConfigData.screenDisplayFilter);
 
                     Boolean clearCheckedBoxes = true;
