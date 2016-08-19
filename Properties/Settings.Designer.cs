@@ -25,7 +25,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM3")]
         public string PortName {
             get {
                 return ((string)(this["PortName"]));

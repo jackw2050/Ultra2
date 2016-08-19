@@ -1,8 +1,3 @@
-/*
- * Project:    SerialPort Terminal
-           Search for "comport" to see how I'm using the SerialPort control.
- */
-
 #region Namespace Inclusions
 
 using FileHelpers;
@@ -23,6 +18,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 //  Delimited file operations using FileHelpers  http://www.filehelpers.net
 // iTextSharp  http://www.mikesdotnetting.com/article/89/itextsharp-page-layout-with-columns
@@ -71,7 +67,8 @@ namespace SerialPortTerminal
         private Boolean heaterNotReady = true;
         private int heaterWaitOptions;
         public Single newSpringTension;
-        public static Boolean engineerDebug = true;
+        public static Boolean engineerDebug = false;
+        public static Boolean timerDebug = true;
         public int set = 1;
         public int enable = 1;
         public int clear = 0;
@@ -461,11 +458,7 @@ namespace SerialPortTerminal
         {
             if (CurrentDataMode == DataMode.Text)
             {
-                // Send the user's text straight out the port
-                comport.Write(SerialPortForm.txtSendData.Text);
-
-                // Show in the terminal window the user's text
-                Log(LogMsgType.Outgoing, SerialPortForm.txtSendData.Text + "\n");
+                Console.WriteLine("This is an error.  Data mode should be HEX");
             }
             else
             {
@@ -551,13 +544,12 @@ namespace SerialPortTerminal
         {
             get
             {
-                if (SerialPortForm.rbHex.Checked) return DataMode.Hex;
-                else return DataMode.Text;
+                return DataMode.Hex;
+
             }
             set
             {
-                if (value == DataMode.Text) SerialPortForm.rbText.Checked = true;
-                else SerialPortForm.rbHex.Checked = true;
+
             }
         }
 
@@ -582,13 +574,13 @@ namespace SerialPortTerminal
             // The form is closing, save the user's preferences
             SaveSettings();
         }
-
+/*
         private void rbText_CheckedChanged(object sender, EventArgs e)
         { if (SerialPortForm.rbText.Checked) CurrentDataMode = DataMode.Text; }
 
         private void rbHex_CheckedChanged(object sender, EventArgs e)
         { if (SerialPortForm.rbHex.Checked) CurrentDataMode = DataMode.Hex; }
-
+        */
         private void OpenPort()
         {
             // ADD 1 SEC TIMER.  START AT END
@@ -680,14 +672,29 @@ namespace SerialPortTerminal
 
         public void TimerWithDataCollection(string state)
         {
+            
+            // Get call stack
+            StackTrace stackTrace = new StackTrace();
+            if (timerDebug)
+            {
+                Console.WriteLine("Timer operation. New state " + state + ". Caller: " + stackTrace);
+            }
+
+            // Get calling method name
+            Console.WriteLine(stackTrace.GetFrame(1).GetMethod().Name);
             switch (state)
             {
                 case "start":// enables data collection and starts 1 second timer
+
+                    if ((ControlSwitches.controlSw & 0x01) == 0)
+                    {
+                        ControlSwitches.DataCollection(enable);
+                        sendCmd("Send Control Switches");           // 1 ----
+                    }
                     _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
                     _timer1.Enabled = true;
                     _timer1.Start();
-                    ControlSwitches.DataCollection(enable);
-                    sendCmd("Send Control Switches");           // 1 ----
+
                     break;
 
                 case "stop":// disables data collection and stops 1 second timer
@@ -2778,12 +2785,15 @@ namespace SerialPortTerminal
             SetInitialVisibility();
             if (engineerDebug)
             {
-                rtfTerminal.Visible = true;
+                rtfTerminal.Visible = false;
             }
             else
             {
                 rtfTerminal.Visible = false;
             }
+
+            CurrentDataMode = DataMode.Hex;
+
 
             // Create an instance of NumericTextBox.
             NumericTextBox numericTextBox1 = new NumericTextBox();
@@ -2820,6 +2830,10 @@ namespace SerialPortTerminal
             SetupChart();
             // Setup DataGrid();
         }
+
+
+        //==================================================================================================
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -3076,6 +3090,11 @@ namespace SerialPortTerminal
         public void sendCmd(string cmd)
         {
             byte[] data;
+            if (!comport.IsOpen)
+            {
+                OpenPort();
+
+            }
             switch (cmd)
             {
                 case "Send Relay Switches": // 0
@@ -3465,6 +3484,10 @@ namespace SerialPortTerminal
 
         public void InitStoredVariables()
         {
+            comport.PortName = Properties.Settings.Default.PortName;
+            comport.BaudRate = Properties.Settings.Default.BaudRate;
+            comport.StopBits = Properties.Settings.Default.StopBits;
+
             // Load configuration data from stored defaults
             ConfigData.version = Properties.Settings.Default.version;
             mdt.SpringTension = Properties.Settings.Default.springTension;

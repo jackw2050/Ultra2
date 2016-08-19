@@ -413,6 +413,7 @@ namespace SerialPortTerminal
 
         private void updateMeterButton_Click(object sender, EventArgs e)
         {
+            UpdateConfigValues();
             updateConfigData = true;
         }
 
@@ -421,5 +422,118 @@ namespace SerialPortTerminal
 
             updateConfigData = true;
         }
+
+        private void UpdateConfigValues()
+        {
+            // Load configuration data from enabled parameter text boxes
+            
+
+            //============  Cross Axis Parameters ================
+            if (crossPeriodCheckBox.Checked)
+            {
+                ConfigData.crossPeriod = Convert.ToDouble(crossPeriodTextBox.Text.Trim());
+            }
+            if (crossDampingCheckBox.Checked)
+            {
+                ConfigData.crossDampFactor = Convert.ToDouble(crossDampingTextBox.Text.Trim());
+            }
+            if (crossGainCheckBox.Checked)
+            {
+                ConfigData.crossGain = Convert.ToDouble(crossGainTextBox.Text.Trim());
+            }
+            if (crossLeadCheckBox.Checked)
+            {
+                ConfigData.crossLead = Convert.ToDouble(crossPeriodTextBox.Text.Trim());
+            }
+            //============  Long Axis Parameters ================
+
+            if (longPeriodCheckBox.Checked)
+            {
+                ConfigData.longPeriod = Convert.ToDouble(longPeriodTextBox.Text.Trim());
+            }
+            if (longDampingCheckBox.Checked)
+            {
+                ConfigData.longDampFactor = Convert.ToDouble(longDampingTextBox.Text.Trim());
+            }
+            if (longGainCheckBox.Checked)
+            {
+                ConfigData.longGain = Convert.ToDouble(longGainTextBox.Text.Trim());
+            }
+            if (longLeadCheckBox.Checked)
+            {
+                ConfigData.longLead = Convert.ToDouble(longLeadTextBox.Text.Trim());
+            }
+
+
+            if (CMLFactorCheckBox.Checked)
+            {
+                ConfigData.CML_Fact = Convert.ToDouble(CMLFactorTextBox.Text.Trim());
+            }
+            if (CMXFactorCheckBox.Checked)
+            {
+                ConfigData.CMX_Fact = Convert.ToDouble(CMXFactorTextBox.Text.Trim());
+            }
+            if (ALFactorCheckBox.Checked)
+            {
+                ConfigData.AL_Fact = Convert.ToDouble(ALFactorTextBox.Text.Trim());
+            }
+            if (AXFactorCheckBox.Checked)
+            {
+                ConfigData.AX_Fact = Convert.ToDouble(AXFactorTextBox.Text.Trim());
+            }
+            if (VEFactorCheckBox.Checked)
+            {
+                ConfigData.VE_Fact = Convert.ToDouble(VEFactorTextBox.Text.Trim());
+            }
+            if (XACC2FactorCheckBox.Checked)
+            {
+                ConfigData.XACC2_Fact = Convert.ToDouble(XACC2FactorTextBox.Text.Trim());
+            }
+            if (LACC2FactorCheckBox.Checked)
+            {
+                ConfigData.LACC2_Fact = Convert.ToDouble(LACC2FactorTextBox.Text.Trim());
+            }
+            if (XACCPhaseCheckBox.Checked)
+            {
+                ConfigData.XACC_Phase = Convert.ToDouble(XACCPhasetextBox.Text.Trim());
+            }
+            if (LACC_AL_PhaseCheckBox.Checked)
+            {
+                ConfigData.LACC_AL_Phase = Convert.ToDouble(LACC_AL_PhaseTextBox.Text.Trim());
+            }
+            if (LACC_CML_PhaseCheckBox.Checked)
+            {
+                ConfigData.LACC_CML_Phase = Convert.ToDouble(LACC_CML_PhaseTextBox.Text.Trim());
+            }
+            if (LACC_CMX_PhaseCheckBox.Checked)
+            {
+                ConfigData.LACC_CMX_Phase = Convert.ToDouble(LACC_CMX_PhaseTextBox.Text.Trim());
+            }
+
+            //============  Misc Parameters ================
+
+            if (meterNumberCheckBox.Checked)
+            {
+                ConfigData.meterNumber = meterNumberTextBox.Text.Trim();
+            }
+            if (maxSpringTensionCheckBox.Checked)
+            {
+                ConfigData.springTensionMax = Convert.ToDouble(maxSpringTensionTextBox.Text.Trim());
+            }
+            if (kFactorCheckBox.Checked)
+            {
+                ConfigData.kFactor = Convert.ToDouble(kFactorTextBox.Text.Trim());
+            }
+            if (gyroTypeCheckBox.Checked)
+            {
+                ConfigData.gyroType = gyroTypeComboBox.SelectedText;
+            }
+
+
+            
+        }
+
+
+
     }
 }

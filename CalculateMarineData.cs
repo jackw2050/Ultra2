@@ -543,13 +543,15 @@ namespace SerialPortTerminal
             // best way to zero an array?  Array.Clear(tempByte, 0, tempByte.Length);
 
             //          Add checksum verification.  Only record valid data
+            // need to add various error types and keep track here
 
             if  ( (meterBytes.Length == 0 ) ||  (meterBytes[0] != meterBytes.Length - 1))
             {
                 Errors.serialCommErrorCount++;
-                if (frmTerminal.engineerDebug)
+                if (frmTerminal.timerDebug)
                 {
                     Console.WriteLine("Serial comm error count = " + Errors.serialCommErrorCount);
+                    Console.WriteLine("Message length: " + meterBytes.Length);
                 }
                 if (Errors.serialCommErrorCount > 5)
                 {
@@ -889,7 +891,7 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[77];
                 portCStatus = BitConverter.ToInt16(tempByte, 0);//  make global later
                 Port_C.Port_C_MeterStatus(portCStatus);
-                Console.WriteLine("PortC status " + portCStatus);
+              //  Console.WriteLine("PortC status " + portCStatus);
                 // CHECK FOR REMOTE EMBEDDED COMPUTER REBOOT
                 tempByte[0] = meterBytes[1];
                 if (frmTerminal.engineerDebug)
