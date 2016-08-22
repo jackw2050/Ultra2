@@ -814,7 +814,6 @@ namespace SerialPortTerminal
                     frmTerminal.TimerOffset();
                     // frmTerminal.TimerWithDataCollection("stop");
                     // frmTerminal.TimerWithDataCollection("start");
-
                 }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
