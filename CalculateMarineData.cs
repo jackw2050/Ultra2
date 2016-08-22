@@ -400,11 +400,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable alarm
             {
-                relaySW = relaySW | 0x04;// Set bit 3
+                relaySW = relaySW | 0x04;// Set bit 4
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xFB;// Clear bit 3
+                relaySW = relaySW & 0xFB;// Clear bit 4
             }
         }
 
@@ -412,11 +412,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)
             {
-                relaySW = relaySW | 0x08;// Set bit 4
+                relaySW = relaySW | 0x08;// Set bit 8
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xF7;// Clear bit 4
+                relaySW = relaySW & 0xF7;// Clear bit 8
             }
         }
 
@@ -424,11 +424,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)
             {
-                relaySW = relaySW | 0x10;// Set bit 5
+                relaySW = relaySW | 0x10;// Set bit 10
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xEF;// Clear bit 5
+                relaySW = relaySW & 0xEF;// Clear bit 10
             }
         }
 
@@ -436,11 +436,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)
             {
-                relaySW = relaySW | 0x20;// Set bit 6
+                relaySW = relaySW | 0x20;// Set bit 20
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xDF;// Clear bit 6
+                relaySW = relaySW & 0xDF;// Clear bit 20
             }
         }
 
@@ -448,11 +448,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable Torque Motor
             {
-                relaySW = relaySW | 0x40;// Set bit 7
+                relaySW = relaySW | 0x40;// Set bit 40
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0xBF;// Clear bit 7
+                relaySW = relaySW & 0xBF;// Clear bit 40
             }
         }
 
@@ -460,11 +460,11 @@ namespace SerialPortTerminal
         {
             if (state == 1)// Enable stepper Motor
             {
-                relaySW = relaySW | 0x80;// Set bit 8
+                relaySW = relaySW | 0x80;// Set bit 80
             }
             else// Disable Torque Motor
             {
-                relaySW = relaySW & 0x7F;// Clear bit 8
+                relaySW = relaySW & 0x7F;// Clear bit 80
             }
         }
     }
@@ -498,7 +498,7 @@ namespace SerialPortTerminal
 
         public void SpringTension(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)// Enable Spring Tension
             {
                 controlSw = controlSw | 0x02;// Set bit 2
             }
@@ -510,7 +510,7 @@ namespace SerialPortTerminal
 
         public void Alarm(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)// Enable Alarm
             {
                 controlSw = controlSw | 0x08;// Set bit 3
             }
@@ -522,7 +522,7 @@ namespace SerialPortTerminal
 
         public void DataCollection(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)// Enable Data Collection
             {
                 controlSw = controlSw | 0x04;// Set bit 4
             }
@@ -534,7 +534,7 @@ namespace SerialPortTerminal
 
         public void AlarmFlag(int state)
         {
-            if (state == 1)// Enable Torque Motor
+            if (state == 1)// Enable Alarm Flag
             {
                 controlSw = controlSw | 0x10;// Set bit 5
             }

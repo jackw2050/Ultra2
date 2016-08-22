@@ -150,16 +150,16 @@ namespace SerialPortTerminal
             this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileFormatToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.recordingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitProgramToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataStatusFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPortFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.switchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitProgramToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fileStartTimeLabel = new System.Windows.Forms.Label();
             this.timeNowLabel = new System.Windows.Forms.Label();
             this.chartWindowGroupBox = new System.Windows.Forms.GroupBox();
@@ -185,6 +185,7 @@ namespace SerialPortTerminal
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -200,7 +201,6 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButtonContinue = new System.Windows.Forms.RadioButton();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1114,43 +1114,6 @@ namespace SerialPortTerminal
             this.recordingToolStripMenuItem.Text = "Recording";
             this.recordingToolStripMenuItem.Click += new System.EventHandler(this.recordingToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem1,
-            this.aboutToolStripMenuItem,
-            this.loginToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
-            this.helpToolStripMenuItem1.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // loginToolStripMenuItem
-            // 
-            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.loginToolStripMenuItem.Text = "Login";
-            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
-            // 
-            // exitProgramToolStripMenuItem1
-            // 
-            this.exitProgramToolStripMenuItem1.Name = "exitProgramToolStripMenuItem1";
-            this.exitProgramToolStripMenuItem1.Size = new System.Drawing.Size(86, 20);
-            this.exitProgramToolStripMenuItem1.Text = "Exit Program";
-            this.exitProgramToolStripMenuItem1.Click += new System.EventHandler(this.exitProgramToolStripMenuItem1_Click);
-            // 
             // navigationToolStripMenuItem
             // 
             this.navigationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1189,6 +1152,43 @@ namespace SerialPortTerminal
             this.switchesToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.switchesToolStripMenuItem.Text = "Startup";
             this.switchesToolStripMenuItem.Click += new System.EventHandler(this.switchesToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem1,
+            this.aboutToolStripMenuItem,
+            this.loginToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem1.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // loginToolStripMenuItem
+            // 
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
+            // 
+            // exitProgramToolStripMenuItem1
+            // 
+            this.exitProgramToolStripMenuItem1.Name = "exitProgramToolStripMenuItem1";
+            this.exitProgramToolStripMenuItem1.Size = new System.Drawing.Size(86, 20);
+            this.exitProgramToolStripMenuItem1.Text = "Exit Program";
+            this.exitProgramToolStripMenuItem1.Click += new System.EventHandler(this.exitProgramToolStripMenuItem1_Click);
             // 
             // fileStartTimeLabel
             // 
@@ -1457,7 +1457,7 @@ namespace SerialPortTerminal
             // springTensionValueLabel
             // 
             this.springTensionValueLabel.AutoSize = true;
-            this.springTensionValueLabel.Location = new System.Drawing.Point(141, 64);
+            this.springTensionValueLabel.Location = new System.Drawing.Point(168, 19);
             this.springTensionValueLabel.Name = "springTensionValueLabel";
             this.springTensionValueLabel.Size = new System.Drawing.Size(35, 13);
             this.springTensionValueLabel.TabIndex = 8;
@@ -1466,11 +1466,20 @@ namespace SerialPortTerminal
             // springTensionStatusLabel
             // 
             this.springTensionStatusLabel.AutoSize = true;
-            this.springTensionStatusLabel.Location = new System.Drawing.Point(141, 39);
+            this.springTensionStatusLabel.Location = new System.Drawing.Point(168, 46);
             this.springTensionStatusLabel.Name = "springTensionStatusLabel";
             this.springTensionStatusLabel.Size = new System.Drawing.Size(35, 13);
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
+            // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // button6
             // 
@@ -1485,7 +1494,7 @@ namespace SerialPortTerminal
             // springTensionLabel
             // 
             this.springTensionLabel.AutoSize = true;
-            this.springTensionLabel.Location = new System.Drawing.Point(190, 19);
+            this.springTensionLabel.Location = new System.Drawing.Point(119, 66);
             this.springTensionLabel.Name = "springTensionLabel";
             this.springTensionLabel.Size = new System.Drawing.Size(38, 13);
             this.springTensionLabel.TabIndex = 4;
@@ -1493,7 +1502,7 @@ namespace SerialPortTerminal
             // 
             // STtextBox
             // 
-            this.STtextBox.Location = new System.Drawing.Point(109, 80);
+            this.STtextBox.Location = new System.Drawing.Point(233, 16);
             this.STtextBox.Name = "STtextBox";
             this.STtextBox.Size = new System.Drawing.Size(92, 20);
             this.STtextBox.TabIndex = 124;
@@ -1635,15 +1644,6 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
-            // 
-            // springTensionTargetNumericTextBox
-            // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(234, 15);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // frmTerminal
             // 
