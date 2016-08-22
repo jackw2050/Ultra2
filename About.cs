@@ -13,11 +13,11 @@ using System.Reflection;
 
 namespace SerialPortTerminal
 {
-  public partial class frmAbout : Form
+  public partial class FormAbout : Form
   {
     private string TempFile = Path.GetTempFileName();
 
-    public frmAbout()
+    public FormAbout()
     {
       InitializeComponent();
       

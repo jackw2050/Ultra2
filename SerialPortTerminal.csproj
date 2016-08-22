@@ -98,7 +98,6 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="CalculateMarineData.cs" />
-    <Compile Include="Comms.cs" />
     <Compile Include="DataStatusForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -105,7 +105,7 @@ namespace SerialPortTerminal
         public Single crossCouplingFactor14 = 0;
         public Single analogFilter5 = 0;
         public double analogFilter6 = 0;
-        public double aCrossPeriod = 0;
+        /*public double aCrossPeriod = 0;
         public double aLongPeriod = 0;
         public double aCrossDampFactor = 0;
         public double aLongDampFactor = 0;
@@ -113,6 +113,7 @@ namespace SerialPortTerminal
         public double aLongGain = 0;
         public double aCrossLead = 0;
         public double aLongLead = 0;
+        */
         public static Int16 meter_status = 0;
         private Boolean autostart = false;
 
@@ -138,12 +139,36 @@ namespace SerialPortTerminal
 
         public class startupData
         {
-            public string Status;
+
+            private string Status;//TODO: where do I use startupData?
+            public string status
+            {
+                get
+                {
+                    return status;
+                }
+                set
+                {
+                    Status = status;
+                }
+            }
         }
 
         public class shutdownData
         {
-            public string shutDownText;
+            //TODO: what is shutDownText for?
+            private string shutDownText;
+            public string ShutDownText
+            {
+                get
+                {
+                    return shutDownText;
+                }
+                set
+                {
+                    shutDownText = ShutDownText;
+                }
+            }
         }
 
         private class Record
@@ -154,25 +179,7 @@ namespace SerialPortTerminal
             private int year, day, hour, minute, second;
             private Single gpsStatus;
 
-            public Record(DateTime dateTime, double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
-            {
-                this.dateTime = dateTime;
-                this.digitalGravity = digitalGravity;
-                this.springTension = springTension;
-                this.crossCoupling = crossCoupling;
-                this.rawBeam = rawBeam;
-                this.vcc = vcc;
-                this.al = al;
-                this.ax = ax;
-                this.ve = ve;
-                this.ax2 = ax2;
-                this.xacc2 = xacc2;
-                this.lacc2 = lacc2;
-                this.xacc = xacc;
-                this.lacc = lacc;
-                this.totalCorrection = totalCorrection;
-            }
-
+   
             public int Year
             {
                 get { return year; }
@@ -316,6 +323,25 @@ namespace SerialPortTerminal
                 get { return gpsStatus; }
                 set { gpsStatus = value; }
             }
+            public Record(DateTime dateTime, double digitalGravity, double springTension, double crossCoupling, double rawBeam, double vcc, double al, double ax, double ve, double ax2, double xacc2, double lacc2, double xacc, double lacc, double totalCorrection)
+            {
+                this.dateTime = dateTime;
+                this.digitalGravity = digitalGravity;
+                this.springTension = springTension;
+                this.crossCoupling = crossCoupling;
+                this.rawBeam = rawBeam;
+                this.vcc = vcc;
+                this.al = al;
+                this.ax = ax;
+                this.ve = ve;
+                this.ax2 = ax2;
+                this.xacc2 = xacc2;
+                this.lacc2 = lacc2;
+                this.xacc = xacc;
+                this.lacc = lacc;
+                this.totalCorrection = totalCorrection;
+            }
+
         }
 
         public void CleanUp(string timePeriod, int timeValue)
@@ -561,7 +587,7 @@ namespace SerialPortTerminal
         private void lnkAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Show the user the about dialog
-            (new frmAbout()).ShowDialog(this);
+            (new FormAbout()).ShowDialog(this);
         }
 
         private void frmTerminal_Shown(object sender, EventArgs e)
@@ -686,7 +712,7 @@ namespace SerialPortTerminal
             {
                 case "start":// enables data collection and starts 1 second timer
 
-                    if ((ControlSwitches.controlSw & 0x01) == 0)
+                    if ((ControlSwitches.ControlSw & 0x01) == 0)
                     {
                         ControlSwitches.DataCollection(enable);
                         sendCmd("Send Control Switches");           // 1 ----
@@ -883,8 +909,8 @@ namespace SerialPortTerminal
                     DataStatusForm.textBox21.Text = Convert.ToString(meter_status, 2);
                     DataStatusForm.byte76TextBox.Text = Convert.ToString(meter_status, 2);
                     DataStatusForm.byte77TextBox.Text = Convert.ToString(mdt.portCStatus, 2);
-                    DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.relaySW, 2);
-                    DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.controlSw, 2);
+                    DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.RelaySW, 2);
+                    DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.ControlSw, 2);
                 }
 
                 if (UserDataForm.Visible)
@@ -905,7 +931,7 @@ namespace SerialPortTerminal
                     UserDataForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
                     UserDataForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
 
-                    if (MeterStatus.lGyro_Fog == 0)
+                    if (MeterStatus.LGyro_Fog == 0)
                     {
                         UserDataForm.longGyroStatusLabel.ForeColor = Color.Green;
                         UserDataForm.longGyroStatusLabel.Text = "Ready";
@@ -915,7 +941,7 @@ namespace SerialPortTerminal
                         UserDataForm.longGyroStatusLabel.ForeColor = Color.Red;
                         UserDataForm.longGyroStatusLabel.Text = "Not Ready";
                     }
-                    if (MeterStatus.xGyro_Fog == 0)
+                    if (MeterStatus.XGyro_Fog == 0)
                     {
                         UserDataForm.crossGyroStatusLabel.ForeColor = Color.Green;
                         UserDataForm.crossGyroStatusLabel.Text = "Ready";
@@ -925,7 +951,7 @@ namespace SerialPortTerminal
                         UserDataForm.crossGyroStatusLabel.ForeColor = Color.Red;
                         UserDataForm.crossGyroStatusLabel.Text = "Not Ready";
                     }
-                    if (MeterStatus.meterHeater == 0)
+                    if (MeterStatus.MeterHeater == 0)
                     {
                         UserDataForm.heaterStatusLabel.ForeColor = Color.Green;
                         UserDataForm.heaterStatusLabel.Text = "Ready";
@@ -1155,7 +1181,7 @@ namespace SerialPortTerminal
                     FogCheck();
                 }
 
-                if (MeterStatus.lGyro_Fog == 0)
+                if (MeterStatus.LGyro_Fog == 0)
                 {
                     if (meterStatusGroupBox.Visible)
                     {
@@ -1174,7 +1200,7 @@ namespace SerialPortTerminal
 
                     DataStatusForm.textBox19.Text = "Bad";
                 }
-                if (MeterStatus.xGyro_Fog == 0)
+                if (MeterStatus.XGyro_Fog == 0)
                 {
                     if (meterStatusGroupBox.Visible)
                     {
@@ -1217,7 +1243,7 @@ namespace SerialPortTerminal
                         DataStatusForm.textBox21.Text = "Not ready";
                     }
                 }
-                if (MeterStatus.incorrectCommandReceived == 0)
+                if (MeterStatus.IncorrectCommandReceived == 0)
                 {
                     DataStatusForm.textBox23.Text = "OK";
                 }
@@ -1225,7 +1251,7 @@ namespace SerialPortTerminal
                 {
                     DataStatusForm.textBox23.Text = "Incorrect Command";
                 }
-                if (MeterStatus.receiveDataCheckSumError == 0)
+                if (MeterStatus.ReceiveDataCheckSumError == 0)
                 {
                     DataStatusForm.textBox22.Text = "OK";
                 }
@@ -1804,20 +1830,84 @@ namespace SerialPortTerminal
 
         public static class ChartVisibility
         {
-            public static Boolean digitalGravity = true;
-            public static Boolean springTension = true;
-            public static Boolean crossCoupling = true;
-            public static Boolean rawBeam = true;
-            public static Boolean totalCorrection = true;
-
+            private static Boolean digitalGravity = true;
+            public static Boolean DigitalGravity
+            {
+                get { return digitalGravity; }
+                set { digitalGravity = value; }
+            }
+            private static Boolean springTension = true;
+            public static Boolean SpringTension
+            {
+                get { return springTension; }
+                set { springTension = value; }
+            }
+            private static Boolean crossCoupling = true;
+            public static Boolean CrossCoupling
+            {
+                get { return crossCoupling; }
+                set { crossCoupling = value; }
+            }
+            private static Boolean rawBeam = true;
+            public static Boolean RawBeam
+            {
+                get { return rawBeam; }
+                set { rawBeam = value; }
+            }
+            private static Boolean totalCorrection = true;
+            public static Boolean TotalCorrection
+            {
+                get { return totalCorrection; }
+                set { totalCorrection = value; }
+            }
             //   public static Boolean rawGravity = true;
-            public static Boolean AL = true;
+            private static Boolean al = true;
+            public static Boolean AL
+            {
+                get { return al; }
+                set { al = value; }
+            }
 
-            public static Boolean AX = true;
-            public static Boolean VE = true;
-            public static Boolean AX2 = true;
-            public static Boolean LACC = true;
-            public static Boolean XACC = true;
+            private static Boolean ax = true;
+            public static Boolean AX
+            {
+                get { return ax; }
+                set { ax = value; }
+            }
+
+            private static Boolean ve = true;
+            public static Boolean VE
+            {
+                get { return ve; }
+                set { ve = value; }
+            }
+
+            private static Boolean ax2 = true;
+            public static Boolean AX2
+            {
+                get { return ax2; }
+                set { ax2 = value; }
+            }
+
+            private static Boolean lacc = true;
+            public static Boolean LACC
+            {
+                get { return lacc; }
+                set { lacc = value; }
+            }
+
+            private static Boolean xacc = true;
+            public static Boolean XACC
+            {
+                get { return xacc; }
+                set { xacc = value; }
+            }
+
+
+
+
+
+
         }
 
         public void SetChartBorderWidth(int width)
@@ -2113,264 +2203,7 @@ namespace SerialPortTerminal
 
         #region Config File
 
-        private void ReadConfigFile()
-        {
-            //  NEED TO ADD ERROR CHECKING FOR END OF FILE
-            //  NEED TO ADD OPEN FILE DIALOG ONLY IF FILE IS (MISSING OR MANUAL BOX IS CHECKED - ENGINEERING ONLY)
-            ConfigData ConfigData = new ConfigData();
-            FileStream myStream;
-            double[] CCFACT = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            double[] AFILT = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] tempByte = { 0, 0, 0, 0 };
-            byte[] byte2 = new byte[2];
-            byte[] byte4 = new byte[4];
-            byte[] byte10 = new byte[10];
-
-            try
-            {
-                myStream = new FileStream("C:\\LCT stuff\\CONFIG20.ref", FileMode.Open);
-                BinaryReader readBinary = new BinaryReader(myStream);
-
-                readBinary.Read(byte2, 0, 2);
-                readBinary.Read(byte4, 0, 4);
-
-                ConfigData.beamScale = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) if (engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.numAuxChan = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("NUMBER OF AUXILIARY ANALOG CHANNELS-- \t" + Convert.ToString(ConfigData.numAuxChan));
-
-                readBinary.Read(byte10, 0, 10);
-                ConfigData.meterNumber = System.Text.Encoding.Default.GetString(byte10);
-                if (engineerDebug) Console.WriteLine("Meter number is---------------------- \t" + ConfigData.meterNumber);
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.linePrinterSwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.fileNameSwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.hardDiskSwitch = BitConverter.ToInt16(byte2, 0); ;
-                if (engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
-
-                readBinary.Read(byte10, 0, 10);
-                ConfigData.engPassword = System.Text.Encoding.Default.GetString(byte10);
-                if (engineerDebug) Console.WriteLine("Magic value is ---------------------- \t" + ConfigData.engPassword);
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.monitorDisplaySwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossPeriod = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.longPeriod = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossDampFactor = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.longDampFactor = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossGain = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.longGain = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.longGain));
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.serialPortSwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.digitalInputSwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.printerEmulationSwitch = BitConverter.ToInt16(byte2, 0);
-                if (ConfigData.printerEmulationSwitch == 2)
-                {
-                    if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P");
-                }
-                if (ConfigData.printerEmulationSwitch == 3)
-                {
-                    if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P2");
-                }
-                else
-                {
-                    if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "DPL24C");
-                }
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.serialPortOutputSwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
-
-                readBinary.Read(byte2, 0, 2);
-                ConfigData.alarmSwitch = BitConverter.ToInt16(byte2, 0);
-                if (engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossLead = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.longLead = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.springTensionMax = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.modeSwitch = BitConverter.ToInt16(byte4, 0);
-                if (ConfigData.modeSwitch == 0)
-                {
-                    if (engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Marine");
-                }
-                else
-                {
-                    if (engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Hires");
-                }
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.iAuxGain = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("I aux gain value is --------------- \t" + Convert.ToString(ConfigData.iAuxGain));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossBias = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.longBias = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias));
-
-                readBinary.Read(byte2, 0, 2);// extra read for alignment.  need to find out why
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[6] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[7] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("AL----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[7]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[8] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("AX----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[8]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[9] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[10] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[11] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[12] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12]));
-
-                readBinary.Read(byte2, 0, 2);
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[13] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)---------- \t{0:e4}.", ConfigData.crossCouplingFactors[13]);
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[14] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[15] = BitConverter.ToSingle(byte4, 0);
-                if (ConfigData.crossCouplingFactors[15] == 1)
-                {
-                    if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + "N/A");
-                }
-                else
-                {
-                    if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15]));
-                }
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.crossCouplingFactors[16] = BitConverter.ToSingle(byte4, 0);
-                if (ConfigData.crossCouplingFactors[15] == 1)
-                {
-                    if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + "N/A");
-                }
-                else
-                {
-                    if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16]));
-                }
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[1] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[2] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[3] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("AFILT[3]---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[3]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[4] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[5] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[6] = BitConverter.ToSingle(byte4, 0);
-                if (engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6]));
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[7] = BitConverter.ToSingle(byte4, 0);
-                if (CCFACT[15] == 1)
-                {
-                    if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
-                }
-                else
-                {
-                    if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                }
-
-                readBinary.Read(byte4, 0, 4);
-                ConfigData.analogFilter[8] = BitConverter.ToSingle(byte4, 0);
-                if (ConfigData.crossCouplingFactors[15] == 1)
-                {
-                    if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
-                }
-                else
-                {
-                    if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-                }
-
-                Console.ReadLine();
-                readBinary.Close();
-
-                LogConfigData(ConfigData);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+   
 
         private void LogConfigData(ConfigData ConfigData)
         {
@@ -3108,14 +2941,14 @@ namespace SerialPortTerminal
             {
                 case "Send Relay Switches": // 0
 
-                    data = CreateTxArray(0, RelaySwitches.relaySW);
+                    data = CreateTxArray(0, RelaySwitches.RelaySW);
                     Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
                     comport.Write(data, 0, 3);
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     break;
 
                 case "Send Control Switches"://1
-                    data = CreateTxArray(1, ControlSwitches.controlSw);
+                    data = CreateTxArray(1, ControlSwitches.ControlSw);
                     Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
                     try
                     {
@@ -3130,6 +2963,7 @@ namespace SerialPortTerminal
                     break;
 
                 case "Update Date and Time": // 2
+                    //TODO: complete date/ time and clean up code
                     byte[] timeData = new byte[20]; // { 2, 0, 0, 0, 0, 0, 0, 0, 0};
                                                     //    DateTime myDatetime = DateTime.Now;
                     int year = myDatetime.Year;
@@ -3195,11 +3029,11 @@ namespace SerialPortTerminal
                     break;
 
                 case "Set Cross Axis Parameters": //  4
-
-                    aCrossPeriod = Convert.ToSingle(0.000075); //ConfigData.crossPeriod;
+                                                  // TODO: clean up code for Set Cross Axis Parameters
+              /*      aCrossPeriod = Convert.ToSingle(0.000075); //ConfigData.crossPeriod;
                     aCrossDampFactor = Convert.ToSingle(.82); // ConfigData.crossDampFactor;
                     aCrossGain = Convert.ToSingle(6.5);//ConfigData.crossGain;
-                    aCrossLead = Convert.ToSingle(.1);//ConfigData.crossLead;
+                    aCrossLead = Convert.ToSingle(.1);//ConfigData.crossLead;*/
                     crossCouplingFactor13 = System.Convert.ToSingle(ConfigData.crossCouplingFactors[13]);
                     analogFilter5 = System.Convert.ToSingle(ConfigData.analogFilter[5]);
 
@@ -3245,9 +3079,9 @@ namespace SerialPortTerminal
                     break;
 
                 case "Set Long Axis Parameters": //  5
-
-                  //  data = CreateCrossAxisParametersArray(0x05, 1.91e-5, .213, .15, .5, -2e-3, 1.0);
-                          data = CreateCrossAxisParametersArray(5, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
+                                                 // TODO: clean up code for  Set Long Axis Parameters   
+                                                 //  data = CreateCrossAxisParametersArray(0x05, 1.91e-5, .213, .15, .5, -2e-3, 1.0);
+                    data = CreateCrossAxisParametersArray(5, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
                     /*  
                        data[0] = 0X05;
                        data[1] = 0xF0;
@@ -3299,7 +3133,7 @@ namespace SerialPortTerminal
                     break;
 
                 case "Update Cross Coupling Values":  //   8
-                                         
+ // TODO: clean up code for     Update Cross Coupling Values                                     
 
                     //          data = CreateTxArray(8, System.Convert.ToSingle(ConfigData.analogFilter[1]), System.Convert.ToSingle(ConfigData.analogFilter[2]), System.Convert.ToSingle(ConfigData.analogFilter[4]), System.Convert.ToSingle(ConfigData.analogFilter[3]), crossCouplingFactor14, ConfigData.springTensionMax);
 
@@ -3374,10 +3208,10 @@ namespace SerialPortTerminal
             // open serial port to meter
 
             // create temp variables for startup
-            aCrossPeriod = ConfigData.crossPeriod;// aCrossPeriod = perX
+         /*   aCrossPeriod = ConfigData.crossPeriod;// aCrossPeriod = perX
             aLongPeriod = ConfigData.longPeriod;// aLongPeriod = perL
             aCrossDampFactor = ConfigData.crossDampFactor;// aCrossDampFactor = dampX
-            aLongDampFactor = ConfigData.longDampFactor;// aLongDampFactor = dampL
+            aLongDampFactor = ConfigData.longDampFactor;// aLongDampFactor = dampL*/
             crossCouplingFactor13 = System.Convert.ToSingle(ConfigData.crossCouplingFactors[13]);
             crossCouplingFactor14 = System.Convert.ToSingle(ConfigData.crossCouplingFactors[14]);
             analogFilter5 = System.Convert.ToSingle(ConfigData.analogFilter[5]);
@@ -3386,32 +3220,32 @@ namespace SerialPortTerminal
             // turn on 200 Hz
             // RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
 
-            RelaySwitches.slew4(disable);
-            RelaySwitches.slew5(disable);
-            RelaySwitches.stepperMotorEnable(enable);
+            RelaySwitches.Slew4(disable);
+            RelaySwitches.Slew5(disable);
+            RelaySwitches.StepperMotorEnable(enable);
 
-            RelaySwitches.relaySW = 0x80;            // cmd 0
+            RelaySwitches.RelaySW = 0x80;            // cmd 0
             sendCmd("Send Relay Switches");          // 0 ----
             sendCmd("Set Cross Axis Parameters");    // download platform parameters 4 -----
             sendCmd("Set Long Axis Parameters");     // download platform parametersv 5 -----
             sendCmd("Update Cross Coupling Values"); // download CC parameters 8     -----
 
-            ControlSwitches.controlSw = 0x08;       // ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08;       // ControlSwitches.RelayControlSW = 0x08;
 
             sendCmd("Send Control Switches");       // 1 ----
             sendCmd("Send Control Switches");       // 1 ----
 
-            RelaySwitches.relaySW = 0xB1;           // cmd 0
+            RelaySwitches.RelaySW = 0xB1;           // cmd 0
             sendCmd("Send Relay Switches");         // 0 ----
-            ControlSwitches.controlSw = 0x08;       //ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08;       //ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");       // 1 ----
 
-            RelaySwitches.relaySW = 0x81;           // cmd 0
+            RelaySwitches.RelaySW = 0x81;           // cmd 0
             sendCmd("Send Relay Switches");         // 0 ----
 
             ControlSwitches.DataCollection(enable);
             sendCmd("Send Control Switches");       // 1 ----
-            RelaySwitches.relaySW = 0x80;           // cmd 0
+            RelaySwitches.RelaySW = 0x80;           // cmd 0
             sendCmd("Send Relay Switches");         // 0 ----
 
             // wait for platform to level
@@ -3658,16 +3492,16 @@ namespace SerialPortTerminal
             // RelaySwitches.relay200Hz = enable;// set bit 0  high to turn on 200 Hz
             //  RelaySwitches.slew4 = enable;
             //   RelaySwitches.slew5 = enable;
-            RelaySwitches.stepperMotorEnable(enable);
+            RelaySwitches.StepperMotorEnable(enable);
 
             //    RelaySwitches.RelaySwitchCalculate();// 0x80
-            RelaySwitches.relaySW = 0x80;// cmd 0
+            RelaySwitches.RelaySW = 0x80;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
             sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
             sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
             sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
 
-            ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
 
             sendCmd("Send Control Switches");           // 1 ----
             sendCmd("Send Control Switches");           // 1 ----
@@ -3675,39 +3509,42 @@ namespace SerialPortTerminal
 
         private void button4_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0xB1;// cmd 0
+            RelaySwitches.RelaySW = 0xB1;// cmd 0
+
+
+
             sendCmd("Send Relay Switches");           // 0 ----
-            ControlSwitches.controlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");           // 1 ----
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x81;// cmd 0
+            RelaySwitches.RelaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            ControlSwitches.controlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");           // 1 ----
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x80;// cmd 0
+            RelaySwitches.RelaySW = 0x80;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x81;// cmd 0
+            RelaySwitches.RelaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x83;// cmd 0
+            RelaySwitches.RelaySW = 0x83;// cmd 0
             sendCmd("Send Relay Switches");
             // 0 ----
             ControlSwitches.TorqueMotor(enable);
@@ -3718,9 +3555,9 @@ namespace SerialPortTerminal
 
         private void button10_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x81;// cmd 0
+            RelaySwitches.RelaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // 0 ----
-            ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
             sendCmd("Send Control Switches");           // 1 ----
         }
 
@@ -3806,7 +3643,7 @@ namespace SerialPortTerminal
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // Show the user the about dialog
-            (new frmAbout()).ShowDialog(this);
+            (new FormAbout()).ShowDialog(this);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -4763,26 +4600,26 @@ namespace SerialPortTerminal
 
             _delegate(new shutdownData
             {
-                shutDownText = "Preparing to shutdown..."
+                ShutDownText = "Preparing to shutdown..."
             });
             Thread.Sleep(1000);
             fileRecording = false;
             _delegate(new shutdownData
             {
-                shutDownText = "Closing all open files."
+                ShutDownText = "Closing all open files."
             });
             Thread.Sleep(2000);
 
             springTensionEnabled = false;
             _delegate(new shutdownData
             {
-                shutDownText = "Disabling spring tension"
+                ShutDownText = "Disabling spring tension"
             });
             Thread.Sleep(3000);
             torqueMotorsEnabled = false;
             _delegate(new shutdownData
             {
-                shutDownText = "Turning off torque motors"
+                ShutDownText = "Turning off torque motors"
             });
             Thread.Sleep(3000);
 
@@ -4790,13 +4627,13 @@ namespace SerialPortTerminal
 
             _delegate(new shutdownData
             {
-                shutDownText = "Turning off gyros"
+                ShutDownText = "Turning off gyros"
             });
             Thread.Sleep(3000);
 
             _delegate(new shutdownData
             {
-                shutDownText = "Shutdown complete.  Program will now terminate."
+                ShutDownText = "Shutdown complete.  Program will now terminate."
             });
             Thread.Sleep(3000);
 
@@ -4918,7 +4755,7 @@ namespace SerialPortTerminal
             // 200 Hz etc
             byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
 
-            RelaySwitches.stepperMotorEnable(enable);
+            RelaySwitches.StepperMotorEnable(enable);
             sendCmd("Send Relay Switches");
 
             sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
@@ -4942,24 +4779,24 @@ namespace SerialPortTerminal
             ControlSwitches.DataCollection(enable);
             sendCmd("Send Control Switches");
 
-            RelaySwitches.relay200Hz(enable);
-            RelaySwitches.slew4(enable);
-            RelaySwitches.slew5(enable);
-            RelaySwitches.stepperMotorEnable(enable);
+            RelaySwitches.Relay200Hz(enable);
+            RelaySwitches.Slew4(enable);
+            RelaySwitches.Slew5(enable);
+            RelaySwitches.StepperMotorEnable(enable);
 
             ////////////////////////////////////////////////////////////////////////////////////
             // relay and control switches
-            //  RelaySwitches.relaySW = 0xB1;// cmd 0
+            //  RelaySwitches.RelaySW = 0xB1;// cmd 0
             sendCmd("Send Relay Switches");
 
             ControlSwitches.DataCollection(enable);
             sendCmd("Send Control Switches");
             ////////////////////////////////////////////////////////////////////////////////////
 
-            RelaySwitches.slew4(disable);
-            RelaySwitches.slew5(disable);
+            RelaySwitches.Slew4(disable);
+            RelaySwitches.Slew5(disable);
 
-            //  RelaySwitches.relaySW = 0x81;// cmd 0
+            //  RelaySwitches.RelaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
             torqueMotorCheckBox.Enabled = true;
         }
@@ -4982,7 +4819,7 @@ namespace SerialPortTerminal
         {
             if (torqueMotorCheckBox.Checked)
             {
-                RelaySwitches.relaySW = 0x83;
+                RelaySwitches.RelaySW = 0x83;
                 sendCmd("Send Relay Switches");
                 ControlSwitches.TorqueMotor(enable);
                 sendCmd("Send Control Switches");
@@ -4991,7 +4828,7 @@ namespace SerialPortTerminal
             }
             else
             {
-                RelaySwitches.relaySW = 0x81;// cmd 0
+                RelaySwitches.RelaySW = 0x81;// cmd 0
                 sendCmd("Send Relay Switches");           // 0 ----
                 gyroCheckBox.Enabled = true;
                 springTensionCheckBox.Enabled = false;
@@ -5307,14 +5144,15 @@ namespace SerialPortTerminal
 
         private void springTensionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            //TODO: spring tension enable not working - debug
             if (springTensionCheckBox.Checked)
             {
                 ControlSwitches.SpringTension(enable);
                 ControlSwitches.TorqueMotor(enable);
                 ControlSwitches.DataCollection(enable);
 
-                RelaySwitches.relay200Hz(enable);
-                RelaySwitches.stepperMotorEnable(enable);
+                RelaySwitches.Relay200Hz(enable);
+                RelaySwitches.StepperMotorEnable(enable);
 
                 sendCmd("Send Relay Switches");
                 sendCmd("Send Control Switches");
@@ -5323,7 +5161,7 @@ namespace SerialPortTerminal
             else
             {
                 ControlSwitches.SpringTension(disable);
-                RelaySwitches.stepperMotorEnable(disable);
+                RelaySwitches.StepperMotorEnable(disable);
                 sendCmd("Send Relay Switches");
                 sendCmd("Send Control Switches");
                 torqueMotorCheckBox.Enabled = true;
@@ -5332,13 +5170,13 @@ namespace SerialPortTerminal
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            RelaySwitches.stepperMotorEnable(disable);
+            RelaySwitches.StepperMotorEnable(disable);
             sendCmd("Send Relay Switches");
         }
 
         private void button3_Click_2(object sender, EventArgs e)
         {
-            RelaySwitches.stepperMotorEnable(enable);
+            RelaySwitches.StepperMotorEnable(enable);
             sendCmd("Send Relay Switches");
             // byte[] data2 = { 0x01, 0x09, 0x08 };
             // comport.Write(data2, 0, 3);
@@ -5385,8 +5223,8 @@ namespace SerialPortTerminal
                 }
                 else if (springTensionSetRadioButton.Checked)
                 {
-                    RelaySwitches.relay200Hz(enable);
-                    RelaySwitches.stepperMotorEnable(enable);
+                    RelaySwitches.Relay200Hz(enable);
+                    RelaySwitches.StepperMotorEnable(enable);
                     sendCmd("Send Relay Switches");
 
                     ControlSwitches.DataCollection(enable);
@@ -5442,19 +5280,19 @@ namespace SerialPortTerminal
                 Console.WriteLine("CHecking FOG and Heater status");
             }
             // Check Cross FOG status
-            if (MeterStatus.xGyro_Fog == 0)
+            if (MeterStatus.XGyro_Fog == 0)
             { crossFogNotReady = false; }
             else
             { crossFogNotReady = true; }
 
             // Check Long FOG status
-            if (MeterStatus.xGyro_Fog == 0)
+            if (MeterStatus.XGyro_Fog == 0)
             { longFogNotReady = false; }
             else
             { longFogNotReady = true; }
 
             // Check Heater status
-            if (MeterStatus.meterHeater == 0)
+            if (MeterStatus.MeterHeater == 0)
             { heaterNotReady = false; }
             else
             { heaterNotReady = true; }

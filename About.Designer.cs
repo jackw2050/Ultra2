@@ -1,6 +1,6 @@
 namespace SerialPortTerminal
 {
-  partial class frmAbout
+  partial class FormAbout
   {
     /// <summary>
     /// Required designer variable.
@@ -43,7 +43,7 @@ namespace SerialPortTerminal
       this.web.WebBrowserShortcutsEnabled = false;
       this.web.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.web_Navigated);
       // 
-      // frmAbout
+      // FormAbout
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -52,7 +52,7 @@ namespace SerialPortTerminal
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "frmAbout";
+      this.Name = "FormAbout";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "About Terminal";
       this.ResumeLayout(false);

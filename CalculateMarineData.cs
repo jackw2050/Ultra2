@@ -10,29 +10,178 @@ namespace SerialPortTerminal
     // iport[2] 6 airplane mode
     //iport[2]  portC input?
 
-    public class Errors
-    {
-        public static Boolean remoteRebooted = false;
-        public static Boolean setTimeSuccess = false;
-        public static Boolean platformLevel = false;
 
-        public static int timeSetErrorCount = 0;
-        public static int serialCommErrorCount = 0;
+
+
+
+
+
+
+    public static class Errors
+    {
+        private static Boolean remoteRebooted = false;
+        private static Boolean setTimeSuccess = false;
+        private static Boolean platformLevel = false;
+        private static int timeSetErrorCount = 0;
+        private static int serialComErrorCount = 0;
+        public static Boolean RemoteRebooted
+        {
+            get
+            {
+                return remoteRebooted;
+            }
+            set
+            {
+                remoteRebooted = value;
+            }
+        }
+        public static Boolean SetTimeSuccess
+        {
+            get
+            {
+                return setTimeSuccess;
+            }
+            set
+            {
+                setTimeSuccess = value;
+            }
+        }
+        public static Boolean PlatformLevel
+        {
+            get
+            {
+                return platformLevel;
+            }
+            set
+            {
+                platformLevel = value;
+            }
+        }
+        public static int TimeSetErrorCount
+        {
+            get
+            {
+                return timeSetErrorCount;
+            }
+            set
+            {
+                timeSetErrorCount = value;
+            }
+        }
+        public static int SerialComErrorCount
+        {
+            get
+            {
+                return serialComErrorCount;
+            }
+            set
+            {
+                serialComErrorCount = value;
+            }
+        }
+
     }
 
     public class PortC //  Byte 77
     {
-        public int irqPresent = 0;
-        public int xGyroHeater = 0;
-        public int lGyroHeater = 0;
-        public int meterHeater = 0;
-        public int generalInhibitFlag = 0;
+
+
+
+
+        private int irqPresent = 0;
+        private int xGyroHeater = 0;
+        private int lGyroHeater = 0;
+        private int meterHeater = 0;
+        private int generalInhibitFlag = 0;
+        // reserved
+        private int gearSelector = 0;
 
         // reserved
-        public int gearSelector = 0;
+        private int portCVal = 0;
 
-        // reserved
-        public int portCVal = 0;
+
+        public int IrqPresent
+        {
+            get
+            {
+                return irqPresent;
+            }
+            set
+            {
+                irqPresent = value;
+            }
+        }
+        public int XGyroHeater
+        {
+            get
+            {
+                return xGyroHeater;
+            }
+            set
+            {
+                xGyroHeater = value;
+            }
+        }
+        public int LGyroHeater
+        {
+            get
+            {
+                return lGyroHeater;
+            }
+            set
+            {
+                lGyroHeater = value;
+            }
+        }
+        public int MeterHeater
+        {
+            get
+            {
+                return meterHeater;
+            }
+            set
+            {
+                meterHeater = value;
+            }
+        }
+
+        public int GeneralInhibitFlag
+        {
+            get
+            {
+                return generalInhibitFlag;
+            }
+            set
+            {
+                generalInhibitFlag = value;
+            }
+        }
+        public int GearSelector
+        {
+            get
+            {
+                return gearSelector;
+            }
+            set
+            {
+                gearSelector = value;
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        public int PortCVal
+        {
+            get
+            {
+                return portCVal;
+            }
+            set
+            {
+               // portCVal = value;
+            }
+        }
+
+
 
         public void CalculatePortC()
         {
@@ -47,6 +196,8 @@ namespace SerialPortTerminal
             // 0x20 and 0x80 not used
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
         public void Port_C_MeterStatus(Int16 portCStatus)
         {
             irqPresent = (portCStatus & 0x01);
@@ -55,7 +206,7 @@ namespace SerialPortTerminal
             meterHeater = (portCStatus & 0x08) >> 4;
             generalInhibitFlag = (portCStatus & 0x10) >> 8;
             gearSelector = (portCStatus & 0x40) >> 20;
-            if (false)
+            if (frmTerminal.engineerDebug)
             {
                 Console.WriteLine("IRQ status " + irqPresent);
                 Console.WriteLine("Cross gyro heater " + xGyroHeater);
@@ -70,19 +221,113 @@ namespace SerialPortTerminal
     public class MeterStatus// Byte 76
     {
         // CalculateMarineData CalculateMarineData = new CalculateMarineData();
-        public int alarmIndicated = 0;
+        private int alarmIndicated = 0;
+        private int xGyro_Fog = 0;   // cross gyro or FOG status
+        private int lGyro_Fog = 0;   // cross gyro or FOG status
+        private int meterHeater = 0;
+        private int dumpIndigator = 0;
+        private int incorrectCommandReceived = 0;
+        private int serialPortTimeout = 0;
+        private int receiveDataCheckSumError = 0;
+        private static int meterStatus = 0;
 
-        public int xGyro_Fog = 0;   // cross gyro or FOG status
-        public int lGyro_Fog = 0;   // cross gyro or FOG status
-        public int meterHeater = 0;
-        public int dumpIndigator = 0;
-        public int incorrectCommandReceived = 0;
-        public int serialPortTimeout = 0;
-        public int receiveDataCheckSumError = 0;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        public int AlarmIndicated
+        {
+            get
+            {
+                return alarmIndicated;
+            }
+            set
+            {
 
-        // reserved
-        public static int meterStatus = 0;
+            }
+        }
+        public int XGyro_Fog
+        {
+            get
+            {
+                return xGyro_Fog;
+            }
+            set
+            {
 
+            }
+        }
+        public int LGyro_Fog
+        {
+            get
+            {
+                return lGyro_Fog;
+            }
+            set
+            {
+
+            }
+        }
+        public int MeterHeater
+        {
+            get
+            {
+                return meterHeater;
+            }
+            set
+            {
+
+            }
+        }
+        public int DumpIndigator
+        {
+            get
+            {
+                return dumpIndigator;
+            }
+            set
+            {
+
+            }
+        }
+        public int IncorrectCommandReceived
+        {
+            get
+            {
+                return incorrectCommandReceived;
+            }
+            set
+            {
+
+            }
+        }
+        public int SerialPortTimeout
+        {
+            get
+            {
+                return serialPortTimeout;
+            }
+            set
+            {
+
+            }
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "CheckSum")]
+        public int ReceiveDataCheckSumError
+        {
+            get
+            {
+                return receiveDataCheckSumError;
+            }
+            set
+            {
+
+            }
+        }
+
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "alarmIndicated")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
         public void GetMeterStatus(Int16 meterUpdate)
         {
             frmTerminal frmTerminal = new frmTerminal();
@@ -96,7 +341,8 @@ namespace SerialPortTerminal
             receiveDataCheckSumError = (meterStatus & 0x80) >> 40;
             meterStatus = meterUpdate;
             frmTerminal.meter_status = meterUpdate;
-            if (false)
+            frmTerminal.Dispose();
+            if (frmTerminal.engineerDebug)
             {
                 Console.WriteLine("alarmIndicated " + alarmIndicated);
                 Console.WriteLine("Cross FOG " + xGyro_Fog);
@@ -110,50 +356,23 @@ namespace SerialPortTerminal
         }
     }
 
-    public class RelaySwitchesOld// IPORT[1]\\kij
-    {
-        //  public int RelaySW = 0;
-
-        public int relay200Hz = 0;
-        public int relayTorqueMotor = 0;
-        public int alarm = 0;
-        public int steppingMotorDirection = 0;// need to check this
-        public int slew4 = 0;
-        public int slew5 = 0;
-        public int triggerStepperMotor = 0;
-        public int stepperMotorEnable = 0;
-        /*
-         * IPORT(1)
-         * BIT
-         * 0    200Hz relay                 0b1             0x01
-         * 1    Torque relay                0b10            0x02
-         * 2    Alarm                       0b100           0x04
-         * 3    Stepping motor direction    0b1000          0x08
-         * 4    TTL or slew                 0b10000         0x10
-         * 5    TTL or slew                 0b100000        0x20
-         * 6    Trigger Stepper Motor       0b1000000       0x40
-         * 7    Stepper Motor enable        0b10000000      0x80
-            */
-
-        public void RelaySwitchCalculate()// 0xB1  1011 0001
-        {
-            /*     RelaySW =
-                     relay200Hz              * 0x01 +
-                     relayTorqueMotor        * 0x02 +
-                     alarm                   * 0x04 +
-                     steppingMotorDirection  * 0x08 +
-                     slew4                   * 0x10 +
-                     slew5                   * 0x20 +
-                     triggerStepperMotor     * 0x40 +
-                     stepperMotorEnable      * 0x80;*/
-        }
-    }
-
     public class RelaySwitches
     {
-        public int relaySW = 0;
+        private int relaySW = 0;
 
-        public void relay200Hz(int state)
+        public int RelaySW
+        {
+            get
+            {
+                return relaySW;
+            }
+            set
+            {
+                relaySW = RelaySW;
+            }
+        }
+
+        public void Relay200Hz(int state)
         {
             if (state == 1)// Enable Torque Motor
             {
@@ -165,7 +384,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void relayTorqueMotor(int state)
+        public void RelayTorqueMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
             {
@@ -177,7 +396,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void alarm(int state)
+        public void Alarm(int state)
         {
             if (state == 1)// Enable alarm
             {
@@ -189,7 +408,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void steppingMotorDirection(int state)
+        public void SteppingMotorDirection(int state)
         {
             if (state == 1)
             {
@@ -201,7 +420,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void slew4(int state)
+        public void Slew4(int state)
         {
             if (state == 1)
             {
@@ -213,7 +432,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void slew5(int state)
+        public void Slew5(int state)
         {
             if (state == 1)
             {
@@ -225,7 +444,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void triggerStepperMotor(int state)
+        public void TriggerStepperMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
             {
@@ -237,7 +456,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public void stepperMotorEnable(int state)
+        public void StepperMotorEnable(int state)
         {
             if (state == 1)// Enable stepper Motor
             {
@@ -252,8 +471,19 @@ namespace SerialPortTerminal
 
     public class ControlSwitches
     {
-        public int controlSw = 0;
+        private int controlSw = 0;
 
+        public int ControlSw
+        {
+            get
+            {
+                return controlSw;
+            }
+            set
+            {
+                controlSw = ControlSw;
+            }
+        }
         public void TorqueMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -547,13 +777,13 @@ namespace SerialPortTerminal
 
             if  ( (meterBytes.Length == 0 ) ||  (meterBytes[0] != meterBytes.Length - 1))
             {
-                Errors.serialCommErrorCount++;
+                Errors.SerialComErrorCount++;
                 if (frmTerminal.timerDebug)
                 {
-                    Console.WriteLine("Serial comm error count = " + Errors.serialCommErrorCount);
+                    Console.WriteLine("Serial comm error count = " + Errors.SerialComErrorCount);
                     Console.WriteLine("Message length: " + meterBytes.Length);
                 }
-                if (Errors.serialCommErrorCount > 5)
+                if (Errors.SerialComErrorCount > 5)
                 {
                     frmTerminal frmTerminal = new frmTerminal();
                     frmTerminal.TimerWithDataCollection("stop");
@@ -563,7 +793,7 @@ namespace SerialPortTerminal
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {
                 dataValid = true;
-                Errors.serialCommErrorCount = 0;
+                Errors.SerialComErrorCount = 0;
                 byte[] array = new byte[4];
                 array[0] = meterBytes[6]; // Lowest
                 Hour = BitConverter.ToInt16(array, 0);
@@ -908,7 +1138,7 @@ namespace SerialPortTerminal
                 // CHECK FOR TIME SET SUCCESSFULL/ FAIL
                 else if (tempByte[0] == 2)//
                 {
-                    Errors.setTimeSuccess = true;
+                    Errors.SetTimeSuccess = true;
                     if (frmTerminal.engineerDebug)
                     {
                         Console.WriteLine("Time set Successful");
@@ -917,7 +1147,7 @@ namespace SerialPortTerminal
                 }
                 else if (tempByte[0] == 2)// Time set failed
                 {
-                    Errors.setTimeSuccess = false;
+                    Errors.SetTimeSuccess = false;
                     if (frmTerminal.engineerDebug)
                     {
                         Console.WriteLine("Time set Failed");

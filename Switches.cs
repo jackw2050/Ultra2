@@ -11,7 +11,7 @@ namespace SerialPortTerminal
         private frmTerminal frmTerminal = new frmTerminal();
         private ControlSwitches ControlSwitches = new ControlSwitches();
        // private frmTerminal frmTerminal = new frmTerminal();
-        private Comms Comms = new Comms();
+       
         private ConfigData ConfigData = new ConfigData();
 
         public int set = 1;
@@ -31,16 +31,16 @@ namespace SerialPortTerminal
         private void button3_Click(object sender, EventArgs e)
         {
             byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
-            RelaySwitches.stepperMotorEnable(enable);
+            RelaySwitches.StepperMotorEnable(enable);
             
             //    RelaySwitches.RelaySwitchCalculate();// 0x80
-            RelaySwitches.relaySW = 0x80;// cmd 0
+            RelaySwitches.RelaySW = 0x80;// cmd 0
             frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
             frmTerminal.sendCmd("Set Cross Axis Parameters");      // download platform parameters 4 -----
             frmTerminal.sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
             frmTerminal.sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
 
-            ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
 
             frmTerminal.sendCmd("Send Control Switches");           // 1 ----
             frmTerminal.sendCmd("Send Control Switches");           // 1 ----
@@ -48,34 +48,34 @@ namespace SerialPortTerminal
 
         private void button4_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0xB1;// cmd 0
+            RelaySwitches.RelaySW = 0xB1;// cmd 0
             frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
-            ControlSwitches.controlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08; //ControlSwitches.RelayControlSW = 0x08;
             frmTerminal.sendCmd("Send Control Switches");           // 1 ----
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x81;// cmd 0
+            RelaySwitches.RelaySW = 0x81;// cmd 0
             frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            ControlSwitches.controlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
+            ControlSwitches.ControlSw = 0x08;// ControlSwitches.RelayControlSW = 0x08;
             frmTerminal.sendCmd("Send Control Switches");           // 1 ----
         }
         private void button7_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x80;// cmd 0
+            RelaySwitches.RelaySW = 0x80;// cmd 0
             frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button8_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x81;// cmd 0
+            RelaySwitches.RelaySW = 0x81;// cmd 0
             frmTerminal.sendCmd("Send Relay Switches");           // 0 ----
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            RelaySwitches.relaySW = 0x83;// cmd 0
+            RelaySwitches.RelaySW = 0x83;// cmd 0
     //        frmTerminal.sendCmd("Send Relay Switches");// 0 ----
             ControlSwitches.TorqueMotor(enable);
             ControlSwitches.Alarm(enable);
@@ -89,7 +89,7 @@ namespace SerialPortTerminal
 
             if (torqueMotorCheckBox.Checked == true)
             {
-                RelaySwitches.relaySW = 0x83;// cmd 0
+                RelaySwitches.RelaySW = 0x83;// cmd 0
          //       frmTerminal.sendCmd("Send Relay Switches");// 0 ----
                 ControlSwitches.TorqueMotor(enable);
                 ControlSwitches.Alarm(enable);
@@ -98,7 +98,7 @@ namespace SerialPortTerminal
             }
             else
             {
-                RelaySwitches.relaySW = 0x81;// cmd 0
+                RelaySwitches.RelaySW = 0x81;// cmd 0
                 //Comms.sendCmd("Send Relay Switches");           // 0 ----
             }
         }
