@@ -116,7 +116,7 @@ namespace SerialPortTerminal
         */
         public static Int16 meter_status = 0;
         private Boolean autostart = false;
-
+        public int timerOffset = 0;
         public static DateTime fileStartTime;
         public static string fileName = programPath + "test.csv";// c:/zls
         public static string calFileName;
@@ -398,8 +398,8 @@ namespace SerialPortTerminal
             EnableControls();
 
             _timer1 = new System.Windows.Forms.Timer();
-            _timer1.Interval = (3000 - DateTime.Now.Millisecond);
-            _timer1.Enabled = false;  // ENBALE WHEN FIRST DATAN IS SENT
+            _timer1.Interval = (1000 - DateTime.Now.Millisecond);
+            _timer1.Enabled = false;  // ENBALE WHEN FIRST DATA IS SENT
             _timer1.Tick += new EventHandler(port_CheckDataReceived);
         }
 
@@ -696,13 +696,11 @@ namespace SerialPortTerminal
             // Change the state of the form's controls
             EnableControls();
         }
-
-        public void TimerOffset()
+        public void WriteLogFile( string logItem)
         {
-            _timer1.Interval = (1000 - DateTime.Now.Millisecond);
-            _timer1.Enabled = true;
-            _timer1.Start();
+            System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture)+ "\t" + logItem + Environment.NewLine);
         }
+
 
         public void TimerWithDataCollection(string state)
         {
@@ -724,7 +722,7 @@ namespace SerialPortTerminal
                         ControlSwitches.DataCollection(enable);
                         sendCmd("Send Control Switches");           // 1 ----
                     }
-                    _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
+                    _timer1.Interval = 1000 + timerOffset; // (1000 - DateTime.Now.Millisecond);
                     _timer1.Enabled = true;
                     _timer1.Start();
 
@@ -2676,6 +2674,8 @@ namespace SerialPortTerminal
 
             SetupChart();
             // Setup DataGrid();
+           WriteLogFile("System loaded");
+
         }
 
         //==================================================================================================
@@ -4809,7 +4809,9 @@ namespace SerialPortTerminal
 
                 sendCmd("Send Relay Switches");
                 torqueMotorCheckBox.Enabled = true;
+                WriteLogFile("Gyros enabled");
 
+         
             }
             else
             {
@@ -4817,7 +4819,9 @@ namespace SerialPortTerminal
                 RelaySwitches.Slew5(enable);
 
                 sendCmd("Send Relay Switches");
-               
+                WriteLogFile("Gyros disabled");
+
+
             }
         }
 
@@ -4832,6 +4836,8 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");
                 gyroCheckBox.Enabled = false;
                 springTensionCheckBox.Enabled = true;
+                WriteLogFile("Torque motor enabled");
+
             }
             else
             {
@@ -4840,6 +4846,8 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");           // 0 ----
                 gyroCheckBox.Enabled = true;
                 springTensionCheckBox.Enabled = false;
+                WriteLogFile("Torque motor enabled");
+
             }
         }
 
@@ -4849,11 +4857,15 @@ namespace SerialPortTerminal
             {
                 ControlSwitches.Alarm(enable);
                 sendCmd("Send Control Switches");
+                WriteLogFile("Alarm enabled");
+
             }
             else
             {
                 ControlSwitches.Alarm(disable);
                 sendCmd("Send Control Switches");
+                WriteLogFile("Alarm disabled");
+
             }
         }
 
@@ -5164,8 +5176,9 @@ namespace SerialPortTerminal
                 RelaySwitches.StepperMotorEnable(enable);
                 sendCmd("Send Control Switches");
                 sendCmd("Send Relay Switches");
-
                 torqueMotorCheckBox.Enabled = false;
+                WriteLogFile("Spring tension enabled");
+
             }
             else
             {
@@ -5174,6 +5187,8 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");
                 sendCmd("Send Control Switches");
                 torqueMotorCheckBox.Enabled = true;
+                WriteLogFile("Spring tension disabled");
+
             }
         }
 

@@ -10,13 +10,6 @@ namespace SerialPortTerminal
     // iport[2] 6 airplane mode
     //iport[2]  portC input?
 
-
-
-
-
-
-
-
     public static class Errors
     {
         private static Boolean remoteRebooted = false;
@@ -24,6 +17,7 @@ namespace SerialPortTerminal
         private static Boolean platformLevel = false;
         private static int timeSetErrorCount = 0;
         private static int serialComErrorCount = 0;
+
         public static Boolean RemoteRebooted
         {
             get
@@ -35,6 +29,7 @@ namespace SerialPortTerminal
                 remoteRebooted = value;
             }
         }
+
         public static Boolean SetTimeSuccess
         {
             get
@@ -46,6 +41,7 @@ namespace SerialPortTerminal
                 setTimeSuccess = value;
             }
         }
+
         public static Boolean PlatformLevel
         {
             get
@@ -57,6 +53,7 @@ namespace SerialPortTerminal
                 platformLevel = value;
             }
         }
+
         public static int TimeSetErrorCount
         {
             get
@@ -68,6 +65,7 @@ namespace SerialPortTerminal
                 timeSetErrorCount = value;
             }
         }
+
         public static int SerialComErrorCount
         {
             get
@@ -79,26 +77,21 @@ namespace SerialPortTerminal
                 serialComErrorCount = value;
             }
         }
-
     }
 
     public class PortC //  Byte 77
     {
-
-
-
-
         private int irqPresent = 0;
         private int xGyroHeater = 0;
         private int lGyroHeater = 0;
         private int meterHeater = 0;
         private int generalInhibitFlag = 0;
+
         // reserved
         private int gearSelector = 0;
 
         // reserved
         private int portCVal = 0;
-
 
         public int IrqPresent
         {
@@ -111,6 +104,7 @@ namespace SerialPortTerminal
                 irqPresent = value;
             }
         }
+
         public int XGyroHeater
         {
             get
@@ -122,6 +116,7 @@ namespace SerialPortTerminal
                 xGyroHeater = value;
             }
         }
+
         public int LGyroHeater
         {
             get
@@ -133,6 +128,7 @@ namespace SerialPortTerminal
                 lGyroHeater = value;
             }
         }
+
         public int MeterHeater
         {
             get
@@ -156,6 +152,7 @@ namespace SerialPortTerminal
                 generalInhibitFlag = value;
             }
         }
+
         public int GearSelector
         {
             get
@@ -177,11 +174,9 @@ namespace SerialPortTerminal
             }
             set
             {
-               // portCVal = value;
+                // portCVal = value;
             }
         }
-
-
 
         public void CalculatePortC()
         {
@@ -222,6 +217,7 @@ namespace SerialPortTerminal
     {
         // CalculateMarineData CalculateMarineData = new CalculateMarineData();
         private int alarmIndicated = 0;
+
         private int xGyro_Fog = 0;   // cross gyro or FOG status
         private int lGyro_Fog = 0;   // cross gyro or FOG status
         private int meterHeater = 0;
@@ -240,9 +236,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         public int XGyro_Fog
         {
             get
@@ -251,9 +247,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         public int LGyro_Fog
         {
             get
@@ -262,9 +258,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         public int MeterHeater
         {
             get
@@ -273,9 +269,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         public int DumpIndigator
         {
             get
@@ -284,9 +280,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         public int IncorrectCommandReceived
         {
             get
@@ -295,9 +291,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         public int SerialPortTimeout
         {
             get
@@ -306,9 +302,9 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "CheckSum")]
         public int ReceiveDataCheckSumError
@@ -319,12 +315,8 @@ namespace SerialPortTerminal
             }
             set
             {
-
             }
         }
-
-
-
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "alarmIndicated")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
@@ -484,6 +476,7 @@ namespace SerialPortTerminal
                 controlSw = ControlSw;
             }
         }
+
         public void TorqueMotor(int state)
         {
             if (state == 1)// Enable Torque Motor
@@ -752,7 +745,7 @@ namespace SerialPortTerminal
 
         public void GetMeterData(byte[] meterBytes)
         {
-
+            frmTerminal frmTerminal = new frmTerminal();
             dataValid = false;
             myDT = new DateTime(DateTime.Now.Year, 1, 1, new GregorianCalendar());
             //GET SPRING TENSION
@@ -774,50 +767,83 @@ namespace SerialPortTerminal
 
             //          Add checksum verification.  Only record valid data
             // need to add various error types and keep track here
-
-            if  ( (meterBytes.Length == 0 ) ||  (meterBytes[0] != meterBytes.Length - 1))
+            if ((meterBytes.Length == 0))
+            {
+                // do nothing - later
+            }
+            else if ((meterBytes[0] != meterBytes.Length - 1))
             {
                 Errors.SerialComErrorCount++;
-                if (frmTerminal.timerDebug)
+
+                if (meterBytes[0] == meterBytes.Length - 1)
                 {
                     if (meterBytes[1] == 1)
                     {
+                        if (frmTerminal.timerDebug)
+                        {
+                            Console.WriteLine("Remote rebooted");
+                        }
                         Errors.RemoteRebooted = true;
-                        Console.WriteLine("Remote rebooted");
+                        frmTerminal.WriteLogFile("Remote rebooted");
                     }
                     else if (meterBytes[1] == 2)
                     {
                         Errors.SetTimeSuccess = true;
-                        Console.WriteLine("Time set successful");
+                        if (frmTerminal.timerDebug)
+                        {
+                            Console.WriteLine("Time set successful");
+                        }
+                        frmTerminal.WriteLogFile("Time set successful");
                     }
                     else if (meterBytes[1] == 3)
                     {
                         Errors.SetTimeSuccess = false;
-                        Console.WriteLine("Time set failed");
+                        frmTerminal.WriteLogFile("Time set failed");
+                        if (frmTerminal.timerDebug)
+                        {
+                            Console.WriteLine("Time set failed");
+                        }
                     }
                     else if (meterBytes[1] == 4)
                     {
-                        Console.WriteLine("G2000 bias incomming");
+                        if (frmTerminal.timerDebug)
+                        {
+                            Console.WriteLine("G2000 bias incoming");
+                        }
                     }
-                    else
+
+                    if (frmTerminal.timerDebug)
+                    {
+                        frmTerminal.WriteLogFile("Remote rebooted");
+                        Console.WriteLine("Serial comm error count = " + Errors.SerialComErrorCount);
+                        Console.WriteLine("Message length: " + meterBytes.Length);
+                    }
+                }
+                if (meterBytes[0] != meterBytes.Length - 1)
+                {
+                    if (frmTerminal.timerDebug)
                     {
                         Console.WriteLine("Unrecognized command");
+                        Console.WriteLine("Data length: " + meterBytes.Length);
                     }
-                    Console.WriteLine("Serial comm error count = " + Errors.SerialComErrorCount);
-                    Console.WriteLine("Message length: " + meterBytes.Length);
+                    frmTerminal.WriteLogFile("Serial port read error");
                 }
+
                 if (Errors.SerialComErrorCount > 3)
                 {
-                    frmTerminal frmTerminal = new frmTerminal();
                     Errors.SerialComErrorCount = 0;
-                    Console.WriteLine("Resetting timer");
-                    frmTerminal.TimerOffset();
+                    if (frmTerminal.timerDebug)
+                    {
+                        Console.WriteLine("Resetting timer by  " + Errors.SerialComErrorCount * 100);
+                    }
+                    frmTerminal.timerOffset = Errors.SerialComErrorCount * 100;
                     // frmTerminal.TimerWithDataCollection("stop");
                     // frmTerminal.TimerWithDataCollection("start");
                 }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {
+                frmTerminal.timerOffset = 0;
                 Errors.RemoteRebooted = false;
                 dataValid = true;
                 Errors.SerialComErrorCount = 0;
@@ -1148,7 +1174,7 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[77];
                 portCStatus = BitConverter.ToInt16(tempByte, 0);//  make global later
                 Port_C.Port_C_MeterStatus(portCStatus);
-              //  Console.WriteLine("PortC status " + portCStatus);
+                //  Console.WriteLine("PortC status " + portCStatus);
                 // CHECK FOR REMOTE EMBEDDED COMPUTER REBOOT
                 tempByte[0] = meterBytes[1];
                 if (frmTerminal.engineerDebug)
@@ -1170,7 +1196,6 @@ namespace SerialPortTerminal
                     {
                         Console.WriteLine("Time set Successful");
                     }
-
                 }
                 else if (tempByte[0] == 2)// Time set failed
                 {
@@ -1179,7 +1204,6 @@ namespace SerialPortTerminal
                     {
                         Console.WriteLine("Time set Failed");
                     }
-
                 }
                 //CHECK G2000 BIAS
                 else if (tempByte[0] == 4)
