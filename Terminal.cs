@@ -697,6 +697,13 @@ namespace SerialPortTerminal
             EnableControls();
         }
 
+        public void TimerOffset()
+        {
+            _timer1.Interval = (1000 - DateTime.Now.Millisecond);
+            _timer1.Enabled = true;
+            _timer1.Start();
+        }
+
         public void TimerWithDataCollection(string state)
         {
             // Get call stack

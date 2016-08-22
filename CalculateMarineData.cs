@@ -780,18 +780,46 @@ namespace SerialPortTerminal
                 Errors.SerialComErrorCount++;
                 if (frmTerminal.timerDebug)
                 {
+                    if (meterBytes[1] == 1)
+                    {
+                        Errors.RemoteRebooted = true;
+                        Console.WriteLine("Remote rebooted");
+                    }
+                    else if (meterBytes[1] == 2)
+                    {
+                        Errors.SetTimeSuccess = true;
+                        Console.WriteLine("Time set successful");
+                    }
+                    else if (meterBytes[1] == 3)
+                    {
+                        Errors.SetTimeSuccess = false;
+                        Console.WriteLine("Time set failed");
+                    }
+                    else if (meterBytes[1] == 4)
+                    {
+                        Console.WriteLine("G2000 bias incomming");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unrecognized command");
+                    }
                     Console.WriteLine("Serial comm error count = " + Errors.SerialComErrorCount);
                     Console.WriteLine("Message length: " + meterBytes.Length);
                 }
-                if (Errors.SerialComErrorCount > 5)
+                if (Errors.SerialComErrorCount > 3)
                 {
                     frmTerminal frmTerminal = new frmTerminal();
-                    frmTerminal.TimerWithDataCollection("stop");
-                    frmTerminal.TimerWithDataCollection("start");
+                    Errors.SerialComErrorCount = 0;
+                    Console.WriteLine("Resetting timer");
+                    frmTerminal.TimerOffset();
+                    // frmTerminal.TimerWithDataCollection("stop");
+                    // frmTerminal.TimerWithDataCollection("start");
+
                 }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
             {
+                Errors.RemoteRebooted = false;
                 dataValid = true;
                 Errors.SerialComErrorCount = 0;
                 byte[] array = new byte[4];
