@@ -397,11 +397,15 @@ namespace SerialPortTerminal
             // Enable/disable controls based on the current state
             EnableControls();
 
+            comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
+            comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
+/*
             _timer1 = new System.Windows.Forms.Timer();
             _timer1.Interval = (1000 - DateTime.Now.Millisecond);
             _timer1.Enabled = false;  // ENBALE WHEN FIRST DATA IS SENT
             _timer1.Tick += new EventHandler(port_CheckDataReceived);
-        }
+  */
+            }
 
         private void comport_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
@@ -834,199 +838,72 @@ namespace SerialPortTerminal
 
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            // If the com port has been closed, do nothing
             if (!comport.IsOpen) return;
-
-            // This method will be called when there is data waiting in the port's buffer
-
-            // Determain which mode (string or binary) the user is in
+            Thread.Sleep(100);
             if (CurrentDataMode == DataMode.Text)
             {
-                // Read all the data waiting in the buffer
                 string data = comport.ReadExisting();
 
-                // Display the text to the user in the terminal
                 Log(LogMsgType.Incoming, data);
             }
             else
             {
-                // Obtain the number of bytes waiting in the port's buffer
+             
+                
+                /*// Obtain the number of bytes waiting in the port's buffer
                 int bytes = comport.BytesToRead;
-
+                Console.WriteLine("Bytes to read: " + bytes);
                 // Create a byte array buffer to hold the incoming data
                 byte[] buffer = new byte[bytes];
-
-                // Read the data from the port and store it in our buffer
                 comport.Read(buffer, 0, bytes);
-
-                // Show the user the incoming data in hex format
                 Log(LogMsgType.Incoming, ByteArrayToHexString(buffer));
 
-                mdt.GetMeterData(buffer);// send buffer for parsing
+            */
+                // Obtain the number of bytes waiting in the port's buffer
+                int bytes = comport.BytesToRead;
+                if (bytes > 0)
+                {
+                    byte[] buffer = new byte[bytes];
+                    comport.Read(buffer, 0, bytes);
+                    Console.WriteLine(buffer.Length + "     " + DateTime.Now.ToString());
+                    Log(LogMsgType.Incoming, ByteArrayToHexString(buffer));
+                    mdt.GetMeterData(buffer);// send buffer for parsing
+                }
 
+
+
+
+
+                //   mdt.GetMeterData(buffer);// send buffer for parsing
+                //Console.WriteLine(buffer[0] + "   " + buffer[1]);
+
+                
                 if (mdt.dataValid)
                 {
                     //   textBox1.Text = (mdt.gravity.ToString());
 
                     ThreadProcSafe();
+                    GravityChart.DataBind();
                 }
-
+                
                 //          UpdateTextBox(DateTime newDT, double ST, double Beam);
 
                 //           f2.GravityRichTextBox1.Text = Convert.ToString(mdt.myDT ) +  "         " + Convert.ToString(mdt.SpringTension) + "             " + Convert.ToString(mdt.Beam) + "/n/n";
             }
         }
 
-        private void ThreadProcSafe()
+        private void ThreadParametersFormProcSafe()
         {
             string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
-
-            // Check if this method is running on a different thread
-            // than the thread that created the control.
             if (this.DataStatusForm.InvokeRequired)
             {
                 // It's on a different thread, so use Invoke.
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
-                Thread.Sleep(2000);
+                SetTextCallback parametersFormCallback = new SetTextCallback(SetText);
+                this.Invoke(parametersFormCallback, new object[] { text });
+                //   Thread.Sleep(2000);
             }
             else
             {
-                if (DataStatusForm.Visible == true)
-                {
-                    DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox4.Text = (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox5.Text = (mdt.myDT.ToString());
-                    DataStatusForm.textBox6.Text = (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
-
-                    DataStatusForm.textBox7.Text = (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox8.Text = (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox9.Text = (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox13.Text = (mdt.LACC2.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
-                    DataStatusForm.textBox21.Text = Convert.ToString(meter_status, 2);
-                    DataStatusForm.byte76TextBox.Text = Convert.ToString(meter_status, 2);
-                    DataStatusForm.byte77TextBox.Text = Convert.ToString(mdt.portCStatus, 2);
-                    DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.RelaySW, 2);
-                    DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.ControlSw, 2);
-                }
-
-                if (UserDataForm.Visible)
-                {
-                    UserDataForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox4.Text = (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox5.Text = (mdt.myDT.ToString());
-                    UserDataForm.textBox6.Text = (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox7.Text = (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox8.Text = (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox9.Text = (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox13.Text = (mdt.LACC2.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
-                    UserDataForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
-
-                    if (MeterStatus.LGyro_Fog == 0)
-                    {
-                        UserDataForm.longGyroStatusLabel.ForeColor = Color.Green;
-                        UserDataForm.longGyroStatusLabel.Text = "Ready";
-                    }
-                    else
-                    {
-                        UserDataForm.longGyroStatusLabel.ForeColor = Color.Red;
-                        UserDataForm.longGyroStatusLabel.Text = "Not Ready";
-                    }
-                    if (MeterStatus.XGyro_Fog == 0)
-                    {
-                        UserDataForm.crossGyroStatusLabel.ForeColor = Color.Green;
-                        UserDataForm.crossGyroStatusLabel.Text = "Ready";
-                    }
-                    else
-                    {
-                        UserDataForm.crossGyroStatusLabel.ForeColor = Color.Red;
-                        UserDataForm.crossGyroStatusLabel.Text = "Not Ready";
-                    }
-                    if (MeterStatus.MeterHeater == 0)
-                    {
-                        UserDataForm.heaterStatusLabel.ForeColor = Color.Green;
-                        UserDataForm.heaterStatusLabel.Text = "Ready";
-                    }
-                    else
-                    {
-                        UserDataForm.heaterStatusLabel.ForeColor = Color.Red;
-                        UserDataForm.heaterStatusLabel.Text = "Not Ready";
-                    }
-                }
-
-                string specifier;
-                specifier = "000.000000";
-                textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
-                textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
-                textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
-                if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus == 0) & (mdt.gpsSyncStatus == 0))
-                {
-                    gpsStartusTextBox.ForeColor = Color.Green;
-                    gpsStartusTextBox.Text = "Good";
-                }
-                else
-                {
-                    gpsStartusTextBox.ForeColor = Color.Red;
-                    gpsStartusTextBox.Text = "Error";
-                }
-
-                if (UserDataForm.Visible)
-                {
-                    UserDataForm.gpsSatelitesTextBox.Text = mdt.gpsNumSatelites.ToString();
-
-                    if (mdt.gpsNavigationStatus == 0)
-                    {
-                        UserDataForm.gpsNavigationTextBox.ForeColor = Color.Green;
-                        UserDataForm.gpsNavigationTextBox.Text = "Good";
-                    }
-                    else
-                    {
-                        UserDataForm.gpsNavigationTextBox.ForeColor = Color.Red;
-                        UserDataForm.gpsNavigationTextBox.Text = "Navigation data not available";
-                    }
-                    if (mdt.gpsSyncStatus == 0)
-                    {
-                        UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Green;
-                        UserDataForm.gps1HzSynchTextBox.Text = "Good";
-                    }
-                    else
-                    {
-                        UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Red;
-                        UserDataForm.gps1HzSynchTextBox.Text = "1 Hz synch pulse not present";
-                    }
-                    if (mdt.gpsTimeStatus == 0)
-                    {
-                        UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Green;
-                        UserDataForm.gpsTimeSetTextBox.Text = "Good";
-                    }
-                    else
-                    {
-                        UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Red;
-                        UserDataForm.gpsTimeSetTextBox.Text = "GPS time set unsuccesful";
-                    }
-                }
-
-                // Fill up list aray
-                if (GravityChart.Visible)
-                {
-                    listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
-                    GravityChart.DataSource = listDataSource;
-                }
-
                 // write config values to parameter form when required
                 if (Parameters.updateConfigData)
                 {
@@ -1150,6 +1027,194 @@ namespace SerialPortTerminal
                         Parameters.screenDisplayFilterCheckBox.Checked = false;
                     }
                 }
+            }
+        }
+        private void ThreadUserDataFormProcSafe()
+        {
+            string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
+
+            if (this.DataStatusForm.InvokeRequired)
+            {
+                // It's on a different thread, so use Invoke.
+                SetTextCallback userDataCallback = new SetTextCallback(SetText);
+                this.Invoke(userDataCallback, new object[] { text });
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                UserDataForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox4.Text = (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox5.Text = (mdt.myDT.ToString());
+                UserDataForm.textBox6.Text = (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox7.Text = (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox8.Text = (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox9.Text = (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox13.Text = (mdt.LACC2.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
+
+                if (MeterStatus.LGyro_Fog == 0)
+                {
+                    UserDataForm.longGyroStatusLabel.ForeColor = Color.Green;
+                    UserDataForm.longGyroStatusLabel.Text = "Ready";
+                }
+                else
+                {
+                    UserDataForm.longGyroStatusLabel.ForeColor = Color.Red;
+                    UserDataForm.longGyroStatusLabel.Text = "Not Ready";
+                }
+                if (MeterStatus.XGyro_Fog == 0)
+                {
+                    UserDataForm.crossGyroStatusLabel.ForeColor = Color.Green;
+                    UserDataForm.crossGyroStatusLabel.Text = "Ready";
+                }
+                else
+                {
+                    UserDataForm.crossGyroStatusLabel.ForeColor = Color.Red;
+                    UserDataForm.crossGyroStatusLabel.Text = "Not Ready";
+                }
+                if (MeterStatus.MeterHeater == 0)
+                {
+                    UserDataForm.heaterStatusLabel.ForeColor = Color.Green;
+                    UserDataForm.heaterStatusLabel.Text = "Ready";
+                }
+                else
+                {
+                    UserDataForm.heaterStatusLabel.ForeColor = Color.Red;
+                    UserDataForm.heaterStatusLabel.Text = "Not Ready";
+                }
+
+                /////////
+                UserDataForm.gpsSatelitesTextBox.Text = mdt.gpsNumSatelites.ToString();
+
+                if (mdt.gpsNavigationStatus == 0)
+                {
+                    UserDataForm.gpsNavigationTextBox.ForeColor = Color.Green;
+                    UserDataForm.gpsNavigationTextBox.Text = "Good";
+                }
+                else
+                {
+                    UserDataForm.gpsNavigationTextBox.ForeColor = Color.Red;
+                    UserDataForm.gpsNavigationTextBox.Text = "Navigation data not available";
+                }
+                if (mdt.gpsSyncStatus == 0)
+                {
+                    UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Green;
+                    UserDataForm.gps1HzSynchTextBox.Text = "Good";
+                }
+                else
+                {
+                    UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Red;
+                    UserDataForm.gps1HzSynchTextBox.Text = "1 Hz synch pulse not present";
+                }
+                if (mdt.gpsTimeStatus == 0)
+                {
+                    UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Green;
+                    UserDataForm.gpsTimeSetTextBox.Text = "Good";
+                }
+                else
+                {
+                    UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Red;
+                    UserDataForm.gpsTimeSetTextBox.Text = "GPS time set unsuccesful";
+                }
+            }
+        }
+        private void ThreadDataStatusFormProcSafe()
+        {
+            string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
+
+            if (this.DataStatusForm.InvokeRequired)
+            {
+                // It's on a different thread, so use Invoke.
+                SetTextCallback dataStatusCallback = new SetTextCallback(SetText);
+                this.Invoke(dataStatusCallback, new object[] { text });
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox4.Text = (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox5.Text = (mdt.myDT.ToString());
+                DataStatusForm.textBox6.Text = (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
+
+                DataStatusForm.textBox7.Text = (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox8.Text = (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox9.Text = (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox13.Text = (mdt.LACC2.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox21.Text = Convert.ToString(meter_status, 2);
+                DataStatusForm.byte76TextBox.Text = Convert.ToString(meter_status, 2);
+                DataStatusForm.byte77TextBox.Text = Convert.ToString(mdt.portCStatus, 2);
+                DataStatusForm.relaySwitchesTextBox.Text = Convert.ToString(RelaySwitches.RelaySW, 2);
+                DataStatusForm.controlSwitchesTextBox.Text = Convert.ToString(ControlSwitches.ControlSw, 2);
+            }
+        }
+        private void ThreadProcSafe()
+        {
+            string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
+
+            // Check if this method is running on a different thread
+            // than the thread that created the control.
+            if (this.InvokeRequired)
+            {
+                // It's on a different thread, so use Invoke.
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.Invoke(d, new object[] { text });
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                if (DataStatusForm.Visible == true)
+                {
+                    // Now at ThreadDataStatusFormProcSafe()
+                }
+
+                if (UserDataForm.Visible)
+                {
+                   // Now at ThreadUserDataFormProcSafe
+                }
+
+                string specifier;
+                specifier = "000.000000";
+                textBox16.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
+                textBox17.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
+                textBox18.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
+                if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus == 0) & (mdt.gpsSyncStatus == 0))
+                {
+                    gpsStartusTextBox.ForeColor = Color.Green;
+                    gpsStartusTextBox.Text = "Good";
+                }
+                else
+                {
+                    gpsStartusTextBox.ForeColor = Color.Red;
+                    gpsStartusTextBox.Text = "Error";
+                }
+
+                if (UserDataForm.Visible)
+                {
+                    ThreadUserDataFormProcSafe
+                }
+
+                // Fill up list aray
+                if (GravityChart.Visible)
+                {
+                    listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+                    GravityChart.DataSource = listDataSource;
+                }
+
+             
 
                 myData myData = new myData();
                 myData.Date = mdt.Date;
@@ -2631,11 +2696,11 @@ namespace SerialPortTerminal
             SetInitialVisibility();
             if (engineerDebug)
             {
-                rtfTerminal.Visible = false;
+                rtfTerminal.Visible = true;
             }
             else
             {
-                rtfTerminal.Visible = false;
+                rtfTerminal.Visible = true;
             }
 
             CurrentDataMode = DataMode.Hex;

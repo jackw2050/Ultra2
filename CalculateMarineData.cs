@@ -829,16 +829,20 @@ namespace SerialPortTerminal
                     frmTerminal.WriteLogFile("Serial port read error");
                 }
 
-                if (Errors.SerialComErrorCount > 3)
+                if (Errors.SerialComErrorCount > 2)
                 {
-                    Errors.SerialComErrorCount = 0;
+                    
                     if (frmTerminal.timerDebug)
                     {
-                        Console.WriteLine("Resetting timer by  " + Errors.SerialComErrorCount * 100);
+                        Console.WriteLine("Resetting timer by  " + Errors.SerialComErrorCount * 50);
                     }
-                    frmTerminal.timerOffset = Errors.SerialComErrorCount * 100;
+                    frmTerminal.timerOffset = Errors.SerialComErrorCount * 50;
                     // frmTerminal.TimerWithDataCollection("stop");
                     // frmTerminal.TimerWithDataCollection("start");
+                    if (Errors.SerialComErrorCount > 500)
+                    {
+                        Errors.SerialComErrorCount = 0;
+                    }
                 }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
