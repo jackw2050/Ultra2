@@ -185,7 +185,6 @@ namespace SerialPortTerminal
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -199,8 +198,9 @@ namespace SerialPortTerminal
             this.crossGyroStatusLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButtonContinue = new System.Windows.Forms.RadioButton();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
+            this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1472,15 +1472,6 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
             // 
-            // springTensionTargetNumericTextBox
-            // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
-            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(264, 67);
@@ -1612,7 +1603,7 @@ namespace SerialPortTerminal
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.radioButtonContinue);
+            this.groupBox3.Controls.Add(this.heaterBypassCheckBox);
             this.groupBox3.Controls.Add(this.heaterStatusLabel);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(171, 17);
@@ -1621,18 +1612,6 @@ namespace SerialPortTerminal
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Heater";
-            // 
-            // radioButtonContinue
-            // 
-            this.radioButtonContinue.AutoSize = true;
-            this.radioButtonContinue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButtonContinue.Location = new System.Drawing.Point(6, 50);
-            this.radioButtonContinue.Name = "radioButtonContinue";
-            this.radioButtonContinue.Size = new System.Drawing.Size(165, 20);
-            this.radioButtonContinue.TabIndex = 8;
-            this.radioButtonContinue.Text = "Continue without Heater";
-            this.radioButtonContinue.UseVisualStyleBackColor = true;
-            this.radioButtonContinue.CheckedChanged += new System.EventHandler(this.radioButtonContinue_CheckedChanged);
             // 
             // heaterStatusLabel
             // 
@@ -1644,6 +1623,26 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
+            // 
+            // heaterBypassCheckBox
+            // 
+            this.heaterBypassCheckBox.AutoSize = true;
+            this.heaterBypassCheckBox.Location = new System.Drawing.Point(9, 84);
+            this.heaterBypassCheckBox.Name = "heaterBypassCheckBox";
+            this.heaterBypassCheckBox.Size = new System.Drawing.Size(157, 19);
+            this.heaterBypassCheckBox.TabIndex = 9;
+            this.heaterBypassCheckBox.Text = "Continue without Heater";
+            this.heaterBypassCheckBox.UseVisualStyleBackColor = true;
+            this.heaterBypassCheckBox.CheckedChanged += new System.EventHandler(this.heaterBypassCheckBox_CheckedChanged);
+            // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // frmTerminal
             // 
@@ -1864,10 +1863,10 @@ namespace SerialPortTerminal
         public System.Windows.Forms.Label longGyroStatusLabel;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioButtonContinue;
         public System.Windows.Forms.Label heaterStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDefaultsToolStripMenuItem;
+        private System.Windows.Forms.CheckBox heaterBypassCheckBox;
     }
 }
 

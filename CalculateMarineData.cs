@@ -213,22 +213,21 @@ namespace SerialPortTerminal
         }
     }
 
-    public class MeterStatus// Byte 76
+    static class MeterStatus// Byte 76
     {
         // CalculateMarineData CalculateMarineData = new CalculateMarineData();
-        private int alarmIndicated = 0;
-
-        private int xGyro_Fog = 0;   // cross gyro or FOG status
-        private int lGyro_Fog = 0;   // cross gyro or FOG status
-        private int meterHeater = 0;
-        private int dumpIndigator = 0;
-        private int incorrectCommandReceived = 0;
-        private int serialPortTimeout = 0;
-        private int receiveDataCheckSumError = 0;
+        private static int alarmIndicated = 0;
+        private static int xGyro_Fog = 0;   // cross gyro or FOG status
+        private static int lGyro_Fog = 0;   // cross gyro or FOG status
+        private static int meterHeater = 0;
+        private static int dumpIndigator = 0;
+        private static int incorrectCommandReceived = 0;
+        private static int serialPortTimeout = 0;
+        private static int receiveDataCheckSumError = 0;
         private static int meterStatus = 0;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
-        public int AlarmIndicated
+        public static int AlarmIndicated
         {
             get
             {
@@ -239,7 +238,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public int XGyro_Fog
+        public static int XGyro_Fog
         {
             get
             {
@@ -250,7 +249,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public int LGyro_Fog
+        public static int LGyro_Fog
         {
             get
             {
@@ -261,7 +260,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public int MeterHeater
+        public static int MeterHeater
         {
             get
             {
@@ -272,7 +271,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public int DumpIndigator
+        public static int DumpIndigator
         {
             get
             {
@@ -283,7 +282,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public int IncorrectCommandReceived
+        public static int IncorrectCommandReceived
         {
             get
             {
@@ -294,7 +293,7 @@ namespace SerialPortTerminal
             }
         }
 
-        public int SerialPortTimeout
+        public static int SerialPortTimeout
         {
             get
             {
@@ -307,7 +306,7 @@ namespace SerialPortTerminal
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "CheckSum")]
-        public int ReceiveDataCheckSumError
+        public static int ReceiveDataCheckSumError
         {
             get
             {
@@ -320,7 +319,7 @@ namespace SerialPortTerminal
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "alarmIndicated")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
-        public void GetMeterStatus(Int16 meterUpdate)
+        public static void GetMeterStatus(Int16 meterUpdate)
         {
             frmTerminal frmTerminal = new frmTerminal();
             alarmIndicated = (meterStatus & 0x01);
@@ -628,7 +627,7 @@ namespace SerialPortTerminal
         public static Boolean myDebug = false;
 
         private PortC Port_C = new PortC();
-        private MeterStatus MeterStatus = new MeterStatus();
+    //    private MeterStatus MeterStatus = new MeterStatus();
         public static double cper = 18;
 
         // Take serial data from meter and separate into various variables and commands

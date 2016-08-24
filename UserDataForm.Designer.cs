@@ -81,14 +81,14 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.gps1HzSynchTextBox = new System.Windows.Forms.TextBox();
-            this.gpsNavigationTextBox = new System.Windows.Forms.TextBox();
-            this.gpsTimeSetTextBox = new System.Windows.Forms.TextBox();
             this.gpsSatelitesTextBox = new System.Windows.Forms.TextBox();
+            this.gpsTimeSetTextBox = new System.Windows.Forms.TextBox();
+            this.gpsNavigationTextBox = new System.Windows.Forms.TextBox();
+            this.gps1HzSynchTextBox = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -614,32 +614,33 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "GPS Status";
             // 
-            // label18
+            // gpsSatelitesTextBox
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(26, 23);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(74, 13);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "GPS Time Set";
+            this.gpsSatelitesTextBox.Location = new System.Drawing.Point(284, 46);
+            this.gpsSatelitesTextBox.Name = "gpsSatelitesTextBox";
+            this.gpsSatelitesTextBox.Size = new System.Drawing.Size(54, 20);
+            this.gpsSatelitesTextBox.TabIndex = 7;
             // 
-            // label22
+            // gpsTimeSetTextBox
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(27, 78);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(59, 13);
-            this.label22.TabIndex = 1;
-            this.label22.Text = "1Hz Synch";
+            this.gpsTimeSetTextBox.Location = new System.Drawing.Point(113, 19);
+            this.gpsTimeSetTextBox.Name = "gpsTimeSetTextBox";
+            this.gpsTimeSetTextBox.Size = new System.Drawing.Size(128, 20);
+            this.gpsTimeSetTextBox.TabIndex = 6;
             // 
-            // label23
+            // gpsNavigationTextBox
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(27, 52);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(58, 13);
-            this.label23.TabIndex = 2;
-            this.label23.Text = "Navigation";
+            this.gpsNavigationTextBox.Location = new System.Drawing.Point(113, 49);
+            this.gpsNavigationTextBox.Name = "gpsNavigationTextBox";
+            this.gpsNavigationTextBox.Size = new System.Drawing.Size(128, 20);
+            this.gpsNavigationTextBox.TabIndex = 5;
+            // 
+            // gps1HzSynchTextBox
+            // 
+            this.gps1HzSynchTextBox.Location = new System.Drawing.Point(113, 78);
+            this.gps1HzSynchTextBox.Name = "gps1HzSynchTextBox";
+            this.gps1HzSynchTextBox.Size = new System.Drawing.Size(128, 20);
+            this.gps1HzSynchTextBox.TabIndex = 4;
             // 
             // label24
             // 
@@ -650,33 +651,32 @@
             this.label24.TabIndex = 3;
             this.label24.Text = "# Satelites";
             // 
-            // gps1HzSynchTextBox
+            // label23
             // 
-            this.gps1HzSynchTextBox.Location = new System.Drawing.Point(113, 78);
-            this.gps1HzSynchTextBox.Name = "gps1HzSynchTextBox";
-            this.gps1HzSynchTextBox.Size = new System.Drawing.Size(100, 20);
-            this.gps1HzSynchTextBox.TabIndex = 4;
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(27, 52);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(58, 13);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Navigation";
             // 
-            // gpsNavigationTextBox
+            // label22
             // 
-            this.gpsNavigationTextBox.Location = new System.Drawing.Point(113, 49);
-            this.gpsNavigationTextBox.Name = "gpsNavigationTextBox";
-            this.gpsNavigationTextBox.Size = new System.Drawing.Size(100, 20);
-            this.gpsNavigationTextBox.TabIndex = 5;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(27, 78);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "1Hz Synch";
             // 
-            // gpsTimeSetTextBox
+            // label18
             // 
-            this.gpsTimeSetTextBox.Location = new System.Drawing.Point(113, 19);
-            this.gpsTimeSetTextBox.Name = "gpsTimeSetTextBox";
-            this.gpsTimeSetTextBox.Size = new System.Drawing.Size(100, 20);
-            this.gpsTimeSetTextBox.TabIndex = 6;
-            // 
-            // gpsSatelitesTextBox
-            // 
-            this.gpsSatelitesTextBox.Location = new System.Drawing.Point(284, 46);
-            this.gpsSatelitesTextBox.Name = "gpsSatelitesTextBox";
-            this.gpsSatelitesTextBox.Size = new System.Drawing.Size(54, 20);
-            this.gpsSatelitesTextBox.TabIndex = 7;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(26, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(74, 13);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "GPS Time Set";
             // 
             // UserDataForm
             // 

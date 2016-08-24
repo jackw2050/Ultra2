@@ -8,7 +8,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -39,11 +38,12 @@ namespace SerialPortTerminal
     public partial class frmTerminal : Form
     {
         #region Local Variables
+
         public CalculateMarineData mdt = new CalculateMarineData();
         public RelaySwitches RelaySwitches = new RelaySwitches();
         private ConfigData ConfigData = new ConfigData();
         private ControlSwitches ControlSwitches = new ControlSwitches();
-        private MeterStatus MeterStatus = new MeterStatus();
+//        private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
         private SerialPortForm SerialPortForm = new SerialPortForm();
         private static ArrayList listDataSource = new ArrayList();
@@ -62,11 +62,11 @@ namespace SerialPortTerminal
         public static int iStop;
         public static int fmpm = 2340;
         public static int[] iStep = { 0, 0, 0, 0, 0 };
-        public Boolean completed = false;
+        public static Boolean completed = false;
         private Boolean crossFogNotReady = true;
         private Boolean longFogNotReady = true;
         private Boolean heaterNotReady = true;
-        private int heaterWaitOptions;
+        private static int heaterWaitOptions;
         public Single newSpringTension;
         public static Boolean engineerDebug = false;
         public static Boolean timerDebug = true;
@@ -359,8 +359,6 @@ namespace SerialPortTerminal
             }
         }
 
-      
-
         // The main control for communicating through the RS-232 port
         private SerialPort comport = new SerialPort();
 
@@ -391,19 +389,19 @@ namespace SerialPortTerminal
             EnableControls();
 
             comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
-         //   comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
-/*
-            _timer1 = new System.Windows.Forms.Timer();
-            _timer1.Interval = (1000 - DateTime.Now.Millisecond);
-            _timer1.Enabled = false;  // ENBALE WHEN FIRST DATA IS SENT
-            _timer1.Tick += new EventHandler(port_CheckDataReceived);
-  */
-            }
+            //   comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
+            /*
+                        _timer1 = new System.Windows.Forms.Timer();
+                        _timer1.Interval = (1000 - DateTime.Now.Millisecond);
+                        _timer1.Enabled = false;  // ENBALE WHEN FIRST DATA IS SENT
+                        _timer1.Tick += new EventHandler(port_CheckDataReceived);
+              */
+        }
 
         private void comport_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
             // Show the state of the pins
-          //  UpdatePinState();
+            //  UpdatePinState();
         }
 
         private void UpdatePinState()
@@ -630,7 +628,7 @@ namespace SerialPortTerminal
                 else
                 {
                     // Show the initial pin states
-                 //   UpdatePinState();
+                    //   UpdatePinState();
                 }
 
                 // START 1 SEC TIMER
@@ -670,7 +668,7 @@ namespace SerialPortTerminal
                 if (error) MessageBox.Show(this, "Could not open the COM port.  Most likely it is already in use, has been removed, or is unavailable.", "COM Port Unavalible", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 else
                 {
-                 //   UpdatePinState();
+                    //   UpdatePinState();
                 }
                 initMeter();
                 meterStatusGroupBox.Visible = true;
@@ -678,7 +676,7 @@ namespace SerialPortTerminal
                 gyroCheckBox.Enabled = true;
                 torqueMotorCheckBox.Enabled = false;
                 //  alarmCheckBox.Enabled = true;
-         //       TimerWithDataCollection("start");
+                //       TimerWithDataCollection("start");
 
                 /*
                 // START 1 SEC TIMER
@@ -689,15 +687,15 @@ namespace SerialPortTerminal
                 sendCmd("Send Control Switches");           // 1 ----
                 */
             }
-         //   initMeter();
+            //   initMeter();
             // Change the state of the form's controls
             EnableControls();
         }
-        public void WriteLogFile( string logItem)
-        {
-            System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture)+ "\t" + logItem + Environment.NewLine);
-        }
 
+        public void WriteLogFile(string logItem)
+        {
+            System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
+        }
 
         public void TimerWithDataCollection(string state)
         {
@@ -820,7 +818,7 @@ namespace SerialPortTerminal
                     // call calculaton functions
 
                     // Need to check how to sync threads or have all threads access same data source
-                    ThreadProcSafe();//  Initially write data1 -data4 in text boxes
+                    //                   ThreadProcSafe();//  Initially write data1 -data4 in text boxes
 
                     GravityChart.DataBind();
                 }
@@ -841,8 +839,6 @@ namespace SerialPortTerminal
             }
             else
             {
-             
-                
                 /*// Obtain the number of bytes waiting in the port's buffer
                 int bytes = comport.BytesToRead;
                 Console.WriteLine("Bytes to read: " + bytes);
@@ -858,89 +854,377 @@ namespace SerialPortTerminal
                 {
                     byte[] buffer = new byte[bytes];
                     comport.Read(buffer, 0, bytes);
-                //    Console.WriteLine(buffer.Length + "     " + buffer[0] + "    " + buffer[1] + "    " + DateTime.Now.ToString());
-                 //   Log(LogMsgType.Incoming, ByteArrayToHexString(buffer));
-                    //     mdt.GetMeterData(buffer);// send buffer for parsing
 
                     Thread.CurrentThread.Name = "main";
                     Thread worker = new Thread(CallGetMeterData);
                     worker.Name = "calcMeterData";
-                    worker.Start(buffer);
-
-
+                    worker.Start(buffer);// Start new worker thread to process the data
                 }
-
-
-
-
 
                 //   mdt.GetMeterData(buffer);// send buffer for parsing
                 //Console.WriteLine(buffer[0] + "   " + buffer[1]);
-
-                
-               // if (mdt.dataValid)
-               if(false)
-                {
-                   
-                    //TODO: get callbacks working
-                    ThreadProcSafe();
-                    if (true)
-                    {
-                        ThreadParametersFormProcSafe();
-                    }
-                    if (UserDataForm.Visible)
-                    {
-                        ThreadUserDataFormProcSafe();
-                    }
-                    if (DataStatusForm.Visible)
-                    {
-                        ThreadDataStatusFormProcSafe();
-                    }
-                    
-
-                    // what to do with this?  Not sure it does anything anymore
-                    GravityChart.DataBind();
-                }
-                
-                //          UpdateTextBox(DateTime newDT, double ST, double Beam);
-
-                //           f2.GravityRichTextBox1.Text = Convert.ToString(mdt.myDT ) +  "         " + Convert.ToString(mdt.SpringTension) + "             " + Convert.ToString(mdt.Beam) + "/n/n";
             }
         }
-        static void CallGetMeterData(object buffer)
+
+        public void CallGetMeterData(object buffer)
         {
             frmTerminal frmTerminal = new frmTerminal();
             CalculateMarineData mdt = new CalculateMarineData();
             byte[] bufferByte = (byte[])buffer;
             mdt.GetMeterData((byte[])buffer);// send buffer for parsing
-           
-
-
 
             if (mdt.dataValid)
             {
                 Console.WriteLine(bufferByte.Length + "     " + bufferByte[0] + "    " + mdt.latitude + "    " + DateTime.Now.ToString());
                 //TODO: get callbacks working
-                frmTerminal.ThreadProcSafe();
-                if (true)
+
+                myData myData = new myData();
+                myData.Date = mdt.Date;
+                myData.Gravity = mdt.gravity;
+                myData.SpringTension = mdt.SpringTension;
+                myData.CrossCoupling = mdt.CrossCoupling;
+                myData.RawBeam = mdt.Beam;
+                myData.VCC = mdt.VCC;
+                myData.AL = mdt.AL;
+                myData.AX = mdt.AX;
+                myData.VE = mdt.VE;
+                myData.AX2 = mdt.AX2;
+                myData.XACC2 = mdt.XACC2;
+                myData.LACC2 = mdt.LACC2;
+                myData.XACC = mdt.XACC;
+                myData.LACC = mdt.LACC;
+                myData.TotalCorrection = mdt.totalCorrection;
+                myData.longitude = mdt.longitude;
+                myData.latitude = mdt.latitude;
+                myData.altitude = mdt.altitude;
+                myData.gpsNavigationStatus = mdt.gpsNavigationStatus;
+                myData.gpsSynchStatus = mdt.gpsSyncStatus;
+                myData.gpsTimeStatus = mdt.gpsTimeStatus;
+                myData.gpsNumSatelites = mdt.gpsNumSatelites;
+
+
+
+ 
+                    Invoke((MethodInvoker)delegate
+                    {
+                        listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+                        GravityChart.DataSource = listDataSource;
+                    });
+        
+
+
+
+
+
+                Invoke((MethodInvoker)delegate
                 {
-                    //      ThreadParametersFormProcSafe();
-                }
-                if (frmTerminal.UserDataForm.Visible)
+                    string specifier;
+                    specifier = "000.000000";
+                    gpsAltitudeTextBox.Text = (myData.altitude.ToString("N", CultureInfo.InvariantCulture));
+                    gpsLatitudeTextBox.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
+                    gpsLongitudeTextBox.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
+                    if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus == 0) & (mdt.gpsSyncStatus == 0))
+                    {
+                        gpsStartusTextBox.ForeColor = Color.Green;
+                        gpsStartusTextBox.Text = "Good";
+                    }
+                    else
+                    {
+                        gpsStartusTextBox.ForeColor = Color.Red;
+                        gpsStartusTextBox.Text = "Error";
+                    }
+                });
+
+                // GravityChart.DataBind();
+
+                //   frmTerminal.ThreadProcSafe( myData);
+                if (meterStatusGroupBox.Visible)
                 {
-                    //     ThreadUserDataFormProcSafe();
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        frmTerminal.FogCheck();
+
+                        if (MeterStatus.LGyro_Fog == 0)
+                        {
+                            crossGyroStatusLabel.ForeColor = Color.Green;
+                            crossGyroStatusLabel.Text = "Ready";
+                        }
+                        else
+                        {
+                            crossGyroStatusLabel.ForeColor = Color.Red;
+                            crossGyroStatusLabel.Text = "Not Ready";
+                        }
+                        if (MeterStatus.XGyro_Fog == 0)
+                        {
+                            longGyroStatusLabel.ForeColor = Color.Green;
+                            longGyroStatusLabel.Text = "Ready";
+                        }
+                        else
+                        {
+                            longGyroStatusLabel.ForeColor = Color.Red;
+                            longGyroStatusLabel.Text = "Not Ready";
+                        }
+                        if (meter_status != 0)
+                        {
+                            heaterStatusLabel.ForeColor = Color.Red;
+                            heaterStatusLabel.Text = "Not ready";
+                        }
+                        if (completed)
+                        {
+                            countDown--;
+                        }
+
+                        if (completed = true & countDown == 0)
+                        {
+                            //Console.WriteLine("ready for gyros");
+                            //    Task taskC = Task.Factory.StartNew(() => CloseMeterStatus());
+                            //   taskC.Wait();
+                            meterStatusGroupBox.Visible = false;
+                            startupGroupBox.Visible = true;
+                        }
+                    });
                 }
+                if (UserDataForm.Visible)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        UserDataForm.textBox1.Text = (myData.Gravity.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox2.Text = (myData.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox3.Text = (myData.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox4.Text = (myData.RawBeam.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox5.Text = (myData.Date.ToString());
+                        UserDataForm.textBox6.Text = (myData.TotalCorrection.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox7.Text = (myData.VCC.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox8.Text = (myData.AL.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox9.Text = (myData.AX.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox10.Text = (myData.VE.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox11.Text = (myData.AX2.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox12.Text = (myData.XACC2.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox13.Text = (myData.LACC2.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox14.Text = (myData.XACC.ToString("N", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox15.Text = (myData.LACC.ToString("N", CultureInfo.InvariantCulture));
+
+                        if (MeterStatus.LGyro_Fog == 0)
+                        {
+                            UserDataForm.longGyroStatusLabel.ForeColor = Color.Green;
+                            UserDataForm.longGyroStatusLabel.Text = "Ready";
+                        }
+                        else
+                        {
+                            UserDataForm.longGyroStatusLabel.ForeColor = Color.Red;
+                            UserDataForm.longGyroStatusLabel.Text = "Not Ready";
+                        }
+                        if (MeterStatus.XGyro_Fog == 0)
+                        {
+                            UserDataForm.crossGyroStatusLabel.ForeColor = Color.Green;
+                            UserDataForm.crossGyroStatusLabel.Text = "Ready";
+                        }
+                        else
+                        {
+                            UserDataForm.crossGyroStatusLabel.ForeColor = Color.Red;
+                            UserDataForm.crossGyroStatusLabel.Text = "Not Ready";
+                        }
+                        if (MeterStatus.MeterHeater == 0)
+                        {
+                            UserDataForm.heaterStatusLabel.ForeColor = Color.Green;
+                            UserDataForm.heaterStatusLabel.Text = "Ready";
+                        }
+                        else
+                        {
+                            UserDataForm.heaterStatusLabel.ForeColor = Color.Red;
+                            UserDataForm.heaterStatusLabel.Text = "Not Ready";
+                        }
+
+                        UserDataForm.gpsSatelitesTextBox.Text = mdt.gpsNumSatelites.ToString();
+
+                        if (myData.gpsNumSatelites == 0)
+                        {
+                            UserDataForm.gpsNavigationTextBox.ForeColor = Color.Green;
+                            UserDataForm.gpsNavigationTextBox.Text = "Good";
+                        }
+                        else
+                        {
+                            UserDataForm.gpsNavigationTextBox.ForeColor = Color.Red;
+                            UserDataForm.gpsNavigationTextBox.Text = "Navigation data not available";
+                        }
+                        if (myData.gpsSynchStatus == 0)
+                        {
+                            UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Green;
+                            UserDataForm.gps1HzSynchTextBox.Text = "Good";
+                        }
+                        else
+                        {
+                            UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Red;
+                            UserDataForm.gps1HzSynchTextBox.Text = "1 Hz synch pulse not present";
+                        }
+                        if (myData.gpsTimeStatus == 0)
+                        {
+                            UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Green;
+                            UserDataForm.gpsTimeSetTextBox.Text = "Good";
+                        }
+                        else
+                        {
+                            UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Red;
+                            UserDataForm.gpsTimeSetTextBox.Text = "GPS time set unsuccesful";
+                        }
+                    });
+                        //     ThreadUserDataFormProcSafe();
+                    }
+
+                if (Parameters.Visible)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        if (Parameters.updateConfigData)
+                        {
+                            sendCmd("Set Cross Axis Parameters");
+                            sendCmd("Set Long Axis Parameters");
+                            sendCmd("Update Cross Coupling Values");
+
+                            //  String.Format("{0:0.##}", 123.4567);
+
+                            Parameters.updateConfigData = false;
+
+                            Parameters.crossPeriodTextBox.Text = String.Format("{0:E6}", ConfigData.crossPeriod);
+                            //   Parameters.crossPeriodTextBox.Text = (ConfigData.crossPeriod.ToString("N", CultureInfo.InvariantCulture));  // Convert.ToString( ConfigData.crossPeriod, 6 );
+                            Parameters.crossDampingTextBox.Text = String.Format("{0:E6}", ConfigData.crossDampFactor);
+                            Parameters.crossGainTextBox.Text = String.Format("{0:E6}", ConfigData.crossGain);
+                            Parameters.crossLeadTextBox.Text = String.Format("{0:E6}", ConfigData.crossLead);
+                            Parameters.crossCompFactor4TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompFactor_4);
+                            Parameters.crossCompPhase4TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompPhase_4);
+                            Parameters.crossCompFactor16TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompFactor_16);
+                            Parameters.crossCompPhase16TextBox.Text = String.Format("{0:E6}", ConfigData.crossCompPhase_16);
+
+                            Parameters.longPeriodTextBox.Text = String.Format("{0:E6}", ConfigData.longPeriod);
+                            Parameters.longDampingTextBox.Text = String.Format("{0:E6}", ConfigData.longDampFactor);
+                            Parameters.longGainTextBox.Text = String.Format("{0:E6}", ConfigData.longGain);
+                            Parameters.longLeadTextBox.Text = String.Format("{0:E6}", ConfigData.longLead);
+                            Parameters.longCompFactor4TextBox.Text = String.Format("{0:E6}", ConfigData.longCompFactor_4);
+                            Parameters.longCompPhase4TextBox.Text = String.Format("{0:E6}", ConfigData.longCompPhase_4);
+                            Parameters.longCompFactor16TextBox.Text = String.Format("{0:E6}", ConfigData.longCompFactor_16);
+                            Parameters.longCompPhase16TextBox.Text = String.Format("{0:E6}", ConfigData.longCompPhase_16);
+
+                            Parameters.CMLFactorTextBox.Text = String.Format("{0:E6}", ConfigData.CML_Fact);
+                            Parameters.ALFactorTextBox.Text = String.Format("{0:E6}", ConfigData.AL_Fact);
+                            Parameters.AXFactorTextBox.Text = String.Format("{0:E6}", ConfigData.AX_Fact);
+                            Parameters.VEFactorTextBox.Text = String.Format("{0:E6}", ConfigData.VE_Fact);
+                            Parameters.CMXFactorTextBox.Text = String.Format("{0:E6}", ConfigData.CMX_Fact);
+                            Parameters.XACC2FactorTextBox.Text = String.Format("{0:E6}", ConfigData.XACC2_Fact);
+                            Parameters.LACC2FactorTextBox.Text = String.Format("{0:E6}", ConfigData.LACC2_Fact);
+                            Parameters.XACCPhasetextBox.Text = String.Format("{0:E6}", ConfigData.XACC_Phase);
+                            Parameters.LACC_AL_PhaseTextBox.Text = String.Format("{0:E6}", ConfigData.LACC_AL_Phase);
+                            Parameters.LACC_CML_PhaseTextBox.Text = String.Format("{0:E6}", ConfigData.LACC_CML_Phase);
+                            Parameters.LACC_CMX_PhaseTextBox.Text = String.Format("{0:E6}", ConfigData.LACC_CMX_Phase);
+
+                            Parameters.maxSpringTensionTextBox.Text = String.Format("{0:0.##}", ConfigData.springTensionMax);
+                            Parameters.gyroTypeComboBox.SelectedText = ConfigData.gyroType;
+                            Parameters.meterNumberTextBox.Text = ConfigData.meterNumber;
+                            Parameters.kFactorTextBox.Text = String.Format("{0:E6}", ConfigData.kFactor);
+                            Parameters.screenDisplayFilterTextBox.Text = Convert.ToString(ConfigData.screenDisplayFilter);
+
+                            Boolean clearCheckedBoxes = true;
+                            if (clearCheckedBoxes)
+                            {
+                                // reset checkboxs
+                                Parameters.crossPeriodTextBox.Enabled = false;
+                                Parameters.crossDampingTextBox.Enabled = false;
+                                Parameters.crossGainTextBox.Enabled = false;
+                                Parameters.crossLeadTextBox.Enabled = false;
+                                Parameters.crossCompFactor4TextBox.Enabled = false;
+                                Parameters.crossCompPhase4TextBox.Enabled = false;
+                                Parameters.crossCompFactor16TextBox.Enabled = false;
+                                Parameters.crossCompPhase16TextBox.Enabled = false;
+                                Parameters.longPeriodTextBox.Enabled = false;
+                                Parameters.longDampingTextBox.Enabled = false;
+                                Parameters.longGainTextBox.Enabled = false;
+                                Parameters.longLeadTextBox.Enabled = false;
+                                Parameters.longCompFactor4TextBox.Enabled = false;
+                                Parameters.longCompPhase4TextBox.Enabled = false;
+                                Parameters.longCompFactor16TextBox.Enabled = false;
+                                Parameters.longCompPhase16TextBox.Enabled = false;
+
+                                Parameters.crossPeriodCheckBox.Checked = false;
+                                Parameters.crossDampingCheckBox.Checked = false;
+                                Parameters.crossGainCheckBox.Checked = false;
+                                Parameters.crossLeadCheckBox.Checked = false;
+                                Parameters.crossCompFactor4CheckBox.Checked = false;
+                                Parameters.crossCompPhase4CheckBox.Checked = false;
+                                Parameters.crossCompFactor16CheckBox.Checked = false;
+                                Parameters.crossCompPhase16CheckBox.Checked = false;
+                                Parameters.longPeriodCheckBox.Checked = false;
+                                Parameters.longDampingCheckBox.Checked = false;
+                                Parameters.longGainCheckBox.Checked = false;
+                                Parameters.longLeadCheckBox.Checked = false;
+                                Parameters.longCompFactor4CheckBox.Checked = false;
+                                Parameters.longCompPhase4CheckBox.Checked = false;
+                                Parameters.longCompFactor16CheckBox.Checked = false;
+                                Parameters.longCompPhase16CheckBox.Checked = false;
+
+                                Parameters.CMLFactorTextBox.Enabled = false;
+                                Parameters.ALFactorTextBox.Enabled = false;
+                                Parameters.AXFactorTextBox.Enabled = false;
+                                Parameters.VEFactorTextBox.Enabled = false;
+                                Parameters.CMXFactorTextBox.Enabled = false;
+                                Parameters.XACC2FactorTextBox.Enabled = false;
+                                Parameters.LACC2FactorTextBox.Enabled = false;
+                                Parameters.XACCPhasetextBox.Enabled = false;
+                                Parameters.LACC_AL_PhaseTextBox.Enabled = false;
+                                Parameters.LACC_CML_PhaseTextBox.Enabled = false;
+                                Parameters.LACC_CMX_PhaseTextBox.Enabled = false;
+
+                                Parameters.CMLFactorCheckBox.Checked = false;
+                                Parameters.ALFactorCheckBox.Checked = false;
+                                Parameters.AXFactorCheckBox.Checked = false;
+                                Parameters.VEFactorCheckBox.Checked = false;
+                                Parameters.CMXFactorCheckBox.Checked = false;
+                                Parameters.XACC2FactorCheckBox.Checked = false;
+                                Parameters.LACC2FactorCheckBox.Checked = false;
+                                Parameters.XACCPhaseCheckBox.Checked = false;
+                                Parameters.LACC_AL_PhaseCheckBox.Checked = false;
+                                Parameters.LACC_CML_PhaseCheckBox.Checked = false;
+                                Parameters.LACC_CMX_PhaseCheckBox.Checked = false;
+
+                                Parameters.maxSpringTensionTextBox.Enabled = false;
+                                Parameters.gyroTypeComboBox.Enabled = false;
+                                Parameters.meterNumberTextBox.Enabled = false;
+                                Parameters.kFactorTextBox.Enabled = false;
+                                Parameters.screenDisplayFilterTextBox.Enabled = false;
+
+                                Parameters.maxSpringTensionCheckBox.Checked = false;
+                                Parameters.gyroTypeCheckBox.Checked = false;
+                                Parameters.meterNumberCheckBox.Checked = false;
+                                Parameters.kFactorCheckBox.Checked = false;
+                                Parameters.screenDisplayFilterCheckBox.Checked = false;
+                            }
+                        }
+                    });
+                }
+
                 if (frmTerminal.DataStatusForm.Visible)
                 {
-                    //    ThreadDataStatusFormProcSafe();
-                }
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox2.Text = (mdt.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox3.Text = (mdt.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox4.Text = (mdt.Beam.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox5.Text = (mdt.myDT.ToString());
+                        DataStatusForm.textBox6.Text = (mdt.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
 
+                        DataStatusForm.textBox7.Text = (mdt.VCC.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox8.Text = (mdt.AL.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox9.Text = (mdt.AX.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox10.Text = (mdt.VE.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox11.Text = (mdt.AX2.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox12.Text = (mdt.XACC2.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox13.Text = (mdt.LACC2.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox14.Text = (mdt.XACC.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
+                        DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
+                    });
+                    }
             }
-
-
-
-
-            }
+        }
 
         private void ThreadParametersFormProcSafe()
         {
@@ -1079,6 +1363,7 @@ namespace SerialPortTerminal
                 }
             }
         }
+
         private void ThreadUserDataFormProcSafe()
         {
             string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
@@ -1174,6 +1459,7 @@ namespace SerialPortTerminal
                 }
             }
         }
+
         private void ThreadDataStatusFormProcSafe()
         {
             string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
@@ -1206,7 +1492,8 @@ namespace SerialPortTerminal
                 DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
             }
         }
-        private void ThreadProcSafe()
+
+        private void ThreadProcSafe(myData myData)
         {
             // TODO: cleaup ThreadProcSafe
             string text = Convert.ToString(mdt.myDT) + "\t\t" + "\t Expected bytes: " + Convert.ToString(mdt.dataLength + "\t" + Convert.ToString(mdt.year) + "\t" + Convert.ToString(mdt.day));
@@ -1218,15 +1505,15 @@ namespace SerialPortTerminal
                 // It's on a different thread, so use Invoke.
                 SetTextCallback mainDataCallBack = new SetTextCallback(SetText);
                 this.Invoke(mainDataCallBack, new object[] { text });
-             //   Thread.Sleep(2000);
+                //   Thread.Sleep(2000);
             }
             else
             {
-                Console.WriteLine("Latitude: " + mdt.latitude);
-                gpsAltitudeTextBox.Text = "0";
+                // Console.WriteLine("Latitude: " + mdt.latitude);
+/*
                 string specifier;
                 specifier = "000.000000";
-                gpsAltitudeTextBox.Text = (mdt.altitude.ToString("N", CultureInfo.InvariantCulture));
+                gpsAltitudeTextBox.Text = (myData.altitude.ToString("N", CultureInfo.InvariantCulture));
                 gpsLatitudeTextBox.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                 gpsLongitudeTextBox.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
                 if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus == 0) & (mdt.gpsSyncStatus == 0))
@@ -1239,9 +1526,7 @@ namespace SerialPortTerminal
                     gpsStartusTextBox.ForeColor = Color.Red;
                     gpsStartusTextBox.Text = "Error";
                 }
-
-
-
+                */
                 // Fill up list aray
                 if (GravityChart.Visible)
                 {
@@ -1249,12 +1534,9 @@ namespace SerialPortTerminal
                     GravityChart.DataSource = listDataSource;
                 }
 
-             
-
-
                 if (fileRecording == true)
                 {
-                    myData myData = new myData();
+                    //   myData myData = new myData();
                     myData.Date = mdt.Date;
                     myData.Gravity = mdt.gravity;
                     myData.SpringTension = mdt.SpringTension;
@@ -1273,14 +1555,14 @@ namespace SerialPortTerminal
                     myData.longitude = mdt.longitude;
                     myData.latitude = mdt.latitude;
                     myData.altitude = mdt.altitude;
-                    myData.gpsStatus = mdt.gpsStatus;
+                  //  myData.gpsStatus = mdt.gpsStatus;
                     RecordDataToFile("Append", myData);
                 }
 
                 CleanUp("minutes", 1);// limit chart to 10 min
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
                 if (meterStatusGroupBox.Visible)
                 {
                     FogCheck();
@@ -1320,7 +1602,6 @@ namespace SerialPortTerminal
                 }
                 if (meter_status == 0)
                 {
-                  
                 }
                 else
                 {
@@ -1329,10 +1610,7 @@ namespace SerialPortTerminal
                         heaterStatusLabel.ForeColor = Color.Red;
                         heaterStatusLabel.Text = "Not ready";
                     }
-
                 }
-
-
 
                 if (meterStatusGroupBox.Visible)
                 {
@@ -1350,7 +1628,7 @@ namespace SerialPortTerminal
                         meterStatusGroupBox.Visible = false;
                         startupGroupBox.Visible = true;
                     }
-                }
+                }*/
 
                 //   textBox19.Text = (MeterStatus.lGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// long
                 //   textBox20.Text = (MeterStatus.xGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// cross
@@ -2184,6 +2462,7 @@ namespace SerialPortTerminal
         {
             rtfTerminal.Clear();
         }
+
         // TODO: remove or disable with new computer - user will not have options
         private void tmrCheckComPorts_Tick(object sender, EventArgs e)
         {
@@ -2745,8 +3024,7 @@ namespace SerialPortTerminal
 
             SetupChart();
             // Setup DataGrid();
-           WriteLogFile("System loaded");
-
+            WriteLogFile("System loaded");
         }
 
         //==================================================================================================
@@ -2782,8 +3060,8 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
             // outputBytes[0] = nByte;
-        //    Console.WriteLine("Transmit array: " + outputBytes);
-        //    Console.WriteLine("Done");
+            //    Console.WriteLine("Transmit array: " + outputBytes);
+            //    Console.WriteLine("Done");
 
             return outputBytes;
         }
@@ -3702,7 +3980,7 @@ namespace SerialPortTerminal
 
         private void dataStatusFormToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataStatusForm.Show();
+            UserDataForm.Show();
         }
 
         private void serialPortFormToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4568,8 +4846,8 @@ namespace SerialPortTerminal
                      + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
                      + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
                      + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
-                     + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude)
-                     + delimitor + Convert.ToString(d.gpsStatus);
+                     + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                   //  + delimitor + Convert.ToString(d.gpsStatus);
 
                 try
                 {
@@ -4622,7 +4900,10 @@ namespace SerialPortTerminal
             public double longitude;
             public double latitude;
             public double altitude;
-            public double gpsStatus;
+            public int gpsNavigationStatus;
+            public int gpsSynchStatus;
+            public int gpsTimeStatus;
+            public int gpsNumSatelites;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -4867,7 +5148,7 @@ namespace SerialPortTerminal
 
             //  RelaySwitches.RelaySW = 0x81;// cmd 0
             sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
-           // torqueMotorCheckBox.Enabled = true;
+                                                      // torqueMotorCheckBox.Enabled = true;
         }
 
         private void gyroCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -4881,8 +5162,6 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");
                 torqueMotorCheckBox.Enabled = true;
                 WriteLogFile("Gyros enabled");
-
-         
             }
             else
             {
@@ -4891,8 +5170,6 @@ namespace SerialPortTerminal
 
                 sendCmd("Send Relay Switches");
                 WriteLogFile("Gyros disabled");
-
-
             }
         }
 
@@ -4908,7 +5185,6 @@ namespace SerialPortTerminal
                 gyroCheckBox.Enabled = false;
                 springTensionCheckBox.Enabled = true;
                 WriteLogFile("Torque motor enabled");
-
             }
             else
             {
@@ -4918,7 +5194,6 @@ namespace SerialPortTerminal
                 gyroCheckBox.Enabled = true;
                 springTensionCheckBox.Enabled = false;
                 WriteLogFile("Torque motor enabled");
-
             }
         }
 
@@ -4929,14 +5204,12 @@ namespace SerialPortTerminal
                 ControlSwitches.Alarm(enable);
                 sendCmd("Send Control Switches");
                 WriteLogFile("Alarm enabled");
-
             }
             else
             {
                 ControlSwitches.Alarm(disable);
                 sendCmd("Send Control Switches");
                 WriteLogFile("Alarm disabled");
-
             }
         }
 
@@ -5249,7 +5522,6 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");
                 torqueMotorCheckBox.Enabled = false;
                 WriteLogFile("Spring tension enabled");
-
             }
             else
             {
@@ -5259,7 +5531,6 @@ namespace SerialPortTerminal
                 sendCmd("Send Control Switches");
                 torqueMotorCheckBox.Enabled = true;
                 WriteLogFile("Spring tension disabled");
-
             }
         }
 
@@ -5391,15 +5662,11 @@ namespace SerialPortTerminal
             { heaterNotReady = false; }
             else
             { heaterNotReady = true; }
-            if (heaterWaitOptions == 2)
+            if (heaterBypassCheckBox.Checked)
             {
                 heaterNotReady = false;
             }
-            if ((!crossFogNotReady) & (!longFogNotReady) & !(heaterNotReady))
-            {
-                completed = true;
-            }
-            else if ((heaterWaitOptions == 2))
+            if ((!crossFogNotReady) & (!longFogNotReady) & (!heaterNotReady))
             {
                 completed = true;
             }
@@ -5496,6 +5763,17 @@ namespace SerialPortTerminal
         private void saveDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
+        }
+
+        private void heaterBypassCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.heaterBypassCheckBox.Checked)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    heaterBypassCheckBox.Checked = true;
+                });
+            }
         }
 
         ///////////////////////////////////////////////
