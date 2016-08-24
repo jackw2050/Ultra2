@@ -39,10 +39,10 @@ namespace SerialPortTerminal
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._timer1 = new System.Windows.Forms.Timer(this.components);
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.gpsAltitudeTextBox = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.gpsLongitudeTextBox = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
             this.rtfTerminal = new System.Windows.Forms.RichTextBox();
             this.GravityChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -111,7 +111,7 @@ namespace SerialPortTerminal
             this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.dataPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.gpsLatitudeTextBox = new System.Windows.Forms.TextBox();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -248,13 +248,13 @@ namespace SerialPortTerminal
             this.label16.TabIndex = 50;
             this.label16.Text = "Altitude";
             // 
-            // textBox16
+            // gpsAltitudeTextBox
             // 
-            this.textBox16.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox16.Location = new System.Drawing.Point(109, 33);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(76, 20);
-            this.textBox16.TabIndex = 49;
+            this.gpsAltitudeTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.gpsAltitudeTextBox.Location = new System.Drawing.Point(109, 33);
+            this.gpsAltitudeTextBox.Name = "gpsAltitudeTextBox";
+            this.gpsAltitudeTextBox.Size = new System.Drawing.Size(76, 20);
+            this.gpsAltitudeTextBox.TabIndex = 49;
             // 
             // label17
             // 
@@ -274,14 +274,14 @@ namespace SerialPortTerminal
             this.label18.TabIndex = 46;
             this.label18.Text = "Longitude";
             // 
-            // textBox18
+            // gpsLongitudeTextBox
             // 
-            this.textBox18.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox18.Location = new System.Drawing.Point(6, 73);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(97, 20);
-            this.textBox18.TabIndex = 45;
+            this.gpsLongitudeTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.gpsLongitudeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpsLongitudeTextBox.Location = new System.Drawing.Point(6, 73);
+            this.gpsLongitudeTextBox.Name = "gpsLongitudeTextBox";
+            this.gpsLongitudeTextBox.Size = new System.Drawing.Size(97, 20);
+            this.gpsLongitudeTextBox.TabIndex = 45;
             // 
             // button11
             // 
@@ -843,14 +843,14 @@ namespace SerialPortTerminal
             this.dataPageToolStripMenuItem.Text = "DataPage";
             this.dataPageToolStripMenuItem.Click += new System.EventHandler(this.dataPageToolStripMenuItem_Click);
             // 
-            // textBox17
+            // gpsLatitudeTextBox
             // 
-            this.textBox17.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox17.Font = new System.Drawing.Font("Trebuchet MS", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox17.Location = new System.Drawing.Point(6, 33);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(97, 20);
-            this.textBox17.TabIndex = 88;
+            this.gpsLatitudeTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.gpsLatitudeTextBox.Font = new System.Drawing.Font("Trebuchet MS", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpsLatitudeTextBox.Location = new System.Drawing.Point(6, 33);
+            this.gpsLatitudeTextBox.Name = "gpsLatitudeTextBox";
+            this.gpsLatitudeTextBox.Size = new System.Drawing.Size(97, 20);
+            this.gpsLatitudeTextBox.TabIndex = 88;
             // 
             // emergencyShutdownButton
             // 
@@ -1323,11 +1323,11 @@ namespace SerialPortTerminal
             // 
             this.gpsGroupBox.Controls.Add(this.gpsStartusTextBox);
             this.gpsGroupBox.Controls.Add(this.label1);
-            this.gpsGroupBox.Controls.Add(this.textBox17);
-            this.gpsGroupBox.Controls.Add(this.textBox18);
+            this.gpsGroupBox.Controls.Add(this.gpsLatitudeTextBox);
+            this.gpsGroupBox.Controls.Add(this.gpsLongitudeTextBox);
             this.gpsGroupBox.Controls.Add(this.label18);
             this.gpsGroupBox.Controls.Add(this.label17);
-            this.gpsGroupBox.Controls.Add(this.textBox16);
+            this.gpsGroupBox.Controls.Add(this.gpsAltitudeTextBox);
             this.gpsGroupBox.Controls.Add(this.label16);
             this.gpsGroupBox.Location = new System.Drawing.Point(923, 8);
             this.gpsGroupBox.Name = "gpsGroupBox";
@@ -1708,8 +1708,8 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        public System.Windows.Forms.TextBox textBox16;
-        public System.Windows.Forms.TextBox textBox18;
+        public System.Windows.Forms.TextBox gpsAltitudeTextBox;
+        public System.Windows.Forms.TextBox gpsLongitudeTextBox;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
         public System.Windows.Forms.RichTextBox rtfTerminal;
@@ -1717,7 +1717,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForm;
         private System.Windows.Forms.ToolStripMenuItem Exit;
-        public System.Windows.Forms.TextBox textBox17;
+        public System.Windows.Forms.TextBox gpsLatitudeTextBox;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolTip startStopButtonsToolTip;
