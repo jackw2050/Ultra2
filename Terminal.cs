@@ -688,20 +688,8 @@ namespace SerialPortTerminal
                 //  startupGroupBox.Visible = true;
                 gyroCheckBox.Enabled = true;
                 torqueMotorCheckBox.Enabled = false;
-                //  alarmCheckBox.Enabled = true;
-                //       TimerWithDataCollection("start");
-
-                /*
-                // START 1 SEC TIMER
-                _timer1.Interval = 1000; // (1000 - DateTime.Now.Millisecond);
-                _timer1.Enabled = true;
-                _timer1.Start();
-                ControlSwitches.DataCollection(enable);
-                sendCmd("Send Control Switches");           // 1 ----
-                */
             }
-            //   initMeter();
-            // Change the state of the form's controls
+
             EnableControls();
         }
 
@@ -871,6 +859,7 @@ namespace SerialPortTerminal
 
                     Thread worker = new Thread(CallGetMeterData);
                     worker.Name = "calcMeterData";
+                    worker.IsBackground = true;
                     worker.Start(buffer);// Start new worker thread to process the data
                 }
 
@@ -878,6 +867,7 @@ namespace SerialPortTerminal
                 //Console.WriteLine(buffer[0] + "   " + buffer[1]);
             }
         }
+
 
         public void CallGetMeterData(object buffer)
         {
@@ -917,7 +907,12 @@ namespace SerialPortTerminal
 
 
 
- 
+
+
+
+
+                if (this.GravityChart.InvokeRequired)
+                {
                     Invoke((MethodInvoker)delegate
                     {
                         if (GravityChart.Visible)
@@ -931,7 +926,19 @@ namespace SerialPortTerminal
                         }
 
                     });
-        
+                }
+                else
+                {
+                    if (GravityChart.Visible)
+                    {
+                        // check for changes in time span.  
+                        listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+                        GravityChart.DataSource = listDataSource;
+                        GravityChart.DataBind();// do I need this?
+                                                // Remove oldest element if new size == max size
+                        CleanUp(chartWindowTimePeriod, chartWindowTimeSpan);// limit chart to 10 min
+                    }
+                }
 
 
 
@@ -985,7 +992,12 @@ namespace SerialPortTerminal
                             longGyroStatusLabel.ForeColor = Color.Red;
                             longGyroStatusLabel.Text = "Not Ready";
                         }
-                        if (meter_status != 0)
+                        if (MeterStatus.MeterHeater == 0)
+                        {
+                            heaterStatusLabel.ForeColor = Color.Green;
+                            heaterStatusLabel.Text = "Ready";
+                        }
+                        else
                         {
                             heaterStatusLabel.ForeColor = Color.Red;
                             heaterStatusLabel.Text = "Not ready";
@@ -995,11 +1007,8 @@ namespace SerialPortTerminal
                             countDown--;
                         }
 
-                        if (completed = true & countDown == 0)
+                        if ((completed = true) & (countDown == 0))
                         {
-                            //Console.WriteLine("ready for gyros");
-                            //    Task taskC = Task.Factory.StartNew(() => CloseMeterStatus());
-                            //   taskC.Wait();
                             meterStatusGroupBox.Visible = false;
                             startupGroupBox.Visible = true;
                         }
@@ -1255,7 +1264,6 @@ namespace SerialPortTerminal
                 // It's on a different thread, so use Invoke.
                 SetTextCallback parametersFormCallback = new SetTextCallback(SetText);
                 this.Invoke(parametersFormCallback, new object[] { text });
-                //   Thread.Sleep(2000);
             }
             else
             {
@@ -1526,7 +1534,6 @@ namespace SerialPortTerminal
                 // It's on a different thread, so use Invoke.
                 SetTextCallback mainDataCallBack = new SetTextCallback(SetText);
                 this.Invoke(mainDataCallBack, new object[] { text });
-                //   Thread.Sleep(2000);
             }
             else
             {
@@ -1632,7 +1639,7 @@ namespace SerialPortTerminal
 
         private void SetupChart()
         {
-            BindingSource SBind = new BindingSource();
+          //  BindingSource SBind = new BindingSource();
             //   SBind.DataSource = dataTable;
 
             //   string chartAreaType = "Single chart area";
@@ -1644,6 +1651,7 @@ namespace SerialPortTerminal
             this.GravityChart.Series.Add("Total Correction");
 
             //      SETUP MAIN PAIGE GRAVITY CHART
+            this.GravityChart.ChartAreas["Gravity"].AxisX.IsMarginVisible = false;
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;
             this.GravityChart.Series["Digital Gravity"].XValueMember = "date";
@@ -1722,7 +1730,7 @@ namespace SerialPortTerminal
                         //     this.GravityChart.DataSource = dataTable;
                         //       this.GravityChart.DataBind();
             */
-
+            this.GravityChart.ChartAreas["CrossCoupling"].AxisX.IsMarginVisible = false;
             this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Format = "yyyy-MM-dd HH:mm:ss";
             this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Angle = 0;
 
@@ -1780,6 +1788,8 @@ namespace SerialPortTerminal
             SetChartZoom();
             SetChartScroll();
             //          SetLegend();
+
+
         }
 
         private void SetChartCursors()
@@ -2115,26 +2125,88 @@ namespace SerialPortTerminal
         //*****************************************************************************
         public static class ChartColors
         {
-            public static System.Drawing.Color digitalGravity = System.Drawing.Color.SteelBlue;
-            public static System.Drawing.Color springTension = System.Drawing.Color.BlueViolet;
-            public static System.Drawing.Color crossCoupling = System.Drawing.Color.DarkOrange;
-            public static System.Drawing.Color rawBeam = System.Drawing.Color.DeepSkyBlue;
-            public static System.Drawing.Color totalCorrection = System.Drawing.Color.ForestGreen;
+            private static System.Drawing.Color digitalGravity = System.Drawing.Color.SteelBlue;
+            public static System.Drawing.Color DigitalGravity
+            {
+                get{return digitalGravity;}
+                set{digitalGravity = value;}
+            }
+            private static System.Drawing.Color springTension = System.Drawing.Color.BlueViolet;
+            public static System.Drawing.Color SpringTension
+            {
+                get{ return springTension; }
+                set{ springTension = value; }
+            }
+            private static System.Drawing.Color crossCoupling = System.Drawing.Color.DarkOrange;
+            public static System.Drawing.Color CrossCoupling
+            {
+                get { return crossCoupling; }
+                set { crossCoupling = value; }
+            }
+            private static System.Drawing.Color rawBeam = System.Drawing.Color.DeepSkyBlue;
+            public static System.Drawing.Color RawBeam
+            {
+                get { return rawBeam; }
+                set { rawBeam = value; }
+            }
+            private static System.Drawing.Color totalCorrection = System.Drawing.Color.ForestGreen;
+            public static System.Drawing.Color TotalCorrection
+            {
+                get { return totalCorrection; }
+                set { totalCorrection = value; }
+            }
+            private static System.Drawing.Color al = System.Drawing.Color.LightSeaGreen;
+            public static System.Drawing.Color AL
+            {
+                get { return al; }
+                set { al = value; }
+            }
+            private static System.Drawing.Color ax = System.Drawing.Color.OrangeRed;
+            public static System.Drawing.Color AX
+            {
+                get { return ax; }
+                set { ax = value; }
+            }
+            private static System.Drawing.Color ve = System.Drawing.Color.PaleVioletRed;
+            public static System.Drawing.Color VE
+            {
+                get { return ve; }
+                set { ve = value; }
+            }
+            private static System.Drawing.Color ax2 = System.Drawing.Color.Red;
+            public static System.Drawing.Color AX2
+            {
+                get { return ax2; }
+                set { ax2 = value; }
+            }
+            private static System.Drawing.Color lacc = System.Drawing.Color.Wheat;
+            public static System.Drawing.Color LACC
+            {
+                get { return lacc; }
+                set { lacc = value; }
+            }
+            private static System.Drawing.Color xacc = System.Drawing.Color.SteelBlue;
+            public static System.Drawing.Color XACC
+            {
+                get { return xacc; }
+                set { xacc = value; }
+            }
 
-            //   public static System.Drawing.Color rawGravity = System.Drawing.Color.RoyalBlue;
-            public static System.Drawing.Color AL = System.Drawing.Color.LightSeaGreen;
 
-            public static System.Drawing.Color AX = System.Drawing.Color.OrangeRed;
-            public static System.Drawing.Color VE = System.Drawing.Color.PaleVioletRed;
-            public static System.Drawing.Color AX2 = System.Drawing.Color.Red;
-            public static System.Drawing.Color LACC = System.Drawing.Color.Wheat;
-            public static System.Drawing.Color XACC = System.Drawing.Color.SteelBlue;
+
+
+
+
+
+
         }
 
-        public static class ChartVisibility
+        private static class ChartVisibility
         {
             private static Boolean digitalGravity = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean DigitalGravity
             {
                 get { return digitalGravity; }
@@ -2143,6 +2215,8 @@ namespace SerialPortTerminal
 
             private static Boolean springTension = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean SpringTension
             {
                 get { return springTension; }
@@ -2151,6 +2225,8 @@ namespace SerialPortTerminal
 
             private static Boolean crossCoupling = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean CrossCoupling
             {
                 get { return crossCoupling; }
@@ -2159,6 +2235,8 @@ namespace SerialPortTerminal
 
             private static Boolean rawBeam = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean RawBeam
             {
                 get { return rawBeam; }
@@ -2167,6 +2245,8 @@ namespace SerialPortTerminal
 
             private static Boolean totalCorrection = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean TotalCorrection
             {
                 get { return totalCorrection; }
@@ -2176,6 +2256,8 @@ namespace SerialPortTerminal
             //   public static Boolean rawGravity = true;
             private static Boolean al = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean AL
             {
                 get { return al; }
@@ -2184,6 +2266,8 @@ namespace SerialPortTerminal
 
             private static Boolean ax = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean AX
             {
                 get { return ax; }
@@ -2192,6 +2276,8 @@ namespace SerialPortTerminal
 
             private static Boolean ve = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean VE
             {
                 get { return ve; }
@@ -2200,6 +2286,8 @@ namespace SerialPortTerminal
 
             private static Boolean ax2 = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean AX2
             {
                 get { return ax2; }
@@ -2208,6 +2296,8 @@ namespace SerialPortTerminal
 
             private static Boolean lacc = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean LACC
             {
                 get { return lacc; }
@@ -2216,6 +2306,8 @@ namespace SerialPortTerminal
 
             private static Boolean xacc = true;
 
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
             public static Boolean XACC
             {
                 get { return xacc; }
@@ -2241,11 +2333,11 @@ namespace SerialPortTerminal
 
         public void SetChartColors()
         {
-            GravityChart.Series["Digital Gravity"].Color = ChartColors.digitalGravity;
-            GravityChart.Series["Spring Tension"].Color = ChartColors.springTension;
-            GravityChart.Series["Cross Coupling"].Color = ChartColors.crossCoupling;
-            GravityChart.Series["Raw Beam"].Color = ChartColors.rawBeam;
-            GravityChart.Series["Total Correction"].Color = ChartColors.totalCorrection;
+            GravityChart.Series["Digital Gravity"].Color = ChartColors.DigitalGravity;
+            GravityChart.Series["Spring Tension"].Color = ChartColors.SpringTension;
+            GravityChart.Series["Cross Coupling"].Color = ChartColors.CrossCoupling;
+            GravityChart.Series["Raw Beam"].Color = ChartColors.RawBeam;
+            GravityChart.Series["Total Correction"].Color = ChartColors.TotalCorrection;
             //  crossCouplingChart.Series["Raw Gravity"].Color = ChartColors.rawGravity;
             GravityChart.Series["AL"].Color = ChartColors.AL;
             GravityChart.Series["AX"].Color = ChartColors.AX;
@@ -2969,6 +3061,7 @@ namespace SerialPortTerminal
             windowSizeNumericUpDown.Minimum = 1;
             windowSizeNumericUpDown.Maximum = 60;
             Thread.CurrentThread.Name = "time";
+
             Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
             TimeThread.IsBackground = true;
             TimeThread.Start();
@@ -3010,9 +3103,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            //    Console.WriteLine("Transmit array: " + outputBytes);
-            //    Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3041,9 +3132,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            Console.WriteLine("Transmit array: " + outputBytes);
-            Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3069,9 +3158,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            //   Console.WriteLine("Transmit array: " + outputBytes);
-            //   Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3090,9 +3177,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            Console.WriteLine("Transmit array: " + outputBytes);
-            Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3111,9 +3196,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            Console.WriteLine("Transmit array: " + outputBytes);
-            Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3136,9 +3219,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            Console.WriteLine("Transmit array: " + outputBytes);
-            Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3159,9 +3240,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            //  Console.WriteLine("Transmit array: " + outputBytes);
-            // Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3225,9 +3304,7 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-            // outputBytes[0] = nByte;
-            Console.WriteLine("Transmit array: " + outputBytes);
-            Console.WriteLine("Done");
+
 
             return outputBytes;
         }
@@ -3556,6 +3633,8 @@ namespace SerialPortTerminal
         public void StoreDefaultVariables()
         {
             // Load configuration data from stored defaults
+            Properties.Settings.Default.chartWindowTimeSpan = chartWindowTimeSpan;
+            Properties.Settings.Default.chartWindowTimePeriod = chartWindowTimePeriod;
 
             Properties.Settings.Default.springTension = mdt.SpringTension;
             Properties.Settings.Default.beamScale = ConfigData.beamScale;
@@ -3618,7 +3697,8 @@ namespace SerialPortTerminal
             comport.PortName = Properties.Settings.Default.PortName;
             comport.BaudRate = Properties.Settings.Default.BaudRate;
             comport.StopBits = Properties.Settings.Default.StopBits;
-
+            chartWindowTimeSpan = Properties.Settings.Default.chartWindowTimeSpan;
+            chartWindowTimePeriod = Properties.Settings.Default.chartWindowTimePeriod;
             // Load configuration data from stored defaults
             ConfigData.version = Properties.Settings.Default.version;
             mdt.SpringTension = Properties.Settings.Default.springTension;
@@ -3885,11 +3965,13 @@ namespace SerialPortTerminal
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
+                Environment.Exit(Environment.ExitCode);
                 System.Windows.Forms.Application.Exit();
             }
             else
             {
                 // Console app
+                Environment.Exit(Environment.ExitCode);
                 System.Environment.Exit(1);
             }
         }
@@ -4879,10 +4961,6 @@ namespace SerialPortTerminal
                 recordingTextBox.Text = "Recording file";
                 recordingTextBox.BackColor = System.Drawing.Color.LightGreen;
                 surveyTextBox.Enabled = false;
-
-                //                Thread WorkerThread = new Thread(new ParameterizedThreadStart(ArrayDataWorker));
-                //                WorkerThread.IsBackground = true;
-                //                WorkerThread.Start(new Action<myData>(this.AddDataPoint));
             }
             okToRun = true;
         }
@@ -4950,11 +5028,13 @@ namespace SerialPortTerminal
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms
+                Environment.Exit(Environment.ExitCode);
                 System.Windows.Forms.Application.Exit();
             }
             else
             {
                 // Console app
+                Environment.Exit(Environment.ExitCode);
                 System.Environment.Exit(1);
             }
         }
@@ -4995,13 +5075,14 @@ namespace SerialPortTerminal
             {
                 // WinForms app
                 StoreDefaultVariables();
-
+                Environment.Exit(Environment.ExitCode);
                 System.Windows.Forms.Application.Exit();
             }
             else
             {
                 // Console app
                 StoreDefaultVariables();
+                Environment.Exit(Environment.ExitCode);
                 System.Environment.Exit(1);
             }
         }

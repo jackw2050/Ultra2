@@ -1053,5 +1053,29 @@ namespace SerialPortTerminal.Properties {
                 this["version"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("minutes")]
+        public string chartWindowTimePeriod {
+            get {
+                return ((string)(this["chartWindowTimePeriod"]));
+            }
+            set {
+                this["chartWindowTimePeriod"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int chartWindowTimeSpan {
+            get {
+                return ((int)(this["chartWindowTimeSpan"]));
+            }
+            set {
+                this["chartWindowTimeSpan"] = value;
+            }
+        }
     }
 }

@@ -1167,6 +1167,8 @@ namespace SerialPortTerminal
                 tempByte[0] = meterBytes[76];
                 Int16 meterStatus = BitConverter.ToInt16(tempByte, 0);
                 MeterStatus.GetMeterStatus(meterStatus);
+
+                Console.WriteLine("Meter status " + meterStatus);
                 if (frmTerminal.engineerDebug)
                 {
                     Console.WriteLine("Meter status " + meterStatus);
