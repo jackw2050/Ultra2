@@ -105,8 +105,6 @@ namespace SerialPortTerminal
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chartWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setTraceVisabilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
@@ -165,7 +163,6 @@ namespace SerialPortTerminal
             this.chartWindowGroupBox = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.windowSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.showAllDataCheckBox = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.recordingTextBox = new System.Windows.Forms.TextBox();
             this.surveyRecordGroupBox = new System.Windows.Forms.GroupBox();
@@ -198,12 +195,12 @@ namespace SerialPortTerminal
             this.crossGyroStatusLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.heaterStatusLabel = new System.Windows.Forms.Label();
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
+            this.heaterStatusLabel = new System.Windows.Forms.Label();
             this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
             this.setupContextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -792,26 +789,13 @@ namespace SerialPortTerminal
             this.chartWindowToolStripMenuItem.Name = "chartWindowToolStripMenuItem";
             this.chartWindowToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.chartWindowToolStripMenuItem.Text = "Chart Window";
+            this.chartWindowToolStripMenuItem.Click += new System.EventHandler(this.chartWindowToolStripMenuItem_Click);
             // 
             // setTraceVisabilityToolStripMenuItem
             // 
             this.setTraceVisabilityToolStripMenuItem.Name = "setTraceVisabilityToolStripMenuItem";
             this.setTraceVisabilityToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.setTraceVisabilityToolStripMenuItem.Text = "Set Trace Visability";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 26);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
-            this.toolStripMenuItem1.Text = "Background Color";
             // 
             // contextMenuStripForm
             // 
@@ -1217,9 +1201,9 @@ namespace SerialPortTerminal
             // 
             this.chartWindowGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chartWindowGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.chartWindowGroupBox.Controls.Add(this.button2);
             this.chartWindowGroupBox.Controls.Add(this.comboBox1);
             this.chartWindowGroupBox.Controls.Add(this.windowSizeNumericUpDown);
-            this.chartWindowGroupBox.Controls.Add(this.showAllDataCheckBox);
             this.chartWindowGroupBox.Controls.Add(this.label13);
             this.chartWindowGroupBox.Location = new System.Drawing.Point(1129, 8);
             this.chartWindowGroupBox.Name = "chartWindowGroupBox";
@@ -1253,17 +1237,7 @@ namespace SerialPortTerminal
             0,
             0,
             0});
-            // 
-            // showAllDataCheckBox
-            // 
-            this.showAllDataCheckBox.AutoSize = true;
-            this.showAllDataCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.showAllDataCheckBox.Location = new System.Drawing.Point(11, 69);
-            this.showAllDataCheckBox.Name = "showAllDataCheckBox";
-            this.showAllDataCheckBox.Size = new System.Drawing.Size(90, 17);
-            this.showAllDataCheckBox.TabIndex = 2;
-            this.showAllDataCheckBox.Text = "Show all data";
-            this.showAllDataCheckBox.UseVisualStyleBackColor = true;
+            this.windowSizeNumericUpDown.ValueChanged += new System.EventHandler(this.windowSizeNumericUpDown_ValueChanged);
             // 
             // label13
             // 
@@ -1612,17 +1586,7 @@ namespace SerialPortTerminal
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Heater";
-            // 
-            // heaterStatusLabel
-            // 
-            this.heaterStatusLabel.AutoSize = true;
-            this.heaterStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.heaterStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.heaterStatusLabel.Location = new System.Drawing.Point(6, 26);
-            this.heaterStatusLabel.Name = "heaterStatusLabel";
-            this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
-            this.heaterStatusLabel.TabIndex = 6;
-            this.heaterStatusLabel.Text = "Not Ready";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // heaterBypassCheckBox
             // 
@@ -1635,6 +1599,17 @@ namespace SerialPortTerminal
             this.heaterBypassCheckBox.UseVisualStyleBackColor = true;
             this.heaterBypassCheckBox.CheckedChanged += new System.EventHandler(this.heaterBypassCheckBox_CheckedChanged);
             // 
+            // heaterStatusLabel
+            // 
+            this.heaterStatusLabel.AutoSize = true;
+            this.heaterStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heaterStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.heaterStatusLabel.Location = new System.Drawing.Point(6, 26);
+            this.heaterStatusLabel.Name = "heaterStatusLabel";
+            this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
+            this.heaterStatusLabel.TabIndex = 6;
+            this.heaterStatusLabel.Text = "Not Ready";
+            // 
             // springTensionTargetNumericTextBox
             // 
             this.springTensionTargetNumericTextBox.AllowSpace = false;
@@ -1643,6 +1618,16 @@ namespace SerialPortTerminal
             this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
             this.springTensionTargetNumericTextBox.TabIndex = 6;
             this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(46, 67);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(46, 20);
+            this.button2.TabIndex = 116;
+            this.button2.Text = "Done";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // frmTerminal
             // 
@@ -1673,7 +1658,6 @@ namespace SerialPortTerminal
             this.Shown += new System.EventHandler(this.frmTerminal_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).EndInit();
             this.chartContextMenuStrip.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStripForm.ResumeLayout(false);
             this.setupContextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -1712,8 +1696,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
         public System.Windows.Forms.RichTextBox rtfTerminal;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForm;
         private System.Windows.Forms.ToolStripMenuItem Exit;
         public System.Windows.Forms.TextBox gpsLatitudeTextBox;
@@ -1809,7 +1791,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label fileStartTimeLabel;
         private System.Windows.Forms.Label timeNowLabel;
         private System.Windows.Forms.GroupBox chartWindowGroupBox;
-        private System.Windows.Forms.CheckBox showAllDataCheckBox;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button emergencyShutdownButton;
         private System.Windows.Forms.TextBox recordingTextBox;
@@ -1867,6 +1848,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDefaultsToolStripMenuItem;
         private System.Windows.Forms.CheckBox heaterBypassCheckBox;
+        private System.Windows.Forms.Button button2;
     }
 }
 

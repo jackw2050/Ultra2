@@ -49,7 +49,8 @@ namespace SerialPortTerminal
         private static ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
         public UserDataForm UserDataForm = new UserDataForm();
-
+        private static string chartWindowTimePeriod = "minutes";
+        private static int chartWindowTimeSpan = 10;
         public DateTime myDatetime = DateTime.Now;
 
         private delegate void SetTextCallback(string text);
@@ -336,10 +337,11 @@ namespace SerialPortTerminal
                 this.totalCorrection = totalCorrection;
             }
         }
-
+        private static int oldMaxArraySize;
         public void CleanUp(string timePeriod, int timeValue)
         {
             int maxArraySize = 60;// initialize for 60 seconds
+            
             if (timePeriod == "seconds")
             {
                 maxArraySize = timeValue;
@@ -353,10 +355,21 @@ namespace SerialPortTerminal
                 maxArraySize = 3600 * timeValue;
             }
 
+            if (maxArraySize < oldMaxArraySize )
+            {
+               
+                if (maxArraySize < listDataSource.Count)
+                {
+                    int removeCount = listDataSource.Count - maxArraySize;
+                    listDataSource.RemoveRange(maxArraySize, removeCount);
+                }
+            }
+            
             if (listDataSource.Count > maxArraySize)
             {
                 listDataSource.RemoveAt(0);
             }
+            oldMaxArraySize = maxArraySize;
         }
 
         // The main control for communicating through the RS-232 port
@@ -855,7 +868,7 @@ namespace SerialPortTerminal
                     byte[] buffer = new byte[bytes];
                     comport.Read(buffer, 0, bytes);
 
-                    Thread.CurrentThread.Name = "main";
+
                     Thread worker = new Thread(CallGetMeterData);
                     worker.Name = "calcMeterData";
                     worker.Start(buffer);// Start new worker thread to process the data
@@ -875,7 +888,7 @@ namespace SerialPortTerminal
 
             if (mdt.dataValid)
             {
-                Console.WriteLine(bufferByte.Length + "     " + bufferByte[0] + "    " + mdt.latitude + "    " + DateTime.Now.ToString());
+              //  Console.WriteLine(bufferByte.Length + "     " + bufferByte[0] + "    " + mdt.latitude + "    " + DateTime.Now.ToString());
                 //TODO: get callbacks working
 
                 myData myData = new myData();
@@ -907,8 +920,16 @@ namespace SerialPortTerminal
  
                     Invoke((MethodInvoker)delegate
                     {
-                        listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
-                        GravityChart.DataSource = listDataSource;
+                        if (GravityChart.Visible)
+                        {
+                            // check for changes in time span.  
+                            listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
+                            GravityChart.DataSource = listDataSource;
+                            GravityChart.DataBind();// do I need this?
+                            // Remove oldest element if new size == max size
+                            CleanUp(chartWindowTimePeriod, chartWindowTimeSpan);// limit chart to 10 min
+                        }
+
                     });
         
 
@@ -935,7 +956,7 @@ namespace SerialPortTerminal
                     }
                 });
 
-                // GravityChart.DataBind();
+                
 
                 //   frmTerminal.ThreadProcSafe( myData);
                 if (meterStatusGroupBox.Visible)
@@ -1528,11 +1549,7 @@ namespace SerialPortTerminal
                 }
                 */
                 // Fill up list aray
-                if (GravityChart.Visible)
-                {
-                    listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
-                    GravityChart.DataSource = listDataSource;
-                }
+
 
                 if (fileRecording == true)
                 {
@@ -1559,76 +1576,10 @@ namespace SerialPortTerminal
                     RecordDataToFile("Append", myData);
                 }
 
-                CleanUp("minutes", 1);// limit chart to 10 min
+               
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-                if (meterStatusGroupBox.Visible)
-                {
-                    FogCheck();
-                }
 
-                if (MeterStatus.LGyro_Fog == 0)
-                {
-                    if (meterStatusGroupBox.Visible)
-                    {
-                        crossGyroStatusLabel.ForeColor = Color.Green;
-                        crossGyroStatusLabel.Text = "Ready";
-                    }
-                }
-                else
-                {
-                    if (meterStatusGroupBox.Visible)
-                    {
-                        crossGyroStatusLabel.ForeColor = Color.Red;
-                        crossGyroStatusLabel.Text = "Not Ready";
-                    }
-                }
-                if (MeterStatus.XGyro_Fog == 0)
-                {
-                    if (meterStatusGroupBox.Visible)
-                    {
-                        longGyroStatusLabel.ForeColor = Color.Green;
-                        longGyroStatusLabel.Text = "Ready";
-                    }
-                }
-                else
-                {
-                    if (meterStatusGroupBox.Visible)
-                    {
-                        longGyroStatusLabel.ForeColor = Color.Red;
-                        longGyroStatusLabel.Text = "Not Ready";
-                    }
-                }
-                if (meter_status == 0)
-                {
-                }
-                else
-                {
-                    if (meterStatusGroupBox.Visible)
-                    {
-                        heaterStatusLabel.ForeColor = Color.Red;
-                        heaterStatusLabel.Text = "Not ready";
-                    }
-                }
-
-                if (meterStatusGroupBox.Visible)
-                {
-                    // FogCheck();
-                    if (completed)
-                    {
-                        countDown--;
-                    }
-
-                    if (completed = true & countDown == 0)
-                    {
-                        //Console.WriteLine("ready for gyros");
-                        //    Task taskC = Task.Factory.StartNew(() => CloseMeterStatus());
-                        //   taskC.Wait();
-                        meterStatusGroupBox.Visible = false;
-                        startupGroupBox.Visible = true;
-                    }
-                }*/
 
                 //   textBox19.Text = (MeterStatus.lGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// long
                 //   textBox20.Text = (MeterStatus.xGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// cross
@@ -2978,14 +2929,14 @@ namespace SerialPortTerminal
         private void frmTerminal_Load(object sender, EventArgs e)
         {
             SetInitialVisibility();
-            gpsGroupBox.Visible = true;
+           
             if (engineerDebug)
             {
                 rtfTerminal.Visible = true;
             }
             else
             {
-                rtfTerminal.Visible = true;
+                rtfTerminal.Visible = false;
             }
 
             CurrentDataMode = DataMode.Hex;
@@ -3997,10 +3948,12 @@ namespace SerialPortTerminal
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             timePeriod = comboBox1.SelectedItem.ToString();
+            chartWindowTimePeriod = timePeriod;
             windowSizeNumericUpDown.Minimum = 1;
             if (timePeriod == "hours")
             {
                 windowSizeNumericUpDown.Maximum = 24;
+                
             }
             else
             {
@@ -5774,6 +5727,27 @@ namespace SerialPortTerminal
                     heaterBypassCheckBox.Checked = true;
                 });
             }
+        }
+
+        private void windowSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            chartWindowTimeSpan = Convert.ToInt16(windowSizeNumericUpDown.Value);
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chartWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chartWindowGroupBox.Visible = true;
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            chartWindowGroupBox.Visible = false;
+
         }
 
         ///////////////////////////////////////////////
