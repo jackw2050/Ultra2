@@ -181,7 +181,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"E:\\\\ZLS\\\\data\\\\\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\data\\")]
         public string filePath {
             get {
                 return ((string)(this["filePath"]));
@@ -205,7 +205,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"E:\\\\ZLS\\\\data\\\\\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\data\\\\")]
         public string dataFilePath {
             get {
                 return ((string)(this["dataFilePath"]));
@@ -397,7 +397,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("GravSurvey")]
         public string dataFileName {
             get {
                 return ((string)(this["dataFileName"]));
@@ -1075,6 +1075,18 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["chartWindowTimeSpan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\zls\\")]
+        public string programPath {
+            get {
+                return ((string)(this["programPath"]));
+            }
+            set {
+                this["programPath"] = value;
             }
         }
     }

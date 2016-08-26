@@ -42,13 +42,13 @@
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="filePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"E:\\ZLS\\data\\"</Value>
+      <Value Profile="(Default)">E:\ZLS\data\</Value>
     </Setting>
     <Setting Name="fileType" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dataFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"E:\\ZLS\\data\\"</Value>
+      <Value Profile="(Default)">E:\ZLS\data\\</Value>
     </Setting>
     <Setting Name="beamScale" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1.298317</Value>
@@ -96,7 +96,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="dataFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">GravSurvey</Value>
     </Setting>
     <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hi-Res</Value>
@@ -265,6 +265,9 @@
     </Setting>
     <Setting Name="chartWindowTimeSpan" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="programPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\zls\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

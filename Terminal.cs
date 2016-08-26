@@ -81,7 +81,7 @@ namespace SerialPortTerminal
         public static Boolean surveyNameSet = false;
         public static string surveyName = null;
         public static string customFileName;
-        public static string filePath;
+        public static string dataFilePath;
         public static string programPath;
         public static string configFilePath;
         public static string calFilePath;
@@ -97,7 +97,7 @@ namespace SerialPortTerminal
         //      public  Boolean engPasswordValid = false;
         //      public  Boolean mgrPasswordValid = false;
         //      public  Boolean userPasswordValid = false;
-
+        public Boolean newDataFile = true;
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
 
@@ -126,6 +126,7 @@ namespace SerialPortTerminal
         public static bool fileRecording = false;
         public static bool firstTime = true;
         public static string fileType;
+        public static string dataFileName;
         public static DateTime oldTime = DateTime.Now;
         public string timePeriod;
         public int timeValue;
@@ -695,7 +696,21 @@ namespace SerialPortTerminal
 
         public void WriteLogFile(string logItem)
         {
-            System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
+            try
+            {
+                string path = System.IO.Directory.GetCurrentDirectory();
+                string fileName = "\\logs\\log.txt";
+                System.IO.File.AppendAllText("@" +path + fileName, DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
+
+               // System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
+
+            }
+            catch (Exception)
+            {
+
+              //  throw;
+
+            }
         }
 
         public void TimerWithDataCollection(string state)
@@ -754,6 +769,7 @@ namespace SerialPortTerminal
 
         private void port_CheckDataReceived(object sender, EventArgs e)
         {
+             CalculateMarineData mdt = new CalculateMarineData();
             // SET VARIABLE FOR DATA LENGTH.  CREATE ENUMERATED BASED ON COMMAND SENT AND SET FOR LENGTH
             // CHECK EXPECTED LENGTH VS comport.BytesToRead.  LOG ERROR IN MESSAGE EXPECTED X BYTES.  RECEIVED Y BYTES
             // IF PASS READ ALL BYTES
@@ -824,6 +840,7 @@ namespace SerialPortTerminal
                     GravityChart.DataBind();
                 }
             }
+           
         }
 
         //**********************************************************************************************************
@@ -907,7 +924,23 @@ namespace SerialPortTerminal
 
 
 
+                if (fileRecording == true)
+                {
+                    if (newDataFile)
+                    {
+                    //    RecordDataToFile("Open", myData);
+                        RecordMeterDataToFile();
+                        newDataFile = false;
 
+                    }
+                    else
+                    {
+                    //    RecordDataToFile("Append", myData);
+
+                    }
+
+
+                }
 
 
 
@@ -1254,6 +1287,7 @@ namespace SerialPortTerminal
                     });
                     }
             }
+            frmTerminal.Dispose();
         }
 
         private void ThreadParametersFormProcSafe()
@@ -1537,63 +1571,11 @@ namespace SerialPortTerminal
             }
             else
             {
-                // Console.WriteLine("Latitude: " + mdt.latitude);
-/*
-                string specifier;
-                specifier = "000.000000";
-                gpsAltitudeTextBox.Text = (myData.altitude.ToString("N", CultureInfo.InvariantCulture));
-                gpsLatitudeTextBox.Text = (mdt.latitude.ToString(specifier, CultureInfo.InvariantCulture));
-                gpsLongitudeTextBox.Text = (mdt.longitude.ToString(specifier, CultureInfo.InvariantCulture));
-                if ((mdt.gpsNavigationStatus == 0) & (mdt.gpsTimeStatus == 0) & (mdt.gpsSyncStatus == 0))
-                {
-                    gpsStartusTextBox.ForeColor = Color.Green;
-                    gpsStartusTextBox.Text = "Good";
-                }
-                else
-                {
-                    gpsStartusTextBox.ForeColor = Color.Red;
-                    gpsStartusTextBox.Text = "Error";
-                }
-                */
-                // Fill up list aray
-
-
-                if (fileRecording == true)
-                {
-                    //   myData myData = new myData();
-                    myData.Date = mdt.Date;
-                    myData.Gravity = mdt.gravity;
-                    myData.SpringTension = mdt.SpringTension;
-                    myData.CrossCoupling = mdt.CrossCoupling;
-                    myData.RawBeam = mdt.Beam;
-                    myData.VCC = mdt.VCC;
-                    myData.AL = mdt.AL;
-                    myData.AX = mdt.AX;
-                    myData.VE = mdt.VE;
-                    myData.AX2 = mdt.AX2;
-                    myData.XACC2 = mdt.XACC2;
-                    myData.LACC2 = mdt.LACC2;
-                    myData.XACC = mdt.XACC;
-                    myData.LACC = mdt.LACC;
-                    myData.TotalCorrection = mdt.totalCorrection;
-                    myData.longitude = mdt.longitude;
-                    myData.latitude = mdt.latitude;
-                    myData.altitude = mdt.altitude;
-                  //  myData.gpsStatus = mdt.gpsStatus;
-                    RecordDataToFile("Append", myData);
-                }
-
-               
-
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-                //   textBox19.Text = (MeterStatus.lGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// long
-                //   textBox20.Text = (MeterStatus.xGyro_Fog.ToString("N", CultureInfo.InvariantCulture));// cross
-                //   textBox21.Text = (MeterStatus.meterHeater.ToString("N", CultureInfo.InvariantCulture));// meter
+ 
+   
             }
 
-            //        this.Invoke(d, new object[] { text });
+         
         }
 
         private void CloseMeterStatus()
@@ -1639,10 +1621,7 @@ namespace SerialPortTerminal
 
         private void SetupChart()
         {
-          //  BindingSource SBind = new BindingSource();
-            //   SBind.DataSource = dataTable;
 
-            //   string chartAreaType = "Single chart area";
             this.GravityChart.Series.Add("Digital Gravity");
             this.GravityChart.Series.Add("Spring Tension");
             this.GravityChart.Series.Add("Cross Coupling");
@@ -1917,7 +1896,6 @@ namespace SerialPortTerminal
             }
             else if (mode == "Value")
             {
-                //     myData d = new myData();
                 GravityChart.Series["Digital Gravity"].ToolTip = "Gravity =  " + "#VALY";
                 GravityChart.Series["Spring Tension"].ToolTip = "Spring Tension = " + "#VALY";
                 GravityChart.Series["Cross Coupling"].ToolTip = "Cross Coupling = " + "#VALY";
@@ -2611,7 +2589,6 @@ namespace SerialPortTerminal
 
         private void LogConfigData(ConfigData ConfigData)
         {
-            // ConfigData ConfigData = new ConfigData();
             if (engineerDebug) Console.WriteLine("\n\nConfiguration data for meter number   \t" + ConfigData.meterNumber);
             if (engineerDebug) Console.WriteLine("\n\t User defined parameters\n");
             if (engineerDebug) Console.WriteLine("Number of auxillary analog channels-- \t" + Convert.ToString(ConfigData.numAuxChan));
@@ -2977,14 +2954,12 @@ namespace SerialPortTerminal
             UserDataForm.modeLabel.Text = dataAquisitionMode + " mode";
             if (fileRecording == true)
             {
-                //    this.Invoke(new UpdateFileTimeCallback(this.UpdateDurationTime), new object[] {  });
                 var myStartTime = DateTime.Now;
                 if (firstTime == true)
                 {
                     this.Invoke(new UpdateFileNameLabelCallback(this.UpdateNameLabel), new object[] { });
                     this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
                     fileStartTime = myStartTime;// DateTime.Now;
-                    //  frmTerminal.gravityFileName = sampleFileNamelabel.Text;
                     RecordDataToFile("Open");
                     firstTime = false;
                 }
@@ -3021,7 +2996,16 @@ namespace SerialPortTerminal
         private void frmTerminal_Load(object sender, EventArgs e)
         {
             SetInitialVisibility();
-           
+
+      
+
+
+
+
+
+            // Console.WriteLine(a);
+            //  Console.WriteLine(DateTime.UtcNow);
+
             if (engineerDebug)
             {
                 rtfTerminal.Visible = true;
@@ -3694,6 +3678,7 @@ namespace SerialPortTerminal
 
         public void InitStoredVariables()
         {
+            frmTerminal frmTerminal = new frmTerminal();
             comport.PortName = Properties.Settings.Default.PortName;
             comport.BaudRate = Properties.Settings.Default.BaudRate;
             comport.StopBits = Properties.Settings.Default.StopBits;
@@ -3842,15 +3827,17 @@ namespace SerialPortTerminal
 
             // Load program defaults
 
-            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
-            configFilePath = Properties.Settings.Default.configFilePath;
-            configFileName = Properties.Settings.Default.configFileName;
-            calFilePath = Properties.Settings.Default.calFilePath;
-            calFileName = Properties.Settings.Default.calFileName;
-            filePath = Properties.Settings.Default.filePath;
-            fileType = Properties.Settings.Default.fileType;
-            fileName = Properties.Settings.Default.dataFileName;
-            mdt.SpringTension = Properties.Settings.Default.springTension;
+            dataAquisitionMode  = Properties.Settings.Default.dataAquisitionMode;
+            configFilePath      = Properties.Settings.Default.configFilePath;
+            configFileName      = Properties.Settings.Default.configFileName;
+            calFilePath         = Properties.Settings.Default.calFilePath;
+            calFileName         = Properties.Settings.Default.calFileName;
+            dataFilePath        = Properties.Settings.Default.dataFilePath;// file path for data logs
+            fileType            = Properties.Settings.Default.fileType;// file type for data logs csv, txt etc
+            dataFileName        = Properties.Settings.Default.dataFileName;// stored file name i.e. survey name
+            surveyName = dataFileName;
+            surveyTextBox.Text = surveyName;
+            mdt.SpringTension   = Properties.Settings.Default.springTension;
             frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
 
             ControlSwitches.DataCollection(enable);// ControlSwitches.dataSwitch = enable;// ICNTLSW = 8; // data on
@@ -3860,6 +3847,7 @@ namespace SerialPortTerminal
 
             double aLongPeriod = ConfigData.longPeriod;
             double aLongDampFactor = ConfigData.longDampFactor;
+            frmTerminal.Dispose();
         }
 
         private void TorqueMotorButton_Click(object sender, EventArgs e)
@@ -3996,6 +3984,7 @@ namespace SerialPortTerminal
                 }
             }
             //  return PasswordForm.passwordValid;
+            PasswordForm.Dispose();
         }
 
         private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4009,6 +3998,7 @@ namespace SerialPortTerminal
             {
                 MessageBox.Show("You must be logged in to access this.");
             }
+            PasswordForm.Dispose();
         }
 
         private void dataStatusFormToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4050,18 +4040,21 @@ namespace SerialPortTerminal
         {
             DateTimeForm myDateForm = new DateTimeForm();
             myDateForm.Show();
+            myDateForm.Dispose();
         }
 
         private void fileFormatToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FileFormatForm myFileForm = new FileFormatForm();
             myFileForm.Show();
+            myFileForm.Dispose();
         }
 
         private void recordingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RecordingForm RecordingForm = new RecordingForm();
             RecordingForm.Show();
+            RecordingForm.Dispose();
         }
 
         #region File Class
@@ -4152,219 +4145,219 @@ namespace SerialPortTerminal
                             switch (dataItem.EntryName)
                             {
                                 case "Version":
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Version number: ---------------------- \t" + Convert.ToString(dataItem.configValue));
+                                    if (engineerDebug) Console.WriteLine("Version number: ---------------------- \t" + Convert.ToString(dataItem.configValue));
                                     break;
 
                                 case "Meter Number":
                                     ConfigData.meterNumber = dataItem.configValue.Trim();
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Meter number is---------------------- \t" + ConfigData.meterNumber);
+                                    if (engineerDebug) Console.WriteLine("Meter number is---------------------- \t" + ConfigData.meterNumber);
                                     break;
 
                                 case "Beam Scale Factor":
                                     ConfigData.beamScale = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}", ConfigData.beamScale);
+                                    if (engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}", ConfigData.beamScale);
                                     break;
 
                                 case "Cross Axis Period":
                                     ConfigData.crossPeriod = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
+                                    if (engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
                                     break;
 
                                 case "Long Axis Period":
                                     ConfigData.longPeriod = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
+                                    if (engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
                                     break;
 
                                 case "Cross Axis Damping Factor":
                                     ConfigData.crossDampFactor = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
+                                    if (engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
                                     break;
 
                                 case "Long Axis Damping Factor":
                                     ConfigData.longDampFactor = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
+                                    if (engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
                                     break;
 
                                 case "Cross Axis Gain":
                                     ConfigData.crossGain = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
+                                    if (engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
                                     break;
 
                                 case "Long Axis Gain":
                                     ConfigData.longGain = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.longGain));
+                                    if (engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.longGain));
                                     break;
 
                                 case "Cross Axis Lead":
                                     ConfigData.crossLead = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
+                                    if (engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
                                     break;
 
                                 case "Long Axis Lead":
                                     ConfigData.longLead = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
+                                    if (engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
                                     break;
 
                                 case "Max Spring Tension":
                                     ConfigData.springTensionMax = Convert.ToInt32(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
+                                    if (engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
                                     break;
 
                                 case "Cross Axis Bias":
                                     ConfigData.crossBias = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
+                                    if (engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
                                     break;
 
                                 case "Long Axis Bias":
                                     ConfigData.longBias = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("LONG-AXIS BIAS----------------------- \t" + Convert.ToString(ConfigData.longBias));
+                                    if (engineerDebug) Console.WriteLine("LONG-AXIS BIAS----------------------- \t" + Convert.ToString(ConfigData.longBias));
                                     break;
 
                                 case "crossCouplingFactors0": // Not used
                                     ConfigData.crossCouplingFactors[0] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[0]------------- \t{0:e4}", ConfigData.crossCouplingFactors[0]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[0]------------- \t{0:e4}", ConfigData.crossCouplingFactors[0]);
                                     break;
 
                                 case "crossCouplingFactors1": // Not used
                                     ConfigData.crossCouplingFactors[1] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[1]------------- \t{0:e4}", ConfigData.crossCouplingFactors[1]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[1]------------- \t{0:e4}", ConfigData.crossCouplingFactors[1]);
                                     break;
 
                                 case "crossCouplingFactors2": // Not used
                                     ConfigData.crossCouplingFactors[2] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[2]------------- \t{0:e4}", ConfigData.crossCouplingFactors[2]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[2]------------- \t{0:e4}", ConfigData.crossCouplingFactors[2]);
                                     break;
 
                                 case "crossCouplingFactors3": // Not used
                                     ConfigData.crossCouplingFactors[3] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[3]------------- \t{0:e4}", ConfigData.crossCouplingFactors[3]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[3]------------- \t{0:e4}", ConfigData.crossCouplingFactors[3]);
                                     break;
 
                                 case "crossCouplingFactors4": // Not used
                                     ConfigData.crossCouplingFactors[4] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[4]------------- \t{0:e4}", ConfigData.crossCouplingFactors[4]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[4]------------- \t{0:e4}", ConfigData.crossCouplingFactors[4]);
                                     break;
 
                                 case "crossCouplingFactors5": // Not used
                                     ConfigData.crossCouplingFactors[5] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[5]------------- \t{0:e4}", ConfigData.crossCouplingFactors[5]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[5]------------- \t{0:e4}", ConfigData.crossCouplingFactors[5]);
                                     break;
 
                                 case "crossCouplingFactors6-VCC": // VCC
                                     ConfigData.crossCouplingFactors[6] = Convert.ToSingle(dataItem.configValue);
                                     mdt.VCC = ConfigData.crossCouplingFactors[6];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[6]/VCC------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[6]/VCC------------- \t{0:e4}", ConfigData.crossCouplingFactors[6]);
                                     break;
 
                                 case "crossCouplingFactors7-AL": // AL
                                     ConfigData.crossCouplingFactors[7] = Convert.ToSingle(dataItem.configValue);
                                     mdt.AL = ConfigData.crossCouplingFactors[7];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[7]/AL------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[7]/AL------------- \t{0:e4}", ConfigData.crossCouplingFactors[7]);
                                     break;
 
                                 case "crossCouplingFactors8-AX": // AX
                                     ConfigData.crossCouplingFactors[8] = Convert.ToSingle(dataItem.configValue);
                                     mdt.AX = ConfigData.crossCouplingFactors[8];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[8]/AX------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[8]/AX------------- \t{0:e4}", ConfigData.crossCouplingFactors[8]);
                                     break;
 
                                 case "crossCouplingFactors9-VE": // VE
                                     ConfigData.crossCouplingFactors[9] = Convert.ToSingle(dataItem.configValue);
                                     mdt.VE = ConfigData.crossCouplingFactors[9];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[9]/VE------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[9]/VE------------- \t{0:e4}", ConfigData.crossCouplingFactors[9]);
                                     break;
 
                                 case "crossCouplingFactors10-AX2": // AX2
                                     ConfigData.crossCouplingFactors[10] = Convert.ToSingle(dataItem.configValue);
                                     mdt.AX2 = ConfigData.crossCouplingFactors[10];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[10]/AX2------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[10]/AX2------------- \t{0:e4}", ConfigData.crossCouplingFactors[10]);
                                     break;
 
                                 case "crossCouplingFactors11-XACC2": // XACC2
                                     ConfigData.crossCouplingFactors[11] = Convert.ToSingle(dataItem.configValue);
                                     mdt.XACC2 = ConfigData.crossCouplingFactors[11];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[11]/XACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[11]/XACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[11]);
                                     break;
 
                                 case "crossCouplingFactors12-LACC2": // LACC2
                                     ConfigData.crossCouplingFactors[12] = Convert.ToSingle(dataItem.configValue);
                                     mdt.LACC2 = ConfigData.crossCouplingFactors[12];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[12]/LACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[12]/LACC2------------- \t{0:e4}", ConfigData.crossCouplingFactors[12]);
                                     break;
 
                                 case "crossCouplingFactors13-Cross Axis Compensation(4)": // Cross Axis Compensation (4)
                                     ConfigData.crossCouplingFactors[13] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.crossCompFactor_4 = ConfigData.crossCouplingFactors[13];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[13]/Cross Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[13]/Cross Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[13]);
                                     break;
 
                                 case "crossCouplingFactors14-Long Axis Compensation(4)": // Long Axis Compensation (4)
                                     ConfigData.crossCouplingFactors[14] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.longCompFactor_4 = ConfigData.crossCouplingFactors[14];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[14]/Long Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[14]/Long Axis Comp(4)------------- \t{0:e4}", ConfigData.crossCouplingFactors[14]);
                                     break;
 
                                 case "crossCouplingFactors15-Cross Axis Compensation(16)": // Cross Axis Compensation (16)
                                     ConfigData.crossCouplingFactors[15] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.crossCompFactor_16 = ConfigData.crossCouplingFactors[15];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[15]/Cross Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[15]/Cross Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[15]);
                                     break;
 
                                 case "crossCouplingFactors16-Long Axis Compensation(16)": // Long Axis Compensation (16)
                                     ConfigData.crossCouplingFactors[16] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.longCompFactor_16 = ConfigData.crossCouplingFactors[16];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Cross Coupling Factors[16]/Long Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
+                                    if (engineerDebug) Console.WriteLine("Cross Coupling Factors[16]/Long Axis Comp(16)------------- \t{0:e4}", ConfigData.crossCouplingFactors[16]);
                                     break;
 
                                 case "analogFilter1-AX Phase":// AX Phase
                                     ConfigData.analogFilter[1] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.XACC_Phase = ConfigData.analogFilter[1];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[1]/AX PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
+                                    if (engineerDebug) Console.WriteLine("AFILT[1]/AX PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
                                     break;
 
                                 case "analogFilter2-AL Phase"://  AL Phase
                                     ConfigData.analogFilter[2] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.LACC_AL_Phase = ConfigData.analogFilter[2];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[2]/AL PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
+                                    if (engineerDebug) Console.WriteLine("AFILT[2]/AL PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
                                     break;
 
                                 case "analogFilter3":
                                     ConfigData.analogFilter[3] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[3]------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[3]));
+                                    if (engineerDebug) Console.WriteLine("AFILT[3]------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[3]));
                                     break;
 
                                 case "analogFilter4-VCC Phase":// VCC Phase
                                     ConfigData.analogFilter[4] = Convert.ToSingle(dataItem.configValue);
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("AFILT[3]/VCC PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
+                                    if (engineerDebug) Console.WriteLine("AFILT[3]/VCC PHASE------------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
                                     break;
 
                                 case "analogFilter5-Cross Axis Compensation Phase(4)":
                                     ConfigData.analogFilter[5] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.crossCompPhase_4 = ConfigData.analogFilter[5];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [5]/CROSS-AXIS COMPENSATION PHASE (4)------- \t" + Convert.ToString(ConfigData.crossCompPhase_4));
+                                    if (engineerDebug) Console.WriteLine("Analog FIlter [5]/CROSS-AXIS COMPENSATION PHASE (4)------- \t" + Convert.ToString(ConfigData.crossCompPhase_4));
                                     break;
 
                                 case "analogFilter6-Long Axis Compensation Phase(4)":
                                     ConfigData.analogFilter[6] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.longCompPhase_4 = ConfigData.analogFilter[6];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [6]/LONG AXIS COMPENSATION PHASE (4)-------- \t" + Convert.ToString(ConfigData.longCompPhase_4));
+                                    if (engineerDebug) Console.WriteLine("Analog FIlter [6]/LONG AXIS COMPENSATION PHASE (4)-------- \t" + Convert.ToString(ConfigData.longCompPhase_4));
                                     break;
 
                                 case "analogFilter7-Cross Axis Compensation Phase(16)":
                                     ConfigData.analogFilter[7] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.crossCompPhase_16 = ConfigData.analogFilter[7];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [7]/Cross AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.crossCompPhase_16));
+                                    if (engineerDebug) Console.WriteLine("Analog FIlter [7]/Cross AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.crossCompPhase_16));
                                     break;
 
                                 case "analogFilter8-Long Axis Compensation Phase(16)":
                                     ConfigData.analogFilter[8] = Convert.ToSingle(dataItem.configValue);
                                     ConfigData.longCompPhase_16 = ConfigData.analogFilter[8];
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Analog FIlter [8]/LONG AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.longCompPhase_16));
+                                    if (engineerDebug) Console.WriteLine("Analog FIlter [8]/LONG AXIS COMPENSATION PHASE (16)------ \t" + Convert.ToString(ConfigData.longCompPhase_16));
                                     break;
 
                                 case "Mode":
                                     dataAquisitionMode = dataItem.configValue.Trim();
-                                    if (frmTerminal.engineerDebug) Console.WriteLine("Data mode ------------------------------ \t" + Convert.ToString(dataAquisitionMode));
+                                    if (engineerDebug) Console.WriteLine("Data mode ------------------------------ \t" + Convert.ToString(dataAquisitionMode));
                                     break;
 
                                 default:
@@ -4389,398 +4382,163 @@ namespace SerialPortTerminal
             {
                 CheckConfigFile(configFile);// File does not exist. Have user pick a new file.
             }
+            
         }// ReadConfigFile
 
-        /*
+    
 
-                //http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in#1
-        */
+    
 
-        public void LogConfigDataToFile()
-        {
-            PdfPTable table = new PdfPTable(2);
-            PdfPCell cell = new PdfPCell(new Phrase("Header spanning 2 columns"));
 
-            cell.Colspan = 3;
-            cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            table.AddCell(cell);
 
-            //  Setup margins
-            //  Left Margin: 36pt => 0.5 inch
-            //  Right Margin: 72pt => 1 inch
-            //  Top Margin: 108pt => 1.5 inch
-            //  Bottom Margini: 180pt => 2.5 inch
 
-            BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+[DelimitedRecord(",")]
+    public class MarineData
+    {
+            public string lineId;
+            public int Year;
+            public int Days;
+            public int Hour;
+            public int Minute;
+            public int Second;
+            public double Gravity;
+            public double SpringTension;
+            public double CrossCoupling;
+            public double RawBeam;// need to change this to avg beam
+            public double VCC;
+            public double AL;
+            public double AX;
+            public double VE;
+            public double AX2;
+            public double XACC2;
+            public double LACC2;
+            public double XACC;
+            public double LACC;
+            public double Period;
+            public double longitude;
+            public double latitude;
+            public double altitude;
 
-            iTextSharp.text.Font times = new iTextSharp.text.Font(bfTimes, 10);
-
-            //Create a System.IO.FileStream object:
-            FileStream fs = new FileStream("C:\\Ultrasys\\Meter Configuration.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
-
-            //Step 2: Create a iTextSharp.text.Document object: with page size and margins
-            Document doc = new Document(PageSize.LETTER, 36, 72, 36, 36);
-
-            // Setting Document properties e.g.
-            // 1. Title
-            // 2. Subject
-            // 3. Keywords
-            // 4. Creator
-            // 5. Author
-            // 6. Header
-            doc.AddTitle("Configuration for meter #: " + frmTerminal.meterNumber);
-            doc.AddSubject("Configuration data");
-            //  doc.AddKeywords("Metadata, iTextSharp 5.4.4, Chapter 1, Tutorial");
-            doc.AddCreator("ZLS");
-            doc.AddAuthor("Jack Walker");
-            doc.AddHeader("Nothing", "No Header");// Add creation date
-
-            //Step 3: Create a iTextSharp.text.pdf.PdfWriter object. It helps to write the Document to the Specified FileStream:
-            PdfWriter writer = PdfWriter.GetInstance(doc, fs);
-
-            try
-            {
-                //Step 4: Openning the Document:
-                doc.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            //Step 5: Adding a Paragraph by creating a iTextSharp.text.Paragraph object:
-
-            doc.Add(new Paragraph("\n\t User defined parameters\n", times));
-            doc.Add(new Paragraph("Number of auxillary analog channels \t\t" + Convert.ToString(ConfigData.numAuxChan)));
-            doc.Add(new Paragraph("DIGITAL INPUT SWITCH \t\t" + Convert.ToString(ConfigData.digitalInputSwitch)));
-            doc.Add(new Paragraph("MONITOR DISPLAY SWITCH \t\t" + Convert.ToString(ConfigData.monitorDisplaySwitch)));
-            doc.Add(new Paragraph("LINE PRINTER SWITCH \t\t" + Convert.ToString(ConfigData.linePrinterSwitch)));
-            doc.Add(new Paragraph("FILE NAME SWITCH \t\t" + Convert.ToString(ConfigData.fileNameSwitch)));
-            doc.Add(new Paragraph("HARD DISK SWITCH \t\t" + Convert.ToString(ConfigData.hardDiskSwitch)));
-            doc.Add(new Paragraph("SERIAL PORT FORMAT SWITCH \t\t" + Convert.ToString(ConfigData.serialPortSwitch)));
-            doc.Add(new Paragraph("SERIAL PORT OUTPUT SWITCH \t\t" + Convert.ToString(ConfigData.serialPortOutputSwitch)));
-            doc.Add(new Paragraph("ALARM SWITCH \t\t" + Convert.ToString(ConfigData.alarmSwitch)));
-            if (ConfigData.printerEmulationSwitch == 2)
-            {
-                doc.Add(new Paragraph("PRINTER EMULATION-------------------- \t" + "ESC_P"));
-            }
-            if (ConfigData.printerEmulationSwitch == 3)
-            {
-                doc.Add(new Paragraph("PRINTER EMULATION-------------------- \t" + "ESC_P2"));
-            }
-            else
-            {
-                doc.Add(new Paragraph("PRINTER EMULATION-------------------- \t" + "DPL24C"));
-            }
-            if (ConfigData.modeSwitch == 0)
-            {
-                doc.Add(new Paragraph("MODE SWITCH-------------------------- \t" + "Marine"));
-            }
-            else
-            {
-                doc.Add(new Paragraph("MODE SWITCH-------------------------- \t" + "Hires"));
-            }
-            doc.Add(new Paragraph("\n\tParameters defined by ZLS.\n"));
-            doc.Add(new Paragraph("BEAM SCALE FACTOR-------------------- \t" + Math.Round(ConfigData.beamScale, 6)));
-            doc.Add(new Paragraph("CROSS-AXIS PERIOD-------------------- \t" + Math.Round(ConfigData.crossPeriod, 4)));
-
-            doc.Add(new Paragraph("CROSS-AXIS DAMPING------------------- \t" + Math.Round(ConfigData.crossDampFactor, 4)));
-            doc.Add(new Paragraph("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain)));
-            doc.Add(new Paragraph("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead)));
-            doc.Add(new Paragraph("CROSS-AXIS COMPENSATION (4)---------- \t" + Math.Round(ConfigData.crossCouplingFactors[13], 4)));
-            doc.Add(new Paragraph("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5])));
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                doc.Add(new Paragraph("CROSS-AXIS COMPENSATION (16)--------- \t" + "N/A"));
-            }
-            else
-            {
-                doc.Add(new Paragraph("CROSS-AXIS COMPENSATION (16)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15])));
-            }
-
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                doc.Add(new Paragraph("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + "N/A"));
-            }
-            else
-            {
-                doc.Add(new Paragraph("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7])));
-            }
-            doc.Add(new Paragraph("CROSS-AXIS BIAS---------------------- \t" + Math.Round(ConfigData.crossBias, 4)));
-            doc.Add(new Paragraph("LONG-AXIS PERIOD-------------------- \t" + Math.Round(ConfigData.longPeriod)));
-            doc.Add(new Paragraph("LONG-AXIS DAMPING------------------- \t" + Math.Round(ConfigData.longDampFactor)));
-            doc.Add(new Paragraph("LONG-AXIS GAIN---------------------- \t" + Math.Round(ConfigData.longGain)));
-            doc.Add(new Paragraph("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead)));
-            doc.Add(new Paragraph("LONG-AXIS COMPENSATION (4)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14])));
-            doc.Add(new Paragraph("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6])));
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                doc.Add(new Paragraph("LONG-AXIS COMPENSATION (16)---------- \t" + "N/A"));
-            }
-            else
-            {
-                doc.Add(new Paragraph("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16])));
-            }
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                doc.Add(new Paragraph("LONG-AXIS COMPENSATION PHASE (16)---- \t" + "N/A"));
-            }
-            else
-            {
-                doc.Add(new Paragraph("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7])));
-            }
-            doc.Add(new Paragraph("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias)));
-            doc.Add(new Paragraph("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6])));
-            doc.Add(new Paragraph("AL----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[7])));
-            doc.Add(new Paragraph("AX----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[8])));
-            doc.Add(new Paragraph("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9])));
-            doc.Add(new Paragraph("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10])));
-            doc.Add(new Paragraph("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11])));
-            doc.Add(new Paragraph("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12])));
-            doc.Add(new Paragraph("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1])));
-            doc.Add(new Paragraph("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2])));
-            doc.Add(new Paragraph("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4])));
-            doc.Add(new Paragraph("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax)));
-
-            //Step 6: Closing the Document:
-            doc.Close();
         }
 
-        public void LogConfigDataToFileTable()
+
+        [DelimitedRecord(",")]
+        public class MarineDataHeader
         {
-            BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
-            iTextSharp.text.Font times = new iTextSharp.text.Font(bfTimes, 10);
+            public string lineId;
+            public string Year;
+            public string Days;
+            public string Hour;
+            public string Minute;
+            public string Second;
+            public string Gravity;
+            public string SpringTension;
+            public string CrossCoupling;
+            public string RawBeam;// need to change this to avg beam
+            public string VCC;
+            public string AL;
+            public string AX;
+            public string VE;
+            public string AX2;
+            public string XACC2;
+            public string LACC2;
+            public string XACC;
+            public string LACC;
+            public string Period;
+            public string longitude;
+            public string latitude;
+            public string altitude;
 
-            iTextSharp.text.Font fontTinyItalic = FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-            iTextSharp.text.Font font16Normal = FontFactory.GetFont("Arial", 16, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-
-            PdfPTable table = new PdfPTable(2);
-            table.TotalWidth = 500f;
-
-            //fix the absolute width of the table
-            table.LockedWidth = true;
-
-            //relative col widths in proportions - 1/3 and 2/3
-            float[] widths = new float[] { 4f, 1f };
-            table.SetWidths(widths);
-            table.HorizontalAlignment = 0;
-
-            PdfPCell cell = new PdfPCell(new Phrase("User defined parameters"));
-            PdfPCell cell2 = new PdfPCell(new Phrase("ZLS defined parameters"));
-
-            //  PdfPCell theCell = new PdfPCell(new Paragraph("Configuration Data for " + meterNumber, font16Normal));
-            //   theCell.Colspan = 2;
-            //  theCell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            //  table.AddCell(theCell);
-
-            //leave a gap before and after the table
-
-            table.SpacingBefore = 50f;
-            table.SpacingAfter = 50f;
-
-            //Create a System.IO.FileStream object:
-            FileStream fs = new FileStream("C:\\ZLS\\Meter Configuration.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
-
-            //Step 2: Create a iTextSharp.text.Document object: with page size and margins
-            Document doc = new Document(PageSize.LETTER, 36, 36, 36, 36);
-
-            doc.AddTitle("Configuration for meter #: " + frmTerminal.meterNumber);
-            doc.AddSubject("Configuration data");
-            //  doc.AddKeywords("Metadata, iTextSharp 5.4.4, Chapter 1, Tutorial");
-            doc.AddCreator("ZLS");
-            doc.AddAuthor("Jack Walker");
-            doc.AddHeader("Nothing", "No Header");// Add creation date
-
-            //Step 3: Create a iTextSharp.text.pdf.PdfWriter object. It helps to write the Document to the Specified FileStream:
-            PdfWriter writer = PdfWriter.GetInstance(doc, fs);
-
-            try
-            {
-                //Step 4: Openning the Document:
-                doc.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            doc.Add(new Paragraph("", fontTinyItalic));
-            doc.Add(new Paragraph("Configuration Data for " + frmTerminal.meterNumber, font16Normal));
-            doc.Add(new Paragraph("", fontTinyItalic));
-
-            cell.Colspan = 2;
-            cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            table.AddCell(cell);
-
-            //Step 5: Adding a Paragraph by creating a iTextSharp.text.Paragraph object:
-
-            //  table.AddCell(new PdfPCell(new Paragraph(new PdfPCell(new Paragraph(Label1.Text, fontTinyItalic)));
-
-            //  table.AddCell(new PdfPCell(new Paragraph("User defined parameters", fontTinyItalic));
-            table.AddCell(new PdfPCell(new Paragraph("Number of auxillary analog channels", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.numAuxChan), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("DIGITAL INPUT SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.digitalInputSwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("MONITOR DISPLAY SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.monitorDisplaySwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("LINE PRINTER SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.linePrinterSwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("FILE NAME SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.fileNameSwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("HARD DISK SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.hardDiskSwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("SERIAL PORT FORMAT SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.serialPortSwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("SERIAL PORT OUTPUT SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.serialPortOutputSwitch), fontTinyItalic)));
-
-            table.AddCell(new PdfPCell(new Paragraph("ALARM SWITCH", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(ConfigData.alarmSwitch), fontTinyItalic)));
-
-            if (ConfigData.printerEmulationSwitch == 2)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("PRINTER EMULATION", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("ESC_P", fontTinyItalic)));
-            }
-            if (ConfigData.printerEmulationSwitch == 3)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("PRINTER EMULATION", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("ESC_P2", fontTinyItalic)));
-            }
-            else
-            {
-                table.AddCell(new PdfPCell(new Paragraph("PRINTER EMULATION", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("DPL24C", fontTinyItalic)));
-            }
-            if (ConfigData.modeSwitch == 0)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("MODE SWITCH", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("Marine", fontTinyItalic)));
-            }
-            else
-            {
-                table.AddCell(new PdfPCell(new Paragraph("MODE SWITCH", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("Hires", fontTinyItalic)));
-            }
-
-            // Items specified by ZLS
-            cell2.Colspan = 2;
-            cell2.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
-            table.AddCell(cell2);
-
-            table.AddCell(new PdfPCell(new Paragraph("BEAM SCALE FACTOR", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.beamScale, 6)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS PERIOD", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossPeriod, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS DAMPING", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossDampFactor, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS GAIN", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossGain, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS LEAD", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossLead, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS COMPENSATION (4 inch)", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[13], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS COMPENSATION PHASE (4 inch)", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[5], 4)), fontTinyItalic)));
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS COMPENSATION (16 inch)", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("N/A", fontTinyItalic)));
-            }
-            else
-            {
-                table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS COMPENSATION (16 inch)", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[15], 4)), fontTinyItalic)));
-            }
-
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS COMPENSATION PHASE 16 inch", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("N/A", fontTinyItalic)));
-            }
-            else
-            {
-                table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS COMPENSATION PHASE 16 inch", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[7], 4)), fontTinyItalic)));
-            }
-            table.AddCell(new PdfPCell(new Paragraph("CROSS-AXIS BIAS ", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossBias, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS PERIOD ", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.longPeriod, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS DAMPING ", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.longDampFactor, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS GAIN ", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.longGain, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS LEAD ", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.longLead, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS COMPENSATION (4 inch )", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[14], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LONG AXIS COMPENSATION PHASE (4 inch)", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[6])), fontTinyItalic)));
-
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS COMPENSATION (16 inch)", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("N/A", fontTinyItalic)));
-            }
-            else
-            {
-                table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS COMPENSATION (16 inch) ", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[16], 4)), fontTinyItalic)));
-            }
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS COMPENSATION PHASE (16 inch)", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph("N/A", fontTinyItalic)));
-            }
-            else
-            {
-                table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS COMPENSATION PHASE (16 inch)", fontTinyItalic)));
-                table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[7], 4)), fontTinyItalic)));
-            }
-            table.AddCell(new PdfPCell(new Paragraph("LONG-AXIS BIAS", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.longBias, 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("VCC", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[6], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("AL", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[7], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("AX", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[8], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("VE", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[9], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("AX2", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[10], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("XACC**2", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[11], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("LACC**2", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.crossCouplingFactors[12], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("AX PHASE", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[1], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("AL PHASE", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[2], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("VCC PHASE", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.analogFilter[4], 4)), fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph("MAXIMUM SPRING TENSION VALUE", fontTinyItalic)));
-            table.AddCell(new PdfPCell(new Paragraph(Convert.ToString(Math.Round(ConfigData.springTensionMax, 4)), fontTinyItalic)));
-            doc.Add(table);
-
-            //Step 6: Closing the Document:
-            doc.Close();
-            //         Process.Start("C:\\ZLS\\Meter Configuration.pdf");
         }
 
+
+
+        public void RecordMeterDataToFile()
+        {
+            var engine = new FileHelperEngine<MarineData>();
+            var MarineData = new List<MarineData>();
+
+            if (newDataFile)
+            {
+                var MarineDataHeader = new List<MarineDataHeader>();
+                MarineDataHeader.Add(new MarineDataHeader()
+                {
+
+                    lineId = "Survey Name",
+                    Year = "Year",
+                    Days = "Day",
+                    Hour = "Hour",
+                    Minute = "Minute",
+                    Second = "Second",
+                    Gravity = "Gravity",
+                    SpringTension = "Spring Tension",
+                    CrossCoupling = "Coupling",
+                    RawBeam = "Avg. Beam",
+                    VCC = "VCC",
+                    AL = "AL",
+                    AX = "AX",
+                    VE = "VE",
+                    AX2 = "AX2",
+                    XACC2 = "XACC2",
+                    LACC2 = "LACC2",
+                    XACC = "XACC",
+                    LACC = "LACC",
+                    Period = "Period",
+                    longitude = "Longitude",
+                    latitude = "Latitude",
+                    altitude = "Altitude"
+                });
+                engine.WriteFile("FileOut.csv", MarineData);
+            }
+
+
+            MarineData.Add(new MarineData()
+            {
+                lineId = surveyName,
+                Year = mdt.year,
+                Days = mdt.day,
+                Hour = mdt.Hour,
+                Minute = mdt.Min,
+                Second = mdt.Sec,
+                Gravity = mdt.gravity,
+                SpringTension = mdt.SpringTension,
+                CrossCoupling = mdt.CrossCoupling,
+                RawBeam = mdt.Beam,// need to change this  to avg beam
+                VCC = mdt.VCC,
+                AL = mdt.AL,
+                AX = mdt.AX,
+                VE = mdt.VE,
+                AX2 = mdt.AX2,
+                XACC2 = mdt.XACC2,
+                LACC2 = mdt.LACC2,
+                XACC = mdt.XACC,
+                LACC = mdt.LACC,
+                Period = 0,// need to add this in calculate marine data
+                longitude = mdt.longitude,
+                latitude = mdt.latitude,
+                altitude = mdt.altitude
+
+            });
+
+            engine.WriteFile("FileOut.csv", MarineData);
+        }
+
+
+
+
+
+
+        // This method opens and writes the header to the data log file
         public void RecordDataToFile(string fileOperation)
         {
             string delimitor = ",";
+            string dataFile;
+             DateTime myNow = DateTime.Now;
+            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", myNow);
 
-            switch (frmTerminal.fileType)
+            
+
+            switch (fileType)
             {
                 case "csv":
                     delimitor = ",";
@@ -4797,12 +4555,12 @@ namespace SerialPortTerminal
                 default:
                     break;
             }
-
+            dataFile = dataFilePath + thisDate + "-" + surveyName + "." + fileType;
             if (fileOperation == "Open")
             {
                 try
                 {
-                    using (StreamWriter writer = File.CreateText(frmTerminal.fileName))
+                    using (StreamWriter writer = File.CreateText(dataFile))
                     {
                         string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
                              + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
@@ -4822,9 +4580,12 @@ namespace SerialPortTerminal
         public void RecordDataToFile(string fileOperation, myData d)
         {
             // fileOperation  0 - open,  1 - append, 2 - close
+            string dataFile;
+            DateTime myNow = DateTime.Now;
+            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", myNow);
             string delimitor = ",";
 
-            switch (frmTerminal.fileType)
+            switch (fileType)
             {
                 case "csv":
                     delimitor = ",";
@@ -4841,24 +4602,15 @@ namespace SerialPortTerminal
                 default:
                     break;
             }
+            dataFile = dataFilePath + thisDate + "-" + surveyName + "." + fileType;
 
-            if (frmTerminal.gravityFileName == null)
-            {
-                DateTime now = DateTime.Now;
-                // String.Format("{0:dds}", now);
-                //  fileName = "C:\\Ultrasys\\Data\\" + "GravityData" + now.ToString("yyyyMMddHHmmsstt") + ".csv";
-                //  fileName = frmTerminal.filePath;
-            }
-            else
-            {
-                //  fileName = "C:\\Ultrasys\\Data\\" + frmTerminal.gravityFileName;
-            }
+
 
             if (fileOperation == "Open")
             {
                 try
                 {
-                    using (StreamWriter writer = File.CreateText(frmTerminal.fileName))
+                    using (StreamWriter writer = File.CreateText(dataFile))
                     {
                         string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
                             + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
@@ -4886,7 +4638,7 @@ namespace SerialPortTerminal
 
                 try
                 {
-                    using (StreamWriter writer = File.AppendText(frmTerminal.fileName))
+                    using (StreamWriter writer = File.AppendText(fileName))
                     {
                         // writer.WriteLine("{0},{1},{2},{3},{4}, {5},{6}", MeterData.year, MeterData.day, MeterData.Hour, MeterData.Min, MeterData.Sec, MeterData.data4[2]);
                         //  writer.WriteLine(Convert.ToString(MeterData.dataTime), ",",Convert.ToString(MeterData.data4[2]),",");
@@ -4945,9 +4697,9 @@ namespace SerialPortTerminal
         {
             Boolean okToRun = false;
 
-            if (surveyNameSet == false)
+            if (surveyName == "")
             {
-                MessageBox.Show("Warning! \nNo survey information was entered.");
+                MessageBox.Show("Warning! \nNo survey information was entered.\nRecording will start on next attempt");
                 surveyNameSet = true;
             }
             else
@@ -5052,19 +4804,19 @@ namespace SerialPortTerminal
             DateTime now = DateTime.Now;
             if (fileDateFormat == 1)
             {
-                fileName = filePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-MMM-dd-HH-mm-ss") + "." + fileType;
+                fileName = dataFilePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-MMM-dd-HH-mm-ss") + "." + fileType;
             }
             else if (fileDateFormat == 2)
             {
-                fileName = filePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-mm-dd-HH-mm-ss") + "." + fileType;
+                fileName = dataFilePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-mm-dd-HH-mm-ss") + "." + fileType;
             }
             else if (fileDateFormat == 3)
             {
-                fileName = filePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-dd-HH-mm-ss") + "." + fileType;
+                fileName = dataFilePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-dd-HH-mm-ss") + "." + fileType;
             }
             else if (fileDateFormat == 4)
             {
-                fileName = filePath + "\\" + customFileName + "." + fileType;
+                fileName = dataFilePath + "\\" + customFileName + "." + fileType;
             }
             //           Properties.Settings.Default.fileDateFormat = fileDateFormat;
         }

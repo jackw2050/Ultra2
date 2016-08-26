@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using System.Threading;
 
 namespace SerialPortTerminal
 {
@@ -344,6 +345,7 @@ namespace SerialPortTerminal
                 Console.WriteLine("Serial port error " + serialPortTimeout);
                 Console.WriteLine("Bad checksum " + receiveDataCheckSumError);
             }
+            frmTerminal.Dispose();
         }
     }
 
@@ -627,7 +629,6 @@ namespace SerialPortTerminal
         public static Boolean myDebug = false;
 
         private PortC Port_C = new PortC();
-    //    private MeterStatus MeterStatus = new MeterStatus();
         public static double cper = 18;
 
         // Take serial data from meter and separate into various variables and commands
@@ -649,7 +650,7 @@ namespace SerialPortTerminal
         public Int16 portCStatus;
         public int year;
         public int day;
-        public double Hour, Min, Sec;
+        public int Hour, Min, Sec;
         public Boolean dataValid = false;
         public short gpsStatus;
         private static int nPoint = 0;
@@ -813,7 +814,7 @@ namespace SerialPortTerminal
 
                     if (frmTerminal.timerDebug)
                     {
-                        frmTerminal.WriteLogFile("Remote rebooted");
+                       // frmTerminal.WriteLogFile("Remote rebooted");
                         Console.WriteLine("Serial comm error count = " + Errors.SerialComErrorCount);
                         Console.WriteLine("Message length: " + meterBytes.Length);
                     }
@@ -825,23 +826,20 @@ namespace SerialPortTerminal
                         Console.WriteLine("Unrecognized command");
                         Console.WriteLine("Data length: " + meterBytes.Length);
                     }
-                    frmTerminal.WriteLogFile("Serial port read error");
+                    frmTerminal.WriteLogFile("Serial port read error.  " + "Data length: " + meterBytes.Length + "  Expected: " + meterBytes[0]);
                 }
 
-                if (Errors.SerialComErrorCount > 2)
+                if (Errors.SerialComErrorCount > 5)
                 {
                     
                     if (frmTerminal.timerDebug)
                     {
                         Console.WriteLine("Resetting timer by  " + Errors.SerialComErrorCount * 50);
                     }
-                    frmTerminal.timerOffset = Errors.SerialComErrorCount * 50;
-                    // frmTerminal.TimerWithDataCollection("stop");
-                    // frmTerminal.TimerWithDataCollection("start");
-                    if (Errors.SerialComErrorCount > 500)
-                    {
-                        Errors.SerialComErrorCount = 0;
-                    }
+                    Thread.Sleep(500);
+                    Errors.SerialComErrorCount = 0;
+                    frmTerminal.WriteLogFile("Sleep 500mS");
+
                 }
             }
             else if ((meterBytes[0] == meterBytes.Length - 1) && (meterBytes.Length == 79))  // &&(checkSum(meterBytes) ==meterBytes{ meterBytes.length])
@@ -1236,7 +1234,7 @@ namespace SerialPortTerminal
                 }
 
                 // get gps and period
-
+                frmTerminal.Dispose();
                 /////////////////////////////////////////////////////////////////
 
                 oneSecStuff();  ////// NEED TO DECIDE - LEAVE THIS HERE OR CALL FROM TERMINAL
