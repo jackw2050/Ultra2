@@ -1281,7 +1281,6 @@ namespace SerialPortTerminal
             this.surveyTextBox.Name = "surveyTextBox";
             this.surveyTextBox.Size = new System.Drawing.Size(130, 20);
             this.surveyTextBox.TabIndex = 119;
-            this.surveyTextBox.TextChanged += new System.EventHandler(this.surveyTextBox_TextChanged_1);
             // 
             // label2
             // 

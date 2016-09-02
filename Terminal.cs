@@ -1,8 +1,6 @@
 #region Namespace Inclusions
 
 using FileHelpers;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using SerialPortTerminal.Properties;
 using System;
 using System.Collections;
@@ -43,8 +41,10 @@ namespace SerialPortTerminal
         public RelaySwitches RelaySwitches = new RelaySwitches();
         private ConfigData ConfigData = new ConfigData();
         private ControlSwitches ControlSwitches = new ControlSwitches();
-//        private MeterStatus MeterStatus = new MeterStatus();
+
+        //        private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
+
         private SerialPortForm SerialPortForm = new SerialPortForm();
         private static ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
@@ -94,10 +94,12 @@ namespace SerialPortTerminal
         public static Boolean torqueMotorsEnabled = false;
         public static Boolean springTensionEnabled = false;
         public static Boolean alarmsEnabled = false;
+
         //      public  Boolean engPasswordValid = false;
         //      public  Boolean mgrPasswordValid = false;
         //      public  Boolean userPasswordValid = false;
         public Boolean newDataFile = true;
+
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
 
@@ -131,6 +133,36 @@ namespace SerialPortTerminal
         public string timePeriod;
         public int timeValue;
         public Boolean filterData = false;
+
+
+        public class ThreadWithState
+        {
+            frmTerminal frmTerminal = new frmTerminal();
+            // State information used in the task.
+            private string boilerplate;
+            private myData value;
+
+            // The constructor obtains the state information.
+            public ThreadWithState(string text, myData number)
+            {
+                boilerplate = text;
+                value = number;
+            }
+
+            // The thread procedure performs the task, such as formatting
+            // and printing a document.
+            public void ThreadProc()
+            {
+                frmTerminal.RecordDataToFile(boilerplate, value);
+                frmTerminal.Dispose();
+
+
+            }
+            
+        }
+
+
+
 
         public class startupData
         {
@@ -338,11 +370,13 @@ namespace SerialPortTerminal
                 this.totalCorrection = totalCorrection;
             }
         }
+
         private static int oldMaxArraySize;
+
         public void CleanUp(string timePeriod, int timeValue)
         {
             int maxArraySize = 60;// initialize for 60 seconds
-            
+
             if (timePeriod == "seconds")
             {
                 maxArraySize = timeValue;
@@ -356,16 +390,15 @@ namespace SerialPortTerminal
                 maxArraySize = 3600 * timeValue;
             }
 
-            if (maxArraySize < oldMaxArraySize )
+            if (maxArraySize < oldMaxArraySize)
             {
-               
                 if (maxArraySize < listDataSource.Count)
                 {
                     int removeCount = listDataSource.Count - maxArraySize;
                     listDataSource.RemoveRange(maxArraySize, removeCount);
                 }
             }
-            
+
             if (listDataSource.Count > maxArraySize)
             {
                 listDataSource.RemoveAt(0);
@@ -700,16 +733,13 @@ namespace SerialPortTerminal
             {
                 string path = System.IO.Directory.GetCurrentDirectory();
                 string fileName = "\\logs\\log.txt";
-                System.IO.File.AppendAllText("@" +path + fileName, DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
+                //  System.IO.File.AppendAllText("@" + path + fileName, DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
 
-               // System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
-
+                System.IO.File.AppendAllText(@"C:\ZLS\logs\log.txt", DateTime.Now.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\t" + logItem + Environment.NewLine);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-              //  throw;
-
+                Console.WriteLine("An error occurred: '{0}'", e);
             }
         }
 
@@ -769,7 +799,7 @@ namespace SerialPortTerminal
 
         private void port_CheckDataReceived(object sender, EventArgs e)
         {
-             CalculateMarineData mdt = new CalculateMarineData();
+            CalculateMarineData mdt = new CalculateMarineData();
             // SET VARIABLE FOR DATA LENGTH.  CREATE ENUMERATED BASED ON COMMAND SENT AND SET FOR LENGTH
             // CHECK EXPECTED LENGTH VS comport.BytesToRead.  LOG ERROR IN MESSAGE EXPECTED X BYTES.  RECEIVED Y BYTES
             // IF PASS READ ALL BYTES
@@ -840,7 +870,6 @@ namespace SerialPortTerminal
                     GravityChart.DataBind();
                 }
             }
-           
         }
 
         //**********************************************************************************************************
@@ -873,7 +902,6 @@ namespace SerialPortTerminal
                     byte[] buffer = new byte[bytes];
                     comport.Read(buffer, 0, bytes);
 
-
                     Thread worker = new Thread(CallGetMeterData);
                     worker.Name = "calcMeterData";
                     worker.IsBackground = true;
@@ -886,8 +914,18 @@ namespace SerialPortTerminal
         }
 
 
+
+
+
+
+
+
+
+
+
         public void CallGetMeterData(object buffer)
         {
+           
             frmTerminal frmTerminal = new frmTerminal();
             CalculateMarineData mdt = new CalculateMarineData();
             byte[] bufferByte = (byte[])buffer;
@@ -895,7 +933,7 @@ namespace SerialPortTerminal
 
             if (mdt.dataValid)
             {
-              //  Console.WriteLine(bufferByte.Length + "     " + bufferByte[0] + "    " + mdt.latitude + "    " + DateTime.Now.ToString());
+                //  Console.WriteLine(bufferByte.Length + "     " + bufferByte[0] + "    " + mdt.latitude + "    " + DateTime.Now.ToString());
                 //TODO: get callbacks working
 
                 myData myData = new myData();
@@ -922,27 +960,32 @@ namespace SerialPortTerminal
                 myData.gpsTimeStatus = mdt.gpsTimeStatus;
                 myData.gpsNumSatelites = mdt.gpsNumSatelites;
 
+                //TODO: file recording
+                string fileStatus;
+                        if (fileRecording == true)
+                        {
 
-
-                if (fileRecording == true)
-                {
                     if (newDataFile)
                     {
-                    //    RecordDataToFile("Open", myData);
-                        RecordMeterDataToFile();
+                        fileStatus = "Open";
                         newDataFile = false;
-
                     }
                     else
                     {
-                    //    RecordDataToFile("Append", myData);
-
+                        fileStatus = "Append";
                     }
+
+                        // Supply the state information required by the task.
+                        ThreadWithState tws = new ThreadWithState(fileStatus, myData );
+
+
+                    Thread t = new Thread(new ThreadStart(tws.ThreadProc));
+                    t.Start();
+
 
 
                 }
-
-
+              
 
                 if (this.GravityChart.InvokeRequired)
                 {
@@ -950,21 +993,20 @@ namespace SerialPortTerminal
                     {
                         if (GravityChart.Visible)
                         {
-                            // check for changes in time span.  
+                            // check for changes in time span.
                             listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
                             GravityChart.DataSource = listDataSource;
                             GravityChart.DataBind();// do I need this?
                             // Remove oldest element if new size == max size
                             CleanUp(chartWindowTimePeriod, chartWindowTimeSpan);// limit chart to 10 min
                         }
-
                     });
                 }
                 else
                 {
                     if (GravityChart.Visible)
                     {
-                        // check for changes in time span.  
+                        // check for changes in time span.
                         listDataSource.Add(new Record(mdt.Date, mdt.gravity, mdt.SpringTension, mdt.CrossCoupling, mdt.Beam, mdt.VCC, mdt.AL, mdt.AX, mdt.VE, mdt.AX2, mdt.XACC2, mdt.LACC2, mdt.XACC, mdt.LACC, mdt.totalCorrection));
                         GravityChart.DataSource = listDataSource;
                         GravityChart.DataBind();// do I need this?
@@ -972,10 +1014,6 @@ namespace SerialPortTerminal
                         CleanUp(chartWindowTimePeriod, chartWindowTimeSpan);// limit chart to 10 min
                     }
                 }
-
-
-
-
 
                 Invoke((MethodInvoker)delegate
                 {
@@ -995,8 +1033,6 @@ namespace SerialPortTerminal
                         gpsStartusTextBox.Text = "Error";
                     }
                 });
-
-                
 
                 //   frmTerminal.ThreadProcSafe( myData);
                 if (meterStatusGroupBox.Visible)
@@ -1131,8 +1167,8 @@ namespace SerialPortTerminal
                             UserDataForm.gpsTimeSetTextBox.Text = "GPS time set unsuccesful";
                         }
                     });
-                        //     ThreadUserDataFormProcSafe();
-                    }
+                    //     ThreadUserDataFormProcSafe();
+                }
 
                 if (Parameters.Visible)
                 {
@@ -1285,7 +1321,7 @@ namespace SerialPortTerminal
                         DataStatusForm.textBox15.Text = (mdt.LACC.ToString("N", CultureInfo.InvariantCulture));
                         DataStatusForm.textBox1.Text = (mdt.gravity.ToString("N", CultureInfo.InvariantCulture));
                     });
-                    }
+                }
             }
             frmTerminal.Dispose();
         }
@@ -1571,11 +1607,7 @@ namespace SerialPortTerminal
             }
             else
             {
- 
-   
             }
-
-         
         }
 
         private void CloseMeterStatus()
@@ -1621,7 +1653,6 @@ namespace SerialPortTerminal
 
         private void SetupChart()
         {
-
             this.GravityChart.Series.Add("Digital Gravity");
             this.GravityChart.Series.Add("Spring Tension");
             this.GravityChart.Series.Add("Cross Coupling");
@@ -1767,8 +1798,6 @@ namespace SerialPortTerminal
             SetChartZoom();
             SetChartScroll();
             //          SetLegend();
-
-
         }
 
         private void SetChartCursors()
@@ -2104,79 +2133,92 @@ namespace SerialPortTerminal
         public static class ChartColors
         {
             private static System.Drawing.Color digitalGravity = System.Drawing.Color.SteelBlue;
+
             public static System.Drawing.Color DigitalGravity
             {
-                get{return digitalGravity;}
-                set{digitalGravity = value;}
+                get { return digitalGravity; }
+                set { digitalGravity = value; }
             }
+
             private static System.Drawing.Color springTension = System.Drawing.Color.BlueViolet;
+
             public static System.Drawing.Color SpringTension
             {
-                get{ return springTension; }
-                set{ springTension = value; }
+                get { return springTension; }
+                set { springTension = value; }
             }
+
             private static System.Drawing.Color crossCoupling = System.Drawing.Color.DarkOrange;
+
             public static System.Drawing.Color CrossCoupling
             {
                 get { return crossCoupling; }
                 set { crossCoupling = value; }
             }
+
             private static System.Drawing.Color rawBeam = System.Drawing.Color.DeepSkyBlue;
+
             public static System.Drawing.Color RawBeam
             {
                 get { return rawBeam; }
                 set { rawBeam = value; }
             }
+
             private static System.Drawing.Color totalCorrection = System.Drawing.Color.ForestGreen;
+
             public static System.Drawing.Color TotalCorrection
             {
                 get { return totalCorrection; }
                 set { totalCorrection = value; }
             }
+
             private static System.Drawing.Color al = System.Drawing.Color.LightSeaGreen;
+
             public static System.Drawing.Color AL
             {
                 get { return al; }
                 set { al = value; }
             }
+
             private static System.Drawing.Color ax = System.Drawing.Color.OrangeRed;
+
             public static System.Drawing.Color AX
             {
                 get { return ax; }
                 set { ax = value; }
             }
+
             private static System.Drawing.Color ve = System.Drawing.Color.PaleVioletRed;
+
             public static System.Drawing.Color VE
             {
                 get { return ve; }
                 set { ve = value; }
             }
+
             private static System.Drawing.Color ax2 = System.Drawing.Color.Red;
+
             public static System.Drawing.Color AX2
             {
                 get { return ax2; }
                 set { ax2 = value; }
             }
+
             private static System.Drawing.Color lacc = System.Drawing.Color.Wheat;
+
             public static System.Drawing.Color LACC
             {
                 get { return lacc; }
                 set { lacc = value; }
             }
+
             private static System.Drawing.Color xacc = System.Drawing.Color.SteelBlue;
+
             public static System.Drawing.Color XACC
             {
                 get { return xacc; }
                 set { xacc = value; }
             }
-
-
-
-
-
-
-
-
         }
 
         private static class ChartVisibility
@@ -2960,7 +3002,6 @@ namespace SerialPortTerminal
                     this.Invoke(new UpdateFileNameLabelCallback(this.UpdateNameLabel), new object[] { });
                     this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
                     fileStartTime = myStartTime;// DateTime.Now;
-                    RecordDataToFile("Open");
                     firstTime = false;
                 }
                 else
@@ -2997,12 +3038,6 @@ namespace SerialPortTerminal
         {
             SetInitialVisibility();
 
-      
-
-
-
-
-
             // Console.WriteLine(a);
             //  Console.WriteLine(DateTime.UtcNow);
 
@@ -3026,7 +3061,7 @@ namespace SerialPortTerminal
             //  Load stored state
             InitStoredVariables();
 
-            UpdateDataFileName();
+
             if (engineerDebug)
             {
                 Console.WriteLine("Data file name " + fileName);
@@ -3088,7 +3123,6 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
 
-
             return outputBytes;
         }
 
@@ -3117,7 +3151,6 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
 
-
             return outputBytes;
         }
 
@@ -3143,7 +3176,6 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
 
-
             return outputBytes;
         }
 
@@ -3162,7 +3194,6 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
 
-
             return outputBytes;
         }
 
@@ -3180,7 +3211,6 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-
 
             return outputBytes;
         }
@@ -3204,7 +3234,6 @@ namespace SerialPortTerminal
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
 
-
             return outputBytes;
         }
 
@@ -3224,7 +3253,6 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-
 
             return outputBytes;
         }
@@ -3288,7 +3316,6 @@ namespace SerialPortTerminal
             checkSum = CalculateCheckSum(outputBytes, outputBytes.Length);
             byte nByte = BitConverter.GetBytes(outputBytes.Length)[0];
             outputBytes[outputBytes.Length - 1] = checkSum[0];
-
 
             return outputBytes;
         }
@@ -3827,17 +3854,17 @@ namespace SerialPortTerminal
 
             // Load program defaults
 
-            dataAquisitionMode  = Properties.Settings.Default.dataAquisitionMode;
-            configFilePath      = Properties.Settings.Default.configFilePath;
-            configFileName      = Properties.Settings.Default.configFileName;
-            calFilePath         = Properties.Settings.Default.calFilePath;
-            calFileName         = Properties.Settings.Default.calFileName;
-            dataFilePath        = Properties.Settings.Default.dataFilePath;// file path for data logs
-            fileType            = Properties.Settings.Default.fileType;// file type for data logs csv, txt etc
-            dataFileName        = Properties.Settings.Default.dataFileName;// stored file name i.e. survey name
+            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
+            configFilePath = Properties.Settings.Default.configFilePath;
+            configFileName = Properties.Settings.Default.configFileName;
+            calFilePath = Properties.Settings.Default.calFilePath;
+            calFileName = Properties.Settings.Default.calFileName;
+            dataFilePath = Properties.Settings.Default.dataFilePath;// file path for data logs
+            fileType = Properties.Settings.Default.fileType;// file type for data logs csv, txt etc
+            dataFileName = Properties.Settings.Default.dataFileName;// stored file name i.e. survey name
             surveyName = dataFileName;
             surveyTextBox.Text = surveyName;
-            mdt.SpringTension   = Properties.Settings.Default.springTension;
+            mdt.SpringTension = Properties.Settings.Default.springTension;
             frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
 
             ControlSwitches.DataCollection(enable);// ControlSwitches.dataSwitch = enable;// ICNTLSW = 8; // data on
@@ -4025,7 +4052,6 @@ namespace SerialPortTerminal
             if (timePeriod == "hours")
             {
                 windowSizeNumericUpDown.Maximum = 24;
-                
             }
             else
             {
@@ -4382,19 +4408,11 @@ namespace SerialPortTerminal
             {
                 CheckConfigFile(configFile);// File does not exist. Have user pick a new file.
             }
-            
         }// ReadConfigFile
 
-    
-
-    
-
-
-
-
-[DelimitedRecord(",")]
-    public class MarineData
-    {
+        [DelimitedRecord(",")]
+        public class MarineData
+        {
             public string lineId;
             public int Year;
             public int Days;
@@ -4418,9 +4436,7 @@ namespace SerialPortTerminal
             public double longitude;
             public double latitude;
             public double altitude;
-
         }
-
 
         [DelimitedRecord(",")]
         public class MarineDataHeader
@@ -4448,10 +4464,7 @@ namespace SerialPortTerminal
             public string longitude;
             public string latitude;
             public string altitude;
-
         }
-
-
 
         public void RecordMeterDataToFile()
         {
@@ -4463,7 +4476,6 @@ namespace SerialPortTerminal
                 var MarineDataHeader = new List<MarineDataHeader>();
                 MarineDataHeader.Add(new MarineDataHeader()
                 {
-
                     lineId = "Survey Name",
                     Year = "Year",
                     Days = "Day",
@@ -4491,7 +4503,6 @@ namespace SerialPortTerminal
                 engine.WriteFile("FileOut.csv", MarineData);
             }
 
-
             MarineData.Add(new MarineData()
             {
                 lineId = surveyName,
@@ -4517,72 +4528,20 @@ namespace SerialPortTerminal
                 longitude = mdt.longitude,
                 latitude = mdt.latitude,
                 altitude = mdt.altitude
-
             });
 
             engine.WriteFile("FileOut.csv", MarineData);
         }
 
-
-
-
-
-
         // This method opens and writes the header to the data log file
-        public void RecordDataToFile(string fileOperation)
-        {
-            string delimitor = ",";
-            string dataFile;
-             DateTime myNow = DateTime.Now;
-            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", myNow);
-
-            
-
-            switch (fileType)
-            {
-                case "csv":
-                    delimitor = ",";
-                    break;
-
-                case "tsv":
-                    delimitor = "\t";
-                    break;
-
-                case "txt":
-                    delimitor = " ";
-                    break;
-
-                default:
-                    break;
-            }
-            dataFile = dataFilePath + thisDate + "-" + surveyName + "." + fileType;
-            if (fileOperation == "Open")
-            {
-                try
-                {
-                    using (StreamWriter writer = File.CreateText(dataFile))
-                    {
-                        string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                             + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
-                             + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                             + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction" + delimitor
-                             + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
-                        writer.WriteLine(header);
-                    }
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-        }
+   
 
         public void RecordDataToFile(string fileOperation, myData d)
         {
             // fileOperation  0 - open,  1 - append, 2 - close
             string dataFile;
-            DateTime myNow = DateTime.Now;
-            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", myNow);
+           // DateTime myNow = DateTime.Now;
+            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
             string delimitor = ",";
 
             switch (fileType)
@@ -4602,9 +4561,7 @@ namespace SerialPortTerminal
                 default:
                     break;
             }
-            dataFile = dataFilePath + thisDate + "-" + surveyName + "." + fileType;
-
-
+            dataFile = dataFilePath + ConfigData.meterNumber + "-" +  thisDate + "-" + surveyName + "." + fileType;
 
             if (fileOperation == "Open")
             {
@@ -4619,6 +4576,9 @@ namespace SerialPortTerminal
                             + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
 
                         writer.WriteLine(header);
+
+                        writer.Close();
+
                     }
                 }
                 catch (Exception ex)
@@ -4626,30 +4586,47 @@ namespace SerialPortTerminal
                     MessageBox.Show(ex.ToString());
                 }
             }
-            else if (fileOperation == "Append")
-            {
-                string myString = Convert.ToString(d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+            //           else if (fileOperation == "Append")
+            //            {
+
+
+
+                   string myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
                      + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
                      + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
                      + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
                      + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
                      + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
-                   //  + delimitor + Convert.ToString(d.gpsStatus);
 
+
+
+
+   /*                string myString = Convert.ToString(d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+            +delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
+                     + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+                     + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
+                     + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                //  + delimitor + Convert.ToString(d.gpsStatus);
+*/
                 try
                 {
-                    using (StreamWriter writer = File.AppendText(fileName))
+                    using (StreamWriter writer = File.AppendText(dataFile))
                     {
                         // writer.WriteLine("{0},{1},{2},{3},{4}, {5},{6}", MeterData.year, MeterData.day, MeterData.Hour, MeterData.Min, MeterData.Sec, MeterData.data4[2]);
                         //  writer.WriteLine(Convert.ToString(MeterData.dataTime), ",",Convert.ToString(MeterData.data4[2]),",");
                         writer.WriteLine(myString);
-                    }
+                    writer.Close();
+                }
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
                 }
-            }
+            //      }
+
+           
         }
 
         #endregion File Class
@@ -4793,33 +4770,14 @@ namespace SerialPortTerminal
 
         private void surveyTextBox_TextChanged(object sender, EventArgs e)
         {
+            UserDataForm.surveyTextBox.Text = surveyTextBox.Text;
             surveyName = surveyTextBox.Text;
             surveyNameSet = true;
-            UpdateDataFileName();
+            newDataFile = true;  //   Changing survey name will crate a new data file
             UpdateNameLabel();
         }
 
-        private void UpdateDataFileName()
-        {
-            DateTime now = DateTime.Now;
-            if (fileDateFormat == 1)
-            {
-                fileName = dataFilePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-MMM-dd-HH-mm-ss") + "." + fileType;
-            }
-            else if (fileDateFormat == 2)
-            {
-                fileName = dataFilePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-mm-dd-HH-mm-ss") + "." + fileType;
-            }
-            else if (fileDateFormat == 3)
-            {
-                fileName = dataFilePath + "\\" + ConfigData.meterNumber + "-" + surveyName + "-" + now.ToString("yyyy-dd-HH-mm-ss") + "." + fileType;
-            }
-            else if (fileDateFormat == 4)
-            {
-                fileName = dataFilePath + "\\" + customFileName + "." + fileType;
-            }
-            //           Properties.Settings.Default.fileDateFormat = fileDateFormat;
-        }
+    
 
         private void exitProgramToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -4843,7 +4801,6 @@ namespace SerialPortTerminal
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = " (*.csv, *.txt, *.tsv)|*.csv, *.txt, *.tsv";
-            UpdateDataFileName();
             dialog.DefaultExt = fileType;
             dialog.AddExtension = true;
             dialog.FileName = ConfigData.meterNumber + surveyName + "-" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm-ss");
@@ -5018,10 +4975,7 @@ namespace SerialPortTerminal
             UserDataForm.Show();
         }
 
-        private void surveyTextBox_TextChanged_1(object sender, EventArgs e)
-        {
-            UserDataForm.surveyTextBox.Text = surveyTextBox.Text;
-        }
+ 
 
         private void manualOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5485,7 +5439,7 @@ namespace SerialPortTerminal
             DialogResult result = DialogResult.No;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = " (*.csv)|*.csv";
-            UpdateDataFileName();
+            
             saveFileDialog1.DefaultExt = fileType;
             saveFileDialog1.AddExtension = true;
             saveFileDialog1.DefaultExt = "csv";
@@ -5569,7 +5523,6 @@ namespace SerialPortTerminal
 
         private void groupBox3_Enter(object sender, EventArgs e)
         {
-
         }
 
         private void chartWindowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5580,7 +5533,6 @@ namespace SerialPortTerminal
         private void button2_Click_2(object sender, EventArgs e)
         {
             chartWindowGroupBox.Visible = false;
-
         }
 
         ///////////////////////////////////////////////

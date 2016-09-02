@@ -205,7 +205,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\data\\\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\data\\")]
         public string dataFilePath {
             get {
                 return ((string)(this["dataFilePath"]));
@@ -361,7 +361,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"marine\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("marine")]
         public string modeSwitch {
             get {
                 return ((string)(this["modeSwitch"]));

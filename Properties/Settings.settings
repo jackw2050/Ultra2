@@ -48,7 +48,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dataFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">E:\ZLS\data\\</Value>
+      <Value Profile="(Default)">E:\ZLS\data\</Value>
     </Setting>
     <Setting Name="beamScale" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1.298317</Value>
@@ -87,7 +87,7 @@
       <Value Profile="(Default)">20000</Value>
     </Setting>
     <Setting Name="modeSwitch" Type="System.String" Scope="User">
-      <Value Profile="(Default)">"marine"</Value>
+      <Value Profile="(Default)">marine</Value>
     </Setting>
     <Setting Name="crossBias" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
