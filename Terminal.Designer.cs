@@ -161,6 +161,7 @@ namespace SerialPortTerminal
             this.fileStartTimeLabel = new System.Windows.Forms.Label();
             this.timeNowLabel = new System.Windows.Forms.Label();
             this.chartWindowGroupBox = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.windowSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
@@ -182,6 +183,7 @@ namespace SerialPortTerminal
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -197,8 +199,6 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
@@ -324,6 +324,8 @@ namespace SerialPortTerminal
             chartArea1.AxisY2.InterlacedColor = System.Drawing.Color.LightGray;
             chartArea1.AxisY2.LineColor = System.Drawing.Color.LightGray;
             chartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.Maximum = 10D;
+            chartArea1.AxisY2.Minimum = -10D;
             chartArea1.AxisY2.TitleForeColor = System.Drawing.Color.LightGray;
             chartArea1.BackColor = System.Drawing.Color.Black;
             chartArea1.BorderColor = System.Drawing.Color.LightGray;
@@ -1212,6 +1214,16 @@ namespace SerialPortTerminal
             this.chartWindowGroupBox.TabStop = false;
             this.chartWindowGroupBox.Text = "Chart Window Options";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(46, 67);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(46, 20);
+            this.button2.TabIndex = 116;
+            this.button2.Text = "Done";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -1445,6 +1457,15 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
             // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
+            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(264, 67);
@@ -1608,25 +1629,6 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
-            // 
-            // springTensionTargetNumericTextBox
-            // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(46, 67);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(46, 20);
-            this.button2.TabIndex = 116;
-            this.button2.Text = "Done";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // frmTerminal
             // 

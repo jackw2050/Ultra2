@@ -54,7 +54,7 @@ namespace SerialPortTerminal
         public DateTime myDatetime = DateTime.Now;
 
         private delegate void SetTextCallback(string text);
-
+        public static int timeCheck = 0;
         private int countDown = 5;
         public static double springTensionScale = .1041666;
         public static int springTensionMaxStep = 2900;
@@ -134,12 +134,13 @@ namespace SerialPortTerminal
         public int timeValue;
         public Boolean filterData = false;
 
-
         public class ThreadWithState
         {
-            frmTerminal frmTerminal = new frmTerminal();
+            private frmTerminal frmTerminal = new frmTerminal();
+
             // State information used in the task.
             private string boilerplate;
+
             private myData value;
 
             // The constructor obtains the state information.
@@ -155,14 +156,8 @@ namespace SerialPortTerminal
             {
                 frmTerminal.RecordDataToFile(boilerplate, value);
                 frmTerminal.Dispose();
-
-
             }
-            
         }
-
-
-
 
         public class startupData
         {
@@ -913,19 +908,8 @@ namespace SerialPortTerminal
             }
         }
 
-
-
-
-
-
-
-
-
-
-
         public void CallGetMeterData(object buffer)
         {
-           
             frmTerminal frmTerminal = new frmTerminal();
             CalculateMarineData mdt = new CalculateMarineData();
             byte[] bufferByte = (byte[])buffer;
@@ -962,9 +946,8 @@ namespace SerialPortTerminal
 
                 //TODO: file recording
                 string fileStatus;
-                        if (fileRecording == true)
-                        {
-
+                if (fileRecording == true)
+                {
                     if (newDataFile)
                     {
                         fileStatus = "Open";
@@ -975,17 +958,12 @@ namespace SerialPortTerminal
                         fileStatus = "Append";
                     }
 
-                        // Supply the state information required by the task.
-                        ThreadWithState tws = new ThreadWithState(fileStatus, myData );
-
+                    // Supply the state information required by the task.
+                    ThreadWithState tws = new ThreadWithState(fileStatus, myData);
 
                     Thread t = new Thread(new ThreadStart(tws.ThreadProc));
                     t.Start();
-
-
-
                 }
-              
 
                 if (this.GravityChart.InvokeRequired)
                 {
@@ -1659,6 +1637,13 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Cross Coupling"].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             this.GravityChart.Series.Add("Raw Beam");
             this.GravityChart.Series.Add("Total Correction");
+
+
+         //   GravityChart.ChartAreas["Gravity"].AxisY.Maximum = 10;
+         //   GravityChart.ChartAreas["Gravity"].AxisY.Minimum = -10;
+
+
+
 
             //      SETUP MAIN PAIGE GRAVITY CHART
             this.GravityChart.ChartAreas["Gravity"].AxisX.IsMarginVisible = false;
@@ -3060,7 +3045,6 @@ namespace SerialPortTerminal
 
             //  Load stored state
             InitStoredVariables();
-
 
             if (engineerDebug)
             {
@@ -4534,13 +4518,12 @@ namespace SerialPortTerminal
         }
 
         // This method opens and writes the header to the data log file
-   
 
         public void RecordDataToFile(string fileOperation, myData d)
         {
             // fileOperation  0 - open,  1 - append, 2 - close
             string dataFile;
-           // DateTime myNow = DateTime.Now;
+            // DateTime myNow = DateTime.Now;
             string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
             string delimitor = ",";
 
@@ -4561,72 +4544,124 @@ namespace SerialPortTerminal
                 default:
                     break;
             }
-            dataFile = dataFilePath + ConfigData.meterNumber + "-" +  thisDate + "-" + surveyName + "." + fileType;
-
+           
+            
+            string fileFormat = "long";
+            string header = "";
+            string myString = "";
+            if (timeCheck == 0)
+            {
+                timeCheck = fileStartTime.Minute;
+            }
+            if ( DateTime.Now.Minute == timeCheck + 2)
+            {
+                fileOperation = "Open";
+                timeCheck = DateTime.Now.Minute;
+                thisDate = Convert.ToString( DateTime.Now);
+            }
+            dataFile = dataFilePath + ConfigData.meterNumber + "-" + thisDate + "-" + surveyName + "." + fileType;
             if (fileOperation == "Open")
             {
+                
                 try
                 {
                     using (StreamWriter writer = File.CreateText(dataFile))
                     {
-                        string header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
-                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
-                            + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
+                        switch (fileFormat)
+                        {
+                            case "long":
+                                header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
+                                + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                                + "Cross coupling" + delimitor + "Average Beam" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
+                                + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor + "LACC2" + delimitor
+                                + "XACC" + delimitor + "LACC" + delimitor + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude"
+                                + delimitor + "GPS Status";
 
+                                break;
+
+                            case "short":
+                                break;
+
+                            case "new":
+                                header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                                + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                                + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                                + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
+                                + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
+
+                                break;
+
+                            default:
+                                header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                                + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                                + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                                + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
+                                + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
+
+                                break;
+
+                        }
                         writer.WriteLine(header);
-
                         writer.Close();
-
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
                 }
+                fileOperation = "Append";
             }
-            //           else if (fileOperation == "Append")
-            //            {
 
 
+            switch (fileFormat)
+            {
+                case "long":
+                    // Need to change from raw beam to avg beam
+                     myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(d.Date.Year) + delimitor + Convert.ToString(d.Date.Day) + delimitor + Convert.ToString(d.Date.Hour) + delimitor 
+                + Convert.ToString(d.Date.Minute) + delimitor + Convert.ToString(d.Date.Second) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+                + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
+                + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+                + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+                + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
+                + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                    break;
 
-                   string myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
-                     + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
-                     + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
-                     + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
-                     + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                case "short":
+                    break;
 
+                case "new":
+                    myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+                + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
+                + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+                + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+                + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
+                + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                    break;
 
+                default:
+                    myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+                + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
+                + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+                + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+                + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
+                + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                    break;
+            }
 
-
-   /*                string myString = Convert.ToString(d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
-            +delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
-                     + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
-                     + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-                     + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
-                     + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
-                //  + delimitor + Convert.ToString(d.gpsStatus);
-*/
-                try
+            try
+            {
+                using (StreamWriter writer = File.AppendText(dataFile))
                 {
-                    using (StreamWriter writer = File.AppendText(dataFile))
-                    {
-                        // writer.WriteLine("{0},{1},{2},{3},{4}, {5},{6}", MeterData.year, MeterData.day, MeterData.Hour, MeterData.Min, MeterData.Sec, MeterData.data4[2]);
-                        //  writer.WriteLine(Convert.ToString(MeterData.dataTime), ",",Convert.ToString(MeterData.data4[2]),",");
-                        writer.WriteLine(myString);
+
+                    writer.WriteLine(myString);
                     writer.Close();
                 }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             //      }
-
-           
         }
 
         #endregion File Class
@@ -4644,6 +4679,7 @@ namespace SerialPortTerminal
             public double SpringTension;
             public double CrossCoupling;
             public double RawBeam;
+            public double avgBeam;
             public double TotalCorrection;
             public double RawGravity;
             public double VCC;
@@ -4776,8 +4812,6 @@ namespace SerialPortTerminal
             newDataFile = true;  //   Changing survey name will crate a new data file
             UpdateNameLabel();
         }
-
-    
 
         private void exitProgramToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -4974,8 +5008,6 @@ namespace SerialPortTerminal
         {
             UserDataForm.Show();
         }
-
- 
 
         private void manualOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5439,7 +5471,7 @@ namespace SerialPortTerminal
             DialogResult result = DialogResult.No;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = " (*.csv)|*.csv";
-            
+
             saveFileDialog1.DefaultExt = fileType;
             saveFileDialog1.AddExtension = true;
             saveFileDialog1.DefaultExt = "csv";
@@ -5534,6 +5566,8 @@ namespace SerialPortTerminal
         {
             chartWindowGroupBox.Visible = false;
         }
+
+
 
         ///////////////////////////////////////////////
     }
