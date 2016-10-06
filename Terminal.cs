@@ -54,6 +54,7 @@ namespace SerialPortTerminal
         public DateTime myDatetime = DateTime.Now;
 
         private delegate void SetTextCallback(string text);
+
         public static int timeCheck = 0;
         private int countDown = 5;
         public static double springTensionScale = .1041666;
@@ -1638,12 +1639,8 @@ namespace SerialPortTerminal
             this.GravityChart.Series.Add("Raw Beam");
             this.GravityChart.Series.Add("Total Correction");
 
-
-         //   GravityChart.ChartAreas["Gravity"].AxisY.Maximum = 10;
-         //   GravityChart.ChartAreas["Gravity"].AxisY.Minimum = -10;
-
-
-
+            //   GravityChart.ChartAreas["Gravity"].AxisY.Maximum = 10;
+            //   GravityChart.ChartAreas["Gravity"].AxisY.Minimum = -10;
 
             //      SETUP MAIN PAIGE GRAVITY CHART
             this.GravityChart.ChartAreas["Gravity"].AxisX.IsMarginVisible = false;
@@ -3415,34 +3412,34 @@ namespace SerialPortTerminal
                     data = CreateCrossAxisParametersArray(4, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
 
                     //     data = CreateCrossAxisParametersArray(0x04, 1.91e-5, .212, .15, .5, -8.99998e-4, 1.0);
-                    /*
-                                        data[0] = 0X04;
-                                        data[1] = 0xF0;
-                                        data[2] = 0x38;
-                                        data[3] = 0xa0;
-                                        data[4] = 0x37;
-                                        data[5] = 0x87;
-                                        data[6] = 0x16;
-                                        data[7] = 0x59;
-                                        data[8] = 0x3E;
-                                        data[9] = 0x9A;
-                                        data[10] = 0x99;
-                                        data[11] = 0x19;
-                                        data[12] = 0x3E;
-                                        data[13] = 0x00;
-                                        data[14] = 0x00;
-                                        data[15] = 0x00;
-                                        data[16] = 0x3F;
-                                        data[17] = 0xFA;
-                                        data[18] = 0xED;
-                                        data[19] = 0x6B;
-                                        data[20] = 0xBA;
-                                        data[21] = 0x00;
-                                        data[22] = 0x00;
-                                        data[23] = 0x80;
-                                        data[24] = 0x3F;
-                                        data[25] = 0xCF;
-                            */
+
+                    data[0] = 0x04;
+                    data[1] = 0xBA;
+                    data[2] = 0xED;
+                    data[3] = 0x0C;
+                    data[4] = 0x37;
+                    data[5] = 0x5A;
+                    data[6] = 0x64;
+                    data[7] = 0xBB;
+                    data[8] = 0x3D;
+                    data[9] = 0xCD;
+                    data[10] = 0xCC;
+                    data[11] = 0x4C;
+                    data[12] = 0x3E;
+                    data[13] = 0x66;
+                    data[14] = 0x66;
+                    data[15] = 0xE6;
+                    data[16] = 0x3E;
+                    data[17] = 0x00;
+                    data[18] = 0x00;
+                    data[19] = 0x00;
+                    data[20] = 0x00;
+                    data[21] = 0x00;
+                    data[22] = 0x00;
+                    data[23] = 0x80;
+                    data[24] = 0x3F;
+                    data[25] = 0xC4;
+
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
                     //      data = CreateCrossAxisParametersArray(0x04, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
@@ -3455,34 +3452,34 @@ namespace SerialPortTerminal
                                                  // TODO: clean up code for  Set Long Axis Parameters
                                                  //  data = CreateCrossAxisParametersArray(0x05, 1.91e-5, .213, .15, .5, -2e-3, 1.0);
                     data = CreateCrossAxisParametersArray(5, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
-                    /*
-                       data[0] = 0X05;
-                       data[1] = 0xF0;
-                       data[2] = 0x38;
-                       data[3] = 0xa0;
-                       data[4] = 0x37;
-                       data[5] = 0xAC;
-                       data[6] = 0x1C;
-                       data[7] = 0x5A;
-                       data[8] = 0x3E;
-                       data[9] = 0x9A;
-                       data[10] = 0x99;
-                       data[11] = 0x19;
-                       data[12] = 0x3E;
-                       data[13] = 0x00;
-                       data[14] = 0x00;
-                       data[15] = 0x00;
-                       data[16] = 0x3F;
-                       data[17] = 0x6F;
-                       data[18] = 0x12;
-                       data[19] = 0x03;
-                       data[20] = 0xBB;
-                       data[21] = 0x00;
-                       data[22] = 0x00;
-                       data[23] = 0x80;
-                       data[24] = 0x3F;
-                       data[25] = 0xEF;
-                       */
+
+                    data[0] = 0x05;
+                    data[1] = 0xBA;
+                    data[2] = 0xED;
+                    data[3] = 0x0C;
+                    data[4] = 0x37;
+                    data[5] = 0x5A;
+                    data[6] = 0x64;
+                    data[7] = 0xBB;
+                    data[8] = 0x3D;
+                    data[9] = 0xCD;
+                    data[10] = 0xCC;
+                    data[11] = 0x4C;
+                    data[12] = 0x3E;
+                    data[13] = 0x66;
+                    data[14] = 0x66;
+                    data[15] = 0xE6;
+                    data[16] = 0x3E;
+                    data[17] = 0x00;
+                    data[18] = 0x00;
+                    data[19] = 0x00;
+                    data[20] = 0x00;
+                    data[21] = 0x00;
+                    data[22] = 0x00;
+                    data[23] = 0x80;
+                    data[24] = 0x3F;
+                    data[25] = 0xC5;
+
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
                     //       data = CreateCrossAxisParametersArray(0x04, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
@@ -3516,34 +3513,34 @@ namespace SerialPortTerminal
                     //      data = CreateTxArray(8, System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), crossCouplingFactor14, ConfigData.springTensionMax);
 
                     //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-                    /*
-                             data[0] = 0X08;
-                             data[1] = 0x89;
-                             data[2] = 0x41;
-                             data[3] = 0x60;
-                             data[4] = 0x3E;
-                             data[5] = 0x77;
-                             data[6] = 0xBE;
-                             data[7] = 0x5F;
-                             data[8] = 0x3E;
-                             data[9] = 0x91;
-                             data[10] = 0xED;
-                             data[11] = 0x7C;
-                             data[12] = 0x3E;
-                             data[13] = 0x5C;
-                             data[14] = 0x8F;
-                             data[15] = 0x42;
-                             data[16] = 0x3E;
-                             data[17] = 0x54;
-                             data[18] = 0xE3;
-                             data[19] = 0x85;
-                             data[20] = 0xBF;
-                             data[21] = 0x00;
-                             data[22] = 0xC0;
-                             data[23] = 0xDA;
-                             data[24] = 0x45;
-                             data[25] = 0x75;
-                        */
+
+                    data[0] = 0x08;
+                    data[1] = 0x3F;
+                    data[2] = 0x35;
+                    data[3] = 0x5E;
+                    data[4] = 0x3E;
+                    data[5] = 0x68;
+                    data[6] = 0x91;
+                    data[7] = 0x2D;
+                    data[8] = 0x3E;
+                    data[9] = 0x14;
+                    data[10] = 0xAE;
+                    data[11] = 0x47;
+                    data[12] = 0x3E;
+                    data[13] = 0xA4;
+                    data[14] = 0x70;
+                    data[15] = 0x3D;
+                    data[16] = 0x3E;
+                    data[17] = 0x00;
+                    data[18] = 0x00;
+                    data[19] = 0x00;
+                    data[20] = 0xC0;
+                    data[21] = 0x00;
+                    data[22] = 0x40;
+                    data[23] = 0x96;
+                    data[24] = 0x46;
+                    data[25] = 0xC6;
+
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     comport.Write(data, 0, 26);
 
@@ -4544,8 +4541,7 @@ namespace SerialPortTerminal
                 default:
                     break;
             }
-           
-            
+
             string fileFormat = "long";
             string header = "";
             string myString = "";
@@ -4553,16 +4549,15 @@ namespace SerialPortTerminal
             {
                 timeCheck = fileStartTime.Minute;
             }
-            if ( DateTime.Now.Minute == timeCheck + 2)
+            if (DateTime.Now.Minute == timeCheck + 2)
             {
                 fileOperation = "Open";
                 timeCheck = DateTime.Now.Minute;
-                thisDate = Convert.ToString( DateTime.Now);
+                thisDate = Convert.ToString(DateTime.Now);
             }
             dataFile = dataFilePath + ConfigData.meterNumber + "-" + thisDate + "-" + surveyName + "." + fileType;
             if (fileOperation == "Open")
             {
-                
                 try
                 {
                     using (StreamWriter writer = File.CreateText(dataFile))
@@ -4599,7 +4594,6 @@ namespace SerialPortTerminal
                                 + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
 
                                 break;
-
                         }
                         writer.WriteLine(header);
                         writer.Close();
@@ -4612,18 +4606,17 @@ namespace SerialPortTerminal
                 fileOperation = "Append";
             }
 
-
             switch (fileFormat)
             {
                 case "long":
                     // Need to change from raw beam to avg beam
-                     myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(d.Date.Year) + delimitor + Convert.ToString(d.Date.Day) + delimitor + Convert.ToString(d.Date.Hour) + delimitor 
-                + Convert.ToString(d.Date.Minute) + delimitor + Convert.ToString(d.Date.Second) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
-                + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
-                + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
-                + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-                + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
-                + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+                    myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(d.Date.Year) + delimitor + Convert.ToString(d.Date.Day) + delimitor + Convert.ToString(d.Date.Hour) + delimitor
+               + Convert.ToString(d.Date.Minute) + delimitor + Convert.ToString(d.Date.Second) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+               + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.RawBeam) + delimitor + Convert.ToString(d.VCC)
+               + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+               + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+               + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
+               + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
                     break;
 
                 case "short":
@@ -4652,7 +4645,6 @@ namespace SerialPortTerminal
             {
                 using (StreamWriter writer = File.AppendText(dataFile))
                 {
-
                     writer.WriteLine(myString);
                     writer.Close();
                 }
@@ -4882,6 +4874,7 @@ namespace SerialPortTerminal
         {
             // 200 Hz etc
             // byte[] data = { 0x01, 0x08, 0x09 };  //HexStringToByteArray(txtSendData.Text);
+            RelaySwitches.RelaySW = 0x80;
             RelaySwitches.StepperMotorEnable(enable);
             sendCmd("Send Relay Switches");
 
@@ -4892,6 +4885,7 @@ namespace SerialPortTerminal
             sendCmd("Set Long Axis Parameters");       // download platform parametersv 5 -----
             taskA = Task.Factory.StartNew(() => DoSomeWork(200));
             taskA.Wait();
+
             sendCmd("Update Cross Coupling Values");   // download CC parameters 8     -----
             taskA = Task.Factory.StartNew(() => DoSomeWork(200));
             taskA.Wait();
@@ -4901,42 +4895,52 @@ namespace SerialPortTerminal
                 sendCmd("Update Gyro Bias Offset");
             }
 
-            ControlSwitches.Alarm(enable);
-            //   ControlSwitches.controlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
             ControlSwitches.DataCollection(enable);
+            ControlSwitches.ControlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+            //ControlSwitches.DataCollection(enable);
             sendCmd("Send Control Switches");
-
-            RelaySwitches.Relay200Hz(enable);
-            RelaySwitches.Slew4(enable);
-            RelaySwitches.Slew5(enable);
-            RelaySwitches.StepperMotorEnable(enable);
+            ControlSwitches.ControlSw = 0x08; // ControlSwitches.RelayControlSW = 0x08;
+            //ControlSwitches.DataCollection(enable);
+            sendCmd("Send Control Switches");
+            // RelaySwitches.Relay200Hz(enable);
+            // RelaySwitches.Slew4(enable);
+            // RelaySwitches.Slew5(enable);
+            // RelaySwitches.StepperMotorEnable(enable);
 
             ////////////////////////////////////////////////////////////////////////////////////
             // relay and control switches
             //  RelaySwitches.RelaySW = 0xB1;// cmd 0
-            sendCmd("Send Relay Switches");
+            taskA = Task.Factory.StartNew(() => DoSomeWork(1000));
+            taskA.Wait();
+           // RelaySwitches.RelaySW = 0xB1;
+           // sendCmd("Send Relay Switches");
+           
 
-            ControlSwitches.DataCollection(enable);
-            sendCmd("Send Control Switches");
-            ////////////////////////////////////////////////////////////////////////////////////
+           // ControlSwitches.ControlSw = 0x08;
+            //ControlSwitches.DataCollection(enable);
+           // sendCmd("Send Control Switches");
+            
 
-            RelaySwitches.Slew4(disable);
-            RelaySwitches.Slew5(disable);
-
-            //  RelaySwitches.RelaySW = 0x81;// cmd 0
-            sendCmd("Send Relay Switches");           // At tis point Gyros are up and running - ready for torque motor
-                                                      // torqueMotorCheckBox.Enabled = true;
         }
 
         private void gyroCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (gyroCheckBox.Checked)
             {
-                //  initMeter();
-                RelaySwitches.Slew4(disable);
-                RelaySwitches.Slew5(disable);
 
+                // RelaySwitches.Slew4(disable);
+                // RelaySwitches.Slew5(disable);
+                ControlSwitches.ControlSw = 0x08;
+                sendCmd("Send Control Switches");
+                Task taskA = Task.Factory.StartNew(() => DoSomeWork(7000));
+                taskA.Wait();
+
+                RelaySwitches.RelaySW = 0x81;
                 sendCmd("Send Relay Switches");
+                taskA = Task.Factory.StartNew(() => DoSomeWork(7000));
+                taskA.Wait();
+
+
                 torqueMotorCheckBox.Enabled = true;
                 WriteLogFile("Gyros enabled");
             }
@@ -4954,11 +4958,15 @@ namespace SerialPortTerminal
         {
             if (torqueMotorCheckBox.Checked)
             {
-                RelaySwitches.RelayTorqueMotor(enable);
-                //  RelaySwitches.RelaySW = 0x83;
-                ControlSwitches.TorqueMotor(enable);
-                sendCmd("Send Control Switches");
+                //RelaySwitches.RelayTorqueMotor(enable);
+                
+                RelaySwitches.RelaySW = 0x83;
                 sendCmd("Send Relay Switches");
+
+                //ControlSwitches.TorqueMotor(enable);
+                ControlSwitches.ControlSw = 0x09;
+                sendCmd("Send Control Switches");
+
                 gyroCheckBox.Enabled = false;
                 springTensionCheckBox.Enabled = true;
                 WriteLogFile("Torque motor enabled");
@@ -5284,14 +5292,18 @@ namespace SerialPortTerminal
             if (springTensionCheckBox.Checked)
             {
                 // ControlSwitches.Alarm(disable);
-                ControlSwitches.SpringTension(enable);
+                //ControlSwitches.SpringTension(enable);
                 //  ControlSwitches.TorqueMotor(enable);
                 //  ControlSwitches.DataCollection(enable);
 
                 //   RelaySwitches.Relay200Hz(enable);
-                RelaySwitches.StepperMotorEnable(enable);
+                //RelaySwitches.StepperMotorEnable(enable);
+                ControlSwitches.ControlSw = 0x0B;
                 sendCmd("Send Control Switches");
-                sendCmd("Send Relay Switches");
+                Console.WriteLine("ST: control sw = 0x0B");
+
+
+                //sendCmd("Send Relay Switches");
                 torqueMotorCheckBox.Enabled = false;
                 WriteLogFile("Spring tension enabled");
             }
@@ -5566,8 +5578,6 @@ namespace SerialPortTerminal
         {
             chartWindowGroupBox.Visible = false;
         }
-
-
 
         ///////////////////////////////////////////////
     }

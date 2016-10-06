@@ -361,7 +361,7 @@ namespace SerialPortTerminal
             }
             set
             {
-                relaySW = RelaySW;
+                relaySW = value;
             }
         }
 
@@ -474,7 +474,7 @@ namespace SerialPortTerminal
             }
             set
             {
-                controlSw = ControlSw;
+                controlSw = value;
             }
         }
 
