@@ -183,7 +183,6 @@ namespace SerialPortTerminal
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -199,6 +198,7 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
@@ -1228,7 +1228,6 @@ namespace SerialPortTerminal
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "hours",
             "minutes",
             "seconds"});
             this.comboBox1.Location = new System.Drawing.Point(62, 40);
@@ -1241,6 +1240,11 @@ namespace SerialPortTerminal
             // windowSizeNumericUpDown
             // 
             this.windowSizeNumericUpDown.Location = new System.Drawing.Point(11, 41);
+            this.windowSizeNumericUpDown.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.windowSizeNumericUpDown.Name = "windowSizeNumericUpDown";
             this.windowSizeNumericUpDown.Size = new System.Drawing.Size(45, 20);
             this.windowSizeNumericUpDown.TabIndex = 10;
@@ -1257,9 +1261,9 @@ namespace SerialPortTerminal
             this.label13.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label13.Location = new System.Drawing.Point(8, 23);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(49, 13);
+            this.label13.Size = new System.Drawing.Size(69, 13);
             this.label13.TabIndex = 1;
-            this.label13.Text = "Window ";
+            this.label13.Text = "Window Size";
             // 
             // recordingTextBox
             // 
@@ -1306,6 +1310,7 @@ namespace SerialPortTerminal
             // 
             // gpsGroupBox
             // 
+            this.gpsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gpsGroupBox.Controls.Add(this.gpsStartusTextBox);
             this.gpsGroupBox.Controls.Add(this.label1);
             this.gpsGroupBox.Controls.Add(this.gpsLatitudeTextBox);
@@ -1456,15 +1461,6 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.Size = new System.Drawing.Size(35, 13);
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
-            // 
-            // springTensionTargetNumericTextBox
-            // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // button6
             // 
@@ -1629,6 +1625,15 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.Size = new System.Drawing.Size(82, 16);
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
+            // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // frmTerminal
             // 

@@ -3855,6 +3855,10 @@ namespace SerialPortTerminal
 
             double aLongPeriod = ConfigData.longPeriod;
             double aLongDampFactor = ConfigData.longDampFactor;
+
+
+            windowSizeNumericUpDown.Maximum = Properties.Settings.Default.chartWindowTimeSpan;
+            comboBox1.SelectedValue = Properties.Settings.Default.chartWindowTimePeriod;
             frmTerminal.Dispose();
         }
 
@@ -4030,13 +4034,13 @@ namespace SerialPortTerminal
             timePeriod = comboBox1.SelectedItem.ToString();
             chartWindowTimePeriod = timePeriod;
             windowSizeNumericUpDown.Minimum = 1;
-            if (timePeriod == "hours")
+            if (timePeriod == "seconds")
             {
-                windowSizeNumericUpDown.Maximum = 24;
+                windowSizeNumericUpDown.Maximum = 60;
             }
             else
             {
-                windowSizeNumericUpDown.Maximum = 60;
+                windowSizeNumericUpDown.Maximum = 10;
             }
 
             Console.WriteLine(timePeriod);
