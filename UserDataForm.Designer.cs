@@ -31,35 +31,35 @@
             this.label21 = new System.Windows.Forms.Label();
             this.heaterStatusLabel = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox_lacc = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox_lacc2 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox_xacc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox_xacc2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox_vcc = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox_al = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox_ve = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox_ax = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox_ax2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox_totalCorrection = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox_beam = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_crossCoupling = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_springTension = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_gravity = new System.Windows.Forms.TextBox();
             this.calFileTextBox = new System.Windows.Forms.TextBox();
             this.calFileLabel = new System.Windows.Forms.Label();
             this.configurationFileTextBox = new System.Windows.Forms.TextBox();
@@ -89,6 +89,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.textBox_rawGravity = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -122,13 +124,13 @@
             this.label13.TabIndex = 115;
             this.label13.Text = "LACC";
             // 
-            // textBox13
+            // textBox_lacc
             // 
-            this.textBox13.Location = new System.Drawing.Point(113, 167);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(100, 20);
-            this.textBox13.TabIndex = 114;
+            this.textBox_lacc.Location = new System.Drawing.Point(113, 167);
+            this.textBox_lacc.Name = "textBox_lacc";
+            this.textBox_lacc.ReadOnly = true;
+            this.textBox_lacc.Size = new System.Drawing.Size(100, 20);
+            this.textBox_lacc.TabIndex = 114;
             // 
             // label14
             // 
@@ -139,13 +141,13 @@
             this.label14.TabIndex = 113;
             this.label14.Text = "LACC2";
             // 
-            // textBox14
+            // textBox_lacc2
             // 
-            this.textBox14.Location = new System.Drawing.Point(113, 217);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(100, 20);
-            this.textBox14.TabIndex = 112;
+            this.textBox_lacc2.Location = new System.Drawing.Point(113, 217);
+            this.textBox_lacc2.Name = "textBox_lacc2";
+            this.textBox_lacc2.ReadOnly = true;
+            this.textBox_lacc2.Size = new System.Drawing.Size(100, 20);
+            this.textBox_lacc2.TabIndex = 112;
             // 
             // label15
             // 
@@ -156,13 +158,13 @@
             this.label15.TabIndex = 111;
             this.label15.Text = "XACC";
             // 
-            // textBox15
+            // textBox_xacc
             // 
-            this.textBox15.Location = new System.Drawing.Point(113, 142);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(100, 20);
-            this.textBox15.TabIndex = 110;
+            this.textBox_xacc.Location = new System.Drawing.Point(113, 142);
+            this.textBox_xacc.Name = "textBox_xacc";
+            this.textBox_xacc.ReadOnly = true;
+            this.textBox_xacc.Size = new System.Drawing.Size(100, 20);
+            this.textBox_xacc.TabIndex = 110;
             // 
             // label7
             // 
@@ -173,13 +175,13 @@
             this.label7.TabIndex = 109;
             this.label7.Text = "XACC2";
             // 
-            // textBox7
+            // textBox_xacc2
             // 
-            this.textBox7.Location = new System.Drawing.Point(113, 192);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 108;
+            this.textBox_xacc2.Location = new System.Drawing.Point(113, 192);
+            this.textBox_xacc2.Name = "textBox_xacc2";
+            this.textBox_xacc2.ReadOnly = true;
+            this.textBox_xacc2.Size = new System.Drawing.Size(100, 20);
+            this.textBox_xacc2.TabIndex = 108;
             // 
             // label8
             // 
@@ -190,13 +192,13 @@
             this.label8.TabIndex = 107;
             this.label8.Text = "VCC";
             // 
-            // textBox8
+            // textBox_vcc
             // 
-            this.textBox8.Location = new System.Drawing.Point(113, 42);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 106;
+            this.textBox_vcc.Location = new System.Drawing.Point(113, 42);
+            this.textBox_vcc.Name = "textBox_vcc";
+            this.textBox_vcc.ReadOnly = true;
+            this.textBox_vcc.Size = new System.Drawing.Size(100, 20);
+            this.textBox_vcc.TabIndex = 106;
             // 
             // label9
             // 
@@ -207,13 +209,13 @@
             this.label9.TabIndex = 105;
             this.label9.Text = "AL";
             // 
-            // textBox9
+            // textBox_al
             // 
-            this.textBox9.Location = new System.Drawing.Point(113, 117);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 104;
+            this.textBox_al.Location = new System.Drawing.Point(113, 117);
+            this.textBox_al.Name = "textBox_al";
+            this.textBox_al.ReadOnly = true;
+            this.textBox_al.Size = new System.Drawing.Size(100, 20);
+            this.textBox_al.TabIndex = 104;
             // 
             // label10
             // 
@@ -224,13 +226,13 @@
             this.label10.TabIndex = 103;
             this.label10.Text = "VE";
             // 
-            // textBox10
+            // textBox_ve
             // 
-            this.textBox10.Location = new System.Drawing.Point(113, 67);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(100, 20);
-            this.textBox10.TabIndex = 102;
+            this.textBox_ve.Location = new System.Drawing.Point(113, 67);
+            this.textBox_ve.Name = "textBox_ve";
+            this.textBox_ve.ReadOnly = true;
+            this.textBox_ve.Size = new System.Drawing.Size(100, 20);
+            this.textBox_ve.TabIndex = 102;
             // 
             // label11
             // 
@@ -241,13 +243,13 @@
             this.label11.TabIndex = 101;
             this.label11.Text = "AX";
             // 
-            // textBox11
+            // textBox_ax
             // 
-            this.textBox11.Location = new System.Drawing.Point(113, 92);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(100, 20);
-            this.textBox11.TabIndex = 100;
+            this.textBox_ax.Location = new System.Drawing.Point(113, 92);
+            this.textBox_ax.Name = "textBox_ax";
+            this.textBox_ax.ReadOnly = true;
+            this.textBox_ax.Size = new System.Drawing.Size(100, 20);
+            this.textBox_ax.TabIndex = 100;
             // 
             // label12
             // 
@@ -258,30 +260,30 @@
             this.label12.TabIndex = 99;
             this.label12.Text = "AX2";
             // 
-            // textBox12
+            // textBox_ax2
             // 
-            this.textBox12.Location = new System.Drawing.Point(113, 242);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(100, 20);
-            this.textBox12.TabIndex = 98;
+            this.textBox_ax2.Location = new System.Drawing.Point(113, 242);
+            this.textBox_ax2.Name = "textBox_ax2";
+            this.textBox_ax2.ReadOnly = true;
+            this.textBox_ax2.Size = new System.Drawing.Size(100, 20);
+            this.textBox_ax2.TabIndex = 98;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 174);
+            this.label6.Location = new System.Drawing.Point(7, 199);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 97;
             this.label6.Text = "Total Correction";
             // 
-            // textBox6
+            // textBox_totalCorrection
             // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox6.Location = new System.Drawing.Point(100, 167);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 96;
+            this.textBox_totalCorrection.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_totalCorrection.Location = new System.Drawing.Point(100, 192);
+            this.textBox_totalCorrection.Name = "textBox_totalCorrection";
+            this.textBox_totalCorrection.Size = new System.Drawing.Size(100, 20);
+            this.textBox_totalCorrection.TabIndex = 96;
             // 
             // label5
             // 
@@ -309,13 +311,13 @@
             this.label4.TabIndex = 93;
             this.label4.Text = "Beam";
             // 
-            // textBox4
+            // textBox_beam
             // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox4.Location = new System.Drawing.Point(100, 67);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 92;
+            this.textBox_beam.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_beam.Location = new System.Drawing.Point(100, 67);
+            this.textBox_beam.Name = "textBox_beam";
+            this.textBox_beam.Size = new System.Drawing.Size(100, 20);
+            this.textBox_beam.TabIndex = 92;
             // 
             // label3
             // 
@@ -326,13 +328,13 @@
             this.label3.TabIndex = 91;
             this.label3.Text = "Cross Coupling";
             // 
-            // textBox3
+            // textBox_crossCoupling
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox3.Location = new System.Drawing.Point(100, 117);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 90;
+            this.textBox_crossCoupling.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_crossCoupling.Location = new System.Drawing.Point(100, 117);
+            this.textBox_crossCoupling.Name = "textBox_crossCoupling";
+            this.textBox_crossCoupling.Size = new System.Drawing.Size(100, 20);
+            this.textBox_crossCoupling.TabIndex = 90;
             // 
             // label2
             // 
@@ -343,30 +345,30 @@
             this.label2.TabIndex = 89;
             this.label2.Text = "Spring Tension";
             // 
-            // textBox2
+            // textBox_springTension
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox2.Location = new System.Drawing.Point(100, 92);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 88;
+            this.textBox_springTension.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_springTension.Location = new System.Drawing.Point(100, 92);
+            this.textBox_springTension.Name = "textBox_springTension";
+            this.textBox_springTension.Size = new System.Drawing.Size(100, 20);
+            this.textBox_springTension.TabIndex = 88;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 149);
+            this.label1.Location = new System.Drawing.Point(49, 174);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 87;
             this.label1.Text = "Gravity";
             // 
-            // textBox1
+            // textBox_gravity
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.Location = new System.Drawing.Point(100, 142);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 86;
+            this.textBox_gravity.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_gravity.Location = new System.Drawing.Point(100, 167);
+            this.textBox_gravity.Name = "textBox_gravity";
+            this.textBox_gravity.Size = new System.Drawing.Size(100, 20);
+            this.textBox_gravity.TabIndex = 86;
             // 
             // calFileTextBox
             // 
@@ -447,7 +449,7 @@
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Location = new System.Drawing.Point(36, 267);
+            this.groupBox1.Location = new System.Drawing.Point(36, 286);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(237, 137);
             this.groupBox1.TabIndex = 126;
@@ -539,46 +541,48 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label25);
+            this.groupBox3.Controls.Add(this.textBox_rawGravity);
             this.groupBox3.Controls.Add(this.textBox5);
-            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.textBox_gravity);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.textBox_springTension);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.textBox_crossCoupling);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.textBox_beam);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.textBox6);
+            this.groupBox3.Controls.Add(this.textBox_totalCorrection);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.Location = new System.Drawing.Point(36, 25);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(237, 216);
+            this.groupBox3.Size = new System.Drawing.Size(237, 244);
             this.groupBox3.TabIndex = 128;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Gravity";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox11);
+            this.groupBox4.Controls.Add(this.textBox_ax);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.textBox10);
+            this.groupBox4.Controls.Add(this.textBox_ve);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.textBox12);
+            this.groupBox4.Controls.Add(this.textBox_ax2);
             this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.textBox14);
-            this.groupBox4.Controls.Add(this.textBox8);
+            this.groupBox4.Controls.Add(this.textBox_lacc2);
+            this.groupBox4.Controls.Add(this.textBox_vcc);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.textBox13);
-            this.groupBox4.Controls.Add(this.textBox7);
+            this.groupBox4.Controls.Add(this.textBox_lacc);
+            this.groupBox4.Controls.Add(this.textBox_xacc2);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.textBox9);
+            this.groupBox4.Controls.Add(this.textBox_al);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Controls.Add(this.textBox15);
+            this.groupBox4.Controls.Add(this.textBox_xacc);
             this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox4.Location = new System.Drawing.Point(293, 25);
             this.groupBox4.Name = "groupBox4";
@@ -678,6 +682,23 @@
             this.label18.TabIndex = 0;
             this.label18.Text = "GPS Time Set";
             // 
+            // textBox_rawGravity
+            // 
+            this.textBox_rawGravity.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_rawGravity.Location = new System.Drawing.Point(100, 141);
+            this.textBox_rawGravity.Name = "textBox_rawGravity";
+            this.textBox_rawGravity.Size = new System.Drawing.Size(100, 20);
+            this.textBox_rawGravity.TabIndex = 132;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(23, 148);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 13);
+            this.label25.TabIndex = 132;
+            this.label25.Text = "Raw Gravity";
+            // 
             // UserDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -711,35 +732,35 @@
         public System.Windows.Forms.Label label21;
         public System.Windows.Forms.TextBox heaterStatusLabel;
         public System.Windows.Forms.Label label13;
-        public System.Windows.Forms.TextBox textBox13;
+        public System.Windows.Forms.TextBox textBox_lacc;
         private System.Windows.Forms.Label label14;
-        public System.Windows.Forms.TextBox textBox14;
+        public System.Windows.Forms.TextBox textBox_lacc2;
         public System.Windows.Forms.Label label15;
-        public System.Windows.Forms.TextBox textBox15;
+        public System.Windows.Forms.TextBox textBox_xacc;
         public System.Windows.Forms.Label label7;
-        public System.Windows.Forms.TextBox textBox7;
+        public System.Windows.Forms.TextBox textBox_xacc2;
         private System.Windows.Forms.Label label8;
-        public System.Windows.Forms.TextBox textBox8;
+        public System.Windows.Forms.TextBox textBox_vcc;
         public System.Windows.Forms.Label label9;
-        public System.Windows.Forms.TextBox textBox9;
+        public System.Windows.Forms.TextBox textBox_al;
         public System.Windows.Forms.Label label10;
-        public System.Windows.Forms.TextBox textBox10;
+        public System.Windows.Forms.TextBox textBox_ve;
         public System.Windows.Forms.Label label11;
-        public System.Windows.Forms.TextBox textBox11;
+        public System.Windows.Forms.TextBox textBox_ax;
         public System.Windows.Forms.Label label12;
-        public System.Windows.Forms.TextBox textBox12;
+        public System.Windows.Forms.TextBox textBox_ax2;
         public System.Windows.Forms.Label label6;
-        public System.Windows.Forms.TextBox textBox6;
+        public System.Windows.Forms.TextBox textBox_totalCorrection;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox textBox5;
         public System.Windows.Forms.Label label4;
-        public System.Windows.Forms.TextBox textBox4;
+        public System.Windows.Forms.TextBox textBox_beam;
         public System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.TextBox textBox_crossCoupling;
         public System.Windows.Forms.Label label2;
-        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox textBox_springTension;
         public System.Windows.Forms.Label label1;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBox_gravity;
         private System.Windows.Forms.Label calFileLabel;
         private System.Windows.Forms.Label configFileLabel;
         public System.Windows.Forms.Label label19;
@@ -769,5 +790,7 @@
         public System.Windows.Forms.TextBox gpsTimeSetTextBox;
         public System.Windows.Forms.TextBox gpsNavigationTextBox;
         public System.Windows.Forms.TextBox gps1HzSynchTextBox;
+        public System.Windows.Forms.Label label25;
+        public System.Windows.Forms.TextBox textBox_rawGravity;
     }
 }

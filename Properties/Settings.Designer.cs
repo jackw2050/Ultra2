@@ -218,9 +218,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1.298317")]
-        public double beamScale {
+        public float beamScale {
             get {
-                return ((double)(this["beamScale"]));
+                return ((float)(this["beamScale"]));
             }
             set {
                 this["beamScale"] = value;
@@ -254,9 +254,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("8.4E-06")]
-        public double crossPeriod {
+        public float crossPeriod {
             get {
-                return ((double)(this["crossPeriod"]));
+                return ((float)(this["crossPeriod"]));
             }
             set {
                 this["crossPeriod"] = value;
@@ -266,9 +266,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("8.4E-06")]
-        public double longPeriod {
+        public float longPeriod {
             get {
-                return ((double)(this["longPeriod"]));
+                return ((float)(this["longPeriod"]));
             }
             set {
                 this["longPeriod"] = value;
@@ -278,9 +278,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.0915")]
-        public double crossDampFactor {
+        public float crossDampFactor {
             get {
-                return ((double)(this["crossDampFactor"]));
+                return ((float)(this["crossDampFactor"]));
             }
             set {
                 this["crossDampFactor"] = value;
@@ -290,9 +290,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.0915")]
-        public double longDampFactor {
+        public float longDampFactor {
             get {
-                return ((double)(this["longDampFactor"]));
+                return ((float)(this["longDampFactor"]));
             }
             set {
                 this["longDampFactor"] = value;
@@ -302,9 +302,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
-        public double crossGain {
+        public float crossGain {
             get {
-                return ((double)(this["crossGain"]));
+                return ((float)(this["crossGain"]));
             }
             set {
                 this["crossGain"] = value;
@@ -314,9 +314,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
-        public double longGain {
+        public float longGain {
             get {
-                return ((double)(this["longGain"]));
+                return ((float)(this["longGain"]));
             }
             set {
                 this["longGain"] = value;
@@ -326,9 +326,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.45")]
-        public double crossLead {
+        public float crossLead {
             get {
-                return ((double)(this["crossLead"]));
+                return ((float)(this["crossLead"]));
             }
             set {
                 this["crossLead"] = value;
@@ -338,9 +338,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.45")]
-        public double longLead {
+        public float longLead {
             get {
-                return ((double)(this["longLead"]));
+                return ((float)(this["longLead"]));
             }
             set {
                 this["longLead"] = value;
@@ -350,9 +350,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20000")]
-        public double springTensionMax {
+        public float springTensionMax {
             get {
-                return ((double)(this["springTensionMax"]));
+                return ((float)(this["springTensionMax"]));
             }
             set {
                 this["springTensionMax"] = value;
@@ -374,9 +374,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossBias {
+        public float crossBias {
             get {
-                return ((double)(this["crossBias"]));
+                return ((float)(this["crossBias"]));
             }
             set {
                 this["crossBias"] = value;
@@ -386,9 +386,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double longBias {
+        public float longBias {
             get {
-                return ((double)(this["longBias"]));
+                return ((float)(this["longBias"]));
             }
             set {
                 this["longBias"] = value;
@@ -421,9 +421,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public double springTension {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float springTension {
             get {
-                return ((double)(this["springTension"]));
+                return ((float)(this["springTension"]));
             }
             set {
                 this["springTension"] = value;
@@ -433,9 +434,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-2")]
-        public double kFactor {
+        public float kFactor {
             get {
-                return ((double)(this["kFactor"]));
+                return ((float)(this["kFactor"]));
             }
             set {
                 this["kFactor"] = value;
@@ -457,9 +458,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCompFactor_4 {
+        public float crossCompFactor_4 {
             get {
-                return ((double)(this["crossCompFactor_4"]));
+                return ((float)(this["crossCompFactor_4"]));
             }
             set {
                 this["crossCompFactor_4"] = value;
@@ -469,9 +470,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCompPhase_4 {
+        public float crossCompPhase_4 {
             get {
-                return ((double)(this["crossCompPhase_4"]));
+                return ((float)(this["crossCompPhase_4"]));
             }
             set {
                 this["crossCompPhase_4"] = value;
@@ -481,9 +482,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCompFactor_16 {
+        public float crossCompFactor_16 {
             get {
-                return ((double)(this["crossCompFactor_16"]));
+                return ((float)(this["crossCompFactor_16"]));
             }
             set {
                 this["crossCompFactor_16"] = value;
@@ -493,9 +494,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCompPhase_16 {
+        public float crossCompPhase_16 {
             get {
-                return ((double)(this["crossCompPhase_16"]));
+                return ((float)(this["crossCompPhase_16"]));
             }
             set {
                 this["crossCompPhase_16"] = value;
@@ -505,9 +506,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double longCompFactor_4 {
+        public float longCompFactor_4 {
             get {
-                return ((double)(this["longCompFactor_4"]));
+                return ((float)(this["longCompFactor_4"]));
             }
             set {
                 this["longCompFactor_4"] = value;
@@ -517,9 +518,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double longCompPhase_4 {
+        public float longCompPhase_4 {
             get {
-                return ((double)(this["longCompPhase_4"]));
+                return ((float)(this["longCompPhase_4"]));
             }
             set {
                 this["longCompPhase_4"] = value;
@@ -529,9 +530,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double longCompFactor_16 {
+        public float longCompFactor_16 {
             get {
-                return ((double)(this["longCompFactor_16"]));
+                return ((float)(this["longCompFactor_16"]));
             }
             set {
                 this["longCompFactor_16"] = value;
@@ -541,9 +542,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double longCompPhase_16 {
+        public float longCompPhase_16 {
             get {
-                return ((double)(this["longCompPhase_16"]));
+                return ((float)(this["longCompPhase_16"]));
             }
             set {
                 this["longCompPhase_16"] = value;
@@ -553,9 +554,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double CML_Fact {
+        public float CML_Fact {
             get {
-                return ((double)(this["CML_Fact"]));
+                return ((float)(this["CML_Fact"]));
             }
             set {
                 this["CML_Fact"] = value;
@@ -565,9 +566,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double AL_Fact {
+        public float AL_Fact {
             get {
-                return ((double)(this["AL_Fact"]));
+                return ((float)(this["AL_Fact"]));
             }
             set {
                 this["AL_Fact"] = value;
@@ -577,9 +578,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double AX_Fact {
+        public float AX_Fact {
             get {
-                return ((double)(this["AX_Fact"]));
+                return ((float)(this["AX_Fact"]));
             }
             set {
                 this["AX_Fact"] = value;
@@ -589,9 +590,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double VE_Fact {
+        public float VE_Fact {
             get {
-                return ((double)(this["VE_Fact"]));
+                return ((float)(this["VE_Fact"]));
             }
             set {
                 this["VE_Fact"] = value;
@@ -601,9 +602,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double CMX_Fact {
+        public float CMX_Fact {
             get {
-                return ((double)(this["CMX_Fact"]));
+                return ((float)(this["CMX_Fact"]));
             }
             set {
                 this["CMX_Fact"] = value;
@@ -613,9 +614,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double XACC2_Fact {
+        public float XACC2_Fact {
             get {
-                return ((double)(this["XACC2_Fact"]));
+                return ((float)(this["XACC2_Fact"]));
             }
             set {
                 this["XACC2_Fact"] = value;
@@ -625,9 +626,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double LACC2_Fact {
+        public float LACC2_Fact {
             get {
-                return ((double)(this["LACC2_Fact"]));
+                return ((float)(this["LACC2_Fact"]));
             }
             set {
                 this["LACC2_Fact"] = value;
@@ -637,9 +638,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.217")]
-        public double XACC_Phase {
+        public float XACC_Phase {
             get {
-                return ((double)(this["XACC_Phase"]));
+                return ((float)(this["XACC_Phase"]));
             }
             set {
                 this["XACC_Phase"] = value;
@@ -649,9 +650,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.6196")]
-        public double LAXX_AL_Phase {
+        public float LAXX_AL_Phase {
             get {
-                return ((double)(this["LAXX_AL_Phase"]));
+                return ((float)(this["LAXX_AL_Phase"]));
             }
             set {
                 this["LAXX_AL_Phase"] = value;
@@ -661,9 +662,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.195")]
-        public double LACC_CML_Phase {
+        public float LACC_CML_Phase {
             get {
-                return ((double)(this["LACC_CML_Phase"]));
+                return ((float)(this["LACC_CML_Phase"]));
             }
             set {
                 this["LACC_CML_Phase"] = value;
@@ -673,9 +674,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.185")]
-        public double LACC_CMX_Phase {
+        public float LACC_CMX_Phase {
             get {
-                return ((double)(this["LACC_CMX_Phase"]));
+                return ((float)(this["LACC_CMX_Phase"]));
             }
             set {
                 this["LACC_CMX_Phase"] = value;
@@ -721,9 +722,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors1 {
+        public float crossCouplingFactors1 {
             get {
-                return ((double)(this["crossCouplingFactors1"]));
+                return ((float)(this["crossCouplingFactors1"]));
             }
             set {
                 this["crossCouplingFactors1"] = value;
@@ -733,9 +734,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors2 {
+        public float crossCouplingFactors2 {
             get {
-                return ((double)(this["crossCouplingFactors2"]));
+                return ((float)(this["crossCouplingFactors2"]));
             }
             set {
                 this["crossCouplingFactors2"] = value;
@@ -745,9 +746,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors3 {
+        public float crossCouplingFactors3 {
             get {
-                return ((double)(this["crossCouplingFactors3"]));
+                return ((float)(this["crossCouplingFactors3"]));
             }
             set {
                 this["crossCouplingFactors3"] = value;
@@ -757,9 +758,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors4 {
+        public float crossCouplingFactors4 {
             get {
-                return ((double)(this["crossCouplingFactors4"]));
+                return ((float)(this["crossCouplingFactors4"]));
             }
             set {
                 this["crossCouplingFactors4"] = value;
@@ -769,9 +770,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors5 {
+        public float crossCouplingFactors5 {
             get {
-                return ((double)(this["crossCouplingFactors5"]));
+                return ((float)(this["crossCouplingFactors5"]));
             }
             set {
                 this["crossCouplingFactors5"] = value;
@@ -780,10 +781,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.035199999809265137")]
-        public double crossCouplingFactors6_VCC {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0352")]
+        public float crossCouplingFactors6_VCC {
             get {
-                return ((double)(this["crossCouplingFactors6_VCC"]));
+                return ((float)(this["crossCouplingFactors6_VCC"]));
             }
             set {
                 this["crossCouplingFactors6_VCC"] = value;
@@ -792,10 +793,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-0.0032800000626593828")]
-        public double crossCouplingFactors7_AL {
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.00328")]
+        public float crossCouplingFactors7_AL {
             get {
-                return ((double)(this["crossCouplingFactors7_AL"]));
+                return ((float)(this["crossCouplingFactors7_AL"]));
             }
             set {
                 this["crossCouplingFactors7_AL"] = value;
@@ -804,10 +805,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-0.058649998158216476")]
-        public double crossCouplingFactors8_AX {
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.05865")]
+        public float crossCouplingFactors8_AX {
             get {
-                return ((double)(this["crossCouplingFactors8_AX"]));
+                return ((float)(this["crossCouplingFactors8_AX"]));
             }
             set {
                 this["crossCouplingFactors8_AX"] = value;
@@ -816,10 +817,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.0094400001689791679")]
-        public double crossCouplingFactors9_VE {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.00944")]
+        public float crossCouplingFactors9_VE {
             get {
-                return ((double)(this["crossCouplingFactors9_VE"]));
+                return ((float)(this["crossCouplingFactors9_VE"]));
             }
             set {
                 this["crossCouplingFactors9_VE"] = value;
@@ -829,9 +830,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors10_AX2 {
+        public float crossCouplingFactors10_AX2 {
             get {
-                return ((double)(this["crossCouplingFactors10_AX2"]));
+                return ((float)(this["crossCouplingFactors10_AX2"]));
             }
             set {
                 this["crossCouplingFactors10_AX2"] = value;
@@ -841,9 +842,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors11_XACC2 {
+        public float crossCouplingFactors11_XACC2 {
             get {
-                return ((double)(this["crossCouplingFactors11_XACC2"]));
+                return ((float)(this["crossCouplingFactors11_XACC2"]));
             }
             set {
                 this["crossCouplingFactors11_XACC2"] = value;
@@ -853,9 +854,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors12_LACC2 {
+        public float crossCouplingFactors12_LACC2 {
             get {
-                return ((double)(this["crossCouplingFactors12_LACC2"]));
+                return ((float)(this["crossCouplingFactors12_LACC2"]));
             }
             set {
                 this["crossCouplingFactors12_LACC2"] = value;
@@ -864,10 +865,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-0.0011992008658125997")]
-        public double crossCouplingFactors13_CrossAxisCompensation4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.00119920087")]
+        public float crossCouplingFactors13_CrossAxisCompensation4 {
             get {
-                return ((double)(this["crossCouplingFactors13_CrossAxisCompensation4"]));
+                return ((float)(this["crossCouplingFactors13_CrossAxisCompensation4"]));
             }
             set {
                 this["crossCouplingFactors13_CrossAxisCompensation4"] = value;
@@ -876,10 +877,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-0.0013000000035390258")]
-        public double crossCouplingFactors14_LongAxisCompensation4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("-0.0013")]
+        public float crossCouplingFactors14_LongAxisCompensation4 {
             get {
-                return ((double)(this["crossCouplingFactors14_LongAxisCompensation4"]));
+                return ((float)(this["crossCouplingFactors14_LongAxisCompensation4"]));
             }
             set {
                 this["crossCouplingFactors14_LongAxisCompensation4"] = value;
@@ -889,9 +890,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCouplingFactors15_CrossAxisCompensation16 {
+        public float crossCouplingFactors15_CrossAxisCompensation16 {
             get {
-                return ((double)(this["crossCouplingFactors15_CrossAxisCompensation16"]));
+                return ((float)(this["crossCouplingFactors15_CrossAxisCompensation16"]));
             }
             set {
                 this["crossCouplingFactors15_CrossAxisCompensation16"] = value;
@@ -901,9 +902,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double crossCouplingFactors16_LongAxisCompensation16 {
+        public float crossCouplingFactors16_LongAxisCompensation16 {
             get {
-                return ((double)(this["crossCouplingFactors16_LongAxisCompensation16"]));
+                return ((float)(this["crossCouplingFactors16_LongAxisCompensation16"]));
             }
             set {
                 this["crossCouplingFactors16_LongAxisCompensation16"] = value;
@@ -913,9 +914,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double crossCouplingFactors0 {
+        public float crossCouplingFactors0 {
             get {
-                return ((double)(this["crossCouplingFactors0"]));
+                return ((float)(this["crossCouplingFactors0"]));
             }
             set {
                 this["crossCouplingFactors0"] = value;
@@ -925,9 +926,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double analogFilter0 {
+        public float analogFilter0 {
             get {
-                return ((double)(this["analogFilter0"]));
+                return ((float)(this["analogFilter0"]));
             }
             set {
                 this["analogFilter0"] = value;
@@ -936,10 +937,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.22400000691413879")]
-        public double analogFilter1_AXPhase {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.224")]
+        public float analogFilter1_AXPhase {
             get {
-                return ((double)(this["analogFilter1_AXPhase"]));
+                return ((float)(this["analogFilter1_AXPhase"]));
             }
             set {
                 this["analogFilter1_AXPhase"] = value;
@@ -948,10 +949,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.24250000715255737")]
-        public double analogFilter2_ALPhase {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2425")]
+        public float analogFilter2_ALPhase {
             get {
-                return ((double)(this["analogFilter2_ALPhase"]));
+                return ((float)(this["analogFilter2_ALPhase"]));
             }
             set {
                 this["analogFilter2_ALPhase"] = value;
@@ -960,10 +961,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.20000000298023224")]
-        public double analogFilter3 {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
+        public float analogFilter3 {
             get {
-                return ((double)(this["analogFilter3"]));
+                return ((float)(this["analogFilter3"]));
             }
             set {
                 this["analogFilter3"] = value;
@@ -972,10 +973,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.28999999165534973")]
-        public double analogFilter4_VCCPhase {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.29")]
+        public float analogFilter4_VCCPhase {
             get {
-                return ((double)(this["analogFilter4_VCCPhase"]));
+                return ((float)(this["analogFilter4_VCCPhase"]));
             }
             set {
                 this["analogFilter4_VCCPhase"] = value;
@@ -984,10 +985,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.60000002384185791")]
-        public double analogFilter5_CrossAxisCompensationPhase4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.6")]
+        public float analogFilter5_CrossAxisCompensationPhase4 {
             get {
-                return ((double)(this["analogFilter5_CrossAxisCompensationPhase4"]));
+                return ((float)(this["analogFilter5_CrossAxisCompensationPhase4"]));
             }
             set {
                 this["analogFilter5_CrossAxisCompensationPhase4"] = value;
@@ -996,10 +997,10 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.60000002384185791")]
-        public double analogFilter6_LongAxisCompensationPhase4 {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.6")]
+        public float analogFilter6_LongAxisCompensationPhase4 {
             get {
-                return ((double)(this["analogFilter6_LongAxisCompensationPhase4"]));
+                return ((float)(this["analogFilter6_LongAxisCompensationPhase4"]));
             }
             set {
                 this["analogFilter6_LongAxisCompensationPhase4"] = value;
@@ -1009,9 +1010,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double analogFilter8_LongAxisCompensationPhase16 {
+        public float analogFilter8_LongAxisCompensationPhase16 {
             get {
-                return ((double)(this["analogFilter8_LongAxisCompensationPhase16"]));
+                return ((float)(this["analogFilter8_LongAxisCompensationPhase16"]));
             }
             set {
                 this["analogFilter8_LongAxisCompensationPhase16"] = value;
@@ -1021,9 +1022,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double analogFilter8 {
+        public float analogFilter8 {
             get {
-                return ((double)(this["analogFilter8"]));
+                return ((float)(this["analogFilter8"]));
             }
             set {
                 this["analogFilter8"] = value;
@@ -1033,9 +1034,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double Setting {
+        public float Setting {
             get {
-                return ((double)(this["Setting"]));
+                return ((float)(this["Setting"]));
             }
             set {
                 this["Setting"] = value;

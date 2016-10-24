@@ -1,33 +1,33 @@
 namespace SerialPortTerminal
 {
-  partial class frmTerminal
-  {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
-
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
+    partial class frmTerminal
     {
-      if (disposing && (components != null))
-      {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
-    }
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    #region Windows Form Designer generated code
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
@@ -76,9 +76,6 @@ namespace SerialPortTerminal
             this.chocolateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seaGreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemTraceMarkers = new System.Windows.Forms.ToolStripMenuItem();
-            this.onToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markerSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markerSize1 = new System.Windows.Forms.ToolStripMenuItem();
             this.markerSize2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,20 +87,11 @@ namespace SerialPortTerminal
             this.markerSize8 = new System.Windows.Forms.ToolStripMenuItem();
             this.markerSize9 = new System.Windows.Forms.ToolStripMenuItem();
             this.markerSize10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.chartTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fastLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fastPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stepLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.areaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.legendLocationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bottomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chartWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setTraceVisabilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -174,15 +162,18 @@ namespace SerialPortTerminal
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.startupGroupBox = new System.Windows.Forms.GroupBox();
+            this.startupLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.alarmCheckBox = new System.Windows.Forms.CheckBox();
             this.springTensionCheckBox = new System.Windows.Forms.CheckBox();
             this.torqueMotorCheckBox = new System.Windows.Forms.CheckBox();
             this.gyroCheckBox = new System.Windows.Forms.CheckBox();
             this.springTensionGroupBox = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -198,7 +189,8 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
+            this.zLSStripChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zLSStripChartCCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
@@ -302,8 +294,8 @@ namespace SerialPortTerminal
             // 
             // GravityChart
             // 
-            this.GravityChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.GravityChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GravityChart.BackColor = System.Drawing.Color.Gray;
             this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
@@ -362,14 +354,11 @@ namespace SerialPortTerminal
             this.toolStripMenuItemBackgroundColor,
             this.toolStripMenuItemTraceWidth,
             this.toolStripMenuItemColorPalette,
-            this.toolStripMenuItemTraceMarkers,
             this.markerSizeToolStripMenuItem,
-            this.chartTypeToolStripMenuItem,
             this.legendLocationToolStripMenuItem,
-            this.chartWindowToolStripMenuItem,
             this.setTraceVisabilityToolStripMenuItem});
             this.chartContextMenuStrip.Name = "contextMenuStrip1";
-            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 202);
+            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 158);
             // 
             // toolStripMenuItemBackgroundColor
             // 
@@ -384,21 +373,21 @@ namespace SerialPortTerminal
             // blackToolStripMenuItem
             // 
             this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
-            this.blackToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.blackToolStripMenuItem.Text = "Black";
             this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
             // 
             // whiteToolStripMenuItem
             // 
             this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
-            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.whiteToolStripMenuItem.Text = "White";
             this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
             // 
             // greyToolStripMenuItem
             // 
             this.greyToolStripMenuItem.Name = "greyToolStripMenuItem";
-            this.greyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.greyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.greyToolStripMenuItem.Text = "Grey";
             this.greyToolStripMenuItem.Click += new System.EventHandler(this.greyToolStripMenuItem_Click);
             // 
@@ -597,27 +586,6 @@ namespace SerialPortTerminal
             this.seaGreenToolStripMenuItem.Text = "SeaGreen";
             this.seaGreenToolStripMenuItem.Click += new System.EventHandler(this.seaGreenToolStripMenuItem_Click);
             // 
-            // toolStripMenuItemTraceMarkers
-            // 
-            this.toolStripMenuItemTraceMarkers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.onToolStripMenuItem,
-            this.offToolStripMenuItem});
-            this.toolStripMenuItemTraceMarkers.Name = "toolStripMenuItemTraceMarkers";
-            this.toolStripMenuItemTraceMarkers.Size = new System.Drawing.Size(202, 22);
-            this.toolStripMenuItemTraceMarkers.Text = "Trace Markers";
-            // 
-            // onToolStripMenuItem
-            // 
-            this.onToolStripMenuItem.Name = "onToolStripMenuItem";
-            this.onToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
-            this.onToolStripMenuItem.Text = "On";
-            // 
-            // offToolStripMenuItem
-            // 
-            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
-            this.offToolStripMenuItem.Text = "Off";
-            // 
             // markerSizeToolStripMenuItem
             // 
             this.markerSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -638,118 +606,62 @@ namespace SerialPortTerminal
             // markerSize1
             // 
             this.markerSize1.Name = "markerSize1";
-            this.markerSize1.Size = new System.Drawing.Size(86, 22);
+            this.markerSize1.Size = new System.Drawing.Size(152, 22);
             this.markerSize1.Text = "1";
             // 
             // markerSize2
             // 
             this.markerSize2.Name = "markerSize2";
-            this.markerSize2.Size = new System.Drawing.Size(86, 22);
+            this.markerSize2.Size = new System.Drawing.Size(152, 22);
             this.markerSize2.Text = "2";
             // 
             // markerSize3
             // 
             this.markerSize3.Name = "markerSize3";
-            this.markerSize3.Size = new System.Drawing.Size(86, 22);
+            this.markerSize3.Size = new System.Drawing.Size(152, 22);
             this.markerSize3.Text = "3";
             // 
             // markerSize4
             // 
             this.markerSize4.Name = "markerSize4";
-            this.markerSize4.Size = new System.Drawing.Size(86, 22);
+            this.markerSize4.Size = new System.Drawing.Size(152, 22);
             this.markerSize4.Text = "4";
             // 
             // markerSize5
             // 
             this.markerSize5.Name = "markerSize5";
-            this.markerSize5.Size = new System.Drawing.Size(86, 22);
+            this.markerSize5.Size = new System.Drawing.Size(152, 22);
             this.markerSize5.Text = "5";
             // 
             // markerSize6
             // 
             this.markerSize6.Name = "markerSize6";
-            this.markerSize6.Size = new System.Drawing.Size(86, 22);
+            this.markerSize6.Size = new System.Drawing.Size(152, 22);
             this.markerSize6.Text = "6";
             // 
             // markerSize7
             // 
             this.markerSize7.Name = "markerSize7";
-            this.markerSize7.Size = new System.Drawing.Size(86, 22);
+            this.markerSize7.Size = new System.Drawing.Size(152, 22);
             this.markerSize7.Text = "7";
             // 
             // markerSize8
             // 
             this.markerSize8.Name = "markerSize8";
-            this.markerSize8.Size = new System.Drawing.Size(86, 22);
+            this.markerSize8.Size = new System.Drawing.Size(152, 22);
             this.markerSize8.Text = "8";
             // 
             // markerSize9
             // 
             this.markerSize9.Name = "markerSize9";
-            this.markerSize9.Size = new System.Drawing.Size(86, 22);
+            this.markerSize9.Size = new System.Drawing.Size(152, 22);
             this.markerSize9.Text = "9";
             // 
             // markerSize10
             // 
             this.markerSize10.Name = "markerSize10";
-            this.markerSize10.Size = new System.Drawing.Size(86, 22);
+            this.markerSize10.Size = new System.Drawing.Size(152, 22);
             this.markerSize10.Text = "10";
-            // 
-            // chartTypeToolStripMenuItem
-            // 
-            this.chartTypeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fastLineToolStripMenuItem,
-            this.fastPointToolStripMenuItem,
-            this.lineToolStripMenuItem,
-            this.pointToolStripMenuItem,
-            this.splineToolStripMenuItem,
-            this.stepLineToolStripMenuItem,
-            this.areaToolStripMenuItem});
-            this.chartTypeToolStripMenuItem.Name = "chartTypeToolStripMenuItem";
-            this.chartTypeToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.chartTypeToolStripMenuItem.Text = "Chart Type";
-            // 
-            // fastLineToolStripMenuItem
-            // 
-            this.fastLineToolStripMenuItem.Name = "fastLineToolStripMenuItem";
-            this.fastLineToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.fastLineToolStripMenuItem.Text = "FastLine";
-            // 
-            // fastPointToolStripMenuItem
-            // 
-            this.fastPointToolStripMenuItem.Name = "fastPointToolStripMenuItem";
-            this.fastPointToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.fastPointToolStripMenuItem.Text = "FastPoint";
-            // 
-            // lineToolStripMenuItem
-            // 
-            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.lineToolStripMenuItem.Text = "Line";
-            // 
-            // pointToolStripMenuItem
-            // 
-            this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
-            this.pointToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.pointToolStripMenuItem.Text = "Point";
-            // 
-            // splineToolStripMenuItem
-            // 
-            this.splineToolStripMenuItem.Name = "splineToolStripMenuItem";
-            this.splineToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.splineToolStripMenuItem.Text = "Spline";
-            // 
-            // stepLineToolStripMenuItem
-            // 
-            this.stepLineToolStripMenuItem.Name = "stepLineToolStripMenuItem";
-            this.stepLineToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.stepLineToolStripMenuItem.Text = "StepLine";
-            // 
-            // areaToolStripMenuItem
-            // 
-            this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
-            this.areaToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.areaToolStripMenuItem.Text = "Area";
             // 
             // legendLocationToolStripMenuItem
             // 
@@ -765,39 +677,35 @@ namespace SerialPortTerminal
             // topToolStripMenuItem
             // 
             this.topToolStripMenuItem.Name = "topToolStripMenuItem";
-            this.topToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.topToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.topToolStripMenuItem.Text = "Top";
             // 
             // bottomToolStripMenuItem
             // 
             this.bottomToolStripMenuItem.Name = "bottomToolStripMenuItem";
-            this.bottomToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.bottomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bottomToolStripMenuItem.Text = "Bottom";
             // 
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rightToolStripMenuItem.Text = "Right";
             // 
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.leftToolStripMenuItem.Text = "Left";
-            // 
-            // chartWindowToolStripMenuItem
-            // 
-            this.chartWindowToolStripMenuItem.Name = "chartWindowToolStripMenuItem";
-            this.chartWindowToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.chartWindowToolStripMenuItem.Text = "Chart Window";
-            this.chartWindowToolStripMenuItem.Click += new System.EventHandler(this.chartWindowToolStripMenuItem_Click);
             // 
             // setTraceVisabilityToolStripMenuItem
             // 
+            this.setTraceVisabilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zLSStripChartToolStripMenuItem,
+            this.zLSStripChartCCToolStripMenuItem});
             this.setTraceVisabilityToolStripMenuItem.Name = "setTraceVisabilityToolStripMenuItem";
             this.setTraceVisabilityToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.setTraceVisabilityToolStripMenuItem.Text = "Set Trace Visability";
+            this.setTraceVisabilityToolStripMenuItem.Text = "Chart Trace Options";
             // 
             // contextMenuStripForm
             // 
@@ -1228,8 +1136,8 @@ namespace SerialPortTerminal
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "minutes",
-            "seconds"});
+            "seconds",
+            "minutes"});
             this.comboBox1.Location = new System.Drawing.Point(62, 40);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(77, 21);
@@ -1346,6 +1254,7 @@ namespace SerialPortTerminal
             // startupGroupBox
             // 
             this.startupGroupBox.BackColor = System.Drawing.Color.Silver;
+            this.startupGroupBox.Controls.Add(this.startupLabel);
             this.startupGroupBox.Controls.Add(this.button1);
             this.startupGroupBox.Controls.Add(this.alarmCheckBox);
             this.startupGroupBox.Controls.Add(this.springTensionCheckBox);
@@ -1354,10 +1263,19 @@ namespace SerialPortTerminal
             this.startupGroupBox.Controls.Add(this.button11);
             this.startupGroupBox.Location = new System.Drawing.Point(352, 53);
             this.startupGroupBox.Name = "startupGroupBox";
-            this.startupGroupBox.Size = new System.Drawing.Size(200, 111);
+            this.startupGroupBox.Size = new System.Drawing.Size(200, 139);
             this.startupGroupBox.TabIndex = 118;
             this.startupGroupBox.TabStop = false;
             this.startupGroupBox.Text = "Startup";
+            // 
+            // startupLabel
+            // 
+            this.startupLabel.AutoSize = true;
+            this.startupLabel.Location = new System.Drawing.Point(10, 112);
+            this.startupLabel.Name = "startupLabel";
+            this.startupLabel.Size = new System.Drawing.Size(35, 13);
+            this.startupLabel.TabIndex = 106;
+            this.startupLabel.Text = "label3";
             // 
             // button1
             // 
@@ -1416,6 +1334,7 @@ namespace SerialPortTerminal
             // springTensionGroupBox
             // 
             this.springTensionGroupBox.BackColor = System.Drawing.Color.Silver;
+            this.springTensionGroupBox.Controls.Add(this.button3);
             this.springTensionGroupBox.Controls.Add(this.springTensionSetRadioButton);
             this.springTensionGroupBox.Controls.Add(this.springTensionValueLabel);
             this.springTensionGroupBox.Controls.Add(this.springTensionStatusLabel);
@@ -1432,6 +1351,16 @@ namespace SerialPortTerminal
             this.springTensionGroupBox.TabIndex = 126;
             this.springTensionGroupBox.TabStop = false;
             this.springTensionGroupBox.Text = "Spring Tension";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(264, 84);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(51, 22);
+            this.button3.TabIndex = 125;
+            this.button3.Text = "Close";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_3);
             // 
             // springTensionSetRadioButton
             // 
@@ -1462,11 +1391,20 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "label3";
             // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(76, 86);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
+            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(264, 67);
+            this.button6.Location = new System.Drawing.Point(198, 84);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(51, 23);
+            this.button6.Size = new System.Drawing.Size(51, 22);
             this.button6.TabIndex = 5;
             this.button6.Text = "Go";
             this.button6.UseVisualStyleBackColor = true;
@@ -1475,7 +1413,7 @@ namespace SerialPortTerminal
             // springTensionLabel
             // 
             this.springTensionLabel.AutoSize = true;
-            this.springTensionLabel.Location = new System.Drawing.Point(119, 66);
+            this.springTensionLabel.Location = new System.Drawing.Point(73, 67);
             this.springTensionLabel.Name = "springTensionLabel";
             this.springTensionLabel.Size = new System.Drawing.Size(38, 13);
             this.springTensionLabel.TabIndex = 4;
@@ -1626,14 +1564,17 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
             // 
-            // springTensionTargetNumericTextBox
+            // zLSStripChartToolStripMenuItem
             // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(122, 86);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
+            this.zLSStripChartToolStripMenuItem.Name = "zLSStripChartToolStripMenuItem";
+            this.zLSStripChartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zLSStripChartToolStripMenuItem.Text = "ZLS Strip chart";
+            // 
+            // zLSStripChartCCToolStripMenuItem
+            // 
+            this.zLSStripChartCCToolStripMenuItem.Name = "zLSStripChartCCToolStripMenuItem";
+            this.zLSStripChartCCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zLSStripChartCCToolStripMenuItem.Text = "ZLS Strip chart + CC";
             // 
             // frmTerminal
             // 
@@ -1687,11 +1628,11 @@ namespace SerialPortTerminal
             this.ResumeLayout(false);
             this.PerformLayout();
 
-    }
+        }
 
-    #endregion
-    private System.Windows.Forms.Button btnOpenPort;
-		private System.Windows.Forms.Timer tmrCheckComPorts;
+        #endregion
+        private System.Windows.Forms.Button btnOpenPort;
+        private System.Windows.Forms.Timer tmrCheckComPorts;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.Timer _timer1;
         private System.Windows.Forms.Label label16;
@@ -1739,9 +1680,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem chocolateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fireToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seaGreenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemTraceMarkers;
-        private System.Windows.Forms.ToolStripMenuItem onToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem markerSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem markerSize1;
         private System.Windows.Forms.ToolStripMenuItem markerSize2;
@@ -1753,20 +1691,11 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem markerSize8;
         private System.Windows.Forms.ToolStripMenuItem markerSize9;
         private System.Windows.Forms.ToolStripMenuItem markerSize10;
-        private System.Windows.Forms.ToolStripMenuItem chartTypeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fastLineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fastPointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pointToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem splineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stepLineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem legendLocationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem topToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bottomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem leftToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem chartWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setTraceVisabilityToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip setupContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem setSpringSensionToolStripMenuItem;
@@ -1855,6 +1784,10 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem saveDefaultsToolStripMenuItem;
         private System.Windows.Forms.CheckBox heaterBypassCheckBox;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label startupLabel;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripMenuItem zLSStripChartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zLSStripChartCCToolStripMenuItem;
     }
 }
 

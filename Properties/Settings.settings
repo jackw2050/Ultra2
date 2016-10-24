@@ -50,7 +50,7 @@
     <Setting Name="dataFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">E:\ZLS\data\</Value>
     </Setting>
-    <Setting Name="beamScale" Type="System.Double" Scope="User">
+    <Setting Name="beamScale" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1.298317</Value>
     </Setting>
     <Setting Name="meterNumber" Type="System.String" Scope="User">
@@ -59,40 +59,40 @@
     <Setting Name="engPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">"zls"</Value>
     </Setting>
-    <Setting Name="crossPeriod" Type="System.Double" Scope="User">
+    <Setting Name="crossPeriod" Type="System.Single" Scope="User">
       <Value Profile="(Default)">8.4E-06</Value>
     </Setting>
-    <Setting Name="longPeriod" Type="System.Double" Scope="User">
+    <Setting Name="longPeriod" Type="System.Single" Scope="User">
       <Value Profile="(Default)">8.4E-06</Value>
     </Setting>
-    <Setting Name="crossDampFactor" Type="System.Double" Scope="User">
+    <Setting Name="crossDampFactor" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.0915</Value>
     </Setting>
-    <Setting Name="longDampFactor" Type="System.Double" Scope="User">
+    <Setting Name="longDampFactor" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.0915</Value>
     </Setting>
-    <Setting Name="crossGain" Type="System.Double" Scope="User">
+    <Setting Name="crossGain" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.2</Value>
     </Setting>
-    <Setting Name="longGain" Type="System.Double" Scope="User">
+    <Setting Name="longGain" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.2</Value>
     </Setting>
-    <Setting Name="crossLead" Type="System.Double" Scope="User">
+    <Setting Name="crossLead" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.45</Value>
     </Setting>
-    <Setting Name="longLead" Type="System.Double" Scope="User">
+    <Setting Name="longLead" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.45</Value>
     </Setting>
-    <Setting Name="springTensionMax" Type="System.Double" Scope="User">
+    <Setting Name="springTensionMax" Type="System.Single" Scope="User">
       <Value Profile="(Default)">20000</Value>
     </Setting>
     <Setting Name="modeSwitch" Type="System.String" Scope="User">
       <Value Profile="(Default)">marine</Value>
     </Setting>
-    <Setting Name="crossBias" Type="System.Double" Scope="User">
+    <Setting Name="crossBias" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="longBias" Type="System.Double" Scope="User">
+    <Setting Name="longBias" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="dataFileName" Type="System.String" Scope="User">
@@ -101,70 +101,70 @@
     <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hi-Res</Value>
     </Setting>
-    <Setting Name="springTension" Type="System.Double" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="springTension" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="kFactor" Type="System.Double" Scope="User">
+    <Setting Name="kFactor" Type="System.Single" Scope="User">
       <Value Profile="(Default)">-2</Value>
     </Setting>
     <Setting Name="gyroType" Type="System.String" Scope="User">
       <Value Profile="(Default)">FOG pack</Value>
     </Setting>
-    <Setting Name="crossCompFactor_4" Type="System.Double" Scope="User">
+    <Setting Name="crossCompFactor_4" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCompPhase_4" Type="System.Double" Scope="User">
+    <Setting Name="crossCompPhase_4" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="crossCompFactor_16" Type="System.Double" Scope="User">
+    <Setting Name="crossCompFactor_16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="crossCompPhase_16" Type="System.Double" Scope="User">
+    <Setting Name="crossCompPhase_16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="longCompFactor_4" Type="System.Double" Scope="User">
+    <Setting Name="longCompFactor_4" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="longCompPhase_4" Type="System.Double" Scope="User">
+    <Setting Name="longCompPhase_4" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="longCompFactor_16" Type="System.Double" Scope="User">
+    <Setting Name="longCompFactor_16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="longCompPhase_16" Type="System.Double" Scope="User">
+    <Setting Name="longCompPhase_16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="CML_Fact" Type="System.Double" Scope="User">
+    <Setting Name="CML_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="AL_Fact" Type="System.Double" Scope="User">
+    <Setting Name="AL_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="AX_Fact" Type="System.Double" Scope="User">
+    <Setting Name="AX_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="VE_Fact" Type="System.Double" Scope="User">
+    <Setting Name="VE_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="CMX_Fact" Type="System.Double" Scope="User">
+    <Setting Name="CMX_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="XACC2_Fact" Type="System.Double" Scope="User">
+    <Setting Name="XACC2_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="LACC2_Fact" Type="System.Double" Scope="User">
+    <Setting Name="LACC2_Fact" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="XACC_Phase" Type="System.Double" Scope="User">
+    <Setting Name="XACC_Phase" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.217</Value>
     </Setting>
-    <Setting Name="LAXX_AL_Phase" Type="System.Double" Scope="User">
+    <Setting Name="LAXX_AL_Phase" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.6196</Value>
     </Setting>
-    <Setting Name="LACC_CML_Phase" Type="System.Double" Scope="User">
+    <Setting Name="LACC_CML_Phase" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.195</Value>
     </Setting>
-    <Setting Name="LACC_CMX_Phase" Type="System.Double" Scope="User">
+    <Setting Name="LACC_CMX_Phase" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0.185</Value>
     </Setting>
     <Setting Name="userPassword" Type="System.String" Scope="User">
@@ -176,85 +176,85 @@
     <Setting Name="zlsPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">password</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors1" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors1" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors2" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors2" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors3" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors3" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors4" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors4" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors5" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors5" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors6_VCC" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.035199999809265137</Value>
+    <Setting Name="crossCouplingFactors6_VCC" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.0352</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors7_AL" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-0.0032800000626593828</Value>
+    <Setting Name="crossCouplingFactors7_AL" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">-0.00328</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors8_AX" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-0.058649998158216476</Value>
+    <Setting Name="crossCouplingFactors8_AX" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">-0.05865</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors9_VE" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.0094400001689791679</Value>
+    <Setting Name="crossCouplingFactors9_VE" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.00944</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors10_AX2" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors10_AX2" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors11_XACC2" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors11_XACC2" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors12_LACC2" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors12_LACC2" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors13_CrossAxisCompensation4" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-0.0011992008658125997</Value>
+    <Setting Name="crossCouplingFactors13_CrossAxisCompensation4" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">-0.00119920087</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors14_LongAxisCompensation4" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-0.0013000000035390258</Value>
+    <Setting Name="crossCouplingFactors14_LongAxisCompensation4" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">-0.0013</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors15_CrossAxisCompensation16" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors15_CrossAxisCompensation16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors16_LongAxisCompensation16" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors16_LongAxisCompensation16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="crossCouplingFactors0" Type="System.Double" Scope="User">
+    <Setting Name="crossCouplingFactors0" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="analogFilter0" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter0" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="analogFilter1_AXPhase" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.22400000691413879</Value>
+    <Setting Name="analogFilter1_AXPhase" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.224</Value>
     </Setting>
-    <Setting Name="analogFilter2_ALPhase" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.24250000715255737</Value>
+    <Setting Name="analogFilter2_ALPhase" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.2425</Value>
     </Setting>
-    <Setting Name="analogFilter3" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.20000000298023224</Value>
+    <Setting Name="analogFilter3" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.2</Value>
     </Setting>
-    <Setting Name="analogFilter4_VCCPhase" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.28999999165534973</Value>
+    <Setting Name="analogFilter4_VCCPhase" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.29</Value>
     </Setting>
-    <Setting Name="analogFilter5_CrossAxisCompensationPhase4" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.60000002384185791</Value>
+    <Setting Name="analogFilter5_CrossAxisCompensationPhase4" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.6</Value>
     </Setting>
-    <Setting Name="analogFilter6_LongAxisCompensationPhase4" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.60000002384185791</Value>
+    <Setting Name="analogFilter6_LongAxisCompensationPhase4" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.6</Value>
     </Setting>
-    <Setting Name="analogFilter8_LongAxisCompensationPhase16" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter8_LongAxisCompensationPhase16" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="analogFilter8" Type="System.Double" Scope="User">
+    <Setting Name="analogFilter8" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.Double" Scope="User">
+    <Setting Name="Setting" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="version" Type="System.String" Scope="User">

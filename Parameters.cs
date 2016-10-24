@@ -431,83 +431,83 @@ namespace SerialPortTerminal
             //============  Cross Axis Parameters ================
             if (crossPeriodCheckBox.Checked)
             {
-                ConfigData.crossPeriod = Convert.ToDouble(crossPeriodTextBox.Text.Trim());
+                ConfigData.crossPeriod = Convert.ToSingle(crossPeriodTextBox.Text.Trim());
             }
             if (crossDampingCheckBox.Checked)
             {
-                ConfigData.crossDampFactor = Convert.ToDouble(crossDampingTextBox.Text.Trim());
+                ConfigData.crossDampFactor = Convert.ToSingle(crossDampingTextBox.Text.Trim());
             }
             if (crossGainCheckBox.Checked)
             {
-                ConfigData.crossGain = Convert.ToDouble(crossGainTextBox.Text.Trim());
+                ConfigData.crossGain = Convert.ToSingle(crossGainTextBox.Text.Trim());
             }
             if (crossLeadCheckBox.Checked)
             {
-                ConfigData.crossLead = Convert.ToDouble(crossPeriodTextBox.Text.Trim());
+                ConfigData.crossLead = Convert.ToSingle(crossPeriodTextBox.Text.Trim());
             }
             //============  Long Axis Parameters ================
 
             if (longPeriodCheckBox.Checked)
             {
-                ConfigData.longPeriod = Convert.ToDouble(longPeriodTextBox.Text.Trim());
+                ConfigData.longPeriod = Convert.ToSingle(longPeriodTextBox.Text.Trim());
             }
             if (longDampingCheckBox.Checked)
             {
-                ConfigData.longDampFactor = Convert.ToDouble(longDampingTextBox.Text.Trim());
+                ConfigData.longDampFactor = Convert.ToSingle(longDampingTextBox.Text.Trim());
             }
             if (longGainCheckBox.Checked)
             {
-                ConfigData.longGain = Convert.ToDouble(longGainTextBox.Text.Trim());
+                ConfigData.longGain = Convert.ToSingle(longGainTextBox.Text.Trim());
             }
             if (longLeadCheckBox.Checked)
             {
-                ConfigData.longLead = Convert.ToDouble(longLeadTextBox.Text.Trim());
+                ConfigData.longLead = Convert.ToSingle(longLeadTextBox.Text.Trim());
             }
 
 
             if (CMLFactorCheckBox.Checked)
             {
-                ConfigData.CML_Fact = Convert.ToDouble(CMLFactorTextBox.Text.Trim());
+                ConfigData.CML_Fact = Convert.ToSingle(CMLFactorTextBox.Text.Trim());
             }
             if (CMXFactorCheckBox.Checked)
             {
-                ConfigData.CMX_Fact = Convert.ToDouble(CMXFactorTextBox.Text.Trim());
+                ConfigData.CMX_Fact = Convert.ToSingle(CMXFactorTextBox.Text.Trim());
             }
             if (ALFactorCheckBox.Checked)
             {
-                ConfigData.AL_Fact = Convert.ToDouble(ALFactorTextBox.Text.Trim());
+                ConfigData.AL_Fact = Convert.ToSingle(ALFactorTextBox.Text.Trim());
             }
             if (AXFactorCheckBox.Checked)
             {
-                ConfigData.AX_Fact = Convert.ToDouble(AXFactorTextBox.Text.Trim());
+                ConfigData.AX_Fact = Convert.ToSingle(AXFactorTextBox.Text.Trim());
             }
             if (VEFactorCheckBox.Checked)
             {
-                ConfigData.VE_Fact = Convert.ToDouble(VEFactorTextBox.Text.Trim());
+                ConfigData.VE_Fact = Convert.ToSingle(VEFactorTextBox.Text.Trim());
             }
             if (XACC2FactorCheckBox.Checked)
             {
-                ConfigData.XACC2_Fact = Convert.ToDouble(XACC2FactorTextBox.Text.Trim());
+                ConfigData.XACC2_Fact = Convert.ToSingle(XACC2FactorTextBox.Text.Trim());
             }
             if (LACC2FactorCheckBox.Checked)
             {
-                ConfigData.LACC2_Fact = Convert.ToDouble(LACC2FactorTextBox.Text.Trim());
+                ConfigData.LACC2_Fact = Convert.ToSingle(LACC2FactorTextBox.Text.Trim());
             }
             if (XACCPhaseCheckBox.Checked)
             {
-                ConfigData.XACC_Phase = Convert.ToDouble(XACCPhasetextBox.Text.Trim());
+                ConfigData.XACC_Phase = Convert.ToSingle(XACCPhasetextBox.Text.Trim());
             }
             if (LACC_AL_PhaseCheckBox.Checked)
             {
-                ConfigData.LACC_AL_Phase = Convert.ToDouble(LACC_AL_PhaseTextBox.Text.Trim());
+                ConfigData.LACC_AL_Phase = Convert.ToSingle(LACC_AL_PhaseTextBox.Text.Trim());
             }
             if (LACC_CML_PhaseCheckBox.Checked)
             {
-                ConfigData.LACC_CML_Phase = Convert.ToDouble(LACC_CML_PhaseTextBox.Text.Trim());
+                ConfigData.LACC_CML_Phase = Convert.ToSingle(LACC_CML_PhaseTextBox.Text.Trim());
             }
             if (LACC_CMX_PhaseCheckBox.Checked)
             {
-                ConfigData.LACC_CMX_Phase = Convert.ToDouble(LACC_CMX_PhaseTextBox.Text.Trim());
+                ConfigData.LACC_CMX_Phase = Convert.ToSingle(LACC_CMX_PhaseTextBox.Text.Trim());
             }
 
             //============  Misc Parameters ================
@@ -518,11 +518,11 @@ namespace SerialPortTerminal
             }
             if (maxSpringTensionCheckBox.Checked)
             {
-                ConfigData.springTensionMax = Convert.ToDouble(maxSpringTensionTextBox.Text.Trim());
+                ConfigData.springTensionMax = Convert.ToSingle(maxSpringTensionTextBox.Text.Trim());
             }
             if (kFactorCheckBox.Checked)
             {
-                ConfigData.kFactor = Convert.ToDouble(kFactorTextBox.Text.Trim());
+                ConfigData.kFactor = Convert.ToSingle(kFactorTextBox.Text.Trim());
             }
             if (gyroTypeCheckBox.Checked)
             {
