@@ -99,7 +99,7 @@ namespace SerialPortTerminal
         //      public  Boolean engPasswordValid = false;
         //      public  Boolean mgrPasswordValid = false;
         //      public  Boolean userPasswordValid = false;
-        public Boolean newDataFile = true;
+        public Boolean newDataFile = false;
 
         //public double[] analogFilter = { 0.0, 0.2, 0.2, 0.2, 0, 2, 1.0, 1.0, 1.0, 10.0 }; // [0] is not used
         public int NAUX = 0;
@@ -928,7 +928,8 @@ namespace SerialPortTerminal
             // check for changes in time span.
             // listDataSource.Add(new Record(Data.Date, Data.gravity, Data.SpringTension, Data.CrossCoupling, Data.Beam, Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.totalCorrection));
             // listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.totalCorrection));
-            listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], 15000, Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.totalCorrection));
+            listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data1[6], Data.data1[7], Data.data1[8], Data.data1[9], Data.data1[10], Data.data1[11], Data.data1[12], Data.data1[13], Data.data1[14], Data.totalCorrection));
+
 
             //IFIL = 4 DEFAULT
 
@@ -1831,7 +1832,7 @@ namespace SerialPortTerminal
 
             //      SETUP MAIN PAIGE GRAVITY CHART
             this.GravityChart.ChartAreas["Gravity"].AxisX.IsMarginVisible = false;
-            this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Format = "HH:mm:ss"; ; //  "yyyy-MM-dd HH:mm:ss";
+            this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Format = "HH:mm:ss";  //  "yyyy-MM-dd HH:mm:ss";
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;
             this.GravityChart.Series["Digital Gravity"].XValueMember = "date";
             this.GravityChart.Series["Digital Gravity"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
@@ -1839,19 +1840,23 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Digital Gravity"].BorderWidth = 4;
 
             this.GravityChart.Series["Spring Tension"].XValueMember = "date";
+            this.GravityChart.Series["Spring Tension"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["Spring Tension"].YValueMembers = "springTension";
             this.GravityChart.Series["Spring Tension"].BorderWidth = 4;
 
             this.GravityChart.Series["Cross Coupling"].XValueMember = "date";
+            this.GravityChart.Series["Cross Coupling"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["Cross Coupling"].YValueMembers = "crossCoupling";
             this.GravityChart.Series["Cross Coupling"].BorderWidth = 4;
 
             this.GravityChart.Series["Raw Beam"].XValueMember = "date";
+            this.GravityChart.Series["Raw Beam"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["Raw Beam"].YValueMembers = "RawBeam";
             this.GravityChart.Series["Raw Beam"].BorderWidth = 4;
 
 
             this.GravityChart.Series["Total Correction"].XValueMember = "date";
+            this.GravityChart.Series["Total Correction"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["Total Correction"].YValueMembers = "totalCorrection";
             this.GravityChart.Series["Total Correction"].BorderWidth = 4;
 
@@ -1885,9 +1890,9 @@ namespace SerialPortTerminal
             //         this.GravityChart.Series.Add("Raw Gravity");
 
 
-            this.GravityChart.ChartAreas["CrossCoupling"].AxisX.IsMarginVisible = false;
-            this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Format = "HH:mm:ss"; ; //  "yyyy-MM-dd HH:mm:ss";
-            this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Angle = 0;
+            //this.GravityChart.ChartAreas["CrossCoupling"].AxisX.IsMarginVisible = false;
+            //this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Format = "HH:mm:ss"; ; //  "yyyy-MM-dd HH:mm:ss";
+            //this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Angle = 0;
 
             this.GravityChart.Series["AL"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["AL"].XValueMember = "date";
@@ -1895,6 +1900,7 @@ namespace SerialPortTerminal
             this.GravityChart.Series["AL"].BorderWidth = 2;
 
             this.GravityChart.Series["AX"].XValueMember = "date";
+            this.GravityChart.Series["AX"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["AX"].YValueMembers = "AX";
             this.GravityChart.Series["AX"].BorderWidth = 2;
 
@@ -1907,10 +1913,12 @@ namespace SerialPortTerminal
             this.GravityChart.Series["AX2"].BorderWidth = 2;
 
             this.GravityChart.Series["XACC"].XValueMember = "date";
+            this.GravityChart.Series["XACC"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["XACC"].YValueMembers = "XACC";
             this.GravityChart.Series["XACC"].BorderWidth = 2;
 
             this.GravityChart.Series["LACC"].XValueMember = "date";
+            this.GravityChart.Series["LACC"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["LACC"].YValueMembers = "LACC";
             this.GravityChart.Series["LACC"].BorderWidth = 2;
 
@@ -2102,20 +2110,19 @@ namespace SerialPortTerminal
 
             if (mode == "Time/Value")
             {
-                GravityChart.Series["Digital Gravity"].ToolTip = "Time = #VALX\n#VALY";
 
-
-                GravityChart.Series["Spring Tension"].ToolTip = "Time = #VALX{M/d H:mm}.\n#VALY";
-                GravityChart.Series["Cross Coupling"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["Raw Beam"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["AL"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["AX"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["VE"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["AX2"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["XACC"].ToolTip = "Time = #VALX\n#VALY{F2}";
-                GravityChart.Series["LACC"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["Raw Gravity"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["Spring Tension"].ToolTip = "Spring Tension\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["Cross Coupling"].ToolTip = "Cross Coupling\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["Raw Beam"].ToolTip = "Raw Beam\nTime: #VALX{HH:mm:ss}\nValue: VALY{N4}";
+                GravityChart.Series["Total Correction"].ToolTip = "Total Correction\nTime: VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["AL"].ToolTip = "AL\nTime: #VALX{HH:mm:ss}\nValue:# VALY{N4}";
+                GravityChart.Series["AX"].ToolTip = "AX\nTime: #VALX{HH:mm:ss}\nValue:# VALY{N4}";
+                GravityChart.Series["VE"].ToolTip = "VE\nTime: n#VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["AX2"].ToolTip = "AX2\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["XACC"].ToolTip = "XACC\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["LACC"].ToolTip = "LACC\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
+                GravityChart.Series["Raw Gravity"].ToolTip = "Raw Gravity\nTime: VALX{HH:mm:ss}\n#Value: #VALY{N4}";
+                GravityChart.Series["Digital Gravity"].ToolTip = "Digital Gravity\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
             }
             else if (mode == "Value")
             {
@@ -5025,6 +5032,7 @@ namespace SerialPortTerminal
             if (okToRun)
             {
                 fileRecording = true;
+                newDataFile = true;
                 recordingTextBox.Text = "Recording file";
                 recordingTextBox.BackColor = System.Drawing.Color.LightGreen;
                 surveyTextBox.Enabled = false;
