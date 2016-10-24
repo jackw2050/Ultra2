@@ -12,3 +12,91 @@ SO LENGTH = BYTE COUNT + 1
 	EACH COMAND NEEDS A BOOL FOR EXPECTED READ AND INT FOR LENGTH IF REQUIRED
 
 	SET DATE TIME RETURNS 2 BYTES + CHECKSUM
+
+
+	TODO
+	---------------------------------------------------------------------
+
+	Change Thread.Sleep(1000); to a timer
+
+	Still getting comm errors.  How to fix?  If byte count is too high try to use only lower part?
+
+	Set up for marine and hires mode (1 sec and 10 sec)
+
+	Fix GPS status
+
+	Complete meter status and port C status
+
+	Auto start	-	Add startup wizard - verify via user spring tension is correct
+
+	Servo loop to level platform for auto  start - wait for XACC and LACC to drop below +/- 10 for 3 counts
+
+	Startup - FOG/ heater status - not changing to green before timing out
+
+			- Enable don't wait for heater option
+
+	Data file	-	Add timer for closing and opening new file
+				-	initial is 24 hour at midnight
+				-	Add other options later
+
+	Add raw beam to user data form
+
+	Chart		-	Add option to enable cross coupling parameters chart
+				-	Add ZLS classic to color options
+				-	Remove trace markers from options
+				-	Remove chart type from options
+				-	Enable background color in options
+				-	Remove chart window options - set to 10 min for 1 sec and 60 min for 10 sec
+				-	Add new Y axis for cross coupling - make it auto
+				-	Add labels to Y axis for accelerometers and cross coupling
+				-	See if I need another filter for chart data
+
+	Time/ Date	-	Enable time set
+				-	Options 1) manual	2) from system clock
+				-	Add note that GPS time will override manual settings when GPS is connected
+				-	Can I select if it will override?
+				-	Add message box for time set success/ failure
+				-	Add second date/time label with GPS time next to it.  Set color of not used time to grey  Other system time
+
+	Alarm		-	Add alarm functions - what are they?
+
+	Cal data	-	Enable writing cal data to meter from parameters form
+
+	User parameters	-	add user parameter form with limited functions
+					-	have form upen based on login
+
+	RS232	-	Add data out functions with  various formats
+
+	Datalog	-	Add format selection - standard and one new version
+
+
+	Unit tests	-	Add more tests
+				-	serial data send calculation
+				-	checksum calculation
+				-	file write
+				-	file open
+				-	file read
+
+GPS	-	Change lon and lat to deg min sec - maybe N W etc
+
+User data form - fix everything
+
+
+
+
+ IFIL PROBABLY IS FROM MODE MARINE OR HI
+screen write
+ISCFLG = 1    RAWG, data(IFIL)[6 -> 10, 13, 14]
+ISCFLG = 2    LINEID, DAY, HR, MIN, SEC, DATA4[3], DATA1[3],DATA(IFIL)[4], DATA1[5], TC
+ISCFLG = 3    PRSTATS
+ISCFLG = 4    LAT, LON, ALT, ISHFT(GPSTATS, -6)
+
+
+
+/*  IFIL PROBABLY IS FROM MODE MARINE OR HI
+RS232 WRITE
+MODESW = 1    LINEID, DAY, HR, MIN, SEC, GRAV, DATA1[3], DATA1[4], BSCALE * DATA1[5] ,  data1[6 -> 14], LAT, LON, ALT,GPSTATS, APERX * 1.0E6
+MODESW = 2    LINEID, DAY, HR, MIN, SEC, GRAV, DATA4[3], DATA4[4], BSCALE * DATA4[5] ,  data4[6 -> 14], LAT, LON, ALT,GPSTATS, APERX * 1.0E6
+
+
+RNS 2 BYTES + CHECKSUM

@@ -33,7 +33,7 @@
       <Value Profile="(Default)">E:\ZLS\</Value>
     </Setting>
     <Setting Name="configFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sampleConfigFile.csv</Value>
+      <Value Profile="(Default)">ConfigFile_Test1.csv</Value>
     </Setting>
     <Setting Name="configFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">e:\ZLS\</Value>

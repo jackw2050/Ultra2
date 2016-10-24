@@ -11,6 +11,7 @@ namespace SerialPortTerminal
 {
     public partial class Parameters : Form
     {
+
         public static Boolean updateConfigData = false;
         public Parameters()
         {
@@ -415,6 +416,9 @@ namespace SerialPortTerminal
         {
             UpdateConfigValues();
             updateConfigData = true;
+
+
+
         }
 
         private void Parameters_Load(object sender, EventArgs e)

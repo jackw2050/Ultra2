@@ -123,7 +123,7 @@ namespace SerialPortTerminal
         private Boolean autostart = false;
         public int timerOffset = 100;
         public static DateTime fileStartTime;
-        public static string fileName = programPath + "test.csv";// c:/zls
+        public static string fileName;// = programPath + "test.csv";// c:/zls
         public static string calFileName;
 
         public static bool fileRecording = false;
@@ -1266,6 +1266,16 @@ namespace SerialPortTerminal
                 Console.WriteLine(Data.Date.Second);
                 showData = true;
             }
+
+
+            if (Parameters.Visible)// Update at 1 sec
+            {
+                UpdateCalibrationParametersForm();
+            }
+
+
+
+
             if (mdt.dataValid && showData)// May want to move this to the called methods
             {
 
@@ -1389,10 +1399,6 @@ namespace SerialPortTerminal
 
 
 
-                if (Parameters.Visible)
-                {
-                    UpdateCalibrationParametersForm();
-                }
                 /*
                 if (frmTerminal.DataStatusForm.Visible)
                 {
@@ -1850,11 +1856,17 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Total Correction"].BorderWidth = 4;
 
 
-
+          
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.ZoomReset(1);
             this.GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.ZoomReset(1);
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;// can vary from -90 to + 90
+
+            this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
+            this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.ZoomReset(1);
+            this.GravityChart.ChartAreas["Gravity"].AxisY2.ScaleView.ZoomReset(1);
+            this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;// can vary from -90 to + 90
+
 
             //Enable range selection and zooming end user interface
 
@@ -1867,7 +1879,7 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             this.GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
 
-
+           
 
             //      SETUP FLOATING CROSS COUPLING CHART
             //         this.GravityChart.Series.Add("Raw Gravity");
@@ -2003,9 +2015,11 @@ namespace SerialPortTerminal
         {
             // Set automatic zooming
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["Gravity"].AxisY2.ScaleView.Zoomable = true;
             GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.Zoomable = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.Zoomable = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["CrossCoupling"].AxisY2.ScaleView.Zoomable = true;
 
             //            GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Zoom(2, 3);
             //            GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.ZoomReset(1);
@@ -2017,10 +2031,12 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSize = .1D;
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoomable = true;
             GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.Zoomable = true;
+            GravityChart.ChartAreas["Gravity"].AxisY2.ScaleView.Zoomable = true;
 
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.ZoomReset(1);
             GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.ZoomReset(1);
+            GravityChart.ChartAreas["Gravity"].AxisY2.ScaleView.ZoomReset(1);
 
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.SmallScrollMinSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScaleView.SmallScrollMinSize = .1D;
@@ -2037,6 +2053,7 @@ namespace SerialPortTerminal
             // Set automatic scrolling
             GravityChart.ChartAreas["Gravity"].CursorX.AutoScroll = true;
             GravityChart.ChartAreas["Gravity"].CursorY.AutoScroll = true;
+
             GravityChart.ChartAreas["CrossCoupling"].CursorX.AutoScroll = true;
             GravityChart.ChartAreas["CrossCoupling"].CursorY.AutoScroll = true;
         }
@@ -2058,6 +2075,7 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.Enabled = true;
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
+            GravityChart.ChartAreas["Gravity"].AxisY2.ScrollBar.IsPositionedInside = true;
 
             // Cross Coupling
             // Change scrollbar colors
@@ -2077,15 +2095,17 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
         }
-
+        // TODO SetChartToolTips
         private void SetChartToolTips()
         {
-            string mode = "Value";
+            string mode = "Time/Value";
 
             if (mode == "Time/Value")
             {
                 GravityChart.Series["Digital Gravity"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["Spring Tension"].ToolTip = "Time = #VALX\n#VALY";
+
+
+                GravityChart.Series["Spring Tension"].ToolTip = "Time = #VALX{M/d H:mm}.\n#VALY";
                 GravityChart.Series["Cross Coupling"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Raw Beam"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Total Correction"].ToolTip = "Time = #VALX\n#VALY";
@@ -2093,7 +2113,7 @@ namespace SerialPortTerminal
                 GravityChart.Series["AX"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["VE"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["AX2"].ToolTip = "Time = #VALX\n#VALY";
-                GravityChart.Series["XACC"].ToolTip = "Time = #VALX\n#VALY";
+                GravityChart.Series["XACC"].ToolTip = "Time = #VALX\n#VALY{F2}";
                 GravityChart.Series["LACC"].ToolTip = "Time = #VALX\n#VALY";
                 GravityChart.Series["Raw Gravity"].ToolTip = "Time = #VALX\n#VALY";
             }
@@ -3651,7 +3671,7 @@ namespace SerialPortTerminal
                     data = CreateCrossAxisParametersArray(4, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
 
                     //     data = CreateCrossAxisParametersArray(0x04, 1.91e-5, .212, .15, .5, -8.99998e-4, 1.0);
-
+/*
                     data[0] = 0x04;// Command
                     data[1] = 0xBA;// crossPeriod
                     data[2] = 0xED;// crossPeriod
@@ -3678,7 +3698,7 @@ namespace SerialPortTerminal
                     data[23] = 0x80;
                     data[24] = 0x3F;
                     data[25] = 0xC4;// checksum
-
+*/
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
                     //      data = CreateCrossAxisParametersArray(0x04, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
@@ -4385,6 +4405,8 @@ namespace SerialPortTerminal
             {
                 ReadConfigFile(configFile);
             }
+
+
         }
 
         public void ReadConfigFile(string configFile)

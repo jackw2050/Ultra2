@@ -145,7 +145,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sampleConfigFile.csv")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ConfigFile_Test1.csv")]
         public string configFileName {
             get {
                 return ((string)(this["configFileName"]));
