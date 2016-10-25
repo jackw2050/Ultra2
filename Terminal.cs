@@ -42,6 +42,7 @@ namespace SerialPortTerminal
         private ConfigData ConfigData = new ConfigData();
         private ControlSwitches ControlSwitches = new ControlSwitches();
         public Data Data = new Data();
+
         //        private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
 
@@ -155,7 +156,8 @@ namespace SerialPortTerminal
             // and printing a document.
             public void ThreadProc()
             {
-                frmTerminal.RecordDataToFile(boilerplate, value);
+                Data Data = new Data();
+                frmTerminal.RecordDataToFile(Data);
                 frmTerminal.Dispose();
             }
         }
@@ -268,6 +270,7 @@ namespace SerialPortTerminal
                 get { return rAwg; }
                 set { rAwg = value; }
             }
+
             public Single VCC
             {
                 get { return vcc; }
@@ -862,8 +865,6 @@ namespace SerialPortTerminal
                 // Show the user the incoming data in hex format
                 Log(LogMsgType.Incoming, ByteArrayToHexString(buffer) + "\tBytes to read: " + bytes + "Length: \t" + Convert.ToString(buffer.Length) + "\n\n");
 
-
-
                 //        mdt.ParseNewMeterData(buffer);
 
                 //             mdt.GetMeterData(buffer);// send buffer for parsing
@@ -875,10 +876,8 @@ namespace SerialPortTerminal
                     //                   ThreadProcSafe();//  Initially write data1 -data4 in text boxes
                     if (Data.Sec % 10 == 0)
                     {
-
                     }
                     GravityChart.DataBind();
-
                 }
             }
         }
@@ -921,8 +920,6 @@ namespace SerialPortTerminal
             }
         }
 
-
-
         public void UpdateGravityChart()
         {
             // check for changes in time span.
@@ -930,14 +927,9 @@ namespace SerialPortTerminal
             // listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.totalCorrection));
             listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data1[6], Data.data1[7], Data.data1[8], Data.data1[9], Data.data1[10], Data.data1[11], Data.data1[12], Data.data1[13], Data.data1[14], Data.totalCorrection));
 
-
             //IFIL = 4 DEFAULT
 
-
-
             //  listDataSource.Add(new Record(Data.Date, 10, 50, 100, 150, 200, 10, 20, 30, 40, -10, -20, -30, -40, 50, -50));
-
-
 
             GravityChart.DataSource = listDataSource;
             GravityChart.DataBind();// do I need this?
@@ -945,20 +937,19 @@ namespace SerialPortTerminal
             CleanUp(chartWindowTimePeriod, chartWindowTimeSpan);// limit chart to 10 min
         }
 
-
         public void DataFileOperations(myData myData)
         {
             /*
              *                  * FILE WRITE
                  * IDSKFLG = 1    LINEID, DAY, HR, MIN, SEC, GRAV, DATA4[3], DATA4[4], BSCALE * DATA4[5] ,  data4[6 -> 14], LAT, LON, ALT,GPSTATS, APERX * 1.0E6
                  * IDSKFLG = 2    LINEID, DAY, HR, MIN, SEC, GRAV, DATA1[3], DATA1[4], BSCALE * DATA1[5] ,  data1[6 -> 14], LAT, LON, ALT,GPSTATS, APERX * 1.0E6
-                 * 
+                 *
                  */
             //TODO: file recording
             string fileStatus;
             if (fileRecording == true)
             {
-                if (newDataFile)
+                if (newDataFile)// change this.  New file will be from button or on timer at midnight
                 {
                     fileStatus = "Open";
                     newDataFile = false;
@@ -1025,7 +1016,6 @@ namespace SerialPortTerminal
             });
             frmTerminal.Dispose();
         }
-
 
         public void UpdateGravityDataForm(myData myData)
         {
@@ -1244,7 +1234,6 @@ namespace SerialPortTerminal
                     }
                 }
             });
-
         }
 
         public void CallGetMeterData(object buffer)
@@ -1268,18 +1257,13 @@ namespace SerialPortTerminal
                 showData = true;
             }
 
-
             if (Parameters.Visible)// Update at 1 sec
             {
                 UpdateCalibrationParametersForm();
             }
 
-
-
-
             if (mdt.dataValid && showData)// May want to move this to the called methods
             {
-
                 //  Console.WriteLine(bufferByte.Length + "     " + bufferByte[0] + "    " + mdt.latitude + "    " + DateTime.Now.ToString());
                 //TODO: get callbacks working
 
@@ -1290,8 +1274,6 @@ namespace SerialPortTerminal
                 //      Update myData based on 1 or 10 second sampling
                 //
                 // *************************************************************************************************8
-
-
 
                 myData.Date = Data.Date;
                 myData.Gravity = Data.gravity;
@@ -1323,9 +1305,7 @@ namespace SerialPortTerminal
                  * ISCFLG = 2    LINEID, DAY, HR, MIN, SEC, DATA4[3], DATA1[3],DATA(IFIL)[4], DATA1[5], TC
                  * ISCFLG = 3    PRSTATS
                  * ISCFLG = 4    LAT, LON, ALT, ISHFT(GPSTATS, -6)
-                 * 
-                 
-                 
+                 *
 
                  *                 /*  IFIL PROBABLY IS FROM MODE MARINE OR HI
                  * RS232 WRITE
@@ -1333,8 +1313,6 @@ namespace SerialPortTerminal
                  * MODESW = 2    LINEID, DAY, HR, MIN, SEC, GRAV, DATA4[3], DATA4[4], BSCALE * DATA4[5] ,  data4[6 -> 14], LAT, LON, ALT,GPSTATS, APERX * 1.0E6
 
                  * */
-
-
 
                 // *******************************************************************************************************
                 //
@@ -1344,7 +1322,6 @@ namespace SerialPortTerminal
 
                 // Write grav data to file
                 DataFileOperations(myData);
-
 
                 if (this.GravityChart.InvokeRequired)
                 {
@@ -1363,9 +1340,6 @@ namespace SerialPortTerminal
                         UpdateGravityChart();
                     }
                 }
-
-
-
 
                 // Update GPS data on main sheet
                 Invoke((MethodInvoker)delegate
@@ -1387,7 +1361,6 @@ namespace SerialPortTerminal
                     }
                 });
 
-
                 if (meterStatusGroupBox.Visible)
                 {
                     ShowStartupStatus();
@@ -1397,8 +1370,6 @@ namespace SerialPortTerminal
                 {
                     UpdateGravityDataForm(myData);
                 }
-
-
 
                 /*
                 if (frmTerminal.DataStatusForm.Visible)
@@ -1424,10 +1395,8 @@ namespace SerialPortTerminal
                         DataStatusForm.textBox1.Text = (Data.gravity.ToString("N", CultureInfo.InvariantCulture));
                     });
                 }   */
-
             }
             frmTerminal.Dispose();
-
         }
 
         private void ThreadParametersFormProcSafe()
@@ -1756,14 +1725,11 @@ namespace SerialPortTerminal
         #endregion Data Grid View
 
         #region Chart
+
         // TODO Gravity chart setup
         private void SetupChart()
         {
-
-
             this.GravityChart.ChartAreas["CrossCoupling"].Visible = false;
-
-
 
             // Add series to chart
 
@@ -1786,11 +1752,7 @@ namespace SerialPortTerminal
             //     this.GravityChart.Series["Cross Coupling"].YAxisType    = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
             this.GravityChart.Series["Total Correction"].YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
 
-
-
-
             this.GravityChart.Titles.Add("Gravity");// Should probably change this
-
 
             // Select chart area for series
 
@@ -1807,8 +1769,6 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Total Correction"].Legend = "Gravity Legend";
             this.GravityChart.Series["XACC"].Legend = "Gravity Legend";
             this.GravityChart.Series["LACC"].Legend = "Gravity Legend";
-
-
 
             this.GravityChart.Series["AL"].ChartArea = "CrossCoupling";
             this.GravityChart.Series["AX"].ChartArea = "CrossCoupling";
@@ -1827,8 +1787,6 @@ namespace SerialPortTerminal
             // this.GravityChart.Series["LACC"].Legend = "Cross Coupling Legend";
             this.GravityChart.Series["Raw Gravity"].Legend = "Cross Coupling Legend";
             this.GravityChart.Series["Raw Beam"].Legend = "Cross Coupling Legend";
-
-
 
             //      SETUP MAIN PAIGE GRAVITY CHART
             this.GravityChart.ChartAreas["Gravity"].AxisX.IsMarginVisible = false;
@@ -1854,14 +1812,11 @@ namespace SerialPortTerminal
             this.GravityChart.Series["Raw Beam"].YValueMembers = "RawBeam";
             this.GravityChart.Series["Raw Beam"].BorderWidth = 4;
 
-
             this.GravityChart.Series["Total Correction"].XValueMember = "date";
             this.GravityChart.Series["Total Correction"].XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
             this.GravityChart.Series["Total Correction"].YValueMembers = "totalCorrection";
             this.GravityChart.Series["Total Correction"].BorderWidth = 4;
 
-
-          
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoom(2, 3);
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.ZoomReset(1);
             this.GravityChart.ChartAreas["Gravity"].AxisY.ScaleView.ZoomReset(1);
@@ -1871,7 +1826,6 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.ZoomReset(1);
             this.GravityChart.ChartAreas["Gravity"].AxisY2.ScaleView.ZoomReset(1);
             this.GravityChart.ChartAreas["Gravity"].AxisX.LabelStyle.Angle = 0;// can vary from -90 to + 90
-
 
             //Enable range selection and zooming end user interface
 
@@ -1884,11 +1838,8 @@ namespace SerialPortTerminal
             this.GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.IsPositionedInside = true;
             this.GravityChart.ChartAreas["Gravity"].AxisY.ScrollBar.IsPositionedInside = true;
 
-           
-
             //      SETUP FLOATING CROSS COUPLING CHART
             //         this.GravityChart.Series.Add("Raw Gravity");
-
 
             //this.GravityChart.ChartAreas["CrossCoupling"].AxisX.IsMarginVisible = false;
             //this.GravityChart.ChartAreas["CrossCoupling"].AxisX.LabelStyle.Format = "HH:mm:ss"; ; //  "yyyy-MM-dd HH:mm:ss";
@@ -1959,12 +1910,10 @@ namespace SerialPortTerminal
             //          SetLegend();
         }
 
-
         private void SetChartAxis(Boolean auto)
         {
             if (auto)
             {
-
                 // chart.ChartAreas[0].RecalculateAxesScale();
 
                 GravityChart.ChartAreas["Gravity"].AxisY.Maximum = Double.NaN;
@@ -1976,7 +1925,6 @@ namespace SerialPortTerminal
                 GravityChart.ChartAreas["Gravity"].AxisY2.Minimum = Double.NaN;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.Maximum = Double.NaN;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.Minimum = Double.NaN;
-
             }
             else
             {
@@ -1989,9 +1937,7 @@ namespace SerialPortTerminal
                 GravityChart.ChartAreas["Gravity"].AxisY2.Minimum = -100;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.Maximum = 10;
                 GravityChart.ChartAreas["CrossCoupling"].AxisY2.Minimum = -10;
-
             }
-
         }
 
         private void SetChartCursors()
@@ -2103,6 +2049,7 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].AxisX.ScrollBar.IsPositionedInside = true;
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScrollBar.IsPositionedInside = true;
         }
+
         // TODO SetChartToolTips
         private void SetChartToolTips()
         {
@@ -2110,7 +2057,6 @@ namespace SerialPortTerminal
 
             if (mode == "Time/Value")
             {
-
                 GravityChart.Series["Spring Tension"].ToolTip = "Spring Tension\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
                 GravityChart.Series["Cross Coupling"].ToolTip = "Cross Coupling\nTime: #VALX{HH:mm:ss}\nValue: #VALY{N4}";
                 GravityChart.Series["Raw Beam"].ToolTip = "Raw Beam\nTime: #VALX{HH:mm:ss}\nValue: VALY{N4}";
@@ -2570,7 +2516,6 @@ namespace SerialPortTerminal
                 get { return rAwg; }
                 set { rAwg = value; }
             }
-
         }
 
         public void SetChartBorderWidth(int width)
@@ -3661,10 +3606,6 @@ namespace SerialPortTerminal
 
                     break;
 
-
-
-
-
                 case "Set Cross Axis Parameters": //  4
                                                   // TODO: clean up code for Set Cross Axis Parameters
                                                   /*      aCrossPeriod = Convert.ToSingle(0.000075); //ConfigData.crossPeriod;
@@ -3678,34 +3619,34 @@ namespace SerialPortTerminal
                     data = CreateCrossAxisParametersArray(4, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
 
                     //     data = CreateCrossAxisParametersArray(0x04, 1.91e-5, .212, .15, .5, -8.99998e-4, 1.0);
-/*
-                    data[0] = 0x04;// Command
-                    data[1] = 0xBA;// crossPeriod
-                    data[2] = 0xED;// crossPeriod
-                    data[3] = 0x0C;// crossPeriod
-                    data[4] = 0x37;// crossPeriod
-                    data[5] = 0x5A;
-                    data[6] = 0x64;
-                    data[7] = 0xBB;
-                    data[8] = 0x3D;
-                    data[9] = 0xCD;
-                    data[10] = 0xCC;
-                    data[11] = 0x4C;
-                    data[12] = 0x3E;
-                    data[13] = 0x66;
-                    data[14] = 0x66;
-                    data[15] = 0xE6;
-                    data[16] = 0x3E;
-                    data[17] = 0x00;
-                    data[18] = 0x00;
-                    data[19] = 0x00;
-                    data[20] = 0x00;
-                    data[21] = 0x00;
-                    data[22] = 0x00;
-                    data[23] = 0x80;
-                    data[24] = 0x3F;
-                    data[25] = 0xC4;// checksum
-*/
+                    /*
+                                        data[0] = 0x04;// Command
+                                        data[1] = 0xBA;// crossPeriod
+                                        data[2] = 0xED;// crossPeriod
+                                        data[3] = 0x0C;// crossPeriod
+                                        data[4] = 0x37;// crossPeriod
+                                        data[5] = 0x5A;
+                                        data[6] = 0x64;
+                                        data[7] = 0xBB;
+                                        data[8] = 0x3D;
+                                        data[9] = 0xCD;
+                                        data[10] = 0xCC;
+                                        data[11] = 0x4C;
+                                        data[12] = 0x3E;
+                                        data[13] = 0x66;
+                                        data[14] = 0x66;
+                                        data[15] = 0xE6;
+                                        data[16] = 0x3E;
+                                        data[17] = 0x00;
+                                        data[18] = 0x00;
+                                        data[19] = 0x00;
+                                        data[20] = 0x00;
+                                        data[21] = 0x00;
+                                        data[22] = 0x00;
+                                        data[23] = 0x80;
+                                        data[24] = 0x3F;
+                                        data[25] = 0xC4;// checksum
+                    */
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
                     //      data = CreateCrossAxisParametersArray(0x04, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
@@ -3887,13 +3828,13 @@ namespace SerialPortTerminal
             // wait for platform to level
             //  sendCmd("Update Gyro Bias Offset");        // 10
         }
+
         // TODO StoreDefaultVariables
         public void StoreDefaultVariables()
         {
             // Load configuration data from stored defaults
             Properties.Settings.Default.chartWindowTimeSpan = chartWindowTimeSpan;
             Properties.Settings.Default.chartWindowTimePeriod = chartWindowTimePeriod;
-
 
             Properties.Settings.Default.springTension = Data.SpringTension;
             Properties.Settings.Default.beamScale = (short)ConfigData.beamScale;
@@ -4123,7 +4064,6 @@ namespace SerialPortTerminal
             double aLongPeriod = ConfigData.longPeriod;
             double aLongDampFactor = ConfigData.longDampFactor;
 
-
             // windowSizeNumericUpDown.Maximum = Properties.Settings.Default.chartWindowTimeSpan;
             // comboBox1.SelectedValue = Properties.Settings.Default.chartWindowTimePeriod;
 
@@ -4141,11 +4081,6 @@ namespace SerialPortTerminal
                 windowSizeNumericUpDown.Maximum = 60;
             }
             windowSizeNumericUpDown.Value = chartWindowTimeSpan;
-
-
-
-
-
 
             frmTerminal.Dispose();
         }
@@ -4412,8 +4347,6 @@ namespace SerialPortTerminal
             {
                 ReadConfigFile(configFile);
             }
-
-
         }
 
         public void ReadConfigFile(string configFile)
@@ -4685,141 +4618,245 @@ namespace SerialPortTerminal
             }
         }// ReadConfigFile
 
-        [DelimitedRecord(",")]
-        public class MarineData
+         /*
+                 [DelimitedRecord(",")]
+                 public class MarineData
+                 {
+                     public string lineId;
+                     public int Year;
+                     public int Days;
+                     public int Hour;
+                     public int Minute;
+                     public int Second;
+                     public double Gravity;
+                     public double SpringTension;
+                     public double CrossCoupling;
+                     public double RawBeam;// need to change this to avg beam
+                     public double VCC;
+                     public double AL;
+                     public double AX;
+                     public double VE;
+                     public double AX2;
+                     public double XACC2;
+                     public double LACC2;
+                     public double XACC;
+                     public double LACC;
+                     public double Period;
+                     public double longitude;
+                     public double latitude;
+                     public double altitude;
+                 }
+
+                 [DelimitedRecord(",")]
+                 public class MarineDataHeader
+                 {
+                     public string lineId;
+                     public string Year;
+                     public string Days;
+                     public string Hour;
+                     public string Minute;
+                     public string Second;
+                     public string Gravity;
+                     public string SpringTension;
+                     public string CrossCoupling;
+                     public string RawBeam;// need to change this to avg beam
+                     public string VCC;
+                     public string AL;
+                     public string AX;
+                     public string VE;
+                     public string AX2;
+                     public string XACC2;
+                     public string LACC2;
+                     public string XACC;
+                     public string LACC;
+                     public string Period;
+                     public string longitude;
+                     public string latitude;
+                     public string altitude;
+                 }
+
+                 public void RecordMeterDataToFile()
+                 {
+                     var engine = new FileHelperEngine<MarineData>();
+                     var MarineData = new List<MarineData>();
+
+                     if (newDataFile)
+                     {
+                         var MarineDataHeader = new List<MarineDataHeader>();
+                         MarineDataHeader.Add(new MarineDataHeader()
+                         {
+                             lineId = "Survey Name",
+                             Year = "Year",
+                             Days = "Day",
+                             Hour = "Hour",
+                             Minute = "Minute",
+                             Second = "Second",
+                             Gravity = "Gravity",
+                             SpringTension = "Spring Tension",
+                             CrossCoupling = "Coupling",
+                             RawBeam = "Avg. Beam",
+                             VCC = "VCC",
+                             AL = "AL",
+                             AX = "AX",
+                             VE = "VE",
+                             AX2 = "AX2",
+                             XACC2 = "XACC2",
+                             LACC2 = "LACC2",
+                             XACC = "XACC",
+                             LACC = "LACC",
+                             Period = "Period",
+                             longitude = "Longitude",
+                             latitude = "Latitude",
+                             altitude = "Altitude"
+                         });
+                         engine.WriteFile("FileOut.csv", MarineData);
+                     }
+
+                     MarineData.Add(new MarineData()
+                     {
+                         lineId = surveyName,
+                         Year = Data.year,
+                         Days = Data.day,
+                         Hour = Data.Hour,
+                         Minute = Data.Min,
+                         Second = Data.Sec,
+                         Gravity = Data.gravity,
+                         SpringTension = Data.SpringTension,
+                         CrossCoupling = Data.CrossCoupling,
+                         RawBeam = Data.beam,// need to change this  to avg beam
+                         VCC = Data.VCC,
+                         AL = Data.AL,
+                         AX = Data.AX,
+                         VE = Data.VE,
+                         AX2 = Data.AX2,
+                         XACC2 = Data.XACC2,
+                         LACC2 = Data.LACC2,
+                         XACC = Data.XACC,
+                         LACC = Data.LACC,
+                         Period = 0,// need to add this in calculate marine data
+                         longitude = Data.longitude,
+                         latitude = Data.latitude,
+                         altitude = Data.altitude
+                     });
+
+                     engine.WriteFile("FileOut.csv", MarineData);
+                 }
+
+                 // This method opens and writes the header to the data log file
+
+           */
+    public void CloseDataFile()
         {
-            public string lineId;
-            public int Year;
-            public int Days;
-            public int Hour;
-            public int Minute;
-            public int Second;
-            public double Gravity;
-            public double SpringTension;
-            public double CrossCoupling;
-            public double RawBeam;// need to change this to avg beam
-            public double VCC;
-            public double AL;
-            public double AX;
-            public double VE;
-            public double AX2;
-            public double XACC2;
-            public double LACC2;
-            public double XACC;
-            public double LACC;
-            public double Period;
-            public double longitude;
-            public double latitude;
-            public double altitude;
+            
         }
-
-        [DelimitedRecord(",")]
-        public class MarineDataHeader
+        // TODO Open new data file
+        public void OpenDataFile()
         {
-            public string lineId;
-            public string Year;
-            public string Days;
-            public string Hour;
-            public string Minute;
-            public string Second;
-            public string Gravity;
-            public string SpringTension;
-            public string CrossCoupling;
-            public string RawBeam;// need to change this to avg beam
-            public string VCC;
-            public string AL;
-            public string AX;
-            public string VE;
-            public string AX2;
-            public string XACC2;
-            public string LACC2;
-            public string XACC;
-            public string LACC;
-            public string Period;
-            public string longitude;
-            public string latitude;
-            public string altitude;
-        }
+            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
+            string delimitor = ",";
+            fileType = "csv";
 
-        public void RecordMeterDataToFile()
-        {
-            var engine = new FileHelperEngine<MarineData>();
-            var MarineData = new List<MarineData>();
 
-            if (newDataFile)
+            switch (fileType)
             {
-                var MarineDataHeader = new List<MarineDataHeader>();
-                MarineDataHeader.Add(new MarineDataHeader()
-                {
-                    lineId = "Survey Name",
-                    Year = "Year",
-                    Days = "Day",
-                    Hour = "Hour",
-                    Minute = "Minute",
-                    Second = "Second",
-                    Gravity = "Gravity",
-                    SpringTension = "Spring Tension",
-                    CrossCoupling = "Coupling",
-                    RawBeam = "Avg. Beam",
-                    VCC = "VCC",
-                    AL = "AL",
-                    AX = "AX",
-                    VE = "VE",
-                    AX2 = "AX2",
-                    XACC2 = "XACC2",
-                    LACC2 = "LACC2",
-                    XACC = "XACC",
-                    LACC = "LACC",
-                    Period = "Period",
-                    longitude = "Longitude",
-                    latitude = "Latitude",
-                    altitude = "Altitude"
-                });
-                engine.WriteFile("FileOut.csv", MarineData);
+                case "csv":
+                    delimitor = ",";
+                    break;
+
+                case "tsv":
+                    delimitor = "\t";
+                    break;
+
+                case "txt":
+                    delimitor = " ";
+                    break;
+
+                default:
+                    break;
             }
 
-            MarineData.Add(new MarineData()
+            string fileFormat = "standard";
+            /*
+                Format options
+                Long marine mode
+                Long High Res mode
+                Short
+                Norstar
+                ZLS - new format
+
+              */
+            string header = "";
+            string myString = "";
+            if (timeCheck == 0)
             {
+                timeCheck = fileStartTime.Minute;
+            }
+            if (DateTime.Now.Minute == timeCheck + 2)
+            {
+                timeCheck = DateTime.Now.Minute;
+                thisDate = String.Format("{0:yyyy-MM-dd-hh-mm-ss}", DateTime.Now);     //Convert.ToString(DateTime.Now);
+            }
+            dataFileName = dataFilePath + ConfigData.meterNumber + "-" + thisDate + "-" + surveyName + "." + fileType;
 
+            try
+            {
+                using (StreamWriter writer = File.CreateText(dataFileName))
+                {
+                    switch (fileFormat)// There is only two formats std and new
+                    {
+                        case "standard":// copy this as serial data format
+                            header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
+                            + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                            + "Cross coupling" + delimitor + "Average Beam" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
+                            + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor + "LACC2" + delimitor
+                            + "XACC" + delimitor + "LACC" + delimitor + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude"
+                            + delimitor + "GPS Status";
 
-                lineId = surveyName,
-                Year = Data.year,
-                Days = Data.day,
-                Hour = Data.Hour,
-                Minute = Data.Min,
-                Second = Data.Sec,
-                Gravity = Data.gravity,
-                SpringTension = Data.SpringTension,
-                CrossCoupling = Data.CrossCoupling,
-                RawBeam = Data.beam,// need to change this  to avg beam
-                VCC = Data.VCC,
-                AL = Data.AL,
-                AX = Data.AX,
-                VE = Data.VE,
-                AX2 = Data.AX2,
-                XACC2 = Data.XACC2,
-                LACC2 = Data.LACC2,
-                XACC = Data.XACC,
-                LACC = Data.LACC,
-                Period = 0,// need to add this in calculate marine data
-                longitude = Data.longitude,
-                latitude = Data.latitude,
-                altitude = Data.altitude
-            });
+                            break;
+/*
+                        case "short":// this is serial data format
+                            header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
+                            + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity";
+                            break;
 
-            engine.WriteFile("FileOut.csv", MarineData);
+                        case "norstar":// this is serial data format
+                            header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
+                            + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                            + "Average Beam" + delimitor + "Cross coupling" + delimitor + "Total Correction" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
+                            + "AX" + delimitor + "VE" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "AX2 or CMX";
+                            break;
+*/
+                        case "new":
+                            header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
+                            + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
+
+                            break;
+
+                        default:
+                            header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                            + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
+                            + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
+                            + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
+                            + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
+
+                            break;
+                    }
+                    writer.WriteLine(header);
+                    writer.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
-        // This method opens and writes the header to the data log file
-
-
-
         // TODO Record to data file
-        public void RecordDataToFile(string fileOperation, myData d)
+        public void RecordDataToFile( Data Data)
         {
-            // fileOperation  0 - open,  1 - append, 2 - close
-            string dataFile;
-            // DateTime myNow = DateTime.Now;
             string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
             string delimitor = ",";
 
@@ -4843,7 +4880,7 @@ namespace SerialPortTerminal
 
             string fileFormat = "standard";
             /*
-                Format options 
+                Format options
                 Long marine mode
                 Long High Res mode
                 Short
@@ -4859,108 +4896,58 @@ namespace SerialPortTerminal
             }
             if (DateTime.Now.Minute == timeCheck + 2)
             {
-                fileOperation = "Open";
+                
                 timeCheck = DateTime.Now.Minute;
                 thisDate = Convert.ToString(DateTime.Now);
             }
-            dataFile = dataFilePath + ConfigData.meterNumber + "-" + thisDate + "-" + surveyName + "." + fileType;
-            if (fileOperation == "Open")
-            {
-                try
-                {
-                    using (StreamWriter writer = File.CreateText(dataFile))
-                    {
-                        switch (fileFormat)// There is only two formats std and new
-                        {
-                            case "standard":// copy this as serial data format
-                                header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
-                                + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                                + "Cross coupling" + delimitor + "Average Beam" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
-                                + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor + "LACC2" + delimitor
-                                + "XACC" + delimitor + "LACC" + delimitor + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude"
-                                + delimitor + "GPS Status";
-
-                                break;
-
-                            case "short":// this is serial data format
-                                header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
-                                + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity";
-                                break;
-
-                            case "norstar":// this is serial data format
-                                header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
-                                + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                                + "Average Beam" + delimitor + "Cross coupling" + delimitor + "Total Correction" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
-                                + "AX" + delimitor + "VE" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "AX2 or CMX";
-                                break;
-
-                            case "new":
-                                header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                                + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
-                                + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                                + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
-                                + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
-
-                                break;
-
-                            default:
-                                header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                                + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
-                                + delimitor + "AX" + delimitor + "VE" + delimitor + "AX2 or CMX" + delimitor + "XACC2" + delimitor
-                                + "LACC2" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "Total Correction"
-                                + "Latitude" + delimitor + "Longitude" + delimitor + "Altitude" + delimitor + "GPS Status";
-
-                                break;
-                        }
-                        writer.WriteLine(header);
-                        writer.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                fileOperation = "Append";
-            }
-
+ 
             switch (fileFormat)// why do I have a second switch statement???
             {
-                case "long":
+                case "standard":
                     // Need to change from raw beam to avg beam
-                    myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(d.Date.Year) + delimitor + Convert.ToString(d.Date.Day) + delimitor + Convert.ToString(d.Date.Hour) + delimitor
-               + Convert.ToString(d.Date.Minute) + delimitor + Convert.ToString(d.Date.Second) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
-               + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.rawBeam) + delimitor + Convert.ToString(d.VCC)
-               + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
-               + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-               + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
-               + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+
+                    // This is for 10 sec data
+                    myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.Date.Day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+               + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
+               + delimitor + Convert.ToString(Data.data4[4]) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
+               + delimitor + Convert.ToString(Data.data1[7]) + delimitor + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[9])
+               + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
+               + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14]) + delimitor + Convert.ToString(Data.totalCorrection)
+               + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+
                     break;
 
-                case "short":
-                    break;
+                // Add 1 sec data here
 
+                /*
+                                case "short":
+                                    break;
+                */
                 case "new":
-                    myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+              /*      myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
                 + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.rawBeam) + delimitor + Convert.ToString(d.VCC)
                 + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
                 + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
                 + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
                 + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
-                    break;
+    */        
+    break;
 
                 default:
+                    /*
                     myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
                 + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.rawBeam) + delimitor + Convert.ToString(d.VCC)
                 + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
                 + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
                 + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
                 + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
-                    break;
+    */             
+    break;
             }
 
             try
             {
-                using (StreamWriter writer = File.AppendText(dataFile))
+                using (StreamWriter writer = File.AppendText(dataFileName))
                 {
                     writer.WriteLine(myString);
                     writer.Close();
@@ -5031,22 +5018,29 @@ namespace SerialPortTerminal
 
             if (okToRun)
             {
+                // call create new file
+                OpenDataFile();
                 fileRecording = true;
                 newDataFile = true;
                 recordingTextBox.Text = "Recording file";
                 recordingTextBox.BackColor = System.Drawing.Color.LightGreen;
                 surveyTextBox.Enabled = false;
+                stopButton.Enabled = true;
+                startButton.Enabled = false;
             }
-            okToRun = true;
+           // okToRun = true;
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             // Close file
+           
             fileRecording = false;
             surveyTextBox.Enabled = true;
             recordingTextBox.Text = "Recording stopped";
             recordingTextBox.BackColor = System.Drawing.Color.Red;
+            stopButton.Enabled = false;
+            startButton.Enabled = true;
         }
 
         private void ShutdownDataWorker(object obj)
@@ -5221,7 +5215,6 @@ namespace SerialPortTerminal
             //ControlSwitches.DataCollection(enable);
             sendCmd("Send Control Switches");
 
-
             // RelaySwitches.Relay200Hz(enable);
             // RelaySwitches.Slew4(enable);
             // RelaySwitches.Slew5(enable);
@@ -5235,12 +5228,9 @@ namespace SerialPortTerminal
             // RelaySwitches.RelaySW = 0xB1;
             // sendCmd("Send Relay Switches");
 
-
             // ControlSwitches.ControlSw = 0x08;
             //ControlSwitches.DataCollection(enable);
             // sendCmd("Send Control Switches");
-
-
         }
 
         private void gyroCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -5259,7 +5249,6 @@ namespace SerialPortTerminal
                 sendCmd("Send Relay Switches");
                 //               taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
                 //               taskA.Wait();
-
 
                 torqueMotorCheckBox.Enabled = true;
                 WriteLogFile("Gyros enabled");
@@ -5628,7 +5617,6 @@ namespace SerialPortTerminal
                 ControlSwitches.ControlSw = 0x0B;
                 sendCmd("Send Control Switches");
                 Console.WriteLine("ST: control sw = 0x0B");
-
 
                 //sendCmd("Send Relay Switches");
                 torqueMotorCheckBox.Enabled = false;
