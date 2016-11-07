@@ -56,9 +56,13 @@ namespace SerialPortTerminal
 
         private delegate void SetTextCallback(string text);
 
+        public static int istep;
+        public static int istop = 1;
+        public static string surveyInfo;
+        public static int screenFilter = 3;
         public static int timeCheck = 0;
         private int countDown = 1;
-        public static short springTensionScale = (short).1041666;
+        public static Single springTensionScale = (Single).1041666;
         public static int springTensionMaxStep = 2900;
         public static int springTensionFPM = 525;
         public static double springTensionMax = 20000;
@@ -130,7 +134,7 @@ namespace SerialPortTerminal
         public static bool fileRecording = false;
         public static bool firstTime = true;
         public static string fileType;
-        public static string dataFileName;
+        public static string dataFileName = "";
         public static DateTime oldTime = DateTime.Now;
         public string timePeriod;
         public int timeValue;
@@ -355,13 +359,13 @@ namespace SerialPortTerminal
                 set { gpsStatus = value; }
             }
 
-            public Record(DateTime dateTime, Single digitalGravity, Single springTension, Single crossCoupling, Single rawBeam, Single rAwg, Single vcc, Single al, Single ax, Single ve, Single ax2, Single xacc2, Single lacc2, Single xacc, Single lacc, Single totalCorrection)
+            public Record(DateTime dateTime, Single digitalGravity, Single springTension, Single crossCoupling, Single beam, Single rAwg, Single vcc, Single al, Single ax, Single ve, Single ax2, Single xacc2, Single lacc2, Single xacc, Single lacc, Single totalCorrection)
             {
                 this.dateTime = dateTime;
                 this.digitalGravity = digitalGravity;
                 this.springTension = springTension;
                 this.crossCoupling = crossCoupling;
-                this.rawBeam = rawBeam;
+                this.rawBeam = beam;
                 this.rAwg = rAwg;
                 this.vcc = vcc;
                 this.al = al;
@@ -412,7 +416,7 @@ namespace SerialPortTerminal
         }
 
         // The main control for communicating through the RS-232 port
-        private SerialPort comport = new SerialPort();
+        public SerialPort comport = new SerialPort();
 
         // Various colors for logging info
         private Color[] LogMsgTypeColor = { Color.Blue, Color.Green, Color.Black, Color.Orange, Color.Red };
@@ -475,7 +479,7 @@ namespace SerialPortTerminal
 
             settings.BaudRate = 9600; // int.Parse(cmbBaudRate.Text);
             settings.DataBits = 8;// int.Parse(cmbDataBits.Text);
-            settings.DataMode = CurrentDataMode;
+            settings.DataMode = DataMode.Hex;
             settings.Parity = (Parity)Enum.Parse(typeof(Parity), "None");//   cmbParity.Text);
             settings.StopBits = (StopBits)Enum.Parse(typeof(StopBits), "One");//    cmbStopBits.Text);
             settings.PortName = SerialPortForm.cmbPortName.Text;
@@ -492,7 +496,7 @@ namespace SerialPortTerminal
             // One port for meter communications
             // Second for output data stream.
 
-            CurrentDataMode = settings.DataMode;
+            CurrentDataMode = DataMode.Hex;
             RefreshComPortList();//  Need two ports
 
             // This clears the terminal window which is for debug only.
@@ -654,7 +658,7 @@ namespace SerialPortTerminal
                 { if (SerialPortForm.rbHex.Checked) CurrentDataMode = DataMode.Hex; }
                 */
 
-        private void OpenPort()
+        public void OpenPort()
         {
             // ADD 1 SEC TIMER.  START AT END
             bool error = false;
@@ -695,7 +699,7 @@ namespace SerialPortTerminal
             if (comport.IsOpen)
             {
                 SerialPortForm.txtSendData.Focus();
-                if (SerialPortForm.chkClearOnOpen.Checked) ClearTerminal();
+
             }
         }
 
@@ -888,14 +892,7 @@ namespace SerialPortTerminal
         {
             if (!comport.IsOpen) return;
             Thread.Sleep(100);
-            if (CurrentDataMode == DataMode.Text)
-            {
-                string data = comport.ReadExisting();
 
-                Log(LogMsgType.Incoming, data);
-            }
-            else
-            {
                 /*// Obtain the number of bytes waiting in the port's buffer
                 int bytes = comport.BytesToRead;
                 Console.WriteLine("Bytes to read: " + bytes);
@@ -917,15 +914,42 @@ namespace SerialPortTerminal
                     worker.IsBackground = true;
                     worker.Start(buffer);// Start new worker thread to process the data
                 }
-            }
+            
         }
 
         public void UpdateGravityChart()
         {
             // check for changes in time span.
             // listDataSource.Add(new Record(Data.Date, Data.gravity, Data.SpringTension, Data.CrossCoupling, Data.Beam, Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.totalCorrection));
-            // listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.totalCorrection));
-            listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data1[6], Data.data1[7], Data.data1[8], Data.data1[9], Data.data1[10], Data.data1[11], Data.data1[12], Data.data1[13], Data.data1[14], Data.totalCorrection));
+            //    listDataSource.Add(new Record(Data.Date, Data.data4[1], Data.data1[3], Data.data4[22], Data.data1[5], Data.data4[21], Data.VCC, Data.AL, Data.AX, Data.VE, Data.AX2, Data.XACC2, Data.LACC2, Data.XACC, Data.LACC, Data.data4[23]));
+            //listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data1[6], Data.data1[7], Data.data1[8], Data.data1[9], Data.data1[10], Data.data1[11], Data.data1[12], Data.data1[13], Data.data1[14], Data.totalCorrection));
+
+            switch (screenFilter)
+            {
+                case 0:
+                    listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data1[6], Data.data1[7], Data.data1[8], Data.data1[9], Data.data1[10], Data.data1[11], Data.data1[12], Data.data1[13], Data.data1[14], Data.totalCorrection));
+
+                    break;
+
+                case 1:
+                    listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data2[6], Data.data2[7], Data.data2[8], Data.data2[9], Data.data2[10], Data.data2[11], Data.data2[12], Data.data2[13], Data.data2[14], Data.totalCorrection));
+
+                    break;
+
+                case 2:
+                    listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data3[6], Data.data3[7], Data.data3[8], Data.data3[9], Data.data3[10], Data.data3[11], Data.data3[12], Data.data3[13], Data.data3[14], Data.totalCorrection));
+
+                    break;
+
+                case 3:
+                    // listDataSource.Add(new Record(Data.Date, Data.gravity,  Data.SpringTension, Data.CrossCoupling, Data.Beam,    Data.rAwg,  Data.VCC,  Data.AL,       Data.AX,       Data.VE,       Data.AX2,      Data.XACC2,     Data.LACC2,     Data.XACC,      Data.LACC,      Data.totalCorrection));
+                    listDataSource.Add(new Record(Data.Date, Data.data4[2], Data.data1[3], Data.data4[4], Data.data1[5], Data.rAwg, Data.data4[6], Data.data4[7], Data.data4[8], Data.data4[9], Data.data4[10], Data.data4[11], Data.data4[12], Data.data4[13], Data.data4[14], Data.totalCorrection));
+
+                    break;
+
+                default:
+                    break;
+            }
 
             //IFIL = 4 DEFAULT
 
@@ -939,6 +963,7 @@ namespace SerialPortTerminal
 
         public void DataFileOperations(myData myData)
         {
+            string fileStatus = "Append";
             /*
              *                  * FILE WRITE
                  * IDSKFLG = 1    LINEID, DAY, HR, MIN, SEC, GRAV, DATA4[3], DATA4[4], BSCALE * DATA4[5] ,  data4[6 -> 14], LAT, LON, ALT,GPSTATS, APERX * 1.0E6
@@ -946,23 +971,13 @@ namespace SerialPortTerminal
                  *
                  */
             //TODO: file recording
-            string fileStatus;
+
             if (fileRecording == true)
             {
-                if (newDataFile)// change this.  New file will be from button or on timer at midnight
-                {
-                    fileStatus = "Open";
-                    newDataFile = false;
-                }
-                else
-                {
-                    fileStatus = "Append";
-                }
-
                 // Supply the state information required by the task.
-                ThreadWithState tws = new ThreadWithState(fileStatus, myData);
-                Thread t = new Thread(new ThreadStart(tws.ThreadProc));
-                t.Start();
+                ThreadWithState tws = new ThreadWithState(fileStatus, myData);// not sure if I still need this
+                Thread fileWriteThread = new Thread(new ThreadStart(tws.ThreadProc));
+                fileWriteThread.Start();
             }
         }
 
@@ -1019,26 +1034,101 @@ namespace SerialPortTerminal
 
         public void UpdateGravityDataForm(myData myData)
         {
+            GPS_Status GPS_Status = new GPS_Status();
             frmTerminal frmTerminal = new frmTerminal();
             this.Invoke((MethodInvoker)delegate
             {
-                UserDataForm.textBox_gravity.Text = (Data.gravity.ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_springTension.Text = (Data.SpringTension.ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_crossCoupling.Text = (Data.CrossCoupling.ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_beam.Text = (Data.data1[4].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox5.Text = (myData.Date.ToString());
+                switch (screenFilter)
+                {
+                    case 0:
+                        UserDataForm.textBox_gravity.Text = (Data.data4[2].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_springTension.Text = (Data.data1[3].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_crossCoupling.Text = (Data.data1[4].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_beam.Text = ((Data.data1[5] * ConfigData.beamScale).ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_totalCorrection.Text = (Data.totalCorrection.ToString("N4", CultureInfo.InvariantCulture));
 
-                UserDataForm.textBox_totalCorrection.Text = (Data.totalCorrection.ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_vcc.Text = (Data.data1[6].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_al.Text = (Data.data1[7].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_ax.Text = (Data.data1[8].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_ve.Text = (Data.data1[9].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_ax2.Text = (Data.data1[10].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_xacc2.Text = (Data.data1[11].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_lacc.Text = (Data.data1[14].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_lacc2.Text = (Data.data1[12].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_xacc.Text = (Data.data1[13].ToString("N4", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_rawGravity.Text = (Data.rAwg.ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_rawGravity.Text = (Data.rAwg.ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_vcc.Text = (Data.data1[6].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_al.Text = (Data.data1[7].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax.Text = (Data.data1[8].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ve.Text = (Data.data1[9].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax2.Text = (Data.data1[10].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc2.Text = (Data.data1[11].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc2.Text = (Data.data1[12].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc.Text = (Data.data1[13].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc.Text = (Data.data1[14].ToString("N4", CultureInfo.InvariantCulture));
+
+                        break;
+
+                    case 1:
+                        UserDataForm.textBox_gravity.Text = (Data.data4[2].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_springTension.Text = (Data.data1[3].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_crossCoupling.Text = (Data.data2[4].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_beam.Text = ((Data.data2[5] * ConfigData.beamScale).ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_totalCorrection.Text = (Data.totalCorrection.ToString("N4", CultureInfo.InvariantCulture));
+
+                        UserDataForm.textBox_rawGravity.Text = (Data.rAwg.ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_vcc.Text = (Data.data2[6].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_al.Text = (Data.data2[7].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax.Text = (Data.data2[8].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ve.Text = (Data.data2[9].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax2.Text = (Data.data2[10].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc2.Text = (Data.data2[11].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc2.Text = (Data.data2[12].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc.Text = (Data.data2[13].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc.Text = (Data.data2[14].ToString("N4", CultureInfo.InvariantCulture));
+
+                        break;
+
+                    case 2:
+                        UserDataForm.textBox_gravity.Text = (Data.data4[2].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_springTension.Text = (Data.data1[3].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_crossCoupling.Text = (Data.data3[4].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_beam.Text = ((Data.data3[5] * ConfigData.beamScale).ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_totalCorrection.Text = (Data.totalCorrection.ToString("N4", CultureInfo.InvariantCulture));
+
+                        UserDataForm.textBox_rawGravity.Text = (Data.rAwg.ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_vcc.Text = (Data.data3[6].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_al.Text = (Data.data3[7].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax.Text = (Data.data3[8].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ve.Text = (Data.data3[9].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax2.Text = (Data.data3[10].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc2.Text = (Data.data3[11].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc2.Text = (Data.data3[12].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc.Text = (Data.data3[13].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc.Text = (Data.data3[14].ToString("N4", CultureInfo.InvariantCulture));
+
+                        break;
+
+                    case 3:
+                        UserDataForm.textBox_gravity.Text = (Data.data4[2].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_springTension.Text = (Data.data1[3].ToString("N6", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_crossCoupling.Text = (Data.data4[4].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_beam.Text = ((Data.data4[5] * ConfigData.beamScale).ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_totalCorrection.Text = (Data.totalCorrection.ToString("N4", CultureInfo.InvariantCulture));
+
+                        UserDataForm.textBox_rawGravity.Text = (Data.rAwg.ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_vcc.Text = (Data.data4[6].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_al.Text = (Data.data4[7].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax.Text = (Data.data4[8].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ve.Text = (Data.data4[9].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_ax2.Text = (Data.data4[10].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc2.Text = (Data.data4[11].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc2.Text = (Data.data4[12].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_xacc.Text = (Data.data4[13].ToString("N4", CultureInfo.InvariantCulture));
+                        UserDataForm.textBox_lacc.Text = (Data.data4[14].ToString("N4", CultureInfo.InvariantCulture));
+
+                        break;
+
+                    default:
+                        break;
+                }
+
+                UserDataForm.textBox5.Text = (Data.Date.ToString());
+                UserDataForm.surveyTextBox.Text = surveyInfo;
+                UserDataForm.dataFileTextBox.Text = dataFileName;
+                UserDataForm.screenFilterNumericUpDown.Value = screenFilter;
+                UserDataForm.dataAquisitionModeComboBox.SelectedText = dataAquisitionMode;
 
                 if (MeterStatus.LGyro_Fog == 0)
                 {
@@ -1071,9 +1161,9 @@ namespace SerialPortTerminal
                     UserDataForm.heaterStatusLabel.Text = "Not Ready";
                 }
 
-                UserDataForm.gpsSatelitesTextBox.Text = Data.gpsNumSatelites.ToString();
+                UserDataForm.gpsSatelitesTextBox.Text = GPS_Status.GpsNumberSat.ToString();
 
-                if (myData.gpsNumSatelites == 0)
+                if (GPS_Status.GpsNumberSat > 0 && GPS_Status.GpsData )
                 {
                     UserDataForm.gpsNavigationTextBox.ForeColor = Color.Green;
                     UserDataForm.gpsNavigationTextBox.Text = "Good";
@@ -1083,7 +1173,7 @@ namespace SerialPortTerminal
                     UserDataForm.gpsNavigationTextBox.ForeColor = Color.Red;
                     UserDataForm.gpsNavigationTextBox.Text = "Navigation data not available";
                 }
-                if (myData.gpsSynchStatus == 0)
+                if (GPS_Status.Gps1HzSynch)
                 {
                     UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Green;
                     UserDataForm.gps1HzSynchTextBox.Text = "Good";
@@ -1093,7 +1183,7 @@ namespace SerialPortTerminal
                     UserDataForm.gps1HzSynchTextBox.ForeColor = Color.Red;
                     UserDataForm.gps1HzSynchTextBox.Text = "1 Hz synch pulse not present";
                 }
-                if (myData.gpsTimeStatus == 0)
+                if (GPS_Status.GpsTimeSynch)
                 {
                     UserDataForm.gpsTimeSetTextBox.ForeColor = Color.Green;
                     UserDataForm.gpsTimeSetTextBox.Text = "Good";
@@ -1250,7 +1340,55 @@ namespace SerialPortTerminal
             // check for mode  1 sec or 10 sec
             // for now only 10 sec data
 
+
+            
+            if (Parameters.Visible)
+            {
+                if (Parameters.InvokeRequired)
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        UpdateCalibrationParametersForm();
+                    });
+                }
+                else
+                {
+                    UpdateCalibrationParametersForm();
+                }
+
+            }
+
+
+                if (Parameters.updateConfigData == true)
+ /*           {
+                if (Parameters.InvokeRequired)
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        if (Parameters.Visible)
+                        {
+                            sendCmd("Set Cross Axis Parameters");
+                            sendCmd("Set Long Axis Parameters");
+                            sendCmd("Update Cross Coupling Values");
+                            // Parameters.updateConfigData = false;
+                        }
+                    });
+                }
+                else
+                {
+                    if (Parameters.Visible)
+                    {
+                        sendCmd("Set Cross Axis Parameters");
+                        sendCmd("Set Long Axis Parameters");
+                        sendCmd("Update Cross Coupling Values");
+                        //   Parameters.updateConfigData = false;
+                    }
+                }
+            }
+*/
             showData = false;
+
+            // change to allow for various time intervals for chart (1 sec, 10 sec and 1 min)
             if (Data.Date.Second % 10 == 0)
             {
                 Console.WriteLine(Data.Date.Second);
@@ -1345,11 +1483,12 @@ namespace SerialPortTerminal
                 Invoke((MethodInvoker)delegate
                 {
                     string specifier;
+                    GPS_Status GPS_Status = new GPS_Status();
                     specifier = "000.000000";
-                    gpsAltitudeTextBox.Text = (myData.altitude.ToString("N", CultureInfo.InvariantCulture));
+                    gpsAltitudeTextBox.Text = (Data.altitude.ToString("N", CultureInfo.InvariantCulture));
                     gpsLatitudeTextBox.Text = (Data.latitude.ToString(specifier, CultureInfo.InvariantCulture));
                     gpsLongitudeTextBox.Text = (Data.longitude.ToString(specifier, CultureInfo.InvariantCulture));
-                    if ((Data.gpsNavigationStatus == 0) & (Data.gpsTimeStatus == 0) & (Data.gpsSyncStatus == 0))
+                    if ((GPS_Status.Gps1HzSynch) & (GPS_Status.Gps1HzSynch) & (GPS_Status.GpsData))
                     {
                         gpsStartusTextBox.ForeColor = Color.Green;
                         gpsStartusTextBox.Text = "Good";
@@ -1370,31 +1509,6 @@ namespace SerialPortTerminal
                 {
                     UpdateGravityDataForm(myData);
                 }
-
-                /*
-                if (frmTerminal.DataStatusForm.Visible)
-                {
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        DataStatusForm.textBox1.Text = (Data.gravity.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox2.Text = (Data.SpringTension.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox3.Text = (Data.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox4.Text = (Data.beam.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox5.Text = (Data.myDT.ToString());
-                        DataStatusForm.textBox6.Text = (Data.totalCorrection.ToString("N", CultureInfo.InvariantCulture));
-
-                        DataStatusForm.textBox7.Text = (Data.VCC.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox8.Text = (Data.AL.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox9.Text = (Data.AX.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox10.Text = (Data.VE.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox11.Text = (Data.AX2.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox12.Text = (Data.XACC2.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox13.Text = (Data.LACC2.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox14.Text = (Data.XACC.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox15.Text = (Data.LACC.ToString("N", CultureInfo.InvariantCulture));
-                        DataStatusForm.textBox1.Text = (Data.gravity.ToString("N", CultureInfo.InvariantCulture));
-                    });
-                }   */
             }
             frmTerminal.Dispose();
         }
@@ -2701,590 +2815,6 @@ namespace SerialPortTerminal
 
         #region Serial Port
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearTerminal();
-        }
-
-        private void ClearTerminal()
-        {
-            rtfTerminal.Clear();
-        }
-
-        // TODO: remove or disable with new computer - user will not have options
-        private void tmrCheckComPorts_Tick(object sender, EventArgs e)
-        {
-            // checks to see if COM ports have been added or removed
-            // since it is quite common now with USB-to-Serial adapters
-            RefreshComPortList();
-        }
-
-        private void RefreshComPortList()
-        {
-            // Determain if the list of com port names has changed since last checked
-            string selected = RefreshComPortList(SerialPortForm.cmbPortName.Items.Cast<string>(), SerialPortForm.cmbPortName.SelectedItem as string, comport.IsOpen);
-
-            // If there was an update, then update the control showing the user the list of port names
-            if (!String.IsNullOrEmpty(selected))
-            {
-                SerialPortForm.cmbPortName.Items.Clear();
-                SerialPortForm.cmbPortName.Items.AddRange(OrderedPortNames());
-                SerialPortForm.cmbPortName.SelectedItem = selected;
-            }
-        }
-
-        private string[] OrderedPortNames()
-        {
-            // Just a placeholder for a successful parsing of a string to an integer
-            int num;
-
-            // Order the serial port names in numberic order (if possible)
-            return SerialPort.GetPortNames().OrderBy(a => a.Length > 3 && int.TryParse(a.Substring(3), out num) ? num : 0).ToArray();
-        }
-
-        private string RefreshComPortList(IEnumerable<string> PreviousPortNames, string CurrentSelection, bool PortOpen)
-        {
-            // Create a new return report to populate
-            string selected = null;
-
-            // Retrieve the list of ports currently mounted by the operating system (sorted by name)
-            string[] ports = SerialPort.GetPortNames();
-
-            // First determain if there was a change (any additions or removals)
-            bool updated = PreviousPortNames.Except(ports).Count() > 0 || ports.Except(PreviousPortNames).Count() > 0;
-
-            // If there was a change, then select an appropriate default port
-            if (updated)
-            {
-                // Use the correctly ordered set of port names
-                ports = OrderedPortNames();
-
-                // Find newest port if one or more were added
-                string newest = SerialPort.GetPortNames().Except(PreviousPortNames).OrderBy(a => a).LastOrDefault();
-
-                // If the port was already open... (see logic notes and reasoning in Notes.txt)
-                if (PortOpen)
-                {
-                    if (ports.Contains(CurrentSelection)) selected = CurrentSelection;
-                    else if (!String.IsNullOrEmpty(newest)) selected = newest;
-                    else selected = ports.LastOrDefault();
-                }
-                else
-                {
-                    if (!String.IsNullOrEmpty(newest)) selected = newest;
-                    else if (ports.Contains(CurrentSelection)) selected = CurrentSelection;
-                    else selected = ports.LastOrDefault();
-                }
-            }
-
-            // If there was a change to the port list, return the recommended default selection
-            return selected;
-        }
-
-        private void rtfTerminal_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        public byte[] CalculateCheckSum(byte[] intBytes, int numBytes)
-        {
-            var checkSum = 0;
-            // byte[] intBytes = BitConverter.GetBytes(data);
-            Array.Resize(ref intBytes, numBytes);
-            byte[] txCmd = new byte[1 + intBytes.Length + 1];
-
-            Buffer.BlockCopy(intBytes, 0, txCmd, 1, intBytes.Length);
-
-            // Concatenate array1 and array2.
-
-            //  txCmd[0] = cmd;
-            for (int i = 0; i < numBytes; i++)
-            {
-                checkSum = checkSum ^ txCmd[i];
-            }
-            txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
-
-            //   Console.WriteLine(txCmd);
-            //    Console.WriteLine(checkSum);
-            return BitConverter.GetBytes(checkSum);
-
-            //  comport.Write(txCmd, 0, txCmd.Length);
-        }
-
-        #endregion Serial Port
-
-        #region Config File
-
-        private void LogConfigData(ConfigData ConfigData)
-        {
-            if (engineerDebug) Console.WriteLine("\n\nConfiguration data for meter number   \t" + ConfigData.meterNumber);
-            if (engineerDebug) Console.WriteLine("\n\t User defined parameters\n");
-            if (engineerDebug) Console.WriteLine("Number of auxillary analog channels-- \t" + Convert.ToString(ConfigData.numAuxChan));
-            if (engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
-            if (engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
-            if (engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
-            if (engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
-            if (engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
-            if (engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
-            if (engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
-            if (engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
-            if (ConfigData.printerEmulationSwitch == 2)
-            {
-                if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P");
-            }
-            if (ConfigData.printerEmulationSwitch == 3)
-            {
-                if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P2");
-            }
-            else
-            {
-                if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "DPL24C");
-            }
-            if (ConfigData.modeSwitch == 0)
-            {
-                if (engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Marine");
-            }
-            else
-            {
-                if (engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Hires");
-            }
-            if (engineerDebug) Console.WriteLine("\n\tParameters defined by ZLS.\n");
-            if (engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)---------- \t{0:e4}.", ConfigData.crossCouplingFactors[13]);
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5]));
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + "N/A");
-            }
-            else
-            {
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15]));
-            }
-
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
-            }
-            else
-            {
-                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-            }
-            if (engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
-            if (engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
-            if (engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
-            if (engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t{0:n4}", ConfigData.longGain);
-            if (engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
-            if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14]));
-            if (engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6]));
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + "N/A");
-            }
-            else
-            {
-                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16]));
-            }
-            if (ConfigData.crossCouplingFactors[15] == 1)
-            {
-                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)---- \t" + "N/A");
-            }
-            else
-            {
-                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
-            }
-            if (engineerDebug) Console.WriteLine("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias));
-            if (engineerDebug) Console.WriteLine("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
-            if (engineerDebug) Console.WriteLine("AL----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[7]));
-            if (engineerDebug) Console.WriteLine("AX----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[8]));
-            if (engineerDebug) Console.WriteLine("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9]));
-            if (engineerDebug) Console.WriteLine("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10]));
-            if (engineerDebug) Console.WriteLine("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11]));
-            if (engineerDebug) Console.WriteLine("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12]));
-            if (engineerDebug) Console.WriteLine("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
-            if (engineerDebug) Console.WriteLine("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
-            if (engineerDebug) Console.WriteLine("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
-            if (engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
-        }
-
-        #endregion Config File
-
-        private void WSlew(double target)
-        {
-            double shift = 0;
-            if (iStop == 2)
-            {
-                //write 5
-                // read target  error 60
-            }
-            else if (iStop == 3)
-            {
-                shift = 500 - Data.data1[3];
-                // goto 100
-            }
-            else if (iStop == 4)
-            {
-                shift = target - Data.data1[3];
-            }
-        }
-
-        private static void DoSomeWork(int val)
-        {
-            // Pretend to do something.
-            Thread.Sleep(val);
-        }
-
-        private void SpringTensionStep(double target, string slewType)
-        {
-            Boolean okToSlew = false;
-            double shift = target;// target = 100
-                                  //  shift = springTensionMax - CalculateMarineData.data1[3] - 500;
-                                  //shift = 100
-                                  // istop = 1
-                                  // spring tension = 1414.5
-                                  // stscale = .1041666
-                                  // M = 960
-
-            if (engineerDebug)
-            {
-                Console.WriteLine("FMPM = " + fmpm);
-                Console.WriteLine("Slew " + slewType);
-                Console.WriteLine("Current ST " + Data.SpringTension);
-                Console.WriteLine("Initial shift = " + shift);
-            }
-
-            switch (slewType)
-            {
-                case "absolute":
-                    //  shift = target - CalculateMarineData.data1[3];
-                    shift = target - Data.SpringTension;
-
-                    break;
-
-                case "relative":
-
-                    if (iStop > 1)
-                    {
-                        // goto 109  startup wizard is active
-                    }
-                    if (Math.Abs(shift) > fmpm)  // FMPM is MGAL/Min
-                    {
-                        springTensionValueLabel.Text = Convert.ToString(Math.Abs(shift) / fmpm);
-                        // this is currently printed to screen
-                    }
-
-                    break;
-
-                case "park":
-                    // shift = springTensionMax - CalculateMarineData.data1[3] - 500;
-                    shift = springTensionMax - Data.SpringTension - 500;
-                    break;
-
-                default:
-                    break;
-            }
-            //            if ((shift + CalculateMarineData.data1[3] > springTensionMax) || shift + CalculateMarineData.data1[3] < 100)
-
-            if ((shift + Data.SpringTension > springTensionMax) || (shift + Data.SpringTension < 100) || (target > springTensionMax) || (Math.Abs(shift) > springTensionMax - 500))
-            {
-                okToSlew = false;
-                MessageBox.Show("Error", "Spring tension out of range.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                TimerWithDataCollection("stop");
-                okToSlew = true;
-            }
-
-            //---------------------------------------------------------------------------------------------
-            // not sure where to put these yet
-            if (Math.Abs(shift) > springTensionFPM)
-            {
-                if (engineerDebug)
-                {
-                    Console.WriteLine(Math.Abs(shift) / springTensionFPM);
-                }
-                // print to some label or text box etc
-            }
-            //---------------------------------------------------------------------------------------------------
-            if (okToSlew)
-            {
-                int M = Convert.ToInt32(Math.Abs(shift / springTensionScale)); // scale == .1041666
-
-                int sign = 1;
-
-                if (shift > 0)
-                {
-                    sign = Math.Abs(Convert.ToSByte(M) * springTensionScale);
-                    if (engineerDebug)
-                    {
-                        Console.WriteLine("Shift > 0");
-                        Console.WriteLine("sign = " + sign);
-                    }
-                }
-                else
-                {
-                    sign = -1 * Math.Abs(M * springTensionScale);
-                    if (engineerDebug)
-                    {
-                        Console.WriteLine("Shift < 0");
-                        Console.WriteLine("sign = " + sign);
-                    }
-                }
-
-                //  CalculateMarineData.data1[3] += sign;// FORTRAN SIGN(M * springTensionScale, shift
-                Data.SpringTension += sign;
-                var tempSt = Math.Round(Convert.ToDouble(Data.SpringTension), 1);
-                Data.SpringTension = Convert.ToSingle(tempSt);
-
-                if (engineerDebug)
-                {
-                    Console.WriteLine("New ST = " + Data.SpringTension);
-                }
-
-                iStep[4] = -springTensionMaxStep;
-
-                if (shift > 0)
-                {
-                    iStep[4] = springTensionMaxStep;
-                }
-
-                while (M >= springTensionMaxStep)
-                {
-                    springTensionStatusLabel.Text = ("Please wait 10 sec");
-                    springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
-                    sendCmd("Slew Spring Tension");
-                    Task taskA = Task.Factory.StartNew(() => DoSomeWork(10000));
-                    taskA.Wait();
-                    STtextBox.Text = Convert.ToString(Data.SpringTension);
-                    M -= springTensionMaxStep;
-                }
-
-                iStep[4] = -1 * Convert.ToInt32(M);
-                if (shift > 0)
-                {
-                    iStep[4] *= -1;
-                }
-                springTensionStatusLabel.Text = ("Please wait 10 sec");
-                springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
-                sendCmd("Slew Spring Tension");
-                // convert text box etc.
-                // send_cmd 3
-                Task taskB = Task.Factory.StartNew(() => DoSomeWork(10000));
-                taskB.Wait();
-                STtextBox.Text = Convert.ToString(Data.SpringTension);
-                // sleep 10 sec  need to stop timer for this
-                // return
-
-                springTensionStatusLabel.Text = ("All done");
-                springTensionTargetNumericTextBox.Text = null;
-                taskB = Task.Factory.StartNew(() => DoSomeWork(300));
-                taskB.Wait();
-                TimerWithDataCollection("stop");
-                springTensionGroupBox.Visible = false;
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)// Send data button.  For debug only.  Remove in final app.
-        {
-            // create hex data stream.  Convert to string and place in text box for sending.
-            // Command 1 - send relay switches
-
-            byte[] data = { 0x00, 0x80, 0x80, 0x04, 0x07, 0x45, 0xf3, 0x37, 0x9a, 0x99, 0x99, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x33, 0x33, 0xb3, 0x3e, 0x2e, 0x90, 0x20, 0xbb, 0x66, 0x66, 0x66, 0x3f, 0xa4, 0x05, 0x93, 0x1a, 0xda, 0x37, 0x85, 0xeb, 0x91, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x33, 0x33, 0xb3, 0x3e, 0x89, 0xd2, 0x5e, 0xbb, 0x00, 0x00, 0x80, 0x3f, 0x5f, 0x08, 0x3f, 0x35, 0x5e, 0x3e, 0x68, 0x91, 0x2d, 0x3e, 0x14, 0xae, 0x47, 0x3e, 0xa4, 0x70, 0x3d, 0x3e, 0x5c, 0x21, 0x88, 0xbf, 0x00, 0xc0, 0xda, 0x45, 0x89, 0x01, 0x08, 0x09, 0x0a, 0x88, 0x45, 0xb3, 0xc3, 0xa3, 0x8e, 0xf3, 0xc2, 0xab };
-
-            // Send the binary data out the port
-            comport.Write(data, 0, data.Length);
-
-            // Show the hex digits on in the terminal window
-            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-        }
-
-        private void StartDataCollection()
-        {
-            // OpenPort();
-            byte[] data = { 0x01, 0x08, 0x09 };
-
-            _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
-            //   _timer1.Enabled = true;
-            //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-        }
-
-        // Start data collection.  Send command 1 for meter to start data stream
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //   OpenPort();
-            // Convert the user's string of hex digits (ex: B4 CA E2) to a byte array
-            byte[] data = { 0x01, 0x08, 0x09 };                                        //HexStringToByteArray(txtSendData.Text);
-
-            // Send the binary data out the port
-            //    comport.Write(data, 0, data.Length);
-
-            //         _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
-            //         _timer1.Enabled = true;
-            // Show the hex digits on in the terminal window
-            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-        }
-
-        //  This will be sendData later will full command byte array and checksum.
-        //  Not needed until I implement sending commands, settings etc.
-        private void button3_Click(object sender, EventArgs e)
-        {
-            byte checkSum = 0;
-            var year = 2016;
-
-            byte[] myByte = BitConverter.GetBytes(year);
-            //     Array.Reverse(myByte);
-            // REPLACE WITH COMMAND AND # BYTES LATER WITH
-
-            byte[] myByteArray = { 3, 0, 0 };
-            checkSum = CalculateChecksum(myByteArray);
-            myByteArray[myByteArray.Length - 1] = checkSum;
-            string StringOutput = "";
-            for (int i = 0; i < myByteArray.Length; i++)
-            {
-                StringOutput = string.Concat(StringOutput, myByteArray[i].ToString("X"));
-            }
-
-            Log(LogMsgType.Incoming, Convert.ToString(StringOutput) + "\n");
-        }
-
-        private void TimeWorker()
-        {
-            while (true)
-            {
-                this.Invoke(new UpdateTimeTextCallback(this.UpdateTimeText), new object[] { });
-                Thread.Sleep(1000);
-            }
-        }
-
-        private void UpdateRecordBox(Boolean i)
-        {
-            recordingTextBox.Visible = i;
-            DateTime nowDateTime = DateTime.Now;
-            fileStartTime = nowDateTime;
-            fileStartTimeLabel.Text = "File start time:  " + Convert.ToString(nowDateTime);
-
-            var runningTime = TimeSpan.FromTicks(DateTime.Now.Ticks - fileStartTime.Ticks);
-            string timeDuration = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
-            recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
-        }
-
-        private void UpdateNameLabel()
-        {
-            UserDataForm.dataFileTextBox.Text = fileName;
-        }
-
-        private void UpdateTimeText()
-        {
-            DateTime nowDateTime = DateTime.Now;
-            timeNowLabel.Text = Convert.ToString(nowDateTime);
-            UserDataForm.modeLabel.Text = dataAquisitionMode + " mode";
-            if (fileRecording == true)
-            {
-                var myStartTime = DateTime.Now;
-                if (firstTime == true)
-                {
-                    this.Invoke(new UpdateFileNameLabelCallback(this.UpdateNameLabel), new object[] { });
-                    this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
-                    fileStartTime = myStartTime;// DateTime.Now;
-                    firstTime = false;
-                }
-                else
-                {
-                    var runningTime = TimeSpan.FromTicks(DateTime.Now.Ticks - fileStartTime.Ticks);
-                    string timeDuration = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
-                    recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
-                }
-            }
-            else
-            {
-                firstTime = true;
-            }
-        }
-
-        private void SetInitialVisibility()
-        {
-            GravityChart.Visible = false;
-            meterStatusGroupBox.Visible = false;
-            surveyRecordGroupBox.Visible = false;
-            gpsGroupBox.Visible = false;
-            springTensionGroupBox.Visible = false;
-            startupGroupBox.Visible = false;
-            chartWindowGroupBox.Visible = false;
-            //---------------------------------------------------
-            torqueMotorCheckBox.Enabled = false;
-            springTensionCheckBox.Enabled = false;
-            gyroCheckBox.Enabled = false;
-            alarmCheckBox.Enabled = false;
-            springTensionRelativeRadioButton.Checked = true;
-            springTensionValueLabel.Text = "";
-            springTensionStatusLabel.Text = "";
-        }
-
-        private void frmTerminal_Load(object sender, EventArgs e)
-        {
-            SetInitialVisibility();
-
-            // Console.WriteLine(a);
-            //  Console.WriteLine(DateTime.UtcNow);
-
-            if (engineerDebug)
-            {
-                rtfTerminal.Visible = true;
-            }
-            else
-            {
-                rtfTerminal.Visible = false;
-            }
-
-            CurrentDataMode = DataMode.Hex;
-
-            // Create an instance of NumericTextBox.
-            NumericTextBox numericTextBox1 = new NumericTextBox();
-            numericTextBox1.Parent = this;
-            //Draw the bounds of the NumericTextBox.
-            numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
-
-            //  Load stored state
-            InitStoredVariables();
-
-            if (engineerDebug)
-            {
-                Console.WriteLine("Data file name " + fileName);
-            }
-
-            STtextBox.Text = Convert.ToString(Data.SpringTension);
-
-            // load config file
-            CheckConfigFile(configFilePath + "\\" + configFileName);
-            //  ReadConfigFile(configFilePath + "\\" + configFileName);
-            //  UserDataForm.configurationFileTextBox.Text = configFilePath + "\\" + configFileName;
-
-            CheckCalFile(calFilePath + "\\" + calFileName);
-
-            comboBox1.SelectedItem = "minutes";
-            windowSizeNumericUpDown.Minimum = 1;
-            windowSizeNumericUpDown.Maximum = 60;
-            Thread.CurrentThread.Name = "time";
-
-            Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
-            TimeThread.IsBackground = true;
-            TimeThread.Start();
-
-            SetupChart();
-            // Setup DataGrid();
-            WriteLogFile("System loaded");
-        }
-
-        //==================================================================================================
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            DataStatusForm.Show();
-        }
-
         public byte[] CreateTxArray(byte command, double data1, double data2, double data3, double data4, double data5, double data6)
         {
             byte[] cmdByte = { command };
@@ -3619,7 +3149,7 @@ namespace SerialPortTerminal
                     data = CreateCrossAxisParametersArray(4, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
 
                     //     data = CreateCrossAxisParametersArray(0x04, 1.91e-5, .212, .15, .5, -8.99998e-4, 1.0);
-                    /*
+                    
                                         data[0] = 0x04;// Command
                                         data[1] = 0xBA;// crossPeriod
                                         data[2] = 0xED;// crossPeriod
@@ -3646,7 +3176,7 @@ namespace SerialPortTerminal
                                         data[23] = 0x80;
                                         data[24] = 0x3F;
                                         data[25] = 0xC4;// checksum
-                    */
+                    
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
                     //      data = CreateCrossAxisParametersArray(0x04, ConfigData.crossPeriod, ConfigData.crossDampFactor, ConfigData.crossGain, ConfigData.crossLead, ConfigData.crossCouplingFactors[13], ConfigData.analogFilter[5]);
@@ -3659,34 +3189,34 @@ namespace SerialPortTerminal
                                                  // TODO: clean up code for  Set Long Axis Parameters
                                                  //  data = CreateCrossAxisParametersArray(0x05, 1.91e-5, .213, .15, .5, -2e-3, 1.0);
                     data = CreateCrossAxisParametersArray(5, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
-
-                    data[0] = 0x05;
-                    data[1] = 0xBA;
-                    data[2] = 0xED;
-                    data[3] = 0x0C;
-                    data[4] = 0x37;
-                    data[5] = 0x5A;
-                    data[6] = 0x64;
-                    data[7] = 0xBB;
-                    data[8] = 0x3D;
-                    data[9] = 0xCD;
-                    data[10] = 0xCC;
-                    data[11] = 0x4C;
-                    data[12] = 0x3E;
-                    data[13] = 0x66;
-                    data[14] = 0x66;
-                    data[15] = 0xE6;
-                    data[16] = 0x3E;
-                    data[17] = 0x00;
-                    data[18] = 0x00;
-                    data[19] = 0x00;
-                    data[20] = 0x00;
-                    data[21] = 0x00;
-                    data[22] = 0x00;
-                    data[23] = 0x80;
-                    data[24] = 0x3F;
-                    data[25] = 0xC5;
-
+                    
+                                        data[0] = 0x05;
+                                        data[1] = 0xBA;
+                                        data[2] = 0xED;
+                                        data[3] = 0x0C;
+                                        data[4] = 0x37;
+                                        data[5] = 0x5A;
+                                        data[6] = 0x64;
+                                        data[7] = 0xBB;
+                                        data[8] = 0x3D;
+                                        data[9] = 0xCD;
+                                        data[10] = 0xCC;
+                                        data[11] = 0x4C;
+                                        data[12] = 0x3E;
+                                        data[13] = 0x66;
+                                        data[14] = 0x66;
+                                        data[15] = 0xE6;
+                                        data[16] = 0x3E;
+                                        data[17] = 0x00;
+                                        data[18] = 0x00;
+                                        data[19] = 0x00;
+                                        data[20] = 0x00;
+                                        data[21] = 0x00;
+                                        data[22] = 0x00;
+                                        data[23] = 0x80;
+                                        data[24] = 0x3F;
+                                        data[25] = 0xC5;
+                    
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
 
                     //       data = CreateCrossAxisParametersArray(0x04, ConfigData.longPeriod, ConfigData.longDampFactor, ConfigData.longGain, ConfigData.longLead, ConfigData.crossCouplingFactors[14], ConfigData.analogFilter[6]);
@@ -3717,37 +3247,53 @@ namespace SerialPortTerminal
                     data = CreateCrossAxisParametersArray(0x08, ConfigData.analogFilter[1], ConfigData.analogFilter[2], ConfigData.analogFilter[4], ConfigData.analogFilter[3], ConfigData.crossCouplingFactors[14], ConfigData.springTensionMax);
                     //    data = CreateCrossAxisParametersArray(0x08, .219, .2185, .247, .19, -1.046, 7000);
 
+
+                    /*
+                     * VCC FACT         0
+                     * AL FACT          0
+                     * AX FACT          0
+                     * VE FACT          0
+                     * AX2 FACT         0
+                     * XACC2 FACT       0
+                     * LACC2 FACT       0
+                     * XACC PHASE       .1499
+                     * LACC (AL) PHASE  .182
+                     * LACC (VCC) PHASE .25
+                     * */
+
+
+
                     //      data = CreateTxArray(8, System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), System.Convert.ToSingle(.2), crossCouplingFactor14, ConfigData.springTensionMax);
 
                     //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
-
-                    data[0] = 0x08;
-                    data[1] = 0x3F;
-                    data[2] = 0x35;
-                    data[3] = 0x5E;
-                    data[4] = 0x3E;
-                    data[5] = 0x68;
-                    data[6] = 0x91;
-                    data[7] = 0x2D;
-                    data[8] = 0x3E;
-                    data[9] = 0x14;
-                    data[10] = 0xAE;
-                    data[11] = 0x47;
-                    data[12] = 0x3E;
-                    data[13] = 0xA4;
-                    data[14] = 0x70;
-                    data[15] = 0x3D;
-                    data[16] = 0x3E;
-                    data[17] = 0x00;
-                    data[18] = 0x00;
-                    data[19] = 0x00;
-                    data[20] = 0xC0;
-                    data[21] = 0x00;
-                    data[22] = 0x40;
-                    data[23] = 0x96;
-                    data[24] = 0x46;
-                    data[25] = 0xC6;
-
+                    
+                                        data[0] = 0x08;
+                                        data[1] = 0x63;
+                                        data[2] = 0x7f;
+                                        data[3] = 0x19;
+                                        data[4] = 0x3E;
+                                        data[5] = 0x6c;
+                                        data[6] = 0x78;
+                                        data[7] = 0x3a;
+                                        data[8] = 0x3e;
+                                        data[9] = 0x00;
+                                        data[10] = 0x00;
+                                        data[11] = 0x80;
+                                        data[12] = 0x3E;
+                                        data[13] = 0xA4;
+                                        data[14] = 0x70;
+                                        data[15] = 0x3D;
+                                        data[16] = 0x3E;
+                                        data[17] = 0x46;
+                                        data[18] = 0x25;
+                                        data[19] = 0xb5;
+                                        data[20] = 0xbf;
+                                        data[21] = 0x00;
+                                        data[22] = 0x80;
+                                        data[23] = 0x3b;
+                                        data[24] = 0x46;
+                                        data[25] = 0xde;
+                  
                     SerialPortForm.textBox24.Text = ByteArrayToHexString(data);
                     comport.Write(data, 0, 26);
 
@@ -3774,6 +3320,461 @@ namespace SerialPortTerminal
             // Assemble byte array
             // send
         }
+
+
+
+
+        // TODO: remove or disable with new computer - user will not have options
+        private void tmrCheckComPorts_Tick(object sender, EventArgs e)
+        {
+            // checks to see if COM ports have been added or removed
+            // since it is quite common now with USB-to-Serial adapters
+            RefreshComPortList();
+        }
+
+        private void RefreshComPortList()
+        {
+            // Determain if the list of com port names has changed since last checked
+            string selected = RefreshComPortList(SerialPortForm.cmbPortName.Items.Cast<string>(), SerialPortForm.cmbPortName.SelectedItem as string, comport.IsOpen);
+
+            // If there was an update, then update the control showing the user the list of port names
+            if (!String.IsNullOrEmpty(selected))
+            {
+                SerialPortForm.cmbPortName.Items.Clear();
+                SerialPortForm.cmbPortName.Items.AddRange(OrderedPortNames());
+                SerialPortForm.cmbPortName.SelectedItem = selected;
+            }
+        }
+
+        private string[] OrderedPortNames()
+        {
+            // Just a placeholder for a successful parsing of a string to an integer
+            int num;
+
+            // Order the serial port names in numberic order (if possible)
+            return SerialPort.GetPortNames().OrderBy(a => a.Length > 3 && int.TryParse(a.Substring(3), out num) ? num : 0).ToArray();
+        }
+
+        private string RefreshComPortList(IEnumerable<string> PreviousPortNames, string CurrentSelection, bool PortOpen)
+        {
+            // Create a new return report to populate
+            string selected = null;
+
+            // Retrieve the list of ports currently mounted by the operating system (sorted by name)
+            string[] ports = SerialPort.GetPortNames();
+
+            // First determain if there was a change (any additions or removals)
+            bool updated = PreviousPortNames.Except(ports).Count() > 0 || ports.Except(PreviousPortNames).Count() > 0;
+
+            // If there was a change, then select an appropriate default port
+            if (updated)
+            {
+                // Use the correctly ordered set of port names
+                ports = OrderedPortNames();
+
+                // Find newest port if one or more were added
+                string newest = SerialPort.GetPortNames().Except(PreviousPortNames).OrderBy(a => a).LastOrDefault();
+
+                // If the port was already open... (see logic notes and reasoning in Notes.txt)
+                if (PortOpen)
+                {
+                    if (ports.Contains(CurrentSelection)) selected = CurrentSelection;
+                    else if (!String.IsNullOrEmpty(newest)) selected = newest;
+                    else selected = ports.LastOrDefault();
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(newest)) selected = newest;
+                    else if (ports.Contains(CurrentSelection)) selected = CurrentSelection;
+                    else selected = ports.LastOrDefault();
+                }
+            }
+
+            // If there was a change to the port list, return the recommended default selection
+            return selected;
+        }
+
+        private void rtfTerminal_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        public byte[] CalculateCheckSum(byte[] intBytes, int numBytes)
+        {
+            var checkSum = 0;
+            // byte[] intBytes = BitConverter.GetBytes(data);
+            Array.Resize(ref intBytes, numBytes);
+            byte[] txCmd = new byte[1 + intBytes.Length + 1];
+
+            Buffer.BlockCopy(intBytes, 0, txCmd, 1, intBytes.Length);
+
+            // Concatenate array1 and array2.
+
+            //  txCmd[0] = cmd;
+            for (int i = 0; i < numBytes; i++)
+            {
+                checkSum = checkSum ^ txCmd[i];
+            }
+            txCmd[txCmd.Length - 1] = BitConverter.GetBytes(checkSum)[0]; ;
+
+            //   Console.WriteLine(txCmd);
+            //    Console.WriteLine(checkSum);
+            return BitConverter.GetBytes(checkSum);
+
+            //  comport.Write(txCmd, 0, txCmd.Length);
+        }
+
+        #endregion Serial Port
+
+        #region Config File
+
+        private void LogConfigData(ConfigData ConfigData)
+        {
+            if (engineerDebug) Console.WriteLine("\n\nConfiguration data for meter number   \t" + ConfigData.meterNumber);
+            if (engineerDebug) Console.WriteLine("\n\t User defined parameters\n");
+            if (engineerDebug) Console.WriteLine("Number of auxillary analog channels-- \t" + Convert.ToString(ConfigData.numAuxChan));
+            if (engineerDebug) Console.WriteLine("DIGITAL INPUT SWITCH----------------- \t" + Convert.ToString(ConfigData.digitalInputSwitch));
+            if (engineerDebug) Console.WriteLine("MONITOR DISPLAY SWITCH--------------- \t" + Convert.ToString(ConfigData.monitorDisplaySwitch));
+            if (engineerDebug) Console.WriteLine("LINE PRINTER SWITCH------------------ \t" + Convert.ToString(ConfigData.linePrinterSwitch));
+            if (engineerDebug) Console.WriteLine("FILE NAME SWITCH--------------------- \t" + Convert.ToString(ConfigData.fileNameSwitch));
+            if (engineerDebug) Console.WriteLine("HARD DISK SWITCH--------------------- \t" + Convert.ToString(ConfigData.hardDiskSwitch));
+            if (engineerDebug) Console.WriteLine("SERIAL PORT FORMAT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortSwitch));
+            if (engineerDebug) Console.WriteLine("SERIAL PORT OUTPUT SWITCH------------ \t" + Convert.ToString(ConfigData.serialPortOutputSwitch));
+            if (engineerDebug) Console.WriteLine("ALARM SWITCH------------------------- \t" + Convert.ToString(ConfigData.alarmSwitch));
+            if (ConfigData.printerEmulationSwitch == 2)
+            {
+                if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P");
+            }
+            if (ConfigData.printerEmulationSwitch == 3)
+            {
+                if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "ESC_P2");
+            }
+            else
+            {
+                if (engineerDebug) Console.WriteLine("PRINTER EMULATION-------------------- \t" + "DPL24C");
+            }
+            if (ConfigData.modeSwitch == 0)
+            {
+                if (engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Marine");
+            }
+            else
+            {
+                if (engineerDebug) Console.WriteLine("MODE SWITCH-------------------------- \t" + "Hires");
+            }
+            if (engineerDebug) Console.WriteLine("\n\tParameters defined by ZLS.\n");
+            if (engineerDebug) Console.WriteLine("BEAM SCALE FACTOR-------------------- \t{0:n6}.", ConfigData.beamScale);
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.crossPeriod);
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS DAMPING------------------- \t{0:e4}", ConfigData.crossDampFactor);
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS GAIN---------------------- \t" + Convert.ToString(ConfigData.crossGain));
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.crossLead));
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (4)---------- \t{0:e4}.", ConfigData.crossCouplingFactors[13]);
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (4)---- \t" + Convert.ToString(ConfigData.analogFilter[5]));
+            if (ConfigData.crossCouplingFactors[15] == 1)
+            {
+                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + "N/A");
+            }
+            else
+            {
+                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION (16)--------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[15]));
+            }
+
+            if (ConfigData.crossCouplingFactors[15] == 1)
+            {
+                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + "N/A");
+            }
+            else
+            {
+                if (engineerDebug) Console.WriteLine("CROSS-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
+            }
+            if (engineerDebug) Console.WriteLine("CROSS-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.crossBias));
+            if (engineerDebug) Console.WriteLine("LONG-AXIS PERIOD-------------------- \t{0:e4}", ConfigData.longPeriod);
+            if (engineerDebug) Console.WriteLine("LONG-AXIS DAMPING------------------- \t{0:e4}", ConfigData.longDampFactor);
+            if (engineerDebug) Console.WriteLine("LONG-AXIS GAIN---------------------- \t{0:n4}", ConfigData.longGain);
+            if (engineerDebug) Console.WriteLine("LONG-AXIS LEAD---------------------- \t" + Convert.ToString(ConfigData.longLead));
+            if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (4)----------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[14]));
+            if (engineerDebug) Console.WriteLine("LONG AXIS COMPENSATION PHASE (4)----- \t" + Convert.ToString(ConfigData.analogFilter[6]));
+            if (ConfigData.crossCouplingFactors[15] == 1)
+            {
+                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + "N/A");
+            }
+            else
+            {
+                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION (16)---------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[16]));
+            }
+            if (ConfigData.crossCouplingFactors[15] == 1)
+            {
+                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)---- \t" + "N/A");
+            }
+            else
+            {
+                if (engineerDebug) Console.WriteLine("LONG-AXIS COMPENSATION PHASE (16)--- \t" + Convert.ToString(ConfigData.analogFilter[7]));
+            }
+            if (engineerDebug) Console.WriteLine("LONG-AXIS BIAS---------------------- \t" + Convert.ToString(ConfigData.longBias));
+            if (engineerDebug) Console.WriteLine("VCC---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[6]));
+            if (engineerDebug) Console.WriteLine("AL----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[7]));
+            if (engineerDebug) Console.WriteLine("AX----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[8]));
+            if (engineerDebug) Console.WriteLine("VE----------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[9]));
+            if (engineerDebug) Console.WriteLine("AX2---------------------------------- \t" + Convert.ToString(ConfigData.crossCouplingFactors[10]));
+            if (engineerDebug) Console.WriteLine("XACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[11]));
+            if (engineerDebug) Console.WriteLine("LACC**2------------------------------ \t" + Convert.ToString(ConfigData.crossCouplingFactors[12]));
+            if (engineerDebug) Console.WriteLine("AX PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[1]));
+            if (engineerDebug) Console.WriteLine("AL PHASE----------------------------- \t" + Convert.ToString(ConfigData.analogFilter[2]));
+            if (engineerDebug) Console.WriteLine("VCC PHASE---------------------------- \t" + Convert.ToString(ConfigData.analogFilter[4]));
+            if (engineerDebug) Console.WriteLine("MAXIMUM SPRING TENSION VALUE--------- \t" + Convert.ToString(ConfigData.springTensionMax));
+        }
+
+        #endregion Config File
+
+        #region Main form stuff
+
+        private void saveDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
+
+        private void heaterBypassCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.heaterBypassCheckBox.Checked)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    heaterBypassCheckBox.Checked = true;
+                });
+            }
+        }
+
+        private void windowSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            chartWindowTimeSpan = Convert.ToInt16(windowSizeNumericUpDown.Value);
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+        }
+
+        private void chartWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chartWindowGroupBox.Visible = true;
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            chartWindowGroupBox.Visible = false;
+        }
+
+        private void button3_Click_3(object sender, EventArgs e)
+        {
+            springTensionGroupBox.Visible = false;
+        }
+
+        private void surveyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            surveyInfo = surveyTextBox.Text;
+        }
+
+        private static void DoSomeWork(int val)
+        {
+            // Pretend to do something.
+            Thread.Sleep(val);
+        }
+
+        private void button1_Click(object sender, EventArgs e)// Send data button.  For debug only.  Remove in final app.
+        {
+            // create hex data stream.  Convert to string and place in text box for sending.
+            // Command 1 - send relay switches
+
+            byte[] data = { 0x00, 0x80, 0x80, 0x04, 0x07, 0x45, 0xf3, 0x37, 0x9a, 0x99, 0x99, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x33, 0x33, 0xb3, 0x3e, 0x2e, 0x90, 0x20, 0xbb, 0x66, 0x66, 0x66, 0x3f, 0xa4, 0x05, 0x93, 0x1a, 0xda, 0x37, 0x85, 0xeb, 0x91, 0x3e, 0xcd, 0xcc, 0x4c, 0x3e, 0x33, 0x33, 0xb3, 0x3e, 0x89, 0xd2, 0x5e, 0xbb, 0x00, 0x00, 0x80, 0x3f, 0x5f, 0x08, 0x3f, 0x35, 0x5e, 0x3e, 0x68, 0x91, 0x2d, 0x3e, 0x14, 0xae, 0x47, 0x3e, 0xa4, 0x70, 0x3d, 0x3e, 0x5c, 0x21, 0x88, 0xbf, 0x00, 0xc0, 0xda, 0x45, 0x89, 0x01, 0x08, 0x09, 0x0a, 0x88, 0x45, 0xb3, 0xc3, 0xa3, 0x8e, 0xf3, 0xc2, 0xab };
+
+            // Send the binary data out the port
+            comport.Write(data, 0, data.Length);
+
+            // Show the hex digits on in the terminal window
+            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+        }
+
+        private void StartDataCollection()
+        {
+            // OpenPort();
+            byte[] data = { 0x01, 0x08, 0x09 };
+
+            _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+            //   _timer1.Enabled = true;
+            //   Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+        }
+
+        // Start data collection.  Send command 1 for meter to start data stream
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //   OpenPort();
+            // Convert the user's string of hex digits (ex: B4 CA E2) to a byte array
+            byte[] data = { 0x01, 0x08, 0x09 };                                        //HexStringToByteArray(txtSendData.Text);
+
+            // Send the binary data out the port
+            //    comport.Write(data, 0, data.Length);
+
+            //         _timer1.Interval = 1000; //  (5000 - DateTime.Now.Millisecond);
+            //         _timer1.Enabled = true;
+            // Show the hex digits on in the terminal window
+            Log(LogMsgType.Outgoing, ByteArrayToHexString(data) + "\n");
+        }
+
+        //  This will be sendData later will full command byte array and checksum.
+        //  Not needed until I implement sending commands, settings etc.
+        private void button3_Click(object sender, EventArgs e)
+        {
+            byte checkSum = 0;
+            var year = 2016;
+
+            byte[] myByte = BitConverter.GetBytes(year);
+            //     Array.Reverse(myByte);
+            // REPLACE WITH COMMAND AND # BYTES LATER WITH
+
+            byte[] myByteArray = { 3, 0, 0 };
+            checkSum = CalculateChecksum(myByteArray);
+            myByteArray[myByteArray.Length - 1] = checkSum;
+            string StringOutput = "";
+            for (int i = 0; i < myByteArray.Length; i++)
+            {
+                StringOutput = string.Concat(StringOutput, myByteArray[i].ToString("X"));
+            }
+
+            Log(LogMsgType.Incoming, Convert.ToString(StringOutput) + "\n");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DataStatusForm.Show();
+        }
+
+        private void TimeWorker()
+        {
+            while (true)
+            {
+                this.Invoke(new UpdateTimeTextCallback(this.UpdateTimeText), new object[] { });
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void UpdateRecordBox(Boolean i)
+        {
+            recordingTextBox.Visible = i;
+            DateTime nowDateTime = DateTime.Now;
+            fileStartTime = nowDateTime;
+            fileStartTimeLabel.Text = "File start time:  " + Convert.ToString(nowDateTime);
+
+            var runningTime = TimeSpan.FromTicks(DateTime.Now.Ticks - fileStartTime.Ticks);
+            string timeDuration = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+            recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+        }
+
+        private void UpdateNameLabel()
+        {
+            UserDataForm.dataFileTextBox.Text = dataFileName;
+        }
+
+        private void UpdateTimeText()
+        {
+            DateTime nowDateTime = DateTime.Now;
+            timeNowLabel.Text = Convert.ToString(nowDateTime);
+            UserDataForm.modeLabel.Text = dataAquisitionMode + " mode";
+            if (fileRecording == true)
+            {
+                var myStartTime = DateTime.Now;
+                if (firstTime == true)
+                {
+                    this.Invoke(new UpdateFileNameLabelCallback(this.UpdateNameLabel), new object[] { });
+                    this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
+                    fileStartTime = myStartTime;// DateTime.Now;
+                    firstTime = false;
+                }
+                else
+                {
+                    var runningTime = TimeSpan.FromTicks(DateTime.Now.Ticks - fileStartTime.Ticks);
+                    string timeDuration = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+                    recordingDurationLabel.Text = "Duration: " + new DateTime(runningTime.Ticks).ToString("HH:mm:ss");
+                }
+            }
+            else
+            {
+                firstTime = true;
+            }
+        }
+
+        #endregion Main form stuff
+
+        #region Setup
+
+        private void SetInitialVisibility()
+        {
+            GravityChart.Visible = false;
+            meterStatusGroupBox.Visible = false;
+            surveyRecordGroupBox.Visible = false;
+            gpsGroupBox.Visible = false;
+            springTensionGroupBox.Visible = false;
+            startupGroupBox.Visible = false;
+            chartWindowGroupBox.Visible = false;
+            //---------------------------------------------------
+            torqueMotorCheckBox.Enabled = false;
+            springTensionCheckBox.Enabled = false;
+            gyroCheckBox.Enabled = false;
+            alarmCheckBox.Enabled = false;
+            springTensionRelativeRadioButton.Checked = true;
+            springTensionValueLabel.Text = "";
+            springTensionStatusLabel.Text = "";
+            stopButton.Enabled = false;
+            startButton.Enabled = true;
+        }
+
+        private void frmTerminal_Load(object sender, EventArgs e)
+        {
+                SetInitialVisibility();
+
+            // Console.WriteLine(a);
+            //  Console.WriteLine(DateTime.UtcNow);
+
+ 
+
+            CurrentDataMode = DataMode.Hex;
+
+            // Create an instance of NumericTextBox.
+            NumericTextBox numericTextBox1 = new NumericTextBox();
+            numericTextBox1.Parent = this;
+            //Draw the bounds of the NumericTextBox.
+            numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
+
+            //  Load stored state
+            InitStoredVariables();
+
+            if (engineerDebug)
+            {
+                Console.WriteLine("Data file name " + fileName);
+            }
+
+            STtextBox.Text = Convert.ToString(Data.SpringTension);
+
+            // load config file
+            CheckConfigFile(configFilePath + "\\" + configFileName);
+            //  ReadConfigFile(configFilePath + "\\" + configFileName);
+            //  UserDataForm.configurationFileTextBox.Text = configFilePath + "\\" + configFileName;
+
+            CheckCalFile(calFilePath + "\\" + calFileName);
+
+            comboBox1.SelectedItem = "minutes";
+            windowSizeNumericUpDown.Minimum = 1;
+            windowSizeNumericUpDown.Maximum = 60;
+            Thread.CurrentThread.Name = "time";
+
+            Thread TimeThread = new Thread(new ThreadStart(TimeWorker));
+            TimeThread.IsBackground = true;
+            TimeThread.Start();
+
+            SetupChart();
+            // Setup DataGrid();
+            WriteLogFile("System loaded");
+        }
+
+        #endregion Setup
+
+        //==================================================================================================
 
         private void AutoStart()
         {
@@ -3873,21 +3874,20 @@ namespace SerialPortTerminal
             Properties.Settings.Default.LACC_CMX_Phase = (short)ConfigData.LACC_CMX_Phase;
             Properties.Settings.Default.kFactor = (short)ConfigData.kFactor;
             Properties.Settings.Default.gyroType = ConfigData.gyroType;
-
+            Properties.Settings.Default.screenFilter = screenFilter;
+            Properties.Settings.Default.dataAquisitionMode = dataAquisitionMode;
+            Properties.Settings.Default.surveyInfo = surveyInfo;
             //  public static double[] crossCouplingFactors = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.9e-2, 2.499999e-3, -1.681e-2, 0.0, 0.0, 0.0, 0.0, -8.9999998e-4, -3.7e-3, 1.0, 1.0 };
 
-            /*
-
-                        dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
-                        configFilePath = Properties.Settings.Default.configFilePath;
-                        configFileName = Properties.Settings.Default.configFileName;
-                        calFilePath = Properties.Settings.Default.calFilePath;
-                        calFileName = Properties.Settings.Default.calFileName;
-                        filePath = Properties.Settings.Default.filePath;
-                        fileType = Properties.Settings.Default.fileType;
-                        fileName = Properties.Settings.Default.dataFileName;
-                        frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
-            */
+            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
+            configFilePath = Properties.Settings.Default.configFilePath;
+            configFileName = Properties.Settings.Default.configFileName;
+            calFilePath = Properties.Settings.Default.calFilePath;
+            calFileName = Properties.Settings.Default.calFileName;
+            dataFilePath = Properties.Settings.Default.filePath;
+            fileType = Properties.Settings.Default.fileType;
+            //      dataFileName = Properties.Settings.Default.dataFileName;
+            fileDateFormat = Properties.Settings.Default.fileDateFormat;
 
             Properties.Settings.Default.Save();
         }
@@ -3993,6 +3993,8 @@ namespace SerialPortTerminal
             ConfigData.analogFilter[6] = (Single)Properties.Settings.Default.analogFilter6_LongAxisCompensationPhase4;
             ConfigData.analogFilter[7] = (Single)Properties.Settings.Default.analogFilter8_LongAxisCompensationPhase16;
             ConfigData.analogFilter[8] = (Single)Properties.Settings.Default.analogFilter8_LongAxisCompensationPhase16;
+            screenFilter = Properties.Settings.Default.screenFilter;
+            dataAquisitionMode = Properties.Settings.Default.dataAquisitionMode;
 
             if (engineerDebug)
             {
@@ -4050,9 +4052,8 @@ namespace SerialPortTerminal
             calFileName = Properties.Settings.Default.calFileName;
             dataFilePath = Properties.Settings.Default.dataFilePath;// file path for data logs
             fileType = Properties.Settings.Default.fileType;// file type for data logs csv, txt etc
-            dataFileName = Properties.Settings.Default.dataFileName;// stored file name i.e. survey name
-            surveyName = dataFileName;
-            surveyTextBox.Text = surveyName;
+            surveyName = Properties.Settings.Default.surveyInfo;
+
             Data.SpringTension = Properties.Settings.Default.springTension;
             frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
 
@@ -4618,144 +4619,141 @@ namespace SerialPortTerminal
             }
         }// ReadConfigFile
 
-         /*
-                 [DelimitedRecord(",")]
-                 public class MarineData
-                 {
-                     public string lineId;
-                     public int Year;
-                     public int Days;
-                     public int Hour;
-                     public int Minute;
-                     public int Second;
-                     public double Gravity;
-                     public double SpringTension;
-                     public double CrossCoupling;
-                     public double RawBeam;// need to change this to avg beam
-                     public double VCC;
-                     public double AL;
-                     public double AX;
-                     public double VE;
-                     public double AX2;
-                     public double XACC2;
-                     public double LACC2;
-                     public double XACC;
-                     public double LACC;
-                     public double Period;
-                     public double longitude;
-                     public double latitude;
-                     public double altitude;
-                 }
+        /*
+                [DelimitedRecord(",")]
+                public class MarineData
+                {
+                    public string lineId;
+                    public int Year;
+                    public int Days;
+                    public int Hour;
+                    public int Minute;
+                    public int Second;
+                    public double Gravity;
+                    public double SpringTension;
+                    public double CrossCoupling;
+                    public double RawBeam;// need to change this to avg beam
+                    public double VCC;
+                    public double AL;
+                    public double AX;
+                    public double VE;
+                    public double AX2;
+                    public double XACC2;
+                    public double LACC2;
+                    public double XACC;
+                    public double LACC;
+                    public double Period;
+                    public double longitude;
+                    public double latitude;
+                    public double altitude;
+                }
 
-                 [DelimitedRecord(",")]
-                 public class MarineDataHeader
-                 {
-                     public string lineId;
-                     public string Year;
-                     public string Days;
-                     public string Hour;
-                     public string Minute;
-                     public string Second;
-                     public string Gravity;
-                     public string SpringTension;
-                     public string CrossCoupling;
-                     public string RawBeam;// need to change this to avg beam
-                     public string VCC;
-                     public string AL;
-                     public string AX;
-                     public string VE;
-                     public string AX2;
-                     public string XACC2;
-                     public string LACC2;
-                     public string XACC;
-                     public string LACC;
-                     public string Period;
-                     public string longitude;
-                     public string latitude;
-                     public string altitude;
-                 }
+                [DelimitedRecord(",")]
+                public class MarineDataHeader
+                {
+                    public string lineId;
+                    public string Year;
+                    public string Days;
+                    public string Hour;
+                    public string Minute;
+                    public string Second;
+                    public string Gravity;
+                    public string SpringTension;
+                    public string CrossCoupling;
+                    public string RawBeam;// need to change this to avg beam
+                    public string VCC;
+                    public string AL;
+                    public string AX;
+                    public string VE;
+                    public string AX2;
+                    public string XACC2;
+                    public string LACC2;
+                    public string XACC;
+                    public string LACC;
+                    public string Period;
+                    public string longitude;
+                    public string latitude;
+                    public string altitude;
+                }
 
-                 public void RecordMeterDataToFile()
-                 {
-                     var engine = new FileHelperEngine<MarineData>();
-                     var MarineData = new List<MarineData>();
+                public void RecordMeterDataToFile()
+                {
+                    var engine = new FileHelperEngine<MarineData>();
+                    var MarineData = new List<MarineData>();
 
-                     if (newDataFile)
-                     {
-                         var MarineDataHeader = new List<MarineDataHeader>();
-                         MarineDataHeader.Add(new MarineDataHeader()
-                         {
-                             lineId = "Survey Name",
-                             Year = "Year",
-                             Days = "Day",
-                             Hour = "Hour",
-                             Minute = "Minute",
-                             Second = "Second",
-                             Gravity = "Gravity",
-                             SpringTension = "Spring Tension",
-                             CrossCoupling = "Coupling",
-                             RawBeam = "Avg. Beam",
-                             VCC = "VCC",
-                             AL = "AL",
-                             AX = "AX",
-                             VE = "VE",
-                             AX2 = "AX2",
-                             XACC2 = "XACC2",
-                             LACC2 = "LACC2",
-                             XACC = "XACC",
-                             LACC = "LACC",
-                             Period = "Period",
-                             longitude = "Longitude",
-                             latitude = "Latitude",
-                             altitude = "Altitude"
-                         });
-                         engine.WriteFile("FileOut.csv", MarineData);
-                     }
+                    if (newDataFile)
+                    {
+                        var MarineDataHeader = new List<MarineDataHeader>();
+                        MarineDataHeader.Add(new MarineDataHeader()
+                        {
+                            lineId = "Survey Name",
+                            Year = "Year",
+                            Days = "Day",
+                            Hour = "Hour",
+                            Minute = "Minute",
+                            Second = "Second",
+                            Gravity = "Gravity",
+                            SpringTension = "Spring Tension",
+                            CrossCoupling = "Coupling",
+                            RawBeam = "Avg. Beam",
+                            VCC = "VCC",
+                            AL = "AL",
+                            AX = "AX",
+                            VE = "VE",
+                            AX2 = "AX2",
+                            XACC2 = "XACC2",
+                            LACC2 = "LACC2",
+                            XACC = "XACC",
+                            LACC = "LACC",
+                            Period = "Period",
+                            longitude = "Longitude",
+                            latitude = "Latitude",
+                            altitude = "Altitude"
+                        });
+                        engine.WriteFile("FileOut.csv", MarineData);
+                    }
 
-                     MarineData.Add(new MarineData()
-                     {
-                         lineId = surveyName,
-                         Year = Data.year,
-                         Days = Data.day,
-                         Hour = Data.Hour,
-                         Minute = Data.Min,
-                         Second = Data.Sec,
-                         Gravity = Data.gravity,
-                         SpringTension = Data.SpringTension,
-                         CrossCoupling = Data.CrossCoupling,
-                         RawBeam = Data.beam,// need to change this  to avg beam
-                         VCC = Data.VCC,
-                         AL = Data.AL,
-                         AX = Data.AX,
-                         VE = Data.VE,
-                         AX2 = Data.AX2,
-                         XACC2 = Data.XACC2,
-                         LACC2 = Data.LACC2,
-                         XACC = Data.XACC,
-                         LACC = Data.LACC,
-                         Period = 0,// need to add this in calculate marine data
-                         longitude = Data.longitude,
-                         latitude = Data.latitude,
-                         altitude = Data.altitude
-                     });
+                    MarineData.Add(new MarineData()
+                    {
+                        lineId = surveyName,
+                        Year = Data.year,
+                        Days = Data.day,
+                        Hour = Data.Hour,
+                        Minute = Data.Min,
+                        Second = Data.Sec,
+                        Gravity = Data.gravity,
+                        SpringTension = Data.SpringTension,
+                        CrossCoupling = Data.CrossCoupling,
+                        RawBeam = Data.beam,// need to change this  to avg beam
+                        VCC = Data.VCC,
+                        AL = Data.AL,
+                        AX = Data.AX,
+                        VE = Data.VE,
+                        AX2 = Data.AX2,
+                        XACC2 = Data.XACC2,
+                        LACC2 = Data.LACC2,
+                        XACC = Data.XACC,
+                        LACC = Data.LACC,
+                        Period = 0,// need to add this in calculate marine data
+                        longitude = Data.longitude,
+                        latitude = Data.latitude,
+                        altitude = Data.altitude
+                    });
 
-                     engine.WriteFile("FileOut.csv", MarineData);
-                 }
+                    engine.WriteFile("FileOut.csv", MarineData);
+                }
 
-                 // This method opens and writes the header to the data log file
+                // This method opens and writes the header to the data log file
 
-           */
-    public void CloseDataFile()
-        {
-            
-        }
+          */
+
         // TODO Open new data file
         public void OpenDataFile()
         {
-            string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
+            // string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
             string delimitor = ",";
             fileType = "csv";
-
+            string thisDate = String.Format("{0:yyyy-MM-dd-hh-mm-ss}", DateTime.Now);
 
             switch (fileType)
             {
@@ -4786,16 +4784,17 @@ namespace SerialPortTerminal
 
               */
             string header = "";
-            string myString = "";
-            if (timeCheck == 0)
-            {
-                timeCheck = fileStartTime.Minute;
-            }
-            if (DateTime.Now.Minute == timeCheck + 2)
-            {
-                timeCheck = DateTime.Now.Minute;
-                thisDate = String.Format("{0:yyyy-MM-dd-hh-mm-ss}", DateTime.Now);     //Convert.ToString(DateTime.Now);
-            }
+
+            /*    if (timeCheck == 0)
+                {
+                    timeCheck = fileStartTime.Minute;
+                }
+                if (DateTime.Now.Minute == timeCheck + 2)
+                {
+                    timeCheck = DateTime.Now.Minute;
+                    thisDate = String.Format("{0:yyyy-MM-dd-hh-mm-ss}", DateTime.Now);     //Convert.ToString(DateTime.Now);
+                }
+                */
             dataFileName = dataFilePath + ConfigData.meterNumber + "-" + thisDate + "-" + surveyName + "." + fileType;
 
             try
@@ -4813,19 +4812,19 @@ namespace SerialPortTerminal
                             + delimitor + "GPS Status";
 
                             break;
-/*
-                        case "short":// this is serial data format
-                            header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
-                            + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity";
-                            break;
+                        /*
+                                                case "short":// this is serial data format
+                                                    header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
+                                                    + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity";
+                                                    break;
 
-                        case "norstar":// this is serial data format
-                            header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
-                            + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
-                            + "Average Beam" + delimitor + "Cross coupling" + delimitor + "Total Correction" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
-                            + "AX" + delimitor + "VE" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "AX2 or CMX";
-                            break;
-*/
+                                                case "norstar":// this is serial data format
+                                                    header = "Line ID" + delimitor + "Year" + delimitor + "Days" + delimitor + "Hours" + delimitor
+                                                    + "Minuites" + delimitor + "Seconds" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
+                                                    + "Average Beam" + delimitor + "Cross coupling" + delimitor + "Total Correction" + delimitor + "VCC or CML" + delimitor + "AL" + delimitor
+                                                    + "AX" + delimitor + "VE" + delimitor + "XACC" + delimitor + "LACC" + delimitor + "AX2 or CMX";
+                                                    break;
+                        */
                         case "new":
                             header = "Date" + delimitor + "Gravity" + delimitor + "Spring Tension" + delimitor
                             + "Cross coupling" + delimitor + "Raw Beam" + delimitor + "VCC or CML" + delimitor + "AL"
@@ -4855,7 +4854,7 @@ namespace SerialPortTerminal
         }
 
         // TODO Record to data file
-        public void RecordDataToFile( Data Data)
+        public void RecordDataToFile(Data Data)
         {
             string thisDate = String.Format("{0:yyyyMMdd-HHmm}", fileStartTime);
             string delimitor = ",";
@@ -4888,7 +4887,7 @@ namespace SerialPortTerminal
                 ZLS - new format
 
               */
-            string header = "";
+
             string myString = "";
             if (timeCheck == 0)
             {
@@ -4896,24 +4895,47 @@ namespace SerialPortTerminal
             }
             if (DateTime.Now.Minute == timeCheck + 2)
             {
-                
                 timeCheck = DateTime.Now.Minute;
                 thisDate = Convert.ToString(DateTime.Now);
             }
- 
+
             switch (fileFormat)// why do I have a second switch statement???
             {
                 case "standard":
                     // Need to change from raw beam to avg beam
 
                     // This is for 10 sec data
-                    myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.Date.Day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
-               + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
-               + delimitor + Convert.ToString(Data.data4[4]) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
-               + delimitor + Convert.ToString(Data.data1[7]) + delimitor + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[9])
-               + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
-               + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14]) + delimitor + Convert.ToString(Data.totalCorrection)
-               + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+
+                    if (dataAquisitionMode == "marine")// MODESW = 0
+                    {
+                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.Date.Day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+             + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
+             + delimitor + Convert.ToString(Data.data4[4] * ConfigData.beamScale) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
+             + delimitor + Convert.ToString(Data.data1[7]) + delimitor + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[9])
+             + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
+             + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14]) + delimitor + Convert.ToString(Data.totalCorrection)
+             + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+                    }
+                    else if (dataAquisitionMode == "HighRes")//MODESW = 1
+                    {
+                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.Date.Day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+             + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data4[3])
+             + delimitor + Convert.ToString(Data.data4[4] * ConfigData.beamScale) + delimitor + Convert.ToString(Data.data4[5]) + delimitor + Convert.ToString(Data.data4[6])
+             + delimitor + Convert.ToString(Data.data4[7]) + delimitor + Convert.ToString(Data.data4[8]) + delimitor + Convert.ToString(Data.data4[9])
+             + delimitor + Convert.ToString(Data.data4[10]) + delimitor + Convert.ToString(Data.data4[11]) + delimitor + Convert.ToString(Data.data4[12])
+             + delimitor + Convert.ToString(Data.data4[13]) + delimitor + Convert.ToString(Data.data4[14]) + delimitor + Convert.ToString(Data.totalCorrection)
+             + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+                    }
+                    else
+                    {
+                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.Date.Day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+             + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
+             + delimitor + Convert.ToString(Data.data4[4]) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
+             + delimitor + Convert.ToString(Data.data1[7]) + delimitor + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[9])
+             + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
+             + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14]) + delimitor + Convert.ToString(Data.totalCorrection)
+             + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+                    }
 
                     break;
 
@@ -4924,14 +4946,14 @@ namespace SerialPortTerminal
                                     break;
                 */
                 case "new":
-              /*      myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
-                + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.rawBeam) + delimitor + Convert.ToString(d.VCC)
-                + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
-                + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
-                + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
-                + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
-    */        
-    break;
+                    /*      myString = String.Format("{0:yyyyMMdd-HHmmss}", d.Date) + delimitor + Convert.ToString(d.Gravity) + delimitor + Convert.ToString(d.SpringTension)
+                      + delimitor + Convert.ToString(d.CrossCoupling) + delimitor + Convert.ToString(d.rawBeam) + delimitor + Convert.ToString(d.VCC)
+                      + delimitor + Convert.ToString(d.AL) + delimitor + Convert.ToString(d.AX) + delimitor + Convert.ToString(d.VE)
+                      + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
+                      + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
+                      + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
+          */
+                    break;
 
                 default:
                     /*
@@ -4941,8 +4963,8 @@ namespace SerialPortTerminal
                 + delimitor + Convert.ToString(d.AX2) + delimitor + Convert.ToString(d.XACC2) + delimitor + Convert.ToString(d.LACC2)
                 + delimitor + Convert.ToString(d.XACC) + delimitor + Convert.ToString(d.LACC) + delimitor + Convert.ToString(d.TotalCorrection)
                 + delimitor + Convert.ToString(d.latitude) + delimitor + Convert.ToString(d.longitude) + delimitor + Convert.ToString(d.altitude);
-    */             
-    break;
+    */
+                    break;
             }
 
             try
@@ -5004,7 +5026,7 @@ namespace SerialPortTerminal
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            Boolean okToRun = false;
+            Boolean okToRun = true;
 
             if (surveyName == "")
             {
@@ -5028,13 +5050,13 @@ namespace SerialPortTerminal
                 stopButton.Enabled = true;
                 startButton.Enabled = false;
             }
-           // okToRun = true;
+            // okToRun = true;
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
             // Close file
-           
+
             fileRecording = false;
             surveyTextBox.Enabled = true;
             recordingTextBox.Text = "Recording stopped";
@@ -5106,15 +5128,6 @@ namespace SerialPortTerminal
                 Environment.Exit(Environment.ExitCode);
                 System.Environment.Exit(1);
             }
-        }
-
-        private void surveyTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UserDataForm.surveyTextBox.Text = surveyTextBox.Text;
-            surveyName = surveyTextBox.Text;
-            surveyNameSet = true;
-            newDataFile = true;  //   Changing survey name will crate a new data file
-            UpdateNameLabel();
         }
 
         private void exitProgramToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -5237,12 +5250,12 @@ namespace SerialPortTerminal
         {
             if (gyroCheckBox.Checked)
             {
-                startupLabel.Text = "Waiting for gyros to spin up";
+                // startupLabel.Text = "Waiting for gyros to spin up";
                 // RelaySwitches.Slew4(disable);
                 // RelaySwitches.Slew5(disable);
                 ControlSwitches.ControlSw = 0x08;
                 sendCmd("Send Control Switches");
-                Task taskA = Task.Factory.StartNew(() => DoSomeWork(7000));
+                Task taskA = Task.Factory.StartNew(() => DoSomeWork(500));
                 taskA.Wait();
 
                 RelaySwitches.RelaySW = 0x81;
@@ -5669,22 +5682,25 @@ namespace SerialPortTerminal
 
         private void button6_Click_1(object sender, EventArgs e)
         {
+            //   SpringTension SlewST = new SpringTension( fmpm,  springTensionMax,  springTensionFPM,  springTensionMaxStep,  springTensionScale, Data.data1[3]);
             Single springTensionTarget;
             if (springTensionTargetNumericTextBox.Text != "" | springTensionParkRadioButton.Checked)
             {
                 if (springTensionAbsoluteRadioButton.Checked)
                 {
                     springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
-                    SpringTensionStep(springTensionTarget, "absolute");
+                    SlewSpringTension(springTensionTarget, "absolute");
+                    // SpringTensionStep(springTensionTarget, "absolute");
                 }
                 else if (springTensionRelativeRadioButton.Checked)
                 {
                     springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
-                    SpringTensionStep(springTensionTarget, "relative");
+                    SlewSpringTension(springTensionTarget, "relative");
                 }
                 else if (springTensionParkRadioButton.Checked)
                 {
-                    SpringTensionStep(0, "park");
+                    springTensionTarget = 0;// check park value in Fortran
+                    SlewSpringTension(springTensionTarget, "park");
                 }
                 else if (springTensionSetRadioButton.Checked)
                 {
@@ -5859,46 +5875,194 @@ namespace SerialPortTerminal
             }
         }
 
-        private void saveDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
+        ///////////////////////////////////////////////
+
+        #region Slew spring tension
+
+        /*       public class SpringTension
+               {
+                   private int fmpm;
+                   private double springTensionMax;
+                   private int springTensionFPM;
+                   private int springTensionMaxStep;
+                   private Single springTensionScale;
+                   private int istop = 0;
+                   private Single localSpringTension;
+                   frmTerminal frmTerminal = new frmTerminal();
+
+                   public SpringTension(int fmpm, double springTensionMax, int springTensionFPM, int springTensionMaxStep, Single springTensionScale, Single localSpringTension)
+                   {
+                       this.fmpm = fmpm;
+                       this.springTensionMax = springTensionMax;
+                       this.springTensionFPM = springTensionFPM;//fmpm = 2340;
+                       this.springTensionMaxStep = springTensionMaxStep;
+                       this.springTensionScale = springTensionScale;
+                       this.localSpringTension = localSpringTension;
+                   }
+
+           */
+
+        private double GetSign(double a, double b)
         {
-            Properties.Settings.Default.Save();
+            a = Math.Abs(a);
+            if (b < 0)
+            {
+                a *= -1;
+            }
+            return a;
         }
 
-        private void heaterBypassCheckBox_CheckedChanged(object sender, EventArgs e)
+        private static void Delay(int val)
         {
-            if (this.heaterBypassCheckBox.Checked)
+            // Pretend to do something.
+            Thread.Sleep(val);
+        }
+
+        private void Slew10SecDelay(int M, int istep4)
+        {
+            istep = istep4;
+            springTensionStatusLabel.Text = ("Please wait 10 sec");
+            springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
+            sendCmd("Slew Spring Tension");
+            Task taskA = Task.Factory.StartNew(() => Delay(10000));
+            taskA.Wait();
+            STtextBox.Text = Convert.ToString(Data.data1[3]);
+        }
+
+        // 2500 steps/sec = 87.5 mGal/10 sec = 525 mGal/min
+        public void SlewSpringTension(double target, string slewType)
+        {
+            switch (slewType)
             {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    heaterBypassCheckBox.Checked = true;
-                });
+                case "relative":
+                    RalativeSlew(target);
+
+                    break;
+
+                case "absolute":
+                    AbsoluteSlew(target);
+                    break;
+
+                case "park":
+                    Park();
+                    break;
+
+                default:
+                    break;
             }
         }
 
-        private void windowSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private Single RalativeSlew(double target)
         {
-            chartWindowTimeSpan = Convert.ToInt16(windowSizeNumericUpDown.Value);
+            double shift = target;
+
+            int M = 0;
+
+            if (shift == 0)// if user intered 0 for slew do nothing and return original value of spring tension
+            {
+                return Data.data1[3];
+            }
+            if (istop <= 1)
+            {
+                if (Math.Abs(shift) > fmpm)
+                {
+                    //    print(Math.abs(shift) / fmpm);     check this in fortran program
+                    //    read chartWindowTimePeriodverify user input
+                }
+            }
+
+            //109
+
+            if (shift + Data.data1[3] > springTensionMax)
+            {
+                // goto 1000
+                return Data.data1[3];
+            }
+
+            if (shift + Data.data1[3] < 100)
+            {
+                //  goto 1000
+                return Data.data1[3];
+            }
+
+            M = Convert.ToInt32(Math.Abs(shift / springTensionScale)); // scale == .1041666
+            Data.data1[3] += (Single)GetSign(M * springTensionScale, shift);
+            iStep[4] = -1 * springTensionMaxStep;
+
+            if (shift > 0)
+            {
+                iStep[4] = springTensionMaxStep;
+            }
+
+            // 110 ==========================================================================================================
+            // if (M < (int)springTensionMaxStep)
+            // {
+            //   goto 120
+            // }
+
+            while (M >= (int)springTensionMaxStep)
+            {
+                Slew10SecDelay(M, istep);// Send slew ST command and wait 10 sec
+                M = M - (int)springTensionMaxStep;
+            }
+            // 120 ==========================================================================================================
+            iStep[4] = -1 * M;
+            if (shift > 0)
+            {
+                iStep[4] *= -1;
+            }
+            Slew10SecDelay(M, istep);// Send slew ST command and wait 10 sec
+
+            // 120 ==========================================================================================================
+
+            // temp
+            if (shift == 0)
+            {
+                return Data.data1[3];
+                // stop slewing
+            }
+            else
+            {
+                return -1;
+            }
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void AbsoluteSlew(double target)
+        {
+            //  shift = target - CalculateMarineData.data1[3];
+            double shift = target - Data.data1[3];
+        }
+
+        private void Park()
         {
         }
 
-        private void chartWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void WSlew(double target)
         {
-            chartWindowGroupBox.Visible = true;
+            double shift = 0;
+            if (iStop == 2)
+            {
+                //write 5
+                // read target  error 60
+            }
+            else if (iStop == 3)
+            {
+                shift = 500 - Data.data1[3];
+                // goto 100
+            }
+            else if (iStop == 4)
+            {
+                shift = target - Data.data1[3];
+            }
         }
 
-        private void button2_Click_2(object sender, EventArgs e)
-        {
-            chartWindowGroupBox.Visible = false;
-        }
+        #endregion Slew spring tension
 
-        private void button3_Click_3(object sender, EventArgs e)
+        private void updateConfigFileToMeterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            springTensionGroupBox.Visible = false;
+            sendCmd("Set Cross Axis Parameters");      // download platform parameters 4
+            sendCmd("Set Long Axis Parameters");
+            sendCmd("Update Cross Coupling Values");   // download CC parameters 8
         }
-
-        ///////////////////////////////////////////////
     }
 }

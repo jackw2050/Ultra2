@@ -23,7 +23,6 @@ SO LENGTH = BYTE COUNT + 1
 
 	Set up for marine and hires mode (1 sec and 10 sec)
 
-	Fix GPS status
 
 	Complete meter status and port C status
 
@@ -100,3 +99,196 @@ MODESW = 2    LINEID, DAY, HR, MIN, SEC, GRAV, DATA4[3], DATA4[4], BSCALE * DATA
 
 
 RNS 2 BYTES + CHECKSUM
+
+
+
+
+
+
+
+old slew
+
+
+        //SpringTensionStep(double target, string slewType)
+
+/*
+        private void SpringTensionStep(double target, string slewType)
+        {
+            Boolean okToSlew = false;
+            double shift = target;// target = 100
+                                  //  shift = springTensionMax - CalculateMarineData.data1[3] - 500;
+                                  //shift = 100
+                                  // istop = 1
+                                  // spring tension = 1414.5
+                                  // stscale = .1041666
+                                  // M = 960
+
+            if (engineerDebug)
+            {
+                Console.WriteLine("FMPM = " + fmpm);
+                Console.WriteLine("Slew " + slewType);
+                Console.WriteLine("Current ST " + Data.SpringTension);
+                Console.WriteLine("Initial shift = " + shift);
+            }
+
+            switch (slewType)
+            {
+                case "absolute":
+                    //  shift = target - CalculateMarineData.data1[3];
+                    shift = target - Data.SpringTension;
+
+                    break;
+
+                case "relative":
+
+                    if (iStop > 1)
+                    {
+                        // goto 109  startup wizard is active
+                    }
+                    if (Math.Abs(shift) > fmpm)  // FMPM is MGAL/Min
+                    {
+                        springTensionValueLabel.Text = Convert.ToString(Math.Abs(shift) / fmpm);
+                        // this is currently printed to screen
+                    }
+
+                    break;
+
+                case "park":
+                    // shift = springTensionMax - CalculateMarineData.data1[3] - 500;
+                    shift = springTensionMax - Data.SpringTension - 500;
+                    break;
+
+                default:
+                    break;
+            }
+            //            if ((shift + CalculateMarineData.data1[3] > springTensionMax) || shift + CalculateMarineData.data1[3] < 100)
+
+            if ((shift + Data.SpringTension > springTensionMax) || (shift + Data.SpringTension < 100) || (target > springTensionMax) || (Math.Abs(shift) > springTensionMax - 500))
+            {
+                okToSlew = false;
+                MessageBox.Show("Error", "Spring tension out of range.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                TimerWithDataCollection("stop");
+                okToSlew = true;
+            }
+
+            //---------------------------------------------------------------------------------------------
+            // not sure where to put these yet
+            if (Math.Abs(shift) > springTensionFPM)
+            {
+                if (engineerDebug)
+                {
+                    Console.WriteLine(Math.Abs(shift) / springTensionFPM);
+                }
+                // print to some label or text box etc
+            }
+            //---------------------------------------------------------------------------------------------------
+            if (okToSlew)
+            {
+                int M = 0;
+
+                int sign = 1;
+                // 2500 steps/sec = 87.5 mGal/10 sec = 525 mGal/min
+
+                if (shift > 0)
+                {
+                    //if(ISTOP > 1){}// startup wizard active
+                    if (Math.Abs(shift) > fmpm)// fmpm = 2340  what is this??
+                    {
+                        // write to screen Math.abs(shift)/fmpm
+                    }
+
+                    if (shift + Data.data1[3] > springTensionMax)
+                    {
+                        // goto 1000
+                    }
+                    if (shift + Data.data1[3] < 100)
+                    {
+                        // goto 1000
+                    }
+
+                    M = Convert.ToInt32(Math.Abs(shift / springTensionScale)); // scale == .1041666
+
+
+                    //sign = Math.Abs(Convert.ToSByte(M) * springTensionScale);
+                    iStep[4] = springTensionMaxStep;
+
+                    if (M < springTensionMaxStep)
+                    {
+
+                    }
+
+
+                    if (M * springTensionScale > 0)
+                    {
+                        sign = 1;
+                    }
+                    else
+                    {
+                        sign = -1;
+                    }
+ 
+                }
+                else
+                {
+                    sign = -1 * Math.Abs(M * springTensionScale);
+
+                }
+
+                  Data.data1[3] *= sign;// FORTRAN SIGN(M * springTensionScale, shift
+
+
+                Data.SpringTension += sign;
+                var tempSt = Math.Round(Convert.ToDouble(Data.SpringTension), 1);
+                Data.SpringTension = Convert.ToSingle(tempSt);
+
+                if (engineerDebug)
+                {
+                    Console.WriteLine("New ST = " + Data.SpringTension);
+                }
+
+                iStep[4] = -springTensionMaxStep;
+
+                if (shift > 0)
+                {
+                    iStep[4] = springTensionMaxStep;
+                }
+
+                while (M >= springTensionMaxStep)
+                {
+                    springTensionStatusLabel.Text = ("Please wait 10 sec");
+                    springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
+                    sendCmd("Slew Spring Tension");
+                    Task taskA = Task.Factory.StartNew(() => DoSomeWork(10000));
+                    taskA.Wait();
+                    STtextBox.Text = Convert.ToString(Data.SpringTension);
+                    M -= springTensionMaxStep;
+                }
+
+                iStep[4] = -1 * Convert.ToInt32(M);
+                if (shift > 0)
+                {
+                    iStep[4] *= -1;
+                }
+                springTensionStatusLabel.Text = ("Please wait 10 sec");
+                springTensionValueLabel.Text = Convert.ToString(Math.Round(.5 + M * springTensionScale));
+                sendCmd("Slew Spring Tension");
+                // convert text box etc.
+                // send_cmd 3
+                Task taskB = Task.Factory.StartNew(() => DoSomeWork(10000));
+                taskB.Wait();
+                STtextBox.Text = Convert.ToString(Data.SpringTension);
+                // sleep 10 sec  need to stop timer for this
+                // return
+
+                springTensionStatusLabel.Text = ("All done");
+                springTensionTargetNumericTextBox.Text = null;
+                taskB = Task.Factory.StartNew(() => DoSomeWork(300));
+                taskB.Wait();
+                TimerWithDataCollection("stop");
+                springTensionGroupBox.Visible = false;
+            }
+        }
+        */

@@ -44,7 +44,6 @@ namespace SerialPortTerminal
             this.label18 = new System.Windows.Forms.Label();
             this.gpsLongitudeTextBox = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
-            this.rtfTerminal = new System.Windows.Forms.RichTextBox();
             this.GravityChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,6 +92,8 @@ namespace SerialPortTerminal
             this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setTraceVisabilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zLSStripChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zLSStripChartCCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripForm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.startupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,6 +134,8 @@ namespace SerialPortTerminal
             this.tempToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setDateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPortPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateConfigFileToMeterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updageCalFileToMeterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileFormatToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.recordingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -189,8 +192,9 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
-            this.zLSStripChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zLSStripChartCCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
@@ -275,7 +279,7 @@ namespace SerialPortTerminal
             // button11
             // 
             this.button11.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button11.Location = new System.Drawing.Point(134, 48);
+            this.button11.Location = new System.Drawing.Point(158, 50);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(51, 43);
             this.button11.TabIndex = 66;
@@ -283,19 +287,10 @@ namespace SerialPortTerminal
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // rtfTerminal
-            // 
-            this.rtfTerminal.BackColor = System.Drawing.SystemColors.Control;
-            this.rtfTerminal.Location = new System.Drawing.Point(558, 111);
-            this.rtfTerminal.Name = "rtfTerminal";
-            this.rtfTerminal.Size = new System.Drawing.Size(331, 41);
-            this.rtfTerminal.TabIndex = 84;
-            this.rtfTerminal.Text = "";
-            // 
             // GravityChart
             // 
-            this.GravityChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.GravityChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GravityChart.BackColor = System.Drawing.Color.Gray;
             this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
@@ -358,7 +353,7 @@ namespace SerialPortTerminal
             this.legendLocationToolStripMenuItem,
             this.setTraceVisabilityToolStripMenuItem});
             this.chartContextMenuStrip.Name = "contextMenuStrip1";
-            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 158);
+            this.chartContextMenuStrip.Size = new System.Drawing.Size(203, 136);
             // 
             // toolStripMenuItemBackgroundColor
             // 
@@ -373,21 +368,21 @@ namespace SerialPortTerminal
             // blackToolStripMenuItem
             // 
             this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
-            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.blackToolStripMenuItem.Text = "Black";
             this.blackToolStripMenuItem.Click += new System.EventHandler(this.blackToolStripMenuItem_Click);
             // 
             // whiteToolStripMenuItem
             // 
             this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
-            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.whiteToolStripMenuItem.Text = "White";
             this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
             // 
             // greyToolStripMenuItem
             // 
             this.greyToolStripMenuItem.Name = "greyToolStripMenuItem";
-            this.greyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.greyToolStripMenuItem.Text = "Grey";
             this.greyToolStripMenuItem.Click += new System.EventHandler(this.greyToolStripMenuItem_Click);
             // 
@@ -606,61 +601,61 @@ namespace SerialPortTerminal
             // markerSize1
             // 
             this.markerSize1.Name = "markerSize1";
-            this.markerSize1.Size = new System.Drawing.Size(152, 22);
+            this.markerSize1.Size = new System.Drawing.Size(86, 22);
             this.markerSize1.Text = "1";
             // 
             // markerSize2
             // 
             this.markerSize2.Name = "markerSize2";
-            this.markerSize2.Size = new System.Drawing.Size(152, 22);
+            this.markerSize2.Size = new System.Drawing.Size(86, 22);
             this.markerSize2.Text = "2";
             // 
             // markerSize3
             // 
             this.markerSize3.Name = "markerSize3";
-            this.markerSize3.Size = new System.Drawing.Size(152, 22);
+            this.markerSize3.Size = new System.Drawing.Size(86, 22);
             this.markerSize3.Text = "3";
             // 
             // markerSize4
             // 
             this.markerSize4.Name = "markerSize4";
-            this.markerSize4.Size = new System.Drawing.Size(152, 22);
+            this.markerSize4.Size = new System.Drawing.Size(86, 22);
             this.markerSize4.Text = "4";
             // 
             // markerSize5
             // 
             this.markerSize5.Name = "markerSize5";
-            this.markerSize5.Size = new System.Drawing.Size(152, 22);
+            this.markerSize5.Size = new System.Drawing.Size(86, 22);
             this.markerSize5.Text = "5";
             // 
             // markerSize6
             // 
             this.markerSize6.Name = "markerSize6";
-            this.markerSize6.Size = new System.Drawing.Size(152, 22);
+            this.markerSize6.Size = new System.Drawing.Size(86, 22);
             this.markerSize6.Text = "6";
             // 
             // markerSize7
             // 
             this.markerSize7.Name = "markerSize7";
-            this.markerSize7.Size = new System.Drawing.Size(152, 22);
+            this.markerSize7.Size = new System.Drawing.Size(86, 22);
             this.markerSize7.Text = "7";
             // 
             // markerSize8
             // 
             this.markerSize8.Name = "markerSize8";
-            this.markerSize8.Size = new System.Drawing.Size(152, 22);
+            this.markerSize8.Size = new System.Drawing.Size(86, 22);
             this.markerSize8.Text = "8";
             // 
             // markerSize9
             // 
             this.markerSize9.Name = "markerSize9";
-            this.markerSize9.Size = new System.Drawing.Size(152, 22);
+            this.markerSize9.Size = new System.Drawing.Size(86, 22);
             this.markerSize9.Text = "9";
             // 
             // markerSize10
             // 
             this.markerSize10.Name = "markerSize10";
-            this.markerSize10.Size = new System.Drawing.Size(152, 22);
+            this.markerSize10.Size = new System.Drawing.Size(86, 22);
             this.markerSize10.Text = "10";
             // 
             // legendLocationToolStripMenuItem
@@ -677,25 +672,25 @@ namespace SerialPortTerminal
             // topToolStripMenuItem
             // 
             this.topToolStripMenuItem.Name = "topToolStripMenuItem";
-            this.topToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.topToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.topToolStripMenuItem.Text = "Top";
             // 
             // bottomToolStripMenuItem
             // 
             this.bottomToolStripMenuItem.Name = "bottomToolStripMenuItem";
-            this.bottomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bottomToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.bottomToolStripMenuItem.Text = "Bottom";
             // 
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.rightToolStripMenuItem.Text = "Right";
             // 
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.leftToolStripMenuItem.Text = "Left";
             // 
             // setTraceVisabilityToolStripMenuItem
@@ -706,6 +701,18 @@ namespace SerialPortTerminal
             this.setTraceVisabilityToolStripMenuItem.Name = "setTraceVisabilityToolStripMenuItem";
             this.setTraceVisabilityToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.setTraceVisabilityToolStripMenuItem.Text = "Chart Trace Options";
+            // 
+            // zLSStripChartToolStripMenuItem
+            // 
+            this.zLSStripChartToolStripMenuItem.Name = "zLSStripChartToolStripMenuItem";
+            this.zLSStripChartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zLSStripChartToolStripMenuItem.Text = "ZLS Strip chart";
+            // 
+            // zLSStripChartCCToolStripMenuItem
+            // 
+            this.zLSStripChartCCToolStripMenuItem.Name = "zLSStripChartCCToolStripMenuItem";
+            this.zLSStripChartCCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zLSStripChartCCToolStripMenuItem.Text = "ZLS Strip chart + CC";
             // 
             // contextMenuStripForm
             // 
@@ -967,7 +974,9 @@ namespace SerialPortTerminal
             // 
             this.tempToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setDateTimeToolStripMenuItem,
-            this.serialPortPreferencesToolStripMenuItem});
+            this.serialPortPreferencesToolStripMenuItem,
+            this.updateConfigFileToMeterToolStripMenuItem,
+            this.updageCalFileToMeterToolStripMenuItem});
             this.tempToolStripMenuItem.Name = "tempToolStripMenuItem";
             this.tempToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.tempToolStripMenuItem.Text = "Tools";
@@ -975,15 +984,28 @@ namespace SerialPortTerminal
             // setDateTimeToolStripMenuItem
             // 
             this.setDateTimeToolStripMenuItem.Name = "setDateTimeToolStripMenuItem";
-            this.setDateTimeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.setDateTimeToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.setDateTimeToolStripMenuItem.Text = "Set Date/ Time";
             this.setDateTimeToolStripMenuItem.Click += new System.EventHandler(this.setDateTimeToolStripMenuItem_Click);
             // 
             // serialPortPreferencesToolStripMenuItem
             // 
             this.serialPortPreferencesToolStripMenuItem.Name = "serialPortPreferencesToolStripMenuItem";
-            this.serialPortPreferencesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.serialPortPreferencesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.serialPortPreferencesToolStripMenuItem.Text = "Serial Port Preferences";
+            // 
+            // updateConfigFileToMeterToolStripMenuItem
+            // 
+            this.updateConfigFileToMeterToolStripMenuItem.Name = "updateConfigFileToMeterToolStripMenuItem";
+            this.updateConfigFileToMeterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.updateConfigFileToMeterToolStripMenuItem.Text = "Update Config File to Meter";
+            this.updateConfigFileToMeterToolStripMenuItem.Click += new System.EventHandler(this.updateConfigFileToMeterToolStripMenuItem_Click);
+            // 
+            // updageCalFileToMeterToolStripMenuItem
+            // 
+            this.updageCalFileToMeterToolStripMenuItem.Name = "updageCalFileToMeterToolStripMenuItem";
+            this.updageCalFileToMeterToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.updageCalFileToMeterToolStripMenuItem.Text = "Updage Cal File to Meter";
             // 
             // configureToolStripMenuItem
             // 
@@ -1101,11 +1123,11 @@ namespace SerialPortTerminal
             this.timeNowLabel.BackColor = System.Drawing.SystemColors.MenuBar;
             this.timeNowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeNowLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.timeNowLabel.Location = new System.Drawing.Point(377, 28);
+            this.timeNowLabel.Location = new System.Drawing.Point(446, 29);
             this.timeNowLabel.Name = "timeNowLabel";
-            this.timeNowLabel.Size = new System.Drawing.Size(37, 16);
+            this.timeNowLabel.Size = new System.Drawing.Size(69, 16);
             this.timeNowLabel.TabIndex = 107;
-            this.timeNowLabel.Text = "Date";
+            this.timeNowLabel.Text = "Date/ time";
             // 
             // chartWindowGroupBox
             // 
@@ -1205,6 +1227,7 @@ namespace SerialPortTerminal
             this.surveyTextBox.Name = "surveyTextBox";
             this.surveyTextBox.Size = new System.Drawing.Size(130, 20);
             this.surveyTextBox.TabIndex = 119;
+            this.surveyTextBox.TextChanged += new System.EventHandler(this.surveyTextBox_TextChanged);
             // 
             // label2
             // 
@@ -1263,7 +1286,7 @@ namespace SerialPortTerminal
             this.startupGroupBox.Controls.Add(this.button11);
             this.startupGroupBox.Location = new System.Drawing.Point(352, 53);
             this.startupGroupBox.Name = "startupGroupBox";
-            this.startupGroupBox.Size = new System.Drawing.Size(200, 139);
+            this.startupGroupBox.Size = new System.Drawing.Size(215, 139);
             this.startupGroupBox.TabIndex = 118;
             this.startupGroupBox.TabStop = false;
             this.startupGroupBox.Text = "Startup";
@@ -1279,7 +1302,7 @@ namespace SerialPortTerminal
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(134, 19);
+            this.button1.Location = new System.Drawing.Point(158, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 23);
             this.button1.TabIndex = 105;
@@ -1325,9 +1348,9 @@ namespace SerialPortTerminal
             this.gyroCheckBox.AutoSize = true;
             this.gyroCheckBox.Location = new System.Drawing.Point(10, 19);
             this.gyroCheckBox.Name = "gyroCheckBox";
-            this.gyroCheckBox.Size = new System.Drawing.Size(53, 17);
+            this.gyroCheckBox.Size = new System.Drawing.Size(128, 17);
             this.gyroCheckBox.TabIndex = 101;
-            this.gyroCheckBox.Text = "Gyros";
+            this.gyroCheckBox.Text = "Enable platform servo";
             this.gyroCheckBox.UseVisualStyleBackColor = true;
             this.gyroCheckBox.CheckedChanged += new System.EventHandler(this.gyroCheckBox_CheckedChanged);
             // 
@@ -1378,18 +1401,18 @@ namespace SerialPortTerminal
             this.springTensionValueLabel.AutoSize = true;
             this.springTensionValueLabel.Location = new System.Drawing.Point(168, 19);
             this.springTensionValueLabel.Name = "springTensionValueLabel";
-            this.springTensionValueLabel.Size = new System.Drawing.Size(35, 13);
+            this.springTensionValueLabel.Size = new System.Drawing.Size(16, 13);
             this.springTensionValueLabel.TabIndex = 8;
-            this.springTensionValueLabel.Text = "label3";
+            this.springTensionValueLabel.Text = "...";
             // 
             // springTensionStatusLabel
             // 
             this.springTensionStatusLabel.AutoSize = true;
             this.springTensionStatusLabel.Location = new System.Drawing.Point(168, 46);
             this.springTensionStatusLabel.Name = "springTensionStatusLabel";
-            this.springTensionStatusLabel.Size = new System.Drawing.Size(35, 13);
+            this.springTensionStatusLabel.Size = new System.Drawing.Size(16, 13);
             this.springTensionStatusLabel.TabIndex = 7;
-            this.springTensionStatusLabel.Text = "label3";
+            this.springTensionStatusLabel.Text = "...";
             // 
             // springTensionTargetNumericTextBox
             // 
@@ -1564,17 +1587,35 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
             // 
-            // zLSStripChartToolStripMenuItem
+            // label3
             // 
-            this.zLSStripChartToolStripMenuItem.Name = "zLSStripChartToolStripMenuItem";
-            this.zLSStripChartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.zLSStripChartToolStripMenuItem.Text = "ZLS Strip chart";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label3.Location = new System.Drawing.Point(380, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(36, 16);
+            this.label3.TabIndex = 128;
+            this.label3.Text = "GPS";
             // 
-            // zLSStripChartCCToolStripMenuItem
+            // label5
             // 
-            this.zLSStripChartCCToolStripMenuItem.Name = "zLSStripChartCCToolStripMenuItem";
-            this.zLSStripChartCCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.zLSStripChartCCToolStripMenuItem.Text = "ZLS Strip chart + CC";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label5.Location = new System.Drawing.Point(446, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 16);
+            this.label5.TabIndex = 129;
+            this.label5.Text = "Date/ time";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label7.Location = new System.Drawing.Point(383, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 16);
+            this.label7.TabIndex = 130;
+            this.label7.Text = "System";
             // 
             // frmTerminal
             // 
@@ -1582,6 +1623,9 @@ namespace SerialPortTerminal
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.setupContextMenuStrip1;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.meterStatusGroupBox);
             this.Controls.Add(this.springTensionGroupBox);
             this.Controls.Add(this.startupGroupBox);
@@ -1593,7 +1637,6 @@ namespace SerialPortTerminal
             this.Controls.Add(this.fileStartTimeLabel);
             this.Controls.Add(this.timeNowLabel);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.rtfTerminal);
             this.Controls.Add(this.GravityChart);
             this.Controls.Add(this.btnOpenPort);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1642,7 +1685,6 @@ namespace SerialPortTerminal
         public System.Windows.Forms.TextBox gpsLongitudeTextBox;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
-        public System.Windows.Forms.RichTextBox rtfTerminal;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForm;
         private System.Windows.Forms.ToolStripMenuItem Exit;
         public System.Windows.Forms.TextBox gpsLatitudeTextBox;
@@ -1767,11 +1809,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.RadioButton springTensionParkRadioButton;
         private System.Windows.Forms.RadioButton springTensionRelativeRadioButton;
         private System.Windows.Forms.RadioButton springTensionAbsoluteRadioButton;
-        private NumericTextBox springTensionTargetNumericTextBox;
-        private System.Windows.Forms.Label springTensionStatusLabel;
-        private System.Windows.Forms.Label springTensionValueLabel;
         private System.Windows.Forms.RadioButton springTensionSetRadioButton;
-        private System.Windows.Forms.TextBox STtextBox;
         private System.Windows.Forms.GroupBox meterStatusGroupBox;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.Label crossGyroStatusLabel;
@@ -1788,6 +1826,15 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolStripMenuItem zLSStripChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zLSStripChartCCToolStripMenuItem;
+        public NumericTextBox springTensionTargetNumericTextBox;
+        public System.Windows.Forms.Label springTensionStatusLabel;
+        public System.Windows.Forms.Label springTensionValueLabel;
+        public System.Windows.Forms.TextBox STtextBox;
+        private System.Windows.Forms.ToolStripMenuItem updateConfigFileToMeterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updageCalFileToMeterToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
     }
 }
 

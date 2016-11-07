@@ -202,7 +202,8 @@ namespace SerialPortTerminal
             meterHeater = (portCStatus & 0x08) >> 4;
             generalInhibitFlag = (portCStatus & 0x10) >> 8;
             gearSelector = (portCStatus & 0x40) >> 20;
-            if (frmTerminal.engineerDebug)
+            Boolean showPortStatus = false;
+            if (showPortStatus)
             {
                 Console.WriteLine("IRQ status " + irqPresent);
                 Console.WriteLine("Cross gyro heater " + xGyroHeater);
@@ -348,7 +349,96 @@ namespace SerialPortTerminal
             frmTerminal.Dispose();
         }
     }
+     class GPS_Status
+    {
+        private static Boolean gpsTimeSynch;
+        private static Boolean gps1HzSynch;
+        private static Boolean gpsData;
+        private static int gpsNumberOfSat;
 
+        public Boolean GpsTimeSynch
+        {
+            get
+            {
+                return gpsTimeSynch;
+            }
+            set
+            {
+                gpsTimeSynch = value;
+            }
+        }
+        public Boolean Gps1HzSynch
+        {
+            get
+            {
+                return gps1HzSynch;
+            }
+            set
+            {
+                gps1HzSynch = value;
+            }
+           
+            
+        }
+        public Boolean GpsData
+        {
+            get
+            {
+                return gpsData;
+            }
+            set
+            {
+                gpsData = value;
+            }
+        }
+
+
+        public int GpsNumberSat
+        {
+            get
+            {
+                return gpsNumberOfSat;
+            }
+            set
+            {
+                gpsNumberOfSat = value;
+            }
+
+        }
+        public void GetSatStatus(int byteData)
+        {
+            int gpsData1 = byteData & 0x40;
+            int timeSync1 = byteData & 0x20;
+            int gps1Hz1 = byteData & 0x10;
+            gpsNumberOfSat = byteData & 0x0F;
+            if (gpsData1 == 0)
+            {
+                gpsData = true;
+            }
+            else
+            {
+                gpsData = false;
+            }
+            if (timeSync1 == 0)
+            {
+                gpsTimeSynch = true;
+            }
+            else
+            {
+                gpsTimeSynch = false;
+            }
+            if (gps1Hz1 == 0)
+            {
+                gps1HzSynch = true;
+            }
+            else
+            {
+                gps1HzSynch = false;
+            }
+
+
+        }
+    }
     public class RelaySwitches
     {
         private int relaySW = 0;
@@ -866,7 +956,7 @@ namespace SerialPortTerminal
             tempByte[3] = meterBytes[16];
 
             Single rawBeam = BitConverter.ToSingle(tempByte, 0);
-            Data.data1[4] = rawBeam;
+            Data.data1[5] = rawBeam;
 
             return rawBeam;
         }
@@ -1106,13 +1196,15 @@ namespace SerialPortTerminal
             }
             return latitude;
         }
-        public double GetMeterGpsStatus(byte[] meterBytes)
+        public int GetMeterGpsStatus(byte[] meterBytes)
         {
             byte[] tempByte = { 0, 0, 0, 0 };
+            GPS_Status GPS_Status = new GPS_Status();
 
             tempByte[0] = meterBytes[74];
             int gpsStatus = BitConverter.ToInt16(tempByte, 0);
-
+            Console.WriteLine("gpsStatus: " + gpsStatus);
+            GPS_Status.GetSatStatus(tempByte[0]);
             return gpsStatus;
         }
         public int GetMeterPortCStatus(byte[] meterBytes)
@@ -1121,7 +1213,8 @@ namespace SerialPortTerminal
 
             tempByte[0] = meterBytes[77];
             int portCStatus = BitConverter.ToInt16(tempByte, 0);
-
+            Port_C.Port_C_MeterStatus((short)portCStatus);
+          //  Console.WriteLine("portCStatus: " + portCStatus);
             return portCStatus;
         }
         public int GetMeterStatus(byte[] meterBytes)
@@ -1130,7 +1223,9 @@ namespace SerialPortTerminal
 
             tempByte[0] = meterBytes[76];
             int meterStatus = BitConverter.ToInt16(tempByte, 0);
-
+            MeterStatus.GetMeterStatus((short)meterStatus);
+            //
+            Console.WriteLine("meterStatus: " + meterStatus);
             return meterStatus;
         }
         public double[] GetMeterG2000_Bias(byte[] meterBytes)
@@ -1272,14 +1367,9 @@ namespace SerialPortTerminal
                     // handle errors here
                     // add method to Errors
                 }
-
-
-
             }
             if (dataValid)
             {
-
-
                 string commandName = "";
                 switch (meterBytes[1])
                 {
@@ -1342,6 +1432,11 @@ namespace SerialPortTerminal
                     Data.altitude = GetMeterGpsAltitude(meterBytes);
                     Data.longitude = GetMeterGpsLongitude(meterBytes);
                     Data.latitude = GetMeterGpsLatitude(meterBytes);
+                    int tempData = GetMeterStatus(meterBytes);
+                    tempData =  GetMeterGpsStatus( meterBytes);
+                    tempData = GetMeterPortCStatus(meterBytes);
+
+
 
                 }
 
@@ -1389,6 +1484,7 @@ namespace SerialPortTerminal
                 // for now I will use the 10 sec version
                 if (Data.Sec % 10 == 0)
                 {
+                    
                     Data = ComputeGravityPrelim(Data);
                     Data = DigitalFilter(Data);                            // Filter with LaCoste 60 point table
                     Data = UpLook(Data);
@@ -1436,7 +1532,7 @@ namespace SerialPortTerminal
                         JERR = 0;// Clear error count if OK
                     }
 
-                    Data = computeChartOutput(Data);
+                 //   Data = computeChartOutput(Data);
                 }
 
 
@@ -1530,7 +1626,10 @@ namespace SerialPortTerminal
                 thisData = Filter320(thisData, i);//     , data2[i], data3[i], data4[i]);
             }
             return thisData;
-            /* if (modesw == 1){   // HI RES mode
+
+
+            /*
+             if (frmTerminal.dataAquisitionMode == "HighRes"){   // HI RES mode
                     if((IDSKSW > 0) && (JDSKSW > 0)
                     {
                         IDSFLG = 2;            
@@ -1541,6 +1640,7 @@ namespace SerialPortTerminal
                } 
             }
             */
+            
             //    ComputeGravity();
 
             // compute chart output
@@ -1594,7 +1694,7 @@ namespace SerialPortTerminal
             Data.totalCorrection = Data.beamFirstDifference * 3 + Data.data4[4];      // Scale velocity to mGal & add cross coupling   This should work if FILT320 worked
             Data.data1[23] = Data.totalCorrection;
             Data.rAwg = Data.data4[3] + Data.totalCorrection;                         // Add spring tension
-            Console.WriteLine(Data.Sec);
+           
             return Data;
 
 

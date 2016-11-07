@@ -22,5 +22,16 @@ namespace SerialPortTerminal
             this.Hide();
 
         }
+
+        private void screenFilterNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            frmTerminal.screenFilter = (int)screenFilterNumericUpDown.Value;
+        }
+
+
+        private void dataAquisitionModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            frmTerminal.dataAquisitionMode = dataAquisitionModeComboBox.SelectedText;
+        }
     }
 }

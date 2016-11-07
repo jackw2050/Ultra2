@@ -70,7 +70,10 @@
             this.crossGyroStatusLabel = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataAquisitionModeComboBox = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.recordingLabel = new System.Windows.Forms.Label();
+            this.screenFilterNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.surveyTextBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dataFileTextBox = new System.Windows.Forms.TextBox();
@@ -78,6 +81,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.meterNumberTextBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.textBox_rawGravity = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -89,10 +94,9 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox_rawGravity = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.screenFilterNumericUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -186,11 +190,11 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(72, 49);
+            this.label8.Location = new System.Drawing.Point(41, 49);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(28, 13);
+            this.label8.Size = new System.Drawing.Size(59, 13);
             this.label8.TabIndex = 107;
-            this.label8.Text = "VCC";
+            this.label8.Text = "VCC (CML)";
             // 
             // textBox_vcc
             // 
@@ -254,11 +258,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(73, 249);
+            this.label12.Location = new System.Drawing.Point(41, 245);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(27, 13);
+            this.label12.Size = new System.Drawing.Size(59, 13);
             this.label12.TabIndex = 99;
-            this.label12.Text = "AX2";
+            this.label12.Text = "AX2 (CMX)";
             // 
             // textBox_ax2
             // 
@@ -305,11 +309,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(55, 74);
+            this.label4.Location = new System.Drawing.Point(23, 74);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 93;
-            this.label4.Text = "Beam";
+            this.label4.Text = "Avg. Beam";
             // 
             // textBox_beam
             // 
@@ -356,11 +360,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 174);
+            this.label1.Location = new System.Drawing.Point(12, 174);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 87;
-            this.label1.Text = "Gravity";
+            this.label1.Text = "Digital Gravity";
             // 
             // textBox_gravity
             // 
@@ -373,7 +377,7 @@
             // calFileTextBox
             // 
             this.calFileTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.calFileTextBox.Location = new System.Drawing.Point(21, 174);
+            this.calFileTextBox.Location = new System.Drawing.Point(21, 188);
             this.calFileTextBox.Name = "calFileTextBox";
             this.calFileTextBox.Size = new System.Drawing.Size(340, 20);
             this.calFileTextBox.TabIndex = 121;
@@ -382,7 +386,7 @@
             // 
             this.calFileLabel.AutoSize = true;
             this.calFileLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.calFileLabel.Location = new System.Drawing.Point(18, 158);
+            this.calFileLabel.Location = new System.Drawing.Point(19, 167);
             this.calFileLabel.Name = "calFileLabel";
             this.calFileLabel.Size = new System.Drawing.Size(72, 13);
             this.calFileLabel.TabIndex = 120;
@@ -391,7 +395,7 @@
             // configurationFileTextBox
             // 
             this.configurationFileTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.configurationFileTextBox.Location = new System.Drawing.Point(21, 124);
+            this.configurationFileTextBox.Location = new System.Drawing.Point(21, 138);
             this.configurationFileTextBox.Name = "configurationFileTextBox";
             this.configurationFileTextBox.Size = new System.Drawing.Size(340, 20);
             this.configurationFileTextBox.TabIndex = 119;
@@ -400,7 +404,7 @@
             // 
             this.configFileLabel.AutoSize = true;
             this.configFileLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.configFileLabel.Location = new System.Drawing.Point(18, 108);
+            this.configFileLabel.Location = new System.Drawing.Point(19, 120);
             this.configFileLabel.Name = "configFileLabel";
             this.configFileLabel.Size = new System.Drawing.Size(85, 13);
             this.configFileLabel.TabIndex = 118;
@@ -458,7 +462,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.dataAquisitionModeComboBox);
+            this.groupBox2.Controls.Add(this.label26);
             this.groupBox2.Controls.Add(this.recordingLabel);
+            this.groupBox2.Controls.Add(this.screenFilterNumericUpDown);
             this.groupBox2.Controls.Add(this.surveyTextBox);
             this.groupBox2.Controls.Add(this.calFileTextBox);
             this.groupBox2.Controls.Add(this.calFileLabel);
@@ -476,20 +483,59 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Misc Information";
             // 
+            // dataAquisitionModeComboBox
+            // 
+            this.dataAquisitionModeComboBox.FormattingEnabled = true;
+            this.dataAquisitionModeComboBox.Items.AddRange(new object[] {
+            "Marine",
+            "High-Res"});
+            this.dataAquisitionModeComboBox.Location = new System.Drawing.Point(135, 30);
+            this.dataAquisitionModeComboBox.Name = "dataAquisitionModeComboBox";
+            this.dataAquisitionModeComboBox.Size = new System.Drawing.Size(113, 21);
+            this.dataAquisitionModeComboBox.TabIndex = 136;
+            this.dataAquisitionModeComboBox.SelectedIndexChanged += new System.EventHandler(this.dataAquisitionModeComboBox_SelectedIndexChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(298, 16);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(63, 13);
+            this.label26.TabIndex = 133;
+            this.label26.Text = "Screen filter";
+            // 
             // recordingLabel
             // 
             this.recordingLabel.AutoSize = true;
             this.recordingLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.recordingLabel.Location = new System.Drawing.Point(18, 204);
+            this.recordingLabel.Location = new System.Drawing.Point(19, 220);
             this.recordingLabel.Name = "recordingLabel";
             this.recordingLabel.Size = new System.Drawing.Size(95, 13);
             this.recordingLabel.TabIndex = 111;
             this.recordingLabel.Text = "Recording data to:";
             // 
+            // screenFilterNumericUpDown
+            // 
+            this.screenFilterNumericUpDown.Location = new System.Drawing.Point(300, 32);
+            this.screenFilterNumericUpDown.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.screenFilterNumericUpDown.Name = "screenFilterNumericUpDown";
+            this.screenFilterNumericUpDown.Size = new System.Drawing.Size(57, 20);
+            this.screenFilterNumericUpDown.TabIndex = 132;
+            this.screenFilterNumericUpDown.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.screenFilterNumericUpDown.ValueChanged += new System.EventHandler(this.screenFilterNumericUpDown_ValueChanged);
+            // 
             // surveyTextBox
             // 
             this.surveyTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.surveyTextBox.Location = new System.Drawing.Point(18, 74);
+            this.surveyTextBox.Location = new System.Drawing.Point(18, 88);
             this.surveyTextBox.Name = "surveyTextBox";
             this.surveyTextBox.Size = new System.Drawing.Size(340, 20);
             this.surveyTextBox.TabIndex = 100;
@@ -498,7 +544,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label16.Location = new System.Drawing.Point(18, 58);
+            this.label16.Location = new System.Drawing.Point(18, 67);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(95, 13);
             this.label16.TabIndex = 101;
@@ -507,7 +553,7 @@
             // dataFileTextBox
             // 
             this.dataFileTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.dataFileTextBox.Location = new System.Drawing.Point(21, 224);
+            this.dataFileTextBox.Location = new System.Drawing.Point(21, 238);
             this.dataFileTextBox.Name = "dataFileTextBox";
             this.dataFileTextBox.Size = new System.Drawing.Size(340, 20);
             this.dataFileTextBox.TabIndex = 112;
@@ -515,17 +561,17 @@
             // modeLabel
             // 
             this.modeLabel.AutoSize = true;
-            this.modeLabel.Location = new System.Drawing.Point(262, 27);
+            this.modeLabel.Location = new System.Drawing.Point(132, 14);
             this.modeLabel.Name = "modeLabel";
-            this.modeLabel.Size = new System.Drawing.Size(75, 13);
+            this.modeLabel.Size = new System.Drawing.Size(59, 13);
             this.modeLabel.TabIndex = 114;
-            this.modeLabel.Text = "Mode:  Marine";
+            this.modeLabel.Text = "Data mode";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label17.Location = new System.Drawing.Point(102, 23);
+            this.label17.Location = new System.Drawing.Point(15, 14);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(44, 13);
             this.label17.TabIndex = 99;
@@ -534,9 +580,9 @@
             // meterNumberTextBox
             // 
             this.meterNumberTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.meterNumberTextBox.Location = new System.Drawing.Point(162, 20);
+            this.meterNumberTextBox.Location = new System.Drawing.Point(18, 31);
             this.meterNumberTextBox.Name = "meterNumberTextBox";
-            this.meterNumberTextBox.Size = new System.Drawing.Size(46, 20);
+            this.meterNumberTextBox.Size = new System.Drawing.Size(65, 20);
             this.meterNumberTextBox.TabIndex = 98;
             // 
             // groupBox3
@@ -562,6 +608,23 @@
             this.groupBox3.TabIndex = 128;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Gravity";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(23, 148);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 13);
+            this.label25.TabIndex = 132;
+            this.label25.Text = "Raw Gravity";
+            // 
+            // textBox_rawGravity
+            // 
+            this.textBox_rawGravity.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_rawGravity.Location = new System.Drawing.Point(100, 141);
+            this.textBox_rawGravity.Name = "textBox_rawGravity";
+            this.textBox_rawGravity.Size = new System.Drawing.Size(100, 20);
+            this.textBox_rawGravity.TabIndex = 132;
             // 
             // groupBox4
             // 
@@ -593,7 +656,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(829, 380);
+            this.button1.Location = new System.Drawing.Point(891, 422);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 130;
@@ -682,23 +745,6 @@
             this.label18.TabIndex = 0;
             this.label18.Text = "GPS Time Set";
             // 
-            // textBox_rawGravity
-            // 
-            this.textBox_rawGravity.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox_rawGravity.Location = new System.Drawing.Point(100, 141);
-            this.textBox_rawGravity.Name = "textBox_rawGravity";
-            this.textBox_rawGravity.Size = new System.Drawing.Size(100, 20);
-            this.textBox_rawGravity.TabIndex = 132;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(23, 148);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 13);
-            this.label25.TabIndex = 132;
-            this.label25.Text = "Raw Gravity";
-            // 
             // UserDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -717,6 +763,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.screenFilterNumericUpDown)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -792,5 +839,8 @@
         public System.Windows.Forms.TextBox gps1HzSynchTextBox;
         public System.Windows.Forms.Label label25;
         public System.Windows.Forms.TextBox textBox_rawGravity;
+        private System.Windows.Forms.Label label26;
+        public System.Windows.Forms.NumericUpDown screenFilterNumericUpDown;
+        public System.Windows.Forms.ComboBox dataAquisitionModeComboBox;
     }
 }

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PortName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM3</Value>
+      <Value Profile="(Default)">COM1</Value>
     </Setting>
     <Setting Name="BaudRate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">9600</Value>
@@ -42,13 +42,13 @@
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="filePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">E:\ZLS\data\</Value>
+      <Value Profile="(Default)">c:\ZLS\data\</Value>
     </Setting>
     <Setting Name="fileType" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="dataFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">E:\ZLS\data\</Value>
+      <Value Profile="(Default)">c:\ZLS\data\</Value>
     </Setting>
     <Setting Name="beamScale" Type="System.Single" Scope="User">
       <Value Profile="(Default)">1.298317</Value>
@@ -95,11 +95,8 @@
     <Setting Name="longBias" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="dataFileName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">GravSurvey</Value>
-    </Setting>
     <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Hi-Res</Value>
+      <Value Profile="(Default)">marine</Value>
     </Setting>
     <Setting Name="springTension" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -268,6 +265,12 @@
     </Setting>
     <Setting Name="programPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\zls\</Value>
+    </Setting>
+    <Setting Name="screenFilter" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="surveyInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

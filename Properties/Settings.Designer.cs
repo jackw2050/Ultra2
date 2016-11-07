@@ -25,7 +25,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
         public string PortName {
             get {
                 return ((string)(this["PortName"]));
@@ -181,7 +181,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\data\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\ZLS\\data\\")]
         public string filePath {
             get {
                 return ((string)(this["filePath"]));
@@ -205,7 +205,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\data\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\ZLS\\data\\")]
         public string dataFilePath {
             get {
                 return ((string)(this["dataFilePath"]));
@@ -397,19 +397,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("GravSurvey")]
-        public string dataFileName {
-            get {
-                return ((string)(this["dataFileName"]));
-            }
-            set {
-                this["dataFileName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Hi-Res")]
+        [global::System.Configuration.DefaultSettingValueAttribute("marine")]
         public string dataAquisitionMode {
             get {
                 return ((string)(this["dataAquisitionMode"]));
@@ -1088,6 +1076,30 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["programPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int screenFilter {
+            get {
+                return ((int)(this["screenFilter"]));
+            }
+            set {
+                this["screenFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string surveyInfo {
+            get {
+                return ((string)(this["surveyInfo"]));
+            }
+            set {
+                this["surveyInfo"] = value;
             }
         }
     }
