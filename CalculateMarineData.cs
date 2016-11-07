@@ -82,17 +82,17 @@ namespace SerialPortTerminal
 
     public class PortC //  Byte 77
     {
-        private int irqPresent = 0;
-        private int xGyroHeater = 0;
-        private int lGyroHeater = 0;
-        private int meterHeater = 0;
-        private int generalInhibitFlag = 0;
+        private static int irqPresent = 0;
+        private static int xGyroHeater = 0;
+        private static int lGyroHeater = 0;
+        private static int meterHeater = 0;
+        private static int generalInhibitFlag = 0;
 
         // reserved
-        private int gearSelector = 0;
+        private static int gearSelector = 0;
 
         // reserved
-        private int portCVal = 0;
+        private static int portCVal = 0;
 
         public int IrqPresent
         {
@@ -199,9 +199,9 @@ namespace SerialPortTerminal
             irqPresent = (portCStatus & 0x01);
             xGyroHeater = (portCStatus & 0x02) >> 1;
             lGyroHeater = (portCStatus & 0x04) >> 2;
-            meterHeater = (portCStatus & 0x08) >> 4;
-            generalInhibitFlag = (portCStatus & 0x10) >> 8;
-            gearSelector = (portCStatus & 0x40) >> 20;
+            meterHeater = (portCStatus & 0x08) >> 3;
+            generalInhibitFlag = (portCStatus & 0x10) >> 4;
+            gearSelector = (portCStatus & 0x40) >> 5;
             Boolean showPortStatus = false;
             if (showPortStatus)
             {
@@ -327,15 +327,16 @@ namespace SerialPortTerminal
             alarmIndicated = (meterStatus & 0x01);
             xGyro_Fog = (meterStatus & 0x02) >> 1;
             lGyro_Fog = (meterStatus & 0x04) >> 2;
-            meterHeater = (meterStatus & 0x08) >> 4;
-            dumpIndigator = (meterStatus & 0x10) >> 8;
-            incorrectCommandReceived = (meterStatus & 0x20) >> 10;
+            meterHeater = (meterStatus & 0x08) >> 3;
+            dumpIndigator = (meterStatus & 0x10) >> 4;
+            incorrectCommandReceived = (meterStatus & 0x20) >> 5;
             serialPortTimeout = (meterStatus & 0x40) >> 20;
-            receiveDataCheckSumError = (meterStatus & 0x80) >> 40;
+            receiveDataCheckSumError = (meterStatus & 0x80) >> 6;
             meterStatus = meterUpdate;
             frmTerminal.meter_status = meterUpdate;
             frmTerminal.Dispose();
-            if (frmTerminal.engineerDebug)
+            Boolean meterDebug = false;
+            if (meterDebug)
             {
                 Console.WriteLine("alarmIndicated " + alarmIndicated);
                 Console.WriteLine("Cross FOG " + xGyro_Fog);
@@ -671,6 +672,7 @@ namespace SerialPortTerminal
         public static Single CrossCoupling;
         public static int year;
         public static int day;
+        public static int days;
         public static int Hour, Min, Sec;
         private static int thisYear = DateTime.Now.Year;
         public static DateTime myDT = new DateTime(DateTime.Now.Year, 1, 1, new GregorianCalendar());
@@ -730,7 +732,7 @@ namespace SerialPortTerminal
         public static string gyroType;
 
         public static Int16 numAuxChan = 0;
-        public static Int16 modeSwitch = 1;
+        public static string modeSwitch = "Marine";
         public static Single iAuxGain = (Single)0.0;// IAUXGAIN -> not sure what this is
         public static Int16 serialPortSwitch = 1;
         public static Int16 digitalInputSwitch = 0;
@@ -1203,7 +1205,7 @@ namespace SerialPortTerminal
 
             tempByte[0] = meterBytes[74];
             int gpsStatus = BitConverter.ToInt16(tempByte, 0);
-            Console.WriteLine("gpsStatus: " + gpsStatus);
+        //    Console.WriteLine("gpsStatus: " + gpsStatus);
             GPS_Status.GetSatStatus(tempByte[0]);
             return gpsStatus;
         }
@@ -1214,7 +1216,7 @@ namespace SerialPortTerminal
             tempByte[0] = meterBytes[77];
             int portCStatus = BitConverter.ToInt16(tempByte, 0);
             Port_C.Port_C_MeterStatus((short)portCStatus);
-          //  Console.WriteLine("portCStatus: " + portCStatus);
+         //   Console.WriteLine("portCStatus: " + portCStatus);
             return portCStatus;
         }
         public int GetMeterStatus(byte[] meterBytes)
@@ -1225,7 +1227,7 @@ namespace SerialPortTerminal
             int meterStatus = BitConverter.ToInt16(tempByte, 0);
             MeterStatus.GetMeterStatus((short)meterStatus);
             //
-            Console.WriteLine("meterStatus: " + meterStatus);
+        //    Console.WriteLine("meterStatus: " + meterStatus);
             return meterStatus;
         }
         public double[] GetMeterG2000_Bias(byte[] meterBytes)

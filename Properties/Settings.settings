@@ -87,7 +87,7 @@
       <Value Profile="(Default)">20000</Value>
     </Setting>
     <Setting Name="modeSwitch" Type="System.String" Scope="User">
-      <Value Profile="(Default)">marine</Value>
+      <Value Profile="(Default)">Marine</Value>
     </Setting>
     <Setting Name="crossBias" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -96,7 +96,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="dataAquisitionMode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">marine</Value>
+      <Value Profile="(Default)">Marine</Value>
     </Setting>
     <Setting Name="springTension" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>

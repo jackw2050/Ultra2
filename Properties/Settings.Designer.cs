@@ -361,7 +361,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("marine")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Marine")]
         public string modeSwitch {
             get {
                 return ((string)(this["modeSwitch"]));
@@ -397,7 +397,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("marine")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Marine")]
         public string dataAquisitionMode {
             get {
                 return ((string)(this["dataAquisitionMode"]));

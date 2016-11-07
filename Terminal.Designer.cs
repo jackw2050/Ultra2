@@ -176,7 +176,6 @@ namespace SerialPortTerminal
             this.springTensionSetRadioButton = new System.Windows.Forms.RadioButton();
             this.springTensionValueLabel = new System.Windows.Forms.Label();
             this.springTensionStatusLabel = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.springTensionLabel = new System.Windows.Forms.Label();
             this.STtextBox = new System.Windows.Forms.TextBox();
@@ -193,8 +192,9 @@ namespace SerialPortTerminal
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.gpsTimeLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.contextMenuStripForm.SuspendLayout();
@@ -1121,11 +1121,11 @@ namespace SerialPortTerminal
             // 
             this.timeNowLabel.AutoSize = true;
             this.timeNowLabel.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.timeNowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeNowLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeNowLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.timeNowLabel.Location = new System.Drawing.Point(446, 29);
             this.timeNowLabel.Name = "timeNowLabel";
-            this.timeNowLabel.Size = new System.Drawing.Size(69, 16);
+            this.timeNowLabel.Size = new System.Drawing.Size(68, 13);
             this.timeNowLabel.TabIndex = 107;
             this.timeNowLabel.Text = "Date/ time";
             // 
@@ -1208,6 +1208,7 @@ namespace SerialPortTerminal
             // 
             // surveyRecordGroupBox
             // 
+            this.surveyRecordGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.surveyRecordGroupBox.Controls.Add(this.stopButton);
             this.surveyRecordGroupBox.Controls.Add(this.startButton);
             this.surveyRecordGroupBox.Controls.Add(this.recordingTextBox);
@@ -1414,15 +1415,6 @@ namespace SerialPortTerminal
             this.springTensionStatusLabel.TabIndex = 7;
             this.springTensionStatusLabel.Text = "...";
             // 
-            // springTensionTargetNumericTextBox
-            // 
-            this.springTensionTargetNumericTextBox.AllowSpace = false;
-            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(76, 86);
-            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
-            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
-            this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
-            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(198, 84);
@@ -1590,32 +1582,41 @@ namespace SerialPortTerminal
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label3.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(380, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 16);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 128;
             this.label3.Text = "GPS";
             // 
-            // label5
+            // gpsTimeLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.label5.Location = new System.Drawing.Point(446, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 16);
-            this.label5.TabIndex = 129;
-            this.label5.Text = "Date/ time";
+            this.gpsTimeLabel.AutoSize = true;
+            this.gpsTimeLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpsTimeLabel.Location = new System.Drawing.Point(446, 7);
+            this.gpsTimeLabel.Name = "gpsTimeLabel";
+            this.gpsTimeLabel.Size = new System.Drawing.Size(68, 13);
+            this.gpsTimeLabel.TabIndex = 129;
+            this.gpsTimeLabel.Text = "Date/ time";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label7.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(383, 31);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 16);
+            this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 130;
             this.label7.Text = "System";
+            // 
+            // springTensionTargetNumericTextBox
+            // 
+            this.springTensionTargetNumericTextBox.AllowSpace = false;
+            this.springTensionTargetNumericTextBox.Location = new System.Drawing.Point(76, 86);
+            this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
+            this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
+            this.springTensionTargetNumericTextBox.TabIndex = 6;
+            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // frmTerminal
             // 
@@ -1624,7 +1625,7 @@ namespace SerialPortTerminal
             this.ClientSize = new System.Drawing.Size(1374, 715);
             this.ContextMenuStrip = this.setupContextMenuStrip1;
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.gpsTimeLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.meterStatusGroupBox);
             this.Controls.Add(this.springTensionGroupBox);
@@ -1833,7 +1834,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem updateConfigFileToMeterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updageCalFileToMeterToolStripMenuItem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label gpsTimeLabel;
         private System.Windows.Forms.Label label7;
     }
 }

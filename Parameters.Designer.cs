@@ -99,8 +99,6 @@
             this.maxSpringTensionCheckBox = new System.Windows.Forms.CheckBox();
             this.gyroTypeComboBox = new System.Windows.Forms.ComboBox();
             this.kFactorTextBox = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBox31 = new System.Windows.Forms.TextBox();
             this.maxSpringTensionTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -705,7 +703,7 @@
             // 
             // updateMeterButton
             // 
-            this.updateMeterButton.Location = new System.Drawing.Point(424, 448);
+            this.updateMeterButton.Location = new System.Drawing.Point(847, 445);
             this.updateMeterButton.Name = "updateMeterButton";
             this.updateMeterButton.Size = new System.Drawing.Size(104, 23);
             this.updateMeterButton.TabIndex = 0;
@@ -725,7 +723,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(411, 535);
+            this.label2.Location = new System.Drawing.Point(294, 544);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(356, 13);
             this.label2.TabIndex = 22;
@@ -733,7 +731,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(820, 448);
+            this.button4.Location = new System.Drawing.Point(845, 525);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(106, 23);
             this.button4.TabIndex = 23;
@@ -752,12 +750,10 @@
             this.groupBox4.Controls.Add(this.maxSpringTensionCheckBox);
             this.groupBox4.Controls.Add(this.gyroTypeComboBox);
             this.groupBox4.Controls.Add(this.kFactorTextBox);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.textBox31);
             this.groupBox4.Controls.Add(this.maxSpringTensionTextBox);
-            this.groupBox4.Location = new System.Drawing.Point(47, 349);
+            this.groupBox4.Location = new System.Drawing.Point(35, 365);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(294, 199);
+            this.groupBox4.Size = new System.Drawing.Size(294, 170);
             this.groupBox4.TabIndex = 220;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Misc. Parameters";
@@ -765,7 +761,7 @@
             // screenDisplayFilterCheckBox
             // 
             this.screenDisplayFilterCheckBox.AutoSize = true;
-            this.screenDisplayFilterCheckBox.Location = new System.Drawing.Point(6, 161);
+            this.screenDisplayFilterCheckBox.Location = new System.Drawing.Point(6, 135);
             this.screenDisplayFilterCheckBox.Name = "screenDisplayFilterCheckBox";
             this.screenDisplayFilterCheckBox.Size = new System.Drawing.Size(122, 17);
             this.screenDisplayFilterCheckBox.TabIndex = 222;
@@ -776,7 +772,7 @@
             // kFactorCheckBox
             // 
             this.kFactorCheckBox.AutoSize = true;
-            this.kFactorCheckBox.Location = new System.Drawing.Point(6, 135);
+            this.kFactorCheckBox.Location = new System.Drawing.Point(6, 109);
             this.kFactorCheckBox.Name = "kFactorCheckBox";
             this.kFactorCheckBox.Size = new System.Drawing.Size(98, 17);
             this.kFactorCheckBox.TabIndex = 225;
@@ -787,7 +783,7 @@
             // screenDisplayFilterTextBox
             // 
             this.screenDisplayFilterTextBox.Enabled = false;
-            this.screenDisplayFilterTextBox.Location = new System.Drawing.Point(179, 158);
+            this.screenDisplayFilterTextBox.Location = new System.Drawing.Point(179, 132);
             this.screenDisplayFilterTextBox.Name = "screenDisplayFilterTextBox";
             this.screenDisplayFilterTextBox.Size = new System.Drawing.Size(100, 20);
             this.screenDisplayFilterTextBox.TabIndex = 189;
@@ -795,7 +791,7 @@
             // meterNumberCheckBox
             // 
             this.meterNumberCheckBox.AutoSize = true;
-            this.meterNumberCheckBox.Location = new System.Drawing.Point(6, 109);
+            this.meterNumberCheckBox.Location = new System.Drawing.Point(6, 83);
             this.meterNumberCheckBox.Name = "meterNumberCheckBox";
             this.meterNumberCheckBox.Size = new System.Drawing.Size(93, 17);
             this.meterNumberCheckBox.TabIndex = 224;
@@ -806,7 +802,7 @@
             // meterNumberTextBox
             // 
             this.meterNumberTextBox.Enabled = false;
-            this.meterNumberTextBox.Location = new System.Drawing.Point(179, 106);
+            this.meterNumberTextBox.Location = new System.Drawing.Point(179, 80);
             this.meterNumberTextBox.Name = "meterNumberTextBox";
             this.meterNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.meterNumberTextBox.TabIndex = 180;
@@ -848,27 +844,10 @@
             // kFactorTextBox
             // 
             this.kFactorTextBox.Enabled = false;
-            this.kFactorTextBox.Location = new System.Drawing.Point(179, 132);
+            this.kFactorTextBox.Location = new System.Drawing.Point(179, 106);
             this.kFactorTextBox.Name = "kFactorTextBox";
             this.kFactorTextBox.Size = new System.Drawing.Size(100, 20);
             this.kFactorTextBox.TabIndex = 190;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 87);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(70, 13);
-            this.label21.TabIndex = 186;
-            this.label21.Text = "Access Code";
-            // 
-            // textBox31
-            // 
-            this.textBox31.Enabled = false;
-            this.textBox31.Location = new System.Drawing.Point(179, 80);
-            this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(100, 20);
-            this.textBox31.TabIndex = 187;
             // 
             // maxSpringTensionTextBox
             // 
@@ -975,8 +954,6 @@
         public System.Windows.Forms.TextBox meterNumberTextBox;
         public System.Windows.Forms.ComboBox gyroTypeComboBox;
         public System.Windows.Forms.TextBox kFactorTextBox;
-        public System.Windows.Forms.Label label21;
-        public System.Windows.Forms.TextBox textBox31;
         public System.Windows.Forms.TextBox maxSpringTensionTextBox;
         public System.Windows.Forms.CheckBox screenDisplayFilterCheckBox;
         public System.Windows.Forms.CheckBox kFactorCheckBox;
