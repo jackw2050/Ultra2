@@ -45,7 +45,7 @@ namespace SerialPortTerminal
         public DateTime dataFileStartTime;
         //        private MeterStatus MeterStatus = new MeterStatus();
         private DataStatusForm DataStatusForm = new DataStatusForm();
-
+        GPS_Status GPS_Status = new GPS_Status();
         private SerialPortForm SerialPortForm = new SerialPortForm();
         private static ArrayList listDataSource = new ArrayList();
         public Parameters Parameters = new Parameters();
@@ -386,28 +386,28 @@ namespace SerialPortTerminal
         {
             int maxArraySize = 60;// initialize for 60 seconds
 
-            if (timePeriod == "seconds")
-            {
-                maxArraySize = timeValue;
-            }
-            else if (timePeriod == "minutes")
-            {
-                maxArraySize = 60 * timeValue;
-            }
-            else if (timePeriod == "hours")
-            {
-                maxArraySize = 3600 * timeValue;
-            }
+            /*      if (timePeriod == "seconds")
+                  {
+                      maxArraySize = timeValue;
+                  }
+                  else if (timePeriod == "minutes")
+                  {
+                      maxArraySize = 60 * timeValue;
+                  }
+                  else if (timePeriod == "hours")
+                  {
+                      maxArraySize = 3600 * timeValue;
+                  }
 
-            if (maxArraySize < oldMaxArraySize)
-            {
-                if (maxArraySize < listDataSource.Count)
-                {
-                    int removeCount = listDataSource.Count - maxArraySize;
-                    listDataSource.RemoveRange(maxArraySize, removeCount);
-                }
-            }
-
+                  if (maxArraySize < oldMaxArraySize)
+                  {
+                      if (maxArraySize < listDataSource.Count)
+                      {
+                          int removeCount = listDataSource.Count - maxArraySize;
+                          listDataSource.RemoveRange(maxArraySize, removeCount);
+                      }
+                  }
+                  */
             if (listDataSource.Count > maxArraySize)
             {
                 listDataSource.RemoveAt(0);
@@ -805,7 +805,7 @@ namespace SerialPortTerminal
             }
             return checkSum;
         }
-
+        /*
         private void port_CheckDataReceived(object sender, EventArgs e)
         {
             CalculateMarineData mdt = new CalculateMarineData();
@@ -873,18 +873,11 @@ namespace SerialPortTerminal
                 //             mdt.GetMeterData(buffer);// send buffer for parsing
                 if (mdt.dataValid)
                 {
-                    // call calculaton functions
-
-                    // Need to check how to sync threads or have all threads access same data source
-                    //                   ThreadProcSafe();//  Initially write data1 -data4 in text boxes
-                    if (Data.Sec % 10 == 0)
-                    {
-                    }
                     GravityChart.DataBind();
                 }
             }
         }
-
+        */
         //**********************************************************************************************************
 
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -914,7 +907,7 @@ namespace SerialPortTerminal
                 worker.Start(buffer);// Start new worker thread to process the data
             }
         }
-
+        // TODO update gravity chart
         public void UpdateGravityChart()
         {
             // check for changes in time span.
@@ -972,12 +965,10 @@ namespace SerialPortTerminal
 
             if (fileRecording == true)
             {
-                // check date/ time for new file
-                //if (Data.Date.Hour == 14 & Data.Date.Minute == 45 & Data.Date.Second == 0 )
-                int dateDelta = Data.Date.Minute - dataFileStartTime.Minute;
-                if (dateDelta >= 2)
+
+                if (Data.Date.Hour == 0 & Data.Date.Minute == 0 & Data.Date.Second == 0 )
                 {
-                    OpenDataFile();
+                    OpenDataFile();// Open new daily data file
                 }
                 // Supply the state information required by the task.
                 ThreadWithState tws = new ThreadWithState(fileStatus, myData);// not sure if I still need this
@@ -1341,23 +1332,51 @@ namespace SerialPortTerminal
         {
             frmTerminal frmTerminal = new frmTerminal();
             CalculateMarineData mdt = new CalculateMarineData();
+            GPS_Status GPS_Status = new GPS_Status();
+            Data Data = new Data();
             byte[] bufferByte = (byte[])buffer;
             Boolean showData = false;
             mdt.ParseNewMeterData(bufferByte);
 
-            // mdt.GetMeterData((byte[])buffer);// send buffer for parsing
-            Data Data = new Data();
+            int chartUpdateRate = 1; // 1 sec , 1- SecurityIDType, 60 sec
 
+            Boolean updateChartData = false;
+            Boolean updateFileData = false;
+            Boolean updateUserData = false;
 
+            DateTime currentTime;
 
-
-
-
-
-
-
-            // check for mode  1 sec or 10 sec
-            // for now only 10 sec data
+            if (GPS_Status.GpsTimeSynch)
+            {
+                currentTime = Data.Date;
+            }
+            else
+            {
+                currentTime = DateTime.Now;
+            }
+            switch (chartUpdateRate)
+                {
+                    case 1:
+                        updateChartData = true;
+                        break;
+                    case 10:
+                    if (currentTime.Second%10 == 0)
+                    {
+                        updateChartData = true;
+                    }
+                        
+                        break;
+                    case 60:
+                    if (currentTime.Minute == 0 & currentTime.Second == 0)
+                    {
+                        updateChartData = true;
+                    }
+                        
+                        break;
+                    default:
+                        updateChartData = false;
+                        break;
+                }
 
             if (Parameters.Visible)
             {
@@ -1452,7 +1471,7 @@ namespace SerialPortTerminal
                 // *******************************************************************************************************
 
                 // Write grav data to file
-                DataFileOperations(myData);
+                DataFileOperations(myData);// myData
 
 
     
@@ -1462,7 +1481,8 @@ namespace SerialPortTerminal
                 {
                     UpdateGravityDataForm(myData);
                 }
-                if (showData)
+
+                if (updateChartData)
                 {
                     if (this.GravityChart.InvokeRequired)
                     {
@@ -1488,7 +1508,7 @@ namespace SerialPortTerminal
                 Invoke((MethodInvoker)delegate
                 {
                     string specifier;
-                    GPS_Status GPS_Status = new GPS_Status();
+                    
                     specifier = "000.000000";
                     gpsAltitudeTextBox.Text = (Data.altitude.ToString("N", CultureInfo.InvariantCulture));
                     gpsLatitudeTextBox.Text = (Data.latitude.ToString(specifier, CultureInfo.InvariantCulture));
@@ -3743,6 +3763,10 @@ namespace SerialPortTerminal
             TimeThread.IsBackground = true;
             TimeThread.Start();
 
+
+
+
+
             SetupChart();
             // Setup DataGrid();
             WriteLogFile("System loaded");
@@ -4607,11 +4631,13 @@ namespace SerialPortTerminal
             string delimitor = ",";
             fileType = "csv";
             string thisDate = String.Format("{0:yyyy-MM-dd-hh-mm-ss}", DateTime.Now);
+            dataFileStartTime = DateTime.Now;
             if (GPS_Status.GpsTimeSynch)
             {
                 thisDate = String.Format("{0:yyyy-MM-dd-hh-mm-ss}", Data.Date);
+                dataFileStartTime = Data.Date;
             }
-           
+            
 
             switch (fileType)
             {
