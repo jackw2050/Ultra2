@@ -436,7 +436,7 @@ namespace SerialPortTerminal
             {
                 gps1HzSynch = false;
             }
-
+         
 
         }
     }

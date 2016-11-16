@@ -191,8 +191,6 @@ namespace SerialPortTerminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.gpsTimeLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
@@ -339,7 +337,7 @@ namespace SerialPortTerminal
             this.GravityChart.Location = new System.Drawing.Point(0, 169);
             this.GravityChart.Name = "GravityChart";
             this.GravityChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            this.GravityChart.Size = new System.Drawing.Size(1373, 562);
+            this.GravityChart.Size = new System.Drawing.Size(1373, 587);
             this.GravityChart.TabIndex = 78;
             this.GravityChart.Text = "chart1";
             // 
@@ -1121,11 +1119,11 @@ namespace SerialPortTerminal
             // 
             this.timeNowLabel.AutoSize = true;
             this.timeNowLabel.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.timeNowLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeNowLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeNowLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.timeNowLabel.Location = new System.Drawing.Point(446, 29);
+            this.timeNowLabel.Location = new System.Drawing.Point(397, 31);
             this.timeNowLabel.Name = "timeNowLabel";
-            this.timeNowLabel.Size = new System.Drawing.Size(68, 13);
+            this.timeNowLabel.Size = new System.Drawing.Size(60, 13);
             this.timeNowLabel.TabIndex = 107;
             this.timeNowLabel.Text = "Date/ time";
             // 
@@ -1285,9 +1283,9 @@ namespace SerialPortTerminal
             this.startupGroupBox.Controls.Add(this.torqueMotorCheckBox);
             this.startupGroupBox.Controls.Add(this.gyroCheckBox);
             this.startupGroupBox.Controls.Add(this.button11);
-            this.startupGroupBox.Location = new System.Drawing.Point(352, 53);
+            this.startupGroupBox.Location = new System.Drawing.Point(932, 122);
             this.startupGroupBox.Name = "startupGroupBox";
-            this.startupGroupBox.Size = new System.Drawing.Size(215, 139);
+            this.startupGroupBox.Size = new System.Drawing.Size(215, 138);
             this.startupGroupBox.TabIndex = 118;
             this.startupGroupBox.TabStop = false;
             this.startupGroupBox.Text = "Startup";
@@ -1371,14 +1369,14 @@ namespace SerialPortTerminal
             this.springTensionGroupBox.Controls.Add(this.springTensionAbsoluteRadioButton);
             this.springTensionGroupBox.Location = new System.Drawing.Point(15, 53);
             this.springTensionGroupBox.Name = "springTensionGroupBox";
-            this.springTensionGroupBox.Size = new System.Drawing.Size(331, 110);
+            this.springTensionGroupBox.Size = new System.Drawing.Size(530, 110);
             this.springTensionGroupBox.TabIndex = 126;
             this.springTensionGroupBox.TabStop = false;
             this.springTensionGroupBox.Text = "Spring Tension";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(264, 84);
+            this.button3.Location = new System.Drawing.Point(463, 82);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(51, 22);
             this.button3.TabIndex = 125;
@@ -1389,6 +1387,7 @@ namespace SerialPortTerminal
             // springTensionSetRadioButton
             // 
             this.springTensionSetRadioButton.AutoSize = true;
+            this.springTensionSetRadioButton.Checked = true;
             this.springTensionSetRadioButton.Location = new System.Drawing.Point(6, 87);
             this.springTensionSetRadioButton.Name = "springTensionSetRadioButton";
             this.springTensionSetRadioButton.Size = new System.Drawing.Size(58, 17);
@@ -1400,16 +1399,16 @@ namespace SerialPortTerminal
             // springTensionValueLabel
             // 
             this.springTensionValueLabel.AutoSize = true;
-            this.springTensionValueLabel.Location = new System.Drawing.Point(168, 19);
+            this.springTensionValueLabel.Location = new System.Drawing.Point(234, 69);
             this.springTensionValueLabel.Name = "springTensionValueLabel";
-            this.springTensionValueLabel.Size = new System.Drawing.Size(16, 13);
+            this.springTensionValueLabel.Size = new System.Drawing.Size(115, 13);
             this.springTensionValueLabel.TabIndex = 8;
-            this.springTensionValueLabel.Text = "...";
+            this.springTensionValueLabel.Text = "Current Spring Tension";
             // 
             // springTensionStatusLabel
             // 
             this.springTensionStatusLabel.AutoSize = true;
-            this.springTensionStatusLabel.Location = new System.Drawing.Point(168, 46);
+            this.springTensionStatusLabel.Location = new System.Drawing.Point(125, 19);
             this.springTensionStatusLabel.Name = "springTensionStatusLabel";
             this.springTensionStatusLabel.Size = new System.Drawing.Size(16, 13);
             this.springTensionStatusLabel.TabIndex = 7;
@@ -1417,7 +1416,7 @@ namespace SerialPortTerminal
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(198, 84);
+            this.button6.Location = new System.Drawing.Point(405, 82);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(51, 22);
             this.button6.TabIndex = 5;
@@ -1430,13 +1429,13 @@ namespace SerialPortTerminal
             this.springTensionLabel.AutoSize = true;
             this.springTensionLabel.Location = new System.Drawing.Point(73, 67);
             this.springTensionLabel.Name = "springTensionLabel";
-            this.springTensionLabel.Size = new System.Drawing.Size(38, 13);
+            this.springTensionLabel.Size = new System.Drawing.Size(112, 13);
             this.springTensionLabel.TabIndex = 4;
-            this.springTensionLabel.Text = "Target";
+            this.springTensionLabel.Text = "Target Spring Tension";
             // 
             // STtextBox
             // 
-            this.STtextBox.Location = new System.Drawing.Point(233, 16);
+            this.STtextBox.Location = new System.Drawing.Point(237, 87);
             this.STtextBox.Name = "STtextBox";
             this.STtextBox.Size = new System.Drawing.Size(92, 20);
             this.STtextBox.TabIndex = 124;
@@ -1448,7 +1447,6 @@ namespace SerialPortTerminal
             this.springTensionParkRadioButton.Name = "springTensionParkRadioButton";
             this.springTensionParkRadioButton.Size = new System.Drawing.Size(47, 17);
             this.springTensionParkRadioButton.TabIndex = 2;
-            this.springTensionParkRadioButton.TabStop = true;
             this.springTensionParkRadioButton.Text = "Park";
             this.springTensionParkRadioButton.UseVisualStyleBackColor = true;
             this.springTensionParkRadioButton.CheckedChanged += new System.EventHandler(this.springTensionParkRadioButton_CheckedChanged);
@@ -1460,7 +1458,6 @@ namespace SerialPortTerminal
             this.springTensionRelativeRadioButton.Name = "springTensionRelativeRadioButton";
             this.springTensionRelativeRadioButton.Size = new System.Drawing.Size(90, 17);
             this.springTensionRelativeRadioButton.TabIndex = 1;
-            this.springTensionRelativeRadioButton.TabStop = true;
             this.springTensionRelativeRadioButton.Text = "Relative Slew";
             this.springTensionRelativeRadioButton.UseVisualStyleBackColor = true;
             this.springTensionRelativeRadioButton.CheckedChanged += new System.EventHandler(this.springTensionRelativeRadioButton_CheckedChanged);
@@ -1472,7 +1469,6 @@ namespace SerialPortTerminal
             this.springTensionAbsoluteRadioButton.Name = "springTensionAbsoluteRadioButton";
             this.springTensionAbsoluteRadioButton.Size = new System.Drawing.Size(92, 17);
             this.springTensionAbsoluteRadioButton.TabIndex = 0;
-            this.springTensionAbsoluteRadioButton.TabStop = true;
             this.springTensionAbsoluteRadioButton.Text = "Absolute Slew";
             this.springTensionAbsoluteRadioButton.UseVisualStyleBackColor = true;
             this.springTensionAbsoluteRadioButton.CheckedChanged += new System.EventHandler(this.springTensionAbsoluteRadioButton_CheckedChanged);
@@ -1579,35 +1575,15 @@ namespace SerialPortTerminal
             this.heaterStatusLabel.TabIndex = 6;
             this.heaterStatusLabel.Text = "Not Ready";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(380, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 128;
-            this.label3.Text = "GPS";
-            // 
-            // gpsTimeLabel
-            // 
-            this.gpsTimeLabel.AutoSize = true;
-            this.gpsTimeLabel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpsTimeLabel.Location = new System.Drawing.Point(446, 7);
-            this.gpsTimeLabel.Name = "gpsTimeLabel";
-            this.gpsTimeLabel.Size = new System.Drawing.Size(68, 13);
-            this.gpsTimeLabel.TabIndex = 129;
-            this.gpsTimeLabel.Text = "Date/ time";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(383, 31);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(397, 7);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
+            this.label7.Size = new System.Drawing.Size(68, 13);
             this.label7.TabIndex = 130;
-            this.label7.Text = "System";
+            this.label7.Text = "System Time";
             // 
             // springTensionTargetNumericTextBox
             // 
@@ -1616,17 +1592,14 @@ namespace SerialPortTerminal
             this.springTensionTargetNumericTextBox.Name = "springTensionTargetNumericTextBox";
             this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
             this.springTensionTargetNumericTextBox.TabIndex = 6;
-            this.springTensionTargetNumericTextBox.TextChanged += new System.EventHandler(this.springTensionTargetNumericTextBox_TextChanged);
             // 
             // frmTerminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1374, 715);
+            this.ClientSize = new System.Drawing.Size(1374, 759);
             this.ContextMenuStrip = this.setupContextMenuStrip1;
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.gpsTimeLabel);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.meterStatusGroupBox);
             this.Controls.Add(this.springTensionGroupBox);
             this.Controls.Add(this.startupGroupBox);
@@ -1833,8 +1806,6 @@ namespace SerialPortTerminal
         public System.Windows.Forms.TextBox STtextBox;
         private System.Windows.Forms.ToolStripMenuItem updateConfigFileToMeterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updageCalFileToMeterToolStripMenuItem;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label gpsTimeLabel;
         private System.Windows.Forms.Label label7;
     }
 }
