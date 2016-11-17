@@ -945,7 +945,7 @@ namespace SerialPortTerminal
             Single springTension = BitConverter.ToSingle(tempByte, 0);
             Data.data1[3] = springTension;
 
-
+            Console.WriteLine(springTension);
             return springTension;
         }
         public Single GetMeterRawBeam(byte[] meterBytes)

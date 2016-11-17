@@ -60,10 +60,10 @@ namespace SerialPortTerminal
         public static Boolean springTensionValid = false;
         public static int istep;
         public static int istop = 1;
-
+        public static Boolean heaterBypassOnStartup = false;
         public static int screenFilter = 3;
         public static int timeCheck = 0;
-        private int countDown = 3;
+        private int countDown = 10;
         public static Single springTensionScale = (Single).1041666;
         public static int springTensionMaxStep = 2900;
         public static int springTensionFPM = 525;
@@ -731,18 +731,26 @@ namespace SerialPortTerminal
 
 
 
-                Point stPoint = new Point();
+                
                 Point mainPoint = new Point();
                 mainPoint.X = this.Location.X;
                 mainPoint.Y = this.Location.Y;
                 int mainWidth = this.Size.Width;
                 int mainHeight = this.Size.Height;
 
+                Point stPoint = new Point();
                 int suWidth = startupGroupBox.Width;
                 int suHeight = startupGroupBox.Height;
                 stPoint.X = mainWidth / 2 - suWidth / 2;
                 stPoint.Y = mainHeight / 4 - suHeight / 4;
                 startupGroupBox.Location = stPoint;
+
+                Point meterStatusGroupBoxPoint = new Point();
+                int meterStatusGroupBoxWidth = meterStatusGroupBox.Width;
+                int meterStatusGroupBoxHeight = meterStatusGroupBox.Height;
+                meterStatusGroupBoxPoint.X = mainWidth / 2 - meterStatusGroupBoxWidth / 2;
+                meterStatusGroupBoxPoint.Y = mainHeight / 2 - meterStatusGroupBoxHeight / 2;
+                meterStatusGroupBox.Location = meterStatusGroupBoxPoint;
 
 
 
@@ -752,6 +760,8 @@ namespace SerialPortTerminal
                 //  startupGroupBox.Visible = true;
                 gyroCheckBox.Enabled = true;
                 torqueMotorCheckBox.Enabled = false;
+
+                btnOpenPort.Visible = false;
             }
 
             EnableControls();
@@ -971,8 +981,11 @@ namespace SerialPortTerminal
                 {
                     countDown--;
                 }
-
-                if ((completed = true) & (countDown == 0))
+                if (heaterBypassOnStartup)
+                {
+                    countDown = 0;
+                }
+                if ((completed ) & (countDown == 0))
                 {
                     meterStatusGroupBox.Visible = false;
                     startupGroupBox.Visible = true;
@@ -1799,7 +1812,7 @@ namespace SerialPortTerminal
 
         #region Data Grid View
 
-        private void InitDataGridView()
+        private void setiInitDataGridView()
         {
         }
 
@@ -3061,7 +3074,7 @@ namespace SerialPortTerminal
                     byte[] byteArrayMin = BitConverter.GetBytes(min);
                     byte[] byteArraySec = BitConverter.GetBytes(sec);
 
-                    // data = CreateTxArray(2, year, day, hour, min, sec);
+                     data = CreateTxArray(2, year, day, hour, min, sec);
                     // comport.Write(data, 0, 9);
 
                     timeData[0] = 2;
@@ -3489,13 +3502,10 @@ namespace SerialPortTerminal
 
         private void heaterBypassCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.heaterBypassCheckBox.Checked)
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    heaterBypassCheckBox.Checked = true;
-                });
-            }
+               if (this.heaterBypassCheckBox.Checked)
+               {
+                   heaterBypassOnStartup = true;
+               }
         }
 
         private void windowSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -3692,6 +3702,29 @@ namespace SerialPortTerminal
             springTensionStatusLabel.Text = "";
             stopButton.Enabled = false;
             startButton.Enabled = true;
+
+
+            Point connectToMeterButtonPoint = new Point();
+            Point mainPoint = new Point();
+            mainPoint.X = this.Location.X;
+            mainPoint.Y = this.Location.Y;
+            int mainFormWidth = this.Size.Width;
+            int mainFormHeight = this.Size.Height;
+
+            int connectToMeterButtonWidth = btnOpenPort.Width;
+            int connectToMeterButtonHeight = btnOpenPort.Height;
+            connectToMeterButtonPoint.X = mainFormWidth / 2 - connectToMeterButtonWidth / 2;
+            connectToMeterButtonPoint.Y = mainFormHeight / 4 - connectToMeterButtonHeight / 4;
+            btnOpenPort.Location = connectToMeterButtonPoint;
+
+
+
+
+
+
+
+
+
         }
 
         private void frmTerminal_Load(object sender, EventArgs e)
@@ -3704,10 +3737,13 @@ namespace SerialPortTerminal
             CurrentDataMode = DataMode.Hex;
 
             // Create an instance of NumericTextBox.
-            NumericTextBox numericTextBox1 = new NumericTextBox();
-            numericTextBox1.Parent = this;
+    //        NumericTextBox numericTextBox1 = new NumericTextBox();
+     //       numericTextBox1.Parent = this;
+         
+            
+            
             //Draw the bounds of the NumericTextBox.
-            numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
+      //      numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
 
             //  Load stored state
             InitStoredVariables();
@@ -3717,7 +3753,7 @@ namespace SerialPortTerminal
                 Console.WriteLine("Data file name " + fileName);
             }
 
-            STtextBox.Text = Data.SpringTension.ToString("N1", CultureInfo.InvariantCulture);
+            STtextBox.Text = Data.data1[3].ToString("N1", CultureInfo.InvariantCulture);
 
 
             // load config file
@@ -3802,12 +3838,12 @@ namespace SerialPortTerminal
 
             Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
             taskA.Wait();
-            Properties.Settings.Default.springTension = newSpringTension;
-            Properties.Settings.Default.Save();
+ //           Properties.Settings.Default.springTension = newSpringTension;
+ //           Properties.Settings.Default.Save();
             this.Invoke((MethodInvoker)delegate
             {
                 springTensionCheckBox.Checked = true;
-                enableSpringTension();
+                enableSpringTension(true);
             });
 
 
@@ -3832,13 +3868,13 @@ namespace SerialPortTerminal
             });
 
 
+            EnableMainForm();
 
 
 
-
-          //  gyroCheckBox.Checked = true;
-          //  torqueMotorCheckBox.Checked = true;
-          //  springTensionCheckBox.Checked = true;
+            //  gyroCheckBox.Checked = true;
+            //  torqueMotorCheckBox.Checked = true;
+            //  springTensionCheckBox.Checked = true;
         }
 
         // TODO StoreDefaultVariables
@@ -3848,7 +3884,13 @@ namespace SerialPortTerminal
             Properties.Settings.Default.chartWindowTimeSpan = chartWindowTimeSpan;
             Properties.Settings.Default.chartWindowTimePeriod = chartWindowTimePeriod;
 
-            Properties.Settings.Default.springTension = (short)Data.SpringTension;
+
+
+            if (Data.SpringTension > 0)
+            {
+                Properties.Settings.Default.springTension = (short)Data.SpringTension;
+            }
+            
             Properties.Settings.Default.beamScale = (short)ConfigData.beamScale;
             Properties.Settings.Default.meterNumber = ConfigData.meterNumber;
             Properties.Settings.Default.crossPeriod = (short)ConfigData.crossPeriod;
@@ -3899,7 +3941,7 @@ namespace SerialPortTerminal
             Properties.Settings.Default.fileType = fileType;
             //      dataFileName = Properties.Settings.Default.dataFileName;
             Properties.Settings.Default.fileDateFormat = fileDateFormat;
-
+            Properties.Settings.Default.springTension =  (short)Data.SpringTension;
             Properties.Settings.Default.Save();
         }
 
@@ -4222,6 +4264,7 @@ namespace SerialPortTerminal
                 springTensionAbsoluteRadioButton.Enabled = true;
                 springTensionParkRadioButton.Enabled = true;
                 springTensionRelativeRadioButton.Enabled = true;
+                
             }
             
            
@@ -4330,7 +4373,7 @@ namespace SerialPortTerminal
         {
             DateTimeForm myDateForm = new DateTimeForm();
             myDateForm.Show();
-            myDateForm.Dispose();
+          
         }
 
         private void fileFormatToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -5287,16 +5330,21 @@ namespace SerialPortTerminal
         private void button1_Click_2(object sender, EventArgs e)
         {
             startupGroupBox.Visible = false;
-            TimerWithDataCollection("start");
-            GravityChart.Visible = true;
-            surveyRecordGroupBox.Visible = true;
-            gpsGroupBox.Visible = true;
+            EnableMainForm();
         }
 
-        private void dataPageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EnableMainForm()
         {
-            UserDataForm.Show();
+            this.Invoke((MethodInvoker)delegate
+            {
+                TimerWithDataCollection("start");
+                GravityChart.Visible = true;
+                surveyRecordGroupBox.Visible = true;
+                gpsGroupBox.Visible = true;
+            });
         }
+
+
 
         private void manualOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5305,6 +5353,12 @@ namespace SerialPortTerminal
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            enableSpringTension(false);
+            Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+            taskA.Wait();
+
+
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
@@ -5567,26 +5621,18 @@ namespace SerialPortTerminal
             readCalibrationFile(OpenFileDialog.FileName);
         }
 
-        private void enableSpringTension()
+        private void enableSpringTension(Boolean enableSpringTension)
         {
-            //TODO: spring tension enable not working - debug
-            if (springTensionCheckBox.Checked)
+           //TODO: spring tension enable not working - debug
+            if (enableSpringTension)
             {
-                // ControlSwitches.Alarm(disable);
-                //ControlSwitches.SpringTension(enable);
-                //  ControlSwitches.TorqueMotor(enable);
-                //  ControlSwitches.DataCollection(enable);
 
-                //   RelaySwitches.Relay200Hz(enable);
-                //RelaySwitches.StepperMotorEnable(enable);
                 ControlSwitches.ControlSw = 0x0B;
                 sendCmd("Send Control Switches");
-                Console.WriteLine("ST: control sw = 0x0B");
-
-                //sendCmd("Send Relay Switches");
                 torqueMotorCheckBox.Enabled = false;
                 alarmCheckBox.Enabled = true;
                 WriteLogFile("Spring tension enabled");
+                springTensionEnabled = true;
             }
             else
             {
@@ -5596,12 +5642,21 @@ namespace SerialPortTerminal
                 sendCmd("Send Control Switches");
                 torqueMotorCheckBox.Enabled = true;
                 WriteLogFile("Spring tension disabled");
+                springTensionEnabled = false;
             }
         }
 
         private void springTensionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            enableSpringTension();
+            if (springTensionCheckBox.Checked)
+            {
+                enableSpringTension(true);
+            }
+            else
+            {
+                enableSpringTension(false);
+            }
+            
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -5662,6 +5717,8 @@ namespace SerialPortTerminal
                 }
                 else if (springTensionSetRadioButton.Checked)
                 {
+
+
                     springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
                     if (springTensionTarget < 0 | springTensionTarget > springTensionMax)
                     {
@@ -5669,6 +5726,11 @@ namespace SerialPortTerminal
                     }
                     else
                     {
+                        if (springTensionEnabled)
+                        {
+                            enableSpringTension(false);
+                        }
+
                         RelaySwitches.Relay200Hz(enable);
                         RelaySwitches.StepperMotorEnable(enable);
                         sendCmd("Send Relay Switches");
@@ -5682,9 +5744,15 @@ namespace SerialPortTerminal
 
                         Properties.Settings.Default.springTension = (short)newSpringTension;
                         Properties.Settings.Default.Save();
+
                         STtextBox.Text = Convert.ToString(newSpringTension);
                         springTensionValid = true;
                         springTensionGroupBox.Visible = false;
+
+                        if (springTensionEnabled)
+                        {
+                            enableSpringTension(true);
+                        }
                     }
                 }
             }
@@ -5729,6 +5797,8 @@ namespace SerialPortTerminal
             {
                 Console.WriteLine("Checking FOG and Heater status");
             }
+
+
             // Check Cross FOG status
             if (MeterStatus.XGyro_Fog == 0)
             { crossFogNotReady = false; }
@@ -5746,13 +5816,15 @@ namespace SerialPortTerminal
             { heaterNotReady = false; }
             else
             { heaterNotReady = true; }
+        
             if (heaterBypassCheckBox.Checked)
             {
                 heaterNotReady = false;
             }
-            if ((!crossFogNotReady) & (!longFogNotReady) & ((!heaterNotReady)) | (heaterBypassCheckBox.Checked == true))
+            
+            if ((!crossFogNotReady) & (!longFogNotReady) & ((!heaterNotReady)) | (heaterBypassOnStartup))
             {
-                completed = true;
+               completed = true;
             }
         }
 
@@ -6037,6 +6109,11 @@ namespace SerialPortTerminal
         private void STtextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click_2(object sender, EventArgs e)
+        {
+            heaterNotReady = false;
         }
     }
 }

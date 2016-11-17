@@ -38,6 +38,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.dayLabel = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // setDateTimeSuccessLabel
@@ -64,7 +65,7 @@
             // 
             this.dayOfYearLabel.AutoSize = true;
             this.dayOfYearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dayOfYearLabel.Location = new System.Drawing.Point(17, 100);
+            this.dayOfYearLabel.Location = new System.Drawing.Point(432, 22);
             this.dayOfYearLabel.Name = "dayOfYearLabel";
             this.dayOfYearLabel.Size = new System.Drawing.Size(37, 17);
             this.dayOfYearLabel.TabIndex = 12;
@@ -83,15 +84,18 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(20, 52);
+            this.dateTimePicker1.CustomFormat = "\"yyyy-MM-dd hh:mm:ss\"";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 61);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(292, 20);
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(253, 20);
             this.dateTimePicker1.TabIndex = 10;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(302, 226);
+            this.button1.Location = new System.Drawing.Point(390, 218);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
@@ -101,7 +105,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(192, 100);
+            this.button2.Location = new System.Drawing.Point(280, 62);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(189, 23);
             this.button2.TabIndex = 16;
@@ -111,14 +115,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(192, 190);
+            this.textBox1.Location = new System.Drawing.Point(280, 182);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(189, 20);
             this.textBox1.TabIndex = 17;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(192, 129);
+            this.button3.Location = new System.Drawing.Point(280, 91);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(189, 23);
             this.button3.TabIndex = 18;
@@ -135,11 +139,20 @@
             this.dayLabel.Size = new System.Drawing.Size(0, 17);
             this.dayLabel.TabIndex = 19;
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker2.Location = new System.Drawing.Point(12, 91);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(183, 20);
+            this.dateTimePicker2.TabIndex = 20;
+            // 
             // DateTimeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 261);
+            this.ClientSize = new System.Drawing.Size(494, 261);
+            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dayLabel);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
@@ -169,5 +182,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label dayLabel;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

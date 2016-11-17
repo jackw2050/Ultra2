@@ -21,9 +21,9 @@ namespace SerialPortTerminal
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "MM/dd/yyyy     HH:mm:ss";
-
+            //dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 
 
             dayLabel.Text = dateTimePicker1.Value.DayOfYear.ToString();
@@ -44,8 +44,12 @@ namespace SerialPortTerminal
             setDateTimeSuccessLabel.Text = "Set time successful";
             setDateTimeSuccessLabel.Visible = true;
             frmTerminal mainForm = new frmTerminal();
-            mainForm.myDatetime = tempDateTime;
-            mainForm.sendCmd("Update Date and Time");
+            
+            DateTime tempDate = dateTimePicker1.Value;
+            textBox1.Text = Convert.ToString(tempDate);
+
+          //  mainForm.myDatetime.Year = dateTimePicker1.Value.Year;  // tempDateTime;
+         //   mainForm.sendCmd("Update Date and Time");
             
 
         }
