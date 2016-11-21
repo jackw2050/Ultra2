@@ -43,7 +43,6 @@ namespace SerialPortTerminal
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.gpsLongitudeTextBox = new System.Windows.Forms.TextBox();
-            this.button11 = new System.Windows.Forms.Button();
             this.GravityChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemBackgroundColor = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,7 +97,6 @@ namespace SerialPortTerminal
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.startStopButtonsToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.emergencyShutdownButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.gravityChartToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -161,6 +159,7 @@ namespace SerialPortTerminal
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.startupGroupBox = new System.Windows.Forms.GroupBox();
+            this.startupWizardButton = new System.Windows.Forms.Button();
             this.startupLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.alarmCheckBox = new System.Windows.Forms.CheckBox();
@@ -188,8 +187,9 @@ namespace SerialPortTerminal
             this.heaterBypassCheckBox = new System.Windows.Forms.CheckBox();
             this.heaterStatusLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
             this.shutdownLabel = new System.Windows.Forms.Label();
+            this.springTensionTargetNumericTextBox = new SerialPortTerminal.NumericTextBox();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GravityChart)).BeginInit();
             this.chartContextMenuStrip.SuspendLayout();
             this.setupContextMenuStrip1.SuspendLayout();
@@ -225,6 +225,7 @@ namespace SerialPortTerminal
             // _timer1
             // 
             this._timer1.Interval = 1000;
+            this._timer1.Tick += new System.EventHandler(this._timer1_Tick);
             // 
             // label16
             // 
@@ -269,17 +270,6 @@ namespace SerialPortTerminal
             this.gpsLongitudeTextBox.Name = "gpsLongitudeTextBox";
             this.gpsLongitudeTextBox.Size = new System.Drawing.Size(97, 20);
             this.gpsLongitudeTextBox.TabIndex = 45;
-            // 
-            // button11
-            // 
-            this.button11.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button11.Location = new System.Drawing.Point(158, 50);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(51, 43);
-            this.button11.TabIndex = 66;
-            this.button11.Text = "Auto Start";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // GravityChart
             // 
@@ -716,21 +706,6 @@ namespace SerialPortTerminal
             this.gpsLatitudeTextBox.Name = "gpsLatitudeTextBox";
             this.gpsLatitudeTextBox.Size = new System.Drawing.Size(97, 20);
             this.gpsLatitudeTextBox.TabIndex = 88;
-            // 
-            // emergencyShutdownButton
-            // 
-            this.emergencyShutdownButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.emergencyShutdownButton.BackColor = System.Drawing.Color.Red;
-            this.emergencyShutdownButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.emergencyShutdownButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.emergencyShutdownButton.Location = new System.Drawing.Point(1287, 7);
-            this.emergencyShutdownButton.Name = "emergencyShutdownButton";
-            this.emergencyShutdownButton.Size = new System.Drawing.Size(75, 45);
-            this.emergencyShutdownButton.TabIndex = 82;
-            this.emergencyShutdownButton.Text = "Emergency Shutdown";
-            this.startStopButtonsToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
-            this.durationToolTip.SetToolTip(this.emergencyShutdownButton, "This electrically shuts down the meter in case of emergency.");
-            this.emergencyShutdownButton.UseVisualStyleBackColor = false;
             // 
             // stopButton
             // 
@@ -1242,19 +1217,29 @@ namespace SerialPortTerminal
             // startupGroupBox
             // 
             this.startupGroupBox.BackColor = System.Drawing.Color.Silver;
+            this.startupGroupBox.Controls.Add(this.startupWizardButton);
             this.startupGroupBox.Controls.Add(this.startupLabel);
             this.startupGroupBox.Controls.Add(this.button1);
             this.startupGroupBox.Controls.Add(this.alarmCheckBox);
             this.startupGroupBox.Controls.Add(this.springTensionCheckBox);
             this.startupGroupBox.Controls.Add(this.torqueMotorCheckBox);
             this.startupGroupBox.Controls.Add(this.gyroCheckBox);
-            this.startupGroupBox.Controls.Add(this.button11);
             this.startupGroupBox.Location = new System.Drawing.Point(932, 122);
             this.startupGroupBox.Name = "startupGroupBox";
-            this.startupGroupBox.Size = new System.Drawing.Size(215, 138);
+            this.startupGroupBox.Size = new System.Drawing.Size(289, 138);
             this.startupGroupBox.TabIndex = 118;
             this.startupGroupBox.TabStop = false;
             this.startupGroupBox.Text = "Startup";
+            // 
+            // startupWizardButton
+            // 
+            this.startupWizardButton.Location = new System.Drawing.Point(208, 18);
+            this.startupWizardButton.Name = "startupWizardButton";
+            this.startupWizardButton.Size = new System.Drawing.Size(75, 41);
+            this.startupWizardButton.TabIndex = 107;
+            this.startupWizardButton.Text = "Startup Wizard";
+            this.startupWizardButton.UseVisualStyleBackColor = true;
+            this.startupWizardButton.Click += new System.EventHandler(this.startupWizardButton_Click);
             // 
             // startupLabel
             // 
@@ -1266,7 +1251,7 @@ namespace SerialPortTerminal
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(158, 21);
+            this.button1.Location = new System.Drawing.Point(232, 102);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 23);
             this.button1.TabIndex = 105;
@@ -1550,6 +1535,16 @@ namespace SerialPortTerminal
             this.label7.TabIndex = 130;
             this.label7.Text = "System Time";
             // 
+            // shutdownLabel
+            // 
+            this.shutdownLabel.AutoSize = true;
+            this.shutdownLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shutdownLabel.Location = new System.Drawing.Point(545, 351);
+            this.shutdownLabel.Name = "shutdownLabel";
+            this.shutdownLabel.Size = new System.Drawing.Size(130, 24);
+            this.shutdownLabel.TabIndex = 131;
+            this.shutdownLabel.Text = "Shutting down";
+            // 
             // springTensionTargetNumericTextBox
             // 
             this.springTensionTargetNumericTextBox.AllowSpace = false;
@@ -1558,14 +1553,15 @@ namespace SerialPortTerminal
             this.springTensionTargetNumericTextBox.Size = new System.Drawing.Size(81, 20);
             this.springTensionTargetNumericTextBox.TabIndex = 6;
             // 
-            // shutdownLabel
+            // button4
             // 
-            this.shutdownLabel.AutoSize = true;
-            this.shutdownLabel.Location = new System.Drawing.Point(673, 143);
-            this.shutdownLabel.Name = "shutdownLabel";
-            this.shutdownLabel.Size = new System.Drawing.Size(35, 13);
-            this.shutdownLabel.TabIndex = 131;
-            this.shutdownLabel.Text = "label3";
+            this.button4.Location = new System.Drawing.Point(782, 110);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 132;
+            this.button4.Text = "Open data port";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_3);
             // 
             // frmTerminal
             // 
@@ -1573,6 +1569,7 @@ namespace SerialPortTerminal
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 759);
             this.ContextMenuStrip = this.setupContextMenuStrip1;
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.shutdownLabel);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.meterStatusGroupBox);
@@ -1580,7 +1577,6 @@ namespace SerialPortTerminal
             this.Controls.Add(this.startupGroupBox);
             this.Controls.Add(this.gpsGroupBox);
             this.Controls.Add(this.surveyRecordGroupBox);
-            this.Controls.Add(this.emergencyShutdownButton);
             this.Controls.Add(this.chartWindowGroupBox);
             this.Controls.Add(this.recordingDurationLabel);
             this.Controls.Add(this.fileStartTimeLabel);
@@ -1631,7 +1627,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label label18;
         public System.Windows.Forms.TextBox gpsAltitudeTextBox;
         public System.Windows.Forms.TextBox gpsLongitudeTextBox;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
         public System.Windows.Forms.TextBox gpsLatitudeTextBox;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
@@ -1715,7 +1710,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label timeNowLabel;
         private System.Windows.Forms.GroupBox chartWindowGroupBox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button emergencyShutdownButton;
         private System.Windows.Forms.TextBox recordingTextBox;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ToolStripMenuItem navigationToolStripMenuItem;
@@ -1778,6 +1772,8 @@ namespace SerialPortTerminal
         private System.Windows.Forms.ToolStripMenuItem updageCalFileToMeterToolStripMenuItem;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label shutdownLabel;
+        private System.Windows.Forms.Button startupWizardButton;
+        private System.Windows.Forms.Button button4;
     }
 }
 

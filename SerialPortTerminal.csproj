@@ -97,12 +97,6 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="AutoStart.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoStart.Designer.cs">
-      <DependentUpon>AutoStart.cs</DependentUpon>
-    </Compile>
     <Compile Include="CalculateMarineData.cs" />
     <Compile Include="DataStatusForm.cs">
       <SubType>Form</SubType>
@@ -173,9 +167,6 @@
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoStart.resx">
-      <DependentUpon>AutoStart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStatusForm.resx">
       <DependentUpon>DataStatusForm.cs</DependentUpon>

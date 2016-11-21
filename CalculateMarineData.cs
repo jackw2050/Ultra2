@@ -18,6 +18,19 @@ namespace SerialPortTerminal
         private static Boolean platformLevel = false;
         private static int timeSetErrorCount = 0;
         private static int serialComErrorCount = 0;
+        private static Boolean comPortRead = false;
+
+        public static Boolean ComPortRead
+        {
+            get
+            {
+                return comPortRead;
+            }
+            set
+            {
+                comPortRead = value;
+            }
+        }
 
         public static Boolean RemoteRebooted
         {
@@ -776,7 +789,6 @@ namespace SerialPortTerminal
         public Single AUX1, AUX2, AUX3, AUX4;
         public Single p28V, n28V, p24V, p15V, n15V, p5V;
         public static int MeterSTATUS;
-        public int REMOTEREBOOTED;
         public int TimeSetSuccess;
         public int G2000Bias;
         public Int16 portCStatus;
@@ -1262,11 +1274,13 @@ namespace SerialPortTerminal
         {
             string command;
             command = "";
-
+            Console.WriteLine("Command = " + meterBytes[1]);
             switch (meterBytes[1])
             {
                 case 0:
                     command = "Meter Data";
+                    Errors.RemoteRebooted = false;
+                    Errors.ComPortRead = true;
                     break;
 
                 case 1:
@@ -1377,6 +1391,9 @@ namespace SerialPortTerminal
                 {
                     case 0:
                         commandName = "Normal Data";
+                        Console.WriteLine(commandName);
+                        Errors.RemoteRebooted = false;
+                        Errors.ComPortRead = true;
                         break;
                     case 1:
                         commandName = "Remote Rebooted";
@@ -1421,6 +1438,9 @@ namespace SerialPortTerminal
                     Data.Sec = GetMeterSec(meterBytes);
                     Data.myDT = GetDateTime(Data);
                     Data.SpringTension = (short)GetMeterSpringTension(meterBytes);
+                  
+
+
                     Data.beam = GetMeterRawBeam(meterBytes);
                     Data.VCC = (short)GetMeterVcc(meterBytes);
                     Data.AL = (short)GetMeterAl(meterBytes);

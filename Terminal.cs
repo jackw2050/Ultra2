@@ -55,15 +55,17 @@ namespace SerialPortTerminal
         private static string chartWindowTimePeriod = "minutes";
         private static int chartWindowTimeSpan = 30;
         public DateTime myDatetime = DateTime.Now;
+        public static Single springTensionTarget;
 
         private delegate void SetTextCallback(string text);
+
         public static Boolean springTensionValid = false;
         public static int istep;
         public static int istop = 1;
         public static Boolean heaterBypassOnStartup = false;
         public static int screenFilter = 3;
         public static int timeCheck = 0;
-        private int countDown = 10;
+        private int countDown = 3;
         public static Single springTensionScale = (Single).1041666;
         public static int springTensionMaxStep = 2900;
         public static int springTensionFPM = 525;
@@ -419,6 +421,7 @@ namespace SerialPortTerminal
 
         // The main control for communicating through the RS-232 port
         public SerialPort comport = new SerialPort();
+        public SerialPort dataport = new SerialPort();
 
         // Various colors for logging info
         private Color[] LogMsgTypeColor = { Color.Blue, Color.Green, Color.Black, Color.Orange, Color.Red };
@@ -479,11 +482,11 @@ namespace SerialPortTerminal
             // Saved setting, connection strings etc.
             // Should be called on exit or when a change is made.
 
-            settings.BaudRate = 9600; // int.Parse(cmbBaudRate.Text);
-            settings.DataBits = 8;// int.Parse(cmbDataBits.Text);
+            settings.BaudRate_RS232 = 9600; // int.Parse(cmbBaudRate.Text);
+            settings.DataBit_RS232 = 8;// int.Parse(cmbDataBits.Text);
             settings.DataMode = DataMode.Hex;
-            settings.Parity = (Parity)Enum.Parse(typeof(Parity), "None");//   cmbParity.Text);
-            settings.StopBits = (StopBits)Enum.Parse(typeof(StopBits), "One");//    cmbStopBits.Text);
+            settings.Parity_RS232 = (Parity)Enum.Parse(typeof(Parity), "None");//   cmbParity.Text);
+            settings.StopBits_RS232 = (StopBits)Enum.Parse(typeof(StopBits), "One");//    cmbStopBits.Text);
             settings.PortName = SerialPortForm.cmbPortName.Text;
             settings.ClearOnOpen = true;// chkClearOnOpen.Checked;
             settings.ClearWithDTR = false;// chkClearWithDTR.Checked;
@@ -660,6 +663,34 @@ namespace SerialPortTerminal
                 { if (SerialPortForm.rbHex.Checked) CurrentDataMode = DataMode.Hex; }
                 */
 
+        public void OpenDataPort()
+        {
+            // ADD 1 SEC TIMER.  START AT END
+            bool error = false;
+
+            // If the port is open, close it.
+            if (dataport.IsOpen) dataport.Close();
+            else
+            {
+                // Set the port's settings
+              //  dataport.PortName = "port6";
+
+                try { dataport.Open(); }// Open serial port
+                catch (UnauthorizedAccessException) { error = true; }
+                catch (IOException) { error = true; }
+                catch (ArgumentException) { error = true; }
+
+                if (error) MessageBox.Show(this, "Could not open the COM port.  Most likely it is already in use, has been removed, or is unavailable.", "COM Port Unavalible", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                else
+                {
+                    //   UpdatePinState();
+                }
+               
+            }
+
+      
+        }
+
         public void OpenPort()
         {
             // ADD 1 SEC TIMER.  START AT END
@@ -728,10 +759,8 @@ namespace SerialPortTerminal
                     //   UpdatePinState();
                 }
                 initMeter();
+                SetSpringTension();
 
-
-
-                
                 Point mainPoint = new Point();
                 mainPoint.X = this.Location.X;
                 mainPoint.Y = this.Location.Y;
@@ -751,10 +780,6 @@ namespace SerialPortTerminal
                 meterStatusGroupBoxPoint.X = mainWidth / 2 - meterStatusGroupBoxWidth / 2;
                 meterStatusGroupBoxPoint.Y = mainHeight / 2 - meterStatusGroupBoxHeight / 2;
                 meterStatusGroupBox.Location = meterStatusGroupBoxPoint;
-
-
-
-
 
                 meterStatusGroupBox.Visible = true;
                 //  startupGroupBox.Visible = true;
@@ -805,7 +830,9 @@ namespace SerialPortTerminal
                     }
                     timerOffset = 200;
                     _timer1.Interval = 1000 + timerOffset; // (1000 - DateTime.Now.Millisecond);
+                                                           // _timer1.Tick += new EventHandler(port_CheckDataReceived);
                     _timer1.Enabled = true;
+
                     _timer1.Start();
 
                     break;
@@ -838,7 +865,6 @@ namespace SerialPortTerminal
             return checkSum;
         }
 
-      
         //**********************************************************************************************************
 
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -866,6 +892,7 @@ namespace SerialPortTerminal
                 worker.Name = "calcMeterData";
                 worker.IsBackground = true;
                 worker.Start(buffer);// Start new worker thread to process the data
+                Errors.ComPortRead = true;
             }
         }
 
@@ -985,7 +1012,7 @@ namespace SerialPortTerminal
                 {
                     countDown = 0;
                 }
-                if ((completed ) & (countDown == 0))
+                if ((completed) & (countDown == 0))
                 {
                     meterStatusGroupBox.Visible = false;
                     startupGroupBox.Visible = true;
@@ -1309,14 +1336,10 @@ namespace SerialPortTerminal
             int maxChartPoints = 360;
             DateTime currentTime;
 
-
             if (springTensionValid & autostart)
             {
                 AutoStartMethod();
             }
-
-
-
 
             if (GPS_Status.GpsTimeSynch)
             {
@@ -1653,7 +1676,7 @@ namespace SerialPortTerminal
             else
             {
                 UserDataForm.textBox_gravity.Text = (Data.gravity.ToString("N", CultureInfo.InvariantCulture));
-                UserDataForm.textBox_springTension.Text = (Data.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                UserDataForm.textBox_springTension.Text = (Data.SpringTension.ToString("N2", CultureInfo.InvariantCulture));
                 UserDataForm.textBox_crossCoupling.Text = (Data.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
                 UserDataForm.textBox_beam.Text = (Data.beam.ToString("N", CultureInfo.InvariantCulture));
                 UserDataForm.textBox5.Text = (Data.myDT.ToString());
@@ -1750,7 +1773,7 @@ namespace SerialPortTerminal
             else
             {
                 DataStatusForm.textBox1.Text = (Data.gravity.ToString("N", CultureInfo.InvariantCulture));
-                DataStatusForm.textBox2.Text = (Data.SpringTension.ToString("N", CultureInfo.InvariantCulture));
+                DataStatusForm.textBox2.Text = (Data.SpringTension.ToString("N2", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox3.Text = (Data.CrossCoupling.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox4.Text = (Data.beam.ToString("N", CultureInfo.InvariantCulture));
                 DataStatusForm.textBox5.Text = (Data.myDT.ToString());
@@ -3074,7 +3097,7 @@ namespace SerialPortTerminal
                     byte[] byteArrayMin = BitConverter.GetBytes(min);
                     byte[] byteArraySec = BitConverter.GetBytes(sec);
 
-                     data = CreateTxArray(2, year, day, hour, min, sec);
+                    data = CreateTxArray(2, year, day, hour, min, sec);
                     // comport.Write(data, 0, 9);
 
                     timeData[0] = 2;
@@ -3502,10 +3525,10 @@ namespace SerialPortTerminal
 
         private void heaterBypassCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-               if (this.heaterBypassCheckBox.Checked)
-               {
-                   heaterBypassOnStartup = true;
-               }
+            if (this.heaterBypassCheckBox.Checked)
+            {
+                heaterBypassOnStartup = true;
+            }
         }
 
         private void windowSizeNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -3682,9 +3705,7 @@ namespace SerialPortTerminal
 
         private void SetInitialVisibility()
         {
-
-           
-
+            shutdownLabel.Visible = false;
             GravityChart.Visible = false;
             meterStatusGroupBox.Visible = false;
             surveyRecordGroupBox.Visible = false;
@@ -3703,7 +3724,6 @@ namespace SerialPortTerminal
             stopButton.Enabled = false;
             startButton.Enabled = true;
 
-
             Point connectToMeterButtonPoint = new Point();
             Point mainPoint = new Point();
             mainPoint.X = this.Location.X;
@@ -3716,35 +3736,12 @@ namespace SerialPortTerminal
             connectToMeterButtonPoint.X = mainFormWidth / 2 - connectToMeterButtonWidth / 2;
             connectToMeterButtonPoint.Y = mainFormHeight / 4 - connectToMeterButtonHeight / 4;
             btnOpenPort.Location = connectToMeterButtonPoint;
-
-
-
-
-
-
-
-
-
         }
 
         private void frmTerminal_Load(object sender, EventArgs e)
         {
             SetInitialVisibility();
-
-            // Console.WriteLine(a);
-            //  Console.WriteLine(DateTime.UtcNow);
-
             CurrentDataMode = DataMode.Hex;
-
-            // Create an instance of NumericTextBox.
-    //        NumericTextBox numericTextBox1 = new NumericTextBox();
-     //       numericTextBox1.Parent = this;
-         
-            
-            
-            //Draw the bounds of the NumericTextBox.
-      //      numericTextBox1.Bounds = new System.Drawing.Rectangle(5, 5, 150, 100);
-
             //  Load stored state
             InitStoredVariables();
 
@@ -3753,8 +3750,7 @@ namespace SerialPortTerminal
                 Console.WriteLine("Data file name " + fileName);
             }
 
-            STtextBox.Text = Data.data1[3].ToString("N1", CultureInfo.InvariantCulture);
-
+            // STtextBox.Text = Data.data1[3].ToString("N1", CultureInfo.InvariantCulture);
 
             // load config file
             CheckConfigFile(configFilePath + "\\" + configFileName);
@@ -3779,43 +3775,24 @@ namespace SerialPortTerminal
 
         #endregion Setup
 
-
-
-
         //==================================================================================================
-        private void StartupWizard()
-        {
-          //  Task taskA = Task.Factory.StartNew(() => WaitForSTValid());// change this to 1 min
-            AutoStart AutoStart = new AutoStart();
-            AutoStart.Show();
 
-          //  taskA.Wait();
-
-
-
-         
-           
-        }
         private void AutoStartMethod()
         {
             autostart = false;
-            AutoStart AutoStart = new AutoStart();
 
             //  enable platform servo
             this.Invoke((MethodInvoker)delegate
             {
                 gyroCheckBox.Checked = true;
-                enablePlatformServo();
+                enablePlatformServo(true);
             });
-            
 
             this.Invoke((MethodInvoker)delegate
             {
                 torqueMotorCheckBox.Checked = true;
-                enableTorqueMotors();
+                enableTorqueMotors(true);
             });
-            
-     
 
             //Spring tension value is set in autostart form prior to calling this method
 
@@ -3823,41 +3800,34 @@ namespace SerialPortTerminal
             RelaySwitches.StepperMotorEnable(enable);
             sendCmd("Send Relay Switches");
 
-
-
-
             ControlSwitches.DataCollection(enable);
             //   ControlSwitches.controlSw = 0x08;
             sendCmd("Send Control Switches");
             //   springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBoxAutostart.Text);
-            newSpringTension = AutoStart.springTensionTarget;
+            newSpringTension = springTensionTarget;
+
             sendCmd("Update Spring Tension Value");
-
-
-
 
             Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
             taskA.Wait();
- //           Properties.Settings.Default.springTension = newSpringTension;
- //           Properties.Settings.Default.Save();
+            //           Properties.Settings.Default.springTension = newSpringTension;
+            //           Properties.Settings.Default.Save();
             this.Invoke((MethodInvoker)delegate
             {
                 springTensionCheckBox.Checked = true;
                 enableSpringTension(true);
             });
 
-
-
             taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
             taskA.Wait();
-           
+
             this.Invoke((MethodInvoker)delegate
             {
                 alarmCheckBox.Checked = true;
                 enableAlarms();
                 startupLabel.Text = "Startup wizard complete..";
             });
-            
+
             springTensionValid = false;
             taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
             taskA.Wait();
@@ -3867,10 +3837,7 @@ namespace SerialPortTerminal
                 startupGroupBox.Visible = false;
             });
 
-
             EnableMainForm();
-
-
 
             //  gyroCheckBox.Checked = true;
             //  torqueMotorCheckBox.Checked = true;
@@ -3884,13 +3851,11 @@ namespace SerialPortTerminal
             Properties.Settings.Default.chartWindowTimeSpan = chartWindowTimeSpan;
             Properties.Settings.Default.chartWindowTimePeriod = chartWindowTimePeriod;
 
-
-
             if (Data.SpringTension > 0)
             {
-                Properties.Settings.Default.springTension = (short)Data.SpringTension;
+                Properties.Settings.Default.springTension = (Single)Data.SpringTension;
             }
-            
+
             Properties.Settings.Default.beamScale = (short)ConfigData.beamScale;
             Properties.Settings.Default.meterNumber = ConfigData.meterNumber;
             Properties.Settings.Default.crossPeriod = (short)ConfigData.crossPeriod;
@@ -3941,7 +3906,7 @@ namespace SerialPortTerminal
             Properties.Settings.Default.fileType = fileType;
             //      dataFileName = Properties.Settings.Default.dataFileName;
             Properties.Settings.Default.fileDateFormat = fileDateFormat;
-            Properties.Settings.Default.springTension =  (short)Data.SpringTension;
+            Properties.Settings.Default.springTension = (short)Data.SpringTension;
             Properties.Settings.Default.Save();
         }
 
@@ -3949,13 +3914,20 @@ namespace SerialPortTerminal
         {
             frmTerminal frmTerminal = new frmTerminal();
             comport.PortName = Properties.Settings.Default.PortName;
-            comport.BaudRate = Properties.Settings.Default.BaudRate;
-            comport.StopBits = Properties.Settings.Default.StopBits;
+            comport.BaudRate = Properties.Settings.Default.BaudRate_RS232;
+            comport.StopBits = Properties.Settings.Default.StopBits_RS232;
+
+            dataport.PortName = Properties.Settings.Default.dataPortName;
+            dataport.BaudRate = Properties.Settings.Default.BaudRate_RS232;
+            dataport.StopBits = Properties.Settings.Default.StopBits_RS232;
+
+
+
             chartWindowTimeSpan = Properties.Settings.Default.chartWindowTimeSpan;
             chartWindowTimePeriod = Properties.Settings.Default.chartWindowTimePeriod;
             // Load configuration data from stored defaults
             ConfigData.version = Properties.Settings.Default.version;
-            Data.SpringTension = (short)Properties.Settings.Default.springTension;
+            Data.SpringTension = (Single)Properties.Settings.Default.springTension;
 
             ConfigData.beamScale = Properties.Settings.Default.beamScale;
             ConfigData.meterNumber = Properties.Settings.Default.meterNumber;
@@ -4109,7 +4081,7 @@ namespace SerialPortTerminal
             fileType = Properties.Settings.Default.fileType;// file type for data logs csv, txt etc
             surveyName = Properties.Settings.Default.surveyInfo;
 
-            Data.SpringTension = (short)Properties.Settings.Default.springTension;
+            Data.SpringTension = (Single)Properties.Settings.Default.springTension;
             frmTerminal.fileDateFormat = Properties.Settings.Default.fileDateFormat;
 
             ControlSwitches.DataCollection(enable);// ControlSwitches.dataSwitch = enable;// ICNTLSW = 8; // data on
@@ -4140,7 +4112,6 @@ namespace SerialPortTerminal
 
             frmTerminal.Dispose();
         }
-
 
         private void button3_Click_1(object sender, EventArgs e)
         {
@@ -4215,71 +4186,11 @@ namespace SerialPortTerminal
             sendCmd("Send Control Switches");           // 1 ----
         }
 
-        private void button11_Click(object sender, EventArgs e)// Autostart
-        {
-            autostart = true;
-            Point stPoint = new Point();
-            Point mainPoint = new Point();
-            mainPoint.X = this.Location.X;
-            mainPoint.Y = this.Location.Y;
-            int mainWidth = this.Size.Width;
-            int mainHeight = this.Size.Height;
-            int stWidth = springTensionGroupBox.Width;
-            int stHeight = springTensionGroupBox.Height;
-            springTensionValueLabel.Text = "Current Spring Tension";
-            STtextBox.Text = Convert.ToString(Data.data1[3]);
-            springTensionTargetNumericTextBox.Text = STtextBox.Text;
-
-            int suWidth = startupGroupBox.Width;
-            int suHeight = startupGroupBox.Height;
-            stPoint.X = mainWidth / 2 - suWidth / 2;
-            stPoint.Y = mainHeight / 2 - suHeight / 2;
-            springTensionGroupBox.Location = stPoint;
-
-            stPoint.X = mainWidth/2 - stWidth/2;
-            stPoint.Y = mainHeight/2 - stHeight/2;
-            springTensionGroupBox.Location = stPoint;
-            springTensionGroupBox.Visible = true;
-            springTensionStatusLabel.Text = "Read spring tension from mechanical counter on meter.\nEnter in in target box and press Go";
-
-
-            springTensionAbsoluteRadioButton.Enabled = false;
-            springTensionParkRadioButton.Enabled = false;
-            springTensionRelativeRadioButton.Enabled = false;
-
-
-            springTensionParkRadioButton.Checked = true;
-            
-
-
-
-
-
-
-
-
-            if (springTensionValid)
-            {
-                AutoStartMethod();
-                springTensionAbsoluteRadioButton.Enabled = true;
-                springTensionParkRadioButton.Enabled = true;
-                springTensionRelativeRadioButton.Enabled = true;
-                
-            }
-            
-           
-            
-        }
-
         private void button12_Click(object sender, EventArgs e)
         {
             ControlSwitches.DataCollection(enable); //ControlSwitches.dataSwitch = enable;// icntlsw = set bit 3  turn on data transmission
             // ControlSwitches.ControlSwitchCalculate();
             sendCmd("Send Control Switches");          // 1   -------
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
         }
 
         private void Exit_Click(object sender, EventArgs e)
@@ -4373,7 +4284,6 @@ namespace SerialPortTerminal
         {
             DateTimeForm myDateForm = new DateTimeForm();
             myDateForm.Show();
-          
         }
 
         private void fileFormatToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -4477,6 +4387,12 @@ namespace SerialPortTerminal
 
                             switch (dataItem.EntryName)
                             {
+                                case "Spring Tension":
+                                    Data.SpringTension = Convert.ToSingle(dataItem.configValue);
+                                    springTensionTarget = Convert.ToSingle(dataItem.configValue);
+                                    if (engineerDebug) Console.WriteLine("Spring tension: ---------------------- \t" + Convert.ToString(dataItem.configValue));
+                                    break;
+
                                 case "Version":
                                     if (engineerDebug) Console.WriteLine("Version number: ---------------------- \t" + Convert.ToString(dataItem.configValue));
                                     break;
@@ -5031,54 +4947,6 @@ namespace SerialPortTerminal
             startButton.Enabled = true;
         }
 
-        private void ShutdownDataWorker(object obj)
-        {
-            var _delegate = (Action<shutdownData>)obj;
-            // this.Invoke(new UpdateRecordBoxCallback(this.UpdateRecordBox), new object[] { true });
-            //   this.Invoke(new Action<shutdownData>(this.UpdateShutdownText), new object[] { d });
-
-            _delegate(new shutdownData
-            {
-                ShutDownText = "Preparing to shutdown..."
-            });
-            Thread.Sleep(1000);
-            fileRecording = false;
-            _delegate(new shutdownData
-            {
-                ShutDownText = "Closing all open files."
-            });
-            Thread.Sleep(2000);
-
-            springTensionEnabled = false;
-            _delegate(new shutdownData
-            {
-                ShutDownText = "Disabling spring tension"
-            });
-            Thread.Sleep(3000);
-            torqueMotorsEnabled = false;
-            _delegate(new shutdownData
-            {
-                ShutDownText = "Turning off torque motors"
-            });
-            Thread.Sleep(3000);
-
-            gyrosEnabled = false;
-
-            _delegate(new shutdownData
-            {
-                ShutDownText = "Turning off gyros"
-            });
-            Thread.Sleep(3000);
-
-            _delegate(new shutdownData
-            {
-                ShutDownText = "Shutdown complete.  Program will now terminate."
-            });
-            Thread.Sleep(3000);
-
-            ExitProgram();
-        }
-
         private void ExitProgram()
         {
             SaveSettings();
@@ -5098,17 +4966,70 @@ namespace SerialPortTerminal
 
         private void exitProgramToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ShutdownProgram();
+        }
+
+        private void ShutdownProgram()
+        {
+            Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+
+            GravityChart.Visible = false;
+            shutdownLabel.Text = "Beginning shutdown process...";
+            shutdownLabel.Visible = true;
+            taskA.Wait();
+
+            shutdownLabel.Text = "Data logging terminated...";
+            fileRecording = false;
+            surveyTextBox.Enabled = false;
+            recordingTextBox.Text = "Recording stopped";
+            recordingTextBox.BackColor = System.Drawing.Color.Red;
+            stopButton.Enabled = false;
+            startButton.Enabled = false;
+            taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+            taskA.Wait();
+
+            shutdownLabel.Text = "Disabling spring tension...";
+            enableSpringTension(false);
+            taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+            taskA.Wait();
+            shutdownLabel.Text = "Disabling torque motors...";
+            enableTorqueMotors(false);
+            taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+            taskA.Wait();
+
+            shutdownLabel.Text = "Disabling platform servo...";
+            enablePlatformServo(false);
+            taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+            taskA.Wait();
+
+            shutdownLabel.Text = "Saving config file.";
+            taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+            taskA.Wait();
+            SaveConfigFile(false);
+
             if (System.Windows.Forms.Application.MessageLoop)
             {
                 // WinForms app
+                shutdownLabel.Text = "Storing system defaults...";
+                taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+                taskA.Wait();
                 StoreDefaultVariables();
+                shutdownLabel.Text = "System shutdown complete.";
+                taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+                taskA.Wait();
                 Environment.Exit(Environment.ExitCode);
                 System.Windows.Forms.Application.Exit();
             }
             else
             {
                 // Console app
+                shutdownLabel.Text = "Storing system defaults...";
+                taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+                taskA.Wait();
                 StoreDefaultVariables();
+                shutdownLabel.Text = "System shutdown complete.";
+                taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
+                taskA.Wait();
                 Environment.Exit(Environment.ExitCode);
                 System.Environment.Exit(1);
             }
@@ -5212,93 +5133,95 @@ namespace SerialPortTerminal
             // sendCmd("Send Control Switches");
         }
 
-        private void enablePlatformServo()
+        private void enablePlatformServo(Boolean enableServo)
         {
-            
             this.Invoke((MethodInvoker)delegate
             {
-                if (gyroCheckBox.Checked)
-            {
-                // startupLabel.Text = "Waiting for gyros to spin up";
-                // RelaySwitches.Slew4(disable);
-                // RelaySwitches.Slew5(disable);
-                ControlSwitches.ControlSw = 0x08;
-                sendCmd("Send Control Switches");
                 Task taskA = Task.Factory.StartNew(() => DoSomeWork(500));
-                taskA.Wait();
+                if (enableServo)
+                {
+                    startupLabel.Text = "Enabling platform servo";
+                    ControlSwitches.ControlSw = 0x08;
+                    sendCmd("Send Control Switches");
+                    taskA.Wait();
+                    RelaySwitches.RelaySW = 0x81;
+                    sendCmd("Send Relay Switches");
+                    torqueMotorCheckBox.Enabled = true;
+                    WriteLogFile("Platform servo enabled");
+                }
+                else
+                {
+                    startupLabel.Text = "Disabling platform servo...";
+                    RelaySwitches.Slew4(enable);
+                    RelaySwitches.Slew5(enable);
 
-                RelaySwitches.RelaySW = 0x81;
-                sendCmd("Send Relay Switches");
-                //               taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
-                //               taskA.Wait();
-
-                torqueMotorCheckBox.Enabled = true;
-                WriteLogFile("Gyros enabled");
-            }
-            else
-            {
-                RelaySwitches.Slew4(enable);
-                RelaySwitches.Slew5(enable);
-
-                sendCmd("Send Relay Switches");
-                WriteLogFile("Gyros disabled");
-            }
-    
-             
-                    startupLabel.Text = "";
-                });
-            
-            
+                    sendCmd("Send Relay Switches");
+                    WriteLogFile("Platform servo disabled");
+                }
+            });
         }
 
         private void gyroCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            enablePlatformServo();
-        }
-
-        private void enableTorqueMotors()
-        {
-            this.Invoke((MethodInvoker)delegate
+            if (gyroCheckBox.Checked)
             {
-                if (torqueMotorCheckBox.Checked)
-            {
-                //RelaySwitches.RelayTorqueMotor(enable);
-                startupLabel.Text = "Wait for platform to level";
-                RelaySwitches.RelaySW = 0x83;
-                sendCmd("Send Relay Switches");
-
-                //Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));// change this to 7 sec
-                //taskA.Wait();
-
-                //ControlSwitches.TorqueMotor(enable);
-                ControlSwitches.ControlSw = 0x09;
-                sendCmd("Send Control Switches");
-                Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));// change this to 1 min
-                taskA.Wait();
-
-                gyroCheckBox.Enabled = false;
-                springTensionCheckBox.Enabled = true;
-                WriteLogFile("Torque motor enabled");
+                enablePlatformServo(false);
             }
             else
             {
-                // RelaySwitches.RelaySW = 0x81;// cmd 0
-                RelaySwitches.RelayTorqueMotor(disable);
-                sendCmd("Send Relay Switches");
-                gyroCheckBox.Enabled = true;
-                springTensionCheckBox.Enabled = false;
-                WriteLogFile("Torque motor enabled");
+                enablePlatformServo(false);
             }
+        }
 
-               
-                    startupLabel.Text = "";
-                });
-            
+        private void enableTorqueMotors(Boolean enableMotor)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (enableMotor)
+                {
+                    //RelaySwitches.RelayTorqueMotor(enable);
+                    startupLabel.Text = "Enabling Torque motors.\nPlease wait for platform to level...";
+                    RelaySwitches.RelaySW = 0x83;
+                    sendCmd("Send Relay Switches");
+
+                    //Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));// change this to 7 sec
+                    //taskA.Wait();
+
+                    //ControlSwitches.TorqueMotor(enable);
+                    ControlSwitches.ControlSw = 0x09;
+                    sendCmd("Send Control Switches");
+                    Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));// change this to 1 min
+                    taskA.Wait();
+
+                    gyroCheckBox.Enabled = false;
+                    springTensionCheckBox.Enabled = true;
+                    WriteLogFile("Torque motor enabled");
+                }
+                else
+                {
+                    // RelaySwitches.RelaySW = 0x81;// cmd 0
+                    startupLabel.Text = "Disabling torque motors...";
+                    RelaySwitches.RelayTorqueMotor(disable);
+                    sendCmd("Send Relay Switches");
+                    gyroCheckBox.Enabled = true;
+                    springTensionCheckBox.Enabled = false;
+                    WriteLogFile("Torque motor disabled");
+                    Task taskA = Task.Factory.StartNew(() => DoSomeWork(500));// change this to 1 min
+                    taskA.Wait();
+                }
+            });
         }
 
         private void torqueMotorCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            enableTorqueMotors();
+            if (torqueMotorCheckBox.Checked)
+            {
+                enableTorqueMotors(true);
+            }
+            else
+            {
+                enableTorqueMotors(false);
+            }
         }
 
         private void enableAlarms()
@@ -5344,8 +5267,6 @@ namespace SerialPortTerminal
             });
         }
 
-
-
         private void manualOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             startupGroupBox.Visible = true;
@@ -5353,24 +5274,7 @@ namespace SerialPortTerminal
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            enableSpringTension(false);
-            Task taskA = Task.Factory.StartNew(() => DoSomeWork(2000));
-            taskA.Wait();
-
-
-            if (System.Windows.Forms.Application.MessageLoop)
-            {
-                // WinForms app
-                StoreDefaultVariables();
-                System.Windows.Forms.Application.Exit();
-            }
-            else
-            {
-                // Console app
-                StoreDefaultVariables();
-                System.Environment.Exit(1);
-            }
+            ShutdownProgram();
         }
 
         private void dataPageToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -5623,10 +5527,9 @@ namespace SerialPortTerminal
 
         private void enableSpringTension(Boolean enableSpringTension)
         {
-           //TODO: spring tension enable not working - debug
+            //TODO: spring tension enable not working - debug
             if (enableSpringTension)
             {
-
                 ControlSwitches.ControlSw = 0x0B;
                 sendCmd("Send Control Switches");
                 torqueMotorCheckBox.Enabled = false;
@@ -5656,7 +5559,6 @@ namespace SerialPortTerminal
             {
                 enableSpringTension(false);
             }
-            
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -5696,7 +5598,7 @@ namespace SerialPortTerminal
         private void button6_Click_1(object sender, EventArgs e)
         {
             //   SpringTension SlewST = new SpringTension( fmpm,  springTensionMax,  springTensionFPM,  springTensionMaxStep,  springTensionScale, Data.data1[3]);
-            Single springTensionTarget;
+
             if (springTensionTargetNumericTextBox.Text != "" | springTensionParkRadioButton.Checked)
             {
                 if (springTensionAbsoluteRadioButton.Checked)
@@ -5717,8 +5619,6 @@ namespace SerialPortTerminal
                 }
                 else if (springTensionSetRadioButton.Checked)
                 {
-
-
                     springTensionTarget = Convert.ToSingle(springTensionTargetNumericTextBox.Text);
                     if (springTensionTarget < 0 | springTensionTarget > springTensionMax)
                     {
@@ -5726,35 +5626,40 @@ namespace SerialPortTerminal
                     }
                     else
                     {
-                        if (springTensionEnabled)
-                        {
-                            enableSpringTension(false);
-                        }
-
-                        RelaySwitches.Relay200Hz(enable);
-                        RelaySwitches.StepperMotorEnable(enable);
-                        sendCmd("Send Relay Switches");
-
-                        ControlSwitches.DataCollection(enable);
-                        //   ControlSwitches.controlSw = 0x08;
-                        sendCmd("Send Control Switches");
-                        
-                        newSpringTension = springTensionTarget;
-                        sendCmd("Update Spring Tension Value");
-
-                        Properties.Settings.Default.springTension = (short)newSpringTension;
-                        Properties.Settings.Default.Save();
-
+                        SetSpringTension();
                         STtextBox.Text = Convert.ToString(newSpringTension);
-                        springTensionValid = true;
-                        springTensionGroupBox.Visible = false;
-
-                        if (springTensionEnabled)
-                        {
-                            enableSpringTension(true);
-                        }
                     }
                 }
+            }
+        }
+
+        private void SetSpringTension()
+        {
+            if (springTensionEnabled)
+            {
+                enableSpringTension(false);
+            }
+
+            RelaySwitches.Relay200Hz(enable);
+            RelaySwitches.StepperMotorEnable(enable);
+            sendCmd("Send Relay Switches");
+
+            ControlSwitches.DataCollection(enable);
+            //   ControlSwitches.controlSw = 0x08;
+            sendCmd("Send Control Switches");
+
+            newSpringTension = springTensionTarget;
+            sendCmd("Update Spring Tension Value");
+
+            Properties.Settings.Default.springTension = (short)newSpringTension;
+            Properties.Settings.Default.Save();
+
+            springTensionValid = true;
+            springTensionGroupBox.Visible = false;
+
+            if (springTensionEnabled)
+            {
+                enableSpringTension(true);
             }
         }
 
@@ -5769,8 +5674,6 @@ namespace SerialPortTerminal
                 springTensionTargetNumericTextBox.Enabled = true;
             }
         }
-
-
 
         private void springTensionRelativeRadioButton_CheckedChanged(object sender, EventArgs e)
         {
@@ -5791,13 +5694,11 @@ namespace SerialPortTerminal
         public void FogCheck()
         {
             PortC Port_C = new PortC();
-            
 
             if (engineerDebug)
             {
                 Console.WriteLine("Checking FOG and Heater status");
             }
-
 
             // Check Cross FOG status
             if (MeterStatus.XGyro_Fog == 0)
@@ -5816,15 +5717,15 @@ namespace SerialPortTerminal
             { heaterNotReady = false; }
             else
             { heaterNotReady = true; }
-        
+
             if (heaterBypassCheckBox.Checked)
             {
                 heaterNotReady = false;
             }
-            
+
             if ((!crossFogNotReady) & (!longFogNotReady) & ((!heaterNotReady)) | (heaterBypassOnStartup))
             {
-               completed = true;
+                completed = true;
             }
         }
 
@@ -5841,7 +5742,7 @@ namespace SerialPortTerminal
 
         private void saveConfigFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveConfigFile();
+            SaveConfigFile(true);
         }
 
         [DelimitedRecord(",")]
@@ -5850,69 +5751,78 @@ namespace SerialPortTerminal
             public string configItem;
         }
 
-        private void SaveConfigFile()
+        private void SaveConfigFile(Boolean dialog)
         {
-            DialogResult result = DialogResult.No;
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = " (*.csv)|*.csv";
+            configFileName = Properties.Settings.Default.configFileName;
+            configFilePath = Properties.Settings.Default.configFilePath;
+            string fileName = configFilePath + "\\" + configFileName;
 
-            saveFileDialog1.DefaultExt = fileType;
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.DefaultExt = "csv";
-            //    dialog.FileName = ConfigData.meterNumber + surveyName + "-" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm-ss");
-
-            saveFileDialog1.InitialDirectory = Properties.Settings.Default.configFilePath;//  need to get this from stored data
-            result = saveFileDialog1.ShowDialog();
-            FileInfo fileInfo = new FileInfo(saveFileDialog1.FileName);
-            Properties.Settings.Default.configFileName = Path.GetFileName(saveFileDialog1.FileName);// saveFileDialog1.FileName;
-            Properties.Settings.Default.configFilePath = fileInfo.DirectoryName.ToString(); // set path for next time
-            Properties.Settings.Default.Save();
-
-            if (result == DialogResult.OK)
+            if (dialog)
             {
-                Console.WriteLine("File name " + saveFileDialog1.FileName);
-                using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName))
+                DialogResult result = DialogResult.No;
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = " (*.csv)|*.csv";
+
+                saveFileDialog1.DefaultExt = fileType;
+                saveFileDialog1.AddExtension = true;
+                saveFileDialog1.DefaultExt = "csv";
+                //    dialog.FileName = ConfigData.meterNumber + surveyName + "-" + DateTime.Now.ToString("yyyy-MMM-dd-HH-mm-ss");
+
+                saveFileDialog1.InitialDirectory = Properties.Settings.Default.configFilePath;//  need to get this from stored data
+                result = saveFileDialog1.ShowDialog();
+                FileInfo fileInfo = new FileInfo(saveFileDialog1.FileName);
+                Properties.Settings.Default.configFileName = Path.GetFileName(saveFileDialog1.FileName);// saveFileDialog1.FileName;
+                Properties.Settings.Default.configFilePath = fileInfo.DirectoryName.ToString(); // set path for next time
+                Properties.Settings.Default.Save();
+                if (result == DialogResult.OK)
                 {
-                    sw.WriteLine("Version" + "," + ConfigData.version);
-                    sw.WriteLine("Meter Number" + "," + ConfigData.meterNumber);
-                    sw.WriteLine("Beam Scale Factor" + "," + ConfigData.beamScale);
-                    sw.WriteLine("Cross Axis Period" + "," + ConfigData.crossPeriod);
-                    sw.WriteLine("Cross Axis Damping Factor" + "," + ConfigData.crossDampFactor);
-                    sw.WriteLine("Cross Axis Gain" + "," + ConfigData.crossGain);
-                    sw.WriteLine("Cross Axis Lead" + "," + ConfigData.crossLead);
-                    sw.WriteLine("Cross Axis Bias" + "," + ConfigData.crossBias);
-                    sw.WriteLine("Long Axis Period" + "," + ConfigData.crossPeriod);
-                    sw.WriteLine("Long Axis Damping Factor" + "," + ConfigData.longDampFactor);
-                    sw.WriteLine("Long Axis Gain" + "," + ConfigData.longGain);
-                    sw.WriteLine("Long Axis Lead" + "," + ConfigData.longLead);
-                    sw.WriteLine("Long Axis Bias" + "," + ConfigData.longBias);
-                    sw.WriteLine("Max Spring Tension" + "," + ConfigData.springTensionMax);
-                    sw.WriteLine("Mode" + "," + ConfigData.modeSwitch);
-                    sw.WriteLine("crossCouplingFactors1" + "," + ConfigData.crossCouplingFactors[1]);
-                    sw.WriteLine("crossCouplingFactors2" + "," + ConfigData.crossCouplingFactors[2]);
-                    sw.WriteLine("crossCouplingFactors3" + "," + ConfigData.crossCouplingFactors[3]);
-                    sw.WriteLine("crossCouplingFactors4" + "," + ConfigData.crossCouplingFactors[4]);
-                    sw.WriteLine("crossCouplingFactors5" + "," + ConfigData.crossCouplingFactors[5]);
-                    sw.WriteLine("crossCouplingFactors6-VCC" + "," + ConfigData.crossCouplingFactors[6]);
-                    sw.WriteLine("crossCouplingFactors7-AL" + "," + ConfigData.crossCouplingFactors[7]);
-                    sw.WriteLine("crossCouplingFactors8-AX" + "," + ConfigData.crossCouplingFactors[8]);
-                    sw.WriteLine("crossCouplingFactors9-VE" + "," + ConfigData.crossCouplingFactors[9]);
-                    sw.WriteLine("crossCouplingFactors10-AX2" + "," + ConfigData.crossCouplingFactors[10]);
-                    sw.WriteLine("crossCouplingFactors11-XACC2" + "," + ConfigData.crossCouplingFactors[11]);
-                    sw.WriteLine("crossCouplingFactors12-LACC2" + "," + ConfigData.crossCouplingFactors[12]);
-                    sw.WriteLine("crossCouplingFactors13-Cross Axis Compensation(4)" + "," + ConfigData.crossCouplingFactors[13]);
-                    sw.WriteLine("crossCouplingFactors14-Long Axis Compensation(4)" + "," + ConfigData.crossCouplingFactors[14]);
-                    sw.WriteLine("crossCouplingFactors15-Cross Axis Compensation(16)" + "," + ConfigData.crossCouplingFactors[15]);
-                    sw.WriteLine("crossCouplingFactors16-Long Axis Compensation(16)" + "," + ConfigData.crossCouplingFactors[16]);
-                    sw.WriteLine("analogFilter1-AX Phase" + "," + ConfigData.analogFilter[1]);
-                    sw.WriteLine("analogFilter2-AL Phase" + "," + ConfigData.analogFilter[2]);
-                    //  sw.WriteLine("analogFilter3" + "," + ConfigData.analogFilter[3]);
-                    sw.WriteLine("analogFilter4-VCC Phase" + "," + ConfigData.analogFilter[4]);
-                    sw.WriteLine("analogFilter5-Cross Axis Compensation Phase(4)" + "," + ConfigData.analogFilter[5]);
-                    sw.WriteLine("analogFilter6-Long Axis Compensation Phase(4)" + "," + ConfigData.analogFilter[6]);
-                    sw.WriteLine("analogFilter7-Cross Axis Compensation Phase(16)" + "," + ConfigData.analogFilter[7]);
-                    sw.WriteLine("analogFilter8-Long Axis Compensation Phase(16)" + "," + ConfigData.analogFilter[8]);
+                    fileName = saveFileDialog1.FileName;
                 }
+            }
+
+            // Console.WriteLine("File name " + saveFileDialog1.FileName);
+            using (StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.WriteLine("Version" + "," + ConfigData.version);
+                sw.WriteLine("Meter Number" + "," + ConfigData.meterNumber);
+                sw.WriteLine("Beam Scale Factor" + "," + ConfigData.beamScale);
+                sw.WriteLine("Spring Tension" + "," + Data.SpringTension);// .ToString("N2", CultureInfo.InvariantCulture));
+                sw.WriteLine("Cross Axis Period" + "," + ConfigData.crossPeriod);
+                sw.WriteLine("Cross Axis Damping Factor" + "," + ConfigData.crossDampFactor);
+                sw.WriteLine("Cross Axis Gain" + "," + ConfigData.crossGain);
+                sw.WriteLine("Cross Axis Lead" + "," + ConfigData.crossLead);
+                sw.WriteLine("Cross Axis Bias" + "," + ConfigData.crossBias);
+                sw.WriteLine("Long Axis Period" + "," + ConfigData.crossPeriod);
+                sw.WriteLine("Long Axis Damping Factor" + "," + ConfigData.longDampFactor);
+                sw.WriteLine("Long Axis Gain" + "," + ConfigData.longGain);
+                sw.WriteLine("Long Axis Lead" + "," + ConfigData.longLead);
+                sw.WriteLine("Long Axis Bias" + "," + ConfigData.longBias);
+                sw.WriteLine("Max Spring Tension" + "," + ConfigData.springTensionMax);
+                sw.WriteLine("Mode" + "," + ConfigData.modeSwitch);
+                sw.WriteLine("crossCouplingFactors1" + "," + ConfigData.crossCouplingFactors[1]);
+                sw.WriteLine("crossCouplingFactors2" + "," + ConfigData.crossCouplingFactors[2]);
+                sw.WriteLine("crossCouplingFactors3" + "," + ConfigData.crossCouplingFactors[3]);
+                sw.WriteLine("crossCouplingFactors4" + "," + ConfigData.crossCouplingFactors[4]);
+                sw.WriteLine("crossCouplingFactors5" + "," + ConfigData.crossCouplingFactors[5]);
+                sw.WriteLine("crossCouplingFactors6-VCC" + "," + ConfigData.crossCouplingFactors[6]);
+                sw.WriteLine("crossCouplingFactors7-AL" + "," + ConfigData.crossCouplingFactors[7]);
+                sw.WriteLine("crossCouplingFactors8-AX" + "," + ConfigData.crossCouplingFactors[8]);
+                sw.WriteLine("crossCouplingFactors9-VE" + "," + ConfigData.crossCouplingFactors[9]);
+                sw.WriteLine("crossCouplingFactors10-AX2" + "," + ConfigData.crossCouplingFactors[10]);
+                sw.WriteLine("crossCouplingFactors11-XACC2" + "," + ConfigData.crossCouplingFactors[11]);
+                sw.WriteLine("crossCouplingFactors12-LACC2" + "," + ConfigData.crossCouplingFactors[12]);
+                sw.WriteLine("crossCouplingFactors13-Cross Axis Compensation(4)" + "," + ConfigData.crossCouplingFactors[13]);
+                sw.WriteLine("crossCouplingFactors14-Long Axis Compensation(4)" + "," + ConfigData.crossCouplingFactors[14]);
+                sw.WriteLine("crossCouplingFactors15-Cross Axis Compensation(16)" + "," + ConfigData.crossCouplingFactors[15]);
+                sw.WriteLine("crossCouplingFactors16-Long Axis Compensation(16)" + "," + ConfigData.crossCouplingFactors[16]);
+                sw.WriteLine("analogFilter1-AX Phase" + "," + ConfigData.analogFilter[1]);
+                sw.WriteLine("analogFilter2-AL Phase" + "," + ConfigData.analogFilter[2]);
+                //  sw.WriteLine("analogFilter3" + "," + ConfigData.analogFilter[3]);
+                sw.WriteLine("analogFilter4-VCC Phase" + "," + ConfigData.analogFilter[4]);
+                sw.WriteLine("analogFilter5-Cross Axis Compensation Phase(4)" + "," + ConfigData.analogFilter[5]);
+                sw.WriteLine("analogFilter6-Long Axis Compensation Phase(4)" + "," + ConfigData.analogFilter[6]);
+                sw.WriteLine("analogFilter7-Cross Axis Compensation Phase(16)" + "," + ConfigData.analogFilter[7]);
+                sw.WriteLine("analogFilter8-Long Axis Compensation Phase(16)" + "," + ConfigData.analogFilter[8]);
             }
         }
 
@@ -6108,12 +6018,195 @@ namespace SerialPortTerminal
 
         private void STtextBox_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void button4_Click_2(object sender, EventArgs e)
         {
             heaterNotReady = false;
         }
+
+        private void autoStartButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void startupWizardButton_Click(object sender, EventArgs e)
+        {
+            springTensionValid = false; // Force false for startup wizard
+            autostart = true;
+            Point stPoint = new Point();
+            Point mainPoint = new Point();
+            mainPoint.X = this.Location.X;
+            mainPoint.Y = this.Location.Y;
+            int mainWidth = this.Size.Width;
+            int mainHeight = this.Size.Height;
+            int stWidth = springTensionGroupBox.Width;
+            int stHeight = springTensionGroupBox.Height;
+            springTensionValueLabel.Text = "Current Spring Tension";
+            STtextBox.Text = Convert.ToString(Data.data1[3]);
+            springTensionTargetNumericTextBox.Text = STtextBox.Text;
+
+            int suWidth = startupGroupBox.Width;
+            int suHeight = startupGroupBox.Height;
+            stPoint.X = mainWidth / 2 - suWidth / 2;
+            stPoint.Y = mainHeight / 2 - suHeight / 2;
+            springTensionGroupBox.Location = stPoint;
+
+            stPoint.X = mainWidth / 2 - stWidth / 2;
+            stPoint.Y = mainHeight / 2 - stHeight / 2;
+            springTensionGroupBox.Location = stPoint;
+            springTensionGroupBox.Visible = true;
+            springTensionStatusLabel.Text = "Read spring tension from mechanical counter on meter.\nEnter in in target box and press Go";
+
+            springTensionAbsoluteRadioButton.Enabled = false;
+            springTensionParkRadioButton.Enabled = false;
+            springTensionRelativeRadioButton.Enabled = false;
+
+            springTensionParkRadioButton.Checked = true;
+
+            if (springTensionValid)
+            {
+                //  AutoStartMethod();
+                springTensionAbsoluteRadioButton.Enabled = true;
+                springTensionParkRadioButton.Enabled = true;
+                springTensionRelativeRadioButton.Enabled = true;
+            }
+        }
+
+        private static int comPortResetCounter = 10;
+        private static Boolean comPortResetFlag = false;
+
+        private void _timer1_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("Comport read = " + Errors.ComPortRead);
+
+            // check if com port was read
+            // if false set flag and start counter
+            if (Errors.ComPortRead == false | Errors.RemoteRebooted)
+            {
+                // Console.WriteLine("Failed to read serial port");
+                WriteLogFile("Failed to read serial port");
+
+                if (comPortResetFlag == false)
+                {
+                    comPortResetFlag = true;
+                }
+                else
+                {
+                    // Console.WriteLine("Reset counter = " + comPortResetCounter);
+
+                    comPortResetCounter--;
+                }
+
+                if (comPortResetCounter == 0)
+                {
+                    // send restart
+                    WriteLogFile("Sending re-start to embedded computer");
+                    comPortResetCounter = 10;
+                    sendCmd("Send Relay Switches");
+                    sendCmd("Send Control Switches");
+                }
+            }
+            else
+            {
+                comPortResetCounter = 10;
+                //Errors.ComPortRead = true;
+            }
+
+            Errors.ComPortRead = false;
+
+            Console.WriteLine(Convert.ToString(DateTime.Now));
+        }
+
+        private void button4_Click_3(object sender, EventArgs e)
+        {
+            OpenDataPort();
+            sendSerialData("long");
+        }
+
+
+
+
+        public void sendSerialData(string dataMode)
+        {
+
+            //  Formats long marine, long hires, short, Norstar
+            string myString;
+            byte[] data;
+            string delimitor = "    ";
+            if (!dataport.IsOpen)
+            {
+                OpenDataPort();
+            }
+  
+            switch (dataMode)
+            {
+                case "long": // 0
+
+                    // data = CreateTxArray(0, RelaySwitches.RelaySW);
+                    //  byte[] byteArrayTemp = BitConverter.GetBytes("MY_LINE");
+
+                    if (dataAquisitionMode == "Marine")
+                    {
+                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+                                    + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
+                                    + delimitor + Convert.ToString(Data.data4[4] * ConfigData.beamScale) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
+                                    + delimitor + Convert.ToString(Data.data1[7]) + delimitor + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[9])
+                                    + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
+                                    + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14])
+                                    + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+                        dataport.Write(myString);
+                    }
+                    else
+                    {
+                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+                                   + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data4[3])
+                                   + delimitor + Convert.ToString(Data.data4[4] * ConfigData.beamScale) + delimitor + Convert.ToString(Data.data4[5]) + delimitor + Convert.ToString(Data.data4[6])
+                                   + delimitor + Convert.ToString(Data.data4[7]) + delimitor + Convert.ToString(Data.data4[8]) + delimitor + Convert.ToString(Data.data4[9])
+                                   + delimitor + Convert.ToString(Data.data4[10]) + delimitor + Convert.ToString(Data.data4[11]) + delimitor + Convert.ToString(Data.data4[12])
+                                   + delimitor + Convert.ToString(Data.data4[13]) + delimitor + Convert.ToString(Data.data4[14])
+                                   + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+                    }
+                    dataport.Write(myString);
+                    break;
+
+
+                case "short": //  3
+                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+                                    + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]);
+                    dataport.Write(myString);
+
+                    break;
+
+                case "norstar": //  4
+                    myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+                                + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
+                                + delimitor + Convert.ToString(Data.data4[4] * ConfigData.beamScale) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
+
+                                + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[7]) + delimitor  + delimitor + Convert.ToString(Data.data1[9])
+                                + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
+                                + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14])
+                              ;
+
+                    dataport.Write(myString);
+
+                    break;
+
+             
+
+
+                default:
+                    break;
+
+                    
+            }
+            
+
+        }
+
+
+
+
+
+        //-------------------------------------------------------------
     }
 }

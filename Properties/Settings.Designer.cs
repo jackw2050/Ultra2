@@ -38,36 +38,36 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("9600")]
-        public int BaudRate {
+        public int BaudRate_RS232 {
             get {
-                return ((int)(this["BaudRate"]));
+                return ((int)(this["BaudRate_RS232"]));
             }
             set {
-                this["BaudRate"] = value;
+                this["BaudRate_RS232"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("8")]
-        public int DataBits {
+        public int DataBit_RS232 {
             get {
-                return ((int)(this["DataBits"]));
+                return ((int)(this["DataBit_RS232"]));
             }
             set {
-                this["DataBits"] = value;
+                this["DataBit_RS232"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("None")]
-        public global::System.IO.Ports.Parity Parity {
+        public global::System.IO.Ports.Parity Parity_RS232 {
             get {
-                return ((global::System.IO.Ports.Parity)(this["Parity"]));
+                return ((global::System.IO.Ports.Parity)(this["Parity_RS232"]));
             }
             set {
-                this["Parity"] = value;
+                this["Parity_RS232"] = value;
             }
         }
         
@@ -86,12 +86,12 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("One")]
-        public global::System.IO.Ports.StopBits StopBits {
+        public global::System.IO.Ports.StopBits StopBits_RS232 {
             get {
-                return ((global::System.IO.Ports.StopBits)(this["StopBits"]));
+                return ((global::System.IO.Ports.StopBits)(this["StopBits_RS232"]));
             }
             set {
-                this["StopBits"] = value;
+                this["StopBits_RS232"] = value;
             }
         }
         
@@ -133,7 +133,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\ZLS\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ZLS\\")]
         public string calFilePath {
             get {
                 return ((string)(this["calFilePath"]));
@@ -157,7 +157,7 @@ namespace SerialPortTerminal.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("e:\\ZLS\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ZLS\\")]
         public string configFilePath {
             get {
                 return ((string)(this["configFilePath"]));
@@ -410,9 +410,9 @@ namespace SerialPortTerminal.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public float springTension {
+        public double springTension {
             get {
-                return ((float)(this["springTension"]));
+                return ((double)(this["springTension"]));
             }
             set {
                 this["springTension"] = value;
@@ -1100,6 +1100,30 @@ namespace SerialPortTerminal.Properties {
             }
             set {
                 this["surveyInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9600")]
+        public int BaudRate_RS422 {
+            get {
+                return ((int)(this["BaudRate_RS422"]));
+            }
+            set {
+                this["BaudRate_RS422"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM6")]
+        public string dataPortName {
+            get {
+                return ((string)(this["dataPortName"]));
+            }
+            set {
+                this["dataPortName"] = value;
             }
         }
     }
