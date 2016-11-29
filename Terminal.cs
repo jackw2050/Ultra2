@@ -421,7 +421,9 @@ namespace SerialPortTerminal
 
         // The main control for communicating through the RS-232 port
         public SerialPort comport = new SerialPort();
+
         public SerialPort dataport = new SerialPort();
+        public SerialPort encoderport = new SerialPort();
 
         // Various colors for logging info
         private Color[] LogMsgTypeColor = { Color.Blue, Color.Green, Color.Black, Color.Orange, Color.Red };
@@ -450,6 +452,9 @@ namespace SerialPortTerminal
             EnableControls();
 
             comport.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
+            encoderport.DataReceived += new SerialDataReceivedEventHandler(encoder_DataReceived);
+            encoderport.PortName = "COM6";
+
             //   comport.PinChanged += new SerialPinChangedEventHandler(comport_PinChanged);
             /*
                         _timer1 = new System.Windows.Forms.Timer();
@@ -673,7 +678,7 @@ namespace SerialPortTerminal
             else
             {
                 // Set the port's settings
-              //  dataport.PortName = "port6";
+                //  dataport.PortName = "port6";
 
                 try { dataport.Open(); }// Open serial port
                 catch (UnauthorizedAccessException) { error = true; }
@@ -685,10 +690,31 @@ namespace SerialPortTerminal
                 {
                     //   UpdatePinState();
                 }
-               
             }
+        }
 
-      
+        public void OpenEncoderPort()
+        {
+            // ADD 1 SEC TIMER.  START AT END
+            bool error = false;
+            // Set the port's settings
+
+            // If the port is open, close it.
+            //if (encoderport.IsOpen) encoderport.Close();
+            // else
+            if (!encoderport.IsOpen)
+            {
+                try { encoderport.Open(); }// Open serial port
+                catch (UnauthorizedAccessException) { error = true; }
+                catch (IOException) { error = true; }
+                catch (ArgumentException) { error = true; }
+
+                if (error) MessageBox.Show(this, "Could not open the COM port.  Most likely it is already in use, has been removed, or is unavailable.", "COM Port Unavalible", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                else
+                {
+                    //   UpdatePinState();
+                }
+            }
         }
 
         public void OpenPort()
@@ -3921,8 +3947,6 @@ namespace SerialPortTerminal
             dataport.BaudRate = Properties.Settings.Default.BaudRate_RS232;
             dataport.StopBits = Properties.Settings.Default.StopBits_RS232;
 
-
-
             chartWindowTimeSpan = Properties.Settings.Default.chartWindowTimeSpan;
             chartWindowTimePeriod = Properties.Settings.Default.chartWindowTimePeriod;
             // Load configuration data from stored defaults
@@ -6123,12 +6147,8 @@ namespace SerialPortTerminal
             sendSerialData("long");
         }
 
-
-
-
         public void sendSerialData(string dataMode)
         {
-
             //  Formats long marine, long hires, short, Norstar
             string myString;
             byte[] data;
@@ -6137,7 +6157,7 @@ namespace SerialPortTerminal
             {
                 OpenDataPort();
             }
-  
+
             switch (dataMode)
             {
                 case "long": // 0
@@ -6154,7 +6174,6 @@ namespace SerialPortTerminal
                                     + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
                                     + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14])
                                     + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
-                        dataport.Write(myString);
                     }
                     else
                     {
@@ -6164,15 +6183,14 @@ namespace SerialPortTerminal
                                    + delimitor + Convert.ToString(Data.data4[7]) + delimitor + Convert.ToString(Data.data4[8]) + delimitor + Convert.ToString(Data.data4[9])
                                    + delimitor + Convert.ToString(Data.data4[10]) + delimitor + Convert.ToString(Data.data4[11]) + delimitor + Convert.ToString(Data.data4[12])
                                    + delimitor + Convert.ToString(Data.data4[13]) + delimitor + Convert.ToString(Data.data4[14])
-                                   + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus);
+                                   + delimitor + Convert.ToString(Data.latitude) + delimitor + Convert.ToString(Data.longitude) + delimitor + Convert.ToString(Data.altitude) + delimitor + Convert.ToString(Data.gpsNavigationStatus + "\n");
                     }
                     dataport.Write(myString);
                     break;
 
-
                 case "short": //  3
-                        myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
-                                    + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]);
+                    myString = Convert.ToString(surveyName) + delimitor + Convert.ToString(Data.Date.Year) + delimitor + Convert.ToString(Data.day) + delimitor + Convert.ToString(Data.Date.Hour) + delimitor
+                                + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]);
                     dataport.Write(myString);
 
                     break;
@@ -6182,7 +6200,7 @@ namespace SerialPortTerminal
                                 + Convert.ToString(Data.Date.Minute) + delimitor + Convert.ToString(Data.Date.Second) + delimitor + Convert.ToString(Data.data4[2]) + delimitor + Convert.ToString(Data.data1[3])
                                 + delimitor + Convert.ToString(Data.data4[4] * ConfigData.beamScale) + delimitor + Convert.ToString(Data.data1[5]) + delimitor + Convert.ToString(Data.data1[6])
 
-                                + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[7]) + delimitor  + delimitor + Convert.ToString(Data.data1[9])
+                                + Convert.ToString(Data.data1[8]) + delimitor + Convert.ToString(Data.data1[7]) + delimitor + delimitor + Convert.ToString(Data.data1[9])
                                 + delimitor + Convert.ToString(Data.data1[10]) + delimitor + Convert.ToString(Data.data1[11]) + delimitor + Convert.ToString(Data.data1[12])
                                 + delimitor + Convert.ToString(Data.data1[13]) + delimitor + Convert.ToString(Data.data1[14])
                               ;
@@ -6191,18 +6209,146 @@ namespace SerialPortTerminal
 
                     break;
 
-             
-
-
                 default:
                     break;
-
-                    
             }
-            
-
         }
 
+        private void button5_Click_2(object sender, EventArgs e)
+        {
+            OpenEncoderPort();
+            string myString = ">";
+
+            encoderport.Write(myString);
+
+            //  ">"   P201 - 9S returns an 8 character hexadecimal string +CR
+            // representing 32 bit SSI data with the data right justified e.g. “00000d54” +CR
+            // representing a binary SSI value of 3412
+
+            //  "?"   P201-9S returns a string + CR representing 32 bit SSI data e.g.  “3412” + CR representing a binary SSI value of 3412
+
+            // "Bnn"   To set the SSI total bits value the B character is sent to the P201 followed by a number in the range 8-30 + CR e.g. “B14” + CR
+            // This would set the SSI total bits value to 14. If successful the P201-9S returns: “OK” + CR else “ERR” + CR
+            //  default setting at power on is 12 bits
+
+            //  "b"   P201-9S returns current a string of SSI total bits value + CR  e.g. “12” + CR
+        }
+
+        private void encoder_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (!encoderport.IsOpen) return;
+            Thread.Sleep(100);
+
+            /*// Obtain the number of bytes waiting in the port's buffer
+            int bytes = comport.BytesToRead;
+            Console.WriteLine("Bytes to read: " + bytes);
+            // Create a byte array buffer to hold the incoming data
+            byte[] buffer = new byte[bytes];
+            comport.Read(buffer, 0, bytes);
+            Log(LogMsgType.Incoming, ByteArrayToHexString(buffer));
+
+        */
+            // Obtain the number of bytes waiting in the port's buffer
+            int bytes = encoderport.BytesToRead;
+            if (bytes > 1)
+            {
+                byte[] buffer = new byte[bytes];
+                encoderport.Read(buffer, 0, bytes);
+
+                Thread worker = new Thread(GetEncoderData);
+                worker.Name = "GetENcoderData";
+                worker.IsBackground = true;
+                worker.Start(buffer);// Start new worker thread to process the data
+                Errors.EncoderPortRead = true;
+            }
+        }
+
+        // need another funtion here that accepts a bool to check if conversion is ok
+        private void GetEncoderData(object buffer)
+        {
+            byte[] bufferByte = (byte[])buffer;
+            byte[] tempByte;// = { 0, 0, 0, 0, 0, 0, 0, 0 };
+            string myString = "";
+            int numValue;
+            bool parsed = false;
+
+            if (bufferByte.Length == 3)
+            {
+                Console.WriteLine(Convert.ToChar(bufferByte[0]) + " " + Convert.ToChar(bufferByte[1]));
+            }
+            else
+            {
+                int TEMPX;
+                Boolean leadingZero = true;
+                for (int i = 0; i < 8; i++)
+                {
+                    byte x = bufferByte[i];
+                    string xx = "";
+                    xx += Convert.ToString(x);
+                    int.TryParse(xx, System.Globalization.NumberStyles.HexNumber, null, out TEMPX);
+
+                   
+                    if ( bufferByte[i] - 48 != 0)
+                    {
+                        leadingZero = false;
+                    }
+                    if (leadingZero == false)
+                    {
+                        // tempByte[i] = bufferByte[i];
+                        //myString += Convert.ToChar(bufferByte[i]);
+                        Console.WriteLine(x);
+                        Console.WriteLine(xx);
+                        Console.WriteLine(TEMPX.ToString());
+                        // 52 dec is 34 hex   convert to hex before parsing
+
+                        parsed = Int32.TryParse(TEMPX.ToString(), out numValue);
+                        Console.WriteLine(numValue);
+                        myString += numValue;
+                    }
+                    
+                }
+            }
+            // myString = System.Text.Encoding.ASCII.GetString(tempByte).Trim();
+
+            Console.WriteLine(" buffer " + myString);
+            Console.Write(ParseHexString(myString));
+
+
+            
+             parsed = Int32.TryParse(myString, out numValue);
+
+            if (!parsed)
+            {
+                Console.WriteLine("Int32.TryParse could not parse '{0}' to an int.\n", myString);
+            }
+            else
+            {
+                Console.WriteLine("Parsed data = " + numValue);
+
+                this.Invoke((MethodInvoker)delegate
+                {
+                    textBox1.Text = myString;
+                });
+            }
+
+            //Console.WriteLine("Buffer " + tempByte[0] + " " + tempByte[1] + " " + tempByte[2] + " " + tempByte[3] + " " + tempByte[4] + " " + tempByte[5] + " " + tempByte[6] + " " + tempByte[7] + " ");
+        }
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            OpenEncoderPort();
+            string myString = "B21" + System.Environment.NewLine;
+            encoderport.Write(myString);
+        }
+
+
+        private static Decimal ParseHexString(string hexNumber)
+        {
+            hexNumber = hexNumber.Replace("x", string.Empty);
+            long result = 0;
+            long.TryParse(hexNumber, System.Globalization.NumberStyles.HexNumber, null, out result);
+            return result;
+        }
 
 
 

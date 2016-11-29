@@ -1126,5 +1126,17 @@ namespace SerialPortTerminal.Properties {
                 this["dataPortName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM7")]
+        public string encoderPortName {
+            get {
+                return ((string)(this["encoderPortName"]));
+            }
+            set {
+                this["encoderPortName"] = value;
+            }
+        }
     }
 }

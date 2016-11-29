@@ -278,5 +278,8 @@
     <Setting Name="dataPortName" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM6</Value>
     </Setting>
+    <Setting Name="encoderPortName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM7</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

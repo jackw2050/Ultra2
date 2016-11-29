@@ -19,6 +19,19 @@ namespace SerialPortTerminal
         private static int timeSetErrorCount = 0;
         private static int serialComErrorCount = 0;
         private static Boolean comPortRead = false;
+        private static Boolean encoderPortRead = false;
+
+        public static Boolean EncoderPortRead
+        {
+            get
+            {
+                return encoderPortRead;
+            }
+            set
+            {
+                encoderPortRead = value;
+            }
+        }
 
         public static Boolean ComPortRead
         {
@@ -31,6 +44,8 @@ namespace SerialPortTerminal
                 comPortRead = value;
             }
         }
+
+
 
         public static Boolean RemoteRebooted
         {
