@@ -1660,7 +1660,6 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Label label18;
         public System.Windows.Forms.TextBox gpsAltitudeTextBox;
         public System.Windows.Forms.TextBox gpsLongitudeTextBox;
-        private System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
         public System.Windows.Forms.TextBox gpsLatitudeTextBox;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
@@ -1810,6 +1809,7 @@ namespace SerialPortTerminal
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button7;
+        public System.Windows.Forms.DataVisualization.Charting.Chart GravityChart;
     }
 }
 

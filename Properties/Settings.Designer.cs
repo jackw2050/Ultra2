@@ -1138,5 +1138,17 @@ namespace SerialPortTerminal.Properties {
                 this["encoderPortName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("21")]
+        public int encoderBits {
+            get {
+                return ((int)(this["encoderBits"]));
+            }
+            set {
+                this["encoderBits"] = value;
+            }
+        }
     }
 }

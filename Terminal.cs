@@ -36,7 +36,7 @@ namespace SerialPortTerminal
     public partial class frmTerminal : Form
     {
         #region Local Variables
-
+        Chart Chart = new Chart();
         public CalculateMarineData mdt = new CalculateMarineData();
         public RelaySwitches RelaySwitches = new RelaySwitches();
         private ConfigData ConfigData = new ConfigData();
@@ -58,7 +58,7 @@ namespace SerialPortTerminal
         public static Single springTensionTarget;
 
         private delegate void SetTextCallback(string text);
-
+        public static int encoderBits;
         public static Boolean springTensionValid = false;
         public static int istep;
         public static int istop = 1;
@@ -1878,7 +1878,7 @@ namespace SerialPortTerminal
         #region Chart
 
         // TODO Gravity chart setup
-        private void SetupChart()
+        public void SetupChart()
         {
             this.GravityChart.ChartAreas["CrossCoupling"].Visible = false;
 
@@ -2061,7 +2061,7 @@ namespace SerialPortTerminal
             //          SetLegend();
         }
 
-        private void SetChartAxis(Boolean auto)
+        public void SetChartAxis(Boolean auto)
         {
             if (auto)
             {
@@ -2091,7 +2091,7 @@ namespace SerialPortTerminal
             }
         }
 
-        private void SetChartCursors()
+        public void SetChartCursors()
         {
             // Set cursor interval properties
             GravityChart.ChartAreas["Gravity"].CursorX.Interval = .001D;
@@ -2116,7 +2116,7 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].CursorY.Interval = 1;
         }
 
-        private void SetChartZoom()
+        public void SetChartZoom()
         {
             // Set automatic zooming
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.Zoomable = true;
@@ -2130,7 +2130,7 @@ namespace SerialPortTerminal
             //            GravityChart.ChartAreas["ChartArea1"].AxisX.ScaleView.ZoomReset(1);
         }
 
-        private void SetChartScaleView()
+        public void SetChartScaleView()
         {
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
             GravityChart.ChartAreas["Gravity"].AxisX.ScaleView.SmallScrollSize = .1D;
@@ -2153,7 +2153,7 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].AxisY.ScaleView.ZoomReset(1);
         }
 
-        private void SetChartScroll()
+        public void SetChartScroll()
         {
             // Set automatic scrolling
             GravityChart.ChartAreas["Gravity"].CursorX.AutoScroll = true;
@@ -2163,7 +2163,7 @@ namespace SerialPortTerminal
             GravityChart.ChartAreas["CrossCoupling"].CursorY.AutoScroll = true;
         }
 
-        private void SetChartScrollBars()
+        public void SetChartScrollBars()
         {
             // Change scrollbar colors
             GravityChart.ChartAreas["Gravity"].AxisX.ScrollBar.BackColor = System.Drawing.Color.LightGray;
@@ -2202,7 +2202,7 @@ namespace SerialPortTerminal
         }
 
         // TODO SetChartToolTips
-        private void SetChartToolTips()
+        public void SetChartToolTips()
         {
             string mode = "Time/Value";
 
@@ -2310,7 +2310,7 @@ namespace SerialPortTerminal
             }
         }
 
-        private void SetTraceColor(string colorPalette)
+        public void SetTraceColor(string colorPalette)
         {
             // colorPalette = "Bright";
             switch (colorPalette)
@@ -2385,7 +2385,7 @@ namespace SerialPortTerminal
             this.GravityChart.ApplyPaletteColors();
         }
 
-        private void SetLegendLocation()
+        public void SetLegendLocation()
         {
             /*
             string location = "top";
@@ -2419,7 +2419,7 @@ namespace SerialPortTerminal
             */
         }
 
-        private void SetLegend()
+        public void SetLegend()
         {
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 
@@ -2545,7 +2545,7 @@ namespace SerialPortTerminal
             }
         }
 
-        private static class ChartVisibility
+        public static class ChartVisibility
         {
             private static Boolean digitalGravity = true;
 
@@ -2703,7 +2703,7 @@ namespace SerialPortTerminal
             GravityChart.Update();
         }
 
-        private void SetChartMarkerSize(int size)
+        public void SetChartMarkerSize(int size)
         {
             GravityChart.Series["Digital Gravity"].MarkerSize = size;
             GravityChart.Series["Spring Tension"].MarkerSize = size;
@@ -2763,7 +2763,7 @@ namespace SerialPortTerminal
         {
         }
 
-        private void SetChartType()
+        public void SetChartType()
         {
             System.Windows.Forms.DataVisualization.Charting.SeriesChartType myChartType = new System.Windows.Forms.DataVisualization.Charting.SeriesChartType();
             myChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -2781,7 +2781,7 @@ namespace SerialPortTerminal
             GravityChart.Series["Raw Gravity"].ChartType = myChartType;
         }
 
-        private void ExtraChartStuff()
+        public void ExtraChartStuff()
         {
             this.GravityChart.BackColor = System.Drawing.Color.WhiteSmoke;   //.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
             this.GravityChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
@@ -3794,7 +3794,7 @@ namespace SerialPortTerminal
             TimeThread.IsBackground = true;
             TimeThread.Start();
 
-            SetupChart();
+            Chart.SetupChart();
             // Setup DataGrid();
             WriteLogFile("System loaded");
         }
